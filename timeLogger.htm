@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<link rel="shortcut icon" href="./timeLogger.ico"/>
+<title>时间管理大帅</title>
+<style type="text/css">
+input{font-family:"Cambria Math",serif;font-size:1.2em}
+p{font-family:"Cambria Math",serif;font-size:1.2em}
+.logic{background-color:#EEEEEE;
+  margin: 20px;
+  text-align: center;
+  border-style:solid;
+  border-width:1px;
+  filter:alpha(opacity=60);
+  box-shadow: 1px 1px 5px #888888;
+  transition: width 2s;
+-webkit-transition: width 2s; /* Safari */
+
+  }
+.buttons>input {
+    background-color : #0072D8;
+    border-color : #EEEEEE;
+    border-width : 0.15em;
+    border-style : solid;
+    color : #FFFFFF;
+}
+.buttons>input:hover {
+    background-color : #2092F8;
+    border-color : #FFFFFF;
+    border-width : 0.15em;
+    border-style : solid;
+    color : #FFFFFF;
+}
+#timeSetting{
+    background-color :#FFFFFF;
+}
+ #timeSetting:focus{
+    background-color :#DDDDDD;
+}
+.greyButton{
+    background-color:#EEEEEE;
+    border-style: none;
+}
+.greyButton:hover{
+    background-color:#FFFFFF;
+    border-style :none;
+}
+.greyButton:focus{
+    background-color:#FFFFFF;
+    
+}
+/* Standard syntax */
+@keyframes mymove {
+    50% {padding-bottom: 50px;}
+}
+</style>
+<script src='logic.js'>
+
+</script>
+</head>
+
+<body>
+    <div class='logic'>
+        <p>这是一个计时器。</p>
+        <p>
+            请在下面的文本框中输入定时间隔和消息提示。<br>
+          例如：40:00-工作-10:00-休息<br>
+          表示40min计时，计时结束后开始10min计时。<br>
+          使用时请允许浏览器弹出窗口(重要！)。
+        </p>
+        <input id='timeSetting' type="text" placeholder="输入间隔和提示..." autofocus onblur="onBlur()">
+        <!--<input type='button' id='save' class='greyButton' value='📁'>-->
+           <br>
+        <input type="button" id="isCyclable" class='greyButton' onclick="onChangeCyclable()" value='循环⏲否'><br>
+        <div class='buttons'>
+           <input type="button" id='start' value="开始" onclick="onStart()">
+          <input type='button' id='stop' value='the WORLD!' onclick="onChangeStatus()">
+        </div>
+        <!---显示计时总时间及剩余时间，若暂停则字体变为红色 --->
+        <p id="status"></p>
+        <p id='remain'></p>
+    </div>
+</body>
