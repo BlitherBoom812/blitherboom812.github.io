@@ -2,6 +2,7 @@
 title: 大雾笔记
 date: 2022-09-14 17:20:10
 tags: note
+katex: true
 ---
 
 # 参考教材
@@ -168,9 +169,7 @@ $k$ 玻尔兹曼常量
 
 规定$T \propto pV$，水的三相点温度为$T_3 = 273.16K$
 
-$$
-T = T_3\frac{pV}{p_3V_3} = 273.16\frac{pV}{p_3V_3}
-$$
+$$T = T_3\frac{pV}{p_3V_3} = 273.16\frac{pV}{p_3V_3}$$
 
 热力学温标$T$：理论温标，与物质无关。
 
@@ -313,31 +312,20 @@ $$
 ###### 大量分子处于平衡态时的统计假设
 
 （1）无外场时，分子在各处出现的概率相同
-$$
-n = \frac{\mathrm d N}{\mathrm d V} = \frac NV = \text{const}.
-$$
+$$n = \frac{\mathrm d N}{\mathrm d V} = \frac NV = \text{const}.$$
 （2）由于碰撞，分子可以有各种不同速度
 
 速度取向各方向等概率：
-$$
-\bar{v_x} = \bar{v_y} = \bar{v_z} = 0\\
-\bar{v_x^2} = \bar{v_y^2} = \bar{v_z^2} = \frac 13 \bar{v^2}
-$$
+$$\bar{v_x} = \bar{v_y} = \bar{v_z} = 0\\\\\bar{v_x^2} = \bar{v_y^2} = \bar{v_z^2} = \frac 13 \bar{v^2}$$
 
 ##### 理想气体压强公式
 
 前提：平衡态，忽略重力，分子当成质点
-$$
-p = \frac13nm\bar{v^2} = \frac23n\bar\varepsilon_t, \\
-\bar\varepsilon_t = \frac12 mv^2
-$$
+$$p = \frac13nm\bar{v^2} = \frac23n\bar\varepsilon_t, \\\\\bar\varepsilon_t = \frac12 mv^2$$
 
 #### 温度的统计意义
 
-$$
-\bar\varepsilon_t = \frac{3p}{2n} = \frac{3nkT}{2n} = \frac32kT\\
-\sqrt{\bar{v^2}} = \sqrt{\frac{3kT}{m}} = \sqrt{\frac{3RT}{M}}
-$$
+$$\bar\varepsilon_t = \frac{3p}{2n} = \frac{3nkT}{2n} = \frac32kT\\\\\sqrt{\bar{v^2}} = \sqrt{\frac{3kT}{m}} = \sqrt{\frac{3RT}{M}}$$
 
 $T = 273K$, 
 
@@ -398,15 +386,11 @@ $v = 3N-6$
 分子振动的动能和势能都是平方项，所以：
 
 $\bar\varepsilon_{vP} = \bar\varepsilon_{vk} = v\frac12kT$,  $\bar\varepsilon_v = \bar\varepsilon_{vP}  + \bar\varepsilon_{vk} = vkT$
-$$
-\bar\varepsilon = \bar\varepsilon _t + \bar\varepsilon_r + \bar\varepsilon_v = (t + r + 2v)\frac12kT
-$$
+$$\bar\varepsilon = \bar\varepsilon _t + \bar\varepsilon_r + \bar\varepsilon_v = (t + r + 2v)\frac12kT$$
 通常情况下($T < 10^3K$)，振动自由度被“冻结”，分子可视为刚性
 
 刚性分子：$v = 0, i = t + r$
-$$
-\bar\varepsilon = \frac{t+ r}2kT
-$$
+$$\bar\varepsilon = \frac{t+ r}2kT$$
 
 ##### 理想气体内能
 
@@ -430,48 +414,68 @@ $$
 
 ##### 速率分布函数
 
-$$
-f(v) = \frac{\text dN}{N\text dv}\\
-\int_0^\infty f(v)\text dv = \int_0^\infty\frac{\text dN}{N} = 1
-$$
+$$f(v) = \frac{\text dN}{N\text dv}\\\\\int_0^\infty f(v)\text dv = \int_0^\infty\frac{\text dN}{N} = 1$$
 
 ##### 麦克斯韦速率分布函数（不用记）
 
-$$
-f(v) = 4\pi (\frac m{2\pi kT})^{3/2}e
-$$
+$$f(v) = 4\pi (\frac m{2\pi kT})^{3/2}e$$
 
 ##### 三种统计速率
 
 ###### 最概然速率
 
-$$
-v_p = \sqrt{\frac{2kT}{m}}
-$$
+$$v_p = \sqrt{\frac{2kT}{m}}$$
 
 m一定时，温度T越高，速率大的分子数比例越大，最概然速率越大， $f(v_p)$越小。
 
 ###### 平均速率
 
-$$
-\bar v = \int_0^\infty vf(v)\text dv
-$$
+$$\bar v = \int_0^\infty vf(v)\text dv$$
 
 任意函数对全体分子按速率分布的平均值为
 
 <font color ="red">$f(v)$一定要归一化!</font><p>例如求0到vp/2的平均速率，首先要将f(v)归一化成这个区间内的速率分布，而不是直接用全部速率分布</p>
-$$
-\bar{\phi(v)} =\int_0^\infty \phi(v)f(v)\text dv
-$$
+$$\bar{\phi(v)} =\int_0^\infty \phi(v)f(v)\text dv$$
+
 由麦克斯韦速率分布函数
-$$
-\bar v = \sqrt{\frac{8kT}{\pi m}} = \sqrt{\frac{8RT}{\pi M}}
-$$
+
+$$\bar v = \sqrt{\frac{8kT}{\pi m}} = \sqrt{\frac{8RT}{\pi M}}$$
 
 ###### 方均根速率
 
-$$
-\bar{v^2} = \int_0^\infty v^2f(v)\text dv = \frac{3kT}{m}\\
-\sqrt{\bar{v^2}} = \sqrt{\frac{3kT}{m}} = \sqrt{\frac{3RT}M}
-$$
+$$\bar{v^2} = \int_0^\infty v^2f(v)\text dv = \frac{3kT}{m}\\\sqrt{\bar{v^2}} = \sqrt{\frac{3kT}{m}} = \sqrt{\frac{3RT}M}$$
+
+##### 麦克斯韦速度分布律
+
+$$\frac{\text dN}{N} = \left(\frac{m}{2\pi kT}\right)^{3/2}e^{-m(v_x^2 + v_y^2 + v_z^2)/2kT}\text{d}v_x\text{d}v_y\text{d}v_x$$
+
+速度分量的分布函数
+
+$$g(v) = (\frac m{2\pi kT})^{1/2}e^{-mv^2/2kT}$$
+
+##### 分子碰壁数$Γ$
+
+$$\Gamma = \frac14 n\bar v$$
+
+##### 玻尔兹曼分布
+
+###### 恒温气压公式
+
+$$p = p_0e^{-mgz/kT}\\\\n = n_0e^{-mgz/kT}$$
+
+###### 玻尔兹曼分布
+
+$$\text dN_{\vec r} = n_0 \cdot e^{-\varepsilon_p(\vec r)/kT} \cdot \text d^3 \vec r\\\\\text d^3\vec r = \text dx \ \text dy \  \text dz$$
+
+###### 玻尔兹曼-麦克斯韦分布
+
+$$\text dN = n_0 \cdot (\frac m{2\pi kT})^{3/2} \cdot e^{-[\frac12 mv^2 + \varepsilon_p(\vec r)]/kT} \cdot \text d^3\vec r \cdot \text d^3 \vec v$$
+
+能量简并：不同子相空间分子能量相等。
+
+分子按能量分布：
+
+$$N(\varepsilon) = C \cdot w(\varepsilon) \cdot e^{-\frac{\varepsilon}{kT}}$$
+
+$\varepsilon$为粒子的能量，$w(\varepsilon)$为具有此能量的体积元个数.
 
