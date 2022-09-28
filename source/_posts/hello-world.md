@@ -38,4 +38,11 @@ $ hexo deploy
 
 More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
 
-$$ E = mc^2 \\\\\text {java is the best language.}$$
+
+$$
+\text{Katex is refined.}
+$$
+
+$$
+\int_{birth}^{death} stu\text{d}y = \text{touch fish}
+$$
