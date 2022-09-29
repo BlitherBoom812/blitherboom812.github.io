@@ -197,7 +197,7 @@ $$T = T_3\frac{pV}{p_3V_3} = 273.16\frac{pV}{p_3V_3}$$
 
   1组$(q_1, \dots, q_r, p_1, \dots, p_r)$的取值表示粒子的1个微观状态，对应于子相空间的一个点。
 
-  更确切的说，在子相空间 $( q_1,... , q_r , p_1,..., p_r ) $位 置处的体积元 $d q_1...d q_r dp_1...dp_r$中的点，都是由$ ( q_1,... , q_r , p_1,..., p_r ) $描述的相同的粒子微观状态。
+  更确切的说，在子相空间 $( q_1,... , q_r , p_1,..., p_r )$位置处的体积元 $d q_1...d q_r dp_1...dp_r$中的点，都是由$( q_1,... , q_r , p_1,..., p_r )$描述的相同的粒子微观状态。
 
   位形空间（坐标构成的空间），速度空间（速度构成的空间）。
 
@@ -293,7 +293,7 @@ $$T = T_3\frac{pV}{p_3V_3} = 273.16\frac{pV}{p_3V_3}$$
 1. 分子永不停息地作无规则运动 — 热运动
 1.  分子间存在一定的相互作用。
 
-#### 理想气体的压强
+### 理想气体的压强
 
 ##### 关于理想气体的假设
 
@@ -323,7 +323,7 @@ $$\bar{v_x} = \bar{v_y} = \bar{v_z} = 0\\\\\bar{v_x^2} = \bar{v_y^2} = \bar{v_z^
 前提：平衡态，忽略重力，分子当成质点
 $$p = \frac13nm\bar{v^2} = \frac23n\bar\varepsilon_t, \\\\\bar\varepsilon_t = \frac12 mv^2$$
 
-#### 温度的统计意义
+### 温度的统计意义
 
 $$\bar\varepsilon_t = \frac{3p}{2n} = \frac{3nkT}{2n} = \frac32kT\\\\\sqrt{\bar{v^2}} = \sqrt{\frac{3kT}{m}} = \sqrt{\frac{3RT}{M}}$$
 
@@ -337,7 +337,7 @@ $H_2$: $1.84\times 10^3m/s$
 
 $O2$: $4.61\times 10^2m/s$
 
-#### 能量均分定理
+### 能量均分定理
 
 自由度：决定物体空间位置的独立坐标数，用$i$表示
 
@@ -404,7 +404,7 @@ $$\bar\varepsilon = \frac{t+ r}2kT$$
 
 理想气体： $\varepsilon_{\mathrm pij} = 0,E = E(T)$
 
-#### 麦克斯韦速度分布律
+### 麦克斯韦速度分布律
 
 分布函数是体现热力学系统的统计规律性的重要函数.
 
@@ -479,3 +479,236 @@ $$N(\varepsilon) = C \cdot w(\varepsilon) \cdot e^{-\frac{\varepsilon}{kT}}$$
 
 $\varepsilon$为粒子的能量，$w(\varepsilon)$为具有此能量的体积元个数.
 
+### 范德瓦尔斯方程
+
+#### 范氏气体模型
+
+气体分子间的作用力：分子间的作用力很复杂，主要是电磁力，可以分为引力和斥力
+
+范氏气体模型：对理想气体做两方面的修正。考虑分子体积、分子间作用力引起的修正。
+
+![范氏气体](../images/physics/VanGas.png)
+
+* 分子是直径为d的刚球
+* 在$d\rightarrow s$的范围内，分子间有恒定引力
+
+#### 范德瓦尔斯方程
+
+范德瓦尔斯方程：
+
+
+设:
+
+$\nu = 1 mol$
+
+$p$ -- 实测气体压强
+
+$V_m$ -- $1\ mol$气体容积
+
+对理想气体：$pV_m = RT$
+
+对真实气体：
+
+1. 分子体积引起的修正
+
+分子自由活动空间的体积为$V_m - b$
+
+$$p(V_m - b) = RT$$
+
+$$
+p = \frac{RT}{V_m - b}
+$$
+
+2. 分子间引力引起的修正
+
+气体分子间作用力一般表现为引力。
+
+在容器内部，单个气体分子受到各个方向的平均引力相等，合力可以看作零。
+
+但是在容器边缘，单个气体分子受到的引力是不对称的。气体分子所受的合力指向容器内部，因此撞击容器壁的气体分子动量比理想气体下的情况要小，宏观上形成的压强比理想气体情况要小。
+
+$$
+p < \frac{RT}{V_m - b}\\
+$$
+
+设
+
+$$
+p = \frac{RT}{V_m - b} - p_{in}
+$$
+
+$p_{in} \propto nf_{合}, f_{合}\propto n \Rightarrow p_{in} \propto n^2 \propto \frac 1{V_m^2}$
+
+最后得到：
+$$
+(p + \frac a{V_m^2})(V_m - b) = RT
+$$
+
+对 ν mol 气体：
+
+$$
+(p + \nu^2 \cdot \frac a{V^2})(V - \nu b) = \nu RT
+$$
+
+常温常压下：$b/V_m \sim 10^{-3}, p_{in}/p \sim 10^{-2}$，这时分子体积和分子间的作用力修正可以忽略。
+
+#### 气体的等温线
+
+真实气体的等温线：
+
+![RealGasTemp](../images/physics/RealGasTemp.png)
+
+范氏气体的等温线：
+
+![VanGasTemp](../images/physics/VanGasTemp.png)
+
+如何计算临界参数：
+
+临界参数：临界点K对应的$p_K, V_K, T_K$
+
+临界点K是等温线的拐点：
+
+$$
+\left(\frac{\partial p}{\partial V}\right)_{T = T_K} = 0\\
+\left(\frac{\partial^2 p}{\partial V^2}\right)_{T = T_K} = 0
+$$
+
+K同时也是三次方程的三重根，因此可以通过假设$(V_m - V_{mK})^3 = 0$展开后和范德瓦尔斯方程对比系数求解。
+
+#### 范氏气体内能
+
+理想气体： $E(T) = i\nu RT / 2$
+
+范氏气体：$V\uparrow \rightarrow p_{in}做负功\rightarrow 分子间势能E_p\uparrow$
+
+要计算势能，首先要定义势能为0的状态：定义某种位形为0势能。其他状态的势能定义为从这种状态变形到0势能状态的过程中保守力的变化。
+
+$$\mathrm dA = -p_{in}S\mathrm dl = -p_{in}\mathrm dV$$
+
+设$E_p(V = \infty) = 0$。
+
+$$
+E_p(V) = \int_V^\infty -p_{in}\mathrm dV = \int_V^\infty-\nu^2 \cdot \frac a{V^2}\mathrm dV = -v^2 \cdot \frac aV
+$$
+
+$$
+E = E_k + E_p = \frac i2\nu RT - \nu ^2\frac aV
+$$
+
+**结论：**
+$$E(T, V) = \frac i2 \nu RT - \nu^2 \frac aV$$
+
+#### 一个细节
+
+为什么不考虑气体分子和容器壁分子间的引力？
+
+事实上，这引力确实存在。但是可以通过动量定理证明，碰撞过程这引力的作用总和为0。
+
+### 气体分子的碰撞、平均自由程
+
+平均碰撞频率和平均自由程
+
+平均碰撞频率$\bar z$：单位时间内一个气体分子与其他分子碰撞的平均次数
+
+平均自由程$\bar \lambda$：气体分子在相邻两次碰撞之间飞行的平均路程。
+
+平均碰撞频率和平均频率之间关系
+
+对象:平衡态下的理想气体
+
+假定：
+
+(1)只有一种分子；
+
+(2)分子可视作直径为d的刚球；
+
+(3)被考察的分子以平均相对速率$\bar u$运动，其余的分子静止。
+
+碰撞界面为$\sigma$。分子间平均相对速率为$\bar u = \sqrt 2 \bar v$。
+
+$$
+\bar z = \sigma \bar u n = \pi d^2 n \bar u = \sqrt 2 \pi d^2 n\bar v
+$$
+
+平均自由程和压强、温度的关系：
+
+$$
+\bar\lambda = \frac {\bar v} {\bar z} = \frac 1{\sqrt2 \pi d^2 n} = \frac {kT}{\sqrt2\pi d^2p} \propto \frac{T}{p}
+$$
+
+### 气体输运过程
+
+非平衡态下，气体内部各部分性质不均匀，就会产生热量、动量、质量的迁移，称为输运过程或内迁移过程。
+
+气体输运过程包括：热传导、扩散和内摩擦（粘滞）。
+
+输运现象的宏观实验定律和原因。
+
+热传导
+
+温度不均匀。实验定律：傅里叶定律，热传导方程。
+
+考虑1维的情形。
+
+$$
+\mathrm dQ = -\kappa \frac{\partial T}{\partial x}\mathrm dS \mathrm dt
+$$
+
+$$
+j(x, t) = \frac{\mathrm dQ}{\mathrm dS\mathrm dt}  = -\kappa \frac {\partial T(x, t)}{\partial x}
+$$
+
+$j(x, t)$：热流密度，$\partial T/\partial x$：温度梯度。
+
+温度梯度“力”导致热流。
+
+稳恒热流：$\frac{\mathrm dQ}{\mathrm dt} = C$，$j$, $T$与$t$无关。
+
+$\kappa$称为导热系数，由气体特性和$T, p$决定。
+
+扩散
+
+原因：气体内部离子数浓度不均匀。
+
+斐克定律
+
+$$
+\mathrm dN = -D\frac {\partial n}{\partial x}\mathrm dS \mathrm dt
+$$
+
+$$
+j(x, t) = \frac {\mathrm dN}{\mathrm dS \mathrm dt} = -D\frac {\partial n}{\partial x}
+$$
+
+稳恒扩散流：$\frac {\mathrm dN}{\mathrm dt} = C$，$j$, $n$, 与$t$无关。
+
+粒子数守恒方程
+$$
+\oiint_S j\cdot \vec {s} = -\frac {\mathrm dN}{\mathrm dt}, \nabla \cdot \vec j + \frac{\partial n}{\partial x} = 0.
+$$
+
+结合粒子数守恒方程（微分形式）和斐克定律得到扩散方程
+
+$$
+\frac{\partial n}{\partial t} = D\frac{\partial^2 n}{\partial x^2}
+$$
+
+考试考定场稳恒流，不考内摩擦。
+
+内摩擦（粘滞）
+
+根据流体力学，对定常流动的粘滞流体，流速不太大时（雷诺数小），出现层流。
+
+粘滞定律（牛顿摩擦定律）
+
+$$
+\Delta F = - \eta \frac{\mathrm du}{\mathrm dz}\Delta S
+$$
+
+$$
+p = -\eta \frac{\mathrm du}{\mathrm dz}
+$$
+
+粘度和温度有关，气体粘度随温度增加，液体温度随温度减小。遵从粘滞定律的流体称为牛顿流体。
+
+内摩擦原因：流速不均匀。
