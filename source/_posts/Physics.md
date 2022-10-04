@@ -662,6 +662,18 @@ $j(x, t)$：热流密度，$\partial T/\partial x$：温度梯度。
 
 温度梯度“力”导致热流。
 
+> $T$在这里相当于电势，$-\partial T / \partial x$相当于电势的负梯度即电场强度，$j$相当于电流密度，$\kappa$相当于电导率。因此类比$\vec{J} = \sigma \vec{E}$有$j = -\kappa \partial T /\partial x$。类似的，也许可以推导出热阻的概念？热学的“麦克斯韦”方程组又是什么？
+
+统计物理给出的结论：
+
+$$
+\kappa = \frac 13 nm\bar v \bar \lambda c_V
+$$
+
+>如何理解此公式：热传导的本质是分子能量（热量）的交换，交换的热量等于粒子数乘以单个粒子交换的热量。
+>
+>$m$为单个分子质量。$c_V$为定体热容。$n\bar v$用于描述$\mathrm dt$内穿过$\mathrm dS$的粒子数，$\bar\lambda$乘以$\partial T/\partial x$得到温度的变化量$\mathrm dT$ ,$m,c_V$与温度的变化量相乘，得到单个粒子交换的热量。
+
 稳恒热流：$\frac{\mathrm dQ}{\mathrm dt} = C$，$j$, $T$与$t$无关。
 
 $\kappa$称为导热系数，由气体特性和$T, p$决定。
@@ -675,6 +687,20 @@ $\kappa$称为导热系数，由气体特性和$T, p$决定。
 $$
 \mathrm dN = -D\frac {\partial n}{\partial x}\mathrm dS \mathrm dt
 $$
+
+>教材的表述为
+>$$
+\mathrm dM = -D\frac {\partial \rho}{\partial x}\mathrm dS \mathrm dt
+>$$
+>这里的两个$D$是一样的。
+
+统计物理给出的结论：
+
+$$
+D = \frac13\bar v\bar \lambda
+$$
+
+扩散流密度：
 
 $$
 j(x, t) = \frac {\mathrm dN}{\mathrm dS \mathrm dt} = -D\frac {\partial n}{\partial x}
@@ -712,3 +738,9 @@ $$
 粘度和温度有关，气体粘度随温度增加，液体温度随温度减小。遵从粘滞定律的流体称为牛顿流体。
 
 内摩擦原因：流速不均匀。
+
+统计物理给出的结论：
+
+$$
+\eta = \frac 13 nm\bar v\bar \lambda
+$$
