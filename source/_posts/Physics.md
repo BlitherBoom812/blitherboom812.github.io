@@ -951,3 +951,68 @@ $$
 $$
 
 其中，$T_1$，$T_2$分别为循环中工质的最高和最低温度。
+
+### 克劳修斯熵公式
+
+热力学第零定理导出了温度，热力学第一定律导出了内能，热力学第二定律则导出了熵。
+
+可逆循环可以拆成若干小卡诺循环，每个卡诺循环满足
+
+可逆循环有克劳修斯等式
+$$
+\oint_R \frac{\mathrm {\bar d} Q}{T} = 0
+$$
+
+因此得到一个与路径无关的状态函数。
+
+熵与状态有关，和过程无关。即便过程是不可逆过程。
+
+但是，仅当过程为可逆过程时才有$\mathrm dS=  \mathrm{\bar d}Q/T$。
+
+对于可逆过程：
+
+$$
+T\mathrm dS = \mathrm{\bar d}Q = \mathrm dE + p\mathrm dV
+$$
+
+因而可以用$E, V$表示熵：
+$$
+\mathrm dS = \frac 1T \mathrm dE + \frac pT \mathrm dV = \frac 1T()
+$$
+
+### 克劳修斯不等式
+
+不可逆循环有
+$$
+\oint_{Ir} \frac{\mathrm {\bar d} Q}{T} < 0
+$$
+
+因而有熵增加原理:
+
+$$
+\int_{1_{Ir}}^{2} + \int_{2_R}^1 < 0\Rightarrow S_1 - S_2= \int_{1_{Ir}}^2
+$$
+
+# 振动和波动
+
+## 波动
+
+### 多普勒效应
+
+一般形式：
+
+![](../images/DSA/Duopule.jpg)
+
+机械波不存在多普勒效应。
+
+电磁波的多普勒效应：
+
+![](../images/DSA/waveDuopl.jpg)
+
+横向多普勒效应：$\theta = \pi /2$
+
+纵向多普勒效应：$\theta = 0,\pi$
+
+### 激波
+
+马赫数：$\frac{v_s}{u} = \frac 1{\sin\alpha}$
