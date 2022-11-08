@@ -1016,3 +1016,89 @@ $$
 ### 激波
 
 马赫数：$\frac{v_s}{u} = \frac 1{\sin\alpha}$
+
+# 光学
+
+光学分为几何光学，波动光学和量子光学。
+
+## 光的相干叠加
+
+光源：
+1. 普通光源：自发辐射。不同原子发光独立、不相干；同原子不同次发光独立、不相干。
+2. 激光光源：受激辐射。光放大，全通光子，相干光，波列长，相干性好。
+
+光的相干性：
+光学中强调电磁波的电场矢量$\vec E$：光矢量
+
+相干条件：光矢量有平行分量，频率相同，相差恒定。
+
+电磁波叠加的强度公式推导：
+$$
+I = \sqrt{\varepsilon / \mu}\left<\vec E \cdot \vec E \right>_t \\
+
+I \propto \left<\vec E \cdot \vec E \right>_t \\
+
+叠加的电磁波：\vec E_1 + \vec E_2\\
+
+
+矢量的点乘运算可得叠加后的强度:\\
+
+I = I_1 + I_2 + 2\sqrt{\varepsilon / \mu}\left<\vec E_1 \cdot \vec E_2 \right>_t 
+
+$$
+
+对光的相干叠加，用光矢量的平行分量描述光场--标量波函数。
+
+$$
+I = I_1 + I_2 + 2\sqrt{I_1I_2}\cos \Delta \varphi
+$$
+
+其中$\Delta\varphi = -k(r_2 - r_1) + (\varphi_{20} - \varphi_{10})$为相位差。
+
+在上面两式中，若$\vec E_1 \cdot \vec E_2 \ne 0$或者$\Delta\varphi \ne \pm\frac{\pi}{2}...$，则满足相干的条件。
+
+条纹的明显程度用衬比度衡量：$V = (I_{max} - I_{min})/(I_{max} + I_{min})$
+
+不同的位置$\Delta\varphi$不同，因而对应的$I$不同，造成了干涉条纹的出现。$I_1 = I_2$时$V=1$，$I_1 \ne I_2$时，$V \ne 1$。
+
+普通光源获得相干光的途径一般有分波阵面法（双缝干涉）和分振幅法（薄膜干涉）。
+
+双缝干涉：
+
+![](../images/physics/shuangfeng.jpg)
+
+明纹：$\delta = \pm k\lambda$
+
+暗纹：$\delta = \pm (2k + 1)\frac \lambda 2$
+
+$(k\in N)$
+
+条纹间距：$\Delta x = \frac{D}{d}\lambda$
+
+$\Delta \varphi \approx \frac{d\sin \theta}{\lambda}2\pi$
+
+时间相干性（光的颜色）：
+
+光的非单色性：
+
+准单色光：由某个中心频率或波长附近的频率或波长连续分布的光构成。采用谱密度函数描述。
+
+![](../images/physics/准单色光.jpg)
+
+造成谱线宽度的原因：自然宽度、多普勒增宽、碰撞增宽
+
+非单色性对干涉条纹的影响：
+
+![](../images/physics/非单色光.jpg)
+
+从图中可以看出，如果某个位置谱线中波长最长的成分的k级明纹和波长最短的成分的(k+1)级明纹重合，则在这个位置以后的条纹看不清楚了。
+
+可以解得最大相干级次：$k_M = \lambda/\Delta\lambda$，进而有最大波程差：$\delta_M = \lambda^2/\Delta\lambda$。
+
+相干长度等于波列长度。
+
+通常用相干时间（光通过相干长度所需的时间）$\tau = \delta_M / c$ 衡量光的单色性。相干时间或相干长度越长，则单色性越好。
+
+空间相干性（光的宽度）：
+
+
