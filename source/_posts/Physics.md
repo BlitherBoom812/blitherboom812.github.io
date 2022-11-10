@@ -1063,7 +1063,7 @@ $$
 
 普通光源获得相干光的途径一般有分波阵面法（双缝干涉）和分振幅法（薄膜干涉）。
 
-双缝干涉：
+### 双缝干涉
 
 ![](../images/physics/shuangfeng.jpg)
 
@@ -1101,4 +1101,67 @@ $\Delta \varphi \approx \frac{d\sin \theta}{\lambda}2\pi$
 
 空间相干性（光的宽度）：
 
+较宽的光源会导致明纹的非相干叠加，使衬比度下降。
 
+设光的宽度为$b_0$,则看到干涉条纹的条件是$b_0 < \frac{R}{d}\lambda$，这一上界称为光源极限宽度。
+
+固定b和R，则得到$d < \frac{R}{b}\lambda$，上界称为相干间隔。
+
+光源中心对两孔的张角为$\theta = \frac{d}{R} < \frac{\lambda}{b}$，上界称为相干孔径角。
+
+### 光程
+
+用于计算光经过不同介质的相差。
+$\Delta\varphi = \frac{2\pi r}{\lambda}$。
+
+透镜不产生附加光程差。
+
+### 薄膜干涉
+
+为什么要薄？相干长度（时间相干性）限制。
+
+薄膜干涉有实际意义的是等倾条纹和等厚条纹。
+
+光程差
+$$
+\delta = 2ne \cos r + \frac{\lambda}{2}
+$$
+
+e为膜厚度。
+
+等厚条纹：
+
+厚度不同，角度相同
+
+单色平行光入射，近似垂直于膜表面，因而$i, r \approx 0$
+
+$$
+\delta = 2ne + \frac{\lambda}{2}
+$$
+
+劈尖：
+
+由于明纹需满足$\delta = k\lambda$，暗纹需满足$\delta = (2k+1)\lambda/2$，故相邻亮纹所在的厚度差为$\Delta e = \lambda / (2n)$，而条纹间距为$L = \Delta e / \theta = \lambda / (2n\theta)$
+
+牛顿环：
+
+![](../images/physics/niudunhuan.jpg)
+
+可以得到暗环半径公式：$r_k=\sqrt{kR\lambda}$
+
+总结：条纹跟着厚度走。
+
+等倾条纹：
+
+厚度相同，角度不同。
+
+光程差(记!)
+$$
+\delta = 2ne \cos r + \frac{\lambda}{2} = 2e\sqrt{n^2 - n^{\prime2}\sin ^2 i} + \frac \lambda2
+$$
+
+等倾条纹实验通常采用面光源,因为透镜会把方向相同的光汇聚到一点，因而条纹的非常鲜明，衬比度很高，不会出现光源宽度和条纹衬比度的矛盾。
+
+应用：增透膜和增反膜
+
+### 迈克尔逊干涉仪
