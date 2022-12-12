@@ -1486,3 +1486,408 @@ $$
 $$
 
 时间不是力学量，它只是一个参数。位置，动量，能量等都是力学量。
+
+## 薛定谔方程
+
+定义
+
+$$
+i\hbar \frac{\partial \Psi}{\partial t} = \hat {H} \Psi
+$$
+
+哈密顿算符：$\bar {H} = -\frac{\hbar ^2}{2m}\nabla^2 + U(\vec r, t)$
+
+若势函数不显含时间，则哈密顿算符$\hat H$称为能量算符。此时薛定谔方程可以通过分离变量法求解。
+
+### 定态薛定谔方程-能量本征方程
+
+分离变量法求解：
+
+若势函数不显含t，则可设：
+$$
+\Psi(\vec r, t) = \Phi(\vec r) \cdot T(t)
+$$
+
+得到：
+
+$$
+i\hbar \frac{\mathrm dT(t)}{\mathrm d t}\frac 1{T(t)} = [\hat H\Phi (\vec r)]\frac{1}{\Phi(\vec r)} = E
+$$
+
+$$
+T(t) = Ce^{-\frac{i}{\hbar}Et}\\
+()
+$$
+
+E称为能量本征值（后面会讲什么叫本征值），对应的$\Phi_E$称为本征波函数。
+
+定态：能量取确定值的状态，对应薛定谔方程的特解：$\Psi_E(\vec r, t) = \Phi e^{-\frac{i}{\hbar}Et}$.
+
+对不同的势函数和能量区间，能量的本征值可能取连续的值，也可能取分立的值。设E取分立值，$\{E_n, n = 1, 2, 3, \dots\}$，对应的本征波函数$\Psi_E (\vec r, t) = \Phi_E(\vec r)e^{-\frac{i}{\hbar}Et}$
+
+下面通过求解一维定态薛定谔方程来讨论两类问题：
+
+本征值问题：给定$U(x)$，求$E_n$和$\Phi_n(x)$。
+
+散射问题：$E$已知，射向势垒$U(x)$，计算粒子穿透势垒的概率。 
+
+## 无限深方势阱中的粒子
+
+背景：长度为$a$的导体中自由移动的电子，只能在导体中自由运动，而不能离开导体。
+
+$|x| > a/2$时，$U(x) \rightarrow \infty$；
+
+$|x| \le a/2$时，$U(x) = 0$。
+
+在$|x| > a/2$区间，$\Phi_1 = 0$。
+
+在$|x| \le  a/2$区间，$\frac{\mathrm d^2 \Phi_2}{\mathrm dx^2} + \frac{2mE}{\hbar^2}\Phi_2 = 0$
+
+记$k = \frac{2mE}{\hbar^2}$。解得$\Phi_2 = A\sin(kx + \varphi)$。
+
+求解定态的常规手法：利用波函数的三个条件，即单值、有限、连续，确定$A, k, \varphi$。
+
+利用连续条件，波函数在势阱边界处连续：
+
+$$
+A\sin(\frac{ka}{2} + \varphi) = 0, A\sin(-\frac{ka}{2} + \varphi) = 0.\\
+
+\Rightarrow k = \frac{n\pi}{a}, \varphi = \frac{l\pi}{2}
+$$
+
+从而
+$$
+E = \frac{\pi^2\hbar^2}{2ma^2}n^2 \ (n = 1, 2, 3, \dots)
+$$
+
+最低能量$E_1$被称为零点能。
+
+大量子数情况下，能量趋向于连续。
+
+$$
+l = 0, \varphi = 0, \Phi_2 = A\sin \frac{n\pi}{a}x = \Phi_{on},满足边界连续需要n为偶数\\
+l = 1, \varphi =\pi /2 , \Phi_2 = A\cos \frac{n\pi}{a}x = \Phi_{en},满足边界连续需要n为奇数\\
+l \ge 2，只差个符号，不影响|\Phi|^2，不再考虑。
+$$
+
+求$A$：
+
+归一化：$\int_{-a/2}^{a/2}|\Phi_{on}|^2 \mathrm dx = 1$， 得到$A = \sqrt \frac2a$
+
+$$
+\Phi_{on} = \sqrt{\frac 2a}\sin \frac{n\pi}{a}x, n = 2, 4, 6, \dots\\
+\Phi_{en} = \sqrt{\frac 2a}\cos\frac{n\pi}{a}x, n = 1, 3, 5, \dots
+$$ 
+
+定态：
+
+$$
+\Psi_n (x, t) = \Phi_n(x) \cdot e^{-\frac i\hbar Et}
+
+$$
+
+被称为驻波解(时间项指数为纯虚数，展开可以写成三角函数)。概率密度$|\Psi_n(x, t)|^2 = |\Phi_n(x)|^2$
+
+## 势垒穿透
+
+### 粒子进入势垒
+
+背景：金属与半导体接触处，势能隆起形成势垒。粒子以能量为$E(E < U_0)$的状态自由入射。
+
+$$
+U(x) = 0, x \le 0;\\
+U(x) = U_0, x \gt 0.
+$$
+
+量子力学认为有一部分粒子会穿透势垒。不仅有反射，还有投射。
+
+定态薛定谔方程：
+
+$$
+\Phi^{\prime\prime}(x) + \frac{2m}{\hbar^2}(E - U(x))\Phi(x) = 0
+$$
+
+$x \le 0$: 
+$$
+k_1 = \sqrt{2mE/\hbar^2} > 0\\
+\Psi_1^{\prime\prime} + k_1^2 \Psi_1 = 0
+$$
+
+$x \gt 0$:
+$$
+ik_2 = \sqrt{2m(E - U_0)/\hbar^2} (k_2 > 0)\\
+\Psi_2^{\prime\prime} + (ik_2)^2\Psi_2 = 0
+$$
+
+通解（利用了$x\rightarrow\infty$时$\Psi_2$的有界性）：
+
+$$
+\Psi_1(x) = Ae^{ik_1x} + Be^{-k_1x}(表现为入射和反射波)\\
+\Psi_2(x) = Ce^{k_2x}(表现为透射波)
+$$
+
+粒子可以出现在势垒区！表现为电子溢出金属表面，形成金属表面的一层电子气。
+
+势垒区的概率密度：$|\Psi_2(x)|\propto e^{-\frac{2x}{\hbar}\sqrt{U_0 - E}}$
+
+波可以穿过有限宽势垒，以平面波的形式继续前进。称为量子隧穿效应。
+$\Psi_3(x) = Se^{i\frac {\sqrt{2mE}}{\hbar} x}$
+
+扫描隧道显微镜：原理是量子隧穿效应，可以用来观测物质表面结构。
+
+![](../images/physics/STM.jpg)
+
+$$
+i \propto Ue^{-C\sqrt{\varPhi}d}
+$$
+
+$\varPhi$为样品表面平均势垒高度。
+
+## 一维谐振子
+
+$$
+U(x) = \frac 12 kx^2 = \frac 12m\omega^2x^2, \omega = \sqrt{\frac km}
+$$
+
+求解定态薛定谔方程得到
+$$
+E_n = (n + \frac 12)\hbar \omega = (n + \frac 12)h\nu
+$$
+零点能：$\frac{h\nu}{2}$。间距：$h\nu$。能量本征函数不用记。
+
+定态概率密度：
+
+经典情况下：平衡位置处$\vec v$最大，停留时间最短，出现概率最小，振幅最大的时候$\vec v$为0，出现概率最大。量子数n趋于无穷时，量子概率分布趋于经典概率分布。
+
+如果$E< U$，隧穿效应仍然存在。
+20220328
+## 力学量算符
+
+以位矢$\vec r$为自变量的空间，称为“坐标表象”。在坐标表象中，动量和位矢不存在对应关系$\vec p = \vec p(\vec r)$（不确定关系）。
+
+量子力学将动量、角动量、能量等力学量“算符化”。力学量算符是量子力学的一个基本假设。
+
+### 力学量算符的引入
+
+定义能量算符$\hat {E} \equiv i\hbar \frac{\partial}{\partial t}$，与表象无关。
+
+坐标表象中定义动量算符$\hat{\vec p} = -i\hbar\nabla$，坐标算符$\hat{\vec r} = r$。
+
+由于坐标表象下坐标算符就是坐标，因此势能算符$\hat{U} = U(\vec r)$。动能算符$\hat{E_k} = \frac{(-i\hbar\nabla)\cdot (-i\hbar\nabla)}{2m} = -\frac{\hbar^2}{2m}\nabla^2$
+
+角动量算符$\hat{\vec L} = \hat{\vec r}\times \hat{\vec p} = -i\hbar\vec r \times \nabla$。如果用球极坐标，可得$\hat{L_z} = -i\hbar \frac{\partial}{\partial \varphi}$。角动量算符的模方由极角和方位角的导数组成：$\hat{L}^2 = -\frac {\hbar^2}{\sin \theta}\frac{\partial}{\partial \theta}(\sin \theta\frac{\partial}{\partial \theta})  +\frac{\hat{L_z^2}}{\sin^2\theta}$
+
+### 本征值和本征函数
+
+本征方程：$\hat{A}\Psi_n = A_n\Psi_n$。其中$A_n$为本征值，$\Psi_n$是$A$取$A_n$时的本征态，称为本征函数。
+
+本征值就是相应力学量的可能取值。
+
+$\hat A$的本征函数系${\Psi_n}$构成正交、归一的完备函数系。一维情况的归一化：$\int_{-\infty}^{+\infty}\Psi_n^*(x)\Psi_n(x)\mathrm dx = 1$。正交性：$\int_{-\infty}^{+\infty}\Psi_m(x)\Psi_n(x)\mathrm d x = \delta_{mn}$.
+
+本征函数的完备性：在相同的函数空间内，任一物理上合理的归一化波函数，都可以由力学量A的本征函数系线性展开，即$\Psi = \sum_{n}C_n(t)\Psi_n(x)$。
+
+### 态叠加原理：
+
+线性展开公式：
+
+$$
+\Psi(x, t) = \sum_{n }C_n(t)\Psi_n(x) \ (假设是归一化的)
+$$
+
+基本假设之一。
+
+### 力学量的测量原理
+
+量子力学假设：在$\Psi(x,t)$态上测量$A$，则$\Psi(x, t)$一定向着$A$的某个本征态$\Psi_n$塌缩，测量结果为$A_n$。
+
+特别地，如果$\Psi = \Psi_n$，则测量结果是确定的，为$A_n$。
+
+测量结果中$A_n$出现的概率为$|C_n(t)|^2$。
+
+$$
+\bar A = \sum_n |C_n(t)|^2A_n = \int_{-\infty}^{+\infty}\Psi^*(x, t)\hat A\Psi(x, t)\mathrm dx
+$$
+
+
+## Dirac符号
+
+### 量子态
+
+本征值离散的：$\ket{n}$
+
+本征值是连续的：$\ket{P_x}, \ket{x}$
+
+它们各自张开一个线性空间。
+
+### 内积空间
+
+左矢与右矢一一对应，左矢张开一个共轭线性空间。
+
+$\ket{A}$和$\ket{B}$的内积(复内积)：$\langle B|A\rangle$
+
+左矢空间与右矢空间通过复内积练习，称为内积空间。
+
+### 线性算符
+
+$$
+\hat{L}\ket{A} = \ket{B}
+$$
+
+满足：
+* $\hat L (\ket{A} + \ket {B}) = \hat L\ket{A} + \hat L\ket{B}$
+* $(\hat F + \hat G)\ket{A} = \hat F \ket{A} + \hat G\ket{A}$
+
+* $\hat F(\hat G \ket{A}) = (\hat F \cdot \hat G)\ket {A}$
+
+共轭算符：$\bra{A}\bar{\hat L}$与$\hat L \ket{A}$一一对应，将$\bar{\hat L}$或者$\hat L ^+$称为共轭算符。
+
+厄米算符：$\bar {\hat L} = \hat L$。
+
+算符是向右结合的。
+
+### 算符本征方程
+
+$$
+\hat L \ket{L_n} = l_n\ket{L_n}\\
+
+\hat L\ket{n} = l_n\ket{n}
+$$
+
+$l_n$是本征值，$L_n$是本征态。
+
+由测量原理，本征值必须是实数。所以可以观测的力学量对应的算符都是厄米算符。
+
+### 态叠加原理
+
+离散谱：
+
+$$
+\bra{m}n\rangle = \delta_{mn}\\
+\ket{\psi} = \sum_n C_n\ket{n}\\
+概率幅：\bra{m}\psi \rangle = C_m\\
+\ket{A} = \sum_{n}(\bra{n}A\rangle)\ket{n} = \left(\sum_n \ket{n}\bra{n}\right)\ket{A}\\
+\Rightarrow \sum_n \ket{n}\bra{n}=1(本征矢的完备性表示)
+$$
+
+连续谱：
+
+$$
+\bra{x_0^\prime}x_0\rangle = \delta(x_0^\prime - x_0)\\
+\ket{\psi} = \int_{-\infty}^{\infty}C(x_0)\ket{x_0}\mathrm dx_0 \\
+概率幅：\bra{x_0^\prime}\psi\rangle = C(x_0^\prime)\\
+\ket{\psi} = \int_{-\infty}^{\infty}\bra{x_0}\psi\rangle\ket{x_0}\mathrm dx_0 = \left(\int_{-\infty}^{\infty}\ket{x_0}\bra{x_0}\mathrm dx_0\right)\ket{\psi}\\
+\Rightarrow \int_{-\infty}^{\infty}\ket{x_0}\bra{x_0}\mathrm dx_0 = 1(连续谱的完备性方程)
+$$
+
+注：$C(x_0) = \bra{x_0}\psi\rangle$就是波函数$\psi(x_0)$。$|\bra{x_0}\psi\rangle|^2 = |\psi(x_0)|^2 = \psi^*(x_0)\psi(x_0)$是概率密度。
+
+### 正则量子化假设
+
+对易关系：$[\hat A, \hat B]= \hat A\hat B - \hat B\hat A$，若$[\hat A , \hat B]=0$，则称$A$与$B$对易，否则称不对易。
+
+正则量子化假设：
+
+$$
+[\hat{x}, \hat{p_x}] = i\hbar,
+[\hat{y}, \hat{p_y}] = i\hbar, 
+[\hat{z}, \hat{p_z}] = i\hbar
+$$
+
+其余$x, y, z, p_x, p_y, p_z$的组合均对易。
+
+满足$\hat{\vec A}\times \hat{\vec A} = i\hbar \hat{\vec A}$的算符被称为角动量。所有的角动量算符都满足这个关系。例如$\hat L = \hat r\times \hat p$，可以利用正则量子化假设对三个坐标进行计算验证。
+
+$\hat A$和$\hat B$可以同时测准的充分必要条件：
+
+$$
+[\hat A, \hat{B}] = 0\Leftrightarrow 有共同本征态
+$$
+
+简并：1个本征值对应m个量子态,称为m重简并。
+
+产生简并的原因：对称性=>守恒量。
+
+如果$\hat A$是m重简并的，只测量得到本征值A，无法确定对应的量子态。但是如果同时测量对易的$\hat B$，就可以确定对应的$|A, B_i\rangle$，则对应的A的量子态是$|A_i\rangle$。
+
+力学量完全集：能完备描述、确定量子态的力学量算符必须包含$\hat H$。
+
+$\hat H$是核心力学量。
+
+$$
+[\hat A, \hat H]=0\Leftrightarrow \hat A是守恒量
+$$
+选择力学量的完全集，就是选择守恒量的完全集。
+
+## 原子中的电子
+
+### 氢原子理论
+
+巴耳末公式->里德伯方程->波尔氢原子理论
+
+氢原子理论：
+
+定态条件
+
+电子绕核作圆周运动，有确定能量，不辐射能量-经典轨道+定态
+
+频率条件
+
+电子在定态之间跃迁满足：$\nu = (E_i - E_f)/h$
+
+轨道角动量：$L_n = mv_nr_n = n\hbar$，轨道半径$r_n = n^2r_1$
+
+能级公式：$E_n = -13.6eV/n^2$
+
+类氢离子能级：核外只有一个电子，核电荷数大于1.例如$He^+, Li^{2+}$
+
+评价：
+
+波尔理论解释了氢原子和类氢离子光谱的波长和频率。
+
+但是不能解释氢原子的光谱线强度，也不能解释其他原子的光谱结构。
+* 与经典电磁理论矛盾
+* 角动量量子化条件是硬加的
+* 卢瑟福的质疑：电子知道要往$E_2$跳才能往$E_2$跳，但是又必须先跳过去才能知道要往$E_2$跳
+* 薛定谔的非难：当电子离开$E_1$态之后，进入$E_2$态之前，它在哪里，是什么状态？
+
+轨道概念不再适用。定态、能级、跃迁频率条件、角动量量子化仍然被认为是正确的。
+
+### 氢原子的量子力学处理
+
+求解量子问题的要点之一：确定体系的力学量完全集，即力学量可以同时测准，具有共同本征态，相应量子数集可完备地描述体系状态。
+
+通常选择守恒量完全集，和体系对称性有关。
+
+氢原子问题的守恒量完全集：$\hat H, \hat L^2, \hat L_z$
+
+**角动量量子化：**
+
+处于中心力场的氢原子电子，角动量守恒。
+
+求$\hat  L_z$的本征值：
+
+$$
+\hat L_z = -i\hbar \frac{\partial }{\partial \varphi}\\
+
+\hat L_z \varPhi = L_z \varPhi\Rightarrow \varPhi = Ae^{\frac{i}{\hbar}L_z\varphi}
+$$
+
+根据标准条件（周期性），$\varPhi(\varphi) = \varPhi(\varphi + 2\pi)$，带入解得$L_z = m_l\hbar$，$m_l = 0, \pm1, \pm2,\dots$称为磁量子数。
+
+对应的本征函数：$\varPhi_{m_l}(\varphi) = Ae^{im_l\varPhi} = \frac{1}{\sqrt{2\pi}}e^{im_l\varphi}$
+
+求$\hat L^2$的本征值：
+
+结论：$L^2 = l(l+1)\hbar^2$，$l = 0, 1, 2, \dots$称为角量子数。
+
+（$\hat L^2和\hat L_z$具有的共同本征值为球谐函数）
+
+角动量的空间量子化
+
+$L = \sqrt{l(l+1)}\hbar > L_z = m_l\hbar \Rightarrow m_l = 0, \pm1, \pm2,\dots, \pm l$。作矢量图可知，角动量有$2l+1$种取向。
+
+**能量量子化**
+
+(省略公式)
+
