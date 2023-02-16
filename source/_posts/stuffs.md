@@ -51,7 +51,7 @@ function saveShareContent (content, fileName) {
 
 **4.逐步滚动**
 
-```js
+```javascript
     var count = 0;
     pos = document.documentElement.scrollTop;
     console.log(pos);
@@ -65,4 +65,36 @@ function saveShareContent (content, fileName) {
             }
         }
     , 2);
+```
+
+## electron-vue
+
+
+
+**如何引入.node文件**
+
+需要将.node文件放在public文件夹下，引用时可以用相对路径也可以用`__static`+文件名。
+
+需要安装node-loader@1.0.3。太高的版本会导致问题。
+
+~~~javascript
+const addon = require("node-loader!../public/addon.node")
+~~~
+
+**在vue中使用ipcRenderer**
+
+主进程中引入ipcMain没啥大问题。
+在vue文件中引入ipcRenderer，需要先在vue.config.js中配置 
+```js
+nodeIntegration: true
+
+  pluginOptions: {
+    electronBuilder: {
+      // 在vue中能引入electron模块
+      nodeIntegration: true,
+```
+然后在各个vue文件中引入
+
+```js
+import { ipcRenderer } from 'electron'
 ```
