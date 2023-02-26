@@ -45,19 +45,23 @@ $$
 $$
 R(t) = 0, t\lt 0; t, t>0
 $$
+
 #### Unit step function
 $$
 u(t) = 0, t<0;1/2, t=0;1, t>0
 $$
+
 #### Rectangular pulse
 $$
 u(t) - u(t-t_0)
 $$
+
 #### Sign function
 $$
 sgn(t) = 1, t>0;-1, t<0
 $$
 define $sgn(0)=0$, then $sgn(t)=2u(t)-1$
+
 #### Unit impulse function
 Dirac definition
 $$
@@ -86,6 +90,7 @@ $$
 \text{shifted:}\int^{\infty}_{-\infty}f(t)\delta^\prime(t-t_0)\mathrm dt=-f^{\prime}(t_0)\\
 $$
 ![](../images/ss/lec2_.jpg)
+
 ### Signal Decomposition
 
 $$
@@ -167,9 +172,7 @@ a time shift in the input results in a same time shift in the output.
 
 $$
 e(t)\rightarrow r(t)\Rightarrow e(t-t_0)\rightarrow r(t-t_0)\\
-
-\lim_{\Delta t\rightarrow 0}\frac{e(t)-e(t-\Delta t)}{\Delta t}\rightarrow \lim_{\Delta t\rightarrow 0}\frac{r(t)-r(t-\Delta t)}{\Delta t}
-\\
+\lim_{\Delta t\rightarrow 0}\frac{e(t)-e(t-\Delta t)}{\Delta t}\rightarrow \lim_{\Delta t\rightarrow 0}\frac{r(t)-r(t-\Delta t)}{\Delta t}\\
 \frac{\mathrm de(t)}{dt}\rightarrow \frac{\mathrm dr(t)}{dt}
 $$
 
