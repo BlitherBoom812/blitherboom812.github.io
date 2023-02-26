@@ -1,7 +1,8 @@
 ---
 title: Signal and Systems
 date: 2023-02-22 09:46:36
-tags:
+tags: note
+katex: true
 ---
 
 March 15

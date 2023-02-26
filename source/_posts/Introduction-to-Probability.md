@@ -1,7 +1,8 @@
 ---
 title: Introduction-to-Probability
 date: 2023-02-20 21:05:41
-tags:
+tags: note
+katex: true
 ---
 # Probability
 ## Introduction
