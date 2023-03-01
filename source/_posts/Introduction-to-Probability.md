@@ -4,7 +4,9 @@ date: 2023-02-20 21:05:41
 tags: note
 katex: true
 ---
+
 # Probability
+
 ## Introduction
 
 ## Probability Space
@@ -86,7 +88,6 @@ A\sub B\Rightarrow P(A)\le P(B)\\
 P(A\cup B)=P(A)+P(B)-P(A\cap B)\\
 P(A\cup B) \le P(A) + P(B)\\
 P(A\cup B \cup C)=P(A) + P(A^C\cap B) + P(A^C\cap B^C\cap C)
-
 $$
 
 ### Conditional Probability
@@ -97,5 +98,4 @@ $$
 
 * If $P(B)=0$, $P(A|B)$ is undefined.
 * For a fixed event $B$, $P(A|B)$ can be verified as a legitimate probability measure on the new universe. $P(A, B)\ge 0$, $P(\Omega|B)=1$, $P(A_1\cup A_2\cup...|B)=P(A_1|B)+P(A_2|B)+...$
-* $P(A|B)=\frac{\text{\# of elements of }A\cap B}{\text{total \# of elements of }B}$
-
+* <div>$ P(A|B)=\frac{\text{ \# of elements of }A\cap B}{\text{total \# of elements of }B} $</div>
