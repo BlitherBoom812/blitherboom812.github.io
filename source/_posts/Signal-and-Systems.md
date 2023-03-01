@@ -207,7 +207,7 @@ Then the coefficients can be solved by multipling the inverse of Vandermonde mat
 
 ![](../images/ss/lec3_2.jpg)
 
-The combination of zero-input response and the zero-state response is not necessarily linear, since the existence of constant. If one of them contains no constant, the other is linear.
+The combination of zero-input response and the zero-state response is not necessarily linear, since the existence of constant. If one of them vanishes, the other is linear.
 
 #### Impulse and Step Responses
 
