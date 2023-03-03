@@ -6,7 +6,6 @@ katex: true
 ---
 
 March 15
-# Signal and Systems
 ## Basic
 ### Classification
 Deterministic & random
@@ -178,20 +177,20 @@ $$
 
 If every coefficient is time independent, the system is time invariant.
 
-### Time-Domain(TD) Analysis
+## Time-Domain(TD) Analysis
 
 $$
 C_0\frac{d^nr(t)}{dt^n}+C_1\frac{d^{n-1}r(t)}{dt^{n-1}} + ... + C_nr(t)\\
 =E_0\frac{d^me(t)}{dt^m}+E_1\frac{d^{m-1}e(t)}{dt^{m-1}}+...+E_me(t)
 $$
 
-#### Three Steps
+**Three Steps**
 
 * Homogeneous
 * Particular
 * Calculation on coefficients
 
-#### Determining Coefficients
+### Determining Coefficients
 
 If functions are continuous, we can get their boundary conditions by determining the derivatives.
 
@@ -209,7 +208,7 @@ Then the coefficients can be solved by multipling the inverse of Vandermonde mat
 
 The combination of zero-input response and the zero-state response is not necessarily linear, since the existence of constant. If one of them vanishes, the other is linear.
 
-#### Impulse and Step Responses
+### Impulse and Step Responses
 
 **Impulse Response** the zero-state response $h(t)$ to $\delta (t)$, which can be equalized to the initial condition.
 
@@ -223,7 +222,9 @@ $$
 g(t) = \int_0^th(\tau)d\tau
 $$
 
-#### Convolution
+### Convolution
+
+Zero-state required
 
 $$
 e(t) = \int_{-\infty}^{\infty}e(\tau)\delta(t-\tau)\mathrm d\tau\\
@@ -272,5 +273,68 @@ $$
 
 (4) $f(t) * \delta^\prime(t) = f^\prime(t)$
 
+## Fourier Transform
 
+### Fourier Series
+
+requirements:
+
+* has finite number of discontinuities
+* has finite number of maxima and minima
+* $\int_{t_0}^{t_0+T_1} |f(t)|\mathrm dt < \infty$
+
+$$
+\begin{align*}
+f(t)&=a_0+\sum_{n=1}^\infty \left[a_n\cos(n\omega_1)t + b_n\sin(n\omega_1t)\right]\\
+&=c_0 + \sum_{n=1}^\infty c_n\cos \left(n\omega_1t+\varphi_n \right)\\
+&=\sum_{n=-\infty}^{\infty}F_ne^{jn\omega_1 t}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    a_0&=\frac{1}{T_1}\int_{t_0}^{t_0+T_1}f(t)\mathrm dt=c_0\\
+    a_n&=\frac{2}{T_1}\int_{t_0}^{t_0+T_1}f(t)\cos(n\omega_1t)\mathrm dt\\
+    b_n&=\frac{2}{T_1}\int_{t_0}^{t_0+T_1}f(t)\sin(n\omega_1t)\mathrm dt\\
+    c_n&=\sqrt{a_n^2+b_n^2}\\
+    \varphi_n&=-\tg^{-1}\frac{b_n}{a_n}\\
+    F_n&=\frac 1{T_1}\int_{t_0}^{t_0+T_1}f(t)e^{-jn\omega_1t}\mathrm dt\\
+    &=\frac 12e^{j\varphi_n}\\
+    &=\frac 12(a_n-jb_n)
+\end{align*}
+$$
+
+**note** When $b_n=0$, $\varphi_n = a_n > 0\ ?\ 0:\pi$
+
+In the last part, the negative frequency is introduced for the convenience of the signal analysis. Therefore the amplitude is reduced to half.
+
+
+**FS for special functions**
+
+1. Even function $c_n=a_n, \varphi_n = 0, F_n=F_{-n}=\frac 12 a_n$
+2. Odd function $a_0=0, a_n=0, \varphi_n=-\frac{\pi}{2}, F_n=F_{-n}=-\frac{1}{2}jb_n$
+3. Half-wave Odd (odd harmonic) function, $f(t)=-f\left[t\pm \frac{T_1}2{}\right]$
+4. Finite term series
+
+### FS for typical periodic signals
+
+**Periodic square wave**
+
+$$
+f(t)=\sum_{n=-\infty}^{\infty}\frac{E\tau}{T_1}\text{Sa}(\frac{n\omega_1\tau}{2})
+$$
+
+1. Spectrum is discrete with frequency spacing $\omega_1 = \frac{2\pi}{T_1}$. When $T_1 \rightarrow \infty$, the spectrum will be continuous.
+2. Amplitude: $\text{Sa}\left(\frac{n\pi\tau}{T_1}\right)$ or $\text{Sa} \left(\frac{n\omega_1\tau}{2}\right)$, cross zero when $\omega_1 = \frac{2m\pi}{\tau}$
+3. Non-zero FS coefficients of a aperiodic signal are infinite with most energy concentrated at low frequency components (within $\left(-\frac{2\pi}{\tau},\frac{2\pi}{\tau}\right)$). Thus we define the bandwith $B_{\omega} = \frac{2\pi}{\tau}$
+
+**Periodic symmetric square wave**
+
+Since the spectrum crosses zero when $\omega_1 = \frac{2m\pi}{\tau}$, the even harmonic vanishes. Also the sine component vanishes.
+
+$$
+c_n = \frac{2E\tau}{T_1}\left|\text{Sa}\left(\frac{n\omega_1\tau}{2}\right)\right|\\
+
+f(t) = \frac{2E}{\pi}\left[\cos(\omega_1t) - \frac{1}3\cos(3\omega_1t) + \frac{1}{5}\cos(5\omega_1t)-...\right]
+$$
 
