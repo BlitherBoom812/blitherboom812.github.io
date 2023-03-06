@@ -334,7 +334,23 @@ Since the spectrum crosses zero when $\omega_1 = \frac{2m\pi}{\tau}$, the even h
 
 $$
 c_n = \frac{2E\tau}{T_1}\left|\text{Sa}\left(\frac{n\omega_1\tau}{2}\right)\right|\\
-
 f(t) = \frac{2E}{\pi}\left[\cos(\omega_1t) - \frac{1}3\cos(3\omega_1t) + \frac{1}{5}\cos(5\omega_1t)-...\right]
 $$
 
+**Periodic Serrated Pulse**
+
+$$
+f(t) = \sum_{n = 1}^\infty \frac{E}{n\pi}(-1)^{n+1}\sin (n\omega_1t)
+$$
+
+**Periodic Triangular Pulse**
+
+$$
+f(t)=\frac E2 + \frac{4E}{\pi^2}\sum_{n=1}^\infty\frac{1}{n^2}\sin^2\left(\frac{n\pi}{2}\right)\cos(n\omega_1t)\\=\frac E2 + \frac{4E}{\pi^2}\sum_{n=1}^\infty\frac{1}{(2n-1)^2}\cos((2n-1)\omega_1t)
+$$
+
+**consine of non-negative values**
+
+
+
+**cosine of absoulute values**

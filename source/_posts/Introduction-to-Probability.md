@@ -99,3 +99,4 @@ $$
 * If $P(B)=0$, $P(A|B)$ is undefined.
 * For a fixed event $B$, $P(A|B)$ can be verified as a legitimate probability measure on the new universe. $P(A, B)\ge 0$, $P(\Omega|B)=1$, $P(A_1\cup A_2\cup...|B)=P(A_1|B)+P(A_2|B)+...$
 * <div>$ P(A|B)=\frac{\text{ \# of elements of }A\cap B}{\text{total \# of elements of }B} $</div>
+
