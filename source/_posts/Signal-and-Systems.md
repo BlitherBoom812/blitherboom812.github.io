@@ -321,7 +321,7 @@ In the last part, the negative frequency is introduced for the convenience of th
 **Periodic square wave**
 
 $$
-f(t)=\sum_{n=-\infty}^{\infty}\frac{E\tau}{T_1}\text{Sa}(\frac{n\omega_1\tau}{2})
+f(t)=\frac{E\tau}{T_1}+\sum_{n=1}^{\infty}\frac{2E\tau}{T_1}\text{Sa}(\frac{n\omega_1\tau}{2})
 $$
 
 1. Spectrum is discrete with frequency spacing $\omega_1 = \frac{2\pi}{T_1}$. When $T_1 \rightarrow \infty$, the spectrum will be continuous.
