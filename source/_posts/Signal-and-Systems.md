@@ -351,6 +351,14 @@ $$
 
 **consine of non-negative values**
 
-
+$$
+f(t) = \frac E\pi - \frac{2E}{\pi}\sum_{n=1}^\infty\frac{1}{n^2-1}\cos(\frac {n\pi}2)\cos(n\omega_1t)
+$$
 
 **cosine of absoulute values**
+
+$$
+f(t) = \frac{2E}{\pi} + \frac{4E}{\pi}\sum_{n=1}^\infty (-1)^{n+1}\frac{1}{4n^2-1}\cos(2n\omega_0t)
+$$
+
+其中$\omega_0$ = 2$\omega_1$
