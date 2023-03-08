@@ -313,7 +313,7 @@ In the last part, the negative frequency is introduced for the convenience of th
 
 1. Even function $c_n=a_n, \varphi_n = 0, F_n=F_{-n}=\frac 12 a_n$
 2. Odd function $a_0=0, a_n=0, \varphi_n=-\frac{\pi}{2}, F_n=F_{-n}=-\frac{1}{2}jb_n$
-3. Half-wave Odd (odd harmonic) function, $f(t)=-f\left[t\pm \frac{T_1}2{}\right]$
+3. Half-wave Odd (odd harmonic) function, $f(t)=-f\left(t\pm \frac{T_1}2{}\right)$, contains only odd harmonics(both sine and cosine)
 4. Finite term series
 
 ### FS for typical periodic signals
@@ -361,4 +361,114 @@ $$
 f(t) = \frac{2E}{\pi} + \frac{4E}{\pi}\sum_{n=1}^\infty (-1)^{n+1}\frac{1}{4n^2-1}\cos(2n\omega_0t)
 $$
 
-其中$\omega_0$ = 2$\omega_1$
+其中$\omega_0$ = $2\omega_1$
+
+### Fourier Transform
+
+The case where $T_1\rightarrow \infty$. Signal becomes aperiodic.
+
+Also, $\omega_1\rightarrow 0$ results in the continuous frequency axis. For square wave the magnitude $\frac{E\tau}{T_1}\rightarrow 0$.
+
+$$
+f(t) =\sum_{n=-\infty}^{\infty}F(n\omega_1)e^{jn\omega_1 t}\\
+F(n\omega_1) = \frac 1T_1\int_{-\frac {T_1}2}^{\frac {T_1}2}f(t)e^{-jn\omega_1t}\mathrm dt
+$$
+
+We use spectrum density to replace spectrum, making the magnitude dropping to zero remain its meaning.
+
+$$
+\frac{F(n\omega_1)}{\omega_1} = \frac{1}{2\pi}\int_{-\frac {T_1}2}^{\frac {T_1}2}f(t)e^{-jn\omega_1t}\mathrm dt\\
+F(\omega) = \lim_{\omega_1\rightarrow 0}\frac{2\pi F(n\omega_1)}{\omega_1}=\lim_{T_1\rightarrow \infty}\int_{-\frac {T_1}2}^{\frac {T_1}2}f(t)e^{-jn\omega_1t}\mathrm d t=\int_{-\infty}^\infty f(t)e^{-j\omega t}\mathrm d t\\
+f(t) = \sum_{n=-\infty}^{\infty}F(n\omega_1)\cdot \frac{1}{\omega_1}e^{jn\omega_1 t} \Delta(n\omega_1) = \frac{1}{2\pi}\int_{-\infty}^\infty F(\omega)e^{j\omega t}\mathrm d\omega
+$$
+
+$$
+F(\omega) = |F(\omega)|e^{j\varphi(\omega)}
+$$
+
+The fourier transfrom is continuous waveform, where every frequency has no energy but energy density, used to analyse aperiodic function.
+
+Sufficient condition, but not necessary.
+
+$$
+\int_{-\infty}^\infty |f(t)|\mathrm dt<\infty
+$$
+
+### FT for typical aperiodic signals
+
+**Rectangular pulses**
+
+$$
+F(\omega) = \int_{-\tau/2}^{\tau/2} Ee^{-j\omega t}\mathrm dt = E\tau \text{Sa}\left(\frac{\omega \tau}{2}\right)
+$$
+
+**Raised Cosine Signal**
+
+$$
+f(t) = \frac{E}{2}(1+\cos\frac{\pi t}{\tau})(u(t+\tau) - u(t - \tau))\\
+F(\omega) = \int_{-\tau}^{\tau}(1+\cos\frac{\pi t}{\tau})\mathrm dt = \frac{E\tau}{1 - \left(\frac{\omega \tau}{\pi}\right)^2}\text{Sa}({\omega \tau})
+$$
+
+More compacted than square signal($|F(\omega)|\propto \frac 1{\omega^3}$). An explanation is that the raised cosine has no discontinuities.
+
+Generally:
+
+1. $f(t)$ has discontinuities, $|F(\omega)|\propto \frac 1{\omega}$
+2. $\frac{d}{dt}f(t)$ has discontinuities, $|F(\omega)|\propto \frac 1{\omega^2}$
+3. $\frac{d^2}{dt^2}f(t)$ has discontinuities, $|F(\omega)|\propto \frac 1{\omega^3}$
+
+The **width** $\tau$ of the raised cosine signal is defined at $\frac E2$ rather than at the bottom, making it easy to compare with 
+     the rectangular pulse of same width. The first zeros of the 
+   frequency spectrum are identical.
+
+
+raised consine is energy-concentrative and has been widely used in digital communications.
+
+**Single-sided exponential singal** 
+
+$$
+f(t) = e^{-at}u(t)\\
+F(\omega) = \frac{1}{a+j\omega}
+$$
+
+**Two-sided, anti-symmetric exponential signal**
+
+$$
+f(t) = -e^{at}u(-t) + e^{-at}u(t)\\
+F(\omega) = \frac{-2j\omega}{a^2+\omega^2}
+$$
+
+**Sign function**
+
+$$
+\text{sgn}(t) = u(t) - u(-t)\\
+F(\omega) = \lim_{a\rightarrow 0}\frac{-2j\omega}{a^2+\omega^2}= \frac{2}{j\omega}
+$$
+
+**Gaussian singal**
+
+$$
+f(t) = Ee^{-\left(\frac{t}{\tau}\right)^2}\\
+F(\omega) = \sqrt \pi E\tau e^{-\left(\frac{\omega\tau}{2}\right)^2}
+$$
+
+### FT on impulse and step functions
+
+$$
+\mathcal F[\delta(t)] = 1\\
+\mathcal F[1] = 2\pi \delta(\omega)
+$$
+
+The spectrum of impulse function covers the entire frequency range. The interferences caused by a variety of electric sparks always cover the full frequency range.
+
+$$
+\mathcal F[\delta^\prime (t)]= j\omega\\
+\mathcal F[\delta^{(n)}(t)] = (j\omega)^n
+$$
+
+$$
+\mathcal F[u(t)] = \pi \delta(\omega) + \frac{1}{j\omega}
+$$
+
+Due to the DC component in u(t), an impulse exists.
+

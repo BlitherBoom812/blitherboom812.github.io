@@ -156,19 +156,3 @@ $$
 $$
 P(A\cap B | C) = P(A| C) \cdot P(B|C)
 $$
-
-assume A and B are independent. Conditioning may affect the independence.
-
-Consider two successive rolls of a 4-sided die.
-
-• Are the events
-
-A = {1st roll results in 1}, B = {sum of two rolls is 5}
-
-independent?
-
-• Are the events
-
-A = {1st roll results in 1}, B = {sum of two rolls is 4}
-
-independent?
