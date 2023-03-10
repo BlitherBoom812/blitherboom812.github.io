@@ -472,3 +472,51 @@ $$
 
 Due to the DC component in u(t), an impulse exists.
 
+### Properties of FT
+
+**Symmetry** $\mathcal F[F(t)]= 2\pi f(-\omega)$ , if $f(t)$ is a even function, $\mathcal F[F(t)]= 2\pi f(-\omega)$
+
+**Linearity** $\mathcal{F}[\Sigma_{i=1}^{n}a_if_i(t)] = \Sigma_{i=1}^{n}a_iF_i(\omega)$
+
+**Odd-Even, Imaginary-Real** $f(t) = f_e(t)+f_o(t)$, then
+
+$$
+\begin{align*}
+  F(\omega) &= \int_{-\infty}^\infty f(t)\cos \omega t \mathrm dt -j\int_{-\infty}^\infty f(t)\sin \omega t \mathrm dt\\
+  &=R(\omega)+jX(\omega)\\
+  &=\int_{-\infty}^\infty f_e(t)\cos \omega t \mathrm dt -j\int_{-\infty}^\infty f_o(t)\sin \omega t \mathrm dt\\
+\end{align*}.
+$$
+
+$R(\omega)$ is an even function of $\omega$, $X(\omega)$ is an odd function of $\omega$.
+
+$|F(\omega) = \sqrt{R^2(\omega)+F^2(\omega)}|$ is even function.
+
+$\varphi(\omega) = \tg^{-1}\frac{R(\omega)}{X(\omega)}$
+
+if $f(t)$ is real and even, then $f(t)=f_e(t), F(\omega)=R(\omega)$, the phase shift is $0$ or $\pi$.
+
+if $f(t)$ is real and odd, $f(t) = f_o(t)$, then $F(\omega)=jX(\omega)$, $F(\omega)$ has only imaginary part and is odd, the phase shift is $\pm \frac{\pi}{2}$
+
+**Scaling** $\mathcal{F}[f(at)]=\frac 1{|a|}F\left(\frac{\omega}a\right)$ Expansion in TD results in Compression in FD.
+
+**Time Shifting** $\mathcal{F}[f(t\pm t_0)] = F(\omega)e^{\pm j\omega t_0}$
+
+**Frequency Shifting** $\mathcal F[f(t)e^{\pm j\omega_0t}] = F(\omega\mp\omega_0)$
+
+**Differentiation property**$\mathcal F\left[\frac{\mathrm d}{\mathrm dt}f(t)\right] = j\omega F(\omega)$
+
+$\mathcal F\left[\frac{\mathrm d^n}{\mathrm dt^n}f(t)\right] = (j\omega)^n F(\omega)$
+
+$\mathcal F\left[\frac{\mathrm d^n}{\mathrm dt^n}F(\omega)\right] = (-jt)^nf(t)$
+
+
+**Integration Property** $\mathcal{F}\left[\int_{-\infty}^t f(\tau)\mathrm{d} \tau\right] = \frac{F(\omega)}{j\omega} + \pi F(0)\delta(\omega)$
+
+### Convolution theorem
+
+$$
+\mathcal F[f_1(t)* f_2(t)] = F_1(\omega)F_2(\omega)\\
+\mathcal F[f_1(t)\cdot f_2(t)] = \frac 1{2\pi} F_1(\omega) * F_2(\omega)
+$$
+
