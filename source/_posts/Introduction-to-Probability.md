@@ -5,8 +5,6 @@ tags: note
 katex: true
 ---
 
-# Probability
-
 ## Introduction
 
 ## Probability Space
@@ -155,4 +153,117 @@ $$
 
 $$
 P(A\cap B | C) = P(A| C) \cdot P(B|C)
+$$
+
+**Definition**
+
+Event $A_1, A_2, ..., A_n$ are called independent if: 
+
+$$
+P(A_i\cap A_j\cap ...\cap A_q) = P(A_1)P(A_j)...P(A_q)
+$$
+
+for any distinct indices $i, j, \dots q$ chosen from $\{1, \dots n\}$.
+
+Pairwise is independence does not imply independence.
+
+## Discrete Random Variables
+
+Random Variable is neither random, nor variable.
+
+### Definition
+
+We care about the probability that $X \le x$ instead $X = x$ in the consideration of generality. 
+
+**Random variables**
+
+Given a probability space $(\Omega, F, P)$, a random variable is a function $X: \Omega \rightarrow \R$ with the probability that $\{\omega \in \Omega: X(\omega) \le x\} \in \mathcal F$ for each $x\in \R$. Such a function $X$ is said to be $\mathcal F$-measurable.
+
+**Probability Mass Function(PMF)**
+
+$$
+p_X(x)=P(X=x)=P(\{\omega \in \Omega \text{ s.t. } X(\omega)=x\})
+$$
+
+Bonulli PMF: 
+
+$$ 
+p_X(k) = \begin{cases}
+    p, &\text{if } k = 1\\
+    1-p, &\text{if }k=0
+\end{cases}
+$$
+
+Binomial PMF: $p_X(k)=\binom{n}{k}p^k(1-p)^{n-k}$
+
+Geometric PMF: $p_X(k)=(1-p)^{k-1}p$
+
+Poisson PMF: $p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$. Note: $\sum_{k=0}^\infty e^{-\lambda}\frac{\lambda^k}{k!}=e^{-\lambda}e^\lambda=1$
+
+If $y=g(x)$, $p_Y(y)=\sum_{\lbrace x|g(x)=y \rbrace} p(x)$.
+
+
+### Expectation and Variance
+
+**Expectation**
+
+$$
+E[X] = \sum_x xp_X(x)
+$$
+
+Note: we assume that the sum converges.
+
+Properties:
+
+$$
+E[Y]=\sum_x g(x)p_X(x)\\
+E[\alpha X + \beta] = \alpha E[X] + \beta
+$$
+
+**Variance**
+
+$$
+\text{var}(X) = E \left[(X-E[X])^2\right]=\sum_x (x-E[X])^2 p_X(x)
+$$
+
+Standard deviation: $\sigma_X=\sqrt{\text{var}(X)}$
+
+Properties: 
+
+$$
+\text{var}(X) = E[X^2] -(E[X])^2\\
+\text{var}(X)\ge 0\\
+\text{var}(\alpha X + \beta) = \alpha^2\text{var} (X)
+$$
+
+**Bernoulli RV**
+
+$$
+p_X(k) = \begin{cases}
+    p, &\text{if } k = 1\\
+    1-p, &\text{if }k=0
+\end{cases}\\
+E[X] = p\\
+E[X^2] = p\\
+\text{var}(X) = p(1-p)
+$$
+
+**Discrete Uniform RV**
+
+
+$$
+p_X(k) = \begin{cases}
+    \frac {1}{b-a+1}, &\text{if } k = a, a+1, ..., b\\
+    1-p, &\text{otherwise}
+\end{cases}\\
+E[X] = \frac{a+b}{2}\\
+\text{var}(X) = \frac{(b-a)(b-a+2)}{12}
+$$
+
+**Poisson RV**
+
+$$
+p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}\\
+E[X] = \lambda\\
+\text{var}(X)=\lambda
 $$
