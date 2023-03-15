@@ -1,5 +1,5 @@
 ---
-title: Signal and Systems
+title: Signals and Systems
 date: 2023-02-22 09:46:36
 tags: note
 katex: true
@@ -519,4 +519,86 @@ $$
 \mathcal F[f_1(t)* f_2(t)] = F_1(\omega)F_2(\omega)\\
 \mathcal F[f_1(t)\cdot f_2(t)] = \frac 1{2\pi} F_1(\omega) * F_2(\omega)
 $$
+
+### FT for Periodic Signals
+
+$$
+\mathcal F[\cos (\omega_0 t)] = \pi [\delta(\omega + \omega_0) + \delta(\omega - \omega_0)]\\
+\mathcal{F} [\sin (\omega_0 t)] = j\pi [\delta(\omega+\omega_0) + \delta(\omega - \omega_0)]
+$$
+
+FT for periodic of $T_1$ & $\omega_1=2\pi/T_1$
+
+$$
+\mathcal F[f(t)] = 2\pi\sum_{n=-\infty}^{+\infty} F_n\delta(\omega - n\omega_1)\\
+F_n = \frac 1{T_1}\int_{-T_1/2}^{T_1/2}f(t)e^{-jn\omega_1 t}\mathrm dt = \frac{1}{T_1}F_0(\omega)\vert_{\omega =n\omega_1}
+$$
+
+Where $F_0(\omega)$ is the FT considering waveform of $f(t)$ only in $|t|\le T_1/2$.
+
+example: 
+
+$$
+f(t) = \sum_{n=0}^{\infty}\delta(t-nT_1), F_n=\frac{1}{T_1}\\
+F(\omega) = \frac{2\pi}{T_1}\sum_{n=0}^{\infty}\delta(\omega - n\omega_1)=\omega_1\sum_{n=0}^{\infty}\delta(\omega - n\omega_1)
+$$
+
+$$
+F_0(ω) \text{ determines the profile of } F(ω)\\
+T_1\text{ determines the density of the impulses
+}\\
+T_1↑, ω_1↓\text{, intensity of harmonics}↓\\
+T_1↓,ω_1↑\text{, intensity of harmonics}↑\\
+$$
+
+![](../images/ss/lec7_1.jpg)
+
+In the same way: 
+
+![](../images/ss/lec7_2.jpg)
+
+### FT for periodically sampled signals
+
+$$
+F(\omega) = \mathcal F[f(t)]\\
+P(\omega) = \mathcal F[p(t)]\\
+f_s(t) = f(t)p(t)\\
+F_s(\omega) =\frac{1}{2\pi} F(\omega) * P(\omega)
+$$
+
+Then, 
+
+$$
+P(\omega) = 2\pi \sum_{n = -\infty}^{+\infty} P_n\delta(\omega - \omega_s)\\
+F(\omega) * P(\omega) = 2\pi \sum_{n = -\infty}^{+\infty} P_nF(\omega - n\omega_s)\\
+F_s(\omega) = \sum_{n = -\infty}^{+\infty} P_nF(\omega - n\omega_s)
+$$
+
+![](../images/ss/lec7_3.jpg)
+
+For the frequency-domain sampling: 
+
+$$
+F_1(\omega) = F(\omega)P(\omega)\\
+P(\omega) = \sum_{n=-\infty}^{+\infty} \delta(\omega - n\omega_1)\\
+f_1(t) = f(t) *  \frac{1}{\omega_1}\sum_{n=-\infty}^{+\infty} \delta(\omega - n\omega_1)
+$$
+
+**The Sampling Theorem**
+
+$$
+\omega_s \ge 2\omega_m
+$$
+
+A band-limited signal whose spectrum is strictly within $[0, f_m]$ could be uniquely determined by the samples on itself, if and only if the sampling interval $T_s \le 1/(2f_m)$.
+
+$T_s = \frac{1}{2f_m}$ is called the **Nyquist interval**.
+
+$2f_m$ is called the **Nyquist frequency**.
+
+A FD verison:
+
+![](../images/ss/lec7_4.jpg)
+
+
 
