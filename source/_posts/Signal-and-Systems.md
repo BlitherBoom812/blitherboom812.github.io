@@ -474,7 +474,7 @@ Due to the DC component in u(t), an impulse exists.
 
 ### Properties of FT
 
-**Symmetry** $\mathcal F[F(t)]= 2\pi f(-\omega)$ , if $f(t)$ is a even function, $\mathcal F[F(t)]= 2\pi f(-\omega)$
+**Symmetry** $\mathcal F[F(t)]= 2\pi f(-\omega)$ , if $f(t)$ is a even function, $\mathcal F[F(t)]= 2\pi f(\omega)$
 
 **Linearity** $\mathcal{F}[\Sigma_{i=1}^{n}a_if_i(t)] = \Sigma_{i=1}^{n}a_iF_i(\omega)$
 
@@ -581,7 +581,7 @@ For the frequency-domain sampling:
 $$
 F_1(\omega) = F(\omega)P(\omega)\\
 P(\omega) = \sum_{n=-\infty}^{+\infty} \delta(\omega - n\omega_1)\\
-f_1(t) = f(t) *  \frac{1}{\omega_1}\sum_{n=-\infty}^{+\infty} \delta(\omega - n\omega_1)
+f_1(t) = f(t) *  \frac{1}{\omega_1}\sum_{n=-\infty}^{+\infty} \delta(t - nT_1) = \frac{1}{\omega_1}\sum_{n=-\infty}^{\infty} f(t-nT_1)
 $$
 
 **The Sampling Theorem**
@@ -596,9 +596,136 @@ $T_s = \frac{1}{2f_m}$ is called the **Nyquist interval**.
 
 $2f_m$ is called the **Nyquist frequency**.
 
+对于单频信号，奈奎斯特频率的采样可能会出现问题。例如正弦信号，每次采样都采在零点上，那就没法复现信号。单频信号没法描述带宽。
+
 A FD verison:
 
 ![](../images/ss/lec7_4.jpg)
 
 
+
+## L Transform
+
+### Unilateral L-transform
+
+$$
+F(s) = \int^{\infty}_{0}f(t)e^{-st}\mathrm dt, s=\sigma+j\omega\\
+f(t)=\frac{1}{2\pi j}\int_{\sigma-j\infty}^{\sigma+j\infty}F(s)e^{st}\mathrm ds
+$$
+
+$F(s) = \mathcal{L}[f(t)]$ is called image function, $f(t) = \mathcal{L}^{-1}[F(s)]$ is called primitive function.
+
+assuming that $f(t)$ is causal and always 0 if $t<0$.
+
+$$
+\mathcal L \left[\frac{\mathrm df(t)}{\mathrm dt}\right] = -f(0) + sF(s)
+$$
+
+The initial state is automatically included in differential equation.
+
+We define the **unilateral** L-Transform as: 
+
+$$
+F(s) = \int_{0_-}^{\infty}f(t)e^{-st}\mathrm dt\\
+\mathcal L \left[\frac{\mathrm df(t)}{\mathrm dt}\right] = -f(0_-) + sF(s)
+$$
+
+Conditions for L-Transform: 
+
+1. Limited discontinuities
+2. Exponential order
+
+The strong attenuation factor can make the function convergent.
+
+Region of Convergence (ROC)
+
+Axis of convergence
+
+Coordinate of convergence $\sigma_0$
+
+### Comman LT Pairs
+
+$$
+\begin{align*}
+f(t)&\Rightarrow F(s)\\  
+\delta(t) &\Rightarrow 1\\
+u(t) &\Rightarrow \frac 1s\\
+e^{-at} &\Rightarrow \frac{1}{s+a}\\
+t^n & \Rightarrow \frac{n!}{s^{n+1}}\\
+\sin (\omega t)&\Rightarrow \frac{\omega}{s^2 + \omega^2}\\
+\cos (\omega t)&\Rightarrow \frac{s}{s^2+\omega^2}\\
+\end{align*}
+$$
+
+### Properties of LT
+
+**Linarity**
+
+$$
+\mathcal L [k_1f_1(t) + k_2f_2(t)] = k_1F_1(s) + k_2F_2(s)\\
+$$
+
+**Differentiation**
+
+$$
+\mathcal L \left[\frac{\mathrm d f(t)}{\mathrm d t}\right] = sF(s) - f(0_-)
+$$
+
+**Intergration**
+
+$$
+\mathcal L\left[\int_{-\infty}^t f(\tau)\mathcal d\tau\right]=\frac{F(s)}{s} + \frac{f^{(-1)}(0)}{s}
+$$
+
+**Time Shifting**
+
+$$
+\mathcal L\left[f(t-t_0)u(t-t_0)\right] = e^{-st}F(s)
+$$
+
+Use $u(t-t_0)$ to avoid nagative part of $f(t)$ emerges.
+
+**Frequency Shifting**
+
+$$
+\mathcal L[f(t)e^{-at}] = F(s+a)
+$$
+
+**Scaling**
+
+$$
+\mathcal L[f(at)] = \frac 1a F\left(\frac{s}{a}\right)
+$$
+
+**s-Domain Differentiation**
+
+$$
+\frac{\mathrm d}{\mathrm ds}\mathcal L[f(t)] = \mathcal L[-tf(t)]
+$$
+
+**s-Domain Differentiation**
+
+$$
+\int_s^\infty F(s) = \mathcal{L}\left[\frac{f(t)}{t}\right]
+$$
+
+**Initial value**
+
+$$
+f(0_+) = \lim_{s\rightarrow\infty}sF(s)
+$$
+
+**Final value**
+
+$$
+\lim_{t\rightarrow\infty} f(t) = \lim_{s\rightarrow0} sF(s)
+$$
+
+Generalized limit: $\lim_{t\rightarrow\infty} \sin(\omega t)=0$
+
+**Convolution**
+
+$$
+\mathcal L[f_1(t)*f_2(t)] = F_1(s)F_2(s)
+$$
 
