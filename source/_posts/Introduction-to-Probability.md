@@ -267,3 +267,143 @@ p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}\\
 E[X] = \lambda\\
 \text{var}(X)=\lambda
 $$
+
+### Conditional
+
+$$
+p_{X|A(x)} = P(X=x|A) = \frac{P(\{X=x\}\cap A)}{P(A)}
+$$
+
+$$
+\sum_x p_{X|A}(x) = 1
+$$
+
+$$
+E[X|Y=y] = \sum_x xp_{X|Y}(x|y)\\
+E[g(X)|Y=y] = \sum_x g(x)p_{X|Y}(x|y)
+$$
+
+**Total expectation theorem**
+
+$A_1, \dots, A_n$ is a partition of sample space
+
+$$
+P(B) = P(A_1)P(B|A_1) + \dotsb + P(A_n)P(B|A_n)\\
+p_X(x) = P(A_1)p_{X|A_1}(x) + \dotsb + P(A_n)p_{X|A_n}(x)\\
+E[X] = P(A_1)E[X|A_1] + \dotsb + P(A_n)E[X|A_n]
+$$
+
+We derive the expectation and variance use the theories above.
+
+**Geometric PMF example**
+
+$$
+p_X(k) = (1-p)^{k-1}p, k = 1, 2, \dots\\
+E[X] = \sum_{k=1}^\infty kp_X(k) = \sum_{k=1}^\infty k(1-p)^{k-1}p\\
+E[X^2] = \sum_{k=1}^\infty k^2p_X(k) = \sum_{k=1}^\infty k^2(1-p)^{k-1}p\\
+\text {var}(X) = E[X^2] - (E[X])^2
+$$
+
+However, the Geometric has a memoryless property.
+
+$$
+p_{X|X>1}(k) = \frac{P(\{X>1\}\cap \{X=k\})}{P(X>1)} = \frac{(1-p)^{k-1}p}{1-p} = (1-p)^{k-2}p
+$$
+
+Thus, 
+$$
+E[X] = P(X=1)E[X|X=1] + P(X>1)E[X|X>1]=p+(1-p)(E[1 + X])\\
+\Rightarrow E[X] = 1/p\\
+E[X^2] = P(X=1)E[X^2|X=1] + P(X>1)E[X^2|X>1] = p + (1-p)E[(1+X)^2]=p + (1-p)(1+2E[X]+E[X^2])\\
+\Rightarrow E[X^2] = \frac{2-p}{p^2}\\
+\Rightarrow\text{var} (X) = \frac{1-p}{p^2}
+$$
+
+### Multiple discrete random variables
+
+**Joint PMFs**
+
+$$
+p_{X, Y}(x, y) = P(X = x, Y= y) = P(\{X(\omega) = x\}\cap \{Y(\omega) = y\})
+$$
+
+$$
+\sum_x\sum_y p_{X, Y}(x, y) = 1
+$$
+
+**Marginal PMF**
+
+$$
+p_X(x) = \sum_y P(X=x, Y=y) = \sum_y p_{X, Y}(x, y)
+$$
+
+**Conditional PMF**
+
+$$
+p_{X|Y}(x|y) = P(X = x | Y = y) = \frac{p_{X, Y}(x, y)}{p_Y(y)}
+$$
+
+$$
+\sum_x p_{X|Y}(x|y) = 1
+$$
+
+**Funcitons of multiple RVs**
+
+$$
+Z = g(X, Y)\\
+p_Z(z) = \sum_{\lbrace (x, y)|g(x, y)=z \rbrace  } p_{X, Y}(x, y)
+$$
+
+**Expectations**
+
+$$
+E[g(X, Y)] = \sum_x\sum_y g(x, y)p(X, Y)(x, y)\\
+E[g(X, Y, Z)] = \sum_x\sum_y\sum_z g(x, y, z)p(X, Y, Z)(x, y, z)
+$$
+
+$$
+E[g(X,  Y)] \not\equiv g(E[X], E[Y])
+$$
+
+**linearity**
+
+$$
+E[\alpha X + \beta] = \alpha E[X] + \beta\\
+E[X + Y + Z] = E[X] + E[Y] + E[Z]
+$$
+
+Let's calculate the Mean of Binominal RV.
+
+$$
+X_i=
+\begin{cases}
+    1, &\text{if success in trial } i,\\
+    0, & \text{otherwise.}
+\end{cases}\\
+X = X_1 + X_2 + \dotsb X_n\\
+E[X] = \sum_{i = 1}^n E[X_i] = np\\
+\text{var}(X) = np(1-p)
+$$
+
+### Independence
+
+**Independence**
+
+$$
+p_{X, Y}(x, y) = p_X(x) \cdot p_Y(y)
+$$
+
+if $X$ and $Y$ are independent:
+
+$$
+E[XY] = E[X]E[Y]\\
+E[g(X)h(Y)] = E[g(X)]E[h(Y)]\\
+\text{var}(X + Y) = \text{var}(X) + \text{var}(Y)
+$$
+
+**Conditional independence**
+
+$$
+p_{X, Y|A}(X, Y) = p_{X|A}(x) \cdot p_{Y|A}(y)
+$$
+
