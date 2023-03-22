@@ -729,3 +729,70 @@ $$
 \mathcal L[f_1(t)*f_2(t)] = F_1(s)F_2(s)
 $$
 
+### Applications
+
+**Differential Equations**
+
+$$
+  F(s) = \frac{A(s)}{B(s)} = \frac{a_ns^n + a_{n-1}s^{n-1} + \cdots + a_1s + a_0}{b_ms^m + b_{m-1}s^{m-1} + \cdots + b_1s + b_0} % The division of two polynomials
+$$
+
+(assume that $n<m$)
+
+The roots of numerator is called zeros, while the roots of denominator is called poles.
+
+Unknown function F(s) can be represented by the ratio of two polynomials if all initial states are 0.
+
+1. real poles
+
+$$
+F(s) = \frac{A(s)}{(s-p_1)(s-p_2)(s-p_3)}
+$$
+
+2. complex conjugate poles
+
+$$
+F(s) = \frac{A(s)}{D(s)[(s+\alpha)^2 + \beta^2]} = \frac{F_1(s)}{[(s+\alpha)^2 + \beta^2]} = \frac{F_1(s)}{(s+\alpha - j\beta)(s+\alpha + j\beta)} + \dots
+$$
+
+$$
+k_1 = (s+\alpha - j\beta)F(s)|_{s = -\alpha + j\beta} = \frac {F_1(-\alpha + j\beta)}{2j\beta}\\
+k_2 = (s+\alpha + j\beta)F(s)|_{s = -\alpha - j\beta} = \frac {F_1(-\alpha - j\beta)}{-2j\beta}
+$$
+
+3. Multiple poles
+
+$$
+F(s) = \frac {A(s)}{B(s)} = \frac{A(s)}{(s-p_1)^k D(s)}\\
+= \frac{K_{11}}{(s-p_1)^k}+\frac{K_{12}}{(s-p_1)^{k-1}}+\dotsb+\frac{K_{1k}}{s-p_1} + \frac{E(s)}{D(s)}(s-p_1)^k
+$$
+
+![](../images/ss/lec9_1.jpg)
+
+![](../images/ss/lec9_2.jpg)
+
+
+Circuit model:
+
+![](../images/ss/lec9_3.jpg)
+
+![](../images/ss/lec9_4.jpg)
+
+![](../images/ss/lec9_5.jpg)
+
+Use initial value and final value to verify it.
+
+### System Function
+
+$$
+\begin{cases}
+  R(s) = H(s) \cdot E(s)\\
+  r(t) = h(t) * e(t)
+\end{cases}
+\Rightarrow H(s) = L[h(t)]
+$$
+
+**Driving point function & transfer function**
+
+![](../images/ss/lec9_6.jpg)
+
