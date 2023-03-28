@@ -407,3 +407,129 @@ $$
 p_{X, Y|A}(X, Y) = p_{X|A}(x) \cdot p_{Y|A}(y)
 $$
 
+## Continuous Random Variables
+
+
+### Probability Density Function
+
+* $f_X(x)\ge 0\text{ for all }x$
+* $\int_{-\infty}^\infty f_X(x)\mathrm dx = 1$
+* If $\delta$ is very small, then $P([x, x+\delta])\approx f_X(x) \cdot \delta$
+* For any subset $B$ of the real line, $P(X\in B) = \int_B f_X(x)\mathrm d x$.
+
+**Expectation**
+
+$$
+E[X] = \int_{-\infty}^\infty xf_X(x)\mathrm dx\\
+E[g(x)] = \int_{-\infty}^\infty g(x)f_X(x)\mathrm dx
+$$
+
+Assuming that the integration is well-defined. The Cauchy distribution ($\frac{1}{1+x^2}$)doesn't have expectation since $\frac{x}{1+x^2}$ is not absolutely integrably.
+
+**Variance**
+
+$$
+\text{var}(X) = E[(X - E[X])^2] = \int_{-\infty}^\infty(x - E[x])^2 f_X(x)\mathrm dx\\
+0\le \text{var}(x) = E[X^2] - (E[X])^2
+$$
+
+Properties:
+
+$$
+E[aX+b] = aE[X] + b\\
+\text{var}(aX+b) = a^2\text{var}(X)
+$$
+
+### Common Example for PDF
+
+**Exponential Random Variable**
+
+$$
+f_X(x) = \begin{cases}
+    \lambda e^{-\lambda x}, &\text{if }x \ge 0,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+$$
+P(X\ge a) = e^{-\lambda a}\\
+E[X] = \frac{1}{\lambda}\\
+\text{var}(X) = \frac{1}{\lambda^2}
+$$
+
+### Cumulative Distribution Functions
+
+$$
+F_X(x) = P(X\le x) = \begin{cases}
+    \sum_{k\le x}p_X(k), &\text{if } X \text{ is discrete,}\\
+    \int_{-\infty}^x f_X(t)\mathrm dt, &\text{if } X \text{ is continuous.}
+\end{cases}
+$$
+
+**Properties**
+
+$$
+\text{if } x \le y, \text{then } F_X(x)\le F_X(y).\\
+F_X(x)\text{ tends to 0 as } x \rightarrow -\infty, \text{and to 1 as} x \rightarrow \infty\\
+\text{If } X \text{ is discrete, then } F_X(x) \text{ is a piecewise constant function of }x.\\
+\text{If } X \text{ is continuous, then } F_X(x) \text{is a continuous funciton of }x.\\
+\text{If } X \text{ is discrete and takes integer values, the PMF and the CDF can be obtained from each other by summing or differcing: }\\
+F_X(k) = \sum_{i = -\infty}^k p_X(i),\\
+p_X(k) = P(X\le k) - P(X \le k -1) = F_X(k) - F_X(k - 1),\\
+\text{ for all integers }k.\\
+\text{If } X \text{ is continuous, the PDF and the CDF can be obtained from each other by integration or differentiation: }\\
+F_X(x) = \int_{-\infty}^x f_X(t)\mathrm dt, f_X(x) = \frac{\mathrm dF_X}{\mathrm dx}(x)
+$$
+
+### Examples for CDF
+
+**Geometric CDF**
+
+$$
+F_{\text{geo}}(n) = \sum_{k = 1}^n p(1-p)^{k-1} = 1-(1-p)^n, \text{for } n = 1, 2, \dots
+$$
+
+**Exponential CDF**
+
+$$
+F_{\text{exp}}(x) = P(X\le x) = 0, \text{ for } x\le0,\\
+F_{\text{exp}}(x) = \int_{0}^x \lambda e^{-\lambda t}\mathrm dt = 1 - e^{-\lambda x}, \text{for }x\ge 0.
+$$
+
+Exponential Distribution is Memoriless, like Geometric: 
+
+$$
+P(X \ge c + x| X \ge c) = e^{-\lambda x} = P(X \ge x)\\
+$$
+
+The relationship: 
+
+![](../images/prob/L6_1.jpg)
+
+### Normal Random Variables
+
+$$
+f_X(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/2\sigma^2}\\
+E[X] =\mu\\
+\text{var}(X) = \sigma^2
+$$
+
+Gaussian is good, since adding two Gaussian functions resulting in a new Gaussian functions. And with a huge mount of samples, the distribution is close to Gaussian(Central limit theorem).
+
+**The Standard Normal Random Variable**
+
+Normal(Gaussian)
+
+$$
+Y = \frac{X - \mu}{\sigma}\\
+f_Y(y) = \frac{1}{\sqrt{2\pi}}e^{-y^2/2}\\
+E[Y] = 0\\
+\text{var}(Y) = 1\\
+$$
+
+The CDF of Normal Random Variable $\Phi(y)$ can not be derived directly, we can use the standard normal table to get the value.
+
+$$
+\Phi(-y) = 1 - \Phi(y)
+$$
+

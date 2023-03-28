@@ -796,3 +796,97 @@ $$
 
 ![](../images/ss/lec9_6.jpg)
 
+L-transform can be used in the following analysis:
+
+* TD characteristics (response decomposition)
+* FD characteristics (steady-state with sine signal input,applications such as filtering) 
+* Stability (active network, feedback, oscillator, control system)
+
+
+### TD characteristics by 0-point distribution
+
+Three cases: 
+
+* Real poles
+* Complex conjugate poles
+* Real pole of high-order
+
+1. Zero pole of H(s)
+
+
+
+![](../images/ss/lec10_1.jpg)
+
+![](../images/ss/lec10_2.jpg)
+
+Zero only affects the phase and amplitude, while the shape and type of waveform is determined by the poles.
+
+2. pole distribution $\Leftrightarrow$ corresponding natural/forced responses
+
+$$
+H(s) = \frac{\prod_{i = 1}^m(s-z_{hj})}{\prod_{i = 1}^n(s-p_{hi})}\\
+E(s) = \frac{\prod_{i = 1}^u(s-z_{el})}{\prod_{i = 1}^v(s-p_{ek})}\\
+\text{if } m + u < n + v\\
+R(s) = E(s)H(s) = \sum_{k=1}^n\frac{K_{hk}}{s - p_{hk}} + \sum_{k=1}^v\frac{K_{ek}}{s-p_{ek}}
+$$
+
+The natural response of $r(t)$ is only related to $p_{hk}$, while the forced response is only related to $p_{ek}$.
+
+$K_{hk}$, $K_{ek}$ are related to both $H(s)$ and $E(s)$.
+
+However natural and forced responses could not be completely separated, if there exists $k, k^\prime$ satisfying $p_{hk}=p_{ek^\prime}$.
+
+$p_{hi}$ are called natural frequency of the system.
+
+However, some common factors may be eliminated: 
+
+$$
+\frac{(s+1)}{(s+1)(s+2)} = \frac{1}{(s+2)}
+$$
+
+$$
+H(s) = \frac{\Delta_{jk}}{\Delta}
+$$
+
+All the poles of $H(s)$ are the natural frequencies of the system, but $h(t)$ may not include all the natural frequencies(but the root of $\Delta$ contains all natural frequencies).
+
+In most cases:
+
+$$
+\text{Re}(p_{hi}) < 0, \text{Re}(p_{ei}) = 0
+$$
+
+Thus the natural response is transient, while the forced response is steady-state.
+
+However, some natural response can be steady-state(conjugate poles of $Re(p_{hi})$), while some forced response can be transient.
+
+![](../images/ss/lec10_3.jpg)
+
+![](../images/ss/lec10_4.jpg)
+
+![](../images/ss/lec10_5.jpg)
+
+$$
+E_m|H(j\omega)|\sin (\omega_0t + \varphi_0)
+$$
+
+$$
+H(j\omega) =K\cdot \frac{\prod(j\omega - z_j)}{\prod (j\omega - p_i)}
+$$
+
+![](../images/ss/lec10_7.jpg)
+
+![](../images/ss/lec10_6.jpg)
+
+![](../images/ss/lec10_8.jpg)
+
+for band-pass filter, 
+
+BW is where Peak(dB) - 3dB
+
+for low-pass filter,
+
+BW = $f_{\text{cut-off}}$
+
+According to the sampling theorem, the signal bandwith is often determined by the first zero of the spectrum.
+
