@@ -680,7 +680,7 @@ $$
 **Time Shifting**
 
 $$
-\mathcal L\left[f(t-t_0)u(t-t_0)\right] = e^{-st}F(s)
+\mathcal L\left[f(t-t_0)u(t-t_0)\right] = e^{-st_0}F(s)
 $$
 
 Use $u(t-t_0)$ to avoid nagative part of $f(t)$ emerges.
@@ -890,3 +890,78 @@ BW = $f_{\text{cut-off}}$
 
 According to the sampling theorem, the signal bandwith is often determined by the first zero of the spectrum.
 
+**All Pass Systems**
+
+$$
+R_e(p_i) = -R_e(z_i)\\
+I_m(p_i) = I_m(z_i)
+$$
+
+The Amplitude is const., while the phase can change.
+
+**Minimum-phase system/function**
+
+Definition: A stable system with poles on left-half s-plane is called minimum-phase system/function, if all the zeros are also on left-half s-plane or at the jω-axis. Otherwise is a non-minimum-phase system/function. 
+![](../images/ss/lec11_1.jpg)
+
+
+Property: A non-minimum-phase function can be represented as the product of  a minimum-phase function and an all-pass function.
+
+### Stability of Linear System
+
+A system is considered to be stable if bounded input always leads to bounded output.
+
+Bounded-input, Bounded-output(BIBO)
+
+The necessary & sufficient conditions for BIBO:
+
+$$
+\int_{-\infty}^\infty|h(t)|\mathrm dt \le M
+$$
+
+Poles are: 
+
+* on the left half-plane: $\lim_{t\rightarrow \infty}[h(t)] = 0$, stable system
+* on the right half-plane, or at $j\omega$-axis with order of more than one: $\lim_{t\rightarrow \infty}[h(t)] = \infty$, unstable system
+* at $j\omega$-axis with order of one: $h(t)$ is non-zero or oscillated with equal amplitude, critical stable system
+
+### Two-sided (Bilateral) LT
+
+$$
+F_B(s) = \int_{-\infty}^\infty f(t)e^{-st}\mathrm{d} t
+$$
+
+ * t starts from −∞, i.e., non-causal signal as the input
+       or regarding the initial condition as the input.
+*  Easily to be associated with F-transform and Z-   
+       transforms
+
+We determine the ROC by:
+
+$$
+\lim_{t\rightarrow \infty} f(t)e^{-\sigma t} = 0\\
+\lim_{t\rightarrow -\infty} f(t)e^{-\sigma t} = 0
+$$
+
+NOTE: 
+
+* If no overlap between the two constraints, then $F_B(s)$ does not exist.
+* $F_B(s)$ and $f(t)$ are not uniquely corresponding to each other.($\int_{-\infty}^\infty u(t)e^{-st}\mathrm{d} t = \frac{1}{s}$, $\int_{-\infty}^\infty -u(-t)e^{-st}\mathrm{d} t=\frac{1}{s}$)
+* Two-sided L-Transform shares almost all the properties with its single-sided counterpart except for the initial-value theorem.
+* Two-sided L-Transform has very limited applications as most continuous-time systems are causal.
+
+**Relationship between LT and FT **
+
+* $\sigma_0 > 0$, $F(\omega)$ does not exist
+* $\sigma_0 = 0$, impulse appears in $F(\omega)$
+* $\sigma_0 < 0$, $F(\omega)$ exists, $F(\omega) = F(s)|_{s=j\omega}$
+
+![](../images/ss/lec11_2.jpg)
+(The LT above is unilateral LT.)
+
+
+![](../images/ss/lec11_3.jpg)
+
+### Extra Attention
+
+$1 + e^{-s}$ also has zero(many!). Note that if it is on the denominator.
