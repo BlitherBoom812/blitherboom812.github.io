@@ -98,3 +98,10 @@ nodeIntegration: true
 ```js
 import { ipcRenderer } from 'electron'
 ```
+
+一个只跟a, b中最大的那一个有关的积分：
+
+$$
+\int_{0}^{\pi}\frac{\sin \theta}{\sqrt{a^2+b^2-2ab\cos\theta}}\mathrm d\theta = \frac{1}{ab}(|a+b| - |a-b|)
+$$
+

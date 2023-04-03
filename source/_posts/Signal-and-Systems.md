@@ -965,3 +965,103 @@ NOTE:
 ### Extra Attention
 
 $1 + e^{-s}$ also has zero(many!). Note that if it is on the denominator.
+
+## FT in Telecom. Systems
+
+System discussed in this chapter are strictly stable: 
+
+$$
+\mathcal{F}[f(t)] = F(s)|_{s=j\omega}
+$$
+
+Because even for critical stable system, FT is not  the same as LT(containing $\delta$), there will be ambiguity between $H(j\omega)$ and $H(s)|_{s=j\omega}$.
+
+For every freq. component, it is reshaped in its phase and amplitude by the system function when passing through the system, related with its frequency. Thus the system can distort the original signal.
+
+**Distortion**
+
+2 types of distortion:
+
+* Non-linear distortion (new frequency components)
+* Linear distortion (without new frequency components), just the amplitude and/or phase distortion.
+
+ **Distortionless transmission**
+
+$$
+e(t)\rightarrow ke(t - t_0)
+$$
+
+$$
+R(j\omega) = \int_{-\infty}^\infty ke(t -t_0)e^{-j\omega t}\mathrm dt=ke^{-j\omega t_0}\int_{-\infty}^\infty e(x)e^{-j\omega x}\mathrm dx=ke^{-j\omega t_0} E(j\omega)
+$$
+
+So, $H(j\omega) = ke^{-j\omega t_0}$, $h(t)=K\delta(t - t_0)$.
+
+The Amplitude is frequency independent, $BW\rightarrow \infty$.
+
+Phase response is linear at negative slope.
+
+The impulse response of a distortionless linear system is  
+     also an impulse.
+
+The physical scenario: group delay.
+
+$$
+\tau = -\frac{\mathrm d\varphi (\omega)}{\mathrm d\omega}
+$$
+
+Condition for phase distortionless property: the group delay remains a constant.
+
+### Filter
+
+**Ideal Low pass (LP) Filter**
+
+$$
+H(j\omega) = \begin{cases}
+  1 \cdot e^{-j\omega t_0}, &|\omega|< \omega_c,\\
+  0, &|\omega|> \omega_c.
+\end{cases}
+$$
+
+![](../images/ss/lec12_1.jpg)
+
+**The Impulse response of Ideal LP**
+
+![](../images/ss/lec12_2.jpg)
+
+* Severe distortion. $BW_{\delta(t)}\rightarrow \infty$, but $BW_{\text{Lowpass}}=\omega_c$, the higier frequency is eliminated.
+* Non-causal. When $t\lt 0$, $h(t)\ne 0$.
+
+**Unit-step response of Ideal LP**
+
+![](../images/ss/lec12_3.jpg)
+
+![](../images/ss/lec12_4.jpg)
+
+![](../images/ss/lec12_5.jpg)
+
+The response is similar to the input if $\frac{1}{2}=\frac{\pi}{\omega_c}\llless \tau$. 
+
+**Gibbs phenomenon**: 9% overshoot at discontinuity. Use other window functions can eliminate this, e.g. raised-cosine window.
+
+### Modulation and demodulation
+
+Means of modulation:
+
+**Spectrum shifting** 
+
+$f(t) = g(t)\cos(\omega_0t)$, $F(\omega) =\frac{1}{2\pi} G(\omega) * \pi[\delta(\omega - \omega_0) + \delta (\omega + \omega_0)] = \frac{1}{2}[G(\omega + \omega_0) + G(\omega - \omega_0)]$.
+
+![](../images/ss/lec12_6.jpg)
+
+Demodulation: 
+
+**coherent demodulation**
+
+$g_0(t)=[g(t)\cos(\omega_0 t)]\cos(\omega_0t) = \frac{1}{2}g(t) + \frac{1}{2}g(t)\cos2\omega_0t$
+
+![](../images/ss/lec12_7.jpg)
+
+**Envelope Detection**
+
+![](../images/ss/lec12_8.jpg)
