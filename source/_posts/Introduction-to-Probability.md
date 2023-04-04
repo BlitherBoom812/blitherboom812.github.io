@@ -433,6 +433,22 @@ $$
 0\le \text{var}(x) = E[X^2] - (E[X])^2
 $$
 
+**Uniform RV**
+
+$$
+f_X(x) = \begin{cases}
+    \frac{1}{b-a}, &\text{if }a\le x\le b,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+$$
+E[X] = \frac{a+b}{2}\\
+E[X^2] = \frac{a^2+b^2 + ab}{3}\\
+\text{var}(X) = \frac{(b-a)^2}{12}
+$$
+
+
 Properties:
 
 $$
@@ -531,5 +547,186 @@ The CDF of Normal Random Variable $\Phi(y)$ can not be derived directly, we can 
 
 $$
 \Phi(-y) = 1 - \Phi(y)
+$$
+
+### Multiple Continuous Random Variables
+
+**Joint PDFs**
+
+The two continuous RVs X and Y, with the same experiment, are jointly continuous if they can be described by a joint PDF $f_{X, Y}$, where $f_{X, Y}$ is a nonnegative function that satisfies 
+
+$$
+P((X, Y) \in B) = \iint_{(x, y)\in B} f(X, Y)\mathrm d x\mathrm dy
+$$
+
+for every subset B of the two-dimensional plane. In particular, when B is the form $B = \{(x, y)|a\le x \le b, c\le y \le d\}$, we have
+
+$$
+P(a\le X \le b, c \le Y \le d) = \int_c^d\int_a^bf_{X, Y}(x, y)\mathrm dx\mathrm dy
+$$
+
+**Normalization** 
+
+$$
+\int_{-\infty}^\infty\int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dx\mathrm dy
+$$
+
+**Interpretation(Small rectangle)**
+
+$$
+P(a\le X \le a + \delta, c \le Y \le c + \delta) \approx f_{X, Y}(a, c)\cdot\delta^2
+$$
+
+**Marginal PDF
+**
+$$
+P(X\in A) = P(X \in A, Y \in (-\infty, \infty)) = \int_A \int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dy\mathrm dx
+$$
+
+$$
+f_X(x) = \int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dy\\
+f_Y(y) = \int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dx
+$$
+
+**Joint CDF**
+
+If X and Y are two RVs asscociated with the same experiment, then the joint CDF of X and Y is the function
+
+$$
+F_{X, Y}(x, y) = P(X\le x, Y\le y) = P(X\le x|Y\le y)P(Y\le y) = \int_{-\infty}^y\int_{-\infty}^x f_{X, Y}(u, v)\mathrm du\mathrm dv
+$$
+
+Conversely
+
+$$
+f_{X, Y}(x, y) = \frac{\partial^2F_{X, Y}}{\partial dx\partial dy}(x, y)
+$$
+
+**Expectations**
+
+$$
+E[g(X, Y)] = \int_{-\infty}^\infty\int_{-\infty}^\infty g(x, y)f_{X, Y}(x, y)\mathrm dx\mathrm dy
+$$
+
+If g is linear, of the form of $g(x, y) = ax + by + c$, then
+
+$$
+E[g(X, Y)] = aE[X] + bE[Y] + c
+$$
+
+X and Y are called independent if 
+
+$$
+f_{X, Y}(x, y) = f_X(x)f_Y(y)
+$$
+
+### Conditional and Independence
+
+**Conditional PDFs**
+
+Let X and Y be continuous RVs with joint PDF $f_{X, Y}$. For any $f_Y(y) \gt 0$, the conditional PDF of X given Y = y is defined by
+
+$$
+f_{X|Y}(x|y) = \frac{f_{X, Y}(x, y)}{f_Y(y)}
+$$
+
+Discrete case: 
+
+$$
+p_{X|Y}(x|y) = \frac{p_{X, Y}(x, y)}{p_Y(y)}
+$$
+
+By analogy, for fixed y would like: 
+
+$$
+P(x \le X \le x + \delta|Y = y) \approx f_{X|Y}(x|y)\cdot\delta
+$$
+
+But {Y = y} is a zero-probability event.
+
+Let $B = \{y\le Y \le y + \epsilon\}$, for small $\epsilon > 0$. Then
+
+$$
+P(x \le X \le x + \delta|Y \in B) \approx \frac{P(x \le X \le x + \delta)}{P(y \le Y \le y + \epsilon)} \approx \frac{f_{X, Y}(x, y)\cdot\epsilon\delta}{f_Y(y)\cdot\epsilon} \approx f_{X|Y}(x|y)\cdot\delta
+$$
+
+Limiting case when $\epsilon \rightarrow 0$, to define conditional PDF where the denominator is a zero-probability event.
+
+**Conditional Expectation**
+
+The conditional expectation of X given that A has happened is defined by 
+
+$$
+E[X|A] = \int_{-\infty}^\infty xf_{X|A}(x)\mathrm dx
+$$
+
+For a function g, we have
+
+$$
+E[g(X)|A] = \int_{-\infty}^\infty g(x)f_{X|A}(x)\mathrm dx
+$$
+
+**Total expectation theorem**
+
+Le $A_1, A_2, \dots A_n$ be disjoint events that form a partition of the sample space $\Omega$. And $P(A_i)\gt 0$ for all $i$. Then
+
+$$
+E[g(X)] = \sum_{i=1}^n P(A_i)E[g(X)|A_i]
+$$
+
+Conditional Expectation
+
+
+The conditional expectation of X given that $Y = y$ has happened is defined by 
+
+$$
+E[X|Y=y] = \int_{-\infty}^\infty xf_{X|Y}(x|y)\mathrm dx
+$$
+
+For a function g, we have
+
+$$
+E[g(X)|Y=y] = \int_{-\infty}^\infty g(x)f_{X|Y}(x|y)\mathrm dx
+$$
+
+Total expectation theorem
+
+$$
+E[X] = E_{Y}\left[E_{X|Y}[X|Y]\right] = \int_{-\infty}^\infty E[X|Y = y]f_Y(y)\mathrm dy
+$$
+
+**Independence**
+
+Two continuous RVs $X$ and $Y$ are independent if and only if
+
+$$
+f_{X, Y}(x, y) = f_X(x)f_Y(y)
+$$
+
+Independence is the same as the condition
+
+$$
+f_{X|Y}(x|y) = f_X(x)
+$$
+
+If $X$ and $Y$ are independent, then
+
+$$
+E[XY] = E[X]E[Y]\\
+E[g(x)h(y)] = E[g(x)]E[h(y)], \forall g, h\\
+\text{var}(X + Y) = \text{var}(X) + \text{var}(Y)\\
+$$
+
+### The continuous Bayes's rule
+
+
+$$
+f_{X|Y}(x, y) = \frac{f_X(x)f_{Y|X}(y|x)}{f_Y(y)}
+$$
+
+Based on the normalization property $\int_{-\infty}^\infty f_{X|Y}(x|y)\mathrm dx = 1$,
+
+$$
+f_{Y|X}(y|x) = \frac{f_X(x)f_{Y|X}(y|x)}{\int_{-\infty}^\infty f_X(t)f_{Y|X}(y|t)\mathrm dt}
 $$
 
