@@ -452,6 +452,14 @@ f(t) = Ee^{-\left(\frac{t}{\tau}\right)^2}\\
 F(\omega) = \sqrt \pi E\tau e^{-\left(\frac{\omega\tau}{2}\right)^2}
 $$
 
+**Sinc Function**
+
+$$
+f(t) = \frac{E}{\pi}\frac{\sin(\omega_c t)}{t}\\
+F(\omega) = E(u(\omega - \omega_c ) + u(\omega + \omega_c ))\\
+$$
+
+
 ### FT on impulse and step functions
 
 $$
@@ -1065,3 +1073,121 @@ $g_0(t)=[g(t)\cos(\omega_0 t)]\cos(\omega_0t) = \frac{1}{2}g(t) + \frac{1}{2}g(t
 **Envelope Detection**
 
 ![](../images/ss/lec12_8.jpg)
+
+### Applications of BPF
+
+**Window Function**
+(Page 304)
+$$
+h_a(t) = \frac{\sqrt a \sin\left(\frac{\pi t}{a}\right)\cos \left(\frac{3\pi t}{a}\right)}{\sqrt{ \pi} \pi t}\\
+H_a(\omega) = \begin{cases}
+  \frac{1}{2}\sqrt{\frac{a}{\pi}}, \text{if } \frac{2\pi}{a}\le |\omega| \le \frac{4\pi}{a},\\
+  0, \text{otherwise}.
+\end{cases}
+$$
+
+![](../images/ss/lec13_1.jpg)
+
+### Recover Continuous Time signal from its Samples
+
+**Analysis on signal after band-pass filter**
+
+Page 301
+
+**Sampling with impulse func.**
+
+FD analysis:
+
+Sampled signal(By impulse function):
+
+$$
+F_s(\omega) = \frac{1}{T_s}\sum_{n=-\infty}^\infty F(\omega - n\omega_s)
+$$
+
+Ideal LP Filter:
+
+$$
+H(j\omega) = \begin{cases}
+  T_s, &|\omega|< \omega_c,\\
+  0, &|\omega|> \omega_c.
+\end{cases}
+$$
+
+Recovered signal: 
+
+$$
+F(\omega) = F_s(\omega) \cdot H(\omega)
+$$
+
+TD analysis:
+
+Sampled signal:
+
+$$
+f_s(t) = \sum_{n=-\infty}^\infty f(nT_s)\delta(t - nT_s)
+$$
+
+Ideal LP Filter:
+
+$$
+h(t) = T_s\frac{\omega_c}\pi \text{Sa}(\omega_c t)
+$$
+
+Recovered signal:
+
+$$
+f(t) = f_s(t) * h(t) = T_s\frac{\omega_c}\pi  \sum_{n=-\infty}^\infty f(nT_s) \text{Sa}(\omega_c (t-nT_s))
+$$
+
+![](../images/ss/lec14_1.jpg)
+
+![](../images/ss/lec14_2.jpg)
+
+**Sampling with a zero-order hold**
+
+![](../images/ss/lec14_3.jpg)
+
+$$
+h_0(t) = u(t) - u(t - T_s)\\
+f_{s0}(t) = f_s(t)* h_0(t)
+$$
+
+$$
+\begin{align*} 
+&\mathcal F\{f_{s0}(t)\} \\&=\mathcal F\{f_s(t)\} \cdot \mathcal F\{h_0(t)\} \\ &=F_s(\omega) \cdot H_0(\omega)\\
+&=\sum_{-\infty}^{\infty}F(\omega - n\omega_s) \cdot  \text{Sa}(\frac{\omega_c T_s}{2})e^{-j\frac{\omega T_s}{2}}\\
+\end{align*}
+$$
+
+LP Filter for compensation
+
+$$
+H_{0r}(\omega) = \begin{cases}
+  \frac{1}{\text{Sa}(\frac{\omega T_s}{2})}e^{j\omega T_s/2}, &|\omega| \le \omega_s/2,\\
+  0, &|\omega|> \omega_s/2.
+\end{cases}
+$$
+
+Linear phase response is OK! No needed for delay compensation. 
+
+**1st-order hold Sampling**
+
+![](../images/ss/lec14_4.jpg)
+
+### Mulitplexing FDM and TDM
+
+Transmit mulitple singals over a single channel concurrently.
+
+Frequency Division Multiplexing (FDM) － OFDM (Orthogonal FDM)
+
+Time Division Multiplexing (TDM)－sharing slot, statistical multiplexing
+
+Code Division Multiplexing (CDM)－ Code division, logical multiplexing
+
+Wavelength Division Multiplexing (WDM)－ Optical carrier
+
+![](../images/ss/lec14_5.jpg)
+
+![](../images/ss/lec14_6.jpg)
+
+![](../images/ss/lec14_7.jpg)
