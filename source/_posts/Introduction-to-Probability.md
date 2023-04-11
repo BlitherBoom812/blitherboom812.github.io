@@ -730,3 +730,223 @@ $$
 f_{Y|X}(y|x) = \frac{f_X(x)f_{Y|X}(y|x)}{\int_{-\infty}^\infty f_X(t)f_{Y|X}(y|t)\mathrm dt}
 $$
 
+## Derived distributions and Entropy
+
+### Derived Distribution
+
+If we want to calculate the expectation $E[g(X)]$, there's no need to calculate the PDF $f_X$ of $X$.
+
+But sometimes we want the PDF $f_Y$ of $Y = g(X)$, where $Y$ is a new RV.
+
+**Principal Method**
+
+Two-step procedure for the calculation of the PDF of a function $Y =
+g(X)$ of a continuous RV $X$
+
+1. Calcualte the CDF $F_Y$ of $Y$: $F_Y(y) = P(Y \le y)$
+2. Differentiate $F_Y$ to obtain the PDF $f_Y$ of $Y$: $f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y)$
+
+**The PDF of $Y=aX + b$**
+
+Suppose $a>0$ and $b$ are constants.
+
+$$
+f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y) = \frac{\mathrm d}{\mathrm d y} F_X(\frac{y-b}{a}) = \frac{1}{a}f_X(\frac{y-b}{a})
+$$
+
+If $X$ is Normal, then $Y = aX + b$ is also Normal.
+
+Suppose X is normal with mean $\mu$ and variance $\sigma^2$. Then
+
+$$
+f_Y(y) = \frac{1}{a\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y-b-a\mu)^2}{2a^2\sigma^2}\right)
+$$
+
+$$
+Y = aX + b \sim N(a\mu + b, a^2\sigma^2)
+$$
+
+**The PDF of a strictly monotonic function**
+
+Suppose $g$ is a strictly monotonic function and that for some function $h$ and all $x$ in the range of $X$ we have 
+
+$$
+y = g(x) \text{ if and only if } x = h(y)
+$$
+
+Assume that $h$ is differentiable.
+
+Then the PDF of $Y = g(X)$ is given by
+
+$$
+f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y) = \frac{\mathrm d}{\mathrm d y} F_X(h(y)) = f_X(h(y))\left|\frac{\mathrm d h}{\mathrm d y}\right|(y)
+$$
+
+### Entropy
+**Defintion**
+
+Discrete case
+
+Let $X$ be a discrete RV defined on probability space $(\Omega, \mathcal F, P)$. The **entropy** of $X$ is defined by
+
+$$
+H(X) = -E[\ln p_X(X)] = -\sum_{k} p_X(x_k)\ln p_X(x_k)
+$$
+
+Continuous case
+
+Let $X$ be a continuous RV defined on probability space $(\Omega, \mathcal F, P)$. The **differential entropy** of $X$ is defined by
+
+$$
+H(X) = -E[\ln f_X(X)] = -\int_{-\infty}^\infty f_X(x)\ln f_X(x)\mathrm dx
+$$
+
+
+**Remarks**
+
+* a special expectation of a random variable
+* a measure of uncertainty in a random experiment
+* - the larger the entropy, the more uncertain the experiment
+* - For a deterministic event, the entropy is zero
+* The base of logarithm can be different. Changing the base od the logarithm is equivalent to multiplying the entropy by a constant.
+* - With base 2, we say that the entropy is in units of **bits**
+* - With base e, we say that the entropy is in units of **nats**
+* The basis of information theory
+
+### Maximum entropy distributions
+
+• Maximum entropy distributions
+
+− Distributions with maximum entropy under some constraints
+
+− Gaussian, exponential, and uniform distributions are all maximum entropy distributions under certain conditions
+
+• Why studying maximum entropy distributions?
+
+− The most random distribution, reflecting the maximum uncertainty about the quantity of interest
+
+**Definition**
+
+**Discrete Case**
+
+X can be a finite number of values $x_1, x_2, \dots, x_n$, satisfying $p_X(x_k) = p_k.$
+
+We have the following optimization problem:
+
+$$
+\max_{X} H(X) = \max_{p_1, p_2, \dots, p_n} \left(-\sum_{k=1}^n p_k\ln p_k\right)\\
+\text{s.t.} \sum_{k=1}^n p_k = 1, p_k \ge 0 \text{ for } k = 1, 2, \dots, n
+$$
+
+**Solution**
+
+Applying the Lagrange multiplier method, we have
+
+$$
+L(p_1, p_2, \dots, p_n;\lambda) = -\sum_{k=1}^n p_k\ln p_k + \lambda\left(\sum_{k=1}^n p_k - 1\right)\\
+\frac{\partial L}{\partial p_k} = -\ln p_k - 1 + \lambda = 0\\
+\Rightarrow p_k = e^{\lambda - 1}\\
+$$
+
+Note that the above is true for all $k$. So we have
+
+$$
+p_k = e^{\lambda - 1}  = \frac1{n}\text{ for } k = 1, 2, \dots, n.
+$$
+
+**Continuous Case 1**
+
+$X \in [-\infty, \infty]$.
+
+Constrain on mean and variance,
+we have the following optimization problem:
+
+$$
+\max_{X}h(X), \\
+\text{s.t. }E[X] = \mu, \quad Var(X) = \sigma^2
+$$
+
+In detail, 
+
+$$
+\max_{X} H(X) = \max_{\mu, \sigma^2} \left(-\int_{-\infty}^\infty f_X(x)\ln f_X(x)\mathrm dx\right)\\
+\text{s.t. }\int_{-\infty}^\infty f(x)\mathrm dx = 1, \quad \int_{-\infty}^\infty xf(x)\mathrm dx = \mu, \quad \int_{-\infty}^\infty x^2f(x)\mathrm dx = \sigma^2 + \mu^2
+$$
+
+Solving the above problem, we have Gaussian distribution with mean $\mu$ and variance $\sigma^2$.
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$
+
+**Solution**
+
+For all measurable functions $g$, we have
+
+$$
+G(t) = h(f + tg) = -\int_{\infty}^\infty (f(x) + tg(x))\ln (f(x) + tg(x))\mathrm dx
+$$
+
+Therefore,
+
+$$
+h(f_{opt})\ge h(f_{opt} + tg)\\
+\Rightarrow G(0)\ge G(t), \forall t \in \R
+$$
+
+$G(t)$ reaches its maximum at $t = 0$.
+
+Then apply the Lagrange multiplier method, we have
+
+$$
+\overline{G}(t) = G(t) + c_0h_0(t) + c_1h_1(t) + c_2h_2(t)\\
+$$
+
+Get the derivative of $\overline{G}(t)$ with regard to $t$, and let the derivative equal to zero.
+
+**Continuous Case 2**
+
+$X \in [0, \infty)$.
+
+Constrain on mean only, we have the following optimization problem:
+
+$$
+\max_{X}h(X), \\
+\text{s.t. }E[X] = \mu
+$$
+
+In detail,
+
+$$
+\max_{X} H(X) = \max_{\mu} \left(-\int_{0}^\infty f_X(x)\ln f_X(x)\mathrm dx\right)\\
+\text{s.t. }\int_{0}^\infty f(x)\mathrm dx = 1, \quad \int_{0}^\infty xf(x)\mathrm dx = \mu
+$$
+
+Solving the above problem, we have exponential distribution with parameter $\lambda$.
+
+$$
+f(x) = \lambda e^{-\lambda x}, x \in [0, \infty)
+$$
+
+**Continuous Case 3**
+
+$X \in [a, b]$.
+
+No constrain, we have the unconstrained optimization problem:
+
+$$
+\max_{X}h(X)
+$$
+
+In detail,
+
+$$
+\max_{X} H(X) = \max_{a, b} \left(-\int_{a}^b f_X(x)\ln f_X(x)\mathrm dx\right)\\
+\text{s.t. }\int_{a}^b f(x)\mathrm dx = 1
+$$
+
+Solving the above problem, we have uniform distribution within $[a, b]$.
+
+$$
+f(x) = \frac{1}{b-a}, x \in [a, b]
+$$
