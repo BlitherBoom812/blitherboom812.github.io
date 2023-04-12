@@ -1191,3 +1191,288 @@ Wavelength Division Multiplexing (WDM)－ Optical carrier
 ![](../images/ss/lec14_6.jpg)
 
 ![](../images/ss/lec14_7.jpg)
+
+## Orthogonal decomposition of signals
+
+### Vector Space
+
+![](../images/ss/lec15_1.jpg)
+
+![](../images/ss/lec15_2.jpg)
+
+![](../images/ss/lec15_3.jpg)
+
+![](../images/ss/lec15_4.jpg)
+
+![](../images/ss/lec15_5.jpg)
+
+### Objective for singal decomposition
+
+$$
+r(t) = H[e(t)] = H\left[\sum_{i=0}^ne_i(t)\right] = \sum_{i=0}^nH[e_i(t)]
+$$
+
+### Basics
+
+**Orthogonal Vector**
+
+![](../images/ss/lec15_6.jpg)
+
+**Orthogonal Function**
+
+Represend $f_1(t)$ in terms of $f_2(t)$(both real), for $t_1<t<t_2$
+
+$$
+f_1(t)\approx c_{12}f_2(t)
+$$
+
+Residual error $\overline{\varepsilon^2} = \overline{f_e^2(t)} = \frac{1}{t_2 - t_1}\int_{t_1}^{t_2}[f_1(t) - c_{12}f_2(t)]^2\mathrm dt$
+
+Let $\frac{\mathrm d \overline{\varepsilon^2}}{\mathrm d c_{12}} = 0$, then $\overline{\varepsilon^2}$ is minimized.
+
+The coefficient can be determined as
+
+$$
+c_{12} = \frac{\int_{t_1}^{t_2}f_1(t)f_2(t)\mathrm dt}{\int_{t_1}^{t_2}f_2^2(t)\mathrm dt} = \frac{\langle f_1, f_2\rangle}{\langle f_2, f_2\rangle}
+$$
+
+If $c_{12} = 0$, then $f_1(t), f_2(t)$ are called **Orthogonal Functions**.
+
+And 
+
+$$
+\int_{t_1}^{t_2}f_1(t)f_2(t)\mathrm dt = 0
+$$
+
+**Orthogonal Function Set**
+
+Any real function $f(t)$ can be represented as the sum of $n$-D orthogonal real functions.
+
+$$
+f(t) = \sum_{r=1}^n c_rg_r(t)
+$$
+
+According to the minimal mean square error, the coefficient can be determined as
+
+$$
+c_r = \frac{\int_{t_1}^{t_2}f(t)g_r(t)\mathrm dt}{\int_{t_1}^{t_2}g_r^2(t)\mathrm dt} = \frac{\langle f, g_r\rangle}{\langle g_r, g_r\rangle}
+$$
+
+If $g_1(t), g_2(t), ..., g_n(t)$ are orthogonal to each other, i.e.
+
+$$
+\int_{t_1}^{t_2}g_r(t)g_s(t)\mathrm dt =\begin{cases}
+  K_i, &r = s,\\
+  0, &r \ne s
+\end{cases}
+$$
+
+Then $f(t)$ can be represented as the sum of $n$-D orthogonal real functions.
+
+Then $g_1(t), g_2(t), ..., g_n(t)$ are called **Orthogonal Function Set**.
+
+If $\int_{t_1}^{t_2}g_i^2(t)\mathrm dt = 1$, the orthogonal function set is called **Orthonormal Function Set**.
+
+**Orthogonality of Complex Function**
+
+$$
+c_{12} = \frac{\int_{t_1}^{t_2}f_1(t)f_2^*(t)\mathrm dt}{\int_{t_1}^{t_2}f_2(t)f_2^*(t)\mathrm dt} = \frac{\langle f_1, f_2^*\rangle}{\langle f_2, f_2^*\rangle}
+$$
+
+**Orthogonal Function Set** satisfies
+
+$$
+\int_{t_1}^{t_2}g_r(t)g_s^*(t)\mathrm dt =\begin{cases}
+  K_i, &r = s,\\
+  0, &r \ne s
+\end{cases}
+$$
+
+The definition of Orthogonal is
+
+$$
+\int_{t_1}^{t_2}f_1(t)f_2^*(t)\mathrm dt = \int_{t_1}^{t_2}f_2(t)f_1^*(t)\mathrm dt = 0
+$$
+
+NOTE:
+
+* If two signals are orthogonal within a given interval, they are not necessarily orthogonal within other intervals.
+
+* If two signals are not orthogonal, they must be correlated.
+
+### Complete Orthogonal Function and Parseval's Theorem
+
+**Complete Orthogonal Funtion Set**
+
+$$
+\overline{\varepsilon^2} = \frac{1}{t_2-t_1}\left[\int_{t_1}^{t_2}f^2(t)\mathrm dt  - \sum_{r = 1}^nc_r^2K_r\right]
+$$
+
+If $\lim_{t_2 \to \infty}\overline{\varepsilon^2} = 0$, then $\{g_r(t)\}$ is said to be a **Complete Orthogonal Function Set**.
+
+Alternative definition of complete orthogonal set
+
+Other than the elements in $\{g_r(t)\}$, there is no finite-energy signal $x(t)$, which satisfies
+
+$$
+\int_{t_1}^{t_2}x(t)g_r(t)\mathrm dt = 0, \forall r\\
+\text{or } \int_{t_1}^{t_2}x(t)g_r^*(t)\mathrm dt = 0, \forall r
+$$
+
+
+Trigonometric Set
+
+$$
+\left\{\cos n\omega_1 t\right\}_{n\rightarrow\infty}\\
+\left\{\sin n\omega_1 t\right\}_{n\rightarrow\infty}
+$$
+
+Complex exponential set
+
+$$
+\left\{e^{jn\omega_1 t}\right\}_{n\rightarrow\infty}
+$$
+
+**Parseval's Theorem**
+
+$$
+\int_{t_1}^{t_2}f(t)^2\mathrm dt = \sum_{r=1}^\infty c_r^2K_r = \sum_{r=1}^\infty\int_{t_1}^{t_2}[c_rg_r(t)]^2\mathrm dt
+$$
+
+Physical interpretation:
+
+The energy (power) of a signal always equals to the sum of the energy (power) of all its components in a complete orthogonal function set. 
+
+Mathematical interpretation:
+
+The norm of vector signals keeps invariant under orthogonal transform.
+
+### Correlation
+
+Physical interpretation:
+
+Gauge of the similarity of two signals 
+
+**Energy and Power Signals**
+
+Instaneous Power $p(t) = i^2(t) R$
+
+The energy consumed by $R$ in a period
+
+$$
+E = \int_{-T_0/2}^{T_0/2}p(t)\mathrm dt = R\int_{-T_0/2}^{T_0/2}i^2(t) \mathrm dt
+$$
+
+Average Power:
+
+$$
+P = \frac{1}{T_0}\int_{-T_0/2}^{T_0/2}p(t)\mathrm dt = \frac{1}{T_0}R\int_{-T_0/2}^{T_0/2}i^2(t) \mathrm dt
+$$
+
+The energy signals and power signals:
+
+$$
+E = \lim_{T_0 \to \infty}\int_{-T_0/2}^{T_0/2}f^2(t)\mathrm dt\\
+P = \lim_{T_0 \to \infty}\frac{1}{T_0}\int_{-T_0/2}^{T_0/2}f^2(t)\mathrm dt
+$$
+
+**Correlation Coefficient**
+
+$$
+\rho_{12} = \frac{\int_{t_1}^{t_2}f_1(t)f_2^*(t)\mathrm dt}{\sqrt{\int_{t_1}^{t_2}f_1^2(t)\mathrm dt}\sqrt{\int_{t_1}^{t_2}f_2^2(t)\mathrm dt}} = \frac{\langle f_1, f_2\rangle}{\sqrt{\langle f_1, f_1\rangle}\sqrt{\langle f_2, f_2\rangle}} = \frac{\langle f_1, f_2\rangle}{\|f_1\|_2\|f_2\|_2} 
+$$
+
+If $f_1(t)$ is a linear function of $f_2(t)$, then $\rho_{12} = \pm1$, $\overline{\varepsilon^2} = 0$.
+
+If $f_1(t)$ is orthogonal to $f_2(t)$, then $\rho_{12} = 0$, $\overline{\varepsilon^2}$ is maximized.
+
+* Describe the correlation of two signals from the perspective of energy difference.
+* Quantitatively measure the correlation of two signals in terms of inner product. 
+
+**Correlation Function**
+
+The similarity between one signal with a delayed version of another signal.
+
+(1) $f_1(t)$ and $f_2(t)$ are both real and energy signals
+
+$$
+R_{12}(\tau) = \int_{-\infty}^{\infty}f_1(t)f_2(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_1(t + \tau)f_2(t)\mathrm dt\\
+R_{21}(\tau) = \int_{-\infty}^{\infty}f_2(t)f_1(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_2(t + \tau)f_1(t)\mathrm dt\\
+R_{12}(\tau) = R_{21}(-\tau)
+$$
+
+(2) $f_1(t)$ and $f_2(t)$ are both complex and energy signals
+
+If $f_1(t) = f_2(t) = f(t)$
+
+Autocorrelation:
+
+$$
+R(\tau) = \int_{-\infty}^{\infty}f(t)f(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f(t + \tau)f(t)\mathrm dt\\
+$$
+
+(2) $f_1(t)$ and $f_2(t)$ are both complex and energy signals
+
+$$
+R_{12}(\tau) = \int_{-\infty}^{\infty}f_1(t)f_2^*(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_1(t + \tau)f_2^*(t)\mathrm dt\\
+R_{21}(\tau) = \int_{-\infty}^{\infty}f_2(t)f_1^*(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_2(t + \tau)f_1^*(t)\mathrm dt\\
+R_{12}(\tau) = R_{21}^*(-\tau)
+$$
+
+Autocorrelation:
+
+$$
+R(\tau) = \int_{-\infty}^{\infty}f(t)f^*(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f(t + \tau)f^*(t)\mathrm dt\\
+R(\tau) = R^*(-\tau)
+$$
+
+
+(3) $f_1(t)$ and $f_2(t)$ are both real and power signals
+
+$$
+R_{12}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_1(t)f_2(t-\tau)\mathrm dt \right]\\
+R_{21}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_2(t)f_1(t-\tau)\mathrm dt \right]\\
+$$
+
+Autocorrelation
+
+$$
+R(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f(t)f(t-\tau)\mathrm dt \right]\\
+$$
+
+(4) $f_1(t)$ and $f_2(t)$ are both complex and power signals
+
+$$
+R_{12}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_1(t)f_2^*(t-\tau)\mathrm dt \right]\\
+R_{21}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_2(t)f_1^*(t-\tau)\mathrm dt \right]\\
+$$
+
+Autocorrelation
+
+$$
+R(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f(t)f^*(t-\tau)\mathrm dt \right]\\
+$$
+
+**Correlation Theorem**
+
+$$
+\mathcal F(x(t)) = X(\omega)\\
+\mathcal F(y(t)) = Y(\omega)\\
+\mathcal F(R_{xy}(\tau)) = X(\omega)Y^*(\omega)\\
+$$
+
+If $x(t) = y(t)$, The FT of the autocorrelation function is $\mathcal F{R_{xx}(\tau)} = |X(\omega)|^2$
+
+If $y(t)$ is a real and even function: $Y^*(\omega) = Y(\omega)$
+
+ Then the correlation theorem is equivalent to the convolution theorem
+
+$$
+\mathcal F(\int_{-\infty}^\infty x(t)y(t-\tau)\mathrm dt) = X(\omega)Y(\omega)\\
+$$
+
+Generally, 
+
+$$
+R_{12}(t) = f_1(t) * f_2(-t)
+$$
