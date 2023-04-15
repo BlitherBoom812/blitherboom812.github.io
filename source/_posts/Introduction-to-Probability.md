@@ -254,7 +254,7 @@ $$
 $$
 p_X(k) = \begin{cases}
     \frac {1}{b-a+1}, &\text{if } k = a, a+1, ..., b\\
-    1-p, &\text{otherwise}
+    0, &\text{otherwise}
 \end{cases}\\
 E[X] = \frac{a+b}{2}\\
 \text{var}(X) = \frac{(b-a)(b-a+2)}{12}
@@ -568,7 +568,7 @@ $$
 **Normalization** 
 
 $$
-\int_{-\infty}^\infty\int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dx\mathrm dy
+\int_{-\infty}^\infty\int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dx\mathrm dy = 1
 $$
 
 **Interpretation(Small rectangle)**
@@ -577,8 +577,8 @@ $$
 P(a\le X \le a + \delta, c \le Y \le c + \delta) \approx f_{X, Y}(a, c)\cdot\delta^2
 $$
 
-**Marginal PDF
-**
+**Marginal PDF**
+
 $$
 P(X\in A) = P(X \in A, Y \in (-\infty, \infty)) = \int_A \int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dy\mathrm dx
 $$
@@ -599,7 +599,7 @@ $$
 Conversely
 
 $$
-f_{X, Y}(x, y) = \frac{\partial^2F_{X, Y}}{\partial dx\partial dy}(x, y)
+f_{X, Y}(x, y) = \frac{\partial^2F_{X, Y}}{\partial x\partial y}(x, y)
 $$
 
 **Expectations**
@@ -740,8 +740,7 @@ But sometimes we want the PDF $f_Y$ of $Y = g(X)$, where $Y$ is a new RV.
 
 **Principal Method**
 
-Two-step procedure for the calculation of the PDF of a function $Y =
-g(X)$ of a continuous RV $X$
+Two-step procedure for the calculation of the PDF of a function $Y=g(X)$ of a continuous RV $X$
 
 1. Calcualte the CDF $F_Y$ of $Y$: $F_Y(y) = P(Y \le y)$
 2. Differentiate $F_Y$ to obtain the PDF $f_Y$ of $Y$: $f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y)$
