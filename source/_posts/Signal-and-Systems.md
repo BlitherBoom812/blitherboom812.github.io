@@ -516,7 +516,7 @@ if $f(t)$ is real and odd, $f(t) = f_o(t)$, then $F(\omega)=jX(\omega)$, $F(\ome
 
 $\mathcal F\left[\frac{\mathrm d^n}{\mathrm dt^n}f(t)\right] = (j\omega)^n F(\omega)$
 
-$\mathcal F\left[\frac{\mathrm d^n}{\mathrm dt^n}F(\omega)\right] = (-jt)^nf(t)$
+$\mathcal F\left[\frac{\mathrm d^n}{\mathrm d\omega^n}F(\omega)\right] = (-jt)^nf(t)$
 
 
 **Integration Property** $\mathcal{F}\left[\int_{-\infty}^t f(\tau)\mathrm{d} \tau\right] = \frac{F(\omega)}{j\omega} + \pi F(0)\delta(\omega)$
