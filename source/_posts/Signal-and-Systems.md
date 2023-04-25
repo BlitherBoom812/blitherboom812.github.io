@@ -1192,7 +1192,7 @@ Wavelength Division Multiplexing (WDM)－ Optical carrier
 
 ![](../images/ss/lec14_7.jpg)
 
-## Orthogonal decomposition of signals
+## Vector Analysis of Signals
 
 ### Vector Space
 
@@ -1476,3 +1476,56 @@ Generally,
 $$
 R_{12}(t) = f_1(t) * f_2(-t)
 $$
+
+### Energy & Power Spectral Density
+
+$$
+R(\tau) = \int_{-\infty}^{\infty}f(t)f^*(t-\tau)\mathrm dt\\
+R(0) = \int_{-\infty}^{\infty}f(t)f^*(t)\mathrm dt = \int_{-\infty}^{\infty}\lvert f(t)\rvert^2\mathrm dt\\
+$$
+
+$$
+R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2 e^{j\omega\tau}\mathrm d\omega\\
+R(0) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2\mathrm d\omega\\
+$$
+
+$$
+\int_{-\infty}^{\infty}\lvert f(t)\rvert^2\mathrm dt = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2\mathrm d\omega
+$$
+
+**Energy Spectral Density**
+
+$$
+\mathcal{E}(\omega) = \lvert F(\omega)\rvert^2\\
+$$
+
+$$
+\mathcal{E}(\omega) = \mathcal{F}[R(\tau)]\\
+R(\tau) = \mathcal{F}^{-1}[\mathcal{E}(\omega)]\\
+$$
+
+**Power Spectral Density**
+
+$$
+\mathcal F[ R(\tau)] = \mathcal P(\omega)\\
+$$
+
+It is called Power Spectral Density (PSD).
+
+Wiener-Khinchin Theorem
+
+$$
+\mathcal P(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau\\
+R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal P(\omega)e^{j\omega\tau}\mathrm d\omega\\
+$$
+
+### 
+
+$$
+|R(j\omega)|^2 = |H(j\omega)|^2|E(j\omega)|^2\\
+\mathcal{E}_r(\omega) = |H(j\omega)|^2\mathcal{E}_e(\omega)\\
+\mathcal{P}_r(\omega) = |H(j\omega)|^2\mathcal{P}_e(\omega)\\
+$$
+
+![](../images/ss/lec16_1.jpg)
+

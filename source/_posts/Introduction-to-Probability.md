@@ -778,7 +778,7 @@ Assume that $h$ is differentiable.
 Then the PDF of $Y = g(X)$ is given by
 
 $$
-f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y) = \frac{\mathrm d}{\mathrm d y} F_X(h(y)) = f_X(h(y))\left|\frac{\mathrm d h}{\mathrm d y}\right|(y)
+f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y) = \frac{\mathrm d}{\mathrm d y} F_X(h(y)) = f_X(h(y))\left|\frac{\mathrm d h}{\mathrm d y}(y)\right|
 $$
 
 ### Entropy
@@ -949,3 +949,148 @@ Solving the above problem, we have uniform distribution within $[a, b]$.
 $$
 f(x) = \frac{1}{b-a}, x \in [a, b]
 $$
+
+## Convolution, covariance, correlation, and conditional expectation
+
+### Convolution
+
+**Discrete case**
+
+$$
+\begin{align*}
+p_W(w) &= P(X+Y=w)\\
+&= \sum_{x}P(X=x, Y=w-x)\\
+&= \sum_{x}P(X=x)P(Y=w-x)\\
+&= \sum_{x}p_X(x)p_Y(w-x)\\
+\end{align*}
+$$
+
+PMF $p_W$ is the convolution of PMFs $p_X$ and $p_Y$.
+
+**The distribution of $X+Y$**
+
+Mechanics:
+- Put the PMF's on top of each other
+- Flip the PMF of $Y$
+- Shift the flipped PMF by $w$ (to the right if $w>0$)
+- Cross-multiply and add
+
+**Continuous Case**
+
+$$
+\begin{align*}
+&W = X+Y, X, Y \text{ are independent}\\
+&P(W\le w|X=x) = P(Y\le w-x)\\
+&f_{W|X}(w|x) = f_Y(w-x)\\
+&f_{W, X}(w, x) = f_X(x)f_Y(w-x)\\
+&f_W(w) = \int_{-\infty}^\infty f_X(x)f_Y(w-x)\mathrm dx\\
+\end{align*}
+$$
+
+**Sum of 2 independent normal RVs**
+
+$$
+\begin{align*}
+    & X\sim N(\mu_1, \sigma_1^2), Y\sim N(\mu_2, \sigma_2^2)\\
+    &f_{X,Y}(x, y) = \frac{1}{2\pi \sigma_x\sigma_y}\text{exp}\left\lbrace-\frac{(x-\mu_x)^2}{2\sigma_x^2} - \frac{(y-\mu_y)^2}{2\sigma_y^2}\right\rbrace
+\end{align*}
+$$
+
+which is constant on the ellipse(circle if $\sigma_x = \sigma_y$).
+
+$$
+\begin{align*}
+    X\sim N(0, \sigma_x), &Y\sim N(0, \sigma_y)\\
+    W &= X+Y\\
+    f_W(w) &= \int_{-\infty}^\infty f_{X,Y}(x, w-x)\mathrm dx\\
+    &= \int_{-\infty}^\infty \frac{1}{2\pi \sigma_x\sigma_y}\text{exp}\left\lbrace-\frac{x^2}{2\sigma_x^2} - \frac{(w-x)^2}{2\sigma_y^2}\right\rbrace\mathrm dx\\
+    =ce^{-\gamma \omega^2}
+\end{align*}
+$$
+
+$W$ is Normal.
+
+Mean = 0, Variance = $\sigma_x^2 + \sigma_y^2$
+
+Same argument for nonzero mean case.
+
+**The difference of two independent RVs**
+
+$X$ and $Y$  are independent exponential RVs with parameter $\lambda$.
+
+Fix some $z\ge 0$ and note that $f_Y(x-z)$ is non zero when $x\ge z$.
+
+$$
+\begin{align*}
+    Z &= X - Y\\
+    f_Z(z) &= \int_{-\infty}^\infty f_X(x)f_{-Y}(z - x)\mathrm dx\\
+    &= \int_{-\infty}^\infty f_X(x)f_{Y}(x - z)\mathrm dx\\
+    &= \int_{z}^\infty \lambda e^{-\lambda x}\lambda e^{-\lambda(x-z)}\mathrm dx\\
+    &= \frac{\lambda}{2}e^{-\lambda z}
+\end{align*}
+$$
+
+The answer for the case $z\le 0$
+
+$$
+f_{X-Y}(z) = f_{Y-X}(z) = f_Z(-z)
+$$
+
+The first quality holds by symmetry.
+
+### Covariance and Correlation
+
+**Definition**
+
+The covariance of two RVs $X$ and $Y$, denoted by $\text{cov}(X, Y)$, is defined by
+
+$$
+\text{cov}(X, Y) = E\left[(X - E[X])(Y - E[Y])\right]
+$$
+
+or, 
+
+$$
+\text{cov}(X, Y) = E[XY] - E[X]E[Y]
+$$
+
+$X$ and $Y$ are **uncorrelated** if $\text{cov}(X, Y) = 0$.
+
+**Zero mean case** $\text{cov}(X, Y) = E[XY]$
+
+**Properties**
+
+$$
+\text{cov}(X, Y) = \text{var}(X, Y)\\
+\text{cov}(X, aY+b) = a\cdot\text{cov}(X, Y)\\
+\text{cov}(X, Y+Z) = \text{cov}(X, Y) + \text{cov}(X, Z)\\
+\text{independent} \Rightarrow \text{cov}(X, Y) = 0(\text{converse is not true})
+$$
+
+**Variance of the sum of RVs**
+
+$$
+\text{var}\left(\sum_{i = 1}^nX_i\right) = \sum_{i = 1}^n\text{var}(X_i) + \sum_{\lbrace(i, j)|i\ne j\rbrace}\text{cov}(X_i, X_j)
+$$
+
+In particular, 
+
+$$
+\text{var}(X_1 + X_2) = \text{var}(X_1) + \text{var}(X_2) + 2\text{cov}(X_1, X_2)
+$$
+
+**Correlation coefficient**
+
+The correlation coefficient $\rho(X, Y)$ of two RVs $X$ and $Y$ that have nonzero variance is defined as
+
+$$
+\begin{align*}
+\rho &= E\left[\frac{(X - E[X])}{\sigma_X} \cdot \frac{(Y - E[Y])}{\sigma_Y}\right]\\
+&= \frac{\text{cov}(X, Y)}{\sigma_X\sigma_Y}
+\end{align*}
+$$
+
+* $-1 \le \rho \le 1$
+* $|\rho| = 1 \Leftrightarrow (X-E[X]) = c(Y-E[Y])$
+* Independent $\Rightarrow \rho = 0(\text{converse is not true})$
+
