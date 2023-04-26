@@ -1529,3 +1529,152 @@ $$
 
 ![](../images/ss/lec16_1.jpg)
 
+## Discrete time signals
+
+Discrete time-axis, but continuous amplitude-axis
+
+### Sequence operation
+
+**Addition** $z(n) = x(n) + y(n)$
+
+**Multiplication** $z(n) = x(n) * y(n)$
+
+**Multiplied a coefficient** $z(n) = a * x(n)$
+
+**Shift** $z(n) = x(n - m)$ right shift($m>0$), $z(n) = x(n +m)$ left shift
+
+**Reflection** $z(n) = x(-n)$
+
+**Difference** $\Delta x(n) = x(n + 1) - x(n)$ Forawrd difference, 
+
+$\nabla x(n) = x(n) - x(n - 1)$ Backward difference
+
+$\nabla^mx(n) = \nabla(\nabla^{m-1}x(n))$
+
+**Summation** $z(n) = \sum_{k = -\infty}^{n}x(k)$
+
+**Scaling** $z(n) = z(2n)$ squeeze, 
+
+$z(n) = x(n/2)$, extend
+
+### Typical sequences
+
+![](../images/ss/lec16_2.jpg)
+
+![](../images/ss/lec16_3.jpg)
+
+Relations of several singal waveforms
+
+$$
+u(n) = \sum_{k = 0}^{\infty}\delta(n - k)\\
+\delta(n) = u(n) - u(n - 1)\\
+R_N(n) = u(n) - u(n - N)\\
+$$
+
+### Signal Decomposition
+
+$$
+x(n) = \sum_{m = -\infty}^{\infty}x_m\delta(n - m)\\
+$$
+
+$$
+\delta(n - m) = \begin{cases}
+1, & n = m\\
+0, & n \neq m
+\end{cases}
+$$
+
+### Difference equations
+
+![](../images/ss/lec16_4.jpg)
+
+Numerical solution of difference equations
+
+General form of difference equation:
+
+$$
+\sum_{k = 0}^N a_ky(n - k) = \sum_{r = 0}^M b_ry(n - r)\\
+$$
+
+**Methods:**
+- Recursive method
+- - Intuitive, difficult to formulate the closed-form solutions
+- Time-domain classical method
+- - Obtain homogeneous and particular solutions and using the  boundary condition to determine the coefficients. 
+- The sum of the zero-input and zero-state responses
+- - Convolution (next class) 
+- Z-transform (Chapter 8)
+- State variable method (Chapter 11)
+
+**Homogeneous Solution**
+
+$$
+\sum_{k = 0}^N a_ky(n - k) = 0\\
+$$
+
+The **characteristic root** $\alpha_k$ satisfies:
+
+$$
+a_0\alpha^N + a_1\alpha^{N-1} + \cdots + a_N = 0\\
+$$
+
+The homogeneous solution is:
+
+$$
+y(n) = c_1\alpha_1^n + c_2\alpha_2^n + \cdots + c_N\alpha_N^n\\
+$$
+
+**Particular Solutions**:
+
+![](../images/ss/lec16_.jpg)
+
+**General steps**
+
+1. Obtain homogeneous solutions from characteristic equation $c_1\alpha_1^n + c_2\alpha_2^n + \cdots + c_N\alpha_N^n$
+2. Determine the form of the particular solution $D(n)$
+3. The complete solution $c_1\alpha_1^n + c_2\alpha_2^n + \cdots + c_N\alpha_N^n + D(n)$
+4. Introduce the boundary condition and set up equations
+$$
+y(0) = C_1 +C_2 + \cdots + C_N + D(0)\\
+y(1) = C_1\alpha_1 +C_2\alpha_2 + \cdots + C_N\alpha_N + D(1)\\
+\vdots\\
+y(N - 1) = C_1\alpha_1^{N - 1} + C_2\alpha_2^{N - 1} + \cdots + C_N\alpha_N^{N - 1} + D(N - 1)\\
+\Rightarrow\\
+Y(k) - D(k) = VC\\
+C = V^{-1}(Y(k) - D(k))\\
+$$
+
+### Zero-input and zero-state responses
+
+$$
+y(k) = y_{zi}(k) + y_{zs}(k)
+$$
+
+**Zero-Input Response**
+$D(k) = 0 \Rightarrow C_{zi} = V^{-1}Y_{zi}(k)$
+
+**Zero-State Response**
+
+$$
+\begin{align*}
+  C_{zs} &= V^{-1}[Y_{zs}(k) - D(k)]\\
+C_{zs} &= V^{-1}[Y(k) - Y_{zi}(k) - D(k)]\\
+C &= C_{zi} + C_{zs}\\
+\end{align*}
+$$
+
+**Natural Response** $\sum_{k = 1}^NC_k\alpha_k^n$
+
+**Forced Response** $D(n)$
+
+Characteristics of the boundary condition for difference equations
+
+N-th order difference equation should have N independent boundary conditions.
+
+Compared with continuous systems, there are no big differences between $0_+$ and $0_-$ in discrete systems. 
+
+$y(-1), y(-2), \dots, y(-N)$ are the system memory (storage) before the excitation is added: $0_-$
+
+Derive (together with the excitation) $y(0), y(1), …, y(N-1): 0_+$
+
+Using Z-transform can avoid mistakes－similar to the Laplace transform in continuous systems
