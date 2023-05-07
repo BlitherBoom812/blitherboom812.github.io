@@ -1481,11 +1481,14 @@ $$
 
 $$
 R(\tau) = \int_{-\infty}^{\infty}f(t)f^*(t-\tau)\mathrm dt\\
-R(0) = \int_{-\infty}^{\infty}f(t)f^*(t)\mathrm dt = \int_{-\infty}^{\infty}\lvert f(t)\rvert^2\mathrm dt\\
 $$
 
 $$
 R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2 e^{j\omega\tau}\mathrm d\omega\\
+|F(\omega)|^2 = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau\\
+$$
+$$
+R(0) = \int_{-\infty}^{\infty}f(t)f^*(t)\mathrm dt = \int_{-\infty}^{\infty}\lvert f(t)\rvert^2\mathrm dt\\
 R(0) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2\mathrm d\omega\\
 $$
 
@@ -1515,8 +1518,8 @@ It is called Power Spectral Density (PSD).
 Wiener-Khinchin Theorem
 
 $$
-\mathcal P(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau\\
-R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal P(\omega)e^{j\omega\tau}\mathrm d\omega\\
+\mathcal P(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty}R(\tau)e^{j\omega\tau}\mathrm d\tau\\
+R(\tau) = \int_{-\infty}^{\infty}\mathcal P(\omega)e^{-j\omega\tau}\mathrm d\omega\\
 $$
 
 ### 
@@ -1677,4 +1680,213 @@ $y(-1), y(-2), \dots, y(-N)$ are the system memory (storage) before the excitati
 
 Derive (together with the excitation) $y(0), y(1), …, y(N-1): 0_+$
 
-Using Z-transform can avoid mistakes－similar to the Laplace transform in continuous systems
+Using Z-transform can avoid mistakes－similar to the Laplace transform in continuous systems.
+
+### Impulse response of DT systems
+
+Similar to CT System, h(n) reflects system’s property
+
+**Causality** $h(n) = h(n) u(n)$ (unlateral, $n\lt 0$ no response)
+
+**Stability** $\sum_{n=-\infty}^\infty |h(n)| \lt \infty$ (absolutely summable)
+
+     NOTE:  critical stability can be considered as either stable or unstable, e.g.,  system whose impulse response is a sine sequence
+
+
+Not all practical discrete systems are necessarily causal：
+
+* Variable is not time, like image processing
+* Variable is time, but data has been recorded and processed, like voice processing, meteorology, stock systems.
+
+Example: Smooth windowing
+
+$$
+y(n) = \frac{1}{2M+1}\sum_{k=-M}^M x(n-k)
+$$
+
+Discrete non-causal system
+
+### Convolution Sum
+
+$$
+y(n) = \sum_{m = -\infty}^\infty x(m)h(n - m) = h(n) * x(n)
+$$
+
+Similar to CT system, also satisfies both distributive and associative laws 
+
+Calculation of convolution：
+Four steps: reflection, shift, multiplication and summation. 
+
+Calculation of correlation：
+Cross- & auto-correlation: shift, multiplication & summation. 
+
+Example:
+
+$$
+x(n) = u(n) - u(n - N)\\
+h(n) = a^nu(n)\\
+y(n) = x(n) * h(n)
+$$
+
+$$
+y(n) = \sum_{m = -\infty}^\infty [u(m) - u(m - N)]a^{n - m}u(n - m)
+$$
+
+if $n < 0$, then $y(n) = 0$
+
+if $0 \le n \lt N - 1$, $y(n) = \sum_{m = 0}^na^{n-m} = \frac{1}{1 - a}[1 - a^{n+1}]$
+
+if $n \ge N - 1$, $y(n) = \frac{1 - a^{-N}}{1 - a^{-1}}a^n$
+
+**Deconvolution**
+
+**Signal retrieval** y(n) and h(n) are known, how to derive x(n)?
+
+*Measurement equipment (linear system), like sensor for measuring blood pressure*
+
+**System identification** y(n) and x(n) are known, how to derive h(n)?
+
+*Earthquake signal, like geological survey, oil exploration, etc.*
+
+$$
+\begin{bmatrix*}
+   y(0)\\
+   y(1)\\
+   y(2)\\
+   \vdots\\
+   y(n)
+\end{bmatrix*} = 
+\begin{bmatrix*}
+  h(0) & 0 & 0 & \dotsb & 0\\
+  h(1) & h(0) & 0 & \dotsb & 0\\
+  h(2) & h(1) & h(0) & \dotsb & 0\\
+  \vdots & \vdots & \vdots & \ddots & \vdots\\
+  h(n) & h(n-1) & h(n-2) & \dotsb & h(0)\\
+\end{bmatrix*}\begin{bmatrix*}
+   x(0)\\
+   x(1)\\
+   x(2)\\
+   \vdots\\
+   x(n)
+\end{bmatrix*}
+$$
+
+Thus, 
+
+$$
+x(n) = \left[y(n) - \sum_{m = 0}^{n-1} x(m) h(n - m)\right]/h(0)\\
+h(n) = \left[y(n) - \sum_{m = 0}^{n-1} h(m) x(n - m)\right]/x(0)
+$$
+
+### Important Concepts
+
+![](../images/ss/lec17_1.jpg)
+
+1. Symbol rate :  clock period is $T$, signal symbol rate is $f = 1/T$.
+2. Information rate: information rate equals to symbol rate for binary encoding, otherwise, equal to multiplication between symbol rate and number of information bits per symbol.
+3. Signal bandwidth: the first zero of non-return-to-zero (NRZ) signal’s spectrum is $1/T$,  so the signal bandwidth is $B=1/T =f$.
+
+> 这句话是在介绍非归零码（Non-Return-to-Zero，简称NRZ）信号的带宽计算方式。
+> 
+> 在信号处理和通信中，信号的频谱表示了信号在不同频率上的能量分布。对于一个NRZ信号，它的频谱图中第一个零点（也就是在零周围出现的第一个极小值点）出现在频率为$1/T$处，其中$T$是NRZ信号中一个脉冲的时间长度。这是因为NRZ信号的频谱是由一个周期为$T$的方波产生的，其频率成分只包含正弦函数的奇次谐波。其中，最低的一个谐波频率是$f=\frac{1}{T}$，对应的是频率为$f$的正弦波。所以，NRZ信号的带宽$B$就被定义为$f=1/T$。
+> 
+> 简而言之，NRZ信号的带宽是由脉冲的时间长度决定的，具体来说，带宽等于脉冲频率的一半，即带宽等于$f=1/T$。
+
+NOTE:
+
+When NRZ code is used, signal bandwidth = symbol rate
+
+When return-to-zero (RZ) code is used, signal bandwidth > symbol rate
+
+Using NRZ code can save bandwidth yet high frequency components of the rectangular signal will suffer from the severe inter-symbol interference (ISI). So the raised cosine or Sa function is preferred.
+> ChatGPT:
+> 
+> 归零码和非归零码都是数字通信中常用的编码方式。
+> 
+> 归零码（Return-to-Zero，简称RZ）是一种二进制码，其中一个信号所代表的位是由一个脉冲表示的。发送二进制“1”时，脉冲电平为高电平，发送二进制“0”时，脉冲电平为低电平。在归零码中，一个信号位所代表的脉冲之后，信号在下一时刻会回到零电平。由于归零码中每个脉冲结束时信号回到零电平，因此这种编码方式具有稳定可靠的特点，但是传输的带宽相对较大。
+> 
+> 非归零码（Non-Return-to-Zero，简称NRZ）的编码方式与归零码不同之处在于，在NRZ信号中，一个信号所代表的位是由一个固定电平表示的。当信号所代表的位是二进制“1”时，固定电平为高电平；当信号所代表的位是二进制“0”时，固定电平为低电平。这种编码方式的好处是带宽更小，但是却存在着在多个二进制“1”连续发送时，出现误解的情况。
+> 
+> 综上所述，归零码是二进制码中脉冲与幅度的双重编码，不易产生传输误码，但其对于通信带宽需求较大；而非归零码不需要对脉冲进行编码，在带宽方面具有一定的优势，但长时间连续发送相同信息时会产生误解。
+
+### Z-Transform
+
+Similar to the L-Tranform.
+
+**Definition**
+
+$$
+X(z) = Z(x(n)) = \sum_{n = -\infty}^{\infty} x(n) z^{-n}
+$$
+
+**Z-T of Typical Series**
+
+$z \in \Complex$
+
+$$
+\delta(n) \rightarrow 1\\
+u(n) \rightarrow \frac{1}{1-z^{-1}}(|z| \gt 1)\\
+nu(n) \rightarrow \frac{z^{-1}}{(1-z^{-1})^2}(|z| \gt 1)\\
+a^n u(n) \rightarrow \frac{1}{1-az^{-1}}(|z| \gt |a|)\\
+\cos(\omega_0 n) u(n) \rightarrow \frac{1-z^{-1}\cos(\omega_0)}{1-2z^{-1}\cos(\omega_0) + z^{-2}}\\
+\sin(\omega_0 n) u(n) \rightarrow \frac{z^{-1}\sin(\omega_0)}{1-2z^{-1}\cos(\omega_0) + z^{-2}}\\
+$$
+
+**The Region of Convergence**
+
+![](../images/ss/lec18_1.jpg)
+
+**Inverse Z-Transform**
+
+$$
+x(n) = \frac{1}{2\pi j} \oint_C X(z) z^{n-1} dz
+$$
+
+**Method**
+
+**Contour Integration(residue method)**
+
+Right-sided sequence
+
+$$
+x(n) = \sum_{k = 1}^{N} Res\{X(z)z^{n-1}\}|_{z = z_k}
+$$
+
+Left-sided sequence
+
+$$
+x(n) = - \sum_{k = 1}^{N} Res\{X(z)z^{n-1}\}|_{z = z_k}
+$$
+
+**Power series expansion(Long division)**
+
+![](../images/ss/lec18_2.jpg)
+
+If it is right sided, 
+
+$$
+X(z) = \sum_{n = 0}^\infty x(n)z^{-n}
+$$
+
+If it is left sided,
+
+$$
+X(z) = \sum_{n = -\infty}^{-1}x(n)z^{-n}
+$$
+
+**Partial Fraction Expansion**
+
+$$
+\frac{z}{z - a} \lrarr \begin{cases}
+ a^nu(n), &|z|\gt |a|\\
+ -a^nu(-n-1), &|z|\lt |a|
+\end{cases}
+$$
+
+![](../images/ss/lec18_3.jpg)
+
+
+![](../images/ss/lec18_34jpg.jpg)
+
+![](../images/ss/lec18_6.jpg)
+
