@@ -1094,3 +1094,181 @@ $$
 * $|\rho| = 1 \Leftrightarrow (X-E[X]) = c(Y-E[Y])$
 * Independent $\Rightarrow \rho = 0(\text{converse is not true})$
 
+**Conditional expected value**
+
+$$
+E[X|Y = y] = \sum_x p_{X|Y}(x|y)
+$$
+
+### Conditional expectation
+
+**Definition**
+
+$$
+E[X|Y = y] = \begin{cases}
+    \sum_x xp_{X|Y}(x|y), & X \text{discrete},\\
+    \int_{-\infty}^\infty xf_{X|Y}(x|y)\mathrm dx, & X \text{continuous}.
+\end{cases}
+$$
+
+$E[X|Y=y]$ is a function of $y$.
+
+$$
+E[X|Y = y] = \frac{y}{2}(\text{number})\\
+E[X|Y] = \frac{Y}{2}(\text{RV})
+$$
+
+**Law of iterated expectations**
+
+$$
+E[X] = E[E[X|Y]] = \begin{cases}
+    \sum_y E[X | Y = y]p_Y(y), & Y \text{discrete},\\
+    \int_{-\infty}^\infty E[X|Y = y]f_Y(y)\mathrm dy, & Y \text{continuous}.
+\end{cases}
+$$
+
+### Conditional expectation as an estimator
+
+Denote the conditional expectation
+
+$$
+\hat{X} = E[X|Y]
+$$
+
+as an estimator of $X$ given $Y$, and the estimation error
+
+$$
+\tilde{X} = X - \hat{X}
+$$
+
+is a RV.
+
+**Properties of the estimator**: 
+
+**Unbiased**
+
+For **any** possible $Y=y$:
+
+$$
+E[\tilde{X}|Y] = E[X - \hat{X} | Y] = E[X | Y] - E[\hat{X}|Y] = \hat{X} - \hat{X} = 0
+$$
+
+By the law of iterated expectations
+
+$$
+E[\tilde{X}] = E[E[\tilde{X}|Y]] = 0
+$$
+
+**Uncorrelated**
+
+$$
+E[\hat{X}\tilde{X}] = E[E[\hat{X}\tilde{X}|Y]] = E[\hat{X}E[\tilde{X}|Y]] = 0
+$$
+
+$$
+\text{cov}(\hat{X}, \tilde{X}) = E[\hat{X}\tilde{X}] - E[\hat{X}]E[\tilde{X}] = 0
+$$
+
+Since $X = \hat{X} + \tilde{X}$, the variance of X can be decomposed as
+
+$$
+\text{var}(X) = \text{var}(\hat{X}) + \text{var}(\tilde{X})
+$$
+
+$$
+\text{var}(\tilde{X}) = \text{var}(E[X|Y])
+$$
+
+Conditional variance
+
+$$
+\text{var}(X|Y) = E[(X - E[X|Y])^2|Y] = E[\tilde{X}^2|Y]
+$$
+
+here comes the law of total variance:
+
+$$
+\text{var}(X) = \text{var}(E[X|Y]) + E[\text{var}(X|Y)] 
+$$
+
+The total variability is avarage variability within sections + variability between sections.
+
+**Law of iterated expectations**
+
+$$
+E[X] = E[E[X|Y]] = \sum_y E[X|Y = y]p_Y(y)
+$$
+
+
+**Conditional variance**
+
+$$
+\text{var}(X|Y) = E[(X - E[X|Y])^2|Y] = E[\tilde{X}^2|Y]
+$$
+
+**Law of total variance**
+
+$$
+\text{var}(X) = \text{var}(E[X|Y]) + E[\text{var}(X|Y)] 
+$$
+
+
+## Transforms and sum of a random number of random variables
+
+The transform associated with a RV $X$ is a function $M_X(s)$ of a scalar parameter $s$, defined by
+
+$$
+M_X(s) = E[e^{sX}] = \begin{cases}
+    \sum_x e^{sx}p_X(x), & X \text{discrete},\\
+    \int_{-\infty}^\infty e^{sx}f_X(x)\mathrm dx, & X \text{continuous}.
+\end{cases}
+$$
+
+**Remarks**
+- a function of $s$, rather than a number
+- not necessarily defined for all (complex) s
+- always well defined for $\Re(s)=0$
+- compared with Laplace transform
+
+**Sanity Checks**
+
+$$
+M_X(0) = 1\\
+|M_X(s)| \le 1 \text{ for } \Re(s) = 0
+$$
+
+**Linear operation**
+$$
+M_{aX + b}(s) = e^{bs}M_X(as)\\
+M_{X + Y}(s) = M_X(s)M_Y(s) (\text{if X, Y independent})
+$$
+
+**Expected Values**
+
+$$
+E[X^n] = \frac{\partial^n M_X(s)}{\partial s^n}\bigg|_{s=0}
+$$
+
+$$
+P(X = c) = \lim_{N\rightarrow \infty}\frac 1N\sum_{k = 1}^N M_X(jk)e^{-jkc}
+$$
+
+since
+
+$$
+\lim_{N\rightarrow \infty}\frac 1N\sum_{k = 1}^N M_X(jk)e^{-jkc} = \sum_{x = 1}^\infty p_X(x)\lim_{N\rightarrow \infty}\frac 1N\sum_{k = 1}^N e^{-jc(k - x)} = \sum_{x = 1}^\infty p_X(x)\lim_{N\rightarrow \infty}\frac{1}{N} \frac{e^{j(x-c)} - e^{Nj(x - c)}}{1-e^{j(x-c)}} = p_X(c)
+$$
+
+**Example**
+
+$Y$ is a standard normal RV, 
+
+$$
+M_Y(s) = \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}}e^{-(y^2/2)}e^{sy}\mathrm dy = e^{s^2/2}
+$$
+
+Consider $X = \sigma Y + \mu$
+
+$$
+M_X(s) = e^{s^2\sigma^2/2 + \mu s}
+$$
