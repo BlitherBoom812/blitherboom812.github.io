@@ -1890,3 +1890,177 @@ $$
 
 ![](../images/ss/lec18_6.jpg)
 
+**Properties of Z-T**
+
+**Linearity**
+
+Addition and homogeneity
+
+<font color="red">ROC may change!</font>
+
+i.e. poles are cancelled when added: ROC will enlarge or and shrink.
+
+**Time shifting**
+
+(a) bilateral: If $\mathcal Z[x(n)] = X(z), R_{X_1} < |z| < R_{X_2}$, then $\mathcal{Z}[x(n-m)] = z^{-m}X(z), R_{X_1} < |z| < R_{X_2}$.
+
+(b) unilateral: if $\mathcal{Z}[x(n)] = X(z), R_{X_1} < |z|$, then $\mathcal{Z}[x(n-m)] = z^{-m}[X(z) + \sum_{k = -m}^{-1}x(k)z^{-k}], R_{X_1}\lt |z|$, and $\mathcal{Z}[x(n+m)] = z^{m}[X(z) - \sum_{k = 0}^{m-1}x(k)z^{-k}], R_{X_1}\lt |z|$
+
+For casual sequence, $n < 0, x(n) = 0$, the unilateral is also $\mathcal{Z}[x(n-m)] = z^{-m}X(z)$.
+
+The reason is that the unilateral z transform doesn't contain the $n<0$ parts of sequence, but after shifting, sometimes must be counted(right shift), sometimes must be discarded(left shift).
+
+**Linear weighting on sequence(Z domain differentiation)**
+
+$$
+\mathcal{Z}[x(n)] = X(z) \Rightarrow nx(n)\lrarr -z\frac{dX(z)}{dz}
+$$
+
+Generalization:
+
+$$
+n^mx(n)\lrarr \bigg[-z\frac{d}{dz}\bigg]^m X(z)
+$$
+
+**Geometric progression(Z-domain scaling)**
+
+$$
+a^n(x^n) \lrarr X(\frac{z}{a})\\
+(R_{x1} \lt \bigg|\frac{z}{a}\bigg| \le R_{x2})
+$$
+
+$$
+a^{-n}x(n) \lrarr X(az)\\
+(-1)^nx(n) \lrarr X(-z)
+$$
+
+**Initial-value theorem**
+
+$$
+x(0) = \lim_{z \rightarrow \infty }X(z)
+$$
+
+**Final-value theorem**
+
+$$
+\lim_{n \rightarrow \infty } x(n) = \lim_{z \rightarrow 1}[(z-1)X(z)]
+$$
+
+condition: when $n \rightarrow \infty$, $x(n)$ converge 
+
+Thus, the poles of $X(z)$ are inside the unit circle, the radius of ROC is less than 1.
+
+For $a^nu(n), |a| \lt 1$, the final value is 0.
+
+Or, if the pole is on the unit circle, it should be 1, and is of the 1st order.
+
+$u(n)$'s final value is 1.
+
+![](../images/ss/lec19_1jpg.jpg)
+
+**Time-domain convolution theorem**
+
+If $\mathcal{Z}{x(n)} = X(z), (R_{x1} \lt |z| \lt R_{x2}), \mathcal{Z}{h(n)} = H(z), (R_{h1} \lt |z| \lt R_{h2})$
+
+$$
+\mathcal{Z}[x(n) * h(n)] = X(z)H(z)\\
+\max(R_{x1}, R_{h1}) \lt |z| \lt \min(R_{x2}, R_{h2})
+$$
+
+If poles are cancelled in multiplication, ROC is enlarged.
+
+Conclusion: (Z Transform) convolution in time-domain is equivalent to multiplication (of Z Transform) in Z-domain.
+
+**Z domain convolution theorem**
+
+$$
+\mathcal{Z}[x(n)h(n)] = \frac{1}{2\pi j} \oint_C X(\frac{z}{v})H(v)v^{-1}dv
+$$
+
+or 
+
+$$
+\mathcal{Z}[x(n)h(n)] = \frac{1}{2\pi j} \oint_C X(v)H(\frac{z}{v})v^{-1}dv
+$$
+
+where $C$ is a closed contour in the intersection of ROCs of $X(\frac{z}{v})$ and $H(v)$ or $X(v)$ and $H(\frac z v)$.
+
+let $v = \rho e^{j\theta}, z = r e^{j\varphi}$, 
+
+then 
+
+$$
+\mathcal Z[x(n)h(n)] = \frac{1}{2\pi}\int_{-\pi}^\pi X(\rho e^{j\theta})H(\frac r\rho e^{-j(\varphi - \theta)})d\theta
+$$
+
+### Mapping of ZT and LT
+
+$$
+z = e^{sT} ,\omega_s = \frac{2\pi}{T}
+\\
+re^{j\theta} = e^{(\sigma + j\omega)T}\\
+$$
+
+then, 
+
+$$
+r = e^{\sigma T} = e^{2\pi\frac{\sigma}{\omega_s}}\\
+\theta = \omega T = 2\pi\frac{\omega}{\omega_s}
+$$
+
+when $\sigma$ is constant, 
+
+vertical line in $s$-plane maps the circle in $z$-plane.
+
+$s$-plane imaginary axis maps the unit circle in $z$-plane.
+
+when $\omega$ is constant,
+
+![](../images/ss/lec19_2jpg.jpg)
+
+**Correspondence of ZT and LT**
+
+![](../images/ss/lec19_3.jpg)
+
+### Solving difference equation by Z-T
+
+$$
+\sum_{k = 0}^N a_ky(n-k) = \sum_{r = 0}^M b_rx(n-r)
+$$
+
+Two methods:
+
+* TD method
+* Z-T method (notice the ROC)
+
+**ZT method**
+
+1. perform unilateral Z-T on both sides.
+
+$x(n-r), y(n-k)$ are both right shifted series
+
+$$
+\sum_{k = 0}^N a_kz^{-k}[Y(z) + \sum_{l = -k}^{-1}y(l)z^{-l} ]= \sum_{r = 0}^M b_rz^{-r}[X(z) + \sum_{m = -r}^{-1}x(m)z^{-m} ]
+$$
+
+2. Derive $Y(z)$
+3. Perform inverse transform on $Y(z)$ to get $y(n)$(ROC!)
+
+**Zero input response**
+
+$$
+x(n) = 0\\
+Y(z) = \frac{-\sum_{k = 0}^M[a_kz^{-k}\cdot \sum_{l = -k}^{-1}y(l)z^{-l}]}{\sum_{k = 0}^Na_kz^{-k}}
+$$
+
+**Zero state response**
+
+$$
+y(l) = 0\\
+\text{ casual sequence }: x(m) = 0\\
+\sum_{k = 0}a_kz^{-k}Y(z) = \sum_{r = 0}^M b_rz^{-r}X(z)\\
+Y(z) = X(z)\cdot\frac{\sum_{r = 0}^M b_rz^{-r}}{\sum_{k = 0}^Na_kz^{-k}} = X(z)\cdot H(z)
+$$
+
+
+

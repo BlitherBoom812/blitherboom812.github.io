@@ -1261,6 +1261,26 @@ $$
 
 **Example**
 
+$X$ is a Poisson RV with parameter $\lambda$
+
+$$
+p_X(x) = \frac{\lambda^x}{x!}e^{-\lambda}
+$$
+
+$$
+M(s) = \sum_{x = 0}^\infty e^{sx}\frac{\lambda^x}{x!}e^{-\lambda} = e^{-\lambda}\sum_{x = 0}^\infty \frac{(e^s\lambda)^x}{x!} = e^{-\lambda}e^{e^s\lambda} = e^{\lambda(e^s - 1)}
+$$
+
+$X$ is an exponential RV with parameter $\lambda$
+
+$$
+f_X(x) = \lambda e^{-\lambda x}
+$$
+
+$$
+M(s) = \int_0^\infty e^{sx}\lambda e^{-\lambda x}\mathrm dx = \frac{\lambda}{\lambda - s}
+$$
+
 $Y$ is a standard normal RV, 
 
 $$
