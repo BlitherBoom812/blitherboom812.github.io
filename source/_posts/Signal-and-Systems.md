@@ -2062,5 +2062,189 @@ y(l) = 0\\
 Y(z) = X(z)\cdot\frac{\sum_{r = 0}^M b_rz^{-r}}{\sum_{k = 0}^Na_kz^{-k}} = X(z)\cdot H(z)
 $$
 
+### System function of DT system
 
+**Unit Impulse/sample response $h(n)$ and system function H(z)**
+
+$$
+y(n) = x(n) * h(n)\\
+Y(z) = H(z)\cdot X(z)
+$$
+
+$$
+H(z) = \frac{Y(z)}{X(z)} = \frac{\sum_{r = 0}^M b_rz^{-r}}{\sum_{k = 0}^Na_kz^{-k}}
+$$
+
+Factorization
+
+$$
+H(z) = \frac{\prod_{r = 1}^M(1-z_rz^{-1})}{\prod_{k=1}^N1-p_kz^{-1}}
+$$
+
+We can draw the conclusions directly from the relationship between Z-T and L-T
+
+||||||
+|----|----|----|----|----|
+| Imaginary axis | $\sigma=0$ | Constant amplitude | $r = 1$ | Unit circle |
+Right half plane |  | | | 
+Left half plane
+Real axis
+
+![](../images/ss/lec20_1.jpg)
+
+![](../images/ss/lec20_2.jpg)
+
+**Stability and Causality**
+
+Stable: iff
+
+$$
+\sum_{n=-\infty}^\infty |h(n)|\lt \infty
+$$
+
+$$
+z = 1, H(z) = \sum_{n=-\infty}^\infty h(n)\lt \infty
+$$
+
+The condition is ROC of stable system includes the unit circle.
+
+Causal:
+
+$$
+h(n) = h(n)u(n)
+$$
+
+Condition is ROC includes $\infty$: $R_{X_1}\lt |z|$
+
+**Stable and causal**
+
+$$
+a\le |z| \le \infty, a\le 1
+$$
+
+### Discrete-time Fourier Transform(DTFT)
+
+**Definition**
+
+$$
+\mathcal{F}[x(t)\delta_T(t)] = \int_{-\infty}^\infty x(t)\delta_T(t)e^{-j\omega t}dt = \sum_{n=-\infty}^\infty x(nT)e^{-j\omega nT}
+$$
+
+take $T = 1$
+
+$$
+\sum_{n=-\infty}^\infty x(n)e^{-j\omega n} = \text{DTFT[x(n)]}
+$$
+
+The relation ship with Z-T:
+
+$$
+X(z) = \sum_{n = -\infty}^\infty x(n)z^{-n}, z = e^{j\omega}\\
+$$
+
+$$
+DTFT[x(n)] = X(z)|_{|z|=1} = X(z)|_{z = e^{j\omega}} = X(e^{j\omega})
+$$
+
+Inverse transform
+
+$$
+x(n) = \frac{1}{2\pi j}\oint_{|z| = 1}X(z)z^{n-1}\mathrm dz=\frac{1}{2\pi}\int_{-\pi}^\pi X(e^{j\omega})e^{j\omega n}\mathrm d\omega
+$$
+
+### Frequency Response of DT system
+
+The steady-state response to sine sequence
+
+$$
+x(n) = A\sin(n\omega)(n\ge 0)\\
+y_{ss}(n) = A|H(e^{j\omega})|\sin(n\omega + \varphi)\\
+H(e^{j\omega}) = \sum_{n=-\infty}^\infty h(n)e^{-jn\omega}
+$$
+
+The FT of $h(n)$, $H(e^{j\omega})$ is a periodic function with period of $\omega_s = 2\pi /T = 2\pi$.
+
+If $h(n)$ is real, then the amplitude/phase response is even/odd function.
+
+The amplitude is determined within $[0, \omega_s/2]$
+
+![](../images/ss/lec20_3.jpg)
+
+![](../images/ss/lec20_4.jpg)
+
+NOTE:
+
+* We can derive the frequency response (function of $\omega$) by letting $D$ move along the unit circle once.
+* $H(j\omega)$ is periodic. The frequency response from 0 to $\omega_s/2$ can be determined by letting $D$ move along half circle.
+* If pole $p_i$ is close to the unit circle, there will be a peak in the frequency response. If zero $z_i$ is close to the unit circle, there will be a notch in the frequency response.
+* For statble systems, $p_i$ should be inside the unit circle, while $z_i$ could be inside or outside the unit circle.
+* poles and zeros at origin have no influence on amplitude.
+
+### Analog and digital Filter
+
+**Fundamental Principles**
+
+![](../images/ss/lec20_5.jpg)
+
+The spectrum of $x(t)$ is strictly inside $\pm \omega_m$.
+
+We choose the sampling frequency:$\omega_s = \frac{2\pi}{T} \ge 2\omega_m$
+
+![](../images/ss/lec20_6.jpg)
+
+**Classifications of digital filters**
+
+$$
+y(n) = \sum_{k=0}^M b_kx(n-k) - \sum_{k=1}^N a_ky(n-k)
+$$
+
+In terms of structure
+
+recursive: $a_k\ne 0$ at least for one $k$
+
+non-recursive: $a_k=0$, for all $k$
+
+In terms of the characteristics of $h(n)$
+
+Infinite impulse response(IIR): recursive, non-linear phase
+
+Finite impulse response(FIR): non-recursive, linear phase.
+
+**IIR filter**
+
+Impulse invariance
+
+Based on the s-domain analog filters.
+
+The result is just repeat the original filter at sampling frequency, thus it attenuates slower.
+
+NOTE:The digital filter implemented this way has aliasing.
+
+The frequency response of analog filter must be attenuated enough within $\omega_s$.
+
+This approach can only realize LP and BP filter, but not HP and band-stop one. 
+
+**Bilinear transformation** method emerges to address this problem (you can study it by yourself)
+
+To implement digital filter, A/D and D/A are required, along with ROM, RAM, ALU, delay units (shift registers), etc.
+
+
+**FIR filter**
+
+$$
+H(z) = \sum_{k = 0}^{N-1}b_kz^{-k} = \sum_{n=0}^{N-1}h(n)z^{-n}
+$$
+
+Poles are at $z=0$. $N - 1$ zeros.
+
+FIR filter has linear-phase iff
+
+$$
+h(n) = h(N - 1 - n)(\text{evenly symmetric})\\
+h(n) = -h(N - 1 - n)(\text{oddly symmetric})
+$$
+
+![](../images/ss/lec20_7.jpg)
+
+![](../images/ss/lec20_8.jpg)
 
