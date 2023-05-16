@@ -1229,7 +1229,7 @@ $$
 - not necessarily defined for all (complex) s
 - always well defined for $\Re(s)=0$
 - compared with Laplace transform
-
+### Properties
 **Sanity Checks**
 
 $$
@@ -1292,3 +1292,153 @@ Consider $X = \sigma Y + \mu$
 $$
 M_X(s) = e^{s^2\sigma^2/2 + \mu s}
 $$
+
+### Inversion of transforms
+
+**Inversion Property**
+
+The transform $M_X(s)$ associated with a RV $X$ uniquely determines the CDF of $X$, assuming that $M_X(s)$ is finite for all $s$ in some interval $[-a, a]$, where $a$ is a positive number.
+
+Example:
+
+$$
+\begin{align*}
+M(s) &= \frac{pe^s}{1 - (1 - p)e^s}\\
+&= pe^s(1 + (1-p)e^s + (1-p)^2e^{2s} + \dotsb)\\
+&= \sum_{k = 1}^\infty p(1-p)^{k - 1}e^{ks}
+\end{align*}
+$$
+
+The probability $P(X = k)$ is found by reading the coefficient of the term $e^{ks}$:
+
+$$
+P(X = k) = p(1-p)^{k-1}
+$$
+
+### Transform of Mixture of Distributions
+
+Let $X_1,\dotsb, X_n$ be continuous RVs with PDFs $f_{X_1}, \dotsb, f_{X_n}$.
+
+The value $y$ of RV $Y$ is generated as follows: an index $i$ is chosen with a corresponding probability $p_i$, and $y$ is taken to be equal to the value $X_i$. Then, 
+
+$$
+f_Y(y) = p_1f_{X_1}(y) + \dotsb + p_nf_{X_n}(y)\\
+M_Y(s) = p_1M_{X_1}(s) + \dotsb + p_nM_{X_n}(s)
+$$
+
+### Sum of independend RVs
+
+Let $X$ and $Y$ be independent RVs, and let $Z = X + Y$. The transform associated with $Z$ is 
+
+$$
+M_Z(s) = M_X(s)M_Y(s)
+$$
+
+Since
+
+$$
+M_Z(s) = E[e^{sZ}] = E[e^{s(X + Y)}] = E[e^{sX}e^{sY}] = E[e^{sX}]E[e^{sY}] = M_X(s)M_Y(s)
+$$
+
+Generalization:
+
+A collection of independent RVs: $X_1, \dotsb, X_n$, $Z = X_1 + \dotsb + X_n$ ,
+
+$$
+M_Z(s) = M_{X_1}(s)\dotsb M_{X_n}(s)
+$$
+
+**Example**
+
+Let $X_1, \dotsb, X_n$ be independent Bernoulli RVs with a common parameter $p$:
+
+$$
+M_{X_i}(s) = 1 - p + pe^s
+$$
+
+$Z = X_1 + \dotsb + X_n$ is binomial with parameters n and p:
+
+$$
+M_z(s) = (1 - p + pe^s)^n
+$$
+
+Let $X$ and $Y$ be independent Poisson RVs with means $\lambda$ and $\mu$, and let $Z = X + Y$. Then $Z$ is still Poisson with mean $\lambda + \mu$.
+
+$$
+M_Z(s) = M_X(s)M_Y(s) = e^{(\lambda +\mu)(e^s - 1)}
+$$
+
+Let $X$ and $Y$ be independent Gaussian RVs with means $\mu_x$ and $\mu_y$, and variances $\sigma_x^2, \sigma_y^2$. And let $Z = X + Y$. Then $Z$ is still Gaussian with mean $\mu_x + \mu_y$ and variance $\sigma_x^2 + \sigma_y^2$
+
+$$
+M_X(s) = \exp\bigg\lbrace\frac{\sigma_x^2s^2}{2} + \mu_x s\bigg\rbrace\\
+M_Y(s) = \exp\bigg\lbrace\frac{\sigma_y^2s^2}{2} + \mu_y s\bigg\rbrace\\
+M_Z(s) = M_X(s)M_Y(s) = \exp\bigg\lbrace\frac{(\sigma_x^2 + \sigma_y^2)s^2}{2} + (\mu_x + \mu_y)s\bigg\rbrace
+$$
+
+Consider
+
+$$
+Y = X_1 + \dotsb + X_N
+$$
+
+where $N$ is a RV that takes integer values, and $X_1, \dotsb, X_N$ are identically distributed RVs.
+
+Assume that $N, X_1, \dotsb$ are independent.
+
+$$
+E[Y|N = n] = E[X_1 + X_2 + \dotsb + X_n|N = n] = nE[X]\\
+E[Y|N] = NE[X]\\
+E[Y] = E[E[Y|N]] = E[NE[X]] = E[N]E[X]
+$$
+
+For the variance, 
+
+$$
+E[Y|N] = NE[X]\\
+\text{var}(E[Y|N]) = (E[X])^2\text{var}(N)\\
+\text{var}(Y|N=n) = n\text{var}(X)\\
+\text{var}(Y|N) = N \text{var}(X)\\
+E[\text{var}(Y|N)] = E[N]\text{var}(X)\\
+$$
+
+So, 
+
+$$
+\text{var}(Y) = E[\text{var}(Y|N)] + \text{var}(E[Y|N]) = E[N]\text{var}(X) + (E[X])^2\text{var}(N)
+$$
+
+For transform,
+
+$$
+E[e^{sY}|N = n] = E[e^{sX_1}\dotsb e^{sX_n}|N = n] = E[e^{sX}]^n = (M_X(s))^n\\
+M_Y(s) = E[e^{sY}] = E[E[e^{sY}|N]] = E[(M_X(s))^N] = \sum_{n = 0}^\infty (M_X(s))^n p_N(n) = \sum_{n = 0}^\infty e^{n\log M_X(s)}p_N(n) = M_N(\log M_X(s))
+$$
+
+**Summary on Properties**
+
+Consider the sum
+
+$$
+Y = X_1 + \dotsb + X_N
+$$
+
+where $N$ is a RV that takes integer values, and $X_1, X_2, \dotsb$ are identically distributed RVs. Assume that $N$, $X_1, X_2, \dotsb$ are independent.
+
+$$
+E[Y] = E[N]E[X]\\
+\text{var}(Y) = E[N]\text{var}(X) + (E[X])^2\text{var}(N)\\
+M_Y(s) = M_N(\log M_X(s))
+$$
+
+**Example**
+
+Assume that $N$ and $X_i$ are both geometrically distributed with parameters $p$ and $q$ respectively. All of these RVs are independent. $Y = X_1 + \dotsb + X_N$
+
+$$
+M_N(s) = \frac{pe^s}{1 - (1-p)e^s}\\
+M_X(s) = \frac{qe^s}{1 - (1-q)e^s}\\
+M_Y(s) = M_N(\log M_X(s)) = \frac{pqe^s}{1 - (1-pq)e^s}
+$$
+
+$Y$ is also geometrically distributed, with parameter $pq$.
