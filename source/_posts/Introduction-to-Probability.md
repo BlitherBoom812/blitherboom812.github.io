@@ -1442,3 +1442,48 @@ M_Y(s) = M_N(\log M_X(s)) = \frac{pqe^s}{1 - (1-pq)e^s}
 $$
 
 $Y$ is also geometrically distributed, with parameter $pq$.
+
+## Weak law of large numbers
+
+### Markov inequality
+
+If a RV $X$ can only take nonnegative values, then
+
+$$
+P(X \ge a) \le \frac{E[X]}{a}, \text{ for all } a \gt 0.
+$$
+
+Intuition: If a nonnegative RV has a small mean, then the probability that it takes a large value must be small。
+
+Fix a positive number $a$, 
+
+$$
+E[X] = \int_0^\infty xf_X(x)dx = \int_0^a xf_X(x)dx + \int_a^\infty xf_X(x)dx \ge 0 + \int_a^\infty xf(x)dx \ge \int_a^\infty af_X(x)dx = aP(X \ge a)
+$$
+
+### Chebyshev's Inequality
+
+If $X$ is a RV with mean $\mu$ and variance $\sigma^2$, then
+
+$$
+P(|X - \mu| \ge c) \le \frac{\sigma^2}{c^2}
+$$
+
+Intuition: If a RV has small variance, then the probability that it takes a value far from its mean is also small.
+
+$$
+\begin{align*}
+\sigma^2 &= \int (x - \mu)^2f_X(x)\mathrm dx\\
+&\ge \int_{-\infty}^{\mu - c} (x - \mu)^2f_X(x)\mathrm dx + \int_{ \mu + c}^\infty (x - \mu)^2f_X(x)\mathrm dx\\
+&\ge \int_{-\infty}^{\mu - c} c^2f_X(x)\mathrm dx + \int_{ \mu + c}^\infty c^2f_X(x)\mathrm dx\\
+&= \int_{|x - \mu| \ge c} c^2f_X(x)\mathrm dx\\
+&=c^2P(|X - \mu| \ge c)
+\end{align*}
+$$
+
+The upperbounds of $\sigma^2$:
+
+$$
+X \in [a, b]\\
+\sigma^2 \le (b - a)^2/4
+$$
