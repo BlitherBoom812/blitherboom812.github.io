@@ -2248,3 +2248,76 @@ $$
 
 ![](../images/ss/lec20_8.jpg)
 
+### Feedback System: Signal Flow Graphs
+
+**Operator and Transfer Operator:**
+
+$$
+p = \frac{d}{dt}\\
+\frac{1}{p} = \int_{-\infty}^t(\cdot)d\tau
+$$
+
+$$
+(C_0p^n + C_1p^{n-1} + \dotsb + C_n)r(t) = (E_0p^m + E_1p^{m - 1} + \dotsb + E_m)e(t)\\
+D(p)r(t) = N(p)e(t)
+$$
+
+Rules:
+
+* Common factors can't be eliminated.
+* Be careful when changing the order of operation($\frac{d}{dt}\int_{-\infty}^tx(\tau)d\tau = x(t)$, $\int_{-\infty}^t\frac{d}{d\tau}x(\tau)d\tau = x(t) - x(-\infty)$)
+
+transfer operator:
+
+$$
+r(t) = \frac{N(t)}{D(t)}e(t) = H(p)e(t)
+$$
+
+**Brief introduction to the signal flow graphs(SFG)**
+
+![](../images/digital/lec_11_1.jpg)
+
+![](../images/ss/lec21_4.jpg)
+
+Terminnologies in SFG
+
+Node, Transfer function, Branch(The branch gain is the transfer function), Source node, Sink node, Mixed node.
+
+**Properties of SFG**
+
+1. Signal only passes through a branch with the direction indicated by the arrowhead.
+2. Signals of incoming branches are added at a node, and the added signal appears on the all outgoing branches.
+3. A sink node can be separated from a mixed node.
+4. For a given system, the SFGs can be different.(equations for a system can be different)
+5. After the SFG being inversed, the transfer function keeps invariant, but the signals represented by the inner nodes will be different.
+
+
+Note: Inversion is done by inversing the transfer direction of each branch, and exchanging the source and sink nodes as well.
+
+Algebra of SFG
+
+![](../images/ss/lec21_5.jpg)
+
+![](../images/ss/lec21_6.jpg)
+
+Simplify:
+
+NOTE: The SFG can be simplified using the following steps:
+
+a. Merge the cascaded branches to decrease the number of nodes;
+
+b. Merge the parallel branches to decrease the number of branches;
+
+c. Eliminate all the loops. 
+
+Then, the system function can be readily derived.
+
+![](../images/ss/lec21_7.jpg)
+
+**Mason's Formula**
+
+$$
+H = \frac{1}{\Delta} \sum_k g_k\Delta_k
+$$
+![](../images/ss/lec21_9.jpg)
+
