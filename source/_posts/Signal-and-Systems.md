@@ -2321,3 +2321,191 @@ H = \frac{1}{\Delta} \sum_k g_k\Delta_k
 $$
 ![](../images/ss/lec21_9.jpg)
 
+## State-variable analysis of system
+
+$$
+\mathbf {\lambda = A\lambda + Be}\\
+\mathbf{r = C\lambda + De}
+$$
+
+Features of the state-variable analytical method 
+
+* (1)Provide internal characteristics of the system
+* (2) Convenient to represent and analyze the multi-input, multi-output (MIMO) cases
+* (3) Easy to be extended to time-variant or nonlinear cases
+* (4) Introduce two important concepts: controllability and observability
+* (5) Convenient for numerical computation
+
+### General form and setup method (CT)
+
+$$
+\frac{d}{dt}\mathbf{\lambda}(t)_{k \times 1} = \mathbf{A}_{k \times k}\mathbf{\lambda}(t)_{k \times 1} + \mathbf{B}_{k \times m}\mathbf{e}(t)_{m \times 1}\\
+\mathbf{r}(t)_{r \times 1} = \mathbf{C}_{r \times k}\mathbf{\lambda}(t)_{k \times 1} + \mathbf{D}_{r \times m}\mathbf{e}(t)_{m \times 1}
+$$
+
+$r$ responses, $k$ state variables, $m$ inputs.
+
+For time-variant system, $\mathbf{A, B, C, D}$ are fuction of $t$.
+
+Direct methods:
+* observation
+* Topological analysis
+
+Used in curcuit analysis.
+
+Indirect methods:
+* From block diagram or flow graph
+* From input-output equation
+* From transfer function
+
+Used in controlled system analysis.
+
+**From input-output equation**
+
+$$
+\frac{r(t)}{e(t)} = \frac{b_0p^k + \dotsb + b_k}{p^k + \dotsb + a_k}
+$$
+
+NOTE : under the zero-state condition, $p$ is equivalent to $s$ 
+
+$$
+H(p) = \frac{b_0 + b_1p^{-1} + \dotsb + b_kp^{-k}}{1 + a_1p^{-1} + \dotsb + a_kp^{-k}}
+$$
+
+The SFG is:
+
+![](../images/ss/lec22_11.jpg)
+
+$$
+\dot{\lambda}_1 = \lambda_2\\
+\dot{\lambda}_2 = \lambda_3\\
+\vdots\\
+\dot{\lambda}_k = -a_k\lambda_1 - a_{k-1}\lambda_2 - \dotsb - a_1\lambda_k + e(t)\\
+r(t) = b_k\lambda_1 + b_{k-1}\lambda_2 + \dotsb + b_1\lambda_k + b_0(-a_k\lambda_1 - a_{k-1}\lambda_2 - \dotsb - a_1\lambda_k + e(t))\\
+=(b_k - a_kb_0)\lambda_1 + (b_{k-1} - a_{k-1}b_0)\lambda_2 + \dotsb + (b_1 - a_1b_0)\lambda_k + b_0e(t)
+$$
+
+$$
+\mathbf A = \begin{bmatrix}
+  0 & 1 & 0 & \dotsb & 0\\
+  0 & 0 & 1 & \dotsb & 0\\
+  \vdots & \vdots & \vdots & \ddots & \vdots\\
+  0 & 0 & 0 & \dotsb & 1\\
+  -a_k & -a_{k-1} & -a_{k-2} & \dotsb & -a_1
+\end{bmatrix}\\
+B = \begin{bmatrix}
+  0\\
+  0\\
+  \vdots\\
+  0\\
+  1
+\end{bmatrix}\\
+\mathbf C = \begin{bmatrix}
+  b_k - a_kb_0 & b_{k-1} - a_{k-1}b_0 & \dotsb & b_1 - a_1b_0
+\end{bmatrix}\\
+D = b_0
+$$
+
+If  the order of differential equation on the left side is higher than that on the right side:
+
+$$
+b_0 = 0, \mathbf{D} = 0
+$$
+
+If the derivatives of the excitation on the right side are absent,
+
+$$
+\mathbf{C} = [b_k, 0, \dotsb, 0], \mathbf{D} = 0
+$$
+
+**Factorizing Transfer operator**
+
+![](../images/ss/lec22_12.jpg)
+
+![](../images/ss/lec22_13.jpg)
+
+![](../images/ss/lec22_14.jpg)
+
+![](../images/ss/lec22_15.jpg)
+
+![](../images/ss/lec22_16.jpg)
+
+![](../images/ss/lec22_17.jpg)
+
+![](../images/ss/lec22_18.jpg)
+
+### Solving CT system's state equations
+
+**Time domain method** using computer.
+
+**Transform-domain(Laplace-tranform) method**
+
+$$
+\frac{d}{dt}\mathbf{}{\lambda}(t) = \mathbf{A\lambda}(t) + \mathbf{Be}(t)\\
+\mathbf{r}(t) = \mathbf{C\lambda}(t) + \mathbf{De}(t)\\
+\mathbf{\lambda}(0_-) = \begin{bmatrix}
+\lambda_1(0_-)\\
+\lambda_2(0_-)\\
+\vdots\\
+\lambda_k(0_-)\\
+\end{bmatrix}
+$$
+
+$$
+s\mathbf \Lambda(s) - \mathbf{\lambda}(0_-) = \mathbf{A\Lambda}(s) + \mathbf{BE}(s)\\
+\mathbf{R}(s) = \mathbf{C\Lambda}(s) + \mathbf{DE}(s)
+$$
+
+$$
+\mathbf{\Lambda}(s) = (s\mathbf {I} - \mathbf{A})^{-1}\mathbf{\lambda}(0_-) + (s\mathbf {I} - \mathbf{A})^{-1}\mathbf{BE}(s)\\
+\mathbf R(s) =\mathbf{C} (s\mathbf {I} - \mathbf{A})^{-1}\mathbf{\lambda}(0_-) + (\mathbf C(s\mathbf {I} - \mathbf{A})^{-1}\mathbf{B + D)E}(s) 
+$$
+
+Let $\Psi(s) = (s\mathbf I - \mathbf A)^{-1}$, which is called **characteristic matrix**.
+
+$$
+\mathbf\lambda(t) = \mathcal{L}^{-1}[\Psi(s)\lambda(0_-)] + \mathcal{L}^{-1}[\Psi(s)\mathbf{B}] * e(t)\\
+\mathbf r(t) = \mathbf{C}\mathcal{L}^{-1}[\Psi(s)\lambda(0_-)] + \lbrace\mathbf{C}\mathcal{L}^{-1}[\mathbf\Psi(s)\mathbf{B] + D}\delta(t)\rbrace * e(t)
+$$
+
+**Time-domain method**
+
+$$
+e^{\mathbf At} = \sum_{k = 0}^\infty \frac{1}{k!}A^kt^k
+$$
+
+properties
+
+$$
+e^{\mathbf At}e^{-\mathbf At} = \mathbf I\\
+e^{\mathbf At} = [e^{-\mathbf At}]^{-1}\\
+\frac{d}{dt}e^{\mathbf At} = \mathbf Ae^{\mathbf At} = e^{\mathbf At} \mathbf A\\
+$$
+
+$$
+\frac{d}{dt}\mathbf \lambda(t) = \mathbf A\mathbf \lambda(t) + \mathbf B\mathbf e(t)\\
+e^{-\mathbf At}\frac{d}{dt}\mathbf \lambda(t) = e^{-\mathbf At}\mathbf A\mathbf \lambda(t) + e^{-\mathbf At}\mathbf B\mathbf e(t)\\
+\frac{d}{dt}e^{-\mathbf At}\mathbf \lambda(t) = e^{-\mathbf At}\mathbf B\mathbf e(t)\\
+\lambda(t) = e^{\mathbf At}\mathbf \lambda(0_-) + \int_0^te^{\mathbf A(t - \tau)}\mathbf B\mathbf e(\tau)d\tau\\
+=e^{\mathbf At}\lambda(0_-) + e^{\mathbf At} \mathbf B * \mathbf e(t)
+$$
+
+output
+
+$$
+\mathbf r(t) = \mathbf C e^{\mathbf At}\mathbf \lambda(0_-) + \mathbf C e^{\mathbf At} \mathbf B * \mathbf e(t) + \mathbf D\mathbf e(t)\\
+= \mathbf C e^{\mathbf At}\mathbf \lambda(0_-) + [\mathbf C e^{\mathbf At} \mathbf B + \mathbf D\delta(t)] * \mathbf e(t)
+$$
+
+Correspond to LT:
+
+$$
+\mathcal{L}[e^{\mathbf At}] = (s\mathbf I - \mathbf A)^{-1}
+$$
+
+**Derive System Functions**
+
+![](../images/ss/lec22_19.jpg)
+
+![](../images/ss/lec22_20.jpg)
+
