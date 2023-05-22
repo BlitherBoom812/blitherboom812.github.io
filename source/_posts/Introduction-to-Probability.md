@@ -1487,3 +1487,12 @@ $$
 X \in [a, b]\\
 \sigma^2 \le (b - a)^2/4
 $$
+
+**Chernoff inequality**
+
+If a RV $X$ has MGF $M_X(s)$, then
+
+$$
+P(X \ge a) \le e^{-\max_{s\ge 0}\left(sa - \ln M_X(s)\right)}
+$$
+
