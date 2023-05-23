@@ -1496,3 +1496,131 @@ $$
 P(X \ge a) \le e^{-\max_{s\ge 0}\left(sa - \ln M_X(s)\right)}
 $$
 
+or, for $s \ge 0$
+
+$$
+P(X\ge a) \le e^{-sa}M_X(s)
+$$
+
+for $s \lt 0$
+
+$$
+P(X \le a) \le e^{-sa}M_X(s)
+$$
+
+proof: for $s \ge 0$
+
+$$
+M_X(s) = \int_{-\infty}^a e^{sx}f_X(x)\mathrm dx + \int_a^{\infty} e^{sx}f_X(x)\mathrm dx\\
+\ge 0 + e^{sa}\int_a^{\infty} f_X(x)\mathrm dx = e^{sa}P(X \ge a)
+$$
+
+### Weak law of large numbers
+
+Let $X_1, X_2, \dots$ be independent identically distributed (i.i.d.) RVs with finite mean $\mu$ and variance $\sigma^2$
+
+$$
+M_n = \frac{X_1 + X_2 + \dotsb + X_n}{n}\\
+E[M_n] = \mu\\
+\text{var}(M_n) = \frac{\sigma^2}{n}
+$$
+
+Applying the Chebyshev inequality and we get:
+
+$$
+P(|M_n - \mu| \ge \epsilon) \le \frac{\text{var}(M_n)}{\epsilon^2} = \frac{\sigma^2}{n\epsilon^2}
+$$
+
+For large $n$, the bulk of the distribution of $M_n$ is concentrated near $\mu$
+
+**Theorem**
+
+Let $X_1, X_2, \dots$ be independent identically distributed (i.i.d.) RVs with finite mean $\mu$ and variance $\sigma^2$. For every $\epsilon \gt 0$, we have
+
+$$
+P(|M_n - \mu| \ge \epsilon) = P\left(\left|\frac{X_1 + \dotsb + X_n}{n} - \mu\right|\ge \epsilon\right) \rightarrow 0, \text{ as } n \rightarrow \infty
+$$
+
+$M_n$ converges **in probability** to $\mu$.
+
+### Convergence "in Probability"
+
+Theorem: Convergence in Probability
+
+Let $\lbrace Y_n\rbrace$(or $Y_1, Y_2, \dots$) be a sequence of RVs(not necessarily independent), and let $a$ be a real number. We say that the sequence $Y_n$ **converges to** $a$ in probability, if for every $\epsilon \gt 0$, we have 
+
+$$
+\lim_{n \rightarrow \infty} P(|Y_n - a| \ge \epsilon) = 0
+$$
+
+(almost all) of the PMF/PDF of $Y_n$, eventually gets concentrated (arbitrarily) close to $a$.
+
+### Many types of convergence
+
+Deterministic limits: $\lim_{n\rightarrow \infty} a_n = a$
+
+$$
+|a_n - a|\le \epsilon, \forall n \ge N, \epsilon \gt 0
+$$
+
+Convergence in probability: $X_n\stackrel P{\rightarrow} X$
+
+$$
+\lim_{n \rightarrow \infty}P(|X_n - X|\ge \epsilon) = 0, \forall \epsilon \gt 0
+$$
+
+(WLLN)
+
+Convergence in Distribution: $X_n \stackrel{D}{\rightarrow} X$
+
+$$
+\lim_{n \rightarrow \infty} P(X_n \le x) = P(X \le x), \forall x
+$$
+
+For all points of $x$ at which the function $F_X(x) = P(X\le x)$is continuous.
+
+(CLT)
+
+Convergence with probability $1$(almost surely): $X_n \stackrel{\text{a.s.}}{\rightarrow} X$
+
+$$
+P\left(\lbrace\omega\in \Omega: \lim_{n\rightarrow\infty}X_n(\omega) =X(\omega)\rbrace\right) = 1
+$$
+
+or 
+
+$$
+P\left(\lim_{n\rightarrow\infty}X_n(\omega) =X(\omega)\right) = 1
+$$
+
+Lemma:
+
+$$
+X_n \stackrel{\text{a.s.}}{\rightarrow} X \Leftrightarrow \lim_{m \rightarrow\infty}P(|X_n - X|\le \epsilon, \forall n \gt m) = 1, \forall \epsilon \gt 0\\
+\Leftrightarrow P(|X_n - X|\gt \epsilon, \text{i.o.}) = 0, \forall \epsilon \gt 0
+$$
+
+i.o. stand for infinitely often
+
+(SLLN)
+
+Convergence in Mean/in Norm: $X_n \stackrel{r}{\rightarrow}X$
+
+if $E[X_n^r] \lt \infty$ for all $n$ and 
+
+$$
+\lim_{n \rightarrow \infty}E[|X_n - X|^r] = 0
+$$
+
+Relations:
+
+$$
+\left(X_n\stackrel {\text{a.s.}}{\rightarrow} X\right) \Rightarrow\left(X_n\stackrel P{\rightarrow} X\right) \Rightarrow \left(X_n\stackrel D{\rightarrow} X\right) \\
+\left(X_n\stackrel {r}{\rightarrow} X\right) \Rightarrow\left(X_n\stackrel P{\rightarrow} X\right) \Rightarrow \left(X_n\stackrel D{\rightarrow} X\right) \\
+\forall r\ge s\ge 1, \left(X_n\stackrel {r}{\rightarrow} X\right) \Rightarrow\left(X_n\stackrel s{\rightarrow} X\right)
+$$
+
+The converse assertions fail in general!
+
+The relation between “almost surely” and “in r-th mean” is complicated. There exist sequences which converge almost surely but
+not in mean, and which converge in mean but not almost surely!
