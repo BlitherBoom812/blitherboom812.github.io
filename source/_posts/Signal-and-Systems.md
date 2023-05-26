@@ -1461,7 +1461,7 @@ $$
 \mathcal F(R_{xy}(\tau)) = X(\omega)Y^*(\omega)\\
 $$
 
-If $x(t) = y(t)$, The FT of the autocorrelation function is $\mathcal F{R_{xx}(\tau)} = |X(\omega)|^2$
+If $x(t) = y(t)$, The FT of the autocorrelation function is $\mathcal F[{R_{xx}(\tau)}] = |X(\omega)|^2$
 
 If $y(t)$ is a real and even function: $Y^*(\omega) = Y(\omega)$
 
@@ -1522,7 +1522,7 @@ $$
 R(\tau) = \int_{-\infty}^{\infty}\mathcal P(\omega)e^{-j\omega\tau}\mathrm d\omega\\
 $$
 
-### 
+### ESD/PSD of the System Response
 
 $$
 |R(j\omega)|^2 = |H(j\omega)|^2|E(j\omega)|^2\\
@@ -1531,6 +1531,21 @@ $$
 $$
 
 ![](../images/ss/lec16_1.jpg)
+
+The last line of this table is wrong. The correct is:
+
+$$
+R_h(\tau) = h(\tau) * h^*(-\tau)
+$$
+
+### Match Filters
+
+$$
+H(j\omega) = kS(-j\omega)e^{-j\omega t_m}\\
+h(t) = ks(t_m - t)\\
+$$
+
+$t_m$ is the signal width in TD.
 
 ## Discrete time signals
 
@@ -2216,6 +2231,16 @@ Impulse invariance
 
 Based on the s-domain analog filters.
 
+Design method 1: **冲激响应不变法**
+
+Replace $\frac{1}{s-s_k}$ with $\frac{1}{1-e^{s_kT}z^{-1}}$. Then $H_a(s)$ become $H(z)$.
+
+The relationship between the continuous and discrete filters:
+
+$$
+H(z)|_{z = e^{sT}} = \frac{1}{T}\sum_{k=-\infty}^\infty H_a(s + j\frac{2\pi}{T}k)
+$$
+
 The result is just repeat the original filter at sampling frequency, thus it attenuates slower.
 
 NOTE:The digital filter implemented this way has aliasing.
@@ -2224,7 +2249,14 @@ The frequency response of analog filter must be attenuated enough within $\omega
 
 This approach can only realize LP and BP filter, but not HP and band-stop one. 
 
-**Bilinear transformation** method emerges to address this problem (you can study it by yourself)
+**method 2: Bilinear transformation** emerges to address this problem (you can study it by yourself)
+
+$$
+s = \frac{2}{T}\left(\frac{1 - z^{-1}}{1 + z^{-1}}\right)\\
+z = \frac{1 + \frac{sT}{2}}{1 - \frac{sT}{2}}
+$$
+
+Bilinear transformation is non-linear transformation.
 
 To implement digital filter, A/D and D/A are required, along with ROM, RAM, ALU, delay units (shift registers), etc.
 
@@ -2508,4 +2540,122 @@ $$
 ![](../images/ss/lec22_19.jpg)
 
 ![](../images/ss/lec22_20.jpg)
+
+### That for DT system
+
+**State equation setup**
+
+$$
+\begin{align*}
+  \mathrm\lambda(n + 1) &= \mathbf A\mathrm\lambda(n) + \mathbf B\mathrm x(n)\\
+  \mathrm y(n) &= \mathbf C\mathrm\lambda(n) + \mathbf D\mathrm x(n)
+\end{align*}
+$$
+
+Solving:
+
+$$
+\lambda(n) = \underbrace{A^n\lambda(0)u(n)}_{\text{Zero Input}} + \underbrace{\left[\sum_{i=0}^{n-1}A^{n-1-i}Bx(i)\right]u(n-1)}_{\text{Zero State}}\\
+y(n) = \underbrace{CA^n\lambda(0)u(n)}_{\text{Zero Input}} + \underbrace{\left[\sum_{i=0}^{n-1}CA^{n-1-i}Bx(i)\right]u(n-1) + Dx(n)u(n)}_{\text{Zero State}}
+$$
+
+The Impulse response is:
+
+$$
+h(n) = CA^{n-1}Bu(n-1) + D\delta(n)
+$$
+
+Calculate $A^n$: Cayley-Hamilton Theorem
+
+**ZT Solution**
+
+$$
+\begin{align*}
+  z\mathrm\Lambda(z) - z\lambda(0) &= \mathbf A\mathrm\Lambda(z) + \mathbf B\mathrm X(z)\\
+  \mathrm Y(z) &= \mathbf C\mathrm\Lambda(z) + \mathbf D\mathrm X(z)
+\end{align*}
+$$
+
+$$
+\mathrm \Lambda(z) = (z\mathbf I - \mathbf A)^{-1}\lambda(0) + (z\mathbf I - \mathbf A)^{-1}\mathbf B\mathrm X(z)\\
+\mathrm Y(z) = \mathbf C(z\mathbf I - \mathbf A)^{-1}\lambda(0) + \left[\mathbf C(z\mathbf I - \mathbf A)^{-1}\mathbf B + \mathbf D\right]\mathrm X(z)
+$$
+
+then 
+
+$$
+\lambda(n) = \mathcal{Z}^{-1}\left[(z\mathbf I - \mathbf A)^{-1}z\right]\lambda(0) + \mathcal{Z}^{-1}\left[(z\mathbf I - \mathbf A)^{-1}\mathbf B\right] * \mathcal{Z}^{-1}\left[\mathrm X(z)\right]\\
+y(n) = \mathcal{Z}^{-1}\left[\mathbf C(z\mathbf I - \mathbf A)^{-1}z\right]\lambda(0) + \mathcal{Z}^{-1}\left[\mathbf C(z\mathbf I - \mathbf A)^{-1}\mathbf B + \mathbf D\right] * \mathcal{Z}^{-1}\left[\mathrm X(z)\right]
+$$
+
+Comparing this with CT solution, we find
+
+$$
+A^n = \mathcal{Z}^{-1}\left[(\mathbf I - z^{-1}\mathbf A)^{-1}\right]\\
+$$
+
+$$
+H(z) = C(\mathbf I - z^{-1}\mathbf A)^{-1}\mathbf B + D
+$$
+
+### Linear Transform on state vectors
+
+$$
+\mathbf{\gamma} = \mathbf P\mathbf \lambda
+$$
+
+The equations become:
+
+$$
+\frac{d}{dt}\gamma(t) =\mathbf{PAP}^{-1}\mathbf \gamma(t) + \mathbf{PB}e(t)\\
+\mathbf y(t) = \mathbf {CP}^{-1}\gamma(t) + \mathbf D\mathbf e(t)
+$$
+
+Similarity transform doesn't change the eigenvalues.
+
+**Transform function matrix keeps invariant under linear transformation.**
+
+We can **diagonalize** the matrix A.
+
+Calculate eigenvalues $\alpha$ -> calulate eigenvectors $\xi$ -> $\mathbf P^{-1} = [\xi_i]$, $\hat A = \text{diag}(\alpha_i)$
+
+### Controllable & Observable
+
+Controllable is 
+
+$$
+\text{rank} [A\ AB\ \dots\ A^{k-1}B] \text{ is full}
+$$
+
+Uncontrollabilty is the input can't change the response.
+
+Obeservability is 
+
+$$
+\text{rank} \begin{bmatrix}
+  C\\
+  CA\\
+  \vdots\\
+  CA^{k-1}
+  \end{bmatrix}
+  \text{ is full}
+$$
+
+Unobserverbility is the response is not affected by the input.
+
+After the diagonalization of A: 
+
+B doesnt contain zero $\Leftrightarrow$ completely controllable. Otherwise, the 0s is coresponding to the uncontrollable state variables.
+
+C doesnt contain zero $\Leftrightarrow$ completely observable. Otherwise, the 0s is coresponding to the unobservable state variables.
+
+In fact:
+
+$$
+H(s) = C(s\mathbf I - \mathbf A)^{-1}\mathbf B + D \stackrel{D = 0}{=} \sum_{i=1}^n \frac{C_iB_i}{s - \alpha_i}
+$$
+
+The $H(s)$ only contains the controllable and observable state variables. So the state and output equations contains more information than the $H(s)$.
+
+![](../images/ss/lec23_1.jpg)
 
