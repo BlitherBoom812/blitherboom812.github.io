@@ -1624,3 +1624,125 @@ The converse assertions fail in general!
 
 The relation between “almost surely” and “in r-th mean” is complicated. There exist sequences which converge almost surely but
 not in mean, and which converge in mean but not almost surely!
+
+## Central Limit Theorem
+
+### Theorem
+
+Let $X_1, X_2, \dots$ be i.i.d. RVs with mean $\mu$ and variance $\sigma^2$. Let 
+
+$$
+Z_n = \frac{X_1 + X_2 + \dotsb + X_n - n\mu}{\sigma\sqrt{n}}
+$$
+
+Then
+
+$$
+\lim_{n\rightarrow \infty}P(Z_n\le z) = \Phi (z) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^z e^{-\frac{x^2}{2}}\mathrm dx
+$$
+
+CDF of $Z_n$ converges to normal CDF(converge in distribution)
+
+### Normal Approximation Based on the Central Limit Theorem
+
+Let $S_n = X_1 + \dotsb + X_n$, where $X_i$ are $\text{i.i.d.}$ RVs with mean $\mu$ and variance $\sigma^2$. If $n$ is large, the probability $P(S_n ≤ c)$ can be approximated by
+treating $S_n$ as if it were normal, according to the following procedure.
+
+1. Calculate the mean $n\mu$ and the variance $n\sigma^2$ of $S_n$
+2. Calculate the normalinzd value $z = (c - n\mu)/(\sigma\sqrt{n})$
+3. Use the approxmation
+
+$$
+    P(S_n \le c)  \approx \Phi(z)
+$$
+
+where $\Phi(z)$ is available from the standard normal CDF.
+
+### Proof
+
+Suppose that $X_1, X_2, \dots$ has mean zero.
+
+$$
+\begin{align*}
+M_{Z_n}(s) &= E[e^{sZ_n}]\\
+&=E\left[\exp\left(\frac{s}{\sigma\sqrt{n}}\sum_{i = 1}^n X_i\right)\right]\\
+&=\prod_{i = 1}^n E[e^{\frac{s}{\sigma\sqrt{n}}X_i}]\\
+&=\prod_{i = 1}^n M_{X_i}\left(\frac{s}{\sigma\sqrt{n}}\right)\\
+&=\left(M_{X}\left(\frac{s}{\sigma\sqrt{n}}\right)\right)^n\\
+\end{align*}
+$$
+
+Suppose that the transform $M_X(s)$ has a second order Taylor series expansion around $s=0$,
+
+$$
+M_X(s) = a + bs + cs^2 + o(s^2)
+$$
+
+where $a = M_X(0) = 1, b = M_X'(0) = E[X] = 0, c = \frac{1}{2}M_X''(0) = \frac{\sigma^2}{2}$
+
+Then
+
+$$
+M_{Z_n}(s) = \left(1 + \frac{s^2}{2n} + o\left(\frac{s^2}{n}\right)\right)^n
+$$
+
+As $n\rightarrow \infty$, 
+
+$$
+\lim_{n\rightarrow \infty}M_{Z_n}(s) = \lim_{n\rightarrow \infty}\left(1 + \frac{s^2}{2n} + o\left(\frac{s^2}{n}\right)\right)^n = e^{\frac{s^2}{2}}
+$$
+
+Approxmation on binomial:
+
+(De Moivre-Laplace Approxmation to the Binomial)
+
+$$
+P(k \le S_n \le l) = P\left(\frac{k - np}{\sqrt{np(1-p)}} \le \frac{S_n - np}{\sqrt{np(1 - p)}} \le \frac{l - np}{\sqrt{np(1 - p)}}\right)\\
+\approx \Phi\left(\frac{l - np}{\sqrt{np(1 - p)}}\right) - \Phi\left(\frac{k - np}{\sqrt{np(1 - p)}}\right)
+$$
+
+## The Strong Law of Large Numbers
+
+### Theorem
+
+Let $X_1, X_2, \dots$ be i.i.d. RVs with mean $\mu$.
+
+$$
+P(\lim_{n \rightarrow\infty}\frac{X_1 + \dots + X_n}{n} = \mu) = 1.
+$$
+
+## Borel-Cantelli lemma & Bernoulli Process
+
+### Limit of set sequence
+
+$$
+\limsup_n A_n = \bigcap_{n = 1}^\infty \bigcup_{k = n}^\infty A_k\\
+\liminf_n A_n = \bigcup_{n = 1}^\infty \bigcap_{k = n}^\infty A_k
+$$
+
+If upper limit equals to lower limit, the limit of set sequence exists.
+
+$$
+\limsup_n A_n \supseteq \liminf_n A_n\\
+\limsup_n A_n = \liminf_n A_n = \lim_n A_n
+$$
+
+Upper limit can also be denoted as
+
+$$
+\limsup_n A_n = \{\omega: \omega \in A_n, \text{i.o.}\} = \lbrace A_n, \text{i.o.}\rbrace
+$$
+
+### Borel-Cantelli Lemma
+
+Let $\lbrace A_n, n = 1, 2, \dotsb\rbrace$ be a sequence of events, then
+
+$$
+\sum_{n = 1}^\infty P(A_n)\lt \infty \xRightarrow{} P(A_n, \text{i.o.}) = 0
+$$
+
+Let $\lbrace A_n, n = 1, 2, \dotsb\rbrace$ be a sequence of **independent** events, then
+
+$$
+\sum_{n = 1}^\infty P(A_n) = \infty \xRightarrow{} P(A_n, \text{i.o.}) = 1
+$$
