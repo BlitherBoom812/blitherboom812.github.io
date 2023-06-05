@@ -2659,3 +2659,91 @@ The $H(s)$ only contains the controllable and observable state variables. So the
 
 ![](../images/ss/lec23_1.jpg)
 
+## CDMA
+
+Use a set of orthogonal codes to support multiple users by orthorgonal multiplexing.
+
+### Example
+
+Assume K users need to connect with the base station simultaneously for CDMA system.
+
+1. Design a set of orthogonal codes
+2. Design on the transmitter
+3. Design on the receiver
+
+An example of Code 4:
+
+$$
+\begin{align*}
+  \mathbf c_1 &= [1\ 1\ 1\ 1\ -1\ -1\ -1\ -1]\\
+  \mathbf c_2 &= [1\ 1\ -1\ -1\ 1\ 1\ -1\ -1]\\
+  \mathbf c_3 &= [1\ -1\ 1\ -1\ 1\ -1\ 1\ -1]\\
+  \mathbf c_4 &= [1\ -1\ -1\ 1\ 1\ -1\ -1\ 1]
+\end{align*}
+$$
+
+$$
+R_{x, y}(j) = \begin{cases}
+  \sum_{k = 0}^{N - 1 - j} x(k)y(k + j), &0 \le j \le N - 1\\
+  \sum_{k = 0}^{N - 1 + j} x(k - j)y(k), &-N + 1 \le j \le 0\\
+  0, & |j| \ge N
+\end{cases}
+$$
+
+Must satisfy:
+
+$$
+R_{k, i}  \begin{cases}
+  =T, &k = i, \tau=0\\
+  \ll T, &k \ne i \text{ or } \tau \ne 0
+  \end{cases}
+$$
+
+second:
+
+(1) frequency shifting: $d_k(t)\cos(\omega t)$
+
+(2) spreading: $s_k(t) = d_k(t)c_k(t)\cos(\omega t)$
+
+third: coherent detection/de-spreading
+
+Core:
+
+* Orthogonal code design(signal design)
+* Code capturing and tracking(signal processing and system design)
+* Multi-use  detection and channel estimation(singal processing and system design)
+
+### Code design
+
+requirements:
+
+* sharp auto-correlation curve
+* zero cross-correlation
+* largest possible orthogonal code set
+* highest possible complexity for security performance
+
+Commonly used codes:
+
+* Walsh code
+* PN sequence
+* GOLD codes
+
+$$
+H_1 = (0)\\
+H_2 = \begin{pmatrix}
+  H_1 & H_1\\
+  H_1 & \overline{H_1}
+\end{pmatrix} = \begin{pmatrix}
+  0 & 0\\
+  0 & 1
+\end{pmatrix}\\
+H_4 = \begin{pmatrix}
+  H_2 & H_2\\
+  H_2 & \overline{H_2}
+  \end{pmatrix}
+$$
+
+* sliding window capturing
+* multiple correlators to detect phase match
+
+The period of address code is much shorter than the period of data code: $T_c < T_d$, so the modulated signal is much wider in FD, whose spectrum is called **spread spectrum**.
