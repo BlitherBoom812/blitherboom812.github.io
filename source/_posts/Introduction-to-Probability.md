@@ -1746,3 +1746,161 @@ Let $\lbrace A_n, n = 1, 2, \dotsb\rbrace$ be a sequence of **independent** even
 $$
 \sum_{n = 1}^\infty P(A_n) = \infty \xRightarrow{} P(A_n, \text{i.o.}) = 1
 $$
+
+### Stochastic process
+
+A stochastic process is a mathematical model of a probabilistic experiment that evolves in time and generates a sequence of
+numerical values.
+
+* Bernoulli process(memoryless, discrete time)
+* Poisson process(memoryless, continuous time)
+
+### **The Bernoulli Process** 
+
+is a sequence of independent Bernoulli trials, each with probability of success $p$.
+
+$$
+P(\text{success}) = P(X_i = 1) = p\\
+P(\text{failure}) = P(X_i = 0) = 1 - p
+$$
+
+**Independence property**: For any given time $n$, the sequence of $X_{n + 1}, X_{n + 2}, \dots$ is also a Bernoulli process, and is independent from $X_1, \dots, X_n$
+
+**Memoryless property**: Let $n$ be a given time and let $\overline T$ be the time of the first success after
+time $n$. Then $\overline T − n$ has a geometric distribution with parameter $p$,
+and is independent of the RVs $X_1, \dots , X_n$.
+
+$$
+P(\overline T - n = t | \overline T \gt n) = (1 - p)^{t - 1}p = P(T = t)
+$$
+
+**Interarrival times**
+
+Denote the $k$th success as $Y_k$, the $k$th interarrival time as $T_k$.
+
+$$
+T_1 = Y_1, T_k = Y_k - Y_{k - 1}, k = 2, 3, \dots
+$$
+
+represents the number of trials following the $(k - 1)$th success until the next success.
+
+Note that
+
+$$
+Y_k = T_1 + T_2 + \dotsb + T_k
+$$
+
+Alternative description of the Bernoulli process: 
+* Start with a sequence of independent geometric RVs $T_1, T_2, \dots$ with common parameter p, and let these stand for the interarrival times.
+* Record a success at times $T_1$, $T_1 + T_2$, etc.
+
+$$
+E[Y_k] = \frac{k}{p}\\
+\text{var}(Y_k) = \frac{k(1 - p)}{p^2}
+$$
+
+$$
+p_{Y_k}(t) = \binom{t - 1}{k - 1}p^k(1 - p)^{t - k}
+$$
+
+**Splitting of a Bernoulli process**
+
+Whenever there is an arrival, we choose to either keep it (with probability $q$), or to discard it (with probability $1 − q$).
+
+Both the process of arrivals that are kept and the process of discarded arrivals are Bernoulli processes, with success probability $pq$ and $p(1 − q)$, respectively, at each time.
+
+**Merging of a Bernoulli process**
+
+In a reverse situation, we start with two independent Bernoulli processes (with parameters $p$ and $q$ respectively). An arrival is
+recorded in the merged process if and only if there is an arrival in at least one of the two original processes.
+
+The merged process is Bernoulli, with success probability $p+q−pq$ at each time step.
+
+## The Poisson Process
+
+### Definition
+An arrival process is called a Poisson process with rate $λ$ if it has the following properties:
+
+**Time homogenity**
+
+$$
+P(k, \tau) = P(k \text{ arrivals in interval of duration }\tau)
+$$
+
+**Independence**
+
+Numbers of arrivals in disjoint time intervals are independent.
+
+**Small interval probabilities**
+
+$$
+\begin{cases}
+    1 - \lambda\tau + o(\tau), & \text{if } k = 0,\\
+    \lambda\tau + o_1(\tau), & \text{if } k = 1,\\
+    o_k(\tau), & \text{if } k > 1.
+\end{cases}
+$$
+
+### Bernoulli/Poisson Relation
+
+In a short time interval $\delta$
+
+$$
+n = t / \delta\\
+p = \lambda\delta\\
+np = \lambda t
+$$
+
+For binomial PMF $p_S(k;n,p)$,
+
+$$
+\lim_{n\rightarrow \infty}p_S(k;n, p) = \lim_{n\rightarrow\infty}\frac{n!}{(n - k)!k!}p^k(1 - p)^{n - k} = \frac{(\lambda t)^k}{k!}e^{-\lambda t} = P(k, t)
+$$
+
+### PMF of Number of Arrivals $N$
+
+$$
+P(k, \tau) = \frac{(\lambda\tau)^ke^{-\lambda\tau}}{k!}
+$$
+
+$$
+E[N_t] = \lambda t\\
+\text{var}(N_t) = \lambda t
+$$
+
+### Time $T$ of the first arrival
+
+$$
+F_T(t) = P(T \le t) = 1 - P(T \gt t) = 1 - e^{-\lambda t}, t\ge 0\\
+f_T(t) = \lambda e^{-\lambda t}, t\ge 0
+$$
+
+**Memoryless property** The  time to next arrival is independent of the past.
+
+### Interarrival times
+
+We also denote the time of the kth success as $Y_k$, and denote the
+kth interarrival time as $T_k$. That is,
+
+$$
+T_1 = Y_1, T_k = Y_k - Y_{k - 1}, k = 2, 3, \dots
+$$
+
+Note that
+
+$$
+Y_k = T_1 + T_2 + \dotsb + T_k
+$$
+
+$$
+f_{Y_k}(y) = \frac{\lambda^ky^{k-1}e^{-\lambda y}}{(k - 1)!}, y\ge 0
+$$
+
+### Merging Poisson Processes
+
+![](../images/prob/L14_1.jpg)
+
+$$
+P(\text{Arrival is red} | \text{1 arrival})\approx \frac{\lambda_1\delta}{(\lambda_1 + \lambda_2) \delta}
+$$
+
