@@ -1518,8 +1518,8 @@ It is called Power Spectral Density (PSD).
 Wiener-Khinchin Theorem
 
 $$
-\mathcal P(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty}R(\tau)e^{j\omega\tau}\mathrm d\tau\\
-R(\tau) = \int_{-\infty}^{\infty}\mathcal P(\omega)e^{-j\omega\tau}\mathrm d\omega\\
+R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal P(\omega)e^{j\omega\tau}\mathrm d\tau\\
+\mathcal P(\omega) = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\omega\\
 $$
 
 ### ESD/PSD of the System Response
