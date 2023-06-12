@@ -1904,3 +1904,4 @@ $$
 P(\text{Arrival is red} | \text{1 arrival})\approx \frac{\lambda_1\delta}{(\lambda_1 + \lambda_2) \delta}
 $$
 
+![](../images/prob/L15_1.jpg)
