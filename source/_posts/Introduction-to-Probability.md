@@ -727,7 +727,7 @@ $$
 Based on the normalization property $\int_{-\infty}^\infty f_{X|Y}(x|y)\mathrm dx = 1$,
 
 $$
-f_{Y|X}(y|x) = \frac{f_X(x)f_{Y|X}(y|x)}{\int_{-\infty}^\infty f_X(t)f_{Y|X}(y|t)\mathrm dt}
+f_{Y|X}(y|x) = \frac{f_Y(y)f_{X|Y}(x|y)}{\int_{-\infty}^\infty f_X(t)f_{Y|X}(y|t)\mathrm dt}
 $$
 
 ## Derived distributions and Entropy
