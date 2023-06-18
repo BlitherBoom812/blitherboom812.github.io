@@ -721,7 +721,7 @@ $$
 
 
 $$
-f_{X|Y}(x, y) = \frac{f_X(x)f_{Y|X}(y|x)}{f_Y(y)}
+f_{Y|X}(y|x) = \frac{f_Y(y)f_{X|Y}(x|y)}{f_Y(y)}
 $$
 
 Based on the normalization property $\int_{-\infty}^\infty f_{X|Y}(x|y)\mathrm dx = 1$,
@@ -1097,7 +1097,7 @@ $$
 **Conditional expected value**
 
 $$
-E[X|Y = y] = \sum_x p_{X|Y}(x|y)
+E[X|Y = y] = \sum_x xp_{X|Y}(x|y)
 $$
 
 ### Conditional expectation
