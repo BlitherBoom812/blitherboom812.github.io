@@ -183,3 +183,49 @@ $$
 x_r(t) = \sum_{x = -\infty}^{\infty}x[n]\frac{\sin[\pi(t - nT)/T]}{\pi(t - nT)/T}
 $$
 理想低通滤波器通过对冲激串信号的内插重建了原来的连续信号
+
+**Summary**
+
+原信号：
+
+$$
+x_c(t) \leftrightarrow X_c(j\Omega)
+$$
+
+采样后的信号：
+
+$$
+\sum\limits_{n=-\infty}^{\infty}x[n]\delta(t - nT_s) = \sum\limits_{n=-\infty}^{\infty}x_c(t)\delta(t - nT_s) \leftrightarrow \frac{1}{T_s}X(e^{j\Omega T_s}) = \frac{1}{T_s}\sum\limits_{n=-\infty}^{\infty}X_c(j(\Omega - n\Omega_s))
+$$
+
+数字域：
+
+$$
+x[n] \leftrightarrow X(e^{j\omega}) = \frac{1}{T_s} X_c(j\omega /T_s)
+$$
+
+恢复信号：
+$$
+h_r(t) \leftrightarrow H_r(j\Omega) = \begin{cases}
+    T_s, &|\Omega| \le \pi / T_s, \\
+    0,   &|\Omega| \gt \pi / T_s
+\end{cases}\\
+\begin{align*}
+    x_r(t)  &= \sum\limits_{n=-\infty}^{\infty}x[n]\delta(t - nT_s) * h_r(t)\\
+            &= \sum\limits_{n=-\infty}^{\infty} x_c(nT_s)h_r(t - nT_s)\\
+            &= x_c(t)
+\end{align*}\ \leftrightarrow\ \begin{align*}
+    X_r(j\Omega) &= T_s X(e^{j\Omega T_s})H_r(j\Omega)\\
+    &= X_c(j\Omega)
+\end{align*}
+$$
+
+数字时域和模拟时域之间的关系：
+$$
+n = \frac{t}{T_s} = tf_s
+$$
+
+数字频域和模拟频域之间的关系：
+$$
+\omega = \Omega T_s = \frac{2\pi f}{f_s}
+$$
