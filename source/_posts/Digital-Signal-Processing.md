@@ -547,7 +547,7 @@ $$
 
 * 卷积与相关性质
     * 时域卷积： $x[n] * y[n] \lrarr X(e^{j\omega})\cdot Y(e^{j\omega})$
-    * 频域卷积：$x[n] \cdot y[n] \lrarr X(e^{j\omega}) * Y(e^{j\omega})$
+    * 频域卷积：$x[n] \cdot y[n] \lrarr \frac{1}{2\pi}X(e^{j\omega}) * Y(e^{j\omega})$
     * 时域相关：
         * 互相关：$r_{xy}[k] =\sum\limits_{k=-\infty}^{\infty}x[n]y^*[n - k]$
         * 自相关：$r_{xx}[k] =\sum\limits_{k=-\infty}^{\infty}x[n]x^*[n - k]$
@@ -629,7 +629,6 @@ $$
 * 首先需要 $N \ge L$
 
 $$
-
 \begin{align*}
     X(e^{j\omega}) &=\sum\limits_{n=0}^{N - 1}x[n]e^{-j\omega n} =\sum\limits_{n=0}^{N - 1}\bigg[\frac{1}{N}\sum\limits_{n=0}^{N - 1}X[k]e^{j\frac{2k\pi}{N}n}\bigg]e^{-j\omega n}\\
     &=\sum\limits_{k=0}^{N - 1}X[k]\bigg[\frac{1}{N}\sum\limits_{n=0}^{N - 1}e^{-j(\omega - \frac{2k\pi}{N}n)}\bigg]\\
@@ -677,3 +676,93 @@ $$
 $$
 \big((n)\big)_N
 $$
+
+周期延拓可以表示为：
+
+$$
+\tilde X[k] = X\bigg[\big((k)\big)_N\bigg]
+\tilde x[n] = X\bigg[\big((n)\big)_N\bigg]
+$$
+
+也可表示为卷积和：
+
+$$
+\tilde{X}[k] = X[k] *\sum\limits_{m=-\infty}^{\infty}\delta[k - mN] =\sum\limits_{m=-\infty}^{\infty}X[k - mN]\\\tilde{x}[n] = x[n] *\sum\limits_{m=-\infty}^{\infty}\delta[n - mN] =\sum\limits_{m=-\infty}^{\infty}x[n - mN]
+$$
+
+#### DFT 性质
+
+* 线性性
+    * 前提：变换长度 $N$ 相同
+    * 如果不相同，补零到长度 $N \ge \max(N_1, N_2)$
+* 反转性质：若时域循环反转，则频域循环反转
+    * $\text{DFT} \Bigg\lbrace x\big[\big((-n)\big)_N\bigg] R_N[n]\Bigg\rbrace = X\bigg[\big((-k)\big)_N\bigg] R_N[k]$
+    * 0 时刻不变，其余前后反转
+* 共轭性质：若时域共轭，则频域共轭且循环反转
+    * $\text{DFT}\lbrace x^*[n]\rbrace = X^*[N - k]$
+* 对偶性质：序列的DFT的DFT
+    * $\text{DFT}\lbrace X[n]\rbrace = NX^*[N - k]$
+* 周期序列的共轭对称性：
+    * 共轭对称：$x_{ep}[n] = x^*_{ep}\bigg[\big((-n)\big)_N\bigg]$
+    * 共轭反对称：$x_{ep}[n] = -x^*_{ep}\bigg[\big((-n)\big)_N\bigg]$
+    * 任意有限长序列的周期延拓总可以分解为周期共轭对称和反对称的分量和的形式
+        * $x[n] = x_{ep}[n] + x_{op}[n]$
+        * $x_{ep}[n] = \frac12 (x[n] + x^*\bigg[\big((-n)\big)_N\bigg])$
+        * $x_{op}[n] = \frac12 (x[n] - x^*\bigg[\big((-n)\big)_N\bigg])$
+    * 实序列的DFT是周期共轭对称序列
+    * 虚序列的DFT是周期共轭反对称序列
+    * 周期共轭对称序列的DFT是实的
+    * 周期共轭反对称序列的DFT是虚的
+* 循环卷积性质：
+    * 有限长循环移位的 DFT 可以由原序列 DFT 乘上一个线性的相位因子得到：$\text{DFT}\Bigg \lbrace\bigg[x\big((n - m)\big)_N\bigg]\Bigg \rbrace = X[k]e^{-j\frac{2\pi k}{N}m}$
+    * 在 DTFT 中：$x[n] * y[n] = \text{IDTFT}\lbrace X(e^{j\omega}) \cdot Y(e^{j\omega})\rbrace$
+    * DFT 中：$x[n] \circledast y[n] =\sum\limits_{m=0}^{N - 1}x[m]y\bigg[\big((n - m)\big)_N\bigg] =\sum\limits_{m=0}^{N - 1}x\bigg[\big((n - m)\big)_N\bigg]y[m]$
+* Parseval 定理：
+    * $\sum\limits_{n=0}^{N - 1}|x[n]|^2 = \frac{1}{N}\sum\limits_{k=0}^{N - 1}|X[k]|^2$
+
+## FFT
+
+FFT 算法是一大类 DFT 快速算法的总称。
+* 基 2 FFT 算法：$N = 2^m$
+* 基 4 FFT 算法：$N = 4^m$
+* 分裂基算法：基本蝶形是倒 L 型，$N = 2^m$
+* 组合数 FFT 算法：变换点数为组合数，即$N = N_1N_2$
+
+根据处理基本蝶形的结构特点，可以分为：
+* DIT (Decimation-In-Time)
+* DIF (Decimation-In-Frequency)
+
+### 基 2 DIT-FFT 算法
+
+按照奇偶时间拆分成两个短序列。
+
+长序列的 DFT 可以由两个短序列的 DFT 组合得到。
+
+$$
+X[k] = \sum\limits_{m=0}^{N/2 - 1}x[2m]W_N^{2mk} + \sum\limits_{m=0}^{N/2 - 1} x[2m + 1]W_N^{(2m + 1)k}\\
+f_1[n] = x[2n], f_2[n] = x[2n + 1]\\
+X[k] = F_1[k] + W_N^kF_2[k]\\
+X[k + N/2] = F_1[k] - W_N^kF_2[k]
+$$
+
+反复抽取，变成2点 DFT：
+
+$$
+\begin{bmatrix}
+    X[0]\\
+    X[1]
+\end{bmatrix} = \begin{bmatrix}
+    x[0] + x[1]\\
+    x[0] - x[1]
+\end{bmatrix}
+$$
+
+![alt](../images/DSP/4_2.jpg)
+
+计算复杂度：
+* 乘法次数为$\frac{N}{2}\log_2N$，$m_a = Nm = N\log_2 N$
+
+输入和输出序列的顺序关系：二进制下的倒序关系。
+* 每次均分时，输入序列按照奇偶性划分，输出序列按照是否过半划分
+* 输入序列的奇偶性等价于最低位为1还是0，输出序列是否过半等价于最高位为1还是0
+* 因此输入映射到输出序列是低位映射到高位的关系。
