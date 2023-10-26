@@ -766,3 +766,160 @@ $$
 * 每次均分时，输入序列按照奇偶性划分，输出序列按照是否过半划分
 * 输入序列的奇偶性等价于最低位为1还是0，输出序列是否过半等价于最高位为1还是0
 * 因此输入映射到输出序列是低位映射到高位的关系。
+
+## 数字频谱分析
+
+### DFT 谱分析的基本概念
+
+频谱：信号经过傅里叶变换转换到频域后，其频域表示的幅度和相位随频率变化的关系分别称为信号的幅度谱和相位谱
+
+基于 DFT 的数字频谱分析
+
+
+利用离散信号 DFT 结果 $X[k]$ 与原连续信号频谱 $X_a(j\Omega)$ 之间存在对应关系来获得连续信号的频谱。
+
+$$
+X[k] = X(e^{j\omega})|_{\omega = \frac{2\pi}{N}k}
+$$
+
+$$
+X(e^{j\omega}) = \frac{1}{T_s}X_a(j\Omega)|_{\Omega = \frac{\omega}{T_s}}
+$$
+
+$$
+ X_a(j\Omega_k)= T_s X[k]
+$$
+
+利用 DFT 结果获得连续信号的频谱：
+
+$$
+X_a(j\Omega_k) = X_a \left ( j\frac{2\pi k}{NT_s} \right) = \begin{cases}
+    T_sX[k], 0 \le k \le \lceil \frac{N}{2} \rceil, \\
+    T_sX[k + N], - \lceil \frac{N - 1}{2} \rceil\le k \lt 0
+\end{cases}
+$$
+
+基于DFT的频谱分析方法存在的问题
+
+- 理论上连续正弦信号的频谱应为冲激函数，但DFT结果为有限值
+- DFT结果在连续正弦信号频谱幅度为0的位置却不为零
+
+### DFT 谱分析的一般过程
+
+#### 抗混叠滤波
+
+![alt](../images/DSP/5_1.jpg)
+
+#### 采样
+
+提高采样率
+- 优点：能够无混叠分析的信号带宽增大
+- 缺点：数据率提高，系统复杂度增加，成本上升
+
+#### 加窗
+
+由于DFT只能处理有限长序列，需要对输入信号
+通过加窗进行截断
+- 窗长可根据频率分辨率、实时性和设备存储能力的要
+求来权衡
+- 窗函数的形式也可根据主瓣宽度和旁瓣电平进行选择
+
+$$
+w_R[n] = \begin{cases}
+    1, 0 \le n \lt M\\
+    0, \text{others}
+\end{cases}
+$$
+
+$$
+x_w[n] = x[n]w_R[n]
+$$
+
+#### DFT计算、插值及频谱输出
+
+DFT计算
+- 可能需要补零，以获得更密集的频域采样，以及使变换点数𝑁满足FFT算法的要求（基2-FFT、基4-FFT）
+
+插值
+- 由DFT结果获得DTFT的估计值
+- 插值方法：
+  - 精确插值： $X(e^{j\omega}) =\sum\limits_{k=0}^{N - 1} X[k] P \left ( \omega - \frac{2\pi k}{N} \right)$, $P(\omega) = \frac{\sin(\omega N/2)}{\sin(\omega/2)}e^{-j\frac{N-1}{2}\omega}$
+  - 近似插值：线性插值，二次插值
+
+连续信号频谱输出
+– 通过坐标变换得到连续信号频谱 $X_a(j\Omega) = T_sX(e^{j\Omega T_s})$
+
+### DFT 谱分析问题
+
+#### 谱分析滤波器
+
+$$
+s(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty}S(j\Omega)e^{j\Omega t}\mathrm d\Omega\\
+s(nT_s) = \frac{1}{2\pi} \int_{-\infty}^{\infty}S(j\Omega)e^{j\Omega nT_s}\mathrm d\Omega\\
+x[n] = \begin{cases}
+    s(nT_s), n = 0, 1, \dots, M - 1,\\
+    0, M, M + 1, \dots, N - 1
+\end{cases}\\
+X[k] =\sum\limits_{n=0}^{N - 1}x[n]e^{-j\frac{2\pi nk}{N}} = \frac{1}{2\pi}\int_{-\infty}^{\infty}\sum\limits_{n=0}^{M - 1}e^{j(\Omega T_s - 2\pi k/N)n}\mathrm d\Omega
+$$
+
+令 $\theta = T_s(\Omega - \Omega_k)$，
+
+$$
+\varphi_k(M, \theta) = \sum\limits_{n=0}^{M - 1}e^{j(\Omega T_s - 2\pi k/N)n} = \frac{\sin(M\theta / 2)}{\sin(\theta/2)} e^{j\frac{M - 1}{2}\theta}
+$$
+
+梳状滤波特性
+
+![alt](../images/DSP/5_2.jpg)
+
+周期内存在多个过零点，把滤波器响应分割成多个区间
+* 主瓣：谱分析滤波器频率响应最大的那个区间
+* 主峰：主瓣中最大频率响应点 $Ω = \frac{2\pi k}{NT_s}$处，高度为𝑀
+* 主瓣宽度：主瓣两边过零点之间的距离4𝜋⁄𝑀𝑇𝑠
+* 旁瓣：除响应最大的那个区间外的其它区间
+
+DFT频谱分析方法能否反映连续信号的频谱？
+- DFT的结果主要给出了连续信号落在相应谱分析滤波器主瓣内的那部分信号的频域信息
+- 由于相邻谱分析滤波器主瓣间有交叠，同一个信号可能会在相邻两个谱分析滤波器都有响应
+- 谱分析滤波器的旁瓣会在其他谱分析滤波器的主瓣位置出现，其对应的DFT结果不可避免的包含了其他滤波器主瓣位置处的信号成分
+
+DFT 可用于连续信号的频谱分析，但由于其谱分析滤波器频率分割不理想的本质，必须对其输出结果进行小心的解释
+
+DFT谱估计得到的是对加窗后序列DTFT的采样
+
+$$
+x_w[n] = x[n]w_R[n]\\
+X_w(e^{j\omega}) = \frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{j\omega})W_R(e^{j(\omega - \theta)})\mathrm d\theta
+$$
+
+对于矩形窗：
+
+$$
+W_R(e^{j\omega}) = \text{DTFT}(w_R[n]) = \frac{\sin(M\omega / 2)}{\sin(\omega/2)} e^{-j\frac{M - 1}{2}\omega}
+$$
+
+频率分辨力的定义：两个等幅单频信号能够被区分开的最小频率间隔
+
+矩形窗的主瓣宽度为 $4\pi/MT_s$
+
+实际工程中，采用 3dB带宽并加上适当余量作为频率分辨力
+
+* 矩形窗的数字角频率分辨力为 $\Delta \omega = 2\pi / M$
+* 连续信号的分辨力为 $\Delta f = f_s/M$
+
+分辨力仅决定于信号时长 $MT_s$。
+
+混叠效应
+
+混叠效应本质上由采样过程引起
+- 混叠效应带来的问题
+- 如果采样过程带来了混叠，DFT结果无法将已混叠的频
+率分量分开
+- 采样之前作抗混叠滤波，把带外频率成分滤除
+- 增大采样频率（减小采样周期）
+– 无法仅从DFT结果中判读原连续信号的模拟频率
+- 需要原连续信号频率分布或抗混叠滤波通带的先验
+知识
+
+
