@@ -596,4 +596,287 @@ $$
 
 如果我们用 $\mathbf K$ 个维度来逼近 $\mathbf X$，为了使得误差最小，选取最大的$\mathbf K$个特征值： $\mathbf X =\sum\limits_{k=1}^{K} \alpha_k\mathbf e_k$。这就是主成分分析（PCA）。
 
+## 谱分析
 
+### 周期函数的傅里叶级数
+
+$$
+x(t) =\sum\limits_{n=-\infty}^{\infty}a_n e^{j\omega_0 t}, \omega_0 = \frac{2\pi}{T}\\
+a_n = \frac{1}{T}\int_{0}^{T}x(t)e^{-jn\omega_0t}\mathrm dt
+$$
+
+帕斯瓦尔定理
+
+$$
+\frac{1}{T}\int_{0}^{T}|x(t)|^2\mathrm dt =\sum\limits_{n=-\infty}^{\infty}|a_n|^2
+$$
+
+自相关函数
+
+$$
+R(\tau) = \frac{1}{T}\int_{0}^{T}x(t + \tau)x^*(t)\mathrm dt
+$$
+
+功率谱密度
+
+$$
+S(\omega) =\sum\limits_{n=-\infty}^{\infty}|a_n|^2\delta(\omega - n \omega_0)
+$$
+
+从而有
+
+$$
+S(\omega) = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau
+$$
+
+### 非周期函数的傅里叶变换
+
+#### 知识
+
+$$
+F(\omega) = \int_{-\infty}^{\infty}x(t)\exp(-j\omega t)\mathrm dt\\
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}F(\omega)\exp(j\omega t)\mathrm d\omega = \int_{-\infty}^{\infty}F(f)\exp(j2\pi ft)\mathrm df
+$$
+
+帕斯瓦尔定理
+
+$$
+\int_{-\infty}^{\infty}|x(t)|^2\mathrm dt = \int_{-\infty}^{\infty}|F(f)|^2\mathrm df
+$$
+
+$$
+时域采样 \lrarr 频域周期延拓\\
+时域周期延拓 \lrarr 频域采样\\
+$$
+
+自相关函数
+
+$$
+R(\tau) = \int_{-\infty}^{\infty}x(t + \tau)x^*(t)\mathrm dt
+$$
+
+能量谱密度
+
+$$
+S(\omega) = |F(\omega)|^2 = \left |\int_{-\infty}^{\infty}x(t)e^{j\omega t}\mathrm dt  \right|^2\\
+$$
+
+波赫纳尔——辛钦定理
+
+$$
+S(\omega) = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau\\
+R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}S(\omega)e^{j\omega\tau}\mathrm d\omega, S(\omega)\ge 0
+$$
+
+实过程的 $S(\omega)$ 为偶函数。
+
+离散随机过程的功率谱：
+
+只在整数点 k 采样
+
+$$
+S(\omega) =\sum\limits_{k=-\infty}^{\infty}R(k)e^{-j\omega k}\\
+R(k) = \frac{1}{2\pi}\int_{-\pi}^{\pi}S(\omega)e^{j\omega k}\mathrm d\omega
+$$
+
+周期过程（自相关函数有周期性）的功率谱
+
+$$
+S(\omega) =\sum\limits_{n=-\infty}^{\infty}b_n\delta(\omega - n \Delta \omega)\\
+R(\tau) = \frac{1}{2\pi}\sum\limits_{n=-\infty}^{\infty}b_ne^{jn\Delta\omega\tau}
+$$
+
+#### 例子
+
+白噪声 $E \lbrace X(t) \rbrace = 0$，
+
+$$
+S(\omega) = N_0, -\infty \lt \omega \le \infty\\
+R(\tau) = N_0\delta(\tau)
+$$
+
+* 任意两个不同时刻 $X(t_1), X(t_2)$ 都不相关。
+* 在各个频率上都有分量，且强度一致。
+
+高斯白噪声：各时刻服从高斯分布的白噪声
+
+色噪声： $R(\tau)$ 不是冲击函数。
+
+* 当某过程 $R(\tau)$ 比较胖的时候，功率谱比较瘦
+  * 相隔较长时间 $X(t)$ 与 $X(t + \tau)$ 还相关，说明信号变化慢，对应频域低频多
+分量多
+* 当某过程 $R(\tau)$ 比较瘦时，功率谱比较胖
+* 相隔一点时间， $X(t)$ 与 $X(t + \tau)$ 不太相关，说明信号变化快，对应频域高频分量多。
+
+### 宽平稳过程通过线性系统
+
+$$
+Y(t) = \int_{-\infty}^{\infty}h(t - \tau)X(\tau)\mathrm d\tau
+$$
+
+总结：
+* 输出过程的均值：易求，因为宽平稳过程的均值为常数
+* 输出过程的自相关函数：有点麻烦
+
+首先看输出与输入的自相关
+
+$$
+R_{YX}(\tau) = \int_{-\infty}^{\infty}h(v)R_x(\tau - v)\mathrm dv\\
+R_Y(\tau) = \int_{-\infty}^{\infty}h^*(-u)R_{YX}(\tau - u)\mathrm du
+$$
+
+$$
+R_Y(\tau) = R_X(\tau) * h(\tau) * h^*(-\tau)\\
+S_Y(\omega) = |H(\omega)|^2S_X(\omega)
+$$
+
+因此，输出的自相关，也可以用功率谱求解。
+
+两个过程输入两个系统，输出过程的互谱（互相关函数的傅里叶变换）。怎么求？
+
+$$
+\hat X(t) = X(t) * f(t)\\
+\hat Y(t) = Y(t) * g(t)
+$$
+
+
+### 离散时间宽平稳序列
+
+$$
+R_{YX}(k) = h(k) * R_X(k)\\
+R_Y(k) = h^*(-k) * h(k) * R_X(k)\\
+S_Y(z) = H(z) H^*(\frac{1}{z^*})S_X(z)\\
+其中 H(z) =\sum\limits_{}^{}h(k)z^{-k}\\
+令 z = e^{j\omega}\\
+S_Y(\omega) = |H(\omega)|^2S_X(\omega)
+$$
+
+理想白噪声通过低通滤波器：
+
+$$
+S_Y(f) = \begin{cases}
+    k_0, -f_c \le f \le f_c,\\
+    0, \text{otherwise.}
+\end{cases}\\
+R_Y(0) = 2f_ck_0\\
+R(\tau) = R_Y(0)\frac{\sin(2\pi f_c\tau)}{2\pi f_c\tau}
+$$
+
+从自相关函数可看出，相隔 $\frac{n}{2f_c}$ 的两个时刻不相关。因此，以 $2f_c$ 为采样频率的噪声采样数据彼此不相关。
+
+可以证明宽平稳过程功率谱非负：$S_X(f) \ge 0$：
+
+$$
+E \lbrace |Y(t)|^2 \rbrace =  R_Y(0) = \int_{-\infty}^{\infty}S_Y(f)\mathrm df = \int_{-\infty}^{\infty}S_X(f)|H(f)|^2\mathrm df \ge 0
+$$
+
+如果 $S_X(f)$ 在某个地方小于0，可以设计对应的滤波器 $H(f)$将这个小于0的区域滤出来，从而 $\int_{-\infty}^{\infty}S_X(f)|H(f)|^2\mathrm df \le 0$，导致矛盾。
+
+线性系统例子：
+
+滑动平均
+
+$$
+Y(t) = \frac{1}{T}\int_{t-T}^{t}X(s)\mathrm ds
+$$
+
+转化为滤波器：
+
+$$
+R_Y(t) = R_X(t) * h(t) * h^*(-t)\\
+h(t) = \begin{cases}
+    \frac{1}{T}, 0 \le t \le T,\\
+    0, \text{otherwise.}
+\end{cases}
+$$
+
+令 
+
+$$
+g(t) = h(t) * h^*(t) = \begin{cases}
+    \frac{1}{T}\left ( 1 - \frac{|t|}{T} \right), t \in [-T, T],\\
+    0,\text{otherwise.}
+\end{cases}
+$$
+
+理想的矩形窗
+
+$$
+R_Y(t) = \int_{-\infty}^{\infty}g(t - \tau)R_X(\tau)\mathrm d\tau = \int_{-T}^{T}\frac{1}{T}\left ( 1 - \frac{|t - \tau|}{T} \right)R_X(\tau)\mathrm d\tau
+$$
+
+从频域看
+
+$$
+H(\omega) = \text{sinc} \left ( \frac{\omega T}{2} \right)e^{-j\omega \frac{T}{2}}\\
+S_Y(\omega) = S_X(\omega)\left |\text{sinc} \left ( \frac{\omega T}{2} \right)  \right|^2
+$$
+
+是一个低通滤波器。
+
+例子2：MTI 滤波
+
+静止目标反射信号相同，运动目标反射回波不同。因此设计滤波器消去静止目标。称为“对消”。
+
+$$
+Y(t) = X(t) - X(t - T)
+$$
+
+在频域看：
+
+$$
+H(\omega) = 1 - e^{j\omega T}
+$$
+
+静止目标，多普勒频率为0，因此频域响应为0；运动目标，多普勒频率不为0，频域响应不为0。因此这是一个高通滤波器。
+
+还可以多次对消：
+
+$$
+Y_1(t) = X(t) - X(t - T)\\
+Y_2(t) = Y_1(t) - Y_1(t - T)\\
+Y_3(t) = Y_2(t) - Y_2(t - T)\\
+\vdots\\
+Y_n(t) = Y_{n - 1}(t) - Y_{n - 1}(t - T)
+$$
+
+频率响应：
+
+$$
+H(\omega) = (1 - e^{-j\omega T})^n
+$$
+
+### 采样定理
+
+随机过程下的采样定理
+
+$|f| \le f_0$, 当 $f_s \le 2f_0$ 时，均方意义下有
+
+$$
+X(t) =\sum\limits_{k=-\infty}^{\infty}X(kT) \text{sinc} \left ( \frac{\pi}{T}(t - kT) \right)
+$$
+
+证明：
+
+$$
+\begin{align*}
+    &要证明 N \rightarrow \infty 时,\\
+    &\varepsilon_N = E \left \lbrace  \left | X(t) -\sum\limits_{k=-N}^{N}X(kT)\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2 \right \rbrace \rightarrow 0\\
+    &利用E \lbrace X(a) X^*(b) \rbrace = R_X(a - b) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{j\omega a}e^{-j\omega b}S_X(\omega)\mathrm d\omega，展开上式\\
+    &\varepsilon_N = \frac{1}{2\pi}\int_{-\infty}^{\infty}\left | e^{j\omega t} -\sum\limits_{k=-N}^{N}e^{j\omega kT}\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2  S_X(\omega)\mathrm d\omega\\
+    &= \frac{1}{2\pi}\int_{-\omega_s/2}^{\omega_s/2}\left | e^{j\omega t} -\sum\limits_{k=-N}^{N}e^{j\omega kT}\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2  S_X(\omega)\mathrm d\omega\\
+    &对 e^{j\omega t}做周期延拓，周期为 \omega_s，可以做频域傅里叶级数展开\\
+    &e^{j\omega t} = \sum\limits_{k=-\infty}^{\infty}\alpha_k e^{j\omega \frac{2\pi}{\omega_s}} = \sum\limits_{k=-\infty}^{\infty}\alpha_k e^{j\omega kT}\\
+    &\alpha_k = \frac{1}{\omega_s}\int_{-\omega_s/2}^{\omega_s/2}e^{j\omega t}e^{-j\omega kT}\mathrm d\omega = \frac{\sin(\frac{\omega}{2}(t - kT))}{\frac{\omega}{2}(t - kT)}\\
+    &从而\left | e^{j\omega t} -\sum\limits_{k=-N}^{N}e^{j\omega kT}\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2 = \left | e^{j\omega t} -\sum\limits_{k=-N}^{N}\alpha_k e^{j\omega kT}\right|^2 \rightarrow 0, N \rightarrow \infty
+\end{align*}
+$$
+
+* 采样定理两边是均方相等。
+* 当满足采样定理时，离散点包含全部信息，任意取值点可以恢复。
+* 频带边界点
+  * 当功率谱在 $\pm \omega_0$ 处有 $\delta$ 函数时，以 $f_s = 2f_0$ 无法恢复信号。
+  * 例如：$X(t) = \cos(\omega_0 t + \phi)$，$\phi$ 为随机相位，在$[0, 2\pi]$内均匀分布。
+  * $R(\tau) = \frac{1}{2}\cos(\omega_0\tau)$
+  * $S(\omega) = \delta(\omega - \omega_0) + \delta(\omega + \omega_0)$
+  * 采样点 $X(kT) = (-1)^kX(0)$，与 $X(0)$ 严重相关。
