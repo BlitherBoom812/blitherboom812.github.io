@@ -708,6 +708,25 @@ $$
 * 当某过程 $R(\tau)$ 比较瘦时，功率谱比较胖
 * 相隔一点时间， $X(t)$ 与 $X(t + \tau)$ 不太相关，说明信号变化快，对应频域高频分量多。
 
+互谱密度
+
+$$
+S_{XY}(\omega) = \int_{-\infty}^{\infty}R_{XY}(\tau)e^{-j\omega \tau}\mathrm d\tau
+$$
+
+称为互谱密度，不具有功率的含义。
+
+$$
+S_{YX}(\omega) = S_{XY}^*(\omega)\\
+R_{XY}(\tau) = 0, \forall \tau \lrArr S_{XY}(\omega) = 0, \forall \omega
+$$
+
+$$
+Z(t) = X(t) + Y(t)\\
+R_Z(\tau) = E \lbrace (X(t + \tau) + Y(t + \tau))\overline{(X(t) + Y(t))} \rbrace = R_X(\tau) + R_{XY}(\tau) + R_{XY}
+
+$$
+
 ### 宽平稳过程通过线性系统
 
 $$
@@ -880,3 +899,8 @@ $$
   * $R(\tau) = \frac{1}{2}\cos(\omega_0\tau)$
   * $S(\omega) = \delta(\omega - \omega_0) + \delta(\omega + \omega_0)$
   * 采样点 $X(kT) = (-1)^kX(0)$，与 $X(0)$ 严重相关。
+
+## 习题课
+
+![alt](../images/stochastic/exer_1.jpg)
+
