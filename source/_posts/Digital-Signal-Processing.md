@@ -922,4 +922,123 @@ $$
 - 需要原连续信号频率分布或抗混叠滤波通带的先验
 知识
 
+栅栏效应
+* DFT 无法精确表示不在离散采样点的频率值
+* 频率估计的最大误差为 $\pi / N$
+* 可以通过加窗补零（增大 $N$）的方法改善
+* 通过局部插值的方法获得更精确的频率估计：精确插值，线性插值，二次插值
 
+## DFT 的应用
+
+### 线性卷积的计算
+
+假设有限长因果序列 $h[n]$ 和 $x[n]$，长度分别为 $P$ 和 $L$，均扩展到 $N$ 个点进行卷积
+
+* 当 $N \ge P + L - 1$ 时，两种卷积的结果相等
+* 当 $N \lt P + L - 1$ 时，循环卷积出现混叠
+
+基于 DFT 的 FIR 滤波器实现
+
+FIR 滤波器需要计算有限长序列和无限长序列的线性卷积
+* $h[n]$ 有限
+* $x[n]$ 无限
+
+方法1：重叠相加法
+
+$$
+x[n] =\sum\limits_{r=0}^{\infty}x_r[n - rL]\\
+y[n] = h[n] * \sum\limits_{r=0}^{\infty}x_r[n - rL] = \sum\limits_{r=0}^{\infty}h[n] * x_r[n - rL]\\
+$$
+
+整个序列的线性卷积等于各段线性卷积后的移位加和
+
+IDFT 后，需要一个专门的加法器进行重叠部分的相加运算
+
+方法二：重叠保留法
+
+取 $L$ 点 $x[n]$ 与扩展的 $P$ 点 $h[n]$ 做循环卷积，取结果的后 $L - P + 1$ 个点作为结果。
+
+两种方法、直接计算线性相关的计算量对比？
+
+### 线性调频 z 变换
+
+CZT 的定义
+
+$$
+X_{cz}(z)|_{z = z_k} =\sum\limits_{n=0}^{N - 1}x[n]z_k^{-n}\\
+z_k = AW^{-k} = (A_0e^{j\theta_0})(W_0e^{-j\varphi_0})^{-k}
+$$
+
+一种广义的 DFT，在复平面螺旋线上的采样。
+
+CZT 的计算
+* 利用定义直接计算
+* 利用卷积计算，而卷积可以利用 FFT 计算
+
+$$
+X_{cz}(z_k) = W^{\frac{k^2}{2}}\sum\limits_{n=0}^{N - 1}f[n]h[k - n]\\
+f[n] = x[n]A^{-n}W^{\frac{n^2}{2}}\\
+h[n] = W^{-\frac{n^2}{2}}
+$$
+
+### 短时傅里叶变换
+
+问题：基于傅里叶的频谱分析可以指导信号观测窗内的频率成分，但是无法得知这些频率成分何时出现，何时消失，持续多久
+
+定义
+
+$$
+\text{STFT}(t^\prime, \Omega) = \int_{-\infty}^{\infty}x(\tau)g^*(\tau - t^\prime)e^{-j\Omega\tau}\mathrm d\tau
+$$
+
+* 窗的长度
+  * 窗长需要足够短，确保落入窗的信号近似平稳
+  * 窗越长，频率分辨率越高，窗越短，时间分辨率越高
+    * 窗无限长，退化成 FT
+    * 无限短，退化成 $s(t^\prime)e^{-j\Omega t^\prime}$
+* 窗的类型
+  * 矩形窗，汉明窗，布莱克曼窗
+  * 主瓣宽度与旁瓣电平之间的权衡
+
+不确定性原理
+
+$$
+\Delta t \cdot \Delta \Omega \ge \frac{1}{2}
+$$
+
+
+## LTI 系统
+
+### LTI 系统的时域分析——冲激响应
+
+根据冲激响应长度不同：
+* FIR:用 $h[n]$ 表示系统
+* IIR：用系统函数或者差分方程表示
+
+### LTI 系统的时域分析——冲激响应
+
+复指数序列是 LTI 系统的特征函数
+
+$$
+T \lbrace e^{j\omega n} \rbrace = H(e^{j\omega})e^{j\omega n}
+$$
+
+频率响应函数的表示方式
+* $H(e^{j\omega}) = H_R(e^{j\omega}) + jH_I(e^{j\omega})$
+* $H(e^{j\omega}) = |H(e^{j\omega})|e^{j\angle H(e^{j\omega})}$
+* 幅频特性：
+  * $|H(e^{j\omega})|$
+  * $20\log |H(e^{j\omega})|$，单位 dB
+* 相频特性
+  * $arg(H(e^{j\omega}))$：连续相位
+  * $Arg(H(e^{j\omega}))$：主值相位
+  * 无卷绕相位：$\angle H(e^{j\omega}) = \tan^{-1}\frac{H_I(e^{j\omega})}{H_R(e^{j\omega})}$
+  * 定义主值区间 $arg(H(e^{j\omega})) = ARG[H(e^{j\omega})] + 2\pi r(\omega)$，$r(\omega)$是补偿函数，仅取整数
+
+相位延迟
+
+群延迟
+
+$$
+-\frac{\mathrm d}{\mathrm d\omega}arg[H_{id}(e^{j\omega})]
+$$

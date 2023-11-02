@@ -900,6 +900,248 @@ $$
   * $S(\omega) = \delta(\omega - \omega_0) + \delta(\omega + \omega_0)$
   * 采样点 $X(kT) = (-1)^kX(0)$，与 $X(0)$ 严重相关。
 
+欠采样
+
+$$
+\begin{align*}
+    E \lbrace |\varepsilon(t)|^2 \rbrace =& \int_{\omega_s/2}^{-\omega_s/2}\sum\limits_{n=-\infty}^{\infty}|1 - e^{jn\omega t}|S(\omega + n\omega_s)\mathrm d\omega\\
+    =&\sum\limits_{n=-\infty}^{\infty}4\sin^2(\omega_snt/2) \cdot \int_{\omega_s/2}^{-\omega_s/2}S(\omega + n\omega_s)\mathrm d\omega\\
+\end{align*}\\
+
+上面的级数为积分的加权求和。 n = 0 时权重为0，对应[-\omega_s/2, \omega_s/2] 内的功率谱。\\
+n\ne 0 时，权不为0，对应[-\omega_s/2, \omega_s/2]外的频谱，如果在这个区间外功率谱不是0，那 |\varepsilon|^2 将大于0。
+
+$$
+
+### 带通采样
+
+$$
+X(\omega) = 0, |\omega - \omega_c| > \omega_0, |\omega + \omega_c| > \omega_0
+$$
+
+一般研究实信号 $g(t)$，频谱具有共轭对称性，只需要考虑正半轴的频带就可以了：
+
+$$
+G(-\omega) = G^*(\omega)\\
+A(\omega) = A(-\omega), \varphi(-\omega) = -\varphi(\omega)
+$$
+
+希尔伯特变换：
+
+$$
+H(\omega) = \begin{cases}
+    -j, \omega \gt 0,\\
+    0, \omega = 0,\\
+    j, \omega \lt 0.
+\end{cases}
+$$
+
+$$
+\lbrace G(\omega)H(\omega) \rbrace^* = G(-\omega)H(-\omega)
+$$
+
+希尔伯特把正频率移相 $-90\degree$，负频率移相 $+90\degree$
+
+时域表示：
+
+滤波器的时域响应为
+
+$$
+\hat h(t) = \frac{1}{\pi t}
+$$
+
+g(t) 做两次希尔伯特变换，相位转了 $180\degree$：
+
+$$
+g(t)\xrightarrow{H(\omega)}\hat g(t) \xrightarrow{H(\omega)} -g(t)
+$$
+
+正交性：
+
+$$
+\int_{-\infty}^{\infty}g(t)\hat g(t)\mathrm dt = 0
+$$
+
+看成$\hat g(t)$ 与 $g(-t)$ 的卷积：
+
+$$
+\int_{-\infty}^{\infty}g(t)\hat g(t)\mathrm dt = \int_{-\infty}^{\infty}g(- (u - t))\hat g(t)\mathrm dt|_{u = 0} = g(-t) * \hat g(t) |_{t = 0}\\
+g(-t) \rightarrow G^*(\omega) = G(-\omega), \hat g(t) \rightarrow G(\omega)H(\omega)\\
+g(-t) * \hat g(t)|_{t = 0} = \int_{-\infty}^{\infty}G^*(\omega)G(\omega)H(\omega)e^{j\omega t}\mathrm d\omega|_{t = 0} = 0
+$$
+
+希尔伯特变换与原信号相加得到单边的频谱：
+
+$$
+g(t) \rightarrow A^* + A\\
+j\hat g(t) \rightarrow \\
+g(t) + j\hat g(t) \rightarrow 2A\\
+$$
+
+下变频：
+
+$$
+\tilde{g}(t) = \lbrace g(t) + j\hat g(t) \rbrace e^{-j\omega_c t} = g_I(t) + jg_Q(t)\\
+g_I(t) = g(t) \cos \omega_c t + \hat g(t) \sin (\omega_c t)\\
+g_Q(t) = - g(t) \sin \omega_c t + \hat g(t) \cos (\omega_c t)\\
+$$
+
+实际上是一个旋转矩阵，把单边频信号 $\tilde g(t)$ 顺时针旋转了 $\omega_ct$变成了基带复信号。
+
+与原信号频谱的关系：
+
+$$
+g_I(t) \rightarrow G(f - f_c) + G(f + f_c) \\
+g_Q(t) \rightarrow G(f - f_c)(+j) + G(f + f_c)(-j)\\
+(f \le |f_0|)
+$$
+
+调制和解调的流程
+* 调制：不需要得到 $\hat g(t)$
+* 解调：通过低通滤波代替$\hat g(t)$
+
+随机过程的希尔伯特变换
+
+$X(t)$为实的带通随机过程
+
+$$
+R_X(-\tau) = E\left \lbrace  X(t - \tau)X^*(t) \right \rbrace = E\left \lbrace  X(t)X^*(t + \tau) \right \rbrace = E\left \lbrace  X(t + \tau)X(t) \right \rbrace = R_X(\tau)\\
+S_X(-\omega) = \int_{-\infty}^{\infty}R_X(\tau)e^{-j(-\omega) \tau}\mathrm d\tau = \int_{-\infty}^{\infty}R_X(-u)e^{-j\omega\tau}\mathrm du = \int_{-\infty}^{\infty}R_X(u)e^{-j\omega\tau}\mathrm du = S_X(\omega)
+$$
+
+通过希尔伯特滤波器后：
+
+$$
+\hat X(t) = X(t) * h(t)\\
+R_{\hat X}(\tau) = R_X(\tau) * h(t) * h^*(-t) = R_X(\tau)\\
+S_{\hat X}(\omega) = S_X(\omega)|H(\omega)|^2 = S_X(\omega)
+$$
+
+互相关：
+
+$$
+\hat R_X(\tau) = R_{\hat XX}(\tau) = E \left \lbrace \int_{-\infty}^{\infty}X(t + \tau - u)\frac{1}{\pi u}\mathrm duX(t)   \right\rbrace = \int_{-\infty}^{\infty}R_X(\tau)\frac{1}{\pi u}\mathrm du
+$$
+
+$$
+R_{X\hat X}(\tau) = -\hat R_X(\tau)
+$$
+
+因此
+
+$$
+Y = X + j\hat X\\
+R_Y(\tau) = R_X(\tau) + R_{\hat X}(\tau) + jR_{\hat XX}(\tau) - jR_{X\hat X}(\tau) = 2R_X(\tau) + 2j\hat R_X(\tau)\\
+S_Y(f) = \begin{cases}
+    4S_X(f), &f \gt 0\\
+    0, &f\lt 0
+\end{cases}
+$$
+
+实的带通随机过程配合虚部的希尔伯特变换，同样也是只有正频率
+
+反之，如果功率谱只有正频率有值，则实部和虚部互为希尔伯特变换，实部和虚部的信息是重复的。
+
+随机信号的下变频：
+
+$$
+\tilde{X}(t) = \lbrace X(t) + j\hat X(t) \rbrace e^{-j\omega_c t} = X_I(t) + jX_Q(t)\\
+X_I(t) = X(t) \cos \omega_c t + \hat X(t) \sin (\omega_c t)\\
+X_Q(t) = - X(t) \sin \omega_c t + \hat X(t) \cos (\omega_c t)\\
+$$
+
+同样是顺时针旋转了 $2\pi f_c t$ 之后得到了基带信号
+
+研究基带信号的实部、虚部的统计特性
+
+$\tilde{X}(t)$ 还是一个平稳过程
+
+$$
+E \lbrace \tilde{X}(t) \rbrace = E \lbrace X_I(t) \rbrace = E \lbrace X_Q(t) \rbrace = 0\\
+R_{X_I}(\tau) = R_X(\tau)\cos(2\pi f_c\tau) + \hat R_X(\tau)\sin(2\pi f_c\tau)\\
+R_{X_Q}(\tau) = R_X(\tau)\cos(2\pi f_c\tau) + \hat R_X(\tau)\sin(2\pi f_c\tau)\\
+R_{X_I}(\tau) = R_{X_Q}(\tau)\\
+R_{X_Q}(0) = R_{X_I}(0) = R_{X}(0)(三者方差一样)\\
+\hat R_X(0) = 0(奇函数，不具备自相关函数的性质)\\
+S_{X_I}(f) = S_{X_Q}(f) = \begin{cases}
+    S_X(f - f_c) + S_X(f + f_c), &|f| \le f_0,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+基带信号虚部和实部的互相关
+
+$$
+R_{X_IX_Q}(\tau) = R_X(\tau)\sin(2\pi f_c\tau) - \hat R_X(\tau)\cos (2\pi f_c\tau)，奇函数
+$$
+
+$$
+R_{X_IX_Q}(0) = 0
+$$
+
+因此同一时刻实部和虚部不相关。
+
+互谱密度
+
+$$
+S_{X_IX_Q}(f) = \begin{cases}
+    jS_X(f + f_c) - jS_X(f - f_c), &|f| \lt f_0,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+只有当正频谱和负频谱分别跟 $f = \pm f_c$ 对称时，互谱密度恒为0。此时，任意两个时间的虚部和实部信号都是不相关的。
+
+## 高斯过程
+
+### 定义
+
+随机向量$X = (X(t_1), \dots, X(t_n))^T$ 服从 $n$ 元高斯分布，称为高斯过程。
+
+均值 $\mu_k$ = $E \lbrace X_k \rbrace$
+
+协方差阵
+
+$$
+\Sigma = E \lbrace (X - \mu)(X - \mu)^T \rbrace = \begin{bmatrix}
+    b_{11}& \dots &b_{1n}\\
+    \vdots& \ddots & \vdots\\
+    b_{n1} & \dots & b_{nn}
+\end{bmatrix}\\
+b_{ij} = E \lbrace (X_i - \mu_i)(X_j - \mu_j)^T \rbrace\\
+b_{ij} = b_{ji}^* = b_{ji}
+$$
+
+做特征分解
+
+$$
+\Sigma v_i = \lambda_i v_i\\
+Q = (v_1, v_2, \dots, v_n)正交阵, Q^{-1} = Q^T\\
+\Sigma = Q\text{diag}(\lambda_1, \dots, \lambda_n)Q^T\\
+\Sigma^{-1} = Q^T\text{diag}(\lambda_1^{-1}, \dots, \lambda_n^{-1})Q
+$$
+
+### 多元高斯分布
+
+$$
+f(x) = K \cdot \exp \left \lbrace  -\frac{1}{2}(x - \mu)\Sigma^{-1}(x - \mu)^T \right \rbrace
+$$
+
+线性变换以消去下标$ij$项：
+
+$$
+\Sigma^{-1} = A^TA\\
+y = A(x - \mu)\\
+(x - \mu)\Sigma^{-1}(x - \mu)^T = y^Ty
+$$
+
+$$
+1 = K \int \dots \int \exp \left \lbrace  -\frac{1}{2}(x - \mu)\Sigma^{-1}(x - \mu)^T \right \rbrace \mathrm dx_1 \dots \mathrm dx_n\\
+K = \frac{1}{(\sqrt{2\pi})^n\cdot \sqrt{|\Sigma|}}
+$$
+
+
+
 ## 习题课
 
 ![alt](../images/stochastic/exer_1.jpg)
