@@ -724,8 +724,28 @@ $$
 $$
 Z(t) = X(t) + Y(t)\\
 R_Z(\tau) = E \lbrace (X(t + \tau) + Y(t + \tau))\overline{(X(t) + Y(t))} \rbrace = R_X(\tau) + R_{XY}(\tau) + R_{XY}
+$$
+
+一个宽平稳过程分别通过两个 LTI 系统：
 
 $$
+Y_1(t) = X(t) * h_1(t)\\
+Y_2(t) = X(t) * h_2(t)\\
+R_{Y_1Y_2}(\tau) = R_X(\tau) * h_1(\tau) * h_2^*(-\tau)\\
+S_{Y_1Y_2}(\omega) = S_X(\omega)H_1(\omega)H_2^*(\omega)\\
+$$
+
+两个过程输入两个系统，输出过程的互谱（互相关函数的傅里叶变换）。怎么求？
+
+（输入为联合宽平稳）
+
+$$
+\hat X(t) = X(t) * f(t)\\
+\hat Y(t) = Y(t) * g(t)\\
+R_{\hat X\hat Y}(\tau) = R_{XY}(\tau) * f(\tau) * g^*(-\tau)\\
+S_{\hat X\hat Y}(\omega) = S_{XY}(\omega)F(\omega)G^*(\omega)
+$$
+
 
 ### 宽平稳过程通过线性系统
 
@@ -750,14 +770,6 @@ S_Y(\omega) = |H(\omega)|^2S_X(\omega)
 $$
 
 因此，输出的自相关，也可以用功率谱求解。
-
-两个过程输入两个系统，输出过程的互谱（互相关函数的傅里叶变换）。怎么求？
-
-$$
-\hat X(t) = X(t) * f(t)\\
-\hat Y(t) = Y(t) * g(t)
-$$
-
 
 ### 离散时间宽平稳序列
 
