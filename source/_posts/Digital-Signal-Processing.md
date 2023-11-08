@@ -1040,5 +1040,37 @@ $$
 群延迟
 
 $$
--\frac{\mathrm d}{\mathrm d\omega}arg[H_{id}(e^{j\omega})]
+-\frac{\mathrm d}{\mathrm d\omega}\text{arg}[H_{id}(e^{j\omega})]
+$$
+
+可以表征窄带信号的相位失真（或者延迟）
+
+$$
+x[n] = a[n]e^{j\omega_c n}\\
+a[n] = c_1e^{j\omega_1n}\\
+y[n] \approx |H(e^{j\omega_c})|c_1e^{j(\omega_1 + \omega_c)n + j\varphi(\omega_1 + \omega_c)} \approx |H(e^{j\omega_c})|\underbrace{a[n - \tau_g(\omega_c)]}_{群延迟给出了包络延迟}\underbrace{e^{j\omega_c[n - \tau_p(\omega_c)]}}_{相位延迟\tau_p(\omega_c) = \varphi(\omega_c)}
+$$
+
+### LTI 系统的零极点分析
+
+$$
+\sum\limits_{k=0}^{N}a_ky[n - k] =\sum\limits_{k=0}^{M}b_kx[n - k]\\
+H[z] = \frac{\sum\limits_{k=0}^{M}b_kz^{-k}}{\sum\limits_{k=0}^{N}a_kz^{-k}} = \left ( \frac{b_0}{a_0} \right)\frac{\prod_{k = 1}^M(1 - c_kz^{-1})}{\prod_{k = 1}^N(1 - d_kz^{-1})}
+$$
+
+$z = 0, z = \infty$ 也可能是零点！求解的时候不要忘了。
+
+系统稳定性的条件：绝对可和。或者说 $H(z)$ 的极点在单位圆内。
+
+可逆性的条件：$h[n] * h_i[n] = \delta[n]$， $H(8z)H_i(z) = 1$
+* 逆系统的极点和零点就是原系统的零点和极点
+* 逆系统和原系统必须有重叠的 ROC，因此可以确定逆系统的 ROC
+
+频率响应
+
+
+群延迟
+
+$$
+\text{grd}[] =\sum\limits_{k=1}^{N}\frac{|d_k|^2 - \Re{d_ke^{-j\omega}}}{1 + |d_k|^2 - 2\Re{d_ke^{-j\omega}}} - \sum\limits_{k=1}^{M}\frac{|c_k|^2 - \Re{c_ke^{-j\omega}}}{1 + |c_k|^2 - 2\Re{c_ke^{-j\omega}}}
 $$
