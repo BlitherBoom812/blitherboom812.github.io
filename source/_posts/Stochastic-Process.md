@@ -1152,7 +1152,217 @@ $$
 K = \frac{1}{(\sqrt{2\pi})^n\cdot \sqrt{|\Sigma|}}
 $$
 
+多元高斯矢量的特征函数
 
+$$
+\omega = (\omega_1, \omega_2,\dots, \omega_n)^T\\
+\Phi_X(\omega) = E \lbrace e^{j\omega^TX} \rbrace = E \lbrace e^{j(\omega_1 X_1 + \omega_2 X_2 + \dots + \omega_n X_n)} \rbrace = \exp \left \lbrace  j\omega^T\mu - \frac{1}{2}\omega^T\Sigma\omega \right \rbrace
+$$
+
+特征函数不要求 $\Sigma$ 可逆。概率密度函数要求 $\Sigma$ 正定，特征值都大于0.
+
+当 $X$ 为高斯矢量时
+
+$$
+\Phi_X(\omega) = \int_{}^{}\int_{}^{}\dots\int_{}^{} K \cdot \exp \left \lbrace  -\frac{1}{2}(x - \mu)^T\Sigma^{-1}(x - \mu) \right \rbrace\mathrm dx_1\mathrm dx_2\dots\mathrm dx_n = \int_{}^{}\int_{}^{}\dots\int_{}^{} K \cdot \exp \left \lbrace  -\frac{y^Ty}{2} \right \rbrace \sqrt{|\Sigma|}
+$$
+
+高斯白噪声的协方差矩阵只有对角元，对角元为方差。
+
+可以用逼近处理 $|\Sigma| = 0$：
+
+$$
+\Sigma_K = \Sigma + \frac{1}{K}I\\
+\Phi_X(\omega) = \exp \left \lbrace  j\omega^T\mu - \frac{1}{2}\omega^T \left (\Sigma + \frac{1}{K}I  \right)\omega \right \rbrace\\
+f(x) = \frac{1}{\sqrt{2\pi}^n \sqrt{|\Sigma_K|}} \cdot \exp \left \lbrace  -\frac{1}{2}(x - \mu)\Sigma^{-1}(x - \mu)^T \right \rbrace
+$$
+
+然后再讨论 $K \rightarrow \infty$ 的情况。
+
+多元高斯矢量的边缘分布
+
+任取子矢量 $\lbrace K_1, K_2, \dots, K_m \rbrace \subseteq {1, 2, \dots, n}$
+
+观察 $\tilde{ X} = (X_{K_1}, X_{K_2}, \dots, X_{K_m})^T$ 的分布
+
+$$
+\tilde{\Phi}(\tilde\omega) = E \lbrace e^{j(\omega_{K_1}\tilde X_{K_1} + \omega_{K_2}\tilde X_{K_2} + \dots + \omega_{K_m}\tilde X_{K_m})} \rbrace = \exp \left \lbrace  j\tilde\omega^T\mu - \frac{1}{2}\tilde\omega^T\Sigma\tilde\omega \right \rbrace
+$$
+
+用置换矩阵 $P$ 将 $\Sigma$ 的第 $K_1, K_2, \dots, K_m$ 行、列移到 $\Sigma$ 的左上角，对应的 $\omega$ 也置换：
+
+$$
+P\omega = \begin{pmatrix}
+    \tilde{\omega}\\
+    0
+\end{pmatrix}\\
+P^T\Sigma P^T = \begin{pmatrix}
+    \tilde{\Sigma} & B\\
+    C & D
+\end{pmatrix}
+$$
+
+置换到左上角后，容易看出子矢量的特征函数可以通过将原矢量其他的$\omega$置零得到，均值就是选择对应的均值，协方差矩阵就是把对应的行列元素抽出来：
+
+$$
+\omega^T\Sigma\omega = (\tilde{\omega}, 0)^T\begin{pmatrix}
+    \tilde{\Sigma} & B\\
+    C & D
+\end{pmatrix}\begin{pmatrix}
+    \tilde{\omega}\\
+    0
+\end{pmatrix} = \tilde{\omega}^T\tilde{\Sigma}\tilde{\omega}
+$$
+
+利用特征函数求数字特征：
+
+$$
+\frac{\partial^2\Phi}{\partial \omega_k\partial \omega_l}|_{\omega_k = \omega_l = 0} = -(\mu_l\mu_k + b_{kl})\\
+E \lbrace X_kX_l \rbrace = \mu_l\mu_k + b_{kl}
+$$
+
+$$
+E \lbrace X_1^{k_1}\dots X_n^{k_n} \rbrace = j^{\sum\limits_{i=1}^{n}k_i} \frac{\partial^{k_1 + k_2 + \dots k_n}}{\partial^{k_1}\omega_1\partial^{k_2}\omega_2\dots \partial^{k_n}\omega_n}\bigg|_{\omega_1 = \omega_2 = \dots = \omega_n = 0}
+$$
+
+高斯的矢量分布的高阶矩完全由一阶矩 $\mu$ 和二阶矩 $\Sigma$ 决定。例如可以用特征函数推出：
+
+$$
+\begin{align*}
+    &E \left \lbrace  X_1X_2X_3X_4 \right \rbrace \\
+    =& j^4 \frac{\partial^4\Phi}{\partial \omega_1\partial \omega_2\partial \omega_3\partial \omega_4}\bigg|_{\omega_1 = \omega_2 = \omega_3 = \omega_4 = 0} \\
+    =& E \left \lbrace  X_1X_2  \right \rbrace E \left \lbrace  X_3X_4  \right \rbrace + E \left \lbrace  X_1X_3  \right \rbrace E \left \lbrace  X_2X_4  \right \rbrace + E \left \lbrace  X_1X_4  \right \rbrace E \left \lbrace  X_2X_3  \right \rbrace
+\end{align*}
+$$
+
+独立性
+
+独立性说的是统计，不相关说的是线性（二阶矩）
+
+一般来说
+
+$$
+独立 \Rightarrow 不相关\\
+不相关 \not \Rightarrow 独立
+$$
+
+但是，对于高斯分布而言：
+
+$$
+独立 \lrArr 不相关
+$$
+
+这是因为高斯分布完全由一阶和二阶矩决定。
+
+定理：
+
+$n$ 元向量 $X = \begin{pmatrix}
+   X_1\\X_2 
+\end{pmatrix}$ 服从 $N(\mu, \Sigma)$，则 $X_1, X_2$ 独立 $\lrArr$ $\Sigma_{12} = 0$
+
+$$
+\Sigma = \begin{pmatrix}
+    \Sigma_{11}&\Sigma_{12}\\
+    \Sigma_{21}&\Sigma_{22}
+\end{pmatrix}
+$$
+
+充分性：
+
+$$
+\Sigma_{12} = E \left \lbrace (X_1 - \mu_1)^T(X_2 - \mu_2)  \right \rbrace = E \left \lbrace (X_1 - \mu_1)\right\rbrace E\left \lbrace(X_2 - \mu_2)  \right \rbrace = 0
+$$
+
+必要性：
+
+$$
+f(x_1, x_2) = \frac{1}{(2\pi)^{n/2}\sqrt{|\Sigma|}}\exp \left \lbrace -\frac{1}{2}\begin{pmatrix}
+    x_1 - \mu_1\\
+    x_2 - \mu_2
+\end{pmatrix}^T\begin{pmatrix}
+    \Sigma_{11}&0\\
+    0&\Sigma_{22}
+\end{pmatrix} \begin{pmatrix}
+    x_1 - \mu_1\\
+    x_2 - \mu_2
+\end{pmatrix} \right  \rbrace = f(x_1)f(x_2)
+$$
+
+可见 $X_1, X_2$ 统计独立。
+
+对于高斯过程：
+
+$$
+严平稳 \lrArr 宽平稳
+$$
+
+即 $X(t_1), X(t_2), \dots, X(t_n)$ 和 $X(t_1 + \tau), X(t_2 + \tau), \dots, X(t_n + \tau)$ 有相同的 $\mu, \Sigma$ 等价于具有相同的分布函数。
+
+线性变换
+
+定理： $X$ 服从高斯分布，矩阵 $C_{m\times n}$， $Y = CX$，则 $Y$ 服从高斯分布 $N \left(C\mu, C \Sigma C^T \right)$。
+
+高斯过程经过微分，积分，滤波等线性操作，输出还是高斯过程。
+
+有一种重要的线性变换：去相关。
+
+$$
+\Sigma_X = \begin{pmatrix}
+    \Sigma_{11}&\Sigma_{12}\\
+    \Sigma_{21}&\Sigma_{22}
+\end{pmatrix}\\
+Y = \begin{pmatrix}
+    Y_1\\Y_2
+\end{pmatrix}= \begin{pmatrix}
+    I & A\\
+    0 & I
+\end{pmatrix}\begin{pmatrix}
+    X_1\\X_2
+\end{pmatrix}\\
+E \left \lbrace  (Y_1 - E(Y_1))(Y_2 - E(Y_2))^T \right \rbrace = \Sigma_{12} + A\Sigma_{22 } = 0
+$$
+
+需要
+
+$$
+-\Sigma_{12}\Sigma_{22}^{-1} = A\\
+$$
+
+计算协方差
+
+$$
+E \left \lbrace  (Y - E(Y))(Y - E(Y))^T \right \rbrace = \begin{pmatrix}
+    \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}&0\\
+    0&\Sigma_{22}
+\end{pmatrix}
+$$
+
+去相关之后方差减小了。可以认为 $X_1 = Y_1 - AX_2$ 中，$- AX_2$是与 $Y$ “独立” 的“噪声项”，这个噪声导致了 $X_1$ 的方差大于去相关之后的 $Y$ 的方差。
+
+去相关与是否是高斯矢量无关。但是对于高斯矢量，去相关之后，两个矢量就独立了，具有重要的意义。
+
+对于一般的二阶矩过程，希望找到一个矩阵 $U$ ，使得 $Y = UX$ 的各个分量不相关：
+
+$$
+E \left \lbrace  (Y - \mu_Y)(Y - \mu_Y)^T \right \rbrace = \text{diag}\\
+E \left \lbrace  U(X - \mu_X)(X - \mu_X)^TU^T \right \rbrace  = \text{diag} = U\Sigma U^T
+$$
+
+所以，本质上就是分析了协方差矩阵 $\Sigma$ 的特征值。也就是二阶矩章节讲到的主成分分析：
+
+$$
+\text{diag}(\lambda_1, \dots, \lambda_n)
+$$
+
+选取 $\lambda_i$ 大的特征矢量，张成主成分空间。
+
+信号处理中有信号空间（特征值大的）和噪声空间（特征值小的，被噪声掩盖了）。
+
+有时候 $Y$ 的各个分量不相关还不能完全消去元素之间的统计关系。只是线性不相关。不相关的约束实际上很弱。
+
+如果要设计 $U$，使得 $Y = UX$ 的各个分量独立，运算很复杂。
+
+但是，对于高斯矢量而言，不相关就是独立。所以对于高斯过程，主成分分析 $\lrArr$ 独立成分分析。
 
 ## 习题课
 
