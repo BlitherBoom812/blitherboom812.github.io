@@ -1074,3 +1074,123 @@ $z = 0, z = \infty$ 也可能是零点！求解的时候不要忘了。
 $$
 \text{grd}[] =\sum\limits_{k=1}^{N}\frac{|d_k|^2 - \Re{d_ke^{-j\omega}}}{1 + |d_k|^2 - 2\Re{d_ke^{-j\omega}}} - \sum\limits_{k=1}^{M}\frac{|c_k|^2 - \Re{c_ke^{-j\omega}}}{1 + |c_k|^2 - 2\Re{c_ke^{-j\omega}}}
 $$
+
+### IIR滤波器
+
+$$
+y[n] =\sum\limits_{k=1}^{N}a_ky[n - k] +\sum\limits_{k=0}^{M}b_kx[n - k]\\
+H(z) = \frac{\sum\limits_{k=0}^{M}b_kz^{-k}}{1 -\sum\limits_{k=1}^{N}a_kz^{-k}}
+$$
+
+直接 I 型
+
+直接 II 型：交换次序，合并延迟单元
+
+级联形式：
+
+$$
+H(z) = K \prod_{k = 1}^{N_s} \frac{b_{0k} + b_{1k}z^{-1} + b_{2k}z^{-2}}{1 - a_{1k}z^{-1} - a_{2k}z^{-2}}
+$$
+
+考虑到有限字长效应，级联形式可以以更加灵活的方式减小有限字长的影响。可以控制零点和极点的位置。
+
+级联形式也可以用直接 I, II 型实现。
+
+多径衰落就是一个 FIR 滤波器，因此具有频率选择特性。
+
+
+并联形式
+
+$$
+H(z) =\sum\limits_{k=0}^{N_p}C_kz^{-k} +\sum\limits_{k=1}^{N_2}\frac{e_{0k}+e_{1k}z^{-1}}{1 - a_{1k} - a_{2k}z^{-2}}
+$$
+
+各子系统的计算误差互不影响，防止误差传递和放大，可控极点位置
+
+流图转置定理：支路方向取反，系数不变，输入和输出交换位置
+
+### FIR 滤波器
+
+$$
+H(z) =\sum\limits_{n=0}^{N - 1}h[n]z^{-n}
+$$
+
+抽头延迟线 or 横向滤波器结构
+
+具有转置形式
+
+级联形式
+
+$$
+H(z) = \prod_{k = 1}^{M_1}(f_{0k} - f_{1k}z^{-1}\prod_{k = 1}^{M_2}(b_{0k} + b_{1k} z^{-1} + b_{2k}z^{-2})
+$$
+
+线性相位特性
+
+$$
+H(e^{j\omega}) = A(e^{j\omega})e^{-j\omega\alpha}
+$$
+
+$$
+h[n] = h[M - n] (I, II)\\
+h[n] = - h[M - n] (III,IV)
+$$
+
+线性相位 FIR 滤波器的直接形式
+
+偶数
+
+$$
+y[n] = \begin{cases}
+    \sum\limits_{k=0}^{M/2 - 1}h[k](x[n - k] + x[n - M + k]) + h[M/2]x[n - M/2], &I type
+    \sum\limits_{k=0}^{M/2 - 1}h[k](x[n - k] - x[n - M + k]), &III type
+\end{cases}
+$$
+
+奇数
+
+
+$$
+y[n] = \begin{cases}
+    \sum\limits_{k=0}^{(M - 1)/2}h[k](x[n - k] + x[n - M + k]), &II type
+    \sum\limits_{k=0}^{(M - 1)/2}h[k](x[n - k] - x[n - M + k]), &IV type
+\end{cases}
+$$
+
+级联形式
+
+对应四种零点分布情况，有四种网络结构
+
+$$
+H(z) = 1 \pm z^{-1}\\
+H(z) = 1 - 2\cos(\theta)z^{-1} + z^{-2}\\
+H(z) = (1 - rz^{-1})(1 - r^{-1}z^{-1})\\
+H(z) = 1 + bz^{-1} + cz^{-2} + bz^{-3} + z^{-4}
+$$
+
+### FIR 滤波器的频率取样结构
+
+$$
+H(z) =\sum\limits_{n=0}^{N - 1}h[n]z^{-n} = \frac{1}{N}(1 - z^{-N})\sum\limits_{k=0}^{N - 1}\frac{H(k)}{1 - W_N^{-j}z^{-1}}
+$$
+
+$H(k)$ 是 FFT 变换。
+
+若冲激响应是实序列，可以用共轭对称性将成对的一阶子系统合称为二阶子系统
+
+$$
+H_k(z) + H_{-k}(z) = 2|H(k)| \frac{\cos\theta(k) - (\cos(\theta(k) - \frac{2\pi}{N}k))z^{-1}}{1 - 2\cos(\frac{2\pi}{N}k)z^{-1} + z^{-2}}
+$$
+
+其中 $\theta(k)$ 是 $H(k)$ 的相位
+
+不成对的子系统？
+
+$$
+H_0(z) = \frac{H(0)}{1 - z^{-1}}\\
+H_{N/2}(z) = \frac{H(0)}{1 + z^{-1}}
+$$
+
+FIR 滤波器的时分复用结构
+
+
