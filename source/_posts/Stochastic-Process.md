@@ -1364,6 +1364,212 @@ $$
 
 但是，对于高斯矢量而言，不相关就是独立。所以对于高斯过程，主成分分析 $\lrArr$ 独立成分分析。
 
+### 高斯变量的条件分布
+
+仍是高斯：
+
+$$
+f_{X_1|X_2}(x_1|x_2) = \frac{1}{\sqrt{\tilde{\Sigma}_{11}}(2\pi)^{\frac{n_1}{2}}}\exp \left \lbrace -\frac{1}{2}(x_1 - \tilde{\mu}_1)^T\tilde{\Sigma}_{11}^{-1}(x_1 - \tilde{\mu}_1)   \right\rbrace\\
+E(X_n|X_{n - 1}) = \frac{E(X_nX_{n - 1})}{E(X_{n - 1}^2)}X_{n - 1}\\
+E \lbrace X_1 | X_2 \rbrace = \mu_1 + \Sigma_{12}\Sigma_{22}^{-1}(X_2 - \mu_2)\\
+E \lbrace (X_1 - E(X_1 | X_2))(X_1 - E(X_1|X_2))^T|X_2 \rbrace = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}
+$$
+
+### 实高斯过程的若干性质
+
+实高斯过程完全由均值函数和协方差函数确定。
+
+严平稳等价于宽平稳。
+
+若实高斯过程均方可导，则 $\lbrace X^\prime(t) \rbrace$ 也是高斯过程。
+
+高斯过程通过一般线性系统仍然是高斯过程。
+
+$$
+Y(t) = \int_{a}^{b}X(\tau)h(t, \tau)\mathrm d\tau\\
+更强的结论：\left \lbrace  \binom{X(t)}{Y(t)} \right \rbrace 是高斯过程。
+$$
+
+### 零均值带通高斯过程
+
+$$
+Z(t) = X(t) + j \hat X(t)\\
+X_B(t) = X_I(t) + j X_Q(t)\\
+V(t) = \sqrt{X_I^2(t) + X_Q^2(t)}\\
+\Theta(t) = \arctan \frac{X_Q(t)}{X_I(t)}\\
+$$
+
+此时有
+
+$$
+X(t) = V(t)\cos(\omega_ct + \Theta(t))\\
+\binom{X_I(t)}{X_Q(t)} = \binom{\ \ \ \cos(\omega_ct)\quad \sin(\omega_c t)}{-\sin(\omega_ct)\quad \cos(\omega_ct)}\binom{X(t)}{\hat X(t)}
+$$
+
+幅度为瑞利分布，相位为均匀分布，相互统计独立：
+
+$$
+f_V(v) = \frac{v}{\sigma^2}e^{-\frac{v^2}{2\sigma^2}}, v \ge 0\\
+f_\Theta(\theta) = \frac{1}{2\pi}, \theta \in [0, 2\pi]
+$$
+
+### 随机相位正弦波信号叠加零均值高斯
+
+$$
+Y(t) = A\sin(\omega_ct + \Phi) + X(t)
+$$
+
+结果是幅度为莱斯分布，相位均匀分布，二者统计独立：
+
+$$
+f_{V(t)}(v) = \frac{v}{\sigma^2}\exp(-\frac{v^2 + A^2}{2\sigma^2})I_0(\frac{Av}{\sigma^2})\\
+f_\Theta(\theta) = \frac{1}{2\pi}
+$$
+
+### 高斯过程经过非线性函数
+
+限幅器
+
+$$
+h(x) = \begin{cases}
+    1, x\ge 0,\\
+    0, x \lt 0
+\end{cases}
+$$
+
+服从两点分布
+
+$$
+P(Y(t) = 1) = P(Y(t) = 0) = \frac{1}{2}\\
+E_Y(t) = 0\\
+R_Y(t, s) = P \lbrace X(t)X(s) \ge 0 \rbrace - P \lbrace X(t)X(s) \lt 0 \rbrace
+$$
+
+$$
+P \lbrace X(t)X(s) \ge 0 \rbrace = \int_{0}^{\infty}\int_{0}^{\infty}\frac{1}{2\pi\sqrt{|\Sigma|^{-1}}}\exp((x_1\ x_2)\Sigma^{-1}\binom{x_1}{x_2})\mathrm dx_2\mathrm dx_1 = \frac{\pi/2 + \sin^{-1}(-\rho)}{2\pi}
+$$
+
+全线性检波（求绝对值）
+
+$$
+E(Y) = \frac{2\sigma}{2\pi}\int_{0}^{\infty}\frac{y}{\sigma^2}\exp(-\frac{y^2}{2\sigma^2})\mathrm dy = \sqrt{\frac{2}{\pi}}\sigma\\
+R_Y(t, s) E \lbrace |X(t)||X(s)| \rbrace = \frac{2\sigma^2}{\pi} \lbrace \sqrt{1 - \rho^2} + \rho\sin^{-1}\rho \rbrace, \rho = \frac{R_X(t - s)}{\sigma^2}\\
+\int_{0}^{\infty}\int_{0}^{\infty}x_1x_2\frac{1}{2\pi\sigma^2\sqrt{1 - \rho^2}}\exp(-\frac{x_1^2 - 2\rho x_1x_2 + x_2^2}{2\sigma(1 - \rho^2)})\mathrm dx_1\mathrm dx_2
+$$
+
+半波线性检波
+
+$$
+h(x) = \begin{cases}
+    x, x\ge 0,\\
+    0, x\lt 0
+\end{cases}
+$$
+
+$$
+R_Y(t, s) = \frac{\sigma^2}{\pi} \lbrace \sqrt{1 - \rho^2} + \rho\sin^{-1}\rho \rbrace\\
+$$
+
+平方率检波
+
+$$
+h(x) = x^2
+$$
+
+$$
+P(Y(t) \le y) = P(-\sqrt{y} \le Y(t) \le \sqrt{y}) = 2\Phi(\frac{\sqrt{y}}{\sigma}) - 1\\
+f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma}\frac{1}{\sqrt{y}}\exp \lbrace -\frac{y}{2\sigma^2} \rbrace,\ (y \gt 0)\\
+E \lbrace Y(t) \rbrace = \sigma^2\\
+R_Y(t,s) = E \lbrace X^2(t_1)X^2(t_2) \rbrace = \sigma^2 + \sigma^2 + \rho\sigma^2 + \rho\sigma^2 = 2(\rho + 1)\sigma^2
+$$
+
+基带信号的包络经过平方律检波
+
+$$
+X_I^2 + X_Q^2 = V^2 服从复指数分布
+$$
+
+### 高斯——马尔可夫性
+
+马尔可夫特性：
+
+$$
+f(x_n|x_1, \dots, x_{n - 1}) = f(x_n|x_{n - 1})
+$$
+
+如果一个过程既是高斯的，又是马尔可夫的，会有很好的性质。
+
+对于零均值高斯分布：
+
+$$
+X(t) 是 \text{Markov} \lrArr R(t_1, t_3) = \frac{R(t_1, t_2)R(t_2, t_3)}{R(t_2, t_2)}
+$$
+
+正向很好证明，反向证明的关键是计算均值和方差。
+
+$$
+X(t) 是 \text{Markov} \lrArr \forall t_1\le t_2\le...\le t_n, E \lbrace X_n|X_1, X_2, \dots, X_{n - 1} \rbrace = E \lbrace X_n|X_{n - 1} \rbrace
+$$
+
+从右到左：条件协方差 $E\lbrace (Y_1 - E \lbrace Y_1|Y_2 \rbrace)^2|Y_2\rbrace = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}$ 跟 $Y_2$ 无关（这并不是说条件协方差和协方差具有相同的意义，只是数值上正好相等）
+
+残差与已有信息正交：
+
+$$
+E \lbrace [X_n - E(X_n | X_{n - 1})] \cdot X_k \rbrace = 0, k = 1, 2, \dots, n - 1
+$$
+
+类似于最小二乘估计：
+
+$$
+X_n - \alpha_n X_{n - 1} 是一个高斯过程，与 X_1, X_2, \dots, X_n 独立
+$$
+
+自回归方程：
+
+$$
+X_n = \alpha_n X_{n - 1} + \beta_nY_n\\
+Y_n \sim N(0, 1)
+$$
+
+### Brown 运动
+
+从一维随机游走开始：
+
+$$
+P \lbrace X_i = a \rbrace = P \lbrace X_i = -a \rbrace = \frac{1}{2}\\
+Y =\sum\limits_{i=1}^{\infty}X_i
+$$
+
+令 $t = nT$，固定 $t$，令 $n \rightarrow \infty$，由 CLT 可知成为一个高斯分布：
+
+$$
+E(Y) = 0\\
+D(Y) = \frac{t}{T}a^2\\
+\frac{a^2}{T} = \beta\\
+f_Y(y) = \frac{1}{\sqrt{2\pi}\sqrt{\beta t}}\exp (-\frac{y^2}{2\beta t})
+$$
+
+随着时间增加，不确定性越来越大。
+
+标准布朗运动：
+
+（1）$B(t)$ 满足独立增量，平稳增量
+（2）$B(t)$ 的每个样本轨道都是连续的
+（3）$\forall t, B(t)$ 遵循高斯分布，均值0，方差 $t$
+
+$$
+f_t(x) = \frac{1}{\sqrt{2\pi t}}\exp (-\frac{x^2}{2t})
+$$
+
+布朗运动是高斯白噪声的积分：
+
+$$
+Y(t) = \int_{0}^{t}X(u)\mathrm du
+$$
+
+可见布朗运动的不规则。
+
 ## 习题课
 
 ![alt](../images/stochastic/exer_1.jpg)
