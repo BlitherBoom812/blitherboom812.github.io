@@ -1256,9 +1256,7 @@ $$
 
 定理：
 
-$n$ 元向量 $X = \begin{pmatrix}
-   X_1\\X_2 
-\end{pmatrix}$ 服从 $N(\mu, \Sigma)$，则 $X_1, X_2$ 独立 $\lrArr$ $\Sigma_{12} = 0$
+$n$ 元向量 $X = \binom{X_1}{X_2}$ 服从 $N(\mu, \Sigma)$，则 $X_1, X_2$ 独立 $\lrArr$ $\Sigma_{12} = 0$
 
 $$
 \Sigma = \begin{pmatrix}
@@ -1370,7 +1368,6 @@ $$
 
 $$
 f_{X_1|X_2}(x_1|x_2) = \frac{1}{\sqrt{\tilde{\Sigma}_{11}}(2\pi)^{\frac{n_1}{2}}}\exp \left \lbrace -\frac{1}{2}(x_1 - \tilde{\mu}_1)^T\tilde{\Sigma}_{11}^{-1}(x_1 - \tilde{\mu}_1)   \right\rbrace\\
-E(X_n|X_{n - 1}) = \frac{E(X_nX_{n - 1})}{E(X_{n - 1}^2)}X_{n - 1}\\
 E \lbrace X_1 | X_2 \rbrace = \mu_1 + \Sigma_{12}\Sigma_{22}^{-1}(X_2 - \mu_2)\\
 E \lbrace (X_1 - E(X_1 | X_2))(X_1 - E(X_1|X_2))^T|X_2 \rbrace = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}
 $$
@@ -1513,10 +1510,14 @@ $$
 
 从右到左：条件协方差 $E\lbrace (Y_1 - E \lbrace Y_1|Y_2 \rbrace)^2|Y_2\rbrace = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}$ 跟 $Y_2$ 无关（这并不是说条件协方差和协方差具有相同的意义，只是数值上正好相等）
 
+$$
+E(X_n|X_{n - 1}) = \frac{E(X_nX_{n - 1})}{E(X_{n - 1}^2)}X_{n - 1}\\
+$$
+
 残差与已有信息正交：
 
 $$
-E \lbrace [X_n - E(X_n | X_{n - 1})] \cdot X_k \rbrace = 0, k = 1, 2, \dots, n - 1
+E \lbrace [X_n - E(X_n | X_{n - 1})] \cdot X_k \rbrace = 0, k = 1, 2, \dots, n - 1\\
 $$
 
 类似于最小二乘估计：
