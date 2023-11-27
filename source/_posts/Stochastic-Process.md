@@ -1574,4 +1574,3 @@ $$
 ## 习题课
 
 ![alt](../images/stochastic/exer_1.jpg)
-
