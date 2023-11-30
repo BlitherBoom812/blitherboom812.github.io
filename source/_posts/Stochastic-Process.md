@@ -1571,6 +1571,175 @@ $$
 
 可见布朗运动的不规则。
 
+## Markov 过程
+
+### Markov 链
+
+一种状态离散、时间离散的随机过程。
+
+### Markov 特性
+
+
+
+马尔可夫特性的一种表示：
+
+在已知现在的条件下，过去与将来独立。
+
+$$
+P(C,A | B) = P(C | B, A) \cdot P(A|B) = P(C|B)P(A|B)
+$$
+
+其他表示：过去用集合事件表示
+
+$$
+P \lbrace X_{n+1}=j|(X_{n-1}, \dots, X_1)\in A, X_n=i \rbrace = P \lbrace X_{n+1}=j|X_n=i \rbrace
+$$
+
+进一步，过去是一个集合，未来也是一个集合：
+
+$$
+P \lbrace X_{n+1}\in B|(X_{n-1}, \dots, X_1)\in A, X_n=i \rbrace = P \lbrace X_{n+1}\in B|X_n=i \rbrace
+$$
+
+但是，变量“现在”必须取值为一个确定的值，不能是一个集合。对现在的状态一定要精确掌握，不能放宽约束。
+
+口号：从小事做起（泊松），从现在做起（马尔可夫）
+
+转移概率
+
+$$
+P_{ij}(m, n) = P \lbrace X_n = a_j | X_m = a_i \rbrace
+$$
+
+$$
+P_{ij}(m, n) \ge 0\\
+\sum\limits_{j}^{}P_{ij}(m, n) = 1
+$$
+
+一步转移概率：
+
+$$
+P_{ij}(m, m + 1) 或 P_{ij}(m)
+$$
+
+状态转移矩阵
+
+观察变量族的联合分布
+
+### 齐次马尔科夫链的迭代表示
+
+$$
+X_0 \xrightarrow{Z_1} X_1 \xrightarrow{Z_2} X_2 \dots \xrightarrow{Z_n} X_{n}
+$$
+
+$$
+X_{n+1} = f(X_n,Z_{n+1}) = P \lbrace X_{n+1} = j | X_n = i \rbrace
+$$
+
+也称为新息过程
+
+### 一维随机游走
+
+吸收壁
+
+反射壁 - 完全反射壁
+
+成功逃跑
+
+等待服务人数
+
+$$
+X_{n + 1} = \begin{cases}
+    X_n - 1 + Y_{n + 1}, X_n \ne 0\\
+    Y_{n + 1}, X_0
+\end{cases}\\
+P = \begin{bmatrix}
+    a_0 & a_1 & a_2 & \dots\\
+    a_0 & a_1 & a_2 & \dots\\
+        & a_0 & a_1 & \dots\\
+        &     & a_0 & \dotsb
+\end{bmatrix}
+$$
+
+### 柯尔莫格洛夫方程
+
+多步转移矩阵概率
+
+$$
+P_{ij}(m, n) = \sum_k P(X_n = j | X_r = k) \cdot P(X_r = k | X_m = i)
+$$
+
+或者表示为
+
+$$
+P_{ij}^{(p + q)} = \sum_{k \in \Omega} P_{ik}^{(p)} P_{kj}^{(q)}
+$$
+
+由于上面转移阵步数 $p, q$ 的任意性，多步跳变矩阵可以转变为矩阵相乘：
+
+$$
+P^{(L)} = P^{(L - 1)}P^{(1)} = ... = P^L
+$$
+
+求多步转移矩阵：适用于齐次马尔可夫
+
+齐次马尔可夫链的 $P$ 与时间起点无关
+
+先求 $P^{(n)} = P^n$，再看 $[P^n]_{ij}$ 就是要求的转移概率。
+
+如何求 $P^n$ ？
+
+首先做特征分解 $PU = U\Lambda$
+
+$$
+P^n = U \Lambda^nU^{-1}
+$$
+
+二元通信信道
+
+$$
+P  = \begin{pmatrix}
+    1 - \alpha & \alpha\\
+    \beta & 1 - \beta
+\end{pmatrix}\\
+U = \begin{pmatrix}
+    1 & -\alpha\\
+    1 & \beta
+\end{pmatrix}
+$$
+
+
+$$
+P^n = \frac{(1 - \alpha - \beta)^n}{\alpha + \beta}\begin{pmatrix}
+    \alpha & -\alpha\\
+    -\beta & \beta
+\end{pmatrix} + \frac{1}{\alpha + \beta} \begin{pmatrix}
+    \beta & \alpha\\
+    \beta & \alpha
+\end{pmatrix}
+$$
+
+在 $|1 - \alpha - \beta| < 1$ 的条件下，无穷步跳变后：
+
+$$
+P^n = \frac{1}{\alpha + \beta} \begin{pmatrix}
+    \beta & \alpha\\
+    \beta & \alpha
+\end{pmatrix}
+$$
+
+各列相等，说明这个马尔可夫链与初始状态无关，历史被淡忘——马尔可夫性。
+
+
+$1 - \alpha - \beta = -1$ 时，极限不存在
+
+$$
+P = \begin{pmatrix}
+    0 & 1\\
+    1 & 0\\
+\end{pmatrix}
+$$
+
 ## 习题课
 
 ![alt](../images/stochastic/exer_1.jpg)
