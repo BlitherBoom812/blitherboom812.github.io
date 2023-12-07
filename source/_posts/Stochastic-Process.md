@@ -1740,6 +1740,149 @@ P = \begin{pmatrix}
 \end{pmatrix}
 $$
 
+### 状态分类
+
+可达性：$\exists m, s.t. P_{ij}^{(m)} > 0$
+
+互通性：$\exist m, n, s.t. P_{ij}^{(m)} > 0, P_{ji}^{(n)} > 0$，是等价关系。
+
+不可约(irreducible)，不可分
+
+马尔可夫链中每两个状态都是互通的，也叫互通链。
+
+闭集：$\forall i \in C, j\not \in C, i \not \rightarrow j$
+
+不可约的另一定义：除了把整个链作为闭集，不存在取其中一些状态构成其他闭集了。
+
+激励状态
+
+稳定状态（闭集）
+
+一般情况，Markov 链的转移矩阵行列重排后可化为：
+
+$$
+P = \begin{pmatrix}
+    u_1\\
+    &u_2\\
+    &&\ddots\\
+    &&&u_k\\
+    v_1&v_2&\dots&v_k&v_{k+1}
+\end{pmatrix}
+$$
+
+对闭集而言，可以在闭集内使用柯尔莫格洛夫方程：
+
+$$
+P_{ij}^{(n + m)} =\sum\limits_{r\in \Omega_1}^{}P_{ir}^{(n)}P_{rj}^{(m)}
+$$
+
+首次达到时间：$T_{ij}(\omega) = \min \lbrace n: X_0(\omega) = i, X_n(\omega) = j, n \ge 1 \rbrace$
+
+$$
+T_{ij} \in [1, 2, ..., \infty)
+$$
+
+首次到达概率
+
+$$
+f_{ij}^{(n)} = P \lbrace T_{ij} = n| X_0 = i \rbrace
+$$
+
+此时有
+$$
+f_{ij}^{(1)} = P_{ij}
+$$
+
+定义
+
+$$
+f_{ij} =\sum\limits_{k=1}^{\infty^-} f_{ij}^{(k)}
+$$
+
+为迟早到达的概率。
+
+$$
+f_{ij}^{(\infty)} = 1 - f_{ij}
+$$
+
+表示永远无法到达的概率。
+
+定理：
+
+$$
+P_{ij}^{(n)} =\sum\limits_{r=1}^{n} f_{ij}^{(r)}P_{jj}^{(n - r)}
+$$
+
+考虑 $P_{ij}^{(0)} = \delta_{ij}$，上述可以写成卷积形式：
+
+$$
+F_{ij}(z) = \sum\limits_{r=0}^{\infty} f_{ij}^{(r)}z^r\\
+G_{ij}(z) = \sum\limits_{r=0}^{\infty} f_{ij}^{(r)}z^{r}\\
+G_{ij}(z) = \delta_{ij} + F_{ij}(z)G_{jj}(z)
+$$
+
+$$
+i \rightarrow j \lrArr  f_{ij} \gt 0
+$$
+
+### 常返性
+
+#### 常返与非常返
+
+若 $f_{ij} = 1$，称状态 i 为常返态
+
+令 $z = 1$：
+
+$$
+G_{ij}(1) = \delta_{ij} + F_{ij}(1)G_{jj}(1)\\
+i = j \rArr G_{ii}(1) = \frac{1}{1 - F_{ii}(1)} \rArr \sum_{n = 0}^{\infty}P_{ii}^{(n)} = \frac{1}{1 - f_{ii}}
+$$
+
+常返性判别：
+
+$$
+常返态 \lrArr f_{ii} = 1 \lrArr \sum\limits_{n=0}^{\infty}P_{ii}^{(n)} = +\infty\\
+非常返态 \lrArr f_{ii} \lt 1 \lrArr \sum\limits_{n=0}^{\infty}P_{ii}^{(n)} = \frac{1}{1 - f_{ii}} < +\infty\\
+$$
+
+后面会证明，这种返回的次数都是无穷大。
+
+常返的理解：
+
+$$
+\forall n, A_n = \begin{cases}
+    A_n = 1, X_n = i,\\
+    A_n = 0, X_n \ne i.
+\end{cases}
+$$
+
+$$
+E \lbrace \sum\limits_{k=0}^{\infty}A_k | X_0 = i \rbrace = \sum\limits_{k=0}^{\infty}P_{ii}^{(0)}\\
+$$
+
+从判别定理可以看出，在期望意义上，常返态被无限次访问。
+
+推论1：既然常返态被无穷次返回，非常返态被有限次访问，则在有限状态的 Markov 链中一定存在常返态。
+
+反证法：如果全是有限返回次数，那所有态的访问次数加起来还是有限的，但是马尔可夫可以访问无限次，矛盾。所以一定有常返态。
+
+推论1.1：如果非常返态的个数有限，则足够长的时间后，状态一定会到达常返态。
+
+推论1.2：若 j 非常返，则$\forall i$
+
+$$
+\sum\limits_{n=0}^{\infty}P_{ij}^{(n)} < \infty (i 到达 j的次数为有限值)\\
+\lim_{n \rightarrow \infty} P_{ij}^{(n)} = 0
+$$
+
+推论2：若 $i$ 常返，$i \lrarr j$，则 $j$ 也是常返的。
+
+推论3：若 $i$ 为常返，$i \rarr j$，则 $j \rarr i$
+
+#### 正常返与零常返
+
+
+
 ## 习题课
 
 ![alt](../images/stochastic/exer_1.jpg)
