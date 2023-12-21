@@ -1881,7 +1881,205 @@ $$
 
 #### 正常返与零常返
 
+$f_{ii}^n$ 可以视为首次返回时间 $T_{ii}$ 的概率分布。对于非常返态不能这么看，因为 $f_{ii} < 1$。
 
+对于常返态的 $T_{ii}$，可以计算期望
+
+$$
+\mu_i = E \lbrace T_{ii} \rbrace = \sum\limits_{n = 1}^{\infty} n f_{ii}^{(n)}
+$$
+
+若均值为无穷大，则称为零常返。
+
+零常返与非常返是有区别的。零常返是可以常返，只是大概率步数很多。
+
+定义返回的速率，可推导
+
+$$
+\lim _{n \rightarrow \infty} \frac{1}{n} \sum\limits_ {k=0}^{n - 1} P_{jj}^{(k)} = \frac{1}{\mu_j}
+$$
+
+正常返意味着速率为常数，零常返意味着速率为 0。
+
+判定定理：
+
+$$
+j 状态零常返 \lrArr \sum\limits_{n=0}^{\infty}P_{jj}^{(n)} = \infty, 且 n \rightarrow \infty 时，P_{jj}^{(n)} = 0
+$$
+
+条件一就是常返的判定定理。条件二比较特殊：
+
+$$
+\lim_{n \rightarrow \infty}P_{jj}^{(n)} = \frac{1}{\mu_j}
+$$
+
+如果是零常返，这个极限就是0。在条件二上，零常返和非常返是一样的。
+
+定理：常返态 $i$，$i \rarr j$，则 $i, j$ 同为正常返或者零常返
+
+#### 补充性质
+
+$$
+q_{jj}(M) = P \lbrace \sum\limits_{k=0}^{\infty}A_k \ge M | X_0 = j \rbrace\\
+\lim_{M \rarr \infty}q_{jj}(M) = \begin{cases}
+    1, f_{jj} = 1\\
+    0, f_{jj} < 1\\
+\end{cases}
+$$
+
+下面研究常返态 $j$，不可约链
+
+“从常返态触发，返回次数为无穷大”这件事的概率为 1.
+
+$$
+\lim_{M \rarr \infty} q_{rj}(M) = 1, \forall
+$$
+
+“任意状态访问常返态的次数为无穷大”的概率为1.
+
+$$
+q_{ij}(M) = f_{ij}q_{jj}(M)
+$$
+
+两边取极限可得 $f_{ij} = 1$
+
+结论3： 从不可约链任何状态出发，迟早访问状态 $j$
+
+$$
+\lim_{n \rarr \infty} P_{ij}^{(n)} = \frac{1}{\mu_j}
+$$
+
+结论4：极限概率与初始状态无关。
+
+分类方式
+
+对于每个常返态 i，存在一个 i 可达状态构成的状态集 C 。则这些状态彼此相通，构成一个不可约闭集，都常返
+
+马尔可夫链可以唯一划分为 $C_1, C_2, ..., T$，其中 $C_i$ 互为不相交的不可约闭集。T 为非常返态。每个闭集中，常返类型一致，不同闭集不互通。
+
+定理：马尔科夫链若有一个零常返，有无穷多个零常返。
+
+推论：有限状态马尔可夫链的常返态必然为正常返。
+
+#### 马尔可夫链的平稳分布和极限概率
+
+对于不可约链：
+
+$$
+\lim_{n \rarr \infty}P_{ij}^{(n)} = 0，j非常返\\
+P_{ij}^{(n)} = \frac{1}{\mu_j} = 0，j零常返\\
+P_{ij}^{(n)} = \frac{1}{\mu_j}，j正常返
+$$
+
+极限概率用 $\pi_j$表示
+
+对于非常返和零常返，极限概率都是0。零常返的链一定有无穷个状态。
+
+对于正常返，$\pi_j \gt 0, \sum\limits_{j\in S}^{}\pi_j = 1$
+
+从柯式方程得出：
+
+$$
+\pi_j = \sum\limits_{i}^{}\pi_iP_{ij}
+$$
+
+矩阵形式：
+
+$$
+\lim_{n \rarr \infty} P^n = \Pi = \begin{bmatrix}
+    \pi_1 & \pi_2 & \cdots & \pi_n & \cdots\\
+    \pi_1 & \pi_2 & \cdots & \pi_n & \cdots\\
+    \cdots & \cdots & \cdots & \cdots & \cdots\\
+\end{bmatrix}
+$$
+## 泊松过程
+
+### 定义
+
+#### 计数过程
+
+在 $[0, t]$ 内发生某类事件的次数记为 $\lbrace N(t), t\ge 0 \rbrace$，则称 $\lbrace N(t) \rbrace$ 为计数过程。
+
+#### 泊松过程
+
+若满足以下条件：
+
+1. $N(0) = 0$
+2. 非负性：$N(t)$ 的取值非负整数；
+3. 非降性：$N(t)$ 是随时间单调不减的；
+4. 独立增量性：对于 $0 \le t_1 < t_2 < \ldots < t_n$，$N(t_2) - N(t_1), N(t_3) - N(t_2), \ldots, N(t_n) - N(t_{n-1})$ 是相互独立的随机变量；
+5. 平稳增量性：对于 $0 \le s < t$，$N(t) - N(s)$ 的分布只与时间间隔 $t-s$ 有关，而与具体的时刻 $s$ 无关。
+6. $P(N(t + \Delta t) - N(t) = 1) = \lambda\Delta t + o(\Delta t), P(N(t + \Delta t) - N(t) \ge 2) = o(\Delta t)$
+则称 $\lbrace N(t), t\ge 0 \rbrace$ 为泊松过程。
+
+### 性质
+
+泊松的表达式
+
+$$
+P_n(t) = P(N(t) = n) = \frac{(\lambda t)^n}{n!}e^{-\lambda t}
+$$
+
+泊松分布的特征函数
+
+$$
+\phi_{N(t)}(\omega) = \exp \left \lbrace \lambda t (e^{j\omega} - 1) \right \rbrace
+$$
+
+泊松过程的数字特征
+
+$$
+E(N(t)) = \lambda t\\
+R(t_1, t_2) = \lambda t_1 + \lambda^2 (t_1t_2) (t_1 \le t_2)\\
+C(t_1, t_2) = \min \lbrace t_1, t_2 \rbrace
+$$
+
+### 泊松与二项分布
+
+泊松分布是二项分布的极限。
+
+泊松脉冲串：
+
+$$
+X(t) = \frac{\mathrm dN(t)}{\mathrm dt} = \sum\limits_{i}^{}\delta(t - t_i)\\
+E(X(t)) = \lambda
+$$
+
+### 泊松相关问题
+
+#### 事件间隔时间的分布
+
+$S_n$ 表示第 n 件事到达的时刻
+
+$T_n$ 表示相邻两件事发生的间隔
+
+$$
+P\lbrace S_n \gt t \rbrace = P \lbrace N(t) \le n - 1 \rbrace
+$$
+
+$$
+f_{T_n}(t) = \lambda e^{-\lambda t}\\
+E(T_n) = 1 / \lambda
+$$
+
+$T_n$ 和 $T_m$ 是独立的。
+
+#### 等待时间的分布
+
+概率密度函数与特征函数互为傅里叶变换
+
+$$
+\Phi_{T_i}(\omega) = \frac{\lambda}{\lambda - j\omega}\\
+\Phi_{S_n}(\omega) = \left (\frac{\lambda}{\lambda - j\omega}  \right)^n\\
+$$
+
+要求 $S_n$ 的概率密度函数，可以看作 $T_n$ 的卷积：
+
+$$
+f_{S_n}(t) = \frac{(\lambda t)^{n - 1}}{(n - 1)!}\lambda e^{-\lambda t}\\
+$$
+
+称为 $\Gamma$ 分布，参数 $\lambda, n$。
 
 ## 习题课
 
