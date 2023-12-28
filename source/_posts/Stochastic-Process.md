@@ -1986,6 +1986,10 @@ $$
 矩阵形式：
 
 $$
+
+$$
+
+$$
 \lim_{n \rarr \infty} P^n = \Pi = \begin{bmatrix}
     \pi_1 & \pi_2 & \cdots & \pi_n & \cdots\\
     \pi_1 & \pi_2 & \cdots & \pi_n & \cdots\\
@@ -2080,6 +2084,94 @@ f_{S_n}(t) = \frac{(\lambda t)^{n - 1}}{(n - 1)!}\lambda e^{-\lambda t}\\
 $$
 
 称为 $\Gamma$ 分布，参数 $\lambda, n$。
+
+#### 相邻两次事件之间的计数
+
+两次公交车到来（速度 $\mu$）之间，等车人数（速度 $\lambda$）的计数：
+
+$$
+P(L = k) = (\frac{\mu}{\mu + \lambda})(\frac{\lambda}{\mu + \lambda})^k
+$$
+
+#### n个事件到达时间的的联合分布
+
+$$
+f_{S_1...S_n|N(t) = n}(u_1, u_2, ..., u_n) = \frac{n!}{t^n}
+$$
+
+如果是有编号的（不是按顺序到达）：
+
+$$
+f_{V_1...V_n|N(t) = n}(t_1, t_2, ..., t_n) = \frac{1}{t^n}
+$$
+
+以下分布的极限，就是泊松过程：
+
+$$
+P \lbrace N(s) = k | N(t) = n \rbrace = \binom{n}{k}(\frac{\lambda s}{n})^k(1 - \frac{\lambda s}{n})^{n - k}
+$$
+
+#### 总结泊松过程的几种定义
+
+1. N(0) = 0，独立增量，平稳增量，$\Delta t$ 内发生一个事件的概率 $\lambda \Delta t$，发生两件事以上的概率小
+2. 事件时间间隔独立同分布，服从复指数分布，则计数为泊松
+3. N 个客体随机地分布在 $[0, t]$ 区间上，每个客体的出现时间均匀分布，且相互时间独立，当 $n \rightarrow \infty, t \rightarrow \infty$，极限分布为泊松分布
+4. 二项分布的极限
+
+### 顺序统计量
+
+统计量是样本的某个函数 $g(X_1, ..., X_n)$。例如：最大值、中值、平均值、样本协方差阵
+
+顺序统计量：根据到达时刻排序。例如 $S_1, S_2, ..., S_n$ 就是 $V_1, V_2, ..., V_n$ 的顺序统计量
+
+$$
+f_{Y_k}(x) = \binom{n}{k - 1}F(x)\binom{n - k + 1}{1}f(x)(1 - F(x))^{n - k}
+$$
+
+有序的顺序统计量的分布：
+
+$$
+f_{Y_1...Y_n}(y_1, y_2, ..., y_n) = n!f(y_1)f(y_2)...f(y_n)
+$$
+
+### 非齐次泊松过程
+
+四个条件：
+
+$N(0) = 0$
+
+$N(t)$ 独立增量
+
+$P(N(t + \Delta t) - N(t) = 1) = \lambda(t)\Delta t + o(\Delta t)$
+
+$P(N(t + \Delta t) - N(t) \ge 2) = o(\Delta t)$
+
+定理：
+
+$$
+P(N(t_0 + t) - N(t_0) = n) = \frac{[m(t_0 + t) - m(t_0)]^n}{n!}e^{-[m(t_0 + t) - m(t_0)]}
+$$
+
+其中，
+
+$$
+m(t) = \int_{0}^{t}\mathrm \lambda(u) du
+$$
+
+其意义可以理解为事件的个数。
+
+令 $m(t + t_0) - m(t_0) = \alpha$
+
+$$
+P(N(t_0 + t) - N(t_0) = n) = \frac{\alpha^n}{n!}e^{-\alpha}
+$$
+
+则期望和方差
+
+$$
+E(N(t_0 + t) - N(t_0)) = \alpha\\
+V(N(t_0 + t) - N(t_0)) = \alpha
+$$
 
 ## 习题课
 
