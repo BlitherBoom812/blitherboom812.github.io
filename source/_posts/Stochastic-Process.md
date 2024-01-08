@@ -2173,6 +2173,94 @@ E(N(t_0 + t) - N(t_0)) = \alpha\\
 V(N(t_0 + t) - N(t_0)) = \alpha
 $$
 
+### 复合泊松
+
+$Y_n$ 随机变量族，$N(t)$ 泊松过程，称$X(t) = \sum_{n = 1}^{N(t)}Y_n$ 为复合泊松。
+
+$$
+E \lbrace X(t) \rbrace = \lambda t \cdot E \lbrace Y_i \rbrace\\
+D \lbrace X(t) \rbrace = \lambda t \cdot E \lbrace Y_i^2 \rbrace\\
+G_X(z) = \exp(\lambda t G_Y(z) - 1)\\
+\phi_X(\omega) = \exp(\lambda t \phi_Y(\omega) - 1)
+$$
+
+### 随机参数泊松
+
+参数 $\lambda$ 是随机变量，PDF为 $f(\lambda)$
+
+* 是平稳增量
+* 不是独立增量
+
+$$
+P(Y(t) = n) = \int^{+\infty}_{0}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda
+$$
+
+母函数：
+
+$$
+G_{Y(t)}(z) = \int_{0}^{\infty}\exp (\lambda t(z - 1))f(\lambda)\mathrm d\lambda
+$$
+
+$$
+E(Y(t)) = \int_{0}^{\infty}\lambda t f(\lambda)\mathrm d\lambda\\
+V(Y(t)) = \int_{0}^{\infty}\lambda t f(\lambda)\mathrm d\lambda\\
+$$
+
+数据统计的后验分布
+
+$$
+P(\Lambda \le x | Y(t) = n) = \frac{\int_{0}^{x}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda}{\int_{0}^{\infty}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda}\\
+f_\Lambda(x|Y(t) = n) = \frac{\frac{(x t)^n}{n!}e^{-x t}f(x)}{\int_{0}^{\infty}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda}
+$$
+
+### 过滤的泊松过程
+
+统计一段时间影响的总和
+
+$$
+Y(t) = \sum\limits_{i=1}^{N(t)}h(t, S_i, A_i)
+$$
+
+特征函数：
+
+$$
+\Phi_{Y(t)}(\omega) = \exp \left ( \lambda t \left ( \int_{0}^{t}\frac{1}{t}\exp(j\omega h(t, v))\mathrm dv - 1\right) \right)
+$$
+
+均值：
+
+$$
+E(Y(t)) = \frac{1}{j}\frac{\partial \Phi_{Y(t)}}{\partial \omega} = \underbrace{\lambda t}_{平均到达个数} \underbrace{\int_{0}^{t}\frac{1}{t}\exp(j\omega h(t, v))\mathrm dv}_{每个事件在 t 时刻的影响}
+$$
+
+## 生灭过程
+
+该过程状态可以用整数序列 $n = 0, 1, 2, 3, ...$ 来表示
+
+状态转移只能发生在临近状态之间
+
+在$[t, t + \Delta t)$ 区间内，n状态转移到 $n + 1$ 状态的概率为 $\lambda \Delta t$， 转移到 $n - 1$ 状态的概率为 $\mu \Delta t$。
+
+### M/M/1
+
+系统平均顾客人数 $L = \frac{\lambda / \mu}{1 - \lambda / \mu}$
+
+排队平均人数
+
+$$
+L_Q = \sum\limits_{n=1}^{\infty}(n - 1)p_n = \frac{\lambda^2}{(\mu - \lambda)\mu}\\
+L_Q \ne L - 1
+$$
+
+前面有一个人，等待时间：负指数分布的无记忆性
+
+$$
+f_T(t|T > t_0) = \mu e^{-\mu (t - t_0)}
+$$
+
+从而不管你什么时候来，平均等待时间为 $1/\mu$，和一个人被服务的时间是一样的。
+
 ## 习题课
 
 ![alt](../images/stochastic/exer_1.jpg)
+
