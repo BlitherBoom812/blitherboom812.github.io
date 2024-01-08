@@ -1410,7 +1410,7 @@ f_V(v) = \frac{v}{\sigma^2}e^{-\frac{v^2}{2\sigma^2}}, v \ge 0\\
 f_\Theta(\theta) = \frac{1}{2\pi}, \theta \in [0, 2\pi]
 $$
 
-### 随机相位正弦波信号叠加零均值高斯
+### 随机相位正弦波信号叠加零均值带通高斯
 
 $$
 Y(t) = A\sin(\omega_ct + \Phi) + X(t)
@@ -1984,11 +1984,6 @@ $$
 $$
 
 矩阵形式：
-
-$$
-
-$$
-
 $$
 \lim_{n \rarr \infty} P^n = \Pi = \begin{bmatrix}
     \pi_1 & \pi_2 & \cdots & \pi_n & \cdots\\
@@ -1996,6 +1991,8 @@ $$
     \cdots & \cdots & \cdots & \cdots & \cdots\\
 \end{bmatrix}
 $$
+
+
 ## 泊松过程
 
 ### 定义
