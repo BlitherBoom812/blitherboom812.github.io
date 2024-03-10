@@ -21,7 +21,8 @@ $$
 ### MSE
 
 $$
-\text{mse}(\hat \theta) = E \lbrace(\theta - \hat \theta)^2\rbrace
+\text{mse}(\hat \theta) = E \lbrace(\theta - \hat \theta)^2\rbrace = \text{var}(\hat \theta) + b^2(\hat \theta)\\
+b^2(\hat \theta) = E(\hat \theta) - \theta
 $$
 
 现实中无法直接计算 MSE，因为涉及到真值 $\theta$，但是 $\theta$ 是我们要求的参数。
