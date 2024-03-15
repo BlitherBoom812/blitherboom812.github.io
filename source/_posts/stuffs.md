@@ -146,3 +146,129 @@ checkContentAndAdjustInterval("特定字符串", 10000, 100000);
 最后，`checkContentAndAdjustInterval`函数通过调用`setTimeout`并传入`checkAndSchedule`函数和初始延迟时间`initialDelay`来启动整个检查流程。
 
 这种方法的好处是你可以灵活地控制检查的间隔时间，而且它在满足特定条件后能够自动调整这个间隔，非常适合需要根据条件动态调整检查频率的场景。
+
+
+## NFS 常用指令
+
+主要参考：[如何在 Ubuntu 20.04 上安装和配置 NFS 服务器？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/480960387)
+
+### 服务端绑定 NFS
+
+直接绑定：
+
+```text
+sudo mount --bind /opt/backups /srv/nfs4/backups
+sudo mount --bind /var/www /srv/nfs4/www
+```
+
+要在重新启动后使绑定挂载永久化，请打开/etc/fstab文件：
+
+```text
+sudo nano /etc/fstab
+```
+
+并添加以下行：
+
+```text
+/etc/fstab
+/opt/backups /srv/nfs4/backups  none   bind   0   0
+/var/www     /srv/nfs4/www      none   bind   0   0
+```
+
+`/var/www `为本地需要绑定的文件夹，`/srv/nfs4/www `为 NFS 管理的文件夹，必须以`/srv/nfs4`开头。
+
+绑定后，服务端可以修改`/var/www `内的文件，会被自动同步到 NFS 绑定的目录下。 
+
+### 客户端绑定 NFS
+
+为挂载点创建两个新目录：
+
+```text
+sudo mkdir -p /backups
+sudo mkdir -p /srv/www
+```
+
+您可以在任何您想要的位置创建目录。
+
+使用以下命令挂载导出的文件系统mount ：
+
+```text
+sudo mount -t nfs -o vers=4 192.168.33.10:/backups /backups
+sudo mount -t nfs -o vers=4 192.168.33.10:/www /srv/www
+```
+
+要在重新启动时永久挂载，请打开/etc/fstab文件并添加以下行：
+
+```text
+sudo nano /etc/fstab
+
+/etc/fstab
+192.168.33.10:/backups /backups   nfs   defaults,timeo=900,retrans=5,_netdev 0 0
+192.168.33.10:/www /srv/www       nfs   defaults,timeo=900,retrans=5,_netdev 0 0
+```
+
+有关挂载 NFS 文件系统时可用选项的信息，请输入man nfs您的终端。
+
+### IP 检测
+
+编辑配置文件
+
+~~~
+sudo nano /etc/exports
+~~~
+
+配置文件例子：
+
+~~~
+/srv/nfs4         192.168.33.0/24(rw,sync,no_subtree_check,crossmnt,fsid=0)
+/srv/nfs4/backups 192.168.33.0/24(ro,sync,no_subtree_check) 192.168.33.3(rw,sync,no_subtree_check)
+/srv/nfs4/www     192.168.33.20(rw,sync,no_subtree_check)
+~~~
+
+其中，192.168.33.0/24 等为需要过滤的 ip 规则。
+
+应用 ip 设置
+
+~~~
+sudo exportfs -ar
+~~~
+
+查看 ip 检测
+
+~~~
+sudo exportfs -v
+~~~
+
+### 重启 NFS
+
+~~~
+sudo /etc/init.d/nfs-kernel-server restart
+~~~
+
+## WSL 相关
+
+### WSL 寄了！
+
+可能是因为配置 nfs 的原因吧，wsl 关掉之后就打不开了。
+* wsl 无响应。
+* 当 ubuntu 处于停止状态时，wsl --list, wsl --status 有响应；但我一旦尝试运行 `wsl` 以启动 ubuntu，就无响应了。
+* wsl --help 一直没问题。
+
+怀疑是配置 /etc/fstab 的时候出的问题，导致 wsl 无响应。
+
+后来的解决方案：
+
+1. 把 ext4.vhdx 备份了一份。
+2. 卸载 ubuntu distro，重新安装了一遍 ubuntu 22.04。
+3. wsl --mount --vhd 将 ext4.vhdx 挂到新安装的 ubuntu wsl 上。
+
+幸好 ext4.vhdx 还在。
+
+另外，挂完 ext4.vhdx 后，我将存有 ext4.vhdx 的移动硬盘拔出，然后重新打开 wsl，发现出现了同样的问题。这样就验证了我的假说：
+
+* 我设置了开机默认挂载 nfs 硬盘，连接远程的服务器。
+* nfs 服务器因为一些原因没连上。
+* wsl 文件系统因为挂载的硬盘找不到了，发生错误。
+* wsl 在启动界面无响应。
+
+重启了电脑，发现之前 wsl --mount 挂载的 ext4.vhdx 已经被清空了，证明 wsl --mount 命令的效果在重启之后清空了。
