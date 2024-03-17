@@ -125,6 +125,8 @@ $$
 
 ![](../images/StaSP/1_1.jpg)
 
+注意：$\mathbf T(\mathbf x)$ 的维度要和 $\mathbf \theta$ 的维度相同
+
 ## 线性模型方法
 
 $$

@@ -272,3 +272,51 @@ sudo /etc/init.d/nfs-kernel-server restart
 * wsl 在启动界面无响应。
 
 重启了电脑，发现之前 wsl --mount 挂载的 ext4.vhdx 已经被清空了，证明 wsl --mount 命令的效果在重启之后清空了。
+
+## SSH 相关
+
+### ssh 服务器
+
+使用 `ssh-keygen` 时最好设置一个口令，否则别人也能用这个密钥。
+
+### 常用命令
+
+ssh 反向代理（服务器端口映射到本地端口），挂在后台
+
+~~~
+ssh -CqTfnN -R <remote_port>:localhost:<local_port>  -v  username@hostname -p <ssh_port>
+~~~
+
+ssh 前向代理（本地端口映射到服务器端口）
+
+~~~
+ssh -CqTfnN -L <local_port>:localhost:<remote_port>  -v  username@hostname -p <ssh_port>
+~~~
+
+将请求转发到 github
+
+~~~
+ssh -CqTfnN -L <local_port>:github.com:22 -v  username@hostname -p <ssh_port>
+~~~
+
+### ssh agent
+
+启动 ssh agent，并查看 pid
+
+~~~
+eval $(ssh-agent -s)
+~~~
+
+查看当前 agent 有哪些密钥
+
+~~~
+ssh-add -l # 查看公钥的 sha256
+ssh-add -L # 查看完整公钥
+~~~
+
+添加密钥
+
+~~~
+ssh-add <private_key_path>
+~~~
+
