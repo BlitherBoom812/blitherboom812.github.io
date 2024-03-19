@@ -28,3 +28,15 @@ reward:
 head:
   css:
     fonts: https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&display=swap
+say:
+  enable: false
+mourn:
+  enable: true
+  days:
+    - 12-13
+post_meta:
+  item_text: false
+  created_at: true
+  updated_at: true
+  categories: true
+  tags: true
