@@ -273,6 +273,28 @@ sudo /etc/init.d/nfs-kernel-server restart
 
 重启了电脑，发现之前 wsl --mount 挂载的 ext4.vhdx 已经被清空了，证明 wsl --mount 命令的效果在重启之后清空了。
 
+### yarn add hasura-cli 安装失败
+
+报错：
+
+~~~
+Command: node dist/index.js
+Arguments: 
+Directory: /home/guoyun812/eesast/hasura/node_modules/hasura-cli
+Output:
+hasura-cli@2.36.1
+Downloading Hasura CLI binary v2.36.1 from https://github.com/hasura/graphql-engine/releases/download/v2.36.1/cli-hasura-linux-amd64
+
+
+hasura-cli@2.36.1
+Error! Failed to install Hasura CLI binary.
+Try npm uninstall hasura-cli or yarn remove hasura-cli and then reinstall it.
+If the issue occurs repeatedly, check if your network can access https://github.com as the the Hasura CLI binary file is hosted on Github.
+You can report the issue on https://github.com/jjangga0214/hasura-cli/issues with error message.
+~~~
+
+解决方案：手动下载 hasura-cli 的二进制文件，并粘贴到 `node_modules/hasura/`。
+
 ## SSH 相关
 
 ### ssh 服务器
