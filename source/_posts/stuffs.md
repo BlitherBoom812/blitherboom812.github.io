@@ -342,3 +342,26 @@ ssh-add -L # 查看完整公钥
 ssh-add <private_key_path>
 ~~~
 
+## Node.js
+
+### listen EACCES: permission denied 0.0.0.0:3000
+
+1、先判断是否是端口占用的问题导致的 `netstat -ano| findstr 3000`
+
+关闭相关进程（cmd）
+
+~~~
+taskkill /PID <process_id> /F
+~~~
+
+发现并没有程序在使用这个端口
+
+2、改用管理员再运行一遍
+
+发现仍然不行
+
+3、使用管理员权限运行以下命令
+
+`net stop winnat`
+
+`net start winnat`
