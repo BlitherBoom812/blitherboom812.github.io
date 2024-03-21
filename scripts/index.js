@@ -11,8 +11,9 @@ hexo.extend.injector.register(
   () => {
     console.log("run latex style");
     var result = css("/css/latex.css")
+    console.log(typeof result)
     console.log(result)
-    return result;
+    return `<link rel="stylesheet" type="text/css" href="/css/latex.css">`;
   },
   "post"
 );
