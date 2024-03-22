@@ -25,9 +25,9 @@ katex:
   options: {}
 reward:
   enable: false
-# head:
-#   css:
-#     online_fonts: https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&display=swap
+head:
+  css:
+    online_fonts: https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&display=swap
 say:
   enable: false
 mourn:
