@@ -1,19 +1,34 @@
 @font-face {
     font-family: "宋体";
+    font-weight: normal;
+    font-style: normal;
     src: url("/fonts/SIMSUN.ttc");
 }
 
 @font-face {
-    font-family: "Latin Modern Roman 10 Regular";
+    font-family: "Latin Modern Roman 10";
+    font-weight: normal;
+    font-style: normal;
     src: url("/fonts/LMROMAN10-REGULAR.otf");
 }
 
 @font-face {
-    font-family: "Latin Modern Roman 10 Bold";
+    font-family: "Latin Modern Roman 10";
+    font-weight: bold;
+    font-style: normal;
     src: url("/fonts/LMROMAN10-BOLD.otf");
 }
 
 @font-face {
-    font-family: "Latin Modern Roman 10 Italic";
+    font-family: "Latin Modern Roman 10";
+    font-weight: normal;
+    font-style: italic;
     src: url("/fonts/LMROMAN10-ITALIC.otf");
+}
+
+@font-face {
+    font-family: "Latin Modern Roman 10";
+    font-weight: bold;
+    font-style: italic;
+    src: url("/fonts/LMROMAN10-BOLDITALIC.otf");
 }
