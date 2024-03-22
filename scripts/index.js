@@ -4,16 +4,18 @@ const katexPatch = require("./katex-patch");
 hexo.extend.filter.register("before_post_render", katexPatch);
 // hexo.extend.filter.register('before_post_render', latex_style);
 
-const css = hexo.extend.helper.get("css").bind(hexo);
-console.log("hexo version: " + hexo.version);
+// load css
 hexo.extend.injector.register(
   "head_end",
   () => {
-    console.log("run latex style");
-    var result = css("/css/latex.css")
-    console.log(typeof result)
-    console.log(result)
     return `<link rel="stylesheet" type="text/css" href="/css/latex.css">`;
+  },
+  "post"
+);
+hexo.extend.injector.register(
+  "head_end",
+  () => {
+    return `<link rel="stylesheet" type="text/css" href="/css/fonts.css">`;
   },
   "post"
 );

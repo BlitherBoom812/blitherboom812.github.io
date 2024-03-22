@@ -4,7 +4,7 @@
   /* 基准字体 */
   /* 备选：Times, "Times New Roman" */
   --base-Latin-font: "Latin Modern Roman", "Latin Modern Roman 10", Times;
-  --base-Chinese-font: "宋体", "微软雅黑";
+  --base-Chinese-font: "华文宋体", "微软雅黑";
   --base-font-size: 13pt;
   /* 引言字体 */
   --quote-font: "Latin Modern Roman", "Latin Modern Roman 10", Times,
@@ -97,7 +97,6 @@ body {
   font-size: var(--base-font-size);
   /* A4标准宽度 */
   max-width: 21cm;
-  background-color: white;
   /* column-count: 2;
     column-gap: 25px;
     column-width: 8cm; 
