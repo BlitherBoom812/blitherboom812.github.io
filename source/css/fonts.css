@@ -13,6 +13,13 @@
 }
 
 @font-face {
+    font-family: "华文宋体";
+    font-weight: normal;
+    font-style: italic;
+    src: url("/fonts/STKAITI.TTF");
+}
+
+@font-face {
     font-family: "华文楷体";
     font-weight: normal;
     font-style: normal;
@@ -27,7 +34,7 @@
 }
 
 @font-face {
-    font-family: "SmilySans";
+    font-family: "SmileySans";
     font-weight: normal;
     font-style: normal;
     src: url("/fonts/SmileySans-Oblique.otf");
