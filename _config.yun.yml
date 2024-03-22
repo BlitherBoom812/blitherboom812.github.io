@@ -27,7 +27,8 @@ reward:
   enable: false
 head:
   css:
-    fonts: https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&display=swap
+    online_fonts: https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&display=swap
+    public_fonts: /fonts/fonts.css
 say:
   enable: false
 mourn:

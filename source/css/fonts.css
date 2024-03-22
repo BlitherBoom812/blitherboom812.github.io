@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "宋体";
+    src: url("/fonts/SIMSUN.ttc");
+}
+
+@font-face {
+    font-family: "Latin Modern Roman 10 Regular";
+    src: url("/fonts/LMROMAN10-REGULAR.otf");
+}
+
+@font-face {
+    font-family: "Latin Modern Roman 10 Bold";
+    src: url("/fonts/LMROMAN10-BOLD.otf");
+}
+
+@font-face {
+    font-family: "Latin Modern Roman 10 Italic";
+    src: url("/fonts/LMROMAN10-ITALIC.otf");
+}
