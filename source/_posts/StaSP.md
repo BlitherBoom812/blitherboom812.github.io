@@ -1,9 +1,10 @@
----
+****---
 title: Statistical Signal Processing
 katex: true
 date: 2024-02-26 11:12:57
 tags:
----
+-----
+
 ## 参数估计
 
 分类：
@@ -344,3 +345,81 @@ $$
 对一般线性模型，MLE是MVU，达到了CRLB，是有效的、最佳的！
 
 ![1711254850893](../images/StaSP/1711254850893.png)
+
+## 最小二乘估计(LS)
+
+### 线性最小二乘估计
+
+![1711339154789](../images/StaSP/1711339154789.png)
+
+### 加权最小二乘估计
+
+![1711339192281](../images/StaSP/1711339192281.png)
+
+### 约束最小二乘估计
+
+![1711339216759](../images/StaSP/1711339216759.png)
+
+### 比较
+
+![1711339249863](../images/StaSP/1711339249863.png)
+
+## 经典估计方法比较
+
+### 噪声电平估计问题
+
+$$
+x[n] = A + w[n]
+$$
+
+其中 $w[n] \sim N(0, \sigma^2)$，待估计参数 $\theta = [A, \sigma^2]^T$
+
+#### MVU估计
+
+$$
+p(x;\theta) = \frac{1}{(2\pi\sigma^2)^{N/2}}\exp \lbrace -\frac{1}{2\sigma^2} \sum\limits_{n=0}^{N - 1}(x[n] - A)^2\rbrace
+$$
+
+$$
+\frac{\partial \ln p (x;\theta)}{\partial A} = \frac{1}{\sigma^2}\sum\limits_{n=0}^{N - 1}(x[n] - A)
+$$
+
+$$
+\frac{\partial \ln p(x;\theta)}{\partial \sigma^2} = \frac{N}{2\sigma^2} + \frac{1}{2\sigma^4}\sum\limits_{n=0}^{N - 1}(x[n] - A)
+$$
+
+![1711339773571](../images/StaSP/1711339773571.png)
+
+![1711339786814](../images/StaSP/1711339786814.png)
+
+#### 线性模型
+
+$$
+\hat\theta = (\bm H^T\bm H)^{-1}\bm  H^T x
+$$
+
+![1711339831807](../images/StaSP/1711339831807.png)
+
+#### BLUE
+
+$$
+\hat\theta = (\bm H^T\bm C^{-1}\bm H)^{-1}\bm  H^T\bm C^{-1} x
+$$
+
+![1711339865703](../images/StaSP/1711339865703.png)
+
+#### 充分统计量
+
+![1711340151724](../images/StaSP/1711340151724.png)
+
+![1711340163113](../images/StaSP/1711340163113.png)
+
+![1711340177961](../images/StaSP/1711340177961.png)
+
+#### MLE
+
+![1711340277148](../images/StaSP/1711340277148.png)
+
+#### LSE
+
+![1711340293644](../images/StaSP/1711340293644.png)
