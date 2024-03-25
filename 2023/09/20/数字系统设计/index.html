@@ -1,0 +1,493 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>数字系统设计 | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="绪论软硬件协同，制作深度学习硬件 理论课，讲座，Lab 专用电路 目标：做一个类似于Google TPU中的某计算模块 benchmark: ML 每4周一个Lab，无期中期末 作业： AlexNet Paper Quantization of CNN DNNTraining &amp; InferenceTraining: forward and backward Inference: back">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字系统设计">
+<meta property="og:url" content="https://blitherboom812.github.io/2023/09/20/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="绪论软硬件协同，制作深度学习硬件 理论课，讲座，Lab 专用电路 目标：做一个类似于Google TPU中的某计算模块 benchmark: ML 每4周一个Lab，无期中期末 作业： AlexNet Paper Quantization of CNN DNNTraining &amp; InferenceTraining: forward and backward Inference: back">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/2_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/2_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/2_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/2_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_9.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/3_10.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_10.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSD/4_9.jpg">
+<meta property="article:published_time" content="2023-09-20T13:33:09.000Z">
+<meta property="article:modified_time" content="2024-03-25T04:18:21.385Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/DSD/2_1.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">21</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">1</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%AA%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">绪论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNN"><span class="toc-number">2.</span> <span class="toc-text">DNN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Training-amp-Inference"><span class="toc-number">2.1.</span> <span class="toc-text">Training &amp; Inference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Model"><span class="toc-number">2.2.</span> <span class="toc-text">Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset"><span class="toc-number">2.3.</span> <span class="toc-text">Dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cost-function"><span class="toc-number">2.4.</span> <span class="toc-text">Cost function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimization"><span class="toc-number">2.5.</span> <span class="toc-text">Optimization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Evaluation"><span class="toc-number">2.6.</span> <span class="toc-text">Evaluation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E7%9A%84%E5%8F%91%E5%B1%95%E5%92%8C%E8%AE%A8%E8%AE%BA"><span class="toc-number">2.7.</span> <span class="toc-text">网络结构的发展和讨论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quantization"><span class="toc-number">3.</span> <span class="toc-text">Quantization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fixed-point-and-floating-point-representation"><span class="toc-number">3.1.</span> <span class="toc-text">Fixed-point and floating-point representation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Fixed-Point-arithmetic"><span class="toc-number">3.1.1.</span> <span class="toc-text">Fixed Point arithmetic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Floating-poing-arithmatic"><span class="toc-number">3.1.2.</span> <span class="toc-text">Floating-poing arithmatic</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hardware-implications"><span class="toc-number">3.2.</span> <span class="toc-text">Hardware implications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quantization-for-deep-learning"><span class="toc-number">3.3.</span> <span class="toc-text">Quantization for deep learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Classic-research-for-quantization-methods"><span class="toc-number">3.4.</span> <span class="toc-text">Classic research for quantization methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pruning"><span class="toc-number">4.</span> <span class="toc-text">Pruning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sparsity-New-Dimension-For-Efficiency"><span class="toc-number">4.1.</span> <span class="toc-text">Sparsity: New Dimension For Efficiency</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Weight-Sparsity-Pruning"><span class="toc-number">4.1.1.</span> <span class="toc-text">Weight Sparsity: Pruning</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Activation-Sparsity-ReLU"><span class="toc-number">4.1.2.</span> <span class="toc-text">Activation Sparsity: ReLU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Weight-Sparsity-Perspective"><span class="toc-number">4.2.</span> <span class="toc-text">Weight Sparsity Perspective</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Unstructured-Sparsity"><span class="toc-number">4.2.1.</span> <span class="toc-text">Unstructured Sparsity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Structural-Sparsity"><span class="toc-number">4.2.2.</span> <span class="toc-text">Structural Sparsity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unstructured-vs-structured"><span class="toc-number">4.2.3.</span> <span class="toc-text">Unstructured vs. structured</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Frequency-Domain-Sparsity"><span class="toc-number">4.2.4.</span> <span class="toc-text">Frequency-Domain Sparsity</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activation-Sparsity-Perspective"><span class="toc-number">4.3.</span> <span class="toc-text">Activation Sparsity Perspective</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Inter-Frame-Sparsity"><span class="toc-number">4.3.1.</span> <span class="toc-text">Inter-Frame Sparsity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ROI-Spasity%EF%BC%9AInput-Dependent"><span class="toc-number">4.3.2.</span> <span class="toc-text">ROI Spasity：Input Dependent</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Leveraging-Sparsity-in-Storage"><span class="toc-number">4.4.</span> <span class="toc-text">Leveraging Sparsity in Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Bitmask-Compression"><span class="toc-number">4.4.1.</span> <span class="toc-text">Bitmask Compression</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Run-Length-Encoding"><span class="toc-number">4.4.2.</span> <span class="toc-text">Run-Length Encoding</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Compressed-Sparse-Row-CSR"><span class="toc-number">4.4.3.</span> <span class="toc-text">Compressed Sparse Row (CSR)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Compressed-Sparse-Column-CSC"><span class="toc-number">4.4.4.</span> <span class="toc-text">Compressed Sparse Column (CSC)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#The-Taco-Notation"><span class="toc-number">4.4.5.</span> <span class="toc-text">The Taco Notation</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A7"><span class="toc-number">5.</span> <span class="toc-text">讲座</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E5%8C%96"><span class="toc-number">5.1.</span> <span class="toc-text">量化</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2023/09/20/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">数字系统设计</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2023-09-20 13:33:09" itemprop="dateCreated datePublished" datetime="2023-09-20T13:33:09+00:00">2023-09-20</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-03-25 04:18:21" itemprop="dateModified" datetime="2024-03-25T04:18:21+00:00">2024-03-25</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>软硬件协同，制作深度学习硬件</p>
+<p>理论课，讲座，Lab</p>
+<p>专用电路</p>
+<p>目标：做一个类似于Google TPU中的某计算模块</p>
+<p>benchmark: ML</p>
+<p>每4周一个Lab，无期中期末</p>
+<p>作业：</p>
+<p>AlexNet Paper</p>
+<p>Quantization of CNN</p>
+<h2 id="DNN"><a href="#DNN" class="headerlink" title="DNN"></a>DNN</h2><h3 id="Training-amp-Inference"><a href="#Training-amp-Inference" class="headerlink" title="Training &amp; Inference"></a>Training &amp; Inference</h3><p>Training: forward and backward</p>
+<p>Inference: backward</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p><img src="/../images/DSD/2_1.jpg" loading="lazy"></p>
+<p>五类算子：</p>
+<p><img src="/../images/DSD/2_2.jpg" loading="lazy"></p>
+<p>特征提取器：卷积层，池化层；</p>
+<p>分类器：全连接层</p>
+<p><strong>线性卷积层</strong></p>
+<p>边界扩充(Padding)：在图像周围扩展一圈0，避免多次卷积导致数据尺寸越来越小</p>
+<p>卷积步长(Stride)：卷积核每次跳的步数。可以用来让数据尺寸快速变化</p>
+<p>非线性函数-激活函数</p>
+<p>非线性-正则化函数</p>
+<p>非线性-池化函数</p>
+<p><strong>池化层</strong></p>
+<p>池化层减小图片的尺寸，从而减小参数的数量和计算量。</p>
+<p>最大池化：在池化窗口内取最大值作为输出。</p>
+<ul>
+<li>复杂度低，硬件实现容易</li>
+<li>最为常用</li>
+</ul>
+<p>平均池化：取池化窗口内的平均值作为输出。</p>
+<p>$L^2$ 池化法：对所有的数计算平方后累加求和再开平方。</p>
+<ul>
+<li>计算复杂度高</li>
+<li>几何平均池化的复杂度更高</li>
+</ul>
+<p><strong>线性全连接层</strong></p>
+<p>将特征图映射为分类结果</p>
+<p><strong>Softmax 层</strong></p>
+<p>有的模型在输出层使用softmax对输出进行归一化：</p>
+<div>$$
+f(z_j) = \dfrac{e^{z_j}}{\sum_{i = 0}^n e^{z_j}}
+$$</div>
+
+<ul>
+<li>输入和输出规模相同</li>
+<li>归一化计算，让较大的值凸显，让较小的值被抑制，从而决定分类概率</li>
+</ul>
+<p><strong>卷积神经网络的总体结构</strong></p>
+<h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><p>数据集的建立：数据采集，数据标签，数据清洗，数据增强，数据分割</p>
+<h3 id="Cost-function"><a href="#Cost-function" class="headerlink" title="Cost function"></a>Cost function</h3><h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><ul>
+<li>梯度下降法</li>
+<li>SGD</li>
+<li>动量法：计算过去的平均梯度</li>
+<li>AdaGrad法：累加梯度方差</li>
+<li>RMSProp：按时间降低学习率</li>
+<li>Adam 算法：指数加权移动平均值计算梯度动量和二次矩</li>
+<li>SGD简单，但是训练过程边长，自适应算法会更高效</li>
+</ul>
+<h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><p><strong>回归问题指标</strong></p>
+<p>PSNR</p>
+<div>$$
+PSNR = 10 \cdot \log_{10}(\frac{MAX_I^2}{MSE})
+$$</div>
+
+<p><strong>分类问题指标</strong></p>
+<ul>
+<li>Top1 accuracy</li>
+<li>Top5 accuracy</li>
+</ul>
+<p><strong>IoU</strong></p>
+<p>Intersection of Union?</p>
+<div>$$
+\text{IoU} = \frac{|A\cap B|}{|A \cup B|}
+$$</div>
+
+<p><strong>检测任务评价指标 mAP</strong></p>
+<p>mean average precision</p>
+<p>真阳性TP: 预测为真，实际为真</p>
+<p>假阳性FP：预测为真，实际为假</p>
+<p>假阴性FN：预测为假，实际为真</p>
+<p><strong>查全率（召回率，Recall）和查准率（准确率，Precision）</strong></p>
+<div>$$
+\text{Precision} = \frac{TP}{TP + FP}\\
+\text{Recall} = \frac{TP}{TP + FN}
+$$</div>
+
+<p>置信度衡量的是模型认为有效的自信程度。我们先将结果按照置信度从高到低排序。</p>
+<p>mAP是不同查全率下，最高查准率的平均值。</p>
+<h3 id="网络结构的发展和讨论"><a href="#网络结构的发展和讨论" class="headerlink" title="网络结构的发展和讨论"></a>网络结构的发展和讨论</h3><p><strong>分类任务</strong></p>
+<p>AlexNet</p>
+<ul>
+<li>使用多个卷积层，有效提取图像特征</li>
+<li>ReLU 提高训练速度</li>
+<li>Dropout、数据增强扩大训练集，防止过拟合</li>
+</ul>
+<p>VGG</p>
+<ul>
+<li>使用 3 * 3 的卷积核取代 AlexNet 的大卷积核<ul>
+<li>提升收敛速度</li>
+<li>参数量更少</li>
+<li>可以构建更深的网络，有更多的非线性变换，还有更强的表征能力</li>
+</ul>
+</li>
+<li>参数预初始化策略</li>
+</ul>
+<p>ResNet</p>
+<p>?</p>
+<p><strong>目标检测</strong></p>
+<p>Two-stage v.s. One-stage</p>
+<p><strong>Two-stage</strong></p>
+<p>先画框，再分类</p>
+<p>MS CoCo Dataset</p>
+<ul>
+<li>用的最多的还是目标检测任务</li>
+</ul>
+<p>R-CNN</p>
+<ul>
+<li>输入图像</li>
+<li>提取候选框</li>
+<li>每一个候选框提取单独的特征</li>
+<li>进行分类</li>
+</ul>
+<p>Fast R-CNN</p>
+<ul>
+<li>输入图像</li>
+<li>一次特征提取</li>
+<li>提取候选框</li>
+<li>进行分类</li>
+</ul>
+<p>Faster R-CNN</p>
+<ul>
+<li>输入图像</li>
+<li>一次特征提取</li>
+<li>提取候选框</li>
+<li>进行分类</li>
+</ul>
+<p><strong>One-stage</strong></p>
+<p>YOLO</p>
+<p>五代发展，最广泛的目标检测算法</p>
+<p>对于每一个像素，都会输出一个对应的特征向量，包含：</p>
+<ul>
+<li>二分类：是物体中心的置信度</li>
+<li>回归：偏离物体中心的长度 $\Delta x$ 和 $\Delta y$</li>
+<li>分类：对应的物体分类以及置信度</li>
+<li>回归：该像素所代表的物体的长宽，YOLO有一些基础框(anchor)，输出值是相对基础框的形变 $\Delta h$ 和 $\Delta w$</li>
+</ul>
+<p><strong>NMS (Non-Maximum Suppression)</strong><br>Bounding boxes for one instance may overlap.<br>Method: For each type, use NMS to eliminate redundant bounding boxes (greedy approach).<br>Workflow:</p>
+<ol>
+<li>Sort candidate bounding boxes by classification confidence.</li>
+<li>Adding the boxes b with most confidence to output list, and delete it from the candidate boxes.</li>
+<li>Calculate IoU between b and other boxes bi. If &gt; threshold, delete bi.</li>
+<li>Repeat until no candidate bounding boxes.</li>
+</ol>
+<p><strong>序列模型（Serial Model）</strong></p>
+<p>to process Speech, text, video, audio, etc.</p>
+<p>Feature: </p>
+<ol>
+<li>The data input is in the time sequence.</li>
+<li>There is a correlation between the data before and after.</li>
+</ol>
+<p>So the model should have the ability to “store” information.</p>
+<p>Speech dataset: TIMIT</p>
+<ol>
+<li>It consists of recordings of 630 speakers of 8 dialects of American English each reading 10 phonetically-rich sentences.</li>
+<li>It also comes with the word and phone-level transcriptions of the speech.</li>
+</ol>
+<p>Video dataset: DAVIS</p>
+<p>The Densely Annotation Video Segmentation dataset (DAVIS) is a high quality and high resolution densely annotated video segmentation dataset under two resolutions, 480p and 1080p.</p>
+<p>There are 50 video sequences with 3455 densely annotated frames in pixel level. 30 videos with 2079 frames are for training and 20 videos with 1376 frames are for validation.</p>
+<p>NLP dataset: GLUE</p>
+<p>General Language Understanding Evaluation (GLUE) benchmark: Standard split of data totrain, validation, test, where labels for the test set is only held in the server.</p>
+<ul>
+<li>Sentence pair tasks<ul>
+<li>MNLI, Multi-Genre Natural Language Inference</li>
+<li>QQP, Ouora Ouestion Pairs</li>
+<li>QNLI, Ouestion Natural Language Inference</li>
+<li>STS-B The Semantic Textual Similarity Benchmark</li>
+<li>MRPC Microsoft Research Paraphrase Corpus</li>
+<li>RTE Recognizing Textual Entailment</li>
+<li>WNLI Winograd NLI is a small natural language inference</li>
+</ul>
+</li>
+<li>datasetSingle sentence classification<ul>
+<li>SST-2 The Stanford Sentiment Treebank</li>
+<li>CoLA The Corpus of Linguistic Acceptability</li>
+</ul>
+</li>
+</ul>
+<p><strong>Models</strong></p>
+<p><strong>RNN: Recurrent Neural Network</strong></p>
+<ul>
+<li>one to one </li>
+<li>one to many</li>
+<li>many to one</li>
+<li>many to many</li>
+<li>many to many</li>
+</ul>
+<p><img src="/../images/DSD/2_3.jpg" loading="lazy"></p>
+<p>损失函数的计算：</p>
+<p>单个时刻：</p>
+<div>$$
+L^{(t)} = -\mathbf y^{(t)} \ln \mathbf {\hat {y}}^{(t)}
+$$</div>
+
+<p>整个序列：</p>
+<div>$$
+L = \sum\limits_{t=1}^{\tau}L^{(t)} = - \sum\limits_{t=1}^{\tau} \mathbf y^{(t)} \ln \mathbf {\hat {y}}^{(t)}
+$$</div>
+
+<p>然后可求梯度：</p>
+<p><img src="/../images/DSD/2_4.jpg" alt="alt" loading="lazy"></p>
+<p>循环神经网络存在梯度爆炸或梯度消失，因此无法处理长期的依赖关系。</p>
+<p><strong>LSTM: Solving the Gradient</strong></p>
+<p><strong>Transformer</strong></p>
+<p>Self attention:</p>
+<div>$$
+\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK}{\sqrt d_k})V
+$$</div>
+
+<h2 id="Quantization"><a href="#Quantization" class="headerlink" title="Quantization"></a>Quantization</h2><h3 id="Fixed-point-and-floating-point-representation"><a href="#Fixed-point-and-floating-point-representation" class="headerlink" title="Fixed-point and floating-point representation"></a>Fixed-point and floating-point representation</h3><h4 id="Fixed-Point-arithmetic"><a href="#Fixed-Point-arithmetic" class="headerlink" title="Fixed Point arithmetic"></a>Fixed Point arithmetic</h4><div>$$
+\underbrace{0}_{\text{Sign bit}}\ \ \underbrace{10\dots01}_{n\text{ bit integer part}}\ \ .\underbrace{10\dots01}_{m\text{ bit fractional part}}
+$$</div>
+
+<p><strong>Fixed point with slope and bias</strong></p>
+<p>apply a linear transform on fixed point:</p>
+<div>$$
+y = s*x + z
+$$</div>
+
+
+
+<h4 id="Floating-poing-arithmatic"><a href="#Floating-poing-arithmatic" class="headerlink" title="Floating-poing arithmatic"></a>Floating-poing arithmatic</h4><p><img src="/../images/DSD/3_1.jpg" alt="alt" loading="lazy"></p>
+<p><strong>IEEE 754 Floating Point Standard</strong></p>
+<ul>
+<li>Called Biased Notation, where bias is number subtracted to get real number. </li>
+<li>IEEE 754 uses bias of 127 for single precision, 1023 for double precision.</li>
+</ul>
+<p><img src="/../images/DSD/3_3.jpg" alt="alt" loading="lazy"></p>
+<div>$$
+(-1)^S \times (1 + m) \times 2^{(E - \text{Bias})}
+$$</div>
+
+<p><strong>fp15(helf precision)</strong></p>
+<p><img src="/../images/DSD/3_2.jpg" alt="alt" loading="lazy"></p>
+<h3 id="Hardware-implications"><a href="#Hardware-implications" class="headerlink" title="Hardware implications"></a>Hardware implications</h3><p><img src="/../images/DSD/3_4.jpg" alt="alt" loading="lazy"></p>
+<p>加法下定点数比浮点数功耗小得多，但是乘法下定点数和浮点数的性能差不多。</p>
+<p>Low bit Fixed-point representations on digital system</p>
+<h3 id="Quantization-for-deep-learning"><a href="#Quantization-for-deep-learning" class="headerlink" title="Quantization for deep learning"></a>Quantization for deep learning</h3><ul>
+<li>Post-training quantization</li>
+<li>Quantization-aware training</li>
+</ul>
+<p><strong>Post-training quantization</strong></p>
+<div>$$
+r = S(Q - Z)\\
+OA[i, k] =\sum\limits_{j=1}^{N}(W[i, j] * IA[j, k])\\
+q_{OA}^{(i, k)} = Z_{OA} + \frac{S_W * S_{IA}}{S_{OA}}\sum\limits_{j=1}^{N} (q_W^{(i, j)} * q_{IA}^{(j, k)})
+$$</div>
+
+<p>Choose the optimal threshold</p>
+<p>No saturation is bad </p>
+<h3 id="Classic-research-for-quantization-methods"><a href="#Classic-research-for-quantization-methods" class="headerlink" title="Classic research for quantization methods"></a>Classic research for quantization methods</h3><p><strong>Basic structure</strong></p>
+<p>Weight Quantization &amp; Activation Quantization</p>
+<p><img src="/../images/DSD/3_5.jpg" alt="alt" loading="lazy"></p>
+<p><strong>Dorefa Net</strong></p>
+<ul>
+<li>quantization for gradient</li>
+<li>normalize data to ensure the data distribution not change after quantization</li>
+<li>uniform noise to offset the quantization noise for gradient</li>
+<li>replace accumulate with bitcount operation</li>
+<li>result is that gradient precision is most sensitive in TAQ(G &gt; A &gt; W)</li>
+</ul>
+<p><strong>INQ</strong></p>
+<ul>
+<li>quantization first half and freeze the other, then unfreeze other to train normally</li>
+<li>exchange the first half and second half, and repeat above</li>
+</ul>
+<p><img src="/../images/DSD/3_6.jpg" alt="alt" loading="lazy"></p>
+<p><strong>Pact</strong></p>
+<ul>
+<li>clipping the activation before quantization is better</li>
+</ul>
+<div>$$
+PACT(x) = 0.5(|x| - |x - \alpha| + \alpha) = \begin{cases}
+    0, x<0,\\
+    x, 0\le x \lt \alpha,\\
+    \alpha, x \ge \alpha 
+\end{cases}
+$$</div>
+
+<p>Different layers need different α</p>
+<p>alpha should be learnable</p>
+<p><strong>Outlier quantization</strong></p>
+<ul>
+<li>Use different quantized bits to quantize different weights. Some weight can have higher precision while others not.</li>
+</ul>
+<p><img src="/../images/DSD/3_7.jpg" alt="alt" loading="lazy"></p>
+<p><strong>Quantization interval learning</strong></p>
+<ul>
+<li>Most of the weights are very small. Minor weights can have too large value.</li>
+</ul>
+<p><img src="/../images/DSD/3_8.jpg" alt="alt" loading="lazy"></p>
+<p>a should be pruned, c should be clipped, only b worths quantizing.</p>
+<p><strong>Binary neural networks (BNN)</strong></p>
+<ul>
+<li>Networks with weights composed of {-1, 1}</li>
+</ul>
+<p><img src="/../images/DSD/3_9.jpg" alt="alt" loading="lazy"></p>
+<ul>
+<li>计算时长跟精度有平方反比的关系，优化是平方的</li>
+<li>存储跟精度只有线性的关系，优化是线性的，由于BNN bit数少，总的参数量更多，实际上存储没怎么优化</li>
+<li>BNN 大幅优化了计算，但是存储没变，此时存储成为了瓶颈</li>
+</ul>
+<p><strong>State-of-the-art hardware support for low<br>precision DNNs</strong></p>
+<p><img src="/../images/DSD/3_10.jpg" alt="alt" loading="lazy"></p>
+<h2 id="Pruning"><a href="#Pruning" class="headerlink" title="Pruning"></a>Pruning</h2><p>稀疏矩阵是指矩阵中大部分元素都是0的矩阵。获得稀疏矩阵，有助于加速训练和推理速度。</p>
+<h3 id="Sparsity-New-Dimension-For-Efficiency"><a href="#Sparsity-New-Dimension-For-Efficiency" class="headerlink" title="Sparsity: New Dimension For Efficiency"></a>Sparsity: New Dimension For Efficiency</h3><p>稀疏性的来源：</p>
+<ul>
+<li>剪枝 - 权重</li>
+<li>ReLU - 激活</li>
+<li>Domain Specific</li>
+</ul>
+<h4 id="Weight-Sparsity-Pruning"><a href="#Weight-Sparsity-Pruning" class="headerlink" title="Weight Sparsity: Pruning"></a>Weight Sparsity: Pruning</h4><p>剪枝方法：</p>
+<ul>
+<li>很多参数其实是很接近0的数</li>
+<li>因此，低于某一阈值时，直接将其赋0.但是这样会影响精度。</li>
+<li>还可以用添加正则项的方法（Weight decay）：<ul>
+<li>$CF &#x3D; MSE_{train} + \lambda \sum_i w_i^2$</li>
+<li>$CF &#x3D; MSE_{train} + \lambda \sum_i |w_i|$</li>
+</ul>
+</li>
+</ul>
+<h4 id="Activation-Sparsity-ReLU"><a href="#Activation-Sparsity-ReLU" class="headerlink" title="Activation Sparsity: ReLU"></a>Activation Sparsity: ReLU</h4><h3 id="Weight-Sparsity-Perspective"><a href="#Weight-Sparsity-Perspective" class="headerlink" title="Weight Sparsity Perspective"></a>Weight Sparsity Perspective</h3><p>不同的稀疏程度：</p>
+<p><img src="/../images/DSD/4_1.jpg" alt="alt" loading="lazy"></p>
+<h4 id="Unstructured-Sparsity"><a href="#Unstructured-Sparsity" class="headerlink" title="Unstructured Sparsity"></a>Unstructured Sparsity</h4><p>Han Song@NIPS2015 的剪枝策略：</p>
+<p><img src="/../images/DSD/4_2.jpg" alt="alt" loading="lazy"></p>
+<p>第一轮训练后，将所有接近0的神经元剪除，再重新对剩下的进行训练(retrain)。</p>
+<ul>
+<li>压缩比很高，而准确率几乎不下降</li>
+<li>对于硬件并不友好，虽然有很多0，但是硬件上没法把它们压缩掉。</li>
+<li>计算速度并没有提高，甚至降低了</li>
+</ul>
+<h4 id="Structural-Sparsity"><a href="#Structural-Sparsity" class="headerlink" title="Structural Sparsity"></a>Structural Sparsity</h4><p><strong>SSL 剪枝策略(Structured weight pruning)</strong></p>
+<ul>
+<li>不是剪一个神经元，而是把一行&#x2F;一列&#x2F;一个通道全部剪掉。（不过，不是真的剪枝，而是修改代价函数的正则项）</li>
+<li>规则化的剪枝对硬件更加友好</li>
+</ul>
+<p>代价函数的表达式：</p>
+<p><img src="/../images/DSD/4_4.jpg" alt="alt" loading="lazy"></p>
+<ul>
+<li>成功在一般设备上加速了</li>
+</ul>
+<p><strong>Pattern Pruning</strong></p>
+<p>研究卷积核内非0的权重是如何分布的。</p>
+<p><img src="/../images/DSD/4_5.jpg" alt="alt" loading="lazy"></p>
+<p>如果某个“分布模式”反复的出现，就可以对它进行压缩存储：</p>
+<p><img src="/../images/DSD/4_6.jpg" alt="alt" loading="lazy"></p>
+<p>这一方面的成果：</p>
+<ul>
+<li>Flexible-Length Pattern Pruning：用概率统计方法得到特定的模式</li>
+<li>Fixed-Length Pattern Pruning：约束了模式里面非0元素的个数</li>
+</ul>
+<h4 id="Unstructured-vs-structured"><a href="#Unstructured-vs-structured" class="headerlink" title="Unstructured vs. structured"></a>Unstructured vs. structured</h4><p>剪枝技术基本上已经成熟：</p>
+<ul>
+<li>Non-stuctured pruning<ul>
+<li>高压缩率</li>
+<li>只能在特定设备上来降低功耗，但是性能其实没什么提升</li>
+</ul>
+</li>
+<li>Structured pruning<ul>
+<li>对硬件更友好</li>
+<li>低压缩率</li>
+</ul>
+</li>
+</ul>
+<p>（压缩率指的是训练的速度，即将数据“压缩”为神经网络的内蕴知识的能力。）</p>
+<h4 id="Frequency-Domain-Sparsity"><a href="#Frequency-Domain-Sparsity" class="headerlink" title="Frequency-Domain Sparsity"></a>Frequency-Domain Sparsity</h4><p>采用循环的卷积核</p>
+<ul>
+<li>因为循环出现的元素，存储降低</li>
+<li>计算等价为循环卷积，可以转换为 FFT 频域相乘，获得更高效的计算</li>
+</ul>
+<h3 id="Activation-Sparsity-Perspective"><a href="#Activation-Sparsity-Perspective" class="headerlink" title="Activation Sparsity Perspective"></a>Activation Sparsity Perspective</h3><h4 id="Inter-Frame-Sparsity"><a href="#Inter-Frame-Sparsity" class="headerlink" title="Inter-Frame Sparsity"></a>Inter-Frame Sparsity</h4><p>一段序列的相邻帧之间具有相似性。因此只需要存储帧与帧之间的差值就行了。</p>
+<p>Yuan Z@ISSCC 2020 的结论：</p>
+<ul>
+<li>差分帧并不是稀疏的</li>
+<li>差分帧的数值集中于低的bit位，分布集中</li>
+<li>而高bit位很多都是0，非常稀疏</li>
+</ul>
+<p>因此，可以对低 bit 位和高 bit 位拆分处理。</p>
+<h4 id="ROI-Spasity：Input-Dependent"><a href="#ROI-Spasity：Input-Dependent" class="headerlink" title="ROI Spasity：Input Dependent"></a>ROI Spasity：Input Dependent</h4><p>ROI: Region of Interest</p>
+<p>图像里包含的信息，有的丰富，有的贫乏，有的容易识别，有的很难识别。</p>
+<ul>
+<li>稠密的输入用大核，稀疏的输入用小核？</li>
+</ul>
+<p>基于不同的输入，采用不同的网络：</p>
+<ul>
+<li>图像中难度高的区域通过更深的网络层</li>
+<li>难度低的区域通过更浅的网络层</li>
+</ul>
+<h3 id="Leveraging-Sparsity-in-Storage"><a href="#Leveraging-Sparsity-in-Storage" class="headerlink" title="Leveraging Sparsity in Storage"></a>Leveraging Sparsity in Storage</h3><p>如何压缩稀疏矩阵的存储空间？</p>
+<h4 id="Bitmask-Compression"><a href="#Bitmask-Compression" class="headerlink" title="Bitmask Compression"></a>Bitmask Compression</h4><p><img src="/../images/DSD/4_7.jpg" alt="alt" loading="lazy"></p>
+<h4 id="Run-Length-Encoding"><a href="#Run-Length-Encoding" class="headerlink" title="Run-Length Encoding"></a>Run-Length Encoding</h4><p>游程编码<br>(matlab警告)</p>
+<p><img src="/../images/DSD/4_8.jpg" alt="alt" loading="lazy"></p>
+<h4 id="Compressed-Sparse-Row-CSR"><a href="#Compressed-Sparse-Row-CSR" class="headerlink" title="Compressed Sparse Row (CSR)"></a>Compressed Sparse Row (CSR)</h4><p><img src="/../images/DSD/4_10.jpg" alt="alt" loading="lazy"></p>
+<h4 id="Compressed-Sparse-Column-CSC"><a href="#Compressed-Sparse-Column-CSC" class="headerlink" title="Compressed Sparse Column (CSC)"></a>Compressed Sparse Column (CSC)</h4><p><img src="/../images/DSD/4_9.jpg" alt="alt" loading="lazy"></p>
+<h4 id="The-Taco-Notation"><a href="#The-Taco-Notation" class="headerlink" title="The Taco Notation"></a>The Taco Notation</h4><p>?</p>
+<h2 id="讲座"><a href="#讲座" class="headerlink" title="讲座"></a>讲座</h2><h3 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h3><p>Uniform &amp; Non-uniform</p>
+<p>Non-uniform quantization is not efficient for hardware deployment</p>
+<p>Symmetric vs Asymmetric Quantization</p>
+<p>Quantization Granularity: Layer-wise vs Channel-wise</p>
+<p>Dynamic vs Static Quantization</p>
+<p>静态的更常用，因为量化本身就是为了加快速度，动态量化却一边训模型一边更新量化区间的范围，反而减慢了速度。不过也有使用动态量化的时候（Mid Journey 生成图像）。</p>
+<p>什么是mixed-precsion quantization？</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2023/09/20/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" title="数字系统设计">https://blitherboom812.github.io/2023/09/20/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/09/21/Stochastic-Process/" rel="prev" title="Stochastic-Process"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Stochastic-Process</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/09/20/Digital-Signal-Processing/" rel="next" title="Digital Signal Processing"><span class="post-nav-text">Digital Signal Processing</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>
