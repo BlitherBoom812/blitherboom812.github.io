@@ -163,7 +163,80 @@ $$
 D = \frac{U_{\max}}{U_{av}} = \frac{P_{\max}}{P_{rad}/4\pi}
 $$
 
-
 ![1711091202619](../images/Antenna/1711091202619.png)
 
 ![1711091212947](../images/Antenna/1711091212947.png)
+
+![1711693683771](../images/Antenna/1711693683771.png)
+
+![1711693701192](../images/Antenna/1711693701192.png)
+
+#### Gain
+
+![1711693749686](../images/Antenna/1711693749686.png)
+
+$$
+G = \frac{U_{\max}}{P_{in}/4\pi}
+$$
+
+#### Polarization
+
+![1711693845822](../images/Antenna/1711693845822.png)
+
+Polarization Mismatch:
+
+![1711693861642](../images/Antenna/1711693861642.png)
+
+CP
+
+![1711693936592](../images/Antenna/1711693936592.png)
+
+#### Effective Aperture and Aperture efficiency
+
+![1711694027177](../images/Antenna/1711694027177.png)
+
+![1711694083583](../images/Antenna/1711694083583.png)
+
+### Circuit Parameters
+
+#### Input impedance
+
+Input impedance definition:
+
+* the impedance presented by an antenna at its terminals
+* the ratio of the voltage to current at its terminals
+* the ratio of the electric to magnetic fields at its terminals
+
+![1711694243897](../images/Antenna/1711694243897.png)
+
+##### Conjugate Matching
+
+$$
+Z_A = Z_g^*
+$$
+
+##### Mismatching
+
+![1711694350257](../images/Antenna/1711694350257.png)
+
+##### Radiation Resistance
+
+$$
+P_{rad} = \frac12|I_g|^2R_r = \oiint_S\vec S_{av} \cdot \rm d\vec s
+$$
+
+![1711694462059](../images/Antenna/1711694462059.png)
+
+#### Scattering Parameters
+
+![1711694619870](../images/Antenna/1711694619870.png)
+
+$$
+\frac{\Gamma^2}{Z_1} + \frac{T^2}{Z_2} = 1
+$$
+
+![1711694639638](../images/Antenna/1711694639638.png)
+
+![1711695738159](../images/Antenna/1711695738159.png)
+
+二端口网络通常用于描述二天线问题。$S_{11}$表示天线1的反射，$S_{21}$表示天线1到天线2的耦合，均不利于信号的传播。我们希望让$1 - S_{11}^2 - S_{21}^2$尽可能大。
