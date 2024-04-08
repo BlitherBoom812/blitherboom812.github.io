@@ -143,7 +143,7 @@ Instantaneous Poynting vector $\vec S(x, y, z, t)$
 
 Radiation Power Density = Time average Poynting vector $\vec S_{av}(x, y, z)=\frac1T\int_0^T\vec S(x, y, z, t)\mathrm dt = \frac12\text{Re}[\tilde{\vec E} \times \tilde{\vec H^*}]$
 
-Total Radiation Power $P_{rad} = \oiint_S[\tilde{\vec E} \times \tilde{\vec H^*}] \cdot \mathrm dv\vec s$
+Total Radiation Power $P_{rad} = \oiint_S[\tilde{\vec E} \times \tilde{\vec H^*}] \cdot \mathrm d\vec s$
 
 #### Radiation Intensity
 
@@ -240,3 +240,23 @@ $$
 ![1711695738159](../images/Antenna/1711695738159.png)
 
 二端口网络通常用于描述二天线问题。$S_{11}$表示天线1的反射，$S_{21}$表示天线1到天线2的耦合，均不利于信号的传播。我们希望让$1 - S_{11}^2 - S_{21}^2$尽可能大。
+
+### Link Calculation
+
+#### Friis's Equation
+
+![1712471419276](../images/Antenna/1712471419276.png)
+
+![1712471436962](../images/Antenna/1712471436962.png)
+
+#### ERIP
+
+![1712471499226](../images/Antenna/1712471499226.png)
+
+    
+
+赫兹偶极子的辐射电阻： $80\pi^2(\frac{\Delta z}{\lambda})^2$，方向性 $\frac{2}{3}$。
+
+#### Radar Equation
+
+![1712473473687](../images/Antenna/1712473473687.png)

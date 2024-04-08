@@ -423,3 +423,69 @@ $$
 #### LSE
 
 ![1711340293644](../images/StaSP/1711340293644.png)
+
+## 贝叶斯估计
+
+贝叶斯MSE：
+Bmse$\left(\hat{\theta}\right)=E\left(\left(\theta-\hat{\theta}\right)^2\right)$
+ 
+
+$=\int\int\left(\theta-\hat{\theta}\right)^{2}p\big(\mathbf{x},\theta\big)d\mathbf{x}d\theta$ $=\iint\left(\theta-\hat{\theta}\right)^2p\big(\boldsymbol{x}|\theta\big)p\big(\theta\big)d\boldsymbol{x}d\theta$
+ $=\iint\left(\theta-\hat{\theta}\right)^2p(x|\theta)dxp(\theta)d\theta$
+
+$\hat{\theta}=E\big(\theta|x\big)$
+
+多余参数：未知，但不感兴趣的参数
+ 解决思路：通过积分消除多余参数的影响
+ (1) 后验概率中存多余参数时：
+
+$$
+p(\boldsymbol{\theta},\boldsymbol{\alpha}\mid\boldsymbol{x}) \Rightarrow p (\boldsymbol{\theta}\mid\boldsymbol{x})=\int p(\boldsymbol{\theta},\boldsymbol{\alpha}\mid\boldsymbol{x})\:d\boldsymbol{\alpha}
+$$
+
+(2) 条件概率中存在多余参数时：
+
+$$
+p(\boldsymbol{\theta}\mid\boldsymbol{x})=\frac{p(\boldsymbol{x}\mid\boldsymbol{\theta})p(\boldsymbol{\theta})}{\int p(\boldsymbol{x}\mid\boldsymbol{\theta})p(\boldsymbol{\theta})d\boldsymbol{\theta}}
+$$
+
+$$
+\text{若现只有 }p(x|\theta,\alpha)\text{,而无 }p(x|\theta)
+$$
+ 此时可通过积分方式解决
+
+$$
+p(x\mid\theta)=\int p(x\mid\theta,\alpha)p(\alpha\mid\theta)d\alpha 
+$$
+
+进一步地，若待估计参数与多余参数相互独立，
+
+$$
+p(x\mid\theta)=\int p(x\mid\theta,\alpha)p(\alpha)d\alpha 
+$$
+
+矢量参数下贝叶斯估计
+若 θ 是 $p{\times}1$ 的矢量参数，那么为了估计其中某个参数 $\theta_i$, 可以将剩余参数当作多余参数，因此对$\theta_i$ 的MMSE为
+
+$$
+\hat{\theta}_i=E\left(\theta_i\mid x\right)=\int\theta_ip(\theta_i\mid x)d\theta_i
+$$
+ 其中
+
+$$
+p(\theta_i\mid x)=\int\cdots\int p(\theta\mid x)d\theta_1\cdots d\theta_{i-1}d\theta_{i+1}\cdots d\theta_p
+$$
+
+$$
+\hat{\theta}_i=\int\theta_i\left(\int\cdots\int p(\boldsymbol{\theta}\mid\boldsymbol{x})\underline{d\theta_1\cdots d\theta_{i-1}d\theta_{i+1}\cdots d\theta_p}\right)d\theta_i=\int\theta_ip(\boldsymbol{\theta}\mid\boldsymbol{x})d\boldsymbol{\theta}
+$$
+
+$$
+\Longrightarrow\hat{\theta}=\begin{bmatrix}\theta_1p(\theta|x)d\theta\\\int\theta_2p(\theta|x)d\theta\\\vdots\\\int\theta_pp(\theta|x)d\theta\end{bmatrix}=\int\theta_P(\theta|x)d\theta=E(\theta|x)
+$$
+
+### 贝叶斯风险
+
+$$
+\Re=\iint C(\varepsilon)p(x,\theta)dxd\theta 
+$$
