@@ -1,33 +1,40 @@
-name: Hexo Deploy Automatically
+name: GitHub Pages
 
-on: [push]
+on:
+  push:
+    branches:
+      # The branch where the project source code resides
+      # 项目源代码所在的分支
+      - valaxy
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
 
-    runs-on: ubuntu-latest
-    
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [lts/*]
+        os: [ubuntu-latest]
+      fail-fast: false
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        
+      - uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      
-      - name: Generate
-        run: |
-          npm i && npx hexo g
-      
-      - name: Deploy
+          registry-url: https://registry.npmjs.org/
+
+      - name: 📦 Install Dependencies
+        run: npm i
+
+      - name: 🌌 Build Valaxy Blog
+        run: npm run build
+
+      - name: 🪤 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: main
-          publish_dir: ./public
+          publish_dir: ./dist
           force_orphan: true
