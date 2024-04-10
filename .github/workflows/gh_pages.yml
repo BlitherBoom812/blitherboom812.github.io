@@ -1,4 +1,4 @@
-name: GitHub Pages
+name: Valaxy GitHub Pages
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
       - name: 🌌 Build Valaxy Blog
         run: npm run build
 
-      - name: 🪤 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
