@@ -256,8 +256,8 @@ sudo /etc/init.d/nfs-kernel-server restart
 可能是因为配置 nfs 的原因吧，wsl 关掉之后就打不开了。
 
 * wsl 无响应。
-* 当 ubuntu 处于停止状态时，wsl --list, wsl --status 有响应；但我一旦尝试运行 `wsl` 以启动 ubuntu，就无响应了。
-* wsl --help 一直没问题。
+* 当 ubuntu 处于停止状态时，wsl \-\-list, wsl \-\-status 有响应；但我一旦尝试运行 `wsl` 以启动 ubuntu，就无响应了。
+* wsl \-\-help 一直没问题。
 
 怀疑是配置 /etc/fstab 的时候出的问题，导致 wsl 无响应。
 
@@ -265,7 +265,7 @@ sudo /etc/init.d/nfs-kernel-server restart
 
 1. 把 ext4.vhdx 备份了一份。
 2. 卸载 ubuntu distro，重新安装了一遍 ubuntu 22.04。
-3. wsl --mount --vhd 将 ext4.vhdx 挂到新安装的 ubuntu wsl 上。
+3. wsl \-\-mount \-\-vhd 将 ext4.vhdx 挂到新安装的 ubuntu wsl 上。
 
 幸好 ext4.vhdx 还在。
 
