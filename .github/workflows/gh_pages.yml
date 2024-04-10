@@ -9,6 +9,11 @@ on:
 
 jobs:
   build:
+
+    defaults:
+      run:
+        working-directory: ./blitherboom-blog
+
     runs-on: ${{ matrix.os }}
 
     strategy:
