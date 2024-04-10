@@ -1951,7 +1951,7 @@ $$
 
 由于$m_l$的$2l+1$种取值，对应的原子束应该在z方向上分裂成奇数条线。
 
-![](/source/images/physics/abaaba.jpg)
+![](../images/physics/abaaba.jpg)
 
 问题：$Ag, H$等原子束($l = 0$)出现了2条线而不是一条线，矛盾。
 
