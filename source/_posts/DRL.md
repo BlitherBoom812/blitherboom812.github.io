@@ -4,6 +4,21 @@ katex: true
 date: 2024-04-10 13:34:06
 tags:
 ---
+## Policy Graident
+
+带权重的梯度下降方法
+
+$$
+\nabla_\theta J(\theta)=\mathbb{E}_{\pi_\theta}[\nabla_\theta\log\pi_\theta(a_t|s_t)R(\tau)]
+$$
+
+## A2C
+
+$$
+\Delta\theta=\alpha\nabla_\theta(log\pi_\theta(s,a))\hat{q}_w(s,a)\\
+\Delta w=\beta\left(R(s,a)+\gamma\hat{q}_{w}(s_{t+1},a_{t+1})-\hat{q}_{w}(s_{t},a_{t})\right)\nabla_{w}\hat{q}_{w}(s_{t},a_{t})\\
+$$
+
 ## Model-Based RL
 
 ### Model-Based RL
