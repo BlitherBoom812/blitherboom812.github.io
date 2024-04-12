@@ -241,22 +241,167 @@ $$
 
 二端口网络通常用于描述二天线问题。$S_{11}$表示天线1的反射，$S_{21}$表示天线1到天线2的耦合，均不利于信号的传播。我们希望让$1 - S_{11}^2 - S_{21}^2$尽可能大。
 
-### Link Calculation
+## Link Calculation
 
-#### Friis's Equation
+### Friis's Equation
 
 ![1712471419276](../images/Antenna/1712471419276.png)
 
 ![1712471436962](../images/Antenna/1712471436962.png)
 
-#### ERIP
+### EIRP
 
 ![1712471499226](../images/Antenna/1712471499226.png)
 
-    
-
 赫兹偶极子的辐射电阻： $80\pi^2(\frac{\Delta z}{\lambda})^2$，方向性 $\frac{2}{3}$。
 
-#### Radar Equation
+### Radar Equation
 
 ![1712473473687](../images/Antenna/1712473473687.png)
+
+RCS(Radar cross section)
+
+RCS (σ) of a radar target is an effective area that intercepts the transmitted radar power and then
+scatters that power isotropically back to the radar receiver.
+
+$$
+\sigma=\lim_{R\to\infty}\frac{W_{o}4\pi R^2}{W_i}
+$$
+
+* $W_i$, $W_o$ and $R$ are known;
+* $\sigma$ converges.
+
+## Antenna Theorems
+
+
+$$
+\boxed{P_r=\mathrm{P}_t\mathrm{G}_t\mathrm{G}_r(\frac{\lambda}{4\pi R})^2}
+$$
+
+$$
+P_{r}=P_{t}\mathrm{e}_{r}\mathrm{e}_{t}D_{r}\mathrm{D}_{t}(1-\left|\Gamma_{r}\right|^{2})(1-\left|\Gamma_{t}\right|^{2})(\frac{\lambda}{4\pi R})^{2}
+$$
+
+In radar:
+
+$$
+P_{r}=P_{t}\mathrm{G}_{t}\mathrm{G}_{r}\sigma\frac{1}{4\pi}(\frac{\lambda}{4\pi R_{1}R_{2}})^{2}
+$$
+
+Equivalent circuit model
+
+
+![1712900712333](../images/Antenna/1712900712333.png)
+
+$R_r$ ：接收天线反射会释放能量。
+
+### Duality Theorem
+
+![1712901375924](../images/Antenna/1712901375924.png)
+
+电 -> 磁，不变号；
+磁 -> 电，变号。
+
+### Image Theorem
+
+PEC：完美电导体
+
+PMC：完美磁导体
+
+定理条件：
+* PEC or PMC
+* Infinite boundary
+
+PEC
+
+$$
+\begin{aligned}&\hat{n}\times\vec{E}=0\\&\hat{n}\cdot\vec{B}=0\end{aligned}
+$$
+
+PMC
+
+$$
+\begin{aligned}&\hat{n}\times\vec{H}=0\\&\hat{n}\cdot\vec{D}=0\end{aligned}
+$$
+
+![1712902160882](../images/Antenna/1712902160882.png)
+
+Note:
+- Satisfied with boundary condition;
+- Mirror source instead of PEC or PMC infinite boundary;
+- Array: source and mirror source;
+- Current loop: upper inside, lower outside.
+
+### Reciprocity Theorem
+
+In radiation pattern,
+
+![1712903308547](../images/Antenna/1712903308547.png)
+
+Transmitting pattern of antenna “a”
+
+$$
+Z_{_{ba}}(\theta,\varphi)=\frac{V_{_b}(\theta,\varphi)}{I_{_a}}
+$$
+
+Receiving pattern of ante
+
+$$
+Z_{ab}(\theta,\varphi)=\frac{V_{a}(\theta,\varphi)}{I_{b}}
+$$
+
+Then,
+
+$$
+Z_{ab}(\theta,\phi)=Z_{ba}(\theta,\phi)
+$$
+
+Lorentz Reciprocity Theorem
+
+$$
+-\nabla\cdot(\vec{E}_{1}\times\vec{H}_{2}-\vec{E}_{2}\times\vec{H}_{1})=\vec{E}_{1}\cdot\vec{J}_{2}+\vec{H}_{2}\cdot\vec{M}_{1}-\vec{E}_{2}\cdot\vec{J}_{1}-\vec H_1 \cdot \vec M_2\\
+-\oiint_{S}(\vec{E}_{1}\times\vec{H}_{2}-\vec{E}_{2}\times\vec{H}_{1})\cdot ds^{'}=\iiint_{V}\left(\vec{E}_{1}\cdot\vec{J}_{2}+\vec{H}_{2}\cdot\vec{M}_{1}-\vec{E}_{2}\cdot\vec{J}_{1}-\vec H_1 \cdot \vec M_2\right)dv^{'}
+$$
+
+Far field:
+
+$$
+\vec{H}_i=\hat{r}\times\vec{E}_i/\eta;\quad d\vec{s}=\hat{n}ds=\hat{r}ds
+$$
+
+$$
+(\vec{E}_1\times\vec{H}_2-\vec{E}_2\times\vec{H}_1)\cdot\hat{r}=(\hat{r}\times\vec{E}_1)\cdot\vec{H}_2-(\hat{r}\times\vec{E}_2)\cdot\vec{H}_1=0
+$$
+
+$$
+\iiint_{V}\Big(\vec{E}_{1}\cdot\vec{J}_{2}+\vec{H}_{2}\cdot\vec{M}_{1}-\vec{E}_{2}\cdot\vec{J}_{1}-\vec{H}_{1}\cdot\vec{M}_{2}\Big)d\nu^{'}=0\\\iiint_{V}\Big(\vec{E}_{1}\cdot\vec{J}_{2}-\vec{H}_{1}\cdot\vec{M}_{2}\Big)d\nu^{'}=\iiint_{V}\Big(\vec{E}_{2}\cdot\vec{J}_{1}-\vec{H}_{2}\cdot\vec{M}_{1}\Big)d\nu^{'}
+$$
+
+Reaction: Reciprocity theorem: $\langle 1 2\rangle=\langle 2,1\rangle$
+
+$$
+\left\langle1,2\right\rangle=\int_{V}(\vec{E}_{1}\cdot\vec{J}_{2}-\vec{H}_{1}\cdot\vec{M}_{2})d\nu\quad\left\langle2,1\right\rangle=\int_{V}(\vec{E}_{2}\cdot\vec{J}_{1}-\vec{H}_{2}\cdot\vec{M}_{1})d\nu 
+$$
+
+If only current-source
+
+$$
+\iiint_V\vec{E}_1\cdot\vec{J}_2d\nu=\iiint_V\vec{E}_2\cdot\vec{J}_1d\nu\\
+\vec{E}_1\cdot\vec{J}_2=\vec{E_2} \cdot \vec{J_1}
+$$
+
+Non-reciprocity
+
+Electron plasma (non-reciprocal media)
+
+$$
+\varepsilon = \begin{bmatrix}\varepsilon_{xx}&+ig&0\\-ig&\varepsilon_{yy}&0\\0&0&\varepsilon_{zz}\end{bmatrix}
+$$
+
+### Huygen's Principle
+
+![1712905110844](../images/Antenna/1712905110844.png)
+
+![1712905233876](../images/Antenna/1712905233876.png)
+
+![1712905317317](../images/Antenna/1712905317317.png)
