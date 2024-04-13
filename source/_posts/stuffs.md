@@ -373,6 +373,10 @@ taskkill /PID <process_id> /F
 
 ## Pytorch
 
+### Llama 架构
+
+![1713000493686](../images/stuffs/1713000493686.png)
+
 ### 使用 Tensorboard
 
 ```python-repl
