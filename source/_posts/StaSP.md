@@ -489,3 +489,158 @@ $$
 $$
 \Re=\iint C(\varepsilon)p(x,\theta)dxd\theta 
 $$
+
+#### 二次型误差
+
+$$
+C(\varepsilon) = \begin{pmatrix}\theta-\hat{\theta}\end{pmatrix}^2
+$$
+
+这就是 MMSE
+
+#### 绝对误差
+
+$$
+C(\varepsilon)=\begin{vmatrix}\theta-\hat{\theta}\end{vmatrix}
+$$
+
+> Leibnitz 准则
+> $\frac{\partial}{\partial u}\int\limits_{\phi_1(u)}^{\phi_2(u)}h\big(u,v\big)dv=\int\limits_{\phi_1(u)}^{\phi_2(u)}\frac{\partial h\big(u,v\big)}{\partial u}dv+\frac{\partial\phi_2\big(u\big)}{\partial u}h\big(u,\phi_2\big(u\big)\big)-\frac{\partial\phi_1\big(u\big)}{\partial u}h\big(u,\phi_1\big(u\big))$
+
+此时
+
+$$
+\int_{-\infty}^{\hat{\theta}}p\big(\theta|x\big)d\theta=\int_{\hat{\theta}}^{+\infty}p\big(\theta|x\big)d\theta 
+$$
+
+#### 成功失败型误差
+
+$$
+C(\varepsilon)=\begin{cases}0,\left|\theta-\hat{\theta}\right|<\delta\\1,\left|\theta-\hat{\theta}\right|\geq\delta\end{cases}
+$$
+
+此时 
+
+$$
+\hat{\theta}=\arg\max_{\theta}p(\theta|x)
+$$
+
+即 $\hat{\theta}$ 是后验PDF的最大值 (众数) 
+
+MAP maximum a posteriori
+
+根据贝叶斯公式
+
+$$
+\hat{\theta}=\arg\max_{\theta}\left\{p(x|\theta)p(\theta)\right\}\\
+\hat{\theta}=\arg\max_{\theta}\left\{\ln p\big(x|\theta\big)+\ln p\big(\theta\big)\right\}
+$$
+
+#### 三值比较
+一般而言，“三值”并不相等，因此三种估计量往往不同
+
+特例：高斯时“三值”相等，三种估计方法等价
+
+大数据量时先验信息不起作用，最大后验概率估计（MAP）将转变为（贝叶斯）最大似然估计（MLE）
+
+### 线性贝叶斯估计
+
+线性贝叶斯估计(LMMSE), 也称线性最小意味着：
+
+$$
+\hat{\theta}=\sum_{n=0}^{N-1}a_nx[n]+a_N
+$$
+
+即限定估计量与观察数据间呈线性关系，然最小化 
+$$
+\mathrm{Bmse}\Big(\hat{\theta}\Big)=E\Big[\Big(\theta-\hat{\theta}\Big)^{2}\Big]
+$$
+
+即，LMMSE:
+
+$$
+\min\left\{E\left[\left(\theta-\hat{\theta}\right)^2\right]\right\}\\s.t.\quad\hat{\theta}=\sum_{n=0}^{N-1}a_nx[n]+a_N
+$$
+
+解得估计量：
+
+$$
+\hat{\theta}=E\left(\theta\right)+\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\left(x-E\left(x\right)\right)\\\mathrm{Bmse}\left(\hat{\theta}\right)=\mathbf{C}_{\theta\theta}-\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\mathbf{C}_{x\theta}
+$$
+
+对比 MMSE：
+
+附加了线性约束
+- 可得显示解——好求
+- 仅需一阶矩和二阶矩
+
+无附加约束
+- 可能难以求得显示解
+- 需PDF
+- 全局最优
+- 仅在“线性”中最优
+
+#### 矢量参数情况
+
+待估计参数$\boldsymbol{\theta}=\begin{bmatrix}\theta_1,\theta_2,...,\theta_p\end{bmatrix}^T$,其每个参数的 LMMSE 定义为
+
+$$
+\begin{aligned}&\min E\bigg[\bigg(\theta_{i}-\hat{\theta}_{i}\bigg)^{2}\bigg]\\&s.t.\hat{\theta}_{i}=\sum_{n=0}^{N-1}a_{in}x[n]+a_{iN}\end{aligned}
+$$
+
+$$
+\hat{\boldsymbol{\theta}}=\begin{bmatrix}E(\theta_1)\\E(\theta_2)\\\vdots\\E(\theta_p)\end{bmatrix}+\begin{bmatrix}\mathbf{C}_{\theta_1x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E(\boldsymbol{x})\right)\\\mathbf{C}_{\theta_2x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E(\boldsymbol{x})\right)\\\vdots\\\mathbf{C}_{\theta_px}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E(\boldsymbol{x})\right)\end{bmatrix}\\
+=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x} - E(\boldsymbol{x})\right)
+$$
+
+### 序贯LMMSE
+
+白噪声电平估计
+
+$$
+x[n]=A+w[n],n=0,1,...,N
+$$
+
+$$
+A\sim N\big(0,\sigma_{A}^{2}\big)\\
+w[n]\sim N\left(0,\sigma^{2}\right)
+$$
+
+解得
+
+$$
+\begin{aligned}
+&E(\theta)=0 \\
+&\mathbf{C}_{\theta x}=E\left(\left(\theta-E\left(\theta\right)\right)\left(x-E\left(x\right)\right)^{T}\right) \\
+&=E\left(\left(A-0\right)\left(x-0\right)^{T}\right) \\
+&=E\Big(A\big(A\mathbf{1}+\mathbf{w}\big)^{T}\Big) \\
+&=\sigma_{A}^{2}\mathbf{1}^{T}
+\end{aligned}\\
+\begin{aligned}
+\mathbf{C}_{xx}& =E\left(\left(x-E\left(x\right)\right)\left(x-E\left(x\right)\right)^T\right)  \\
+&=E\left(\left(A\mathbf{1}+\boldsymbol{w}\right)\left(A\mathbf{1}+\boldsymbol{w}\right)^T\right) \\
+&=E\left\{A\mathbf{1}\mathbf{1}^TA+A\mathbf{1}\boldsymbol{w}^T+\boldsymbol{w}\mathbf{1}^TA+\boldsymbol{w}\boldsymbol{w}^T\right\} \\
+&=\sigma_A^2\mathbf{1}\mathbf{1}^T+\sigma^2\mathbf{I}
+\end{aligned}\\
+\begin{aligned}\mathbf{C}_{\theta\theta}&=\sigma_A^2\\\mathbf{C}_{x\theta}&=\mathbf{C}_{\theta x}^T\\&=\sigma_A^2\mathbf{1}\end{aligned}
+$$
+
+$$
+\begin{aligned}\hat{A}&=\frac{\sigma_{A}^{2}}{\sigma_{A}^{2}+\frac{\sigma^{2}}{N}}\\\mathrm{Bmse}&\left(\hat{A}\right)=\frac{1}{N}\end{aligned}
+$$
+
+记
+
+$$
+\hat{A}[N-1]=\frac{\sigma_A^2}{\sigma_A^2+\frac{\sigma^2}{N}}\frac{1}{N}\sum_{n=0}^{N-1}x[n]
+$$
+
+则
+
+$$
+\hat{A}[N]=\hat{A}[N-1]+\underbrace{\frac{\sigma_A^2}{\left(N+1\right)\sigma_A^2+\sigma^2}}_{K[N]，增益因子}\Big(x[N]-\hat{A}[N-1]\Big)
+$$
+
+$$
+\frac{\frac1{\sigma^2}}{\frac1{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)}+\frac1{\sigma^2}}=\frac{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)}{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)+\sigma^2}\\=\frac{\frac{\sigma_A^2\sigma^2}{N\sigma_A^2+\sigma^2}}{\frac{\sigma_A^2\sigma^2}{N\sigma_A^2+\sigma^2}+\sigma^2}=\frac{\sigma_A^2}{\left(N\sigma_A^2+\sigma^2\right)+\sigma_A^2}=K\begin{bmatrix}N\end{bmatrix}
+$$
