@@ -484,6 +484,12 @@ $$
 \Longrightarrow\hat{\theta}=\begin{bmatrix}\theta_1p(\theta|x)d\theta\\\int\theta_2p(\theta|x)d\theta\\\vdots\\\int\theta_pp(\theta|x)d\theta\end{bmatrix}=\int\theta_P(\theta|x)d\theta=E(\theta|x)
 $$
 
+Woodbury 恒等式：
+
+$$
+\left(\mathbf{B}+\boldsymbol{u}\boldsymbol{u}^T\right)^{-1}=\mathbf{B}^{-1}-\frac{\mathbf{B}^{-1}\boldsymbol{u}\boldsymbol{u}^T\mathbf{B}^{-1}}{1+\boldsymbol{u}^T\mathbf{B}^{-1}\boldsymbol{u}}
+$$
+
 ### 贝叶斯风险
 
 $$
