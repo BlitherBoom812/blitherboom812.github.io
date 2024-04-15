@@ -5,8 +5,48 @@ date: 2024-02-28 19:24:02
 tags:
 ---
 ## 语音信号的线性预测编码技术
+线性预测编码技术（维纳滤波）。可以参考隔壁统计信号处理的笔记hh。
+
+维纳滤波的正交原理：
+
+$$
+E \langle x(n-k), e(n) \rangle = 0
+$$
+
+正交原理可以用来估计任何时候的任何值，不管是现在（滤波），过去（平滑）还是未来（预测），也不管估计的对象是 $x,y$，上述公式的含义是：估计误差始终与已知信号垂直，与估计的是哪个时间的信号无关。
+
+利用前面的 $P$ 个信号预测下一个信号：
+
+$$
+\hat{s}(n)=-\sum_{i=1}^{P^{\prime}}\hat{\alpha}_i\cdot s(n-i)
+$$
+
+误差定义为 
+
+$$
+\begin{aligned}
+\varepsilon(n)& =s(n)-\overset{\wedge}{\operatorname*{s}}(n)=s(n)+\sum_{i=1}\widehat{\alpha}_i\cdot s(n-i)  \\
+&=\sum_{i=0}^{P^{\prime}}\widehat{\alpha}_i\cdot s(n-i)
+\end{aligned}
+$$
+
+从 z 域看，这是一个全极点模型产生了目标信号：
+
+$$
+S(z) = -\sum\limits_{i=1}^{P}\alpha_iz^{-i} + E(z)
+$$
+
+接下来的所有步骤，目的都是推导 $\alpha$ 的取值。
 
 ### 自相关法
+
+本文中假设信号具有遍历性，即时间平均等于统计平均，时间上的自相关等于统计意义上的自相关。
+
+利用 LMMSE 准则可以推出
+
+$$
+\begin{bmatrix}R(0)&R(1)&R(2)&\cdots&R(P-1)\\R(1)&R(0)&R(1)&\cdots&R(P-2)\\R(2)&R(1)&R(0)&\cdots&R(P-3)\\\vdots&\vdots&&&\vdots\\R(P-1)&R(P-2)&\cdots&\cdots&R(0)\end{bmatrix}\cdot\begin{bmatrix}\hat\alpha_1\\\hat\alpha_2\\\vdots\\\vdots\\\hat\alpha_P\end{bmatrix}=-\begin{bmatrix}R(1)\\R(2)\\\vdots\\\vdots\\R(P)\end{bmatrix}
+$$
 
 一个例子：Durbin 递推算法
 
@@ -82,6 +122,10 @@ $$
 
 前向逆滤波器(P阶)
 
+$$
+A^{(P)}(z)=\sum_{i=0}^P\alpha_i^{(P)}z^{-i}
+$$
+
 显然有
 
 $$
@@ -120,6 +164,26 @@ $$
 \langle B^{(m)}(z), z^{-l} \rangle = 0\\
 l = 1, 2, \dots, m
 $$
+
+一个不严谨的理解：
+
+$$
+u(n) = s(n) * Z^{-1}[A(z)] = \varepsilon(n)\\
+v(n) = s(n) * Z^{-1}[z^{-l}] = s(n - l)\\
+\begin{align*}
+    &\langle A^{(m)}(z), z^{-l} \rangle\\
+    =&\sum\limits_{n=-\infty}^{\infty}u(n)v(n)\\
+    =&\sum\limits_{n=-\infty}^{\infty}\varepsilon(n)s(n - l)\\
+\end{align*}
+$$
+
+由于时间平均等于统计平均，
+
+$$
+\frac1{2N} \sum\limits_{n=-N}^{N - 1}\varepsilon(n)s(n-l) = E \langle \varepsilon(n), s(n-l) \rangle
+$$
+
+根据开头提到的维纳滤波正交原理可知上式等于0。
 
 #### 递推公式
 

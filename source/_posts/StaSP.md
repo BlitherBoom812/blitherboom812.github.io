@@ -677,3 +677,102 @@ $$
 \hat{A}[-1]=E(A)\\
 \text{Bmse}\left ( \hat{A} [ - 1] \right ) = \text{var}\left ( A\right ) 
 $$
+
+## 维纳滤波
+
+### 滤波
+
+假定观测数据是零均值、宽平稳的，信号也是零均值、宽平稳的，信号与噪声不相关
+
+$$
+x[n] = s[n] + w[n], n = 0, 1, \dots, N - 1
+$$
+
+$$
+\theta=s[n]\text{ 用 }x[0],x[1],x[2],...,x[n]\text{来估计}$$
+
+![1713150769252](../images/StaSP/1713150769252.png)
+
+利用 LMMSE 可得
+
+$$
+\hat{s}[n]=r_{ss}^{'T}\left(\mathbf{R}_{ss}+\mathbf{R}_{ww}\right)^{-1}\boldsymbol{x}
+$$
+
+从而得到维纳-霍夫滤波方程
+
+$$
+\begin{bmatrix}r_{xx}\begin{bmatrix}0\end{bmatrix}&r_{xx}\begin{bmatrix}1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}n\end{bmatrix}\\r_{xx}\begin{bmatrix}1\end{bmatrix}&r_{xx}\begin{bmatrix}0\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}n-1\end{bmatrix}\\\vdots&\vdots&\ddots&\vdots\\r_{xx}\begin{bmatrix}n\end{bmatrix}&r_{xx}\begin{bmatrix}n-1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}0\end{bmatrix}\end{bmatrix}\begin{bmatrix}h^{(n)}\begin{bmatrix}0\end{bmatrix}\\h^{(n)}\begin{bmatrix}1\end{bmatrix}\\\vdots\\h^{(n)}\begin{bmatrix}n\end{bmatrix}\end{bmatrix}=\begin{bmatrix}r_{ss}\begin{bmatrix}0\end{bmatrix}\\r_{ss}\begin{bmatrix}1\end{bmatrix}\\\vdots\\r_{ss}\begin{bmatrix}n\end{bmatrix}\end{bmatrix}
+$$
+
+### 平滑
+
+$$
+\theta=s[n]\text{用 }...,x[-1],x[0],x[1],x[2],...,\text{来估计}
+$$
+
+![1713152016025](../images/StaSP/1713152016025.png)
+
+LMMSE:
+
+$$
+\hat{s}[n]=\sum_{k=-\infty}^\infty a_kx[k]
+$$
+
+令 $h[k] = a_{N-k}$
+
+> 正交原理：误差与每一个观测数据正交
+> $$
+> E\left(\left(\theta-\hat{\theta}\right)x[m]\right)=0
+> $$
+> 正交原理不依赖于任务是平滑、滤波还是预测，是普遍适用的，证明如下：
+> ![1713152987612](../images/StaSP/1713152987612.png)
+> ![1713152970273](../images/StaSP/1713152970273.png)
+在 LMMSE
+
+$$
+\hat{s}[n]=\sum_{k=-\infty}^\infty a_kx[k]
+$$
+
+中令 $h[k]=a_{n-k}$
+
+则有
+
+$$
+\hat s[n] = \sum\limits_{k=-\infty}^{\infty}h[k]x[n-k]
+$$
+
+可得
+
+$$
+r_{ss}\begin{bmatrix}n\end{bmatrix}=h\begin{bmatrix}n\end{bmatrix}*r_{xx}\begin{bmatrix}n\end{bmatrix}
+$$
+
+无限维纳平滑器的频率响应
+
+$$
+H\left(f\right)=\frac{P_{ss}\left(f\right)}{P_{xx}\left(f\right)}\quad=\frac{P_{ss}\left(f\right)}{P_{ss}\left(f\right)+P_{ww}\left(f\right)}\quad=\frac{\eta\left(f\right)}{\eta\left(f\right)+1}\quad\text{,其中 }\eta\left(f\right)=\frac{P_{ss}\left(f\right)}{P_{ww}\left(f\right)}
+$$
+
+### 预测
+
+可以用来进行预测
+
+$$
+\theta=x[N-1+l]\text{ 用 }x[0],x[1],x[2],...,x[N-1]\text{ 来估计}
+$$
+
+![1713150674892](../images/StaSP/1713150674892.png)
+
+依然用 LMMSE 可以得到线性预测维纳-霍夫滤波方程
+
+$$
+\begin{bmatrix}r_{xx}\begin{bmatrix}0\end{bmatrix}&r_{xx}\begin{bmatrix}1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}N-1\end{bmatrix}\\r_{xx}\begin{bmatrix}1\end{bmatrix}&r_{xx}\begin{bmatrix}0\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}N-2\end{bmatrix}\\\vdots&\vdots&\ddots&\vdots\\r_{xx}\begin{bmatrix}N-1\end{bmatrix}&r_{xx}\begin{bmatrix}N-2\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}0\end{bmatrix}\end{bmatrix}\begin{bmatrix}h\begin{bmatrix}1\end{bmatrix}\\h\begin{bmatrix}2\end{bmatrix}\\\vdots\\h\begin{bmatrix}N\end{bmatrix}\end{bmatrix}=\begin{bmatrix}r_{xx}\begin{bmatrix}l\end{bmatrix}\\r_{xx}\begin{bmatrix}l+1\end{bmatrix}\\\vdots\\r_{xx}\begin{bmatrix}N-1+l\end{bmatrix}\end{bmatrix}
+$$
+
+### 应用
+
+信道均衡问题
+
+![1713151589324](../images/StaSP/1713151589324.png)
+
