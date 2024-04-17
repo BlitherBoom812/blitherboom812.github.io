@@ -143,3 +143,22 @@ Use mean square error.
 
 ### Model-Base RL with images
 
+## Imitation Learning
+
+Accumulate Error and Covariate Shiift
+
+DAgger:
+* Train a policy from human data $D$
+* Run the policy to get dataset $D_\pi$
+* Ask human to label $D_\pi$ with actions $a_t$
+* Aggregate: $D \larr D \cup D_\pi$
+
+Techniques: Dataset Resampling / Reweighting
+
+Techniques: Pre-Trained Models to extract representations
+
+MSE gives the mean value, while the cross-entropy gives the probability. If a task has a probability with 50% left, 50% right, the MSE will give an answer "go forward".
+
+Leverage Demonstrations in DRL
+
+DQfD: Deep Q-Learning from Demonstrations
