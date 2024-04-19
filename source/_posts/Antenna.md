@@ -405,3 +405,181 @@ $$
 ![1712905233876](../images/Antenna/1712905233876.png)
 
 ![1712905317317](../images/Antenna/1712905317317.png)
+
+## Dipole Antenna
+
+### Hertz Dipole
+
+* Infinite short length;
+* Uniform distribution;
+* Infinite small radius;
+
+$$
+E_\theta=\frac{I\Delta z}{4\pi}j\omega\mu\frac{e^{-jkr}}r\sin\theta \\
+H_\varphi=\frac{I\Delta z}{4\pi}jk\frac{e^{-jkr}}r{\sin\theta}\\
+\frac{E_\theta}{H_\varphi}=\sqrt{\frac{\mu_0}{\varepsilon_0}}=\eta 
+$$
+
+![1713506228135](../images/Antenna/1713506228135.png)
+
+![1713506258888](../images/Antenna/1713506258888.png)
+
+![1713506275022](../images/Antenna/1713506275022.png)
+
+### Finite Length Dipole
+
+![1713506837120](../images/Antenna/1713506837120.png)
+
+$$
+I=\begin{cases}I_0\sin[k(\dfrac{l}{2}-z')]&0\leq z'\leq\dfrac{l}{2}\\
+I_0\sin[k(\dfrac{l}{2}+z')]&-\dfrac{l}{2}\leq z'\leq0\end{cases}
+$$
+
+$$
+\vec{A}(x,y,z)=A_z\hat{z}=\hat{z}\int_{-l/2}^{l/2}\mu I(z’)\frac{e^{-j\kappa\Lambda}}{4\pi R}dz’\\R=\sqrt{\left(x-x’\right)^2+\left(y-y’\right)^2+\left(z-z’\right)^2}
+$$
+
+$$
+\begin{aligned}&\text{For phase:}&&R\cong r-z'\cos\theta\\&\text{For amplitude:}&&R\cong r\end{aligned}
+$$
+
+R is the distance between observer and source, 
+r is the distance between observer and origin.
+
+#### Small Dipole
+
+![1713506363705](../images/Antenna/1713506363705.png)
+
+$$
+\begin{aligned}&I(z’)\cong I_{in}(1-2|z’|/l)\\&\vec{A}(x,y,z)=A_z\hat{z}=\hat{z}\int_{-l/2}^{l/2}\mu I(z’)\frac{e^{-jkr}}{4\pi r}dz’\end{aligned}
+$$
+
+Then
+
+$$
+\vec{A}(x,y,z)=\hat{z}\mu\frac{e^{-jkr}}{4\pi r}\cdot\frac12I_{in}l\\
+\vec{A}(\theta,r)=\frac12I_{in}l\mu\frac{e^{-jkr}}{4\pi r}(-\sin\theta\hat{\theta}+\cos\theta\hat{r})
+$$
+
+$$
+\vec{E}=j\omega\mu I_{in}l\frac{e^{-jkr}}{8\pi r}\sin\theta\hat{\theta}\\\vec{H}=j\beta I_{in}l\frac{e^{-jkr}}{8\pi r}\sin\theta\hat{\varphi}
+$$
+
+Note: half of the ideal infinitesima(Hertz) dipole
+
+$$
+\mathrm{Directivity}:\quad D=\frac{4\pi}{\Omega_A}\Rightarrow D_{\underset{dipole}{\operatorname*{small}}}=1.5
+$$
+
+$$
+R_{rad}=20\left(\frac{\pi\Delta z}\lambda\right)^2=\frac14R_{rad}^\textit{Hertz dipole}
+$$
+
+$$
+P_{rad}=\frac14\frac{4\pi}3{\left(\frac{I\Delta z}{4\pi}\right)}^2k^2\eta{=}\frac12I^2R_{rad}
+$$
+
+#### General Case
+
+$$
+E_{\theta}=j\eta\frac{I_0e^{-jkr}}{2\pi r}\Bigg[\frac{\cos(\frac{kl}2\cos\theta)-\cos(\frac{kl}2)}{\sin\theta}\Bigg]\\H_{\varphi}=j\frac{I_0e^{-jkr}}{2\pi r}\Bigg[\frac{\cos(\frac{kl}2\cos\theta)-\cos(\frac{kl}2)}{\sin\theta}\Bigg]
+$$
+
+Beam width: change with length.
+
+![1713507175699](../images/Antenna/1713507175699.png)
+
+$$
+\begin{aligned}
+&\textbf{The time average Poynting vector:}\\
+&\vec{S}_{a\nu}=\hat{r}S_{a\nu}=\frac{1}{2}\mathrm{Re}\bigg[\tilde{\vec{E}}\times\tilde{\vec{H}}^{*}\bigg]=\eta\frac{\big|I_{0}\big|^{2}}{8\pi^{2}r^{2}}\bigg[\frac{\cos(\frac{kl}{2}\cos\theta)-\cos(\frac{kl}{2})}{\sin\theta}\bigg]^{2}\hat{r}  \\
+&P_{rad}=\oint_{s}\vec{S}_{a\nu}\cdot d\vec{s}=\int_{0}^{2\pi}\int_{0}^{\pi}\vec{S}_{a\nu}\cdot\vec{r}r^{2}\sin\theta d\theta d\varphi=\eta\frac{\left|I_{0}\right|^{2}}{4\pi}\int_{0}^{\pi}\frac{\left[\cos(\frac{kl}{2}\cos\theta)-\cos(\frac{kl}{2})\right]^{2}}{\sin\theta}d\theta  \\
+&\begin{aligned}&\text{The radiation intensity:}\\&&U=r^2S_{av}=\eta\frac{\left|I_0\right|^2}{8\pi^2}\left[\frac{\cos(\frac{kl}2\cos\theta)-\cos(\frac{kl}2)}{\sin\theta}\right]^2\\&&=\frac{\pi}{2}=\frac{\left|I_{0}\right|^{2}}{2}=\frac{k_{0}}{2}=\frac{k_{0}}{2}\end{aligned}& \begin{matrix}{l}\\\end{matrix})  \\
+&\Omega_A=\frac{P_{rad}}{U_{\max}}\quad D=4\pi/\Omega_A\quad A_e=\frac{\lambda^2}{4\pi}D\quad P_{rad}=\frac12I^2R_{rad}
+\end{aligned}
+$$
+
+![1713507190746](../images/Antenna/1713507190746.png)
+
+![1713507205996](../images/Antenna/1713507205996.png)
+
+#### Input Impedance
+
+Input resistance $R_r$:
+* calculated by E and H at port; 
+* take the real part (lossless).
+
+Radiation resistance $R_{rad}$:
+* calculated by E and H at far-field;
+
+$$
+P_{rad}=\frac12{\left|I\right|}^2R_{rad}\quad P_{rad}=\frac12{\left|I_{in}\right|}^2R_r
+$$
+
+I is the maximum/peak current.
+
+General Relation:
+
+$$
+R_r=R_{rad}/\sin^2\left(\frac{kl}2\right)
+$$
+
+### Half-wavelength dipole
+
+![1713508252106](../images/Antenna/1713508252106.png)
+
+$$
+I(z)=I_0\sin(\frac\pi2-k\left|z\right|)
+$$
+
+$$
+E_\theta(r,\theta,\varphi)=j\eta I_0\frac{e^{-jkr}}{2\pi r}\frac{\cos(\frac\pi2\cos\theta)}{\sin\theta}\\H_\varphi(r,\theta,\varphi)=jI_0\frac{e^{-jkr}}{2\pi r}\frac{\cos(\frac\pi2\cos\theta)}{\sin\theta}
+$$
+
+$$
+\vec{S}_{a\nu}=\hat{r}S_{a\nu}=\frac{1}{2}\operatorname{Re}\bigg[\tilde{\vec{E}}\times\tilde{\vec{H}}^{*}\bigg]=\eta\frac{\big|I_{0}\big|^{2}}{8\pi^{2}r^{2}}\bigg[\frac{\cos(\frac{\pi}{2}\cos\theta)}{\sin\theta}\bigg]^{2}\hat{r}\\
+P_{rad}=\oint_sS_{a\nu}\cdot d\vec{s}=\int_0^{2\pi}\int_0^\pi\vec{S}_{a\nu}\cdot\hat{r}r^2\sin\theta d\theta d\varphi=\eta\frac{\left|I_0\right|^2}{4\pi}\int_0^\pi\frac{\cos^2(\frac\pi2\cos\theta)}{\sin\theta}d\theta 
+$$
+
+$$
+D=4\pi/\Omega_{A}=1.643=2.15\mathrm{dBi}\\
+A_e=\frac{\lambda^2}{4\pi}D_0\cong0.13\lambda^2
+$$
+
+Edge capacitive effect: 
+* Terminal (open-end) 
+current is not ideal zero;
+* Effective length is longer
+
+$$
+R_r=R_{rad}=\frac{2P_{rad}}{\left|I_0\right|^2}\cong73\left(\Omega\right)\\
+Z_A=73+j43\left(\Omega\right)
+$$
+
+### Applications
+
+#### Wideband Antennas
+
+![1713508669926](../images/Antenna/1713508669926.png)
+
+#### Folded Dipole
+
+![1713508784675](../images/Antenna/1713508784675.png)
+
+$$
+Z_{{folded}}=4Z_A
+$$
+
+Increase Input Impedance
+
+#### Log-periodic & Yagi-Uda antenna
+
+![1713509120707](../images/Antenna/1713509120707.png)
+
+#### Dipole Antennas in base station
+
+![1713509734724](../images/Antenna/1713509734724.png)
+
+#### Monopole
+
+![1713509771675](../images/Antenna/1713509771675.png)
