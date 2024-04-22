@@ -130,3 +130,128 @@ $$
 #### ID3 Algorithm
 
 ![1713171808270](../images/AI/1713171808270.png)
+
+### Multiplayer Perceptrons (MLP)
+
+#### MLP for XOR
+
+![1713771652191](../images/AI/1713771652191.png)
+
+#### Activation
+
+![1713772489046](../images/AI/1713772489046.png)
+
+#### Loss Functions
+
+Entropy
+
+$$
+H(q)=-\sum_{j=1}^kq_j\log q_j
+$$
+
+Relative-entropy
+
+$$
+\mathrm{KL}(q||p)=-\sum_{j=1}^kq_j\log p_j-H(q)
+$$
+
+Cross-entropy
+
+$$
+H(q,p)=-\sum_{j=1}^kq_j\log p_j
+$$
+
+Relationship:
+
+$$
+\boxed{H(q,p)=\mathrm{KL}(q||p)+H(q)}
+$$
+
+Softmax in the output layer
+
+$$
+\widehat{\boldsymbol{y}}=\boldsymbol{a}^{(n_l)}=f_\theta\big(\boldsymbol{x}^{(i)}\big)=\begin{bmatrix}p\big(\boldsymbol{y}^{(i)}=1\big|\boldsymbol{x}^{(i)};\boldsymbol{\theta}\big)\\p\big(\boldsymbol{y}^{(i)}=2\big|\boldsymbol{x}^{(i)};\boldsymbol{\theta}\big)\\\vdots\\p\big(\boldsymbol{y}^{(i)}=k\big|\boldsymbol{x}^{(i)};\boldsymbol{\theta}\big)\end{bmatrix}=\frac{1}{\sum_{j=1}^{k}\exp(z_{j}^{(n_{l})})}\begin{bmatrix}\exp(z_{1}^{(n_{l})})\\\exp(z_{2}^{(n_{l})})\\\vdots\\\exp(z_{k}^{(n_{l})})\end{bmatrix}
+$$
+
+Cross-entropy loss:
+
+$$
+J(y,\widehat{y})=-\sum_{j=1}^ky_j\log\widehat{y}_j
+$$
+
+Cost function:
+
+$$
+\min J(\theta)=-\frac1m\sum_{i=1}^m\left[\sum_{j=1}^k\mathbf{1}\{y^{(i)}=j\}\mathrm{log}\frac{\exp(\mathbf{z}_j^{(n_\iota)})}{\sum_{j^{\prime}=1}^k\exp(\mathbf{z}_{j^{\prime}}^{(n_\iota)})}\right]
+$$
+
+#### Gradient-Based Training
+
+$$
+\arg\min_\theta O(\mathcal{D};\theta)=\sum_{i=1}^mL\left(y_i,f(x_i);\theta\right)+\Omega(\theta)
+$$
+
+Forward Propagation: to compute activations & objective $J(\theta)$
+
+Backward Propagation: Update paramters in all layers
+
+##### Learning Rate decay
+
+Exponential decay strategy:
+
+$$
+\eta = \eta_0e^{kt}
+$$
+
+1/t decay strategy:
+
+$$
+\eta = \eta_0/(1+kt)
+$$
+
+##### Weight Decay
+
+L2 regularization: 
+
+$$
+\Omega(\theta)=\frac\lambda2\sum_{l=1}^{n_l-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\theta_{ji}^{(l)})^2\\\frac\partial{\partial\theta^{(l)}}\Omega(\theta)=\lambda\theta^{(l)}
+$$
+
+L1:
+
+$$
+\Omega(\theta)=\lambda\sum_{l=1}^{n_{l}-1}\sum_{i=1}^{s_{l}}\sum_{j=1}^{s_{l+1}}|\theta_{ji}^{(l)}|\\\frac{\partial}{\partial\theta^{(l)}}\Omega(\theta)_{ji}=\lambda(1_{\theta_{ji}^{(l)}>0}-1_{\theta_{ji}^{(l)}<0})
+$$
+
+一般不调。
+
+##### Weight Initialization
+
+Xavier initialization
+
+(Linear activations)
+
+$$
+\mathrm{Var}(w)=1/n_{\mathrm{in}}
+$$
+
+避免梯度爆炸或者消失；
+
+He initialization
+
+(ReLU activations)
+
+$$
+\mathrm{Var}(w)=2/n_{\mathrm{in}}
+$$
+
+因为 ReLU 删除了一半的信息。
+
+
+![1713775669844](../images/AI/1713775669844.png)
+
+### Convolutional Neural Network (CNN)
+
+![1713776156049](../images/AI/1713776156049.png)
+
+![1713776168789](../images/AI/1713776168789.png)
