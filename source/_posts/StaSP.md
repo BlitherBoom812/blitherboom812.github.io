@@ -776,3 +776,291 @@ $$
 
 ![1713151589324](../images/StaSP/1713151589324.png)
 
+## 卡尔曼滤波
+
+如何估计电压？
+
+### 模型 1：当成确定参数
+
+$$
+x[n] = A + w[n], w[n] \sim N(0, \sigma^{2})
+$$
+
+$$
+\hat A = \sum\limits_{n=0}^{N - 1}x[n] = \bar x
+$$
+
+### 模型2：当成某个随机变量
+
+$$
+x[n] = A + w[n], w[n] \sim N(0, \sigma^{2}), A \sim N(\mu_A, \sigma_A^{2})
+$$
+
+贝叶斯一般线性模型：
+
+$$
+\boldsymbol{x}=\mathbf{H}\boldsymbol{\theta}+\boldsymbol{w}\quad\text{其中 }\boldsymbol{\theta}{\sim}N\begin{pmatrix}\boldsymbol{\mu}_\theta,\mathbf{C}_\theta\end{pmatrix}\text{,}\boldsymbol{w}{\sim}N\begin{pmatrix}\boldsymbol{0},\mathbf{C}_w\end{pmatrix}\\
+E\left(\boldsymbol{\theta}\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E\left(\boldsymbol{x}\right)\right)=\boldsymbol{\mu}_\theta+\mathbf{C}_{\theta|x}\mathbf{H}^T\mathbf{C}_w^{-1}\left(\boldsymbol{x}-\mathbf{H}\boldsymbol{\mu}_\theta\right)\\
+\text{其中,}\mathbf{C}_{\theta|x}=\left(\mathbf{C}_\theta^{-1}+\mathbf{H}^T\mathbf{C}_w^{-1}\mathbf{H}\right)^{-1}
+$$
+
+$$
+\hat{A}=\mu_A+\frac{\frac1{\sigma^2/N}}{\frac1{\sigma_A^2}+\frac1{\sigma^2/N}}(\overline{x}-\mu_A)
+$$
+
+### 模型3：当成未知且随时间变化的量
+
+$$
+x[n]=A[n]+w[n],n=0,1,...,N-1
+$$
+
+$$
+\mathrm{MVU}\text{估计量:}\hat{\boldsymbol{\theta}}=\left(\mathbf{H}^T\mathbf{H}\right)^{-1}\mathbf{H}^T\boldsymbol{x}\\
+\begin{aligned}&\boldsymbol{\theta}=&\begin{bmatrix}A[0],A[1],...,A[N-1]\end{bmatrix}^T\\&\mathbf{H}=\mathbf{I}\end{aligned}\\
+\hat{A}[n]=x[n]
+$$
+
+### 动态信号模型
+
+一阶高斯-马尔可夫信号模型：
+
+$$
+s[n]=as[n-1]+u[n],n\geq0
+$$
+
+其中，$u[n]$是均值为零方差为 $\sigma_u^2$ 的高斯白噪声，称为驱动噪声或激励噪声。信号初值s$[-1]\sim N(\mu_s,\sigma_s^2)$与激励噪声$u[n]$相互独立。
+
+均值：
+
+$$
+s[n]=a^{n+1}s[-1]+\sum_{k=0}^na^ku[n-k]\\
+E\left(s[n]\right)=a^{n+1}E\left(s[-1]\right)+\sum_{k=0}^na^kE\left(u[n-k]\right)=a^{n+1}\mu_s\\
+c_s[m,n] = a^{m+n+2}\sigma_s^2+\sum_{k=0}^m\sum_{l=0}^na^{k+l}E\left(u[m-k]u[n-l]\right)\\
+E\left(u[m-k]u[n-l]\right)=\begin{cases}\sigma_u^2,&l=n-m+k\\0,&\mathrm{others}\end{cases}
+$$
+
+协方差：
+
+$$
+m \ge n, c_s\left[m,n\right]=a^{m+n+2}\sigma_s^2+\sum_{k=m-n}^ma^{2k+n-m}\sigma_u^2=a^{m+n+2}\sigma_s^2+\sigma_u^2a^{m-n}\sum_{k=0}^na^{2k}\\
+m \lt n, c_s\begin{bmatrix}m,n\end{bmatrix}=a^{m+n+2}\sigma_s^2+\sum_{k=0}^ma^{2k+n-m}\sigma_u^2=a^{m+n+2}\sigma_s^2+\sigma_u^2a^{n-m}\sum_{k=0}^ma^{2k}=c_s\begin{bmatrix}n,m\end{bmatrix}
+$$
+
+方差和二阶矩：
+
+$$
+\begin{aligned}
+\operatorname{var}(s[n])& =E\left(\left(s[n]-E\left(s[n]\right)\right)\left(s[n]-E\left(s[n]\right)\right)\right)  \\
+&=c_s[n,n] \\
+&=a^{2n+2}\sigma_s^2+\sigma_u^2\sum_{k=0}^na^{2k}
+\end{aligned}\\
+\text{当 }m\geq n\text{ 时}\\r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_{s}^{2}+\sigma_{s}^{2}\right)+\sigma_{u}^{2}a^{m-n}\sum_{k=0}^{n}a^{2k}\\\text{当 }m<n\text{ 时}\\r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_{s}^{2}+\sigma_{s}^{2}\right)+\sigma_{u}^{2}a^{n-m}\sum^{m}a^{2k}=r_{ss}\left[n,m\right]
+$$
+
+#### 平稳性
+
+$$
+\begin{aligned}&E\left(s\left[n\right]\right)=a^{n+1}\mu_s\\&r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_s^2+\sigma_s^2\right)+\sigma_u^2a^{m-n}\sum_{k=0}^na^{2k}\end{aligned}
+$$
+
+不是宽平稳的。
+
+通常要求 $|a| \lt 1$，当取 $n \rarr \infty$ 时
+
+$$
+\begin{aligned}&E\left(s\left[n\right]\right)=0\\&r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_s^2+\sigma_s^2\right)+\sigma_u^2a^{m-n}\frac{1-a^{2n+2}}{1-a^2}=\frac{\sigma_u^2a^{m-n}}{1-a^2}=r_{ss}\left[k\right]\end{aligned}
+$$
+
+此时是宽平稳（WSS）的。
+
+#### 递推特性
+
+$$
+E\left(s[n]\right)=aE\left(s[n-1]\right)+E\left(u[n]\right)=aE\left(s[n-1]\right)
+$$
+
+$$
+\operatorname{var}\left(s[n]\right)=E\left(\left(s[n]-E(s[n])\right)\left(s[n]-E(s[n])\right)\right) = a^2\operatorname{var}\left(s[n-1]\right)+\sigma_u^2
+$$
+
+$$
+m \ge n, c_s\left[m,n\right]=a^{m-n}\operatorname{var}\left(s[n]\right) = a^{m-n}\left(a^{2n+2}\sigma_s^2+\sigma_u^2\sum_{k=0}^na^{2k}\right)\\
+m \le n, c_s\left[m,n\right]=c_s\left[n,m\right]=a^{n-m}\operatorname{var}\left(s\left[m\right]\right)
+$$
+
+### 卡尔曼滤波
+
+状态方程：$s[n]=as\left[n-1\right]+u\left[n\right]$
+
+观测方程：$x[n]=s\left[n\right]+w[n]$
+
+驱动噪声 $u[n]$ 相互独立且 $u[n] \sim N(0, \sigma^2)$，观测噪声 $w[n]$ 相互独立且 $w[n] \sim N(0, \sigma^2)$，起始条件 $s[-1] \sim N(0, \sigma_s^2)$。假定 $s[-1], u[n], w[n]$ 之间相互独立。
+
+* 提高估计性能：利用待估计参数的内在联系提高性能
+* 减小运算量：通过“老”估计量更新得到“新”估计量
+
+性质：
+
+对联合高斯独立数据矢量可加性：
+
+若$\theta,x_1,x_2$是联合高斯的，数据矢量$x_1,x_2$ 相互独立，则MMSE估计量为：
+
+$$
+\hat{\theta}=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x_1}\mathbf{C}_{x_1x_1}^{-1}\left(\boldsymbol{x}_1-E\left(\boldsymbol{x}_1\right)\right)+\mathbf{C}_{\theta x_2}\mathbf{C}_{x_2x_2}^{-1}\left(\boldsymbol{x}_2-E\left(\boldsymbol{x}_2\right)\right)
+$$
+
+对待估计参数的可加性：
+
+若 $\boldsymbol{\theta}=\boldsymbol{\theta}_1+\boldsymbol{\theta}_2$, 则相应的MMSE估计量是可加的，即
+
+$$
+\hat{\theta}=E\left(\boldsymbol{\theta}\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}_1+\boldsymbol{\theta}_2\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}_1\mid\boldsymbol{x}\right)+E\left(\boldsymbol{\theta}_2\mid\boldsymbol{x}\right)
+$$
+
+线性变换的不变性：
+
+若$\alpha=\mathbf{A\theta}+\boldsymbol{b},\quad\theta$ 的MMSE估计量是 $\theta$, 则 $\alpha$ 的MMSE估计量为：
+
+$$
+\hat{\alpha}=\mathbf{A}\hat{\theta}+b
+$$
+
+定义：
+
+$$
+\hat{s}[n-1]=E\left(s[n-1]|x[0],x[1],...,x[n-1]\right)\triangleq\hat{s}[n-1\mid n-1]\\
+M\begin{bmatrix}n-1\end{bmatrix}=E\left(\left(s\begin{bmatrix}n-1\end{bmatrix}-\hat{s}\begin{bmatrix}n-1\end{bmatrix}\right)^2\right)\\
+\hat s[n] \triangleq\hat{s}[n\mid n]
+$$
+
+其中，前面的 n 表示被估计的信号下表，后面的 n 表示估计量用到的数据中最新的那个数据的下标。
+
+如果能够提取出第 n 个数据点带来的新的信息，并加入之前已有的估计量，就可更新估计量：
+
+$$
+\begin{aligned}
+\hat{s}\Big[n|n\Big]& =E\left(s[n]|x[0],x[1],...,x[n-1],x[n]\right)  \\
+&=E\left(s[n]|x[0],x[1],...,x[n-1],\tilde{x}[n]\right) \\
+&=\underbrace{E\left(s[n]|x[0],x[1],...,x[n-1]\right)}_{先前数据估计}+\underbrace{E\left(s[n]|\tilde{x}[n]\right)}_{新息估计}
+\end{aligned}
+$$
+
+新息与已有的数据正交。
+
+$$
+\tilde{x}[n]=x[n]-\hat{x}[n|n-1]
+$$
+
+“先前数据估计”怎么求解？
+
+$$
+\begin{aligned}
+\hat{s}[n\mid n-1]& =E\left(as[n-1]+u[n]|x[0],x[1],...,x[n-1]\right)  \\
+&=E\left(as[n-1]|x[0],x[1],...,x[n-1]\right)+E\left(u[n]|x[0],x[1],...,x[n-1]\right) \\
+&=aE\left(s\begin{bmatrix}n-1\end{bmatrix}|x\begin{bmatrix}0\end{bmatrix},x\begin{bmatrix}1\end{bmatrix},...,x\begin{bmatrix}n-1\end{bmatrix}\right)\\
+&=a\hat{s}\begin{bmatrix}n-1|n-1\end{bmatrix} \\
+\end{aligned}
+$$
+
+#### 预测
+
+求解新息
+
+$$
+E\left(s[n]|\tilde{x}[n]\right)=E\left(s[n]\right)+\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}\left(\tilde{x}[n]-E\left(\tilde{x}[n]\right)\right)
+$$
+
+$$
+s[n]=a^{n+1}s[-1]+\sum_{k=0}^na^ku[n-k]\rArr E(s[n]) = 0\\
+$$
+
+$$
+\begin{gathered}
+E\left(\tilde{x}[n]\right)=E\left(x[n]-\hat{x}[n\mid n-1]\right) \\
+E\left(x[n]\right)=E\left(s[n]+w[n]\right)=0 \\
+E\left(\hat{x}[n\mid n-1]\right)=E\left(\sum_{k=0}^{n-1}a[k]x[k]\right) 
+\end{gathered}\\
+\rArr E\left(\hat{x}[n\mid n-1]\right)=0\\
+\rArr E(\tilde x[n]) = 0
+$$
+
+因此，
+
+$$
+E\left(s[n]|\tilde{x}[n]\right)=\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}\tilde{x}[n]=\underbrace{\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}}_{卡尔曼增益}\left(x[n]-\hat{x}[n\mid n-1]\right)
+$$
+
+#### 最小预测 MSE
+
+$\mathbf{C}_{s\tilde{x}}\text{的求解}$
+
+$$
+\begin{aligned}
+C_{s\tilde{x}}& =E\left(s[n]\tilde{x}[n]\right)  \\
+&=E\Big(s[n]\Big(x[n]-\hat{x}\Big[n|n-1\Big]\Big)\Big)
+\end{aligned}
+$$
+
+其中
+
+$$
+\begin{aligned}\hat{x}\left[n|n-1\right]&=E\left(x[n]|x[0],x[1],...x[n-1]\right)=E\left(s[n]+w[n]|x[0],x[1],...x[n-1]\right)\\&=E\left(s[n]|x[0],x[1],...x[n-1]\right)=\hat{s}\left[n|n-1\right]\end{aligned}
+$$
+
+因此
+
+$$
+\begin{aligned}
+C_{s\tilde{x}}& =E\left(s[n]\left(s[n]+w[n]-\hat{s}[n|n-1]\right)\right)  \\
+&=E\left(s[n]w[n]+s[n]\left(s[n]-\hat{s}[n|n-1]\right)\right) \\
+&=E\Big(s[n]\Big(s[n]-\hat{s}\Big[n|n-1\Big]\Big)\Big)\\
+&=E\left(s[n]\left(s[n]-\hat{s}[n|n-1]\right)\right)-E\left(\hat{s}[n|n-1]\left(s[n]-\hat{s}[n|n-1]\right)\right)\\
+&=E\left(\left(s[n]-\hat{s}[n|n-1]\right)\left(s[n]-\hat{s}[n|n-1]\right)\right)\\
+&\triangleq M\begin{bmatrix}n\mid n-1\end{bmatrix}
+\end{aligned}
+$$
+
+求解 $M\begin{bmatrix}n\mid n-1\end{bmatrix}$
+
+$$
+\begin{aligned}
+&M\begin{bmatrix}n\mid n-1\end{bmatrix}\\
+&=E\left(\left(as\begin{bmatrix}n-1\end{bmatrix}+u\begin{bmatrix}n\end{bmatrix}-\hat{s}\begin{bmatrix}n|n-1\end{bmatrix}\right)^2\right)\\
+&=E\left(\left(a\left(s[n-1]-\hat{s}[n-1\mid n-1]\right)+u[n]\right)^2\right) \\
+&=E\left(a^2\left(s\left[n-1\right]-\hat{s}\left[n-1\mid n-1\right]\right)^2+u^2\left[n\right]+2a\left(s\left[n-1\right]-\hat{s}\left[n-1\mid n-1\right]\right)u\left[n\right]\right) \\
+&=a^2M\left[n-1\mid n-1\right]+\sigma_u^2
+\end{aligned}
+$$
+
+#### 卡尔曼增益
+
+$\mathbf{C}_{\tilde{x}\tilde{x}}\text{的求解}$
+
+$$
+\\
+\begin{aligned}
+\mathbf{C}_{\tilde{x}\tilde{x}}&=E\left(\left(\tilde{x}[n]-E(\tilde{x}[n])\right)^2\right) = E\left(\tilde{x}^2[n]\right) = E\left(\left(x[n]-\hat{s}[n\mid n-1]\right)^2\right)\\
+&=E\left(\left(s[n]+w[n]-\hat{s}[n\mid n-1]\right)^2\right) \\
+&=E\left(\left(s[n]-\hat{s}[n\mid n-1]\right)^2+w^2\left[n\right]+2\left(s[n]-\hat{s}[n\mid n-1]\right)w[n]\right) \\
+&=M\begin{bmatrix}n\mid n-1\end{bmatrix}+\sigma_n^2
+\end{aligned}
+$$
+
+结合
+
+$$
+\begin{aligned}\mathbf{C}_{\tilde{x}\tilde{x}}&=M\begin{bmatrix}n\mid n-1\end{bmatrix}+\sigma_n^2\\\mathbf{C}_{s\tilde{x}}&=M\begin{bmatrix}n\mid n-1\end{bmatrix}\end{aligned}
+$$
+
+我们得到了卡尔曼增益
+
+$$
+E\left(s[n]|\tilde{x}[n]\right)=\underbrace{\frac{M\left[n\mid n-1\right]}{M\left[n\mid n-1\right]+\sigma_n^2}}_{卡尔曼增益 K[n]}\tilde{x}[n]
+$$
+
+#### 修正
+
+$$
+\hat{s}\left[n\mid n\right]=\underbrace{\hat{s}\left[n\mid n-1\right]}_{预测}+\underbrace{K\left[n\right]\left(x\left[n\right]-\hat{s}\left[n\mid n-1\right]\right)}_{新息修正}
+$$
+
