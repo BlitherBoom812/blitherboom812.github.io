@@ -1064,3 +1064,48 @@ $$
 \hat{s}\left[n\mid n\right]=\underbrace{\hat{s}\left[n\mid n-1\right]}_{预测}+\underbrace{K\left[n\right]\left(x\left[n\right]-\hat{s}\left[n\mid n-1\right]\right)}_{新息修正}
 $$
 
+#### 最小 MSE
+
+MSE 修正：
+
+$$
+M[n|n] = (1 - K[n])M[n|n - 1]
+$$
+
+### 非零均值信号模型
+
+![1714360809348](../images/StaSP/1714360809348.png)
+
+初始化：$\hat{s} [ - 1|- 1] = E\begin{pmatrix} s[ - 1] \end{pmatrix} = \mu _s$ $M[ - 1|- 1] = E\left ( \begin{pmatrix} s[ - 1] - \hat{s} [ - 1|- 1] \end{pmatrix} ^2\right ) = \sigma _s^2$
+
+估计量预测：$\hat{s}[n|n-1]=a\hat{s}[n-1|n-1]$
+
+MSE预测：$M\left[n\mid n-1\right]=a^2M\left[n-1\mid n-1\right]+\sigma_u^2$
+
+卡尔曼增益：$K[n]=\frac{M\left[n|n-1\right]}{M\left[n|n-1\right]+\sigma_n^2}$
+
+估计量修正：$\hat{s}[n|n]=\hat{s}[n|n-1]+K[n]\left(x[n]-\hat{s}[n|n-1]\right)$
+
+MSE修正: $M\left [ n\mid n\right ] = \left ( 1- K\left [ n\right ] \right ) M\left [ n\mid n- 1\right ]$
+
+### 矢量状态-标量观测信号模型
+
+![1714360717248](../images/StaSP/1714360717248.png)
+
+### 矢量状态-矢量观测信号模型
+
+![1714360742651](../images/StaSP/1714360742651.png)
+
+### 非线性信号模型
+
+![1714360782259](../images/StaSP/1714360782259.png)
+
+![1714361011137](../images/StaSP/1714361011137.png)
+
+![1714361027958](../images/StaSP/1714361027958.png)
+
+### 总结
+
+* 不同时刻的待估计参数并不完全一样，但是存在某些内在联系
+* 卡尔曼滤波利用这种联系进行 LMMSE 估计，并减少了运算量
+* 如果信号与噪声是高斯的，则卡尔曼滤波在 MMSE 准则下最佳，否则，在 LMMSE 准则下是最佳的。
