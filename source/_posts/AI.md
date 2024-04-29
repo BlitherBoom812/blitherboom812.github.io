@@ -211,7 +211,7 @@ $$
 
 ##### Weight Decay
 
-L2 regularization: 
+L2 regularization:
 
 $$
 \Omega(\theta)=\frac\lambda2\sum_{l=1}^{n_l-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\theta_{ji}^{(l)})^2\\\frac\partial{\partial\theta^{(l)}}\Omega(\theta)=\lambda\theta^{(l)}
@@ -247,7 +247,6 @@ $$
 
 因为 ReLU 删除了一半的信息。
 
-
 ![1713775669844](../images/AI/1713775669844.png)
 
 ### Convolutional Neural Network (CNN)
@@ -255,3 +254,44 @@ $$
 ![1713776156049](../images/AI/1713776156049.png)
 
 ![1713776168789](../images/AI/1713776168789.png)
+
+![1714379943169](../images/AI/1714379943169.png)
+
+#### Convoluion Kernel
+
+![1714380111476](../images/AI/1714380111476.png)
+
+Stride
+
+![1714380132725](../images/AI/1714380132725.png)
+
+Padding
+
+![1714380159356](../images/AI/1714380159356.png)
+
+![1714380233071](../images/AI/1714380233071.png)
+
+#### Pooling
+
+![1714380343254](../images/AI/1714380343254.png)
+
+Batch Normalization
+
+![1714379335929](../images/AI/1714379335929.png)
+
+在 N 张图像的对应通道做归一化。
+
+可以增强训练的稳定性，使得学习率可以设大一点而仍然保证收敛。
+
+
+* 数据集成
+* 参数集成
+* 模型集成
+
+#### ResNet
+
+![1714380578105](../images/AI/1714380578105.png)
+
+![1714380763838](../images/AI/1714380763838.png)
+
+最后一层 Global Average Pooling：7\*7\*2048 -> 1\* 1 \* 2048
