@@ -1125,7 +1125,10 @@ $$
 $$
 
 $$
-\begin{aligned}&P\left(H_1;H_0\right):\text{ 虚警概率}\left(P_{FA},\text{有时简记为}P_F\right)\\&P\left(H_0;H_1\right):\text{ 漏检概率 }\left(P_M\right)\\&P\left(H_1;H_1\right):\text{ 检测概率 }\left(P_D\right)\end{aligned}
+\begin{aligned}
+&P\left(H_1;H_0\right):\text{ 虚警概率}\left(P_{FA},\text{有时简记为}P_F\right)\\
+&P\left(H_0;H_1\right):\text{ 漏检概率 }\left(P_M\right)\\
+&P\left(H_1;H_1\right):\text{ 检测概率 }\left(P_D\right)\end{aligned}
 $$
 
 要求：在虚警概率一定情况下，使检测概率最大化
@@ -1134,15 +1137,19 @@ $$
 
 对给定的虚警概率 $P_{FA}=\alpha$ ,使检测概率 $P_D$ 最大的判决为
 
-$$L(x)=\frac{p(x;H_1)}{p(x;H_0)}>\gamma $$
+$$
+L(x)=\frac{p(x;H_1)}{p(x;H_0)}>\gamma
+$$
 
-其中门限由$P_{FA}=\int_{\{\mathbf{x}:L(\mathbf{x})>\gamma\}}p(\boldsymbol{x};H_0)d\boldsymbol{x}=\alpha$决定
+其中门限由 $P_{FA}=\int_{\lbrace\mathbf{x}:L(\mathbf{x})>\gamma\rbrace}p(\boldsymbol{x};H_0)d\boldsymbol{x}=\alpha$ 决定
+
 
 对于信号检测问题：
 
 $$
 H_0:\boldsymbol{x}\sim N\left(\boldsymbol{0},\sigma^2\mathbf{I}\right)\\H_1:\boldsymbol{x}\sim N\left(A\mathbf{1},\sigma^2\mathbf{I}\right)
 $$
+
 
 NP 检测器：
 
@@ -1183,6 +1190,7 @@ $$
 - 从数学角度：不同假设下的pdf分隔更开，更易区分不同假设
 - 从信号处理角度：增加信号预检测积分时间，获得更多的能量用于检测
 - 从信息论角度：多的观测数据带来了新的信息
+
 
 ### 最小错误概率准则
 
