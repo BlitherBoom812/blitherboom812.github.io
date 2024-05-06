@@ -1109,3 +1109,174 @@ MSE修正: $M\left [ n\mid n\right ] = \left ( 1- K\left [ n\right ] \right ) M\
 * 不同时刻的待估计参数并不完全一样，但是存在某些内在联系
 * 卡尔曼滤波利用这种联系进行 LMMSE 估计，并减少了运算量
 * 如果信号与噪声是高斯的，则卡尔曼滤波在 MMSE 准则下最佳，否则，在 LMMSE 准则下是最佳的。
+
+## 信号检测基本准则与方法
+
+之前一直在研究连续型的问题（回归/估计），这里研究离散型的问题（分类/检测）。
+
+### Neyman-Pearson 准则
+
+适用于没有先验信息、代价不好量化的场景。
+
+两种假设：
+
+$$
+\begin{aligned}&H_0:x[n]=w[n],n=0,1,...,N-1\\&H_1:x[n]=s[n]+w[n],n=0,1,...,N-1\end{aligned}
+$$
+
+$$
+\begin{aligned}&P\left(H_1;H_0\right):\text{ 虚警概率}\left(P_{FA},\text{有时简记为}P_F\right)\\&P\left(H_0;H_1\right):\text{ 漏检概率 }\left(P_M\right)\\&P\left(H_1;H_1\right):\text{ 检测概率 }\left(P_D\right)\end{aligned}
+$$
+
+要求：在虚警概率一定情况下，使检测概率最大化
+
+检测概率和虚警概率之间追求折中，不可能两者都改善。
+
+对给定的虚警概率 $P_{FA}=\alpha$ ,使检测概率 $P_D$ 最大的判决为
+
+$$L(x)=\frac{p(x;H_1)}{p(x;H_0)}>\gamma $$
+
+其中门限由$P_{FA}=\int_{\{\mathbf{x}:L(\mathbf{x})>\gamma\}}p(\boldsymbol{x};H_0)d\boldsymbol{x}=\alpha$决定
+
+对于信号检测问题：
+
+$$
+H_0:\boldsymbol{x}\sim N\left(\boldsymbol{0},\sigma^2\mathbf{I}\right)\\H_1:\boldsymbol{x}\sim N\left(A\mathbf{1},\sigma^2\mathbf{I}\right)
+$$
+
+NP 检测器：
+
+$$
+\frac{p\left(\boldsymbol{x};H_1\right)}{p\left(\boldsymbol{x};H_0\right)}=\frac{\frac1{\left(2\pi\sigma^2\right)^{N/2}}\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}\left(x[n]-A\right)^2\right\}}{\frac1{\left(2\pi\sigma^2\right)^{N/2}}\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}x^2[n]\right\}}>\gamma\\\quad\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}\left(x[n]-A\right)^2+\frac1{2\sigma^2}\sum_{n=0}^{N-1}x^2[n]\right\}>\gamma 
+$$
+
+$$
+-\frac1{2\sigma^2}\Bigg(-2A\sum_{n=0}^{N-1}x[n]+NA^2\Bigg)>\ln\gamma\\\frac1N\sum_{n=0}^{N-1}x[n]>\frac{\sigma^2}{NA}\ln\gamma+\frac A2
+$$
+
+称为检测统计量。若均值大于门限，则判为有信号，否则为无信号。
+
+使用方法：
+
+$$
+\begin{aligned}
+&\text{检测统计量:}T(x)=\frac1N\sum_{n=0}^{N-1}x[n]\sim\begin{cases}N\Big(0,\sigma^2\Big/_N\Big),&H_0\\[2ex]N\Big(A,\sigma^2\Big/_N\Big),&H_1\end{cases} \\
+&\text{虚警概率:}P_{FA}=Pr\left(T\left(\boldsymbol{x}\right)>\gamma^{'};H_0\right)=Q\left(\frac{\gamma^{'}}{\sqrt{\sigma^2/N}}\right) \\
+&\text{门限设置:}\gamma^{\prime}=\sqrt{\frac{\sigma^2}N}Q^{-1}\left(P_{FA}\right) \\
+& \begin{aligned}&\text{相应的检测概率:}\\&P_{D}=Pr\Big(T\big(\boldsymbol{x}\big)>\gamma^{'};H_{1}\Big)=Q\Bigg(\frac{\gamma^{'}-A}{\sqrt{\sigma^{2}/N}}\Bigg)=Q\Bigg(\frac{\sqrt{\frac{\sigma^{2}}{N}}Q^{-1}\big(P_{FA}\big)-A}{\sqrt{\sigma^{2}/N}}\Bigg)\end{aligned}  \\
+&=Q\Bigg(Q^{-1}\big(P_{F_A}\big)-\sqrt{\frac{NA^2}{\sigma^2}}\Bigg)
+\end{aligned}
+$$
+
+### 检测性能分析
+
+接收机工作特性曲线（ROC, receiver operating characteristics）
+
+![1714966200160](../images/StaSP/1714966200160.png)
+
+直观理解：
+
+![1714966230536](../images/StaSP/1714966230536.png)
+
+多次观测的好处
+
+- 从数学角度：不同假设下的pdf分隔更开，更易区分不同假设
+- 从信号处理角度：增加信号预检测积分时间，获得更多的能量用于检测
+- 从信息论角度：多的观测数据带来了新的信息
+
+### 最小错误概率准则
+
+$$
+\begin{aligned}
+P_{e}& =\Pr\left\{\text{判}H_0,H_1\text{为真}\right\}+\Pr\left\{\text{判}H_1,H_0\text{为真}\right\}  \\
+&=P\big(H_0,H_1\big)+P\big(H_1,H_0\big) \\
+&=P\big(H_1\big)P\big(H_0|H_1\big)+P\big(H_0\big)P\big(H_1|H_0\big) \\
+&=P\big(H_1\big)\int_{R_0}p\big(\boldsymbol{x}|H_1\big)d\boldsymbol{x}+P\big(H_0\big)\int_{R_1}p\big(\boldsymbol{x}|H_0\big)d\boldsymbol{x} \\
+&=P\big(H_1\big)\Bigg(1-\int_{R_1}p\big(\boldsymbol{x}\mid H_1\big)d\boldsymbol{x}\Bigg)+P\big(H_0\big)\int_{R_1}p\big(\boldsymbol{x}\mid H_0\big)d\boldsymbol{x} \\
+&=P\left(H_1\right)+\int_{R_1}\left\{P\left(H_0\right)p\left(\boldsymbol{x}\mid H_0\right)-P\left(H_1\right)p\left(\boldsymbol{x}\mid H_1\right)\right\}d\boldsymbol{x}
+\end{aligned}
+$$
+
+为了使错误最小，需要在积分式小于零的区域积分，即
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}>\frac{P\left(H_0\right)}{P\left(H_1\right)}\text{ 时,判 }H_1
+$$
+
+最小错误概率准则可推导出最大后验概率检测器：
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}>\frac{P\left(H_0\right)}{P\left(H_1\right)}\text{ 时,判 }H_1
+$$
+
+等价于
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)P\left(H_1\right)}{p\left(\boldsymbol{x}\right)}>\frac{p\left(\boldsymbol{x}\mid H_0\right)P\left(H_0\right)}{p\left(\boldsymbol{x}\right)}\\p\left(H_1\mid\boldsymbol{x}\right)>p\left(H_0\mid\boldsymbol{x}\right)
+$$
+
+若先验概率相同，则为最大似然检测器：
+
+$$
+p\left(x\mid H_1\right)>p\left(x\mid H_0\right)
+$$
+
+### 二元贝叶斯风险准则
+
+引入判错代价
+
+$$
+R=C_{01}P\left(H_1\right)P\left(H_0\mid H_1\right)+C_{10}P\left(H_0\right)P\left(H_1\mid H_0\right)
+$$
+
+进一步泛化：
+
+$$
+R=C_{00}P\big(H_0\big)P\big(H_0|H_0\big)+C_{10}P\big(H_0\big)P\big(H_1|H_0\big)\\+C_{01}P\big(H_1\big)P\big(H_0|H_1\big)+C_{11}P\big(H_1\big)P\big(H_1|H_1\big)
+$$
+
+$$
+\begin{aligned}\text{R}&=C_{00}P\left(H_0\right)+C_{01}P\left(H_1\right)\\&+\int_{R_1}\left\{\left(C_{10}-C_{00}\right)P\left(H_0\right)p\left(\boldsymbol{x}\mid H_0\right)-\left(C_{01}-C_{11}\right)P\left(H_1\right)p\left(\boldsymbol{x}\mid H_1\right)\right\}d\boldsymbol{x}\end{aligned}
+$$
+
+因此，有了最小贝叶斯风险判决准则：
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}>\frac{\left(C_{10}-C_{00}\right)P\left(H_0\right)}{\left(C_{01}-C_{11}\right)P\left(H_1\right)}\text{ 时,判 }H_1
+$$
+
+风险一致条件下（$C_{00}=C_{11}=0,C_{10}=C_{01}=1$），回到最小错误概率准则。
+
+### 多元贝叶斯风险准则
+
+贝叶斯风险：
+
+$$
+\begin{aligned}
+\text{R}& =\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}C_{ij}P\Big(H_i,H_j\Big)  \\
+&=\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}C_{ij}\int_{R_i}P\Big(x,H_j\Big)dx \\
+&=\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0}^{M-1}C_{ij}P\Big(x,H_j\Big)dx \\
+&=\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0}^{M-1}C_{ij}P\Big(H_j\mid x\Big)p(x)dx
+\end{aligned}
+$$
+
+
+应选择使平均风险$C_i\left(\boldsymbol{x}\right)=\sum_{j=0}^{M-1}C_{ij}P\left(H_j\mid\boldsymbol{x}\right)$最小的假设
+
+在风险一致条件下
+
+$$
+C_{ij}=\begin{cases}0,&i=j\\1,&i\neq j\end{cases}
+$$
+
+$$
+\begin{aligned}C_{i}\left(\boldsymbol{x}\right)&=\sum_{j=0\atop j\neq i}^{M-1}P\Big(H_j\mid\boldsymbol{x}\Big)\\&=\sum_{j=0}^{M-1}P\Big(H_j\mid\boldsymbol{x}\Big)-\underline{P\Big(H_i\mid\boldsymbol{x}\Big)}_{最大化这个}\end{aligned}
+$$
+
+因此等价于最大后验准则：
+
+$$
+\max_iP(H_i\mid\boldsymbol{x})
+$$
+
+若此时先验概率相同，则为最大似然准则。
