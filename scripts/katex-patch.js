@@ -9,5 +9,7 @@ module.exports = function (data) {
     if (debug) {
         console.log("after replace: " + data.content.match(/<div>\$\$(.|\n)*?\$\$<\/div>/g));
     }
+    data.content = data.content.replace("\\{", "\\lbrace");
+    data.content = data.content.replace("\\}", "\\rbrace");
     return data;
 };

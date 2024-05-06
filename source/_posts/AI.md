@@ -1,6 +1,6 @@
 ---
 title: Introduction to Artificial Intelligence
-katex: false
+katex: true
 date: 2024-02-26 15:20:37
 tags:
 ---
@@ -295,3 +295,104 @@ Batch Normalization
 ![1714380763838](../images/AI/1714380763838.png)
 
 最后一层 Global Average Pooling：7\*7\*2048 -> 1\* 1 \* 2048
+
+### Recurrent Neural Network (RNN)
+
+#### Idea for Sequence Modeling
+
+Local Dependency
+
+![1714982108981](../images/AI/1714982108981.png)
+
+Parameter Sharing
+
+![1714982133935](../images/AI/1714982133935.png)
+
+### RNN
+
+![1714982188331](../images/AI/1714982188331.png)
+
+Go deeper
+
+![1714982215920](../images/AI/1714982215920.png)
+
+#### Standard Architectures
+
+![1714982075164](../images/AI/1714982075164.png)
+
+- RNNs can represent unbounded temporal dependencies
+- RNNs encode histories of words into a fixed size hidden vector 
+- Parameter size does not grow with the length of dependencies
+- RNNs are hard to learn long range dependencies present in data
+
+#### LSTM
+
+Multihead, shared bottom.
+
+![1714982405665](../images/AI/1714982405665.png)
+
+Gradient flow highway: remember history very well.
+
+NIPS 2015 Highway Network.
+
+#### Training Strategies
+
+Shift in Training & Inference
+
+![1714983390325](../images/AI/1714983390325.png)
+
+Use Scheduled Sampling to solve this
+
+![1714983452419](../images/AI/1714983452419.png)
+
+Problem: Gradient Explosion during continuously multiplication.
+
+Solution: Gradient Clipping
+
+![1714983641507](../images/AI/1714983641507.png)
+
+Variational Dropout
+
+![1714983788461](../images/AI/1714983788461.png)
+
+Layer Normalization
+
+![1714983988587](../images/AI/1714983988587.png)
+
+BN: Easy to compare between channels
+
+LN: Easy to compare between samples
+
+在图像任务上，我们一般认为 channel 之间的地位应该是相同的，因此常常采用 BN。
+
+### Transformer
+
+use attention to replace state space.
+
+![1714984460020](../images/AI/1714984460020.png)
+
+#### Attention
+
+![1714984778231](../images/AI/1714984778231.png)
+
+$$
+\text{Attention}(Q,K,V)=\text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+Multi-Head Attention
+
+![1714985419724](../images/AI/1714985419724.png)
+
+Sparse?
+
+$W^o$ to maintain shape and jointly attend to information from different representation subspaces.
+
+#### FFN
+
+Position-wise FFN (Similar to multi  convolution kernels in CNN, shared parameters in every word.)
+
+![1714985971187](../images/AI/1714985971187.png)
+
+#### Positional Encoding
+
+![1714986050538](../images/AI/1714986050538.png)
