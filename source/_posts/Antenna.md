@@ -583,3 +583,32 @@ Increase Input Impedance
 #### Monopole
 
 ![1713509771675](../images/Antenna/1713509771675.png)
+
+## Loop Antennas
+
+### Small Loop
+
+![1715324583382](../images/Antenna/1715324583382.png)
+
+![1715324548326](../images/Antenna/1715324548326.png)
+
+![1715324559069](../images/Antenna/1715324559069.png)
+
+Infinite small loop radius;
+
+Infinite small wire radius;
+
+Uniform distribution.
+
+Resistance $R_r$ too small!
+
+### Finite-length loop antennas
+
+![1715325834911](../images/Antenna/1715325834911.png)
+
+![1715324769403](../images/Antenna/1715324769403.png)
+
+
+
+### Modes of Loop antennas
+

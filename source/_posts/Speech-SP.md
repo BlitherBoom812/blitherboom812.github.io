@@ -578,3 +578,115 @@ G_{TC} =\frac{min\{\sigma_{r,PCM}^{2}\}}{min\{\sigma_{r,TC}^{2}\}}=\frac{\vareps
 $$
 
 #### 最佳正交变换 - KL 变换
+
+
+## 语音信号的参数编码
+
+### 感觉加权滤波器
+
+误差函数加权：
+
+$$
+J=\int_0^{f_s}\lvert s(f)-\hat{s}(f)\rvert^2\cdot\lvert w(f)\rvert^2df
+$$
+
+其中，加权滤波器满足
+
+$$
+\int_0^{f_S}|w(f)|df= Const.
+$$
+
+当误差函数最小的时候，应当保证
+
+$$
+|s(f)-\hat{s}(f)|^2\cdot|w(f)|=\frac{\gamma}{2}=\text{常数}
+$$
+
+可以选择如下的滤波器：
+
+$$
+w(z)=\frac{A(z)}{A\left(\frac{z}{\gamma}\right)}=\frac{1-\sum_{i=1}^P\alpha_iz^{-i}}{1-\sum_{i=1}^P\alpha_i\gamma^iz^{-i}},\quad0\leq\gamma\leq1
+$$
+
+$\gamma$ 为加权因子，在 0-1 之间。
+
+$\gamma=0$ 时变成逆滤波器，其频谱包络的峰值点就是语音谱的谷值点。
+
+>  分析：语音信号是全极点模型产生的，即 $S(z) = GE(z)/A(z)$，与逆滤波器点频谱成反比。
+
+![1715172645812](../images/Speech-SP/1715172645812.png)
+
+### 多脉冲激励线性预测声码器
+
+![1715172680511](../images/Speech-SP/1715172680511.png)
+
+语音综合器的激励源有若干个不同位置和幅度的脉冲信号组成。
+
+$$
+\hat{s}(n)=\hat{s}_0(n)+\sum_{k=1}^Mg_kh(n-n_k)
+$$
+
+其中 $\hat s_0(n)$ 是 LPC 综合器的零输入响应。
+
+$$
+\begin{aligned}&e_{s}(n)=s(n)-\hat{s}(n)=s(n)-\hat{s}_{0}(n)-\sum_{k=1}^{M}g_{k}h(n-n_{k})\\&=\bar{e}(n)-\sum_{k=1}^Mg_kh(n-n_k)\end{aligned}
+$$
+
+用 $\bar{e}(n)=s(n)-\hat{s}_0(n)$ 表示输入语音减去零输入响应（受历史激励影响的部分）。
+
+输入感觉加权滤波器，得到输出
+
+$$
+\begin{aligned}e(n)&=e_{s}(n)*w(n)=\left[\bar{e}(n)-\sum_{k=1}^{M}g_{k}h(n-n_{k})\right]*w(n)\\&=\bar{e}_{w}(n)-\sum_{k=1}^{M}g_{k}h_{w}(n-n_{k})\end{aligned}
+$$
+
+从而，得到感觉加权滤波器的误差函数
+
+$$
+E=\sum_{n=1}^Ne^2(n)=\sum_{n=1}^N\left[\bar{e}_w(n)-\sum_{k=1}^Mg_kh_w(n-n_k)\right]^2
+$$
+
+选择合适的 $n_k$, $g_k$ 使得上面的误差函数最小
+
+$$
+\frac{\partial E}{\partial n_j}=0,\quad j=1,\cdots M\\\frac{\partial E}{\partial g_j}=0,\quad j=1,\cdots M
+$$
+
+上面那个方程很复杂，会导出非线性的方程；
+
+从下面的那个方程可以推出
+
+$$
+\sum_{k=1}^Mg_kR_{hh}(n_k,n_j)=R_{eh}(n_j),\quad j=1,\cdots M
+$$
+
+其中
+
+$$
+R_{eh}(n_j)=\sum_{n=1}^N\bar{e}_w(n)\cdot h_w(n-n_j)\\R_{hh}(n_k,n_j)=\sum_{n=1}^Nh_w(n-n_k)h_w(n-n_j)
+$$
+
+此时可改写最小均方误差
+
+$$
+E_{min}=\sum_{n=1}^N[\bar{e}_w(n)]^2-\sum_{k=1}^Mg_kR_{eh}(n_k)
+$$
+
+最优解的计算涉及到非线性方程的求解，不太现实。考虑采用次优搜索，一个一个求解。
+
+当只有一个脉冲时
+
+$$
+g_1R_{hh}(n_1,n_1)=R_{eh}(n_1)\\
+E_{min}=\sum_{n=1}^N[\bar{e}_w(n)]^2-g_1R_{eh}(n_1)
+$$
+
+消元得到
+
+$$
+E_{min}=\sum_{n=1}^N[\bar{e}_w(n)]^2-R_{eh}^2(n_1)/R_{hh}(n_1,n_1)
+$$
+
+接下来搜索 $n_1$ 使得上式最优化。解出 $n_1$ 后即可解出 $g_1$。
+
+接下来一个个求解，每次都要把前面求解过的脉冲折算到零输入响应中，然后求解当前的结果：
