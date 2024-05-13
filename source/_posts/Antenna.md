@@ -608,7 +608,7 @@ Resistance $R_r$ too small!
 
 ![1715324769403](../images/Antenna/1715324769403.png)
 
-
+![1715328812089](../images/Antenna/1715328812089.png)
 
 ### Modes of Loop antennas
 

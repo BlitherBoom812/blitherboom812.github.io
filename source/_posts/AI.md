@@ -396,3 +396,24 @@ Position-wise FFN (Similar to multi  convolution kernels in CNN, shared paramete
 #### Positional Encoding
 
 ![1714986050538](../images/AI/1714986050538.png)
+
+## Reasoning
+
+Reasoning (Probabilistic) = Modeling + Inference
+
+Modeling:
+* Bayesian Networks
+* Markov random fields
+
+Inference:
+* Elimination methods (变量消除法)
+* Latent variable models (因变量模型)
+* Variational methods (变分方法)
+* Sampling methods (采样方法) - 难学！
+
+### Bayesian Network
+
+$$
+p(x_1,...,x_K)=p(x_K|x_1,...,x_{K-1})\cdots p(x_2|x_1)p(x_1)
+$$
+
