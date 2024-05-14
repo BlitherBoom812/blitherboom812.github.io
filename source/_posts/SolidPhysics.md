@@ -423,8 +423,6 @@ $$
 \begin{aligned}n=&\frac{-1+\left[1+2{\left(\frac{N_D}{N_-}\right)}e^{E_i/k_BT}+...\right]}{\frac2{N_-}e^{E_i/k_BT}}\approx N_D\\\end{aligned}
 $$
 
-
-
 一般室温下热激发到导带的电子数也符合上式，按指数关系随温度升高而增加 （慎用！）
 
 空穴的浓度是
@@ -513,9 +511,8 @@ $$
 迁移率 $\mu$：单位电场下载流子的平均漂移速度
 
 $$
-\sigma=nq\mu 
+\sigma=nq\mu
 $$
-
 
 $$
 j=nq\left(\mu E\right)\\
@@ -525,7 +522,6 @@ $$
 
 $$
 \sigma=nq\mu_-+pq\mu_+
-
 $$
 
 多子导电：
@@ -547,3 +543,150 @@ $$
 半导体的电导率σ除了与迁移率有关外，还与载流子的浓度有关。而载流子的浓度随温度的升高以指数形式增加（饱和区除外）。因此除饱和区外，电导率主要以指数形式随温度的升高而迅速增大，表现出很强的热敏性。但是，不是温度越高就越好的，温度升高后，掺杂的特性就没了，导电能力主要由本征激发决定，相当于半导体退化成了一块普通的电阻，也没有什么 PN 结了。
 
 这与金属的电导率有明显不同。因为金属的载流子（电子或空穴）浓度与温度无关，温度升高时，传导电子的迁移率因与声子的碰撞更加频繁而减小，所以金属的导电率温度系数为负，温度升高，电导率下降。
+
+## PN 结
+
+### 功函数
+
+金属发射电流与温度有关，符合指数规律：
+
+$$
+j\propto e^{\large-\frac{W}{k_BT}}
+$$
+
+其中 $W$ 称功函数。
+
+经典理论：
+
+$$
+j=-n_0q\left(\frac{k_BT}{2\pi m}\right)^{1/2}e^{-\frac\chi{k_BT}}
+$$
+
+功函数：
+
+$$
+W = \chi
+$$
+
+统计分布：
+
+$$
+dn=n_0\left(\frac m{2\pi k_BT}\right)^{3/2}e^{-\frac{m\upsilon^2}{2k_BT}}d\upsilon
+$$
+
+量子理论：
+
+$$
+j=-q\frac{4\pi m{\left(k_BT\right)}^2}{\left(2\pi\hbar\right)^3}e^{-\left(\chi-E_F\right)/k_BT}
+$$
+
+功函数
+
+$$
+W = \chi - E_F
+$$
+
+统计分布：
+
+$$
+dn=2{\left(\frac m{2\pi\hbar}\right)}^3\frac1{e^{\left(\frac12m\upsilon^2-E_F\right)/k_BT}+1}d\upsilon
+$$
+
+金属有接触电势，从费米能级高的地方流向费米能级低的。
+
+![1715657785337](../images/SolidPhysics/1715657785337.png)
+
+$$
+V_A - V_B = (W_B - W_A)/q
+$$
+
+平衡态下，费米能级变为相等，电子不再流动。
+
+### PN 结
+
+载流子扩散运动：
+
+![1715658350241](../images/SolidPhysics/1715658350241.png)
+
+非平衡载流子：复合运动
+
+在外界的作用下，半导体中的电子浓度n和空穴浓度p有可
+能偏离平衡值。例如半导体的本征光吸收产生电子—空穴
+对，用Δn＝n－n0，Δp＝p－p0表示超出热平衡的多余载流
+子，称为非平衡载流子。通常情况下，由于电中性要求，
+Δn＝Δp
+
+我们最关心的是非平衡的少数载流子，因为少子的浓度变化大，通常采用准费米能级 $E_{Fn}, E_{Fp}$。多子的费米能级不变。
+
+$$
+\begin{aligned}n_0+\Delta n&=n_i\exp(\frac{E_{Fn}-E_{Fi}}{kT})\\\left(n_0+\Delta n\right)\cdot\left(p_0+\Delta p\right)>n_i^2\\p_0+\Delta p&=n_i\exp(\frac{E_{Fi}-E_{Fp}}{kT})\end{aligned}
+$$
+
+![1715658620805](../images/SolidPhysics/1715658620805.png)
+
+外界作用下， 非平衡态要恢复到平衡态。非平衡的载流子会消失，消失的过程叫复合，导带的多余电子落回价带，多余的电子和空穴成对消失。
+
+复合速率：
+
+$$
+\frac{d\Delta n}{dt}=-\frac{\Delta n}{\tau}\\\text{其解为:}\quad\Delta n=(\Delta n)_0\exp(-t/\tau)
+$$
+
+$\tau$ 称为非平衡载流子寿命
+
+#### 非平衡载流子的扩散和复合
+
+直接复合：复合率 $R=\alpha_r\cdot n\cdot p$
+
+间接复合：通过杂质能级的间接复合（与杂质浓度呈正比，与非平衡载流子浓度呈正比，深能级更强）
+
+非平衡状态下，过剩电子的复合率一定等于过剩空穴的复合率
+
+$$
+R_n^{\prime}=R_p^{\prime}
+$$
+
+扩散复合过程的稳定分布：
+
+
+$$
+-\frac d{dx}\Bigg(-D\frac{dN}{dx}\Bigg)-\frac N\tau=0\\N=N_0e^{-x/L},L=\sqrt{D\tau}
+$$
+
+扩散长度L：表面非平衡载流子深入材料内部的距离，随扩散系数和复合寿命增加而增加
+
+$$
+\text{扩散流密度 }=-D\frac{dN}{dx}=N_0\frac DLe^{-x/L}
+$$
+
+扩散速度D/L：界面处载流子以速度D/L运动
+
+漂移 + 扩散 的总电流密度：
+
+$$
+J=qn\mu_nE_x+qp\mu_pE_x+qD_n\frac{dn}{dx}-qD_p\frac{dp}{dx}
+$$
+
+爱因斯坦关系：
+
+$$
+\frac{D_n}{\mu_n}=\frac{k_\text{B}T}q\quad\frac{D_p}{\mu_p}=\frac{k_\text{B}T}q
+$$
+
+#### PN 结的接触电势差
+
+![1715659347111](../images/SolidPhysics/1715659347111.png)
+
+$$
+eV_D=\left(E_F\right)_N-\left(E_F\right)_P\\qV_D=\left(E_F\right)_N-\left(E_F\right)_P
+$$
+
+
+$$
+
+
+$$
+
+$V_D$ 等于接触前的费米能级差。
+
+![1715659894626](../images/SolidPhysics/1715659894626.png)

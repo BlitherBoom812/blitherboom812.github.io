@@ -389,7 +389,7 @@ $W^o$ to maintain shape and jointly attend to information from different represe
 
 #### FFN
 
-Position-wise FFN (Similar to multi  convolution kernels in CNN, shared parameters in every word.)
+Position-wise FFN (Similar to multi convolution kernels in CNN, shared parameters in every word.)
 
 ![1714985971187](../images/AI/1714985971187.png)
 
