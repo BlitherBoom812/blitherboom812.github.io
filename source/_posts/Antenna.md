@@ -612,3 +612,54 @@ Resistance $R_r$ too small!
 
 ### Modes of Loop antennas
 
+
+![1715924283522](../images/Antenna/1715924283522.png)
+
+![1715924294266](../images/Antenna/1715924294266.png)
+
+### Helix/helical antennas
+
+![1715924314079](../images/Antenna/1715924314079.png)
+
+Axial Mode
+
+![1715924338243](../images/Antenna/1715924338243.png)
+
+Normal Mode:
+
+![1715924364965](../images/Antenna/1715924364965.png)
+
+![1715924463502](../images/Antenna/1715924463502.png)
+
+## Aperture Antenna
+
+### Huygens' Principle
+
+![1715927654495](../images/Antenna/1715927654495.png)
+
+### Rectangular aperture antennas
+
+![1715927982080](../images/Antenna/1715927982080.png)
+
+![1715928380068](../images/Antenna/1715928380068.png)
+
+![1715929046320](../images/Antenna/1715929046320.png)
+
+![1715929138391](../images/Antenna/1715929138391.png)
+
+![1715929169213](../images/Antenna/1715929169213.png)
+
+### Horn Antennas
+
+
+![1715929396692](../images/Antenna/1715929396692.png)
+
+
+![1715929501432](../images/Antenna/1715929501432.png)
+
+The E-pattern is in shadow.
+
+![1715929523072](../images/Antenna/1715929523072.png)
+
+![1715929531751](../images/Antenna/1715929531751.png)
+
