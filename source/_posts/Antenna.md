@@ -663,3 +663,4 @@ The E-pattern is in shadow.
 
 ![1715929531751](../images/Antenna/1715929531751.png)
 
+![1715929546494](../images/Antenna/1715929546494.png)
