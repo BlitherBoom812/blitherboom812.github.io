@@ -648,7 +648,6 @@ $$
 
 扩散复合过程的稳定分布：
 
-
 $$
 -\frac d{dx}\Bigg(-D\frac{dN}{dx}\Bigg)-\frac N\tau=0\\N=N_0e^{-x/L},L=\sqrt{D\tau}
 $$
@@ -681,7 +680,6 @@ $$
 eV_D=\left(E_F\right)_N-\left(E_F\right)_P\\qV_D=\left(E_F\right)_N-\left(E_F\right)_P
 $$
 
-
 $$
 
 
@@ -690,3 +688,155 @@ $$
 $V_D$ 等于接触前的费米能级差。
 
 ![1715659894626](../images/SolidPhysics/1715659894626.png)
+
+### 正向偏压-载流子扩散运动产生电流
+
+p 区看电子，n 区看空穴：
+
+![1716257709851](../images/SolidPhysics/1716257709851.png)
+
+0 表示热平衡时候的浓度。
+
+### 反向偏压-漂移作用增强
+
+![1716257832298](../images/SolidPhysics/1716257832298.png)
+
+![1716257919907](../images/SolidPhysics/1716257919907.png)
+
+正向注入：
+
+当PN结加正向偏压时：$\mathsf{PN}$结势垒降低为$q(V_D-V)$扩散作用增强
+
+反向抽取：
+
+当PN结加反向偏压时：$\mathsf{PN}$结势垒升高为$q(V_D+V)$漂移作用增强
+
+反向抽取时载流子的复合率为负数，就是说在不断地产生新的载流子（电子-空穴对）。PN结的反向电流实质上就是产生电流。
+
+![1716258157706](../images/SolidPhysics/1716258157706.png)
+
+### PN 结的击穿
+
+![1716258191070](../images/SolidPhysics/1716258191070.png)
+
+### 双极性晶体管
+
+![1716258575169](../images/SolidPhysics/1716258575169.png)
+
+## 异质结与肖特基结
+
+### 半导体异质结
+
+真空能级：电子自由运动所占据的最低能量。
+
+![1716259850103](../images/SolidPhysics/1716259850103.png)
+
+![1716260746330](../images/SolidPhysics/1716260746330.png)
+
+![1716259893782](../images/SolidPhysics/1716259893782.png)
+
+
+导带能级差：$\Delta E_C=\chi_1-\chi_2$
+价带能级差：$\Delta E_v=(\chi_2+E_{g^2})-(\chi_1+E_{g^1})=E_{g^2}-E_{g^1}-\Delta E_{g^2}$
+导带能级差+价带能级差 =带隙宽度差
+注：此为一般半导体物理书中的结果
+
+![1716260901275](../images/SolidPhysics/1716260901275.png)
+
+### 同质结的注入比
+
+
+
+总电流：$j= j_n+ j_p= j_s\left ( e^{qV/ K_BT}- 1\right )$
+
+注入比定义：总电流中，电子电流与空穴电流的比例
+普通PN结(同质结)
+
+注入到$p$区的电子电流密度为：$j_n= q\frac {D_n}{L_n}n_P^0\left ( e^{qV/ k_BT}- 1\right )$
+
+注入到$n$区的空穴电流密度为：$j_p= q\frac {D_p}{L_p}p_N^0\left ( e^{qV/ k_BT}- 1\right )$
+
+
+
+总电流：$j= j_n+ j_p= j_s\left ( e^{qV/ k_BT}- 1\right )$
+注入比定义：总电流中，电子电流与空穴电流的比例
+正偏压下的电子注入比：
+
+$$
+\begin{aligned}&\frac{j_n}{j_p}=\frac{D_nn_P^0}{L_n}\frac{D_pp_N^0}{L_p}=\frac{D_nL_pn_P^0}{D_pL_np_N^0}\\&n_P^0=\frac{n_i^2}{p_P}\approx\frac{n_i^2}{N_A}\\&p_{N}^{0}=\frac{n_{i}^{2}}{n_{N}}\approx\frac{n_{i}^{2}}{N_{D}}\\&\frac{j_n}{j_p}=\frac{D_nL_pN_D}{D_pL_nN_A}\end{aligned}
+$$
+
+提高注入比的办法,提高N型区的施主杂质浓度
+
+
+
+![1716261236429](../images/SolidPhysics/1716261236429.png)
+
+结中电子注入比：
+
+$$
+\begin{aligned}&\frac{J_n}{J_p}=\frac{D_nn_P^0}{L_n}\left/\frac{D_pp_N^0}{L_p}\right.=\frac{D_nL_pN_D}{D_pL_nN_A}e^{\frac{E_{gN}-E_{gP}}{k_BT}}\end{aligned}
+$$
+
+异质结构的优点：
+
+也就是说，N型区的带隙宽度比p型区带隙宽度大，
+可以进一步以指数级增加注入比
+
+提高注入比的意义
+提高晶体管放大系数-异质结双极晶体管HBT
+
+![1716261409659](../images/SolidPhysics/1716261409659.png)
+
+### 激光器
+
+本征光吸收
+
+光照激发价带电子到导带， 形成电子-空穴对的过程
+
+$$
+\hbar\omega\geq E_{_g}
+
+$$
+
+准动量守恒——竖直跃迁
+
+应当照射结区（空间电荷区）
+
+![1716261766058](../images/SolidPhysics/1716261766058.png)
+
+![1716261781489](../images/SolidPhysics/1716261781489.png)
+
+二维电子气体系提高电子迁移率
+
+![1716262583215](../images/SolidPhysics/1716262583215.png)
+
+![1716262570823](../images/SolidPhysics/1716262570823.png)
+
+### 肖特基结
+
+功函数的物理本质是真空能级与费米能级的差
+
+亲合能：从导带底部到真空能级的能量（真空-导带底）
+
+![1716263334906](../images/SolidPhysics/1716263334906.png)
+
+金属与 N 型半导体的接触：
+
+![1716263526504](../images/SolidPhysics/1716263526504.png)
+
+![1716263538645](../images/SolidPhysics/1716263538645.png)
+
+$$
+\boxed{\begin{array}{c}\text{肖特基势垒}\\\phi_{B0}=\left(\phi_m-\chi\right)\end{array}}
+$$
+
+$$
+\boxed{\begin{array}{c}\text{内建电势差}\\\\V_{bi}=\left(\phi_{B0}-\phi_n\right)\end{array}}
+$$
+
+考虑偏压：
+
+![1716263918247](../images/SolidPhysics/1716263918247.png)
+
+![1716263941957](../images/SolidPhysics/1716263941957.png)
