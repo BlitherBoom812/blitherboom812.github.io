@@ -501,3 +501,182 @@ MLE 是先验概率相等的 MAP。
 ![1716195398036](../images/AI/1716195398036.png)
 
 ![1716195442145](../images/AI/1716195442145.png)
+
+#### Naive Bayes Classifier
+
+model $Y$ as a bernoulli distribution with parameters $p(y=1)$ and $p(y=-1)$
+
+conditional independence: each dimension is independent given label y
+
+$$
+p(X=x|Y=y)=\prod_{j=1}^dp(x_{\cdot j}|y)
+$$
+
+Laplacian smoothing for 0 samples:
+
+$$
+p(x_{\cdot j}=r_j|Y=+1)=\frac{\sum_{i=1}^n1\{x_{\cdot j}=r_j\wedge y_i=+1\}+1}{\sum_{i=1}^n1\{y_i=+1\}+k_j}
+$$
+
+For dataset with all continuous features: descretize it, or use another model based on a different assumption.
+
+
+#### Guassian Discriminant Analysis
+
+是一个生成模型！虽然它被用来分类，但是它的建模设计上采用的是生成式。
+
+For dataset with all continuous features:
+
+Using parametrice distribution to represent $P(X=x|Y=y)$
+
+A common assumption in classification:
+
+- We always assume that data points in a class is a cluster.
+
+Still model $p(Y=y)$ as Bernoulli distribution.
+
+$$
+\text{So we can model }p(X=x|Y=y)\text{ by Gaussian distribution:}\\p(X=x|Y=+1)\propto\exp\left(-\frac{1}{2}(x-\mu_{+})^{T}\Sigma^{-1}(x-\mu_{+})\right)\\p(X=x|Y=-1)\propto\exp\left(-\frac{1}{2}(x-\mu_{-})^{T}\Sigma^{-1}(x-\mu_{-})\right)
+$$
+
+Note the shared parameters $\Sigma$ for positive and nagative classes.
+
+Use MLE to find the best solution:
+
+$$
+\ell(\phi,\mu_+,\mu_-,\Sigma)=\log\prod_{i=1}^np(x_i,y_i;\phi,\mu_+,\mu_-,\Sigma)\\=\log\prod_{i=1}^np(x_i|y_i;\mu_+,\mu_-,\Sigma)+\boxed{\log\prod_{i=1}^np(y_i|\phi)}
+$$
+
+Then:
+
+$$
+\phi=\frac{\sum_{i=1}^{n}1\{y_{i}=+1\}}{n},\mu_{+}=\frac{\sum_{i=1}^{n}1\{y_{i}=+1\}x_{i}}{\sum_{i=1}^{n}1\{y_{i}=+1\}},\mu_{-}=\frac{\sum_{i=1}^{n}1\{y_{i}=-1\}x_{i}}{\sum_{i=1}^{n}1\{y_{i}=-1\}}\\\boldsymbol{\Sigma}=\frac{1}{n}\boldsymbol{\Sigma}_{i=1}^{n}(\boldsymbol{x}_{i}-\boldsymbol{\mu}_{\boldsymbol{y}_{i}})(\boldsymbol{x}_{i}-\boldsymbol{\mu}_{\boldsymbol{y}_{i}})^{T}
+$$
+
+#### Discriminative vs. Generative
+
+![1716795753326](../images/AI/1716795753326.png)
+
+### Mixture Models and EM
+
+#### Gaussian Mixture Model
+
+A Generative model. More assumption than Logistic Regression.
+
+![1716796053911](../images/AI/1716796053911.png)
+
+Sample dataset from GMM:
+
+$$
+p(x)=\sum_{z=1}^k\pi_z\mathcal{N}(x|\mu_z,\Sigma_z)
+$$
+
+Compute log-likelihood:
+
+$$
+\ell(\boldsymbol{\pi},\boldsymbol{\mu},\boldsymbol{\Sigma})=\log\prod_{i=1}^n\sum_{z=1}^k\pi_z\mathcal{N}(\boldsymbol{x}_i|\boldsymbol{\mu}_z,\boldsymbol{\Sigma}_z)=\sum_{i=1}^n\log\left[\sum_{z=1}^k\pi_z\mathcal{N}(\boldsymbol{x}_i|\boldsymbol{\mu}_z,\boldsymbol{\Sigma}_z)\right]
+$$
+
+$$
+\ell(\pi,\mu,\Sigma)=\sum_{i=1}^n\log\left[\sum_{z=1}^k\frac{\pi_z}{\sqrt{|2\pi\Sigma_z|}}\exp(-\frac12(x_i-\mu_z)^T\Sigma^{-1}(x_i-\mu_z))\right]
+$$
+
+Intracable! Use EM method to estimate parameters.
+
+$z$ is latent variable.
+
+#### Expectation Maximization
+
+![1716797001550](../images/AI/1716797001550.png)
+
+Learing Problem:
+
+find MLE
+
+$$
+\widehat{\theta}=\underset{\theta}{\operatorname*{argmax\ }}p(\mathcal{D}|\theta)
+$$
+
+Inference Promblem:
+
+Given $x$, find conditional variable of $z$:
+
+$$
+p(z|x,\theta)
+$$
+
+EM method is for both problems!
+
+it is hard to maximize the marginal likelihood directly:
+
+$$
+\max_\theta\log p(x|\theta)
+$$
+
+but the complete data log-likelihood is easy typically:
+
+$$
+\max_\theta\log p(x, z|\theta)
+$$
+
+if we had a distribution $q(z)$ for z:
+
+$$
+\max_\theta\sum_zq(z)\log p(x,z|\theta)
+$$
+
+We have Evidence Lower Bound (ELBO):
+
+$$
+\log p(x|\theta)=\log\left[\sum_zp(x,z|\theta)\right] \ge \underbrace{\sum_zq(z)\log(\frac{p(x,z|\theta)}{q(z)})}_{\mathcal{L}(q,\theta)}
+$$
+
+Now we optimize the ELBO iteratively:
+
+![1716797936119](../images/AI/1716797936119.png)
+
+The math background for ELBO:
+
+![1716798247574](../images/AI/1716798247574.png)
+
+We get back an equality for the marginal likelihood:
+
+$$
+\log p(x|\theta)=\mathcal{L}(q,\theta)+\mathrm{KL}[q(z)||p(z|x,\theta)]
+$$
+
+Evidence = ELBO + KL-Divergence
+
+In E-step, if we want to maximize the ELBO without changing $\theta$, we have to let KL be zero. Thus $q^*(z)=p(z|x,\theta)$
+
+For M-step, we find the $\theta$ to maximize the ELBO.
+
+![1716798687551](../images/AI/1716798687551.png)
+
+In MAP case:
+
+![1716798850106](../images/AI/1716798850106.png)
+
+For GMM, E-step:
+
+![1716798927981](../images/AI/1716798927981.png)
+
+M-step:
+
+![1716799063581](../images/AI/1716799063581.png)
+
+Recommended Initialize:
+
+$$
+\pi = 1/k\\
+\mu = 0\\
+\Sigma = \sigma^2 I
+$$
+
+Variational Methods:
+
+![1716799707301](../images/AI/1716799707301.png)
+
+注意：E 步计算的是隐变量的后验（如果能计算出来），因为它是使得似然函数及ELBO最大的 $q(z)$。算不出来就用变分方法近似。
+
+$q(z)$ 既不是先验分布，也不是后验分布，它只是我们对隐变量分布的一种估计。
