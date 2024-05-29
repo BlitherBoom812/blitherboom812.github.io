@@ -735,7 +735,6 @@ p 区看电子，n 区看空穴：
 
 ![1716259893782](../images/SolidPhysics/1716259893782.png)
 
-
 导带能级差：$\Delta E_C=\chi_1-\chi_2$
 价带能级差：$\Delta E_v=(\chi_2+E_{g^2})-(\chi_1+E_{g^1})=E_{g^2}-E_{g^1}-\Delta E_{g^2}$
 导带能级差+价带能级差 =带隙宽度差
@@ -744,8 +743,6 @@ p 区看电子，n 区看空穴：
 ![1716260901275](../images/SolidPhysics/1716260901275.png)
 
 ### 同质结的注入比
-
-
 
 总电流：$j= j_n+ j_p= j_s\left ( e^{qV/ K_BT}- 1\right )$
 
@@ -756,8 +753,6 @@ p 区看电子，n 区看空穴：
 
 注入到$n$区的空穴电流密度为：$j_p= q\frac {D_p}{L_p}p_N^0\left ( e^{qV/ k_BT}- 1\right )$
 
-
-
 总电流：$j= j_n+ j_p= j_s\left ( e^{qV/ k_BT}- 1\right )$
 注入比定义：总电流中，电子电流与空穴电流的比例
 正偏压下的电子注入比：
@@ -767,8 +762,6 @@ $$
 $$
 
 提高注入比的办法,提高N型区的施主杂质浓度
-
-
 
 ![1716261236429](../images/SolidPhysics/1716261236429.png)
 
@@ -796,7 +789,6 @@ $$
 
 $$
 \hbar\omega\geq E_{_g}
-
 $$
 
 准动量守恒——竖直跃迁
@@ -840,3 +832,77 @@ $$
 ![1716263918247](../images/SolidPhysics/1716263918247.png)
 
 ![1716263941957](../images/SolidPhysics/1716263941957.png)
+
+![1716863556246](../images/SolidPhysics/1716863556246.png)
+
+欧姆接触
+
+![1716864038557](../images/SolidPhysics/1716864038557.png)
+
+![1716864050264](../images/SolidPhysics/1716864050264.png)
+
+欧姆接触是指金属与半导体的接触，而其接触面的电阻值远小于半导体本身的电阻，不产生明显的附加阻抗，而且不会使半导体内部的平衡载流子浓度发生显著的改变
+
+区分电子和空穴的本质是迁移率的不同。
+
+## 格波
+
+### 一维单原子链
+
+相邻原子间距为
+
+$$
+a+(\mu_{n+1}-\mu_n)=a+\delta 
+$$
+
+相邻原子的作用力
+
+$$
+F=-\frac{\partial\nu}{\partial\delta}\approx-\beta\delta 
+$$
+
+左右两边一个原子对中间原子的作用力
+
+$$
+F_{n,n-1}=-\beta\left(\mu_n-\mu_{n-1}\right)\\
+F_{n,n+1}=-\beta\left(\mu_n-\mu_{n+1}\right)\\
+F_n=\beta(\mu_{n+1}+\mu_{n-1}-2\mu_n)
+$$
+
+相邻原子之间的耦合运动方程组
+
+$$
+m\ddot{\mu}_n=\beta\left(\mu_{n+1}+\mu_{n-1}-2\mu_n\right)
+$$
+
+通过坐标变换简化方程组，得到简谐振动解
+
+$$
+\mu_n=Ae^{i(\omega t-qX_n)}
+$$
+
+其中 $X_n=na$ 是第 n 个原子的平衡位置
+
+将解代入运动方程：
+
+$$
+m{\left(i\omega\right)}^2Ae^{i(\omega t-qX_n)}=\beta Ae^{i(\omega t-qna)}{\left(e^{-iqa}+e^{iqa}-2\right)}
+$$
+
+得到色散关系
+
+$$
+\omega^2=\frac{2\beta}m\Big(1-\cos\alpha q\Big)=\frac{4\beta}m\sin^2\Bigg(\frac{aq}2\Bigg)
+$$
+
+![1716868157804](../images/SolidPhysics/1716868157804.png)
+
+格波有意义的取值只在第一布里渊区，我们只关心格点位置处的取值。
+
+![1716868762789](../images/SolidPhysics/1716868762789.png)
+
+波恩卡门条件下的环状链模型
+
+![1716869179928](../images/SolidPhysics/1716869179928.png)
+
+![1716869156196](../images/SolidPhysics/1716869156196.png)

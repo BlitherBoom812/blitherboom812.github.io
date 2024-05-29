@@ -579,7 +579,6 @@ $$
 
 #### 最佳正交变换 - KL 变换
 
-
 ## 语音信号的参数编码
 
 ### 感觉加权滤波器
@@ -612,7 +611,7 @@ $\gamma$ 为加权因子，在 0-1 之间。
 
 $\gamma=0$ 时变成逆滤波器，其频谱包络的峰值点就是语音谱的谷值点。
 
->  分析：语音信号是全极点模型产生的，即 $S(z) = GE(z)/A(z)$，与逆滤波器点频谱成反比。
+> 分析：语音信号是全极点模型产生的，即 $S(z) = GE(z)/A(z)$，与逆滤波器点频谱成反比。
 
 ![1715172645812](../images/Speech-SP/1715172645812.png)
 
@@ -690,3 +689,103 @@ $$
 接下来搜索 $n_1$ 使得上式最优化。解出 $n_1$ 后即可解出 $g_1$。
 
 接下来一个个求解，每次都要把前面求解过的脉冲折算到零输入响应中，然后求解当前的结果：
+
+## 语音信号修整与综合技术
+
+短时谱分析
+
+$$
+\begin{gathered}w[n]=\begin{cases}\neq0&,&0\leq n<L\\0&,&\text{其它}\end{cases}\\X(p,k)=\sum_{n=-\infty}^{+\infty}x[n]w[p-n]e^{-j\frac{2\pi}{N}nk}\\x[n]w[p-n]=\left[\frac{1}{N}\sum_{i=0}^{N-1}X(p,k)e^{j\frac{2\pi}{N}nk}\right]\cdot R[p-n]\end{gathered}
+$$
+
+### 利用修正短时谱进行最小方差信号估计
+
+首先计算短时谱
+
+$$
+X(p,\omega)=\sum_{m=-\infty}^{+\infty}x[m]w(p-m)e^{-j\omega m}
+$$
+
+对短时谱进行修正
+
+$$
+Y(p,\omega)=X(p,\omega)H(p,\omega)
+$$
+
+需要得到一个“有效”的短时谱，满足：
+
+1. 时域短时段有限长，非零段不超过窗函数 $w(p-n)$的范围
+2. 一致性约束，即不同的𝑝时刻 𝑌(𝑝,𝜔)所对应的时域短时段，若有部分重叠，那么在去除分析窗的加权影响后，在重叠的部分，它们应该是相等的。
+
+实际上很难得到上述信号，可以通过最小方差准则逼近
+
+$$
+D[\hat{Y}(n,\omega),Y(n,\omega)]=\sum_{m=-\infty}^{+\infty}\frac{1}{2\pi}\int_{-\pi}^{\pi}\left|\hat{Y}(m,\omega)-Y(m,\omega)\right|^{2}d\omega
+$$
+
+其中
+
+$$
+\hat{Y}(p,\omega)=\sum_{m=-\infty}^{+\infty}\hat{y}[m]w(p-m)e^{-j\omega m}
+$$
+
+利用 Parseval 定理
+
+$$
+\begin{aligned}&D\big[\hat{Y}(n,\omega),Y(n,\omega)\big]=\sum_{m=-\infty}^{+\infty}\sum_{n=-\infty}^{+\infty}|\hat{y}_{m}(n)-y_{m}(n)|^{2}\\&=\sum_{m=-\infty}^{+\infty}\sum_{n=-\infty}^{+\infty}|\hat{y}(n)w(m-n)-y_{m}(n)|^{2}\end{aligned}
+$$
+
+变分法求得最小值
+
+$$
+\hat{y}[n]=\frac{\sum_{m=-\infty}^\infty w(m-n)y_m(n)}{\sum_{m=-\infty}^\infty w^2(m-n)}
+$$
+
+其中
+
+$$
+y_m(n)=\frac{1}{2\pi}\int_{-\pi}^\pi Y(m,\omega)e^{j\omega n}d\omega
+$$
+
+应用中，以周期 $T$ 分析
+
+$$
+\hat{y}[n]=\frac{\sum_{m=-\infty}^\infty w(mT-n)y_{mT}(n)}{\sum_{m=-\infty}^\infty w^2(mT-n)}
+$$
+
+如果 $w(n)$ 取三角窗的平方根
+
+$$
+w^2(n)=\begin{cases}1-\frac{|n-T|}{T}&,\quad0\leq n\leq2T\\\\0&,\quad\text{其它}\end{cases}
+$$
+
+若 n 此时为奇数，$T = (N-1)/2$，这时$\sum_{m=-\infty}^{\infty}w^{2}(mT-n)=1$，可简化计算，如果频谱无修正，最优解为
+
+$$
+\hat{y}(n)=\frac{\sum_{m=-\infty}^\infty w(mT-n)[w(mT-n)x(n)]}{\sum_{m=-\infty}^\infty w^2(mT-n)}=\frac{x(n)\sum_{m=-\infty}^\infty w^2(mT-n)}{\sum_{m=-\infty}^\infty w^2(mT-n)}=x(n)
+$$
+
+若改变语音的速度，$p=k\cdot p^{\prime}$，满足$|Y(p,\omega)|=|X(p^{\prime},\omega)|$ 。
+
+$$
+y_{p'}(n)=\frac{1}{2\pi}\int_{-\pi}^{\pi}Y(p',\omega)e^{j\omega n}d\omega=w(p'-n)x(n)
+$$
+
+让 $\tau_p=p-p^{\prime}=(1-1/k)\cdot p$，
+
+$$
+\begin{aligned}&y_p(n)=y_{p^{\prime}}(n-\tau_p)=w(p^{\prime}-n+\tau_p)x(n-\tau_p)\\&=w(p-n)x(n-\tau_p)\end{aligned}
+
+$$
+
+代入重建公式
+
+$$
+\hat{y}[n]=\frac{\sum_{m=-\infty}^\infty w^2(mT-n)x(n-\tau_{mT})}{\sum_{m=-\infty}^\infty w^2(mT-n)}
+$$
+
+让$\sum_{m=-\infty}^{\infty}W(mT-n)= \sum_{m=-\infty}^{\infty}w^2(mT-n) =1$，
+
+$$
+\hat{y}[n]=\sum_{m=-\infty}^{\infty}W(mT-n)x(n-\tau_{mT})
+$$
