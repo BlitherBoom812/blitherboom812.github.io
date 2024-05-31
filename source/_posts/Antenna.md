@@ -664,3 +664,249 @@ The E-pattern is in shadow.
 ![1715929531751](../images/Antenna/1715929531751.png)
 
 ![1715929546494](../images/Antenna/1715929546494.png)
+
+## Antenna Array
+
+1-D Linear Array
+
+2-D Planar Array
+
+3-D Conformal Array
+
+Array Element
+* Dipoles
+* Loops
+* Slots
+* Microstrip antennas
+
+### Two-Element array
+
+![1717133761533](../images/Antenna/1717133761533.png)
+
+$$
+\begin{gathered}
+\vec{E}_1= \hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\frac{e^{-jkr_1}}{r_1}\cos\theta_1 \\
+\vec{E}_{2}= \hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\frac{e^{-jkr_2}}{r_2}\cos\theta_2 
+\end{gathered}
+$$
+
+Remarks:
+* Two element;
+* Towards Y axis;
+* Along Z axis;
+* Space: d;
+* Uniform phase 
+and amplitude;
+* Observe in 2D 
+(YZ-plane).
+
+Far field Approximation
+
+![1717133876692](../images/Antenna/1717133876692.png)
+
+$$
+\begin{aligned}&\vec{E}_{total}=\vec{E}_1+\vec{E}_2\\&=\hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac1r\Bigg(e^{-jk(r-\frac d2\cos\theta)}+e^{-jk(r+\frac d2\cos\theta)}\Bigg)\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\vec{E}_{total}& =\vec{E}_1+\vec{E}_2=\hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac{1}{r}\Bigg(e^{-jk(r-\frac{d}{2}\cos\theta)}+e^{-jk(r+\frac{d}{2}\cos\theta)}\Bigg)  \\
+&=\hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac{e^{-jkr}}{r}\Bigg(e^{jk\frac{d}{2}\cos\theta}+e^{-jk\frac{d}{2}\cos\theta}\Bigg) \\
+&=\hat{\theta}\underbrace{\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac{e^{-jkr}}r}_{\text{Element pattern}}\underbrace{2\cos\biggl[\frac12kd\cos\theta\biggr]}_{\text{Array Factor (AF)}}
+\end{aligned}
+$$
+
+Remarks:
+* Uniform phase and amplitude;
+* AF is related to space (d);
+* AF is with no relation with antenna type.
+
+$$
+AF{=}2\cos\left[\frac12kd\cos\theta\right]\quad kd{=}\frac{2\pi}\lambda d{=}2\pi\frac d\lambda 
+$$
+
+![1717134268805](../images/Antenna/1717134268805.png)
+
+![1717134287481](../images/Antenna/1717134287481.png)
+
+### N-Element array
+
+![1717134353772](../images/Antenna/1717134353772.png)
+
+$$
+\begin{aligned}&AF=1+e^{jkd\cos\theta}+e^{j2kd\cos\theta}+\cdots+e^{j(N-1)kd\cos\theta}\\&=\sum_{n=1}^Ne^{j(n-1)kd\cos\theta}=\sum_{n=1}^Ne^{j(n-1)\Psi}\end{aligned}
+$$
+
+$$
+AF=1+e^{j\Psi}+e^{j2\Psi}+\cdots+e^{j(N-1)\Psi}=\frac{e^{jN\Psi}-1}{e^{j\Psi}-1}\\=\frac{e^{j\frac N2\Psi}\left(e^{j\frac N2\Psi}-e^{-j\frac N2\Psi}\right)}{e^{j\frac12\Psi}\left(e^{j\frac12\Psi}-e^{-j\frac12\Psi}\right)}=\frac{e^{j\frac N2\Psi}\sin\left(\frac N2\Psi\right)}{e^{j\frac12\Psi}\sin\left(\frac12\Psi\right)}
+$$
+
+Refenece Point at the end:
+
+$$
+AF=\frac{e^{j\frac N2\Psi}\sin\left(\frac N2\Psi\right)}{e^{j\frac12\Psi}\sin\left(\frac12\Psi\right)},\Psi=kd\cos\theta,
+$$
+
+Refenece Point at the center:
+
+$$
+AF=\frac{\sin\left(\frac N2\Psi\right)}{\sin\left(\frac12\Psi\right)},\Psi=kd\cos\theta,
+$$
+
+In Progreessive Phase Shift:
+
+$$
+\Psi=kd\cos\theta+\alpha 
+$$
+
+$$
+AF=1+e^{j(kd\cos\theta+\alpha)}+e^{j2(kd\cos\theta+\alpha)}+\cdots+e^{j(N-1)(kd\cos\theta+\alpha)}\\=\sum_{n=1}^Ne^{j(n-1)(kd\cos\theta+\alpha)}=\sum_{n=1}^Ne^{j(n-1)\Psi}=\frac{e^{j\frac N2\Psi}\sin\left(\frac N2\Psi\right)}{e^{j\frac12\Psi}\sin\left(\frac12\Psi\right)}
+$$
+
+Normalized Array Factor:
+
+$$
+\left|f(\Psi)\right|=\left|\frac{\sin\left(\frac N2\Psi\right)}{N\sin\left(\frac12\Psi\right)}\right|
+$$
+
+Grating Lobe:
+
+$$
+\begin{aligned}
+\theta\in\begin{bmatrix}0,\pi\end{bmatrix}\text{ or }\theta\in\begin{bmatrix}\theta_1,\theta_2\end{bmatrix}\text{, visible region} \\
+\text{In the visible region,} \\
+ifwehaveY= 0\mathrm{~and~}\Psi=2\pi. 
+\end{aligned}
+$$
+
+Avoid grating lobe:
+1. Smaller d;
+2. Smaller phase shift.
+
+$$
+1.\mathrm{~For~}\alpha=\pi\Rightarrow2kd<2\pi\Rightarrow d\mathrm{~/~}\lambda<\frac12\\2.\mathrm{~For~}\alpha=0\mathrm{~}\Rightarrow\mathrm{~k}d<2\pi\Rightarrow d\mathrm{~/~}\lambda<1
+$$
+
+#### Broadside Array
+
+Maximum @ $\theta = 90\degree$
+
+$$
+AF\boldsymbol{=}N@\boldsymbol{\theta}\boldsymbol{=}\boldsymbol{\pi}/2\quad\boldsymbol{\Psi}\boldsymbol{=}kd\cos\boldsymbol{\theta}\boldsymbol{+}\boldsymbol{\alpha}|_{\theta=\pi/2}\boldsymbol{=}0
+$$
+
+![1717134725130](../images/Antenna/1717134725130.png)
+
+![1717134745100](../images/Antenna/1717134745100.png)
+
+#### End-fire Array
+
+![1717134897852](../images/Antenna/1717134897852.png)
+
+$$
+\begin{aligned}
+&AF= N@\theta{=}0  &\Psi=kd+\alpha=2n\pi(n=0,\pm1,\pm2\ldots)  \\
+&\text{or} \\
+&AF= N@\theta{=}\pi   &\Psi=-kd+\alpha=2n\pi(n=0,\pm1,\pm2...)  \\
+&\Psi=kd\cos\theta+\alpha=2\pi\cos\theta 
+\end{aligned}
+$$
+
+Bidirectional:
+
+![1717134942873](../images/Antenna/1717134942873.png)
+
+Unidirectional:
+
+![1717134955235](../images/Antenna/1717134955235.png)
+
+#### Phased Array
+
+![1717135044895](../images/Antenna/1717135044895.png)
+
+#### Non-uniform Array
+
+Side Lobe
+
+Uniform array:
+* Universal pattern: N↑, SLL↓ 
+* With a limit of -13.3 dB
+* No control of SL
+
+How to reduce SLL?
+
+Non-uniform excitation
+
+![1717135171215](../images/Antenna/1717135171215.png)
+
+#### Planar Array
+
+![1717135198414](../images/Antenna/1717135198414.png)
+
+Can be viewed as product of two linear array factors:
+
+$$
+AF=\sum_{i=1}^{M\times N}I_ie^{jk\hat{r}\cdot\vec{r}_i}\\
+AF_n(\theta,\phi)=\left\{\frac{\sin(\frac M2\psi_x)}{M\sin\frac{\psi_x}2}\right\}\left\{\frac{\sin(\frac N2\psi_y)}{N\sin\frac{\psi_y}2}\right\};\\\psi_x=kd_x\sin\theta\cos\varphi+\alpha_x\\\psi_y=kd_y\sin\theta\sin\varphi+\alpha_y
+$$
+
+### Applications
+
+#### Yagi-Uda Antenna
+
+Basic configuration:
+* One driven element;
+* Two parasitic elements or more
+
+![1717135386351](../images/Antenna/1717135386351.png)
+
+Remarks:
+* Parasitic elements are excited by near-field coupling from the driven element;
+* Proper design of parasitic elements for end fire radiation;
+* In far field, the radiated waves from all the elements are in-phase.
+
+![1717135675789](../images/Antenna/1717135675789.png)
+
+![1717135951201](../images/Antenna/1717135951201.png)
+
+#### Helix Antenna
+
+![1717136046473](../images/Antenna/1717136046473.png)
+
+![1717136115015](../images/Antenna/1717136115015.png)
+
+## Travelling-Wave Antennas
+
+### Travelling wave & standing wave
+
+#### Long wire antennas
+
+![1717137633424](../images/Antenna/1717137633424.png)
+
+![1717137646795](../images/Antenna/1717137646795.png)
+
+Note:
+Long wire antennas: “l” = Several wavelength
+* One end for excitation;
+* The other end for load (open, short, or matching);
+* Transmission line with radiation.
+
+### Log-periodic Antennas
+
+Yagi-Uda: High Gain
+
+Log-periodic: Wide Bandwidth
+
+![1717138714524](../images/Antenna/1717138714524.png)
+
+Why:
+1. Feed from smaller dipole element;
+2. Feed out-of-phase with adjacent elements;
+3. Add a resistor at the end.
+
+
+$$
+\tau=\frac{R_{n+1}}{R_{n}}=\frac{L_{n+1}}{L_{n}}=\frac{d_{n+1}}{d_{n}}\\\alpha=2\tan^{-1}\left(\frac{1-\tau}{4\sigma}\right)\\\sigma=\frac{d_{n}}{2L_{n}}\\L_{1}\approx\frac{\lambda_{L}}{2}\quad\mathrm{and}\quad L_{N}\approx\frac{\lambda_{U}}{2}
+$$
+
+![1717138873279](../images/Antenna/1717138873279.png)
