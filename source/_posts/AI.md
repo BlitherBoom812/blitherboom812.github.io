@@ -680,3 +680,100 @@ Variational Methods:
 注意：E 步计算的是隐变量的后验（如果能计算出来），因为它是使得似然函数及ELBO最大的 $q(z)$。算不出来就用变分方法近似。
 
 $q(z)$ 既不是先验分布，也不是后验分布，它只是我们对隐变量分布的一种估计。
+
+### Probabilistic Topic Models
+
+#### Dirichlet-Multinomial Model
+
+![1717400667281](../images/AI/1717400667281.png)
+
+Beta Distribution:
+
+$$
+f(\phi|\alpha,\beta)=\frac1{B(\alpha,\beta)}\phi^{\alpha-1}(1-\phi)^{\beta-1}
+$$
+
+Dirichlet Multinomial Model: Multi-dimensional version of Beta Distribution
+
+$$
+\boxed{p(\vec{\theta}|\boldsymbol{\alpha})}=\frac1{B(\boldsymbol{\alpha})}\prod_{k=1}^K\theta_k^{\alpha_k-1}\quad\text{Where }B(\alpha)=\frac{\Pi_{k=1}^K\Gamma(\alpha_k)}{\Gamma(\sum_{k=1}^K\alpha_k)}
+$$
+
+Conjugate prior:
+
+$$
+\sum_{i=1}^K\theta_i=1
+$$
+
+![1717400854837](../images/AI/1717400854837.png)
+
+Admixture:
+
+![1717401031002](../images/AI/1717401031002.png)
+
+Latent Dirichlet Allocation (LDA):
+
+![1717401124879](../images/AI/1717401124879.png)
+
+Probabilistic Graphical Models:
+
+![1717401517265](../images/AI/1717401517265.png)
+
+![1717401591545](../images/AI/1717401591545.png)
+
+Maximum Likelihood Estimation
+
+$$
+\log p(\beta,\theta,z,w|\alpha,\eta)\\
+=\sum_{k=1}^K\log p(\vec{\beta}_k|\eta)+\sum_{d=1}^D\log p(\vec{\theta}_d|\alpha)+\sum_{d=1}^D\sum_{n=1}^{N_d}\log p(z_{d,n}|\vec{\theta}_d)\\
+ +\sum_{d=1}^D\sum_{n=1}^{N_d}\log p(w_{d,n}|z_{d,n},\vec{\boldsymbol{\beta}}_{1:K})\\
+ \begin{aligned}
+&=\sum_{k=1}^{K}\left(\sum_{v=1}^{V}(\eta_{v}-1)\log\beta_{kv}-\log B(\eta)\right)+\sum_{d=1}^{D}\sum_{k=1}^{K}(\alpha_{k}-1)\log\theta_{dk}-\log B(\alpha) \\
+&+\sum_{d=1}^D\sum_{n=1}^{N_d}\log\theta_{d,z_{d,n}}+\sum_{d=1}^D\sum_{n=1}^{N_d}\log\beta_{z_{d,n}w_{d,n}}
+\end{aligned}
+$$
+
+To learn the param $\alpha, \eta$, use EM method:
+
+In E-step, calculate 
+
+$$
+q^*(z)=p(z|x,\theta^{\mathrm{old}})
+$$
+
+$$
+p(\theta,z,\beta\mid w,\alpha,\eta)=\frac{p(\theta,z,\beta,w\mid\alpha,\eta)}{p(w\mid\alpha,\eta)}
+$$
+
+However, the denominator is intractable:
+
+$$
+p(\mathbf{w}|\alpha,\eta)=\int\int\sum_\mathbf{z}p(\boldsymbol{\theta},\mathbf{z},\boldsymbol{\beta},\mathbf{w}|\boldsymbol{\alpha},\boldsymbol{\eta})d\boldsymbol{\theta}d\boldsymbol{\beta}
+$$
+
+This problem is for general Bayesian models. We can use Variational Methods or Markov Chain Monte Carlo to solve it.
+
+#### Variational Methods
+
+![1717403664862](../images/AI/1717403664862.png)
+
+![1717403702542](../images/AI/1717403702542.png)
+
+![1717403725888](../images/AI/1717403725888.png)
+
+![1717404024479](../images/AI/1717404024479.png)
+
+Use Mean field assumption in LDA:
+
+![1717404907709](../images/AI/1717404907709.png)
+
+![1717404790783](../images/AI/1717404790783.png)
+
+### Variational Autoencoders (VAE)
+
+![1717405465141](../images/AI/1717405465141.png)
+
+Reparameterization Trick: 
+
+![1717405435705](../images/AI/1717405435705.png)
+

@@ -428,7 +428,7 @@ $$
 
 贝叶斯MSE：
 Bmse$\left(\hat{\theta}\right)=E\left(\left(\theta-\hat{\theta}\right)^2\right)$
- 
+
 
 $=\int\int\left(\theta-\hat{\theta}\right)^{2}p\big(\mathbf{x},\theta\big)d\mathbf{x}d\theta$ $=\iint\left(\theta-\hat{\theta}\right)^2p\big(\boldsymbol{x}|\theta\big)p\big(\theta\big)d\boldsymbol{x}d\theta$
  $=\iint\left(\theta-\hat{\theta}\right)^2p(x|\theta)dxp(\theta)d\theta$
@@ -698,31 +698,23 @@ $$
 ![1713150769252](../images/StaSP/1713150769252.png)
 
 利用 LMMSE 可得
-
 $$
 \hat{s}[n]=r_{ss}^{'T}\left(\mathbf{R}_{ss}+\mathbf{R}_{ww}\right)^{-1}\boldsymbol{x}
 $$
-
 从而得到维纳-霍夫滤波方程
-
 $$
 \begin{bmatrix}r_{xx}\begin{bmatrix}0\end{bmatrix}&r_{xx}\begin{bmatrix}1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}n\end{bmatrix}\\r_{xx}\begin{bmatrix}1\end{bmatrix}&r_{xx}\begin{bmatrix}0\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}n-1\end{bmatrix}\\\vdots&\vdots&\ddots&\vdots\\r_{xx}\begin{bmatrix}n\end{bmatrix}&r_{xx}\begin{bmatrix}n-1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}0\end{bmatrix}\end{bmatrix}\begin{bmatrix}h^{(n)}\begin{bmatrix}0\end{bmatrix}\\h^{(n)}\begin{bmatrix}1\end{bmatrix}\\\vdots\\h^{(n)}\begin{bmatrix}n\end{bmatrix}\end{bmatrix}=\begin{bmatrix}r_{ss}\begin{bmatrix}0\end{bmatrix}\\r_{ss}\begin{bmatrix}1\end{bmatrix}\\\vdots\\r_{ss}\begin{bmatrix}n\end{bmatrix}\end{bmatrix}
 $$
-
 ### 平滑
-
 $$
 \theta=s[n]\text{用 }...,x[-1],x[0],x[1],x[2],...,\text{来估计}
 $$
-
 ![1713152016025](../images/StaSP/1713152016025.png)
 
 LMMSE:
-
 $$
 \hat{s}[n]=\sum_{k=-\infty}^\infty a_kx[k]
 $$
-
 令 $h[k] = a_{N-k}$
 
 > 正交原理：误差与每一个观测数据正交
@@ -733,47 +725,35 @@ $$
 > ![1713152987612](../images/StaSP/1713152987612.png)
 > ![1713152970273](../images/StaSP/1713152970273.png)
 在 LMMSE
-
 $$
 \hat{s}[n]=\sum_{k=-\infty}^\infty a_kx[k]
 $$
-
 中令 $h[k]=a_{n-k}$
 
 则有
-
 $$
 \hat s[n] = \sum\limits_{k=-\infty}^{\infty}h[k]x[n-k]
 $$
-
 可得
-
 $$
 r_{ss}\begin{bmatrix}n\end{bmatrix}=h\begin{bmatrix}n\end{bmatrix}*r_{xx}\begin{bmatrix}n\end{bmatrix}
 $$
-
 无限维纳平滑器的频率响应
-
 $$
 H\left(f\right)=\frac{P_{ss}\left(f\right)}{P_{xx}\left(f\right)}\quad=\frac{P_{ss}\left(f\right)}{P_{ss}\left(f\right)+P_{ww}\left(f\right)}\quad=\frac{\eta\left(f\right)}{\eta\left(f\right)+1}\quad\text{,其中 }\eta\left(f\right)=\frac{P_{ss}\left(f\right)}{P_{ww}\left(f\right)}
 $$
-
 ### 预测
 
 可以用来进行预测
-
 $$
 \theta=x[N-1+l]\text{ 用 }x[0],x[1],x[2],...,x[N-1]\text{ 来估计}
 $$
-
 ![1713150674892](../images/StaSP/1713150674892.png)
 
 依然用 LMMSE 可以得到线性预测维纳-霍夫滤波方程
-
 $$
 \begin{bmatrix}r_{xx}\begin{bmatrix}0\end{bmatrix}&r_{xx}\begin{bmatrix}1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}N-1\end{bmatrix}\\r_{xx}\begin{bmatrix}1\end{bmatrix}&r_{xx}\begin{bmatrix}0\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}N-2\end{bmatrix}\\\vdots&\vdots&\ddots&\vdots\\r_{xx}\begin{bmatrix}N-1\end{bmatrix}&r_{xx}\begin{bmatrix}N-2\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}0\end{bmatrix}\end{bmatrix}\begin{bmatrix}h\begin{bmatrix}1\end{bmatrix}\\h\begin{bmatrix}2\end{bmatrix}\\\vdots\\h\begin{bmatrix}N\end{bmatrix}\end{bmatrix}=\begin{bmatrix}r_{xx}\begin{bmatrix}l\end{bmatrix}\\r_{xx}\begin{bmatrix}l+1\end{bmatrix}\\\vdots\\r_{xx}\begin{bmatrix}N-1+l\end{bmatrix}\end{bmatrix}
 $$
-
 ### 应用
 
 信道均衡问题
@@ -785,7 +765,6 @@ $$
 如何估计电压？
 
 ### 模型 1：当成确定参数
-
 $$
 x[n] = A + w[n], w[n] \sim N(0, \sigma^{2})
 $$
@@ -793,15 +772,11 @@ $$
 $$
 \hat A = \sum\limits_{n=0}^{N - 1}x[n] = \bar x
 $$
-
 ### 模型2：当成某个随机变量
-
 $$
 x[n] = A + w[n], w[n] \sim N(0, \sigma^{2}), A \sim N(\mu_A, \sigma_A^{2})
 $$
-
 贝叶斯一般线性模型：
-
 $$
 \boldsymbol{x}=\mathbf{H}\boldsymbol{\theta}+\boldsymbol{w}\quad\text{其中 }\boldsymbol{\theta}{\sim}N\begin{pmatrix}\boldsymbol{\mu}_\theta,\mathbf{C}_\theta\end{pmatrix}\text{,}\boldsymbol{w}{\sim}N\begin{pmatrix}\boldsymbol{0},\mathbf{C}_w\end{pmatrix}\\
 E\left(\boldsymbol{\theta}\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E\left(\boldsymbol{x}\right)\right)=\boldsymbol{\mu}_\theta+\mathbf{C}_{\theta|x}\mathbf{H}^T\mathbf{C}_w^{-1}\left(\boldsymbol{x}-\mathbf{H}\boldsymbol{\mu}_\theta\right)\\
@@ -811,9 +786,7 @@ $$
 $$
 \hat{A}=\mu_A+\frac{\frac1{\sigma^2/N}}{\frac1{\sigma_A^2}+\frac1{\sigma^2/N}}(\overline{x}-\mu_A)
 $$
-
 ### 模型3：当成未知且随时间变化的量
-
 $$
 x[n]=A[n]+w[n],n=0,1,...,N-1
 $$
@@ -823,35 +796,27 @@ $$
 \begin{aligned}&\boldsymbol{\theta}=&\begin{bmatrix}A[0],A[1],...,A[N-1]\end{bmatrix}^T\\&\mathbf{H}=\mathbf{I}\end{aligned}\\
 \hat{A}[n]=x[n]
 $$
-
 ### 动态信号模型
 
 一阶高斯-马尔可夫信号模型：
-
 $$
 s[n]=as[n-1]+u[n],n\geq0
 $$
-
 其中，$u[n]$是均值为零方差为 $\sigma_u^2$ 的高斯白噪声，称为驱动噪声或激励噪声。信号初值s$[-1]\sim N(\mu_s,\sigma_s^2)$与激励噪声$u[n]$相互独立。
 
 均值：
-
 $$
 s[n]=a^{n+1}s[-1]+\sum_{k=0}^na^ku[n-k]\\
 E\left(s[n]\right)=a^{n+1}E\left(s[-1]\right)+\sum_{k=0}^na^kE\left(u[n-k]\right)=a^{n+1}\mu_s\\
 c_s[m,n] = a^{m+n+2}\sigma_s^2+\sum_{k=0}^m\sum_{l=0}^na^{k+l}E\left(u[m-k]u[n-l]\right)\\
 E\left(u[m-k]u[n-l]\right)=\begin{cases}\sigma_u^2,&l=n-m+k\\0,&\mathrm{others}\end{cases}
 $$
-
 协方差：
-
 $$
 m \ge n, c_s\left[m,n\right]=a^{m+n+2}\sigma_s^2+\sum_{k=m-n}^ma^{2k+n-m}\sigma_u^2=a^{m+n+2}\sigma_s^2+\sigma_u^2a^{m-n}\sum_{k=0}^na^{2k}\\
 m \lt n, c_s\begin{bmatrix}m,n\end{bmatrix}=a^{m+n+2}\sigma_s^2+\sum_{k=0}^ma^{2k+n-m}\sigma_u^2=a^{m+n+2}\sigma_s^2+\sigma_u^2a^{n-m}\sum_{k=0}^ma^{2k}=c_s\begin{bmatrix}n,m\end{bmatrix}
 $$
-
 方差和二阶矩：
-
 $$
 \begin{aligned}
 \operatorname{var}(s[n])& =E\left(\left(s[n]-E\left(s[n]\right)\right)\left(s[n]-E\left(s[n]\right)\right)\right)  \\
@@ -860,25 +825,19 @@ $$
 \end{aligned}\\
 \text{当 }m\geq n\text{ 时}\\r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_{s}^{2}+\sigma_{s}^{2}\right)+\sigma_{u}^{2}a^{m-n}\sum_{k=0}^{n}a^{2k}\\\text{当 }m<n\text{ 时}\\r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_{s}^{2}+\sigma_{s}^{2}\right)+\sigma_{u}^{2}a^{n-m}\sum^{m}a^{2k}=r_{ss}\left[n,m\right]
 $$
-
 #### 平稳性
-
 $$
 \begin{aligned}&E\left(s\left[n\right]\right)=a^{n+1}\mu_s\\&r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_s^2+\sigma_s^2\right)+\sigma_u^2a^{m-n}\sum_{k=0}^na^{2k}\end{aligned}
 $$
-
 不是宽平稳的。
 
 通常要求 $|a| \lt 1$，当取 $n \rarr \infty$ 时
-
 $$
 \begin{aligned}&E\left(s\left[n\right]\right)=0\\&r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_s^2+\sigma_s^2\right)+\sigma_u^2a^{m-n}\frac{1-a^{2n+2}}{1-a^2}=\frac{\sigma_u^2a^{m-n}}{1-a^2}=r_{ss}\left[k\right]\end{aligned}
 $$
-
 此时是宽平稳（WSS）的。
 
 #### 递推特性
-
 $$
 E\left(s[n]\right)=aE\left(s[n-1]\right)+E\left(u[n]\right)=aE\left(s[n-1]\right)
 $$
@@ -891,7 +850,6 @@ $$
 m \ge n, c_s\left[m,n\right]=a^{m-n}\operatorname{var}\left(s[n]\right) = a^{m-n}\left(a^{2n+2}\sigma_s^2+\sigma_u^2\sum_{k=0}^na^{2k}\right)\\
 m \le n, c_s\left[m,n\right]=c_s\left[n,m\right]=a^{n-m}\operatorname{var}\left(s\left[m\right]\right)
 $$
-
 ### 卡尔曼滤波
 
 状态方程：$s[n]=as\left[n-1\right]+u\left[n\right]$
@@ -908,39 +866,30 @@ $$
 对联合高斯独立数据矢量可加性：
 
 若$\theta,x_1,x_2$是联合高斯的，数据矢量$x_1,x_2$ 相互独立，则MMSE估计量为：
-
 $$
 \hat{\theta}=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x_1}\mathbf{C}_{x_1x_1}^{-1}\left(\boldsymbol{x}_1-E\left(\boldsymbol{x}_1\right)\right)+\mathbf{C}_{\theta x_2}\mathbf{C}_{x_2x_2}^{-1}\left(\boldsymbol{x}_2-E\left(\boldsymbol{x}_2\right)\right)
 $$
-
 对待估计参数的可加性：
 
 若 $\boldsymbol{\theta}=\boldsymbol{\theta}_1+\boldsymbol{\theta}_2$, 则相应的MMSE估计量是可加的，即
-
 $$
 \hat{\theta}=E\left(\boldsymbol{\theta}\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}_1+\boldsymbol{\theta}_2\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}_1\mid\boldsymbol{x}\right)+E\left(\boldsymbol{\theta}_2\mid\boldsymbol{x}\right)
 $$
-
 线性变换的不变性：
 
 若$\alpha=\mathbf{A\theta}+\boldsymbol{b},\quad\theta$ 的MMSE估计量是 $\theta$, 则 $\alpha$ 的MMSE估计量为：
-
 $$
 \hat{\alpha}=\mathbf{A}\hat{\theta}+b
 $$
-
 定义：
-
 $$
 \hat{s}[n-1]=E\left(s[n-1]|x[0],x[1],...,x[n-1]\right)\triangleq\hat{s}[n-1\mid n-1]\\
 M\begin{bmatrix}n-1\end{bmatrix}=E\left(\left(s\begin{bmatrix}n-1\end{bmatrix}-\hat{s}\begin{bmatrix}n-1\end{bmatrix}\right)^2\right)\\
 \hat s[n] \triangleq\hat{s}[n\mid n]
 $$
-
 其中，前面的 n 表示被估计的信号下表，后面的 n 表示估计量用到的数据中最新的那个数据的下标。
 
 如果能够提取出第 n 个数据点带来的新的信息，并加入之前已有的估计量，就可更新估计量：
-
 $$
 \begin{aligned}
 \hat{s}\Big[n|n\Big]& =E\left(s[n]|x[0],x[1],...,x[n-1],x[n]\right)  \\
@@ -948,15 +897,11 @@ $$
 &=\underbrace{E\left(s[n]|x[0],x[1],...,x[n-1]\right)}_{先前数据估计}+\underbrace{E\left(s[n]|\tilde{x}[n]\right)}_{新息估计}
 \end{aligned}
 $$
-
 新息与已有的数据正交。
-
 $$
 \tilde{x}[n]=x[n]-\hat{x}[n|n-1]
 $$
-
 “先前数据估计”怎么求解？
-
 $$
 \begin{aligned}
 \hat{s}[n\mid n-1]& =E\left(as[n-1]+u[n]|x[0],x[1],...,x[n-1]\right)  \\
@@ -965,11 +910,9 @@ $$
 &=a\hat{s}\begin{bmatrix}n-1|n-1\end{bmatrix} \\
 \end{aligned}
 $$
-
 #### 预测
 
 求解新息
-
 $$
 E\left(s[n]|\tilde{x}[n]\right)=E\left(s[n]\right)+\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}\left(\tilde{x}[n]-E\left(\tilde{x}[n]\right)\right)
 $$
@@ -987,32 +930,24 @@ E\left(\hat{x}[n\mid n-1]\right)=E\left(\sum_{k=0}^{n-1}a[k]x[k]\right)
 \rArr E\left(\hat{x}[n\mid n-1]\right)=0\\
 \rArr E(\tilde x[n]) = 0
 $$
-
 因此，
-
 $$
 E\left(s[n]|\tilde{x}[n]\right)=\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}\tilde{x}[n]=\underbrace{\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}}_{卡尔曼增益}\left(x[n]-\hat{x}[n\mid n-1]\right)
 $$
-
 #### 最小预测 MSE
 
 $\mathbf{C}_{s\tilde{x}}\text{的求解}$
-
 $$
 \begin{aligned}
 C_{s\tilde{x}}& =E\left(s[n]\tilde{x}[n]\right)  \\
 &=E\Big(s[n]\Big(x[n]-\hat{x}\Big[n|n-1\Big]\Big)\Big)
 \end{aligned}
 $$
-
 其中
-
 $$
 \begin{aligned}\hat{x}\left[n|n-1\right]&=E\left(x[n]|x[0],x[1],...x[n-1]\right)=E\left(s[n]+w[n]|x[0],x[1],...x[n-1]\right)\\&=E\left(s[n]|x[0],x[1],...x[n-1]\right)=\hat{s}\left[n|n-1\right]\end{aligned}
 $$
-
 因此
-
 $$
 \begin{aligned}
 C_{s\tilde{x}}& =E\left(s[n]\left(s[n]+w[n]-\hat{s}[n|n-1]\right)\right)  \\
@@ -1023,9 +958,7 @@ C_{s\tilde{x}}& =E\left(s[n]\left(s[n]+w[n]-\hat{s}[n|n-1]\right)\right)  \\
 &\triangleq M\begin{bmatrix}n\mid n-1\end{bmatrix}
 \end{aligned}
 $$
-
 求解 $M\begin{bmatrix}n\mid n-1\end{bmatrix}$
-
 $$
 \begin{aligned}
 &M\begin{bmatrix}n\mid n-1\end{bmatrix}\\
@@ -1035,11 +968,9 @@ $$
 &=a^2M\left[n-1\mid n-1\right]+\sigma_u^2
 \end{aligned}
 $$
-
 #### 卡尔曼增益
 
 $\mathbf{C}_{\tilde{x}\tilde{x}}\text{的求解}$
-
 $$
 \\
 \begin{aligned}
@@ -1049,33 +980,24 @@ $$
 &=M\begin{bmatrix}n\mid n-1\end{bmatrix}+\sigma_n^2
 \end{aligned}
 $$
-
 结合
-
 $$
 \begin{aligned}\mathbf{C}_{\tilde{x}\tilde{x}}&=M\begin{bmatrix}n\mid n-1\end{bmatrix}+\sigma_n^2\\\mathbf{C}_{s\tilde{x}}&=M\begin{bmatrix}n\mid n-1\end{bmatrix}\end{aligned}
 $$
-
 我们得到了卡尔曼增益
-
 $$
 E\left(s[n]|\tilde{x}[n]\right)=\underbrace{\frac{M\left[n\mid n-1\right]}{M\left[n\mid n-1\right]+\sigma_n^2}}_{卡尔曼增益 K[n]}\tilde{x}[n]
 $$
-
 #### 修正
-
 $$
 \hat{s}\left[n\mid n\right]=\underbrace{\hat{s}\left[n\mid n-1\right]}_{预测}+\underbrace{K\left[n\right]\left(x\left[n\right]-\hat{s}\left[n\mid n-1\right]\right)}_{新息修正}
 $$
-
 #### 最小 MSE
 
 MSE 修正：
-
 $$
 M[n|n] = (1 - K[n])M[n|n - 1]
 $$
-
 ### 非零均值信号模型
 
 ![1714360809348](../images/StaSP/1714360809348.png)
@@ -1123,7 +1045,6 @@ MSE修正: $M\left [ n\mid n\right ] = \left ( 1- K\left [ n\right ] \right ) M\
 适用于没有先验信息、代价不好量化的场景。
 
 两种假设：
-
 $$
 \begin{aligned}&H_0:x[n]=w[n],n=0,1,...,N-1\\&H_1:x[n]=s[n]+w[n],n=0,1,...,N-1\end{aligned}
 $$
@@ -1134,29 +1055,23 @@ $$
 &P\left(H_0;H_1\right):\text{ 漏检概率 }\left(P_M\right)\\
 &P\left(H_1;H_1\right):\text{ 检测概率 }\left(P_D\right)\end{aligned}
 $$
-
 要求：在虚警概率一定情况下，使检测概率最大化
 
 检测概率和虚警概率之间追求折中，不可能两者都改善。
 
 对给定的虚警概率 $P_{FA}=\alpha$ ,使检测概率 $P_D$ 最大的判决为
-
 $$
 L(x)=\frac{p(x;H_1)}{p(x;H_0)}>\gamma
 $$
-
 其中门限由 $P_{FA}=\int_{\lbrace\mathbf{x}:L(\mathbf{x})>\gamma\rbrace}p(\boldsymbol{x};H_0)d\boldsymbol{x}=\alpha$ 决定
 
 
 对于信号检测问题：
-
 $$
 H_0:\boldsymbol{x}\sim N\left(\boldsymbol{0},\sigma^2\mathbf{I}\right)\\H_1:\boldsymbol{x}\sim N\left(A\mathbf{1},\sigma^2\mathbf{I}\right)
 $$
 
-
 NP 检测器：
-
 $$
 \frac{p\left(\boldsymbol{x};H_1\right)}{p\left(\boldsymbol{x};H_0\right)}=\frac{\frac1{\left(2\pi\sigma^2\right)^{N/2}}\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}\left(x[n]-A\right)^2\right\}}{\frac1{\left(2\pi\sigma^2\right)^{N/2}}\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}x^2[n]\right\}}>\gamma\\\quad\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}\left(x[n]-A\right)^2+\frac1{2\sigma^2}\sum_{n=0}^{N-1}x^2[n]\right\}>\gamma 
 $$
@@ -1164,11 +1079,9 @@ $$
 $$
 -\frac1{2\sigma^2}\Bigg(-2A\sum_{n=0}^{N-1}x[n]+NA^2\Bigg)>\ln\gamma\\\frac1N\sum_{n=0}^{N-1}x[n]>\frac{\sigma^2}{NA}\ln\gamma+\frac A2
 $$
-
 称为检测统计量。若均值大于门限，则判为有信号，否则为无信号。
 
 使用方法：
-
 $$
 \begin{aligned}
 &\text{检测统计量:}T(x)=\frac1N\sum_{n=0}^{N-1}x[n]\sim\begin{cases}N\Big(0,\sigma^2\Big/_N\Big),&H_0\\[2ex]N\Big(A,\sigma^2\Big/_N\Big),&H_1\end{cases} \\
@@ -1178,7 +1091,6 @@ $$
 &=Q\Bigg(Q^{-1}\big(P_{F_A}\big)-\sqrt{\frac{NA^2}{\sigma^2}}\Bigg)
 \end{aligned}
 $$
-
 ### 检测性能分析
 
 接收机工作特性曲线（ROC, receiver operating characteristics）
@@ -1197,7 +1109,6 @@ $$
 
 
 ### 最小错误概率准则
-
 $$
 \begin{aligned}
 P_{e}& =\Pr\left\{\text{判}H_0,H_1\text{为真}\right\}+\Pr\left\{\text{判}H_1,H_0\text{为真}\right\}  \\
@@ -1208,41 +1119,29 @@ P_{e}& =\Pr\left\{\text{判}H_0,H_1\text{为真}\right\}+\Pr\left\{\text{判}H_1
 &=P\left(H_1\right)+\int_{R_1}\left\{P\left(H_0\right)p\left(\boldsymbol{x}\mid H_0\right)-P\left(H_1\right)p\left(\boldsymbol{x}\mid H_1\right)\right\}d\boldsymbol{x}
 \end{aligned}
 $$
-
 为了使错误最小，需要在积分式小于零的区域积分，即
-
 $$
 \frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}>\frac{P\left(H_0\right)}{P\left(H_1\right)}\text{ 时,判 }H_1
 $$
-
 最小错误概率准则可推导出最大后验概率检测器：
-
 $$
 \frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}>\frac{P\left(H_0\right)}{P\left(H_1\right)}\text{ 时,判 }H_1
 $$
-
 等价于
-
 $$
 \frac{p\left(\boldsymbol{x}\mid H_1\right)P\left(H_1\right)}{p\left(\boldsymbol{x}\right)}>\frac{p\left(\boldsymbol{x}\mid H_0\right)P\left(H_0\right)}{p\left(\boldsymbol{x}\right)}\\p\left(H_1\mid\boldsymbol{x}\right)>p\left(H_0\mid\boldsymbol{x}\right)
 $$
-
 若先验概率相同，则为最大似然检测器：
-
 $$
 p\left(x\mid H_1\right)>p\left(x\mid H_0\right)
 $$
-
 ### 二元贝叶斯风险准则
 
 引入判错代价
-
 $$
 R=C_{01}P\left(H_1\right)P\left(H_0\mid H_1\right)+C_{10}P\left(H_0\right)P\left(H_1\mid H_0\right)
 $$
-
 进一步泛化：
-
 $$
 R=C_{00}P\big(H_0\big)P\big(H_0|H_0\big)+C_{10}P\big(H_0\big)P\big(H_1|H_0\big)\\+C_{01}P\big(H_1\big)P\big(H_0|H_1\big)+C_{11}P\big(H_1\big)P\big(H_1|H_1\big)
 $$
@@ -1250,19 +1149,15 @@ $$
 $$
 \begin{aligned}\text{R}&=C_{00}P\left(H_0\right)+C_{01}P\left(H_1\right)\\&+\int_{R_1}\left\{\left(C_{10}-C_{00}\right)P\left(H_0\right)p\left(\boldsymbol{x}\mid H_0\right)-\left(C_{01}-C_{11}\right)P\left(H_1\right)p\left(\boldsymbol{x}\mid H_1\right)\right\}d\boldsymbol{x}\end{aligned}
 $$
-
 因此，有了最小贝叶斯风险判决准则：
-
 $$
 \frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}>\frac{\left(C_{10}-C_{00}\right)P\left(H_0\right)}{\left(C_{01}-C_{11}\right)P\left(H_1\right)}\text{ 时,判 }H_1
 $$
-
 风险一致条件下（$C_{00}=C_{11}=0,C_{10}=C_{01}=1$），回到最小错误概率准则。
 
 ### 多元贝叶斯风险准则
 
 贝叶斯风险：
-
 $$
 \begin{aligned}
 \text{R}& =\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}C_{ij}P\Big(H_i,H_j\Big)  \\
@@ -1272,11 +1167,9 @@ $$
 \end{aligned}
 $$
 
-
 应选择使平均风险$C_i\left(\boldsymbol{x}\right)=\sum_{j=0}^{M-1}C_{ij}P\left(H_j\mid\boldsymbol{x}\right)$最小的假设
 
 在风险一致条件下
-
 $$
 C_{ij}=\begin{cases}0,&i=j\\1,&i\neq j\end{cases}
 $$
@@ -1284,9 +1177,7 @@ $$
 $$
 \begin{aligned}C_{i}\left(\boldsymbol{x}\right)&=\sum_{j=0\atop j\neq i}^{M-1}P\Big(H_j\mid\boldsymbol{x}\Big)\\&=\sum_{j=0}^{M-1}P\Big(H_j\mid\boldsymbol{x}\Big)-\underline{P\Big(H_i\mid\boldsymbol{x}\Big)}_{最大化这个}\end{aligned}
 $$
-
 因此等价于最大后验准则：
-
 $$
 \max_iP(H_i\mid\boldsymbol{x})
 $$
