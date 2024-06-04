@@ -852,13 +852,13 @@ $$
 相邻原子间距为
 
 $$
-a+(\mu_{n+1}-\mu_n)=a+\delta 
+a+(\mu_{n+1}-\mu_n)=a+\delta
 $$
 
 相邻原子的作用力
 
 $$
-F=-\frac{\partial\nu}{\partial\delta}\approx-\beta\delta 
+F=-\frac{\partial\nu}{\partial\delta}\approx-\beta\delta
 $$
 
 左右两边一个原子对中间原子的作用力
@@ -901,8 +901,112 @@ $$
 
 ![1716868762789](../images/SolidPhysics/1716868762789.png)
 
+![1717467825452](../images/SolidPhysics/1717467825452.png)
+
 波恩卡门条件下的环状链模型
 
 ![1716869179928](../images/SolidPhysics/1716869179928.png)
 
 ![1716869156196](../images/SolidPhysics/1716869156196.png)
+
+
+![1717467681404](../images/SolidPhysics/1717467681404.png)
+
+![1717467815166](../images/SolidPhysics/1717467815166.png)
+
+![1717467885133](../images/SolidPhysics/1717467885133.png)
+
+### 一维双原子链结构
+
+
+![1717467940325](../images/SolidPhysics/1717467940325.png)
+
+P原子质量：m
+ Q原子质量：M
+
+$$
+m\ddot{\mu}_{2n}=\beta(\mu_{2n+1}+\mu_{2n-1}-2\mu_{2n})\\M\ddot{\mu}_{2n+1}=\beta(\mu_{2n+2}+\mu_{2n}-2\mu_{2n+1})
+$$
+
+![1717468003069](../images/SolidPhysics/1717468003069.png)
+
+![1717468014637](../images/SolidPhysics/1717468014637.png)
+
+![1717468150691](../images/SolidPhysics/1717468150691.png)
+
+波数 q 的取值范围：
+
+$$
+-\frac\pi{2a}<q\leq\frac\pi{2a}
+$$
+
+原胞变大，倒格矢变小，布里渊区变小
+
+$$
+N\cdot\left(2aq\right)=2\pi h,h=[-N/2,+N/2]\quad q=\frac{h\pi}{Na}
+$$
+
+对于双原子链，有2N个原子，也有2N个格波
+
+![1717468250438](../images/SolidPhysics/1717468250438.png)
+
+![1717468279238](../images/SolidPhysics/1717468279238.png)
+
+![1717468352260](../images/SolidPhysics/1717468352260.png)
+
+![1717468364464](../images/SolidPhysics/1717468364464.png)
+
+相邻原子振动相反，振幅反比于原子质量
+
+对于声学波，相邻原子同步运动,原胞中两种原子的运动是完全一致的振幅和位相
+
+![1717469037238](../images/SolidPhysics/1717469037238.png)
+
+![1717469080107](../images/SolidPhysics/1717469080107.png)
+
+![1717469005887](../images/SolidPhysics/1717469005887.png)
+
+k 代表的是移动一个原胞后的位相差。
+
+简单晶格没有能带折叠，所以没有光学波。
+
+![1717469702087](../images/SolidPhysics/1717469702087.png)
+
+![1717470027229](../images/SolidPhysics/1717470027229.png)
+
+如果问的是“多少个”光学波/声学波，还得×一个 N
+
+横波才能简并，纵波不能。
+
+硅的晶格中虽然只有硅一种原子，但是由于是复式晶格结构，等同于有两种原子，因此也有声学波和光学波
+
+金属铅(Pb)属于面心立方的简单晶格结构，没有光学波只有三支声学波（注：不同方向上有简并）
+
+纵波的速度总是比横波快。
+
+### 晶格振动的量子化——声子
+
+一维谐振子
+
+![1717470756612](../images/SolidPhysics/1717470756612.png)
+
+### 固体热容
+
+
+$$
+C_V=\left(\frac{\partial\overline{E}}{\partial T}\right)_V
+$$
+
+固体热容主要来自于两个部分
+
+
+晶格热容：来源于固体的晶格热运动
+
+
+电子热容：来源于电子的热运动仅在,极低温下，对于金属比较显著，相比晶格热容，一般可忽略不计
+
+![1717473776761](../images/SolidPhysics/1717473776761.png)
+
+经典模型
+
+![1717473805195](../images/SolidPhysics/1717473805195.png)
