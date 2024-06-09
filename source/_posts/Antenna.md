@@ -910,3 +910,98 @@ $$
 $$
 
 ![1717138873279](../images/Antenna/1717138873279.png)
+
+## Microstrip Antennas  
+
+
+![1717740667735](../images/Antenna/1717740667735.png)
+
+![1717740670364](../images/Antenna/1717740670364.png)
+
+![1717740680573](../images/Antenna/1717740680573.png)
+
+### Basic Mode
+
+* Equivalent magnetic current;
+* Radiating and non-radiating apertures;
+* Operating frequency with different L.
+
+![1717740726098](../images/Antenna/1717740726098.png)
+
+* Magnetic current array;
+* Image theorem from infinite ground;
+* Cavity model with magnetic walls;
+* Different from
+
+![1717740758890](../images/Antenna/1717740758890.png)
+
+![1717740768183](../images/Antenna/1717740768183.png)
+
+### Antenna feeding methods
+
+![1717740786849](../images/Antenna/1717740786849.png)
+
+Impedance Matching:
+
+![1717740801741](../images/Antenna/1717740801741.png)
+
+Using 50-Ohm port: finding the position with Z_in=50 Ohm
+
+### Analysis Model
+
+![1717742374397](../images/Antenna/1717742374397.png)
+
+Known:
+* Operating Frequency
+* Dielectric: $\varepsilon_r$ and $h$
+* Metal: $t$
+
+Design: 
+* Patch: $L$ and $W$
+* Evaluate gain
+
+2 Models:
+
+![1717742413544](../images/Antenna/1717742413544.png)
+
+#### Transmission line model
+
+determine W
+
+Uniform distribution and  field intensity in dielectric
+
+$$
+W=\frac{1}{2f_r\sqrt{\mu_0\epsilon_0}}\sqrt{\frac{2}{\epsilon_r+1}}
+$$
+
+Effective permittivity
+
+$$
+\varepsilon_{eff}=\frac{\varepsilon_r+1}2+\frac{\varepsilon_r-1}2{\left[1+12\frac hW\right]}^{-1/2}
+$$
+
+Fring effect and determine L
+
+$$
+\frac{\Delta L}{h}=0.412\frac{(\varepsilon_{eff}+0.3)(\frac Wh+0.264)}{(\varepsilon_{eff}-0.258)(\frac Wh+0.8)}\\L=\frac{\lambda_d}2-2\Delta L=\frac{\lambda_0}{2\sqrt{\varepsilon_{eff}}}-2\Delta L
+$$
+
+impedance matching
+
+#### Cavity Model
+
+![1717742626807](../images/Antenna/1717742626807.png)
+
+![1717743460723](../images/Antenna/1717743460723.png)
+
+![1717743468657](../images/Antenna/1717743468657.png)
+
+### Circular polarization
+
+Dual feed patch
+
+![1717743681072](../images/Antenna/1717743681072.png)
+
+![1717743691321](../images/Antenna/1717743691321.png)
+
+![1717743927411](../images/Antenna/1717743927411.png)
