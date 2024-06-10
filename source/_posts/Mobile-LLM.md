@@ -8,7 +8,6 @@ tags: research
 
 Personal LLM Agents: Insights and Survey about the Capability, Efficiency and Security
 
-
 ## 数据集
 
 谷歌：Android in the Wild: A Large-Scale Dataset for Android Device Control
@@ -49,6 +48,8 @@ DroidBot-GPT: GPT-powered UI Automation for Android
 
 ![1717939486804](../images/Mobile-LLM/1717939486804.png)
 
+AppAgent: Multimodal Agents as Smartphone Users：利用 GPT4-V 进行探索+部署，支持 learn from demonstration。
+
 #### Multimodal
 
 Auto GUI: You Only Look at Screens: Multimodal Chain-of-Action Agents
@@ -56,7 +57,6 @@ Auto GUI: You Only Look at Screens: Multimodal Chain-of-Action Agents
 ![1717937675502](../images/Mobile-LLM/1717937675502.png)
 
 ### Code-based Methods
-
 
 ## Topics
 
