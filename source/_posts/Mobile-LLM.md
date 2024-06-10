@@ -56,6 +56,14 @@ Auto GUI: You Only Look at Screens: Multimodal Chain-of-Action Agents
 
 ![1717937675502](../images/Mobile-LLM/1717937675502.png)
 
+### UI Understanding
+
+ActionBert: Leveraging User Actions for Semantic Understanding of User Interfaces：UI 理解，leveraged the temporal con
+nections between UIs in a UI sequence to design their pretraining tasks
+
+UIBert: Learning Generic Multimodal Representations for UI Understanding：self-alignment among
+ different multimodal features in a single UI， use trainable lightweight encoders
+
 ### Code-based Methods
 
 ## Topics
@@ -77,3 +85,5 @@ RL training in sparse reward
 LLM as Reward Model
 
 Action & Workflow embedding
+
+寻找 UI 的表征/ UI Understanding
