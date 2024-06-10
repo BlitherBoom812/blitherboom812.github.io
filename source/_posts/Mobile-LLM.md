@@ -10,6 +10,9 @@ Personal LLM Agents: Insights and Survey about the Capability, Efficiency and Se
 
 ## 数据集
 
+谷歌： Onthe Effects of Data Scale on Computer Control Agents，在安卓场景下人标gui sft数据，有测试集
+
+
 谷歌：Android in the Wild: A Large-Scale Dataset for Android Device Control
 
 输入为 image 和 text instruction。包含 30 K 的数据，Google Apps 的占比最大。
@@ -21,6 +24,12 @@ World of Bits (WoB): Use only keyboard & mouse，输入为彩色图像，DOM 文
 OpenAI Universe: Game, Web tasks，输入数据只有图像，操作键盘和鼠标。
 
 AndroidEnv: A Reinforcement Learning Platform for Android: 在 android emulator 上运行的虚拟环境。
+
+（MoTIF）A Dataset for Interactive Vision-Language Navigation with Unknown Command Feasibility：人类标注，有 feasible 字段。
+
+![1718009240031](../images/Mobile-LLM/1718009240031.png)
+
+PIXELHELP: Mapping Natural Language Instructions to Mobile UI Action Sequences
 
 ## 模型
 
@@ -42,7 +51,17 @@ REINFORCEMENT LEARNING ON WEB INTERFACES USING WORKFLOW-GUIDED EXPLORATION： �
 
 #### Prompt Engineering
 
- Responsible Task Automation: Empowering Large Language Models as Responsible Task Automators
+AutoDroid: LLM-powered Task Automation in Android (MobiCom 24)
+
+Exploration + Execution 范式，基于 VH/DOM 的 UI 表示。
+
+![1718003623779](../images/Mobile-LLM/1718003623779.png)
+
+GPT4 成功率相当可观，finetune小模型的效果接近 GPT 3.5：
+
+![1718003792356](../images/Mobile-LLM/1718003792356.png)
+
+Responsible Task Automation: Empowering Large Language Models as Responsible Task Automators
 
 DroidBot-GPT: GPT-powered UI Automation for Android
 
@@ -56,13 +75,16 @@ Auto GUI: You Only Look at Screens: Multimodal Chain-of-Action Agents
 
 ![1717937675502](../images/Mobile-LLM/1717937675502.png)
 
-### UI Understanding
+META-GUI: Towards Multi-modal Conversational Agents on Mobile GUI
+
+![1718009413946](../images/Mobile-LLM/1718009413946.png)
+
+### UI Understanding and Representation
 
 ActionBert: Leveraging User Actions for Semantic Understanding of User Interfaces：UI 理解，leveraged the temporal con
 nections between UIs in a UI sequence to design their pretraining tasks
 
-UIBert: Learning Generic Multimodal Representations for UI Understanding：self-alignment among
- different multimodal features in a single UI， use trainable lightweight encoders
+UIBert: Learning Generic Multimodal Representations for UI Understanding：self-alignment among different multimodal features in a single UI， use trainable lightweight encoders
 
 ### Code-based Methods
 
