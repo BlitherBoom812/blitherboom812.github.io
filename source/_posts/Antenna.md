@@ -1005,3 +1005,48 @@ Dual feed patch
 ![1717743691321](../images/Antenna/1717743691321.png)
 
 ![1717743927411](../images/Antenna/1717743927411.png)
+
+![1718344358151](../images/Antenna/1718344358151.png)
+
+SP-feed 旋转馈电
+
+## Reflector and lens antennas
+
+![1718345601277](../images/Antenna/1718345601277.png)
+
+### Corner Reflectors
+
+![1718345727630](../images/Antenna/1718345727630.png)
+
+![1718345718761](../images/Antenna/1718345718761.png)
+
+### Parabolic Reflectors
+
+![1718346212882](../images/Antenna/1718346212882.png)
+
+![1718346379534](../images/Antenna/1718346379534.png)
+
+![1718346371235](../images/Antenna/1718346371235.png)
+
+![1718346571584](../images/Antenna/1718346571584.png)
+
+### Lens Antennas
+
+![1718346830900](../images/Antenna/1718346830900.png)
+
+Lens antennas:
+* High gain: plane wave;
+* Geometrical optics: equal optical distance;
+* Source: spherical wave, illuminate the whole lens;
+* Source is positioned on the focal point for normal 
+radiated plane wave;
+* Other incident/radiated angle of plane wave: focus on 
+the focal plane with gain decrease;
+* Spatial Fournier Transformation: (x, y)&k
+
+### Reflected and transmitted array
+
+![1718347859765](../images/Antenna/1718347859765.png)
+
+![1718347869028](../images/Antenna/1718347869028.png)
+

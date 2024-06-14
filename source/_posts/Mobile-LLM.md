@@ -12,7 +12,6 @@ Personal LLM Agents: Insights and Survey about the Capability, Efficiency and Se
 
 谷歌： Onthe Effects of Data Scale on Computer Control Agents，在安卓场景下人标gui sft数据，有测试集
 
-
 谷歌：Android in the Wild: A Large-Scale Dataset for Android Device Control
 
 输入为 image 和 text instruction。包含 30 K 的数据，Google Apps 的占比最大。
@@ -109,3 +108,5 @@ LLM as Reward Model
 Action & Workflow embedding
 
 寻找 UI 的表征/ UI Understanding
+
+## Paper Reading
