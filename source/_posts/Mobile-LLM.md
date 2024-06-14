@@ -60,6 +60,10 @@ GPT4 成功率相当可观，finetune小模型的效果接近 GPT 3.5：
 
 ![1718003792356](../images/Mobile-LLM/1718003792356.png)
 
+离线部分：随机探索 + 生成 App Memory，对 UTG(UI Transition Graph) 进行分析，LLM 生成每个页面和每个 UI 元素的描述，并构建 embedding vector base。
+
+在线部分：根据 embedding vector base 筛选 UI 元素，只留下那些重要的 UI 元素，并且利用 APP Memory 中的元素生成 Guide 辅助模型进行决策。
+
 Responsible Task Automation: Empowering Large Language Models as Responsible Task Automators
 
 DroidBot-GPT: GPT-powered UI Automation for Android
@@ -110,3 +114,5 @@ Action & Workflow embedding
 寻找 UI 的表征/ UI Understanding
 
 ## Paper Reading
+
+Read Agent：利用分页解决大模型长文本表现差的问题（Lost in middle）。
