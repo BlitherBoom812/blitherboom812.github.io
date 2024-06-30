@@ -115,4 +115,12 @@ Action & Workflow embedding
 
 ## Paper Reading
 
+### 大小模型协同
+
+[SwiftSage: A Generative Agent with Fast and Slow Thinking for Complex Interactive Tasks](https://arxiv.org/pdf/2305.17390)。用 BC 的小模型进行 fast thinking, 然后让大模型进行 slow thinking / grounding.
+
+### 20240629
+
+Code as Policies: Language Model Programs for Embodied Control: 2209.07753, Use Code (Formal Language) in Embodied Agent.
+
 Read Agent：利用分页解决大模型长文本表现差的问题（Lost in middle）。
