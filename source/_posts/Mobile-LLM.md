@@ -119,8 +119,18 @@ Action & Workflow embedding
 
 [SwiftSage: A Generative Agent with Fast and Slow Thinking for Complex Interactive Tasks](https://arxiv.org/pdf/2305.17390)。用 BC 的小模型进行 fast thinking, 然后让大模型进行 slow thinking / grounding.
 
-### 20240629
+### Code Policy
+
+[AdaPlanner: Adaptive Planning from Feedback with Language Models](https://arxiv.org/pdf/2305.16653)
 
 Code as Policies: Language Model Programs for Embodied Control: 2209.07753, Use Code (Formal Language) in Embodied Agent.
+
+### LLM + RL
+
+[Enabling Intelligent Interactions between an Agent and an LLM: A Reinforcement Learning Approach](https://arxiv.org/pdf/2306.03604)
+
+### FFN 的作用
+
+### 20240629
 
 Read Agent：利用分页解决大模型长文本表现差的问题（Lost in middle）。
