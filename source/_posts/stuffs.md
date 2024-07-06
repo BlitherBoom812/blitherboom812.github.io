@@ -302,6 +302,26 @@ You can report the issue on https://github.com/jjangga0214/hasura-cli/issues wit
 
 ## SSH 相关
 
+### 服务器共用怎么设置自己的环境变量
+
+在 vscode user settings 中添加：
+
+```
+    "terminal.integrated.env.linux": {
+        "ZZZ_INIT_COMMAND": "1"
+    },
+```
+
+在启动文件（例如 `.bashrc`）中添加：
+
+```bash
+# used for zzz's bash init if the env var below is defined
+if [[ -n $ZZZ_INIT_COMMAND ]]; then
+    echo "Hello, welcome to tsz's bash shell!"
+    eval "source /home/ubuntu/tsz/config.sh"
+fi
+```
+
 ### ssh 服务器
 
 使用 `ssh-keygen` 时最好设置一个口令，否则别人也能用这个密钥。

@@ -131,6 +131,19 @@ Code as Policies: Language Model Programs for Embodied Control: 2209.07753, Use 
 
 ### FFN 的作用
 
+[Transformer Feed-Forward Layers Build Predictions by Promoting Concepts in the Vocabulary Space](https://arxiv.org/pdf/2203.14680)
+
+[Dissecting Recall of Factual Associations in Auto-Regressive Language Models](https://arxiv.org/pdf/2304.14767)
+
+### 杂项
+
+MatFormer：嵌套训练 FFN 参数，适配不同的设备。
+
+SADMoE：对 weight 聚类，将双层 MLP 转为 MoE
+
+Deja Vu：预测 attention 的激活值，动态分配空间
+
+
 ### 20240629
 
 Read Agent：利用分页解决大模型长文本表现差的问题（Lost in middle）。
