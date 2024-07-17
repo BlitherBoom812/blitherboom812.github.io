@@ -89,6 +89,11 @@ nections between UIs in a UI sequence to design their pretraining tasks
 
 UIBert: Learning Generic Multimodal Representations for UI Understanding：self-alignment among different multimodal features in a single UI， use trainable lightweight encoders
 
+### LLM + RL
+
+[Enabling Intelligent Interactions between an Agent and an LLM: A Reinforcement Learning Approach](https://arxiv.org/pdf/2306.03604)
+
+
 ### Code-based Methods
 
 ## Topics
@@ -115,6 +120,10 @@ Action & Workflow embedding
 
 ## Paper Reading
 
+### 20240629
+
+Read Agent：利用分页解决大模型长文本表现差的问题（Lost in middle）。
+
 ### 大小模型协同
 
 [SwiftSage: A Generative Agent with Fast and Slow Thinking for Complex Interactive Tasks](https://arxiv.org/pdf/2305.17390)。用 BC 的小模型进行 fast thinking, 然后让大模型进行 slow thinking / grounding.
@@ -124,10 +133,6 @@ Action & Workflow embedding
 [AdaPlanner: Adaptive Planning from Feedback with Language Models](https://arxiv.org/pdf/2305.16653)
 
 Code as Policies: Language Model Programs for Embodied Control: 2209.07753, Use Code (Formal Language) in Embodied Agent.
-
-### LLM + RL
-
-[Enabling Intelligent Interactions between an Agent and an LLM: A Reinforcement Learning Approach](https://arxiv.org/pdf/2306.03604)
 
 ### FFN 的作用
 
@@ -142,8 +147,3 @@ MatFormer：嵌套训练 FFN 参数，适配不同的设备。
 SADMoE：对 weight 聚类，将双层 MLP 转为 MoE
 
 Deja Vu：预测 attention 的激活值，动态分配空间
-
-
-### 20240629
-
-Read Agent：利用分页解决大模型长文本表现差的问题（Lost in middle）。
