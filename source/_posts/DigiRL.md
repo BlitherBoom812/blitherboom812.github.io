@@ -80,6 +80,20 @@ traj 的奖励值就是当前这条路径拿到的奖励总和。
 
 问题：Value Estimator 和 Actor 分别用什么模型训的？疑似是 Transformer？
 
+## 模型架构
+
+在 AutoUI-Base 的基础上进行训练，固定 image encoder 不动。
+
+### Instruction and Step Level Value Functions
+
+输入：采用 image encoder 与 RoBERTa 分别对界面截图和指令进行 embedding，拼接起来。
+
+用 2 层的 MLP 来预测 Value function。
+
+### Actor
+
+在离线学习阶段，通过运行原始的 AutoUI-Base 来采集 traj。在 offline 阶段，跳过了 instruction-level filtering，用所有的 instruction 来训练，用以充分地利用数据。
+
 ## 评测部分
 
 评测采用的是 Gemini-1.5-pro，据论文报告结果和人类的评估接近。评测标准是通过一个端到端的观察，判断是否完成了任务。
