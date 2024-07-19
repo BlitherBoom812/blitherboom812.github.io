@@ -2,7 +2,11 @@
 title: DigiRL
 katex: true
 date: 2024-07-17 23:53:27
-tags: paper, Mobile, RL+LLM
+tags: 
+  - paper
+  - Mobile
+  - RL
+  - LLM
 ---
 ## DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning
 
@@ -77,7 +81,6 @@ traj 的奖励值就是当前这条路径拿到的奖励总和。
   * 具体而言，Instruct-level 选取 top-p 条 traj；
   * Step-level 选取阈值大于 1/H 的 step.
 * 在过滤后的 traj 上采用 MLE 准则训练模型。
-
 
 ## 模型架构
 

@@ -2,7 +2,11 @@
 title: Mobile-LLM 论文阅读
 katex: false
 date: 2024-06-09 20:42:26
-tags: research
+tags:
+  - paper
+  - survey
+  - Mobile
+  - LLM
 ---
 ## 综述
 
@@ -92,7 +96,6 @@ UIBert: Learning Generic Multimodal Representations for UI Understanding：self-
 ### LLM + RL
 
 [Enabling Intelligent Interactions between an Agent and an LLM: A Reinforcement Learning Approach](https://arxiv.org/pdf/2306.03604)
-
 
 ### Code-based Methods
 
