@@ -14,6 +14,12 @@ Personal LLM Agents: Insights and Survey about the Capability, Efficiency and Se
 
 ## 数据集
 
+VideoGUI: A Benchmark for GUI Automation from Instructional Videos，把 GUI 能力划分为三层：High Level 表示高层次的操作意图。Middle Level 为用自然语言描述的单步操作，Atomic-action 为使用固定格式描述的准确操作。整个 pipeline 都是人标的，包括视频挑选，标注，验证，task 数量较少，86 个 full task，463 个 subtask。
+
+![1721718047655](../images/Mobile-LLM/1721718047655.png)
+
+GUI-WORLD: A Dataset for GUI-oriented Multimodal LLM-based Agents，从 Youtube 上爬取视频数据+人类录频操作数据，提取关键帧，以及 QA 文本。关键帧的标注由人类完成，包括：执行的操作， 关键帧转移的目标，使用的软件或者网站，鼠标操作，键盘输入等。迷惑的是为什么人类操作还要录屏，既然最后是提取关键帧，那可以直接在人操作的时候提取关键帧？
+
 谷歌： Onthe Effects of Data Scale on Computer Control Agents，在安卓场景下人标gui sft数据，有测试集
 
 谷歌：Android in the Wild: A Large-Scale Dataset for Android Device Control
