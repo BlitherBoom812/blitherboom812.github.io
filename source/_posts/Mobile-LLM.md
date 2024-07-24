@@ -60,6 +60,7 @@ REINFORCEMENT LEARNING ON WEB INTERFACES USING WORKFLOW-GUIDED EXPLORATION： �
 
 #### Prompt Engineering
 
+
 AutoDroid: LLM-powered Task Automation in Android (MobiCom 24)
 
 Exploration + Execution 范式，基于 VH/DOM 的 UI 表示。
@@ -83,6 +84,12 @@ DroidBot-GPT: GPT-powered UI Automation for Android
 AppAgent: Multimodal Agents as Smartphone Users：利用 GPT4-V 进行探索+部署，支持 learn from demonstration。
 
 #### Multimodal
+
+微软 Responsible Task Automation: Empowering Large Language Models as Responsible Task Automators，大小模型协同，一个模型负责 planning，一个模型负责 executing，同时，在这个过程中实现隐私保护。这个过程会通过一个语言模型根据屏幕截图 + low level commands 来判断命令是否可执行、是否执行成功。当然，仅仅用 Decoder 做二元判断似乎有点浪费，感觉是个分类器就能做，用 bert 说不定更好。另外，Vision Encoder 在识别图片中文字这一块擅长吗？模型架构来自于 pix2seq，它原本是做目标检测的。
+
+![1721792120662](../images/Mobile-LLM/1721792120662.png)
+
+![1721792309928](../images/Mobile-LLM/1721792309928.png)
 
 Auto GUI: You Only Look at Screens: Multimodal Chain-of-Action Agents
 
