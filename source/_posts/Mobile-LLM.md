@@ -60,7 +60,6 @@ REINFORCEMENT LEARNING ON WEB INTERFACES USING WORKFLOW-GUIDED EXPLORATION： �
 
 #### Prompt Engineering
 
-
 AutoDroid: LLM-powered Task Automation in Android (MobiCom 24)
 
 Exploration + Execution 范式，基于 VH/DOM 的 UI 表示。
@@ -135,6 +134,10 @@ Action & Workflow embedding
 寻找 UI 的表征/ UI Understanding
 
 ## Paper Reading
+
+### 20240725
+
+ShareGPT4Video: Improving Video Understanding and Generation with Better Captions：视频数据理解，或许有助于 GUI Agent 的训练。提出了一个 Differential Sliding-window Captioning 的方案，让 GPT4o 根据上一帧和当前帧之间的差别来输出 Caption，最后加上一个 Summary 来描述整个视频的 pipeline。这里的关键是如何选关键帧，原文采用一个 CLIP Model，通过比较最后一帧和这一帧的相似性，选出差别较大的帧。
 
 ### 20240629
 
