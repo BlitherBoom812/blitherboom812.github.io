@@ -60,6 +60,10 @@ REINFORCEMENT LEARNING ON WEB INTERFACES USING WORKFLOW-GUIDED EXPLORATION： �
 
 #### Prompt Engineering
 
+Explore, Select, Derive, and Recall: Augmenting LLM with Human-like Memory for Mobile Task Automation，从 trace 中学习 subtasks，然后封装成 api，在后续执行任务时可以直接调用。也是纯文本推理。
+
+M3A，SeeAct 都是采用截图标注，然后推理，速度会慢很多。
+
 AutoDroid: LLM-powered Task Automation in Android (MobiCom 24)
 
 Exploration + Execution 范式，基于 VH/DOM 的 UI 表示。
