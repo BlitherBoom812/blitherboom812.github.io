@@ -84,15 +84,27 @@ AppAgent: Multimodal Agents as Smartphone Users：利用 GPT4-V 进行探索+部
 
 #### Multimodal
 
+CogAgent: A Visual Language Model for GUI Agents，从结果来看 Auto GUI 还是挺能打的，700M 的 encoder-decoder 和 18B 的 CogAgent （CogVLM-17B 改造而来）不相上下。
+
+![1721962899191](../images/Mobile-LLM/1721962899191.png)
+
+模型架构如下。设计上采用一个低分辨率的图像编码器来识别大部分 UI 元素和布局，高分辨率的编码器用来识别文字（这个有证据吗？仅仅有一个简单的消融实验）。比较反直觉的是，在 OCR 领域模型应该采用更小的隐藏层，而不像通用领域那样需要很大的隐藏层，所以高分辨率编码器反而参数更少，只有 0.30 B。而且，这东西每层都跟 Decoder 做特征融合，不直接使用高分辨率是因为 CogVLM 原来的架构就支持 224*224（经典数字），太大了在 Self Attention 阶段计算量会爆炸，所以这里通过压缩隐藏层大小 + Cross Attention 来降低计算量。
+
+对齐方面，人标了2k条，然后把 Mind2Web 和 AITW 的数据拿过来用 GPT-4 标了 VQA 的数据集。
+
+输出格式包括 Plan，Action，Operation，Operation 部分同样是让大模型生成操作和坐标数据，我依然很好奇到底 VLM 能不能理解坐标信息。
+
+![1721962961205](../images/Mobile-LLM/1721962961205.png)
+
+Auto GUI: You Only Look at Screens: Multimodal Chain-of-Action Agents
+
+![1717937675502](../images/Mobile-LLM/1717937675502.png)
+
 微软 Responsible Task Automation: Empowering Large Language Models as Responsible Task Automators，大小模型协同，一个模型负责 planning，一个模型负责 executing，同时，在这个过程中实现隐私保护。这个过程会通过一个语言模型根据屏幕截图 + low level commands 来判断命令是否可执行、是否执行成功。当然，仅仅用 Decoder 做二元判断似乎有点浪费，感觉是个分类器就能做，用 bert 说不定更好。另外，Vision Encoder 在识别图片中文字这一块擅长吗？模型架构来自于 pix2seq，它原本是做目标检测的。
 
 ![1721792120662](../images/Mobile-LLM/1721792120662.png)
 
 ![1721792309928](../images/Mobile-LLM/1721792309928.png)
-
-Auto GUI: You Only Look at Screens: Multimodal Chain-of-Action Agents
-
-![1717937675502](../images/Mobile-LLM/1717937675502.png)
 
 META-GUI: Towards Multi-modal Conversational Agents on Mobile GUI
 
@@ -138,6 +150,12 @@ Action & Workflow embedding
 ### 20240725
 
 ShareGPT4Video: Improving Video Understanding and Generation with Better Captions：视频数据理解，或许有助于 GUI Agent 的训练。提出了一个 Differential Sliding-window Captioning 的方案，让 GPT4o 根据上一帧和当前帧之间的差别来输出 Caption，最后加上一个 Summary 来描述整个视频的 pipeline。这里的关键是如何选关键帧，原文采用一个 CLIP Model，通过比较最后一帧和这一帧的相似性，选出差别较大的帧。
+
+Learning Transferable Visual Models From Natural Language Supervision
+
+Panda-70M: Captioning 70M Videos with Multiple Cross-Modality Teachers
+
+![1721924737611](../images/Mobile-LLM/1721924737611.png)
 
 ### 20240629
 
