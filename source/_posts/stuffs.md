@@ -3,8 +3,32 @@ title: 杂项
 date: 2022-11-10 21:08:58
 tags:
 ---
+
+
 批处理命令设置环境变量
 set path=xxxx
+
+## 好玩的东西
+
+### Lambda 计数器
+
+```python
+f,n = (lambda f,n=0: ((lambda f, n: lambda x, m=n: f(x, m))(f, n+1), n))(lambda f,n: ((lambda f, n: lambda x, m=n: f(x, m))(f, n+1), n))
+
+print(n)
+f,n = f(f)
+print(n)
+
+f,n = f(f)
+print(n)
+
+f,n = f(f)
+print(n)
+
+f,n = f(f)
+print(n)
+
+```
 
 ## js爬虫
 
