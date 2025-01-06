@@ -3,8 +3,6 @@ title: 杂项
 date: 2022-11-10 21:08:58
 tags:
 ---
-
-
 批处理命令设置环境变量
 set path=xxxx
 
@@ -28,6 +26,26 @@ print(n)
 f,n = f(f)
 print(n)
 
+```
+
+更好玩的版本！
+
+```python
+f,n = (lambda f,n=0: ((lambda h: lambda: h(h))((lambda f, n: lambda x, m=n: f(x, m))(f, n+1)), n))(lambda f,n: ((lambda h: lambda: h(h))((lambda f, n: lambda x, m=n: f(x, m))(f, n+1)), n))
+
+print(n)
+
+f,n = f()
+print(n)
+
+f,n = f()
+print(n)
+
+f,n = f()
+print(n)
+
+f,n = f()
+print(n)
 ```
 
 ## js爬虫
