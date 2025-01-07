@@ -8,6 +8,14 @@ set path=xxxx
 
 ## 好玩的东西
 
+### Lambda 递归
+
+```python
+f = (lambda h: lambda n:(h(h, n)))(lambda f,n: n + f(f, n-1) if n > 0 else 0)
+# >>> f(10)
+# 55
+```
+
 ### Lambda 计数器
 
 ```python
@@ -47,6 +55,35 @@ print(n)
 f,n = f()
 print(n)
 ```
+
+与上一个版本效果相同：
+
+```python
+f = (lambda g: g(lambda f,n=0: (g((lambda f, n: lambda x, m=n: f(x, m))(f, n+1)), n)))(lambda h: lambda: h(h))
+f,n = f()
+print(n)
+
+f,n = f()
+print(n)
+
+f,n = f()
+print(n)
+
+f,n = f()
+print(n)
+```
+
+更加简洁：
+
+```python
+f = (lambda g: g(lambda f,t, n=0: n if t == 0 else g((lambda f, t, n: lambda x, u=t, m=n: f(x, u, m))(f, t, n+1))))((lambda h: lambda t=1: h(h, t)))
+print(f(0))
+f = f()
+print(f(0))
+f = f()
+print(f(0))
+```
+
 
 ## js爬虫
 
