@@ -84,7 +84,6 @@ f = f()
 print(f(0))
 ```
 
-
 ## js爬虫
 
 **1.js保存字符串到本地**
@@ -471,6 +470,14 @@ taskkill /PID <process_id> /F
 `net start winnat`
 
 ## Pytorch
+
+### /usr/bin/ld: cannot find -lcuda
+
+见[这个 issue](https://github.com/NVlabs/tiny-cuda-nn/issues/183#issuecomment-1342828785)
+
+export LIBRARY_PATH="/usr/local/cuda/lib64/stubs:$LIBRARY_PATH"
+
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64/stubs:/usr/local/cuda/lib64"
 
 ### Llama 架构
 
