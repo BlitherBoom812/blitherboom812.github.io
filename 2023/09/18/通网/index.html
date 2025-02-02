@@ -1,0 +1,1748 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>通网 | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="信息论基础离散随机变量的信息度量$$ H(X) &#x3D; \mathbf E\lbraceH(X&#x3D;x_i)\rbrace &#x3D; -\sum_i p_i \log p_i $$  称为熵 单位：  2 (Bit) e (Nat) 10 (Hartely)  表示了信息描述的有效性极限 信源编码（Source Coding），通过信息的有效表示，提高通信的有效性。例如: Huffman 编码 离散随机变量的最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通网">
+<meta property="og:url" content="https://blitherboom812.github.io/2023/09/18/%E9%80%9A%E7%BD%91/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="信息论基础离散随机变量的信息度量$$ H(X) &#x3D; \mathbf E\lbraceH(X&#x3D;x_i)\rbrace &#x3D; -\sum_i p_i \log p_i $$  称为熵 单位：  2 (Bit) e (Nat) 10 (Hartely)  表示了信息描述的有效性极限 信源编码（Source Coding），通过信息的有效表示，提高通信的有效性。例如: Huffman 编码 离散随机变量的最">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/1_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/1_.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_9.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/2_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/3_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/3_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/3_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/3_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/3_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/3_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/4_9.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_9.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/5_10.jpg">
+<meta property="article:published_time" content="2023-09-18T11:14:16.000Z">
+<meta property="article:modified_time" content="2025-02-02T00:08:10.556Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/%E9%80%9A%E7%BD%91/1_1.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">29</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">信息论基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E4%BF%A1%E6%81%AF%E5%BA%A6%E9%87%8F"><span class="toc-number">1.1.</span> <span class="toc-text">离散随机变量的信息度量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E7%86%B5"><span class="toc-number">1.2.</span> <span class="toc-text">连续性随机变量的熵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E7%86%B5"><span class="toc-number">1.3.</span> <span class="toc-text">多元随机变量的熵</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">压缩编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">压缩编码的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E6%A0%B7"><span class="toc-number">2.2.</span> <span class="toc-text">抽样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E5%8C%96"><span class="toc-number">2.3.</span> <span class="toc-text">量化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8F%E5%8C%96%E5%99%AA%E5%A3%B0%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">2.3.1.</span> <span class="toc-text">量化噪声的计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E9%87%8F%E5%8C%96"><span class="toc-number">2.3.2.</span> <span class="toc-text">最优量化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%94%A8%E9%87%8F%E5%8C%96"><span class="toc-number">2.3.3.</span> <span class="toc-text">工程用量化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7%E7%9A%84%E9%87%8F%E5%8C%96"><span class="toc-number">2.3.4.</span> <span class="toc-text">语音信号的量化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9F%BA%E5%B8%A6%E4%BC%A0%E8%BE%93"><span class="toc-number">3.</span> <span class="toc-text">数字基带传输</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E6%98%A0%E5%B0%84"><span class="toc-number">3.1.</span> <span class="toc-text">符号映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">数字调制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nyquist-%E5%87%86%E5%88%99%EF%BC%9A%E6%97%A0ISI%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text">Nyquist 准则：无ISI条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E9%80%9F%E7%8E%87%E4%B8%8E%E5%B8%A6%E5%AE%BD%E6%95%88%E7%8E%87"><span class="toc-number">3.4.</span> <span class="toc-text">通信速率与带宽效率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%87%E4%BD%99%E5%BC%A6%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">3.5.</span> <span class="toc-text">升余弦滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%8A%9F%E7%8E%87%E8%B0%B1%E8%AE%A1%E7%AE%97"><span class="toc-number">3.6.</span> <span class="toc-text">通信信号的功率谱计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%B8%A6%E8%A7%A3%E8%B0%83"><span class="toc-number">3.7.</span> <span class="toc-text">基带解调</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E5%B8%A6%E4%BC%A0%E8%BE%93%E7%9A%84%E5%99%AA%E5%A3%B0%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.7.1.</span> <span class="toc-text">基带传输的噪声模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E9%80%81%E4%B8%80%E4%B8%B2%E7%AC%A6%E5%8F%B7"><span class="toc-number">3.7.2.</span> <span class="toc-text">传送一串符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%B7%AE%E9%94%99%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="toc-number">3.7.3.</span> <span class="toc-text">符号差错模型：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E5%86%B3%E4%B8%8E%E5%B7%AE%E9%94%99"><span class="toc-number">3.8.</span> <span class="toc-text">判决与差错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%88%A4%E5%86%B3"><span class="toc-number">3.9.</span> <span class="toc-text">最佳判决</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SER-amp-BER"><span class="toc-number">3.9.1.</span> <span class="toc-text">SER &amp; BER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OFDM-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">3.9.2.</span> <span class="toc-text">OFDM 基本原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A6%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="toc-number">3.9.3.</span> <span class="toc-text">带通信号的表示方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">差错控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">分组码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#n-k-%E7%BA%A0%E9%94%99%E7%A0%81"><span class="toc-number">4.1.1.</span> <span class="toc-text">(n,k)纠错码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E7%BB%87%E5%99%A8"><span class="toc-number">4.1.2.</span> <span class="toc-text">交织器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%A0%81"><span class="toc-number">4.2.</span> <span class="toc-text">卷积码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%B4%E7%89%B9%E6%AF%94%E8%AF%91%E7%A0%81"><span class="toc-number">4.2.1.</span> <span class="toc-text">维特比译码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E5%88%A4%E5%86%B3%E5%92%8C%E8%BD%AF%E5%88%A4%E5%86%B3"><span class="toc-number">4.3.</span> <span class="toc-text">硬判决和软判决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E9%94%99%E9%87%8D%E5%8F%91-ARQ"><span class="toc-number">4.4.</span> <span class="toc-text">检错重发 ARQ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%81%9C%E7%AD%89ARQ"><span class="toc-number">4.4.1.</span> <span class="toc-text">停等ARQ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E-N-ARQ"><span class="toc-number">4.4.2.</span> <span class="toc-text">返回 N-ARQ</span></a></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2023/09/18/%E9%80%9A%E7%BD%91/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">通网</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2023-09-18 11:14:16" itemprop="dateCreated datePublished" datetime="2023-09-18T11:14:16+00:00">2023-09-18</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2025-02-02 00:08:10" itemprop="dateModified" datetime="2025-02-02T00:08:10+00:00">2025-02-02</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="信息论基础"><a href="#信息论基础" class="headerlink" title="信息论基础"></a>信息论基础</h2><h3 id="离散随机变量的信息度量"><a href="#离散随机变量的信息度量" class="headerlink" title="离散随机变量的信息度量"></a>离散随机变量的信息度量</h3><div>$$
+H(X) = \mathbf E\lbraceH(X=x_i)\rbrace = -\sum_i p_i \log p_i
+$$</div>
+
+<p>称为熵</p>
+<p>单位：</p>
+<ul>
+<li>2 (Bit)</li>
+<li>e (Nat)</li>
+<li>10 (Hartely)</li>
+</ul>
+<p>表示了信息描述的有效性极限</p>
+<p>信源编码（Source Coding），通过信息的有效表示，提高通信的有效性。例如: Huffman 编码</p>
+<p>离散随机变量的最大熵：$\max_{p_i} H(X) &#x3D; \log|S|$</p>
+<p>前缀码：任何码字都不是其他码字的前缀。前缀码保证了唯一可译码。是二叉树叶子节点。</p>
+<p><strong>Kraft不等式</strong></p>
+<p>对于信源字符集$\lbrace a_1, \dots, a_m\rbrace$，必满足：</p>
+<div>$$
+\sum\limits_{k=1}^{M}2^{-l(a_k)} \le 1
+$$</div>
+
+<p>同时，若上式成立，必存在码长分别为$𝑙(𝑎_𝑘)$的前缀码。</p>
+<p>最小前缀码的平均码长：</p>
+<div>$$
+\min \bar L =\sum\limits_{i=1}^{M}p_il_i\\
+s.t.\sum\limits_{i=1}^{M} 2^{-l_i} = 1
+$$</div>
+
+<p>由拉格朗日乘子法</p>
+<div>$$
+p_i = 2^{-l_i}, \bar L_{min} = -\sum\limits_{i=1}^{M}p_i \log p_i
+$$</div>
+
+<p>记 $H(X) &#x3D; -\sum p_i\log p_i$ .一般的，上下界为$H(X) \le \bar L  \lt H(X) + 1$.</p>
+<p>如果我们将$k$个独立同分布的信源符号 $x_1, \dots, x_k$堪称一个，对整体应用前缀码编码：</p>
+<div>$$
+\begin{align*}
+    H(X_1, \dots, X_k) &= -\sum P(x_1, \dots, x_k) \log P(x_1, \dots, x_k)\\
+    &= -\sum P(x_1, \dots, x_k) [\log P(x_1) +  \dots +  \log(x_k)]\\
+    &= -\sum P(x_1)\log (x_1) - \dots - \sum P(x_k)\log (x_k)\\
+    &= -kH(X)
+\end{align*}
+$$</div>
+
+<p>直观：对长度为$𝑛$的$M$种信源符号序列，$𝑥_𝑖$出现的次数$≈𝑛𝑝_𝑖$</p>
+<p>典型序列应满足上述分布，否则就“小众”“非典型”</p>
+<p>典型的个数 # $≈ \frac{𝒏!}{(𝑛𝑝_1) !… (𝑛𝑝_M) !}$</p>
+<p>平均每个信源符号可以用 $L &#x3D; \frac{1}{n}\log\left(\frac{𝒏!}{(𝑛𝑝_1) !… (𝑛𝑝_M) !}\right)$ 个 bit 来表达。</p>
+<p>通过 Stirling 公式可以得出 L的上下界。</p>
+<p>故</p>
+<div>$$
+\lim\limits_{n\rightarrow \infty}^{} L = H(X)
+$$</div>
+
+<p><strong>最大熵</strong></p>
+<p>离散型随机变量的最大熵为</p>
+<!-- max -->
+<div>$$
+\max_{p_i} H(X) = \log |S|
+$$</div>
+
+<p>可以用梯度法直观感受，当所有分量的概率相等时，熵最大。</p>
+<p><strong>联合熵</strong></p>
+<p>联合概率</p>
+<!-- text -->
+<div>$$
+p_{i, j} = \text{Pr}\lbrace X = x_i, Y = y_j\rbrace
+$$</div>
+
+<p>联合熵的定义：</p>
+<div>$$
+H(XY) = -\sum\limits_{i}^{}\sum\limits_{j}^{} p_{i, j} \log p_{i, j}
+$$</div>
+
+<p><strong>条件熵</strong></p>
+<p>条件概率</p>
+<!-- text -->
+<div>$$
+p_{i\mid j} = \text{Pr}\lbrace X = x_i \mid Y = y_j\rbrace
+$$</div>
+
+<p>条件熵的定义：</p>
+<div>$$
+H(X|Y) = -\sum\limits_{i}^{}\sum\limits_{j}^{} p_{i, j} \log p_{i\mid j}
+$$</div>
+
+<p>通过相关观测进行无损压缩，若观测到 $Y &#x3D; \alpha_j$：</p>
+<div>$$
+\bar L(\alpha_j) = -\sum\limits_{i}^{}\sum\limits_{j}^{} p_{i\mid j} \log p_{i\mid j}
+$$</div>
+
+<p>于是</p>
+<div>$$
+\bar L =-\sum\limits_{j=1}^{N} \bar L(\alpha_j)p_j = -\sum\limits_{j=1}^{N}p_j\sum\limits_{i=1}^{M}p_{i|j} \log(p_{i|j}) = -\sum\limits_{i=1}^{M}\sum\limits_{j=1}^{N}p_{ij}\log(p_{i|j}) = H(X|Y)
+$$</div>
+
+<p><strong>链式法则</strong></p>
+<div>$$
+H(XY) = H(Y) + H(X|Y)
+$$</div>
+
+<p>两个随机变量的联合不确定性＝一个随机变量的不确定性＋知道这个随机变量后另一个随机变量残余的不确定性</p>
+<p><strong>互信息(Mutual Infomation)</strong></p>
+<div>$$
+\begin{align*}
+    I(X;Y) &= H(X) + H(Y) - H(XY)\\
+    &= H(X) - H(X|Y) \\
+    &= H(Y) - H(Y|X)
+\end{align*}
+$$</div>
+
+<p>互信息的物理意义</p>
+<p>第一种理解：</p>
+<ul>
+<li>X的不确定度减去观测Y后X残存的不确定度</li>
+<li>即：通过观测Y带来的帮助了解X的信息</li>
+</ul>
+<p>第二种理解：</p>
+<ul>
+<li>Y的不确定度减去观测X后Y残存的不确定度</li>
+<li>即：通过观测X带来的帮助了解Y的信息</li>
+</ul>
+<p>若$X, Y$相互独立，记为$X\perp Y$，则$I(X;Y) &#x3D; 0$，$H(X) &#x3D; H(X|Y)$，$H(Y) &#x3D; H(Y|X)$。观测一个随机变量完全无助于了解另一个随机变量。</p>
+<ul>
+<li>$H(XY) &#x3D; H(X) + H(Y)$，总平均码长等于各自平均码长之和。</li>
+</ul>
+<p>若$X &#x3D; Y$，则$I(X;Y) &#x3D; H(X) &#x3D; H(Y)$，$H(X|Y) &#x3D; H(Y|X) &#x3D; 0$。观测一个随机变量完全了解另一个随机变量。</p>
+<p>$H(XY) &#x3D; H(Y) + H(X|Y) &#x3D; H(Y)$，只需要编码其中一个即可。</p>
+<div>$$
+X \perp Y \leftrightarrow H(X + Y | X) = H(Y | X) = H(Y), H(X + Y, X) = H(Y , X)
+$$</div>
+
+
+<div>$$
+H(X + X | X) = H(X | X) = 0, H(X + X, X) = H(X , X) = H(X)
+$$</div>
+
+<p><strong>信息传输的基本模型</strong></p>
+<ul>
+<li>信息通道，简称信道（Channel）对于输入符号有随机扰动，本质上可用一组条件概率表示</li>
+<li>限于物理条件，信宿只能观测信道输出 $Y$，由此了解其输入 $X$</li>
+<li>通过观测Y可以获得的关于X的信息量是 $I(X;Y)$</li>
+</ul>
+<p><strong>信息传输的优化</strong></p>
+<p>目标：最大化发送端 $X$ 和接收方 $Y$ 的互信息</p>
+<p>方法：</p>
+<ul>
+<li>信道是由物理实现所决定的，无法控制</li>
+<li>但是可以选择X的概率分布</li>
+</ul>
+<p>因此有如下优化问题：</p>
+<div>$$
+p*_i = \argmax_{\sum_i p_i = 1, p_i \ge 0} I(X;Y)
+$$</div>
+
+<p>定义信道容量 $C &#x3D; \max_{\sum_i p_i &#x3D; 1, p_i \ge 0} I(X;Y)$</p>
+<p>信道容量的物理意义</p>
+<ul>
+<li>平均每个信道符号所能传的最大的信息量</li>
+<li>或：单位时间内信道所传最大的信息量</li>
+</ul>
+<p>优化问题的表达式</p>
+<div>$$
+p_i^* = \argmax_{\sum_i p_i = 1, p_i \ge 0} - \sum_i\sum_j p_i p_{j|i} \log \frac{\sum\limits_i p_i p_{j|i}}{p_{j|i}}
+$$</div>
+
+<p>信道容量不易计算</p>
+<p><strong>对称二进制信道(BSC)</strong></p>
+<ul>
+<li>一种典型信道模型</li>
+<li>分析信道编码时有很多应用</li>
+</ul>
+<p>利用互信息表达式</p>
+<div>$$
+\begin{align*}
+    I(X;Y) &= H(Y) - H(Y | X)\\
+    &= H(Y) - \sum_i p_i \left[-\sum_j p_{j|i} \log p_{j|i}\right]\\
+    &= H(Y) - [-\varepsilon\log \varepsilon - (1 - \varepsilon)\log(1 - \varepsilon)]\\
+    &\le 1 - [-\varepsilon\log \varepsilon - (1 - \varepsilon)\log(1 - \varepsilon)] = C\\
+\end{align*}\\
+Y \sim \begin{bmatrix}
+    0 & 1\\
+    1/2 & 1/2
+\end{bmatrix}
+$$</div>
+
+<p>如果误码率 $\varepsilon &#x3D; 0.5$，则信道容量为0, 传递不了信息。</p>
+<p>如果误码率 $\varepsilon &gt; 0.5$，继续增大差错率，反而可以提高信道容量。</p>
+<p><strong>高斯信道</strong></p>
+<!-- **gauss** -->
+<div>$$
+Y = X + N\\
+f_N(n) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left(-\frac{(y - x)^2}{2\sigma^2}\right)
+$$</div>
+
+<p><img src="/../images/%E9%80%9A%E7%BD%91/1_1.jpg" alt="alt" loading="lazy"></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/1_.jpg" alt="alt" loading="lazy"></p>
+<p>Shannon 公式</p>
+<div>$$
+C = W\log(1 + \frac{P}{Wn_0})
+$$</div>
+
+<h3 id="连续性随机变量的熵"><a href="#连续性随机变量的熵" class="headerlink" title="连续性随机变量的熵"></a>连续性随机变量的熵</h3><div>$$
+H(X) = - \int\limits_{-\infty}^{\infty}p(x)\log p(x) \mathrm dx + \lim_{\Delta \rightarrow 0} \log \frac{1}{\Delta}
+$$</div>
+
+<p>我们只关心相对不确定性，定义微分熵</p>
+<div>$$
+h(X) = -\int\limits_{-\infty}^{\infty}p(x) \log p(x)\mathrm dx
+$$</div>
+
+<p>微分熵是对连续型变量相对不确定性的一种描述</p>
+<ul>
+<li>其定义剔除了连续性或“精准要求”带来的困难，保<br>留了分布函数形状自身的特征</li>
+<li>它说明用有限字符集合的字符串描述连续分布的随机<br>变量，则平均字符长度为无穷大</li>
+<li>为了用有限长字符串描述信源，需要进行有损压缩，<br>从而带来失真，即原始信源和压缩结果之间的差异</li>
+<li>失真测度包括：均方误差，绝对值误差，主观误差等</li>
+<li>对于图像，视频和语音等连续信源的编码等均属于有<br>损压缩</li>
+</ul>
+<h3 id="多元随机变量的熵"><a href="#多元随机变量的熵" class="headerlink" title="多元随机变量的熵"></a>多元随机变量的熵</h3><p>联合熵：</p>
+<div>$$
+h(XY) = -\int\limits_{-\infty}^{\infty}p(x, y) \log p(x, y)\mathrm dx \mathrm{d}y
+$$</div>
+
+<p>条件熵：</p>
+<div>$$
+h(Y|X) = -\int\limits_{-\infty}^{\infty}p(x, y) \log p(y|x)\mathrm dx \mathrm{d}y
+$$</div>
+
+<p>互信息：</p>
+<div>$$
+\begin{align*}
+    I(X;Y) &= h(X) + h(Y) - h(XY)\\
+    &= h(X) - h(X|Y) \\
+    &= h(Y) - h(Y|X)
+\end{align*}
+$$</div>
+
+<h2 id="压缩编码"><a href="#压缩编码" class="headerlink" title="压缩编码"></a>压缩编码</h2><h3 id="压缩编码的分类"><a href="#压缩编码的分类" class="headerlink" title="压缩编码的分类"></a>压缩编码的分类</h3><ul>
+<li>无损压缩<ul>
+<li>输入：数字序列</li>
+<li>输出：数字序列</li>
+<li>目的：使得平均长度更小</li>
+</ul>
+</li>
+<li>有损压缩<ul>
+<li>输入：模拟信号</li>
+<li>输出：数字序列</li>
+<li>目的：实现数字传输</li>
+</ul>
+</li>
+</ul>
+<p>信号压缩编码的步骤：</p>
+<ul>
+<li>抽样</li>
+<li>量化</li>
+<li>压缩编码</li>
+</ul>
+<h3 id="抽样"><a href="#抽样" class="headerlink" title="抽样"></a>抽样</h3><p><strong>连续时间信源的离散化</strong></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_1.jpg" loading="lazy"></p>
+<p>离散化的方式：在标准正交基上投影展开</p>
+<div>$$
+s(t) = \sum_k a_k\phi_k(t)\\
+a_k = <s(t), \phi_k(t)>
+$$</div>
+
+<p>若 $s(t)$ 是时限信号（宽度 $T$），可以用傅里叶展开的系数作为离散化结果：$s(t) &#x3D; \sum\limits_k a_k e^{2\pi jkt&#x2F;T}$</p>
+<p>若 $s(t)$ 是带限信号（带宽 $W$），可以在频域对 $\hat S(f)$ 做傅里叶展开：</p>
+<div>$$
+\hat S(f) = \sum\limits_k \alpha_k e^{2\pi jkf/(2W)}
+$$</div>
+
+<p>变换回时域时，得到 Nyquist 抽样定理：</p>
+<div>$$
+s(t) =\sum\limits_{k}^{}s(kT) \text{sinc}\left(\left(\frac{t}{T} - k\right)\right), T = \frac{1}{2W}
+$$</div>
+
+<p>频域无混叠等价于时域无畸变</p>
+<p>对于带通采样，有无混叠条件：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_2.jpg" loading="lazy"></p>
+<p>可以推导得出：</p>
+<div>$$
+f_s = 2B\left(1 + \frac{M}{N}\right)\\
+N = \left\lfloor\frac{f_H}{B}\right\rfloor\\
+M = \left\lbrace\frac{f_H}{B}\right\rbrace\\
+B = f_H - f_L
+$$</div>
+
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_3.jpg" loading="lazy"></p>
+<p>横轴为 $f_H&#x2F;B$，纵轴为 $f_s$</p>
+<p><strong>量化</strong></p>
+<p>分层电平： $\lbrace x_k \lt x \le x_{k + 1} \rbrace$ </p>
+<p>重建&#x2F;输出电平：$y_k$代表一个量化区间，用以重构信号时使用的电平值</p>
+<p>量化函数： $y &#x3D; Q(x)$, $y_k &#x3D; Q\lbrace x_k \lt x \le x_{k + 1} \rbrace$</p>
+<p>量化间隔： $\Delta_k &#x3D; x_{k + 1} - x_{k}$</p>
+<p>均匀量化 &amp; 非均匀量化</p>
+<p>均匀量化只对有界随机变量存在</p>
+<h3 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h3><ul>
+<li>在此只讨论标量的量化</li>
+<li>量化噪声： $q &#x3D; x - y &#x3D; x - Q(x)$ </li>
+<li>量化噪声是一个随机变量</li>
+<li>方差 $\sigma_q^2 &#x3D; \int_{-\infty}^{\infty}[x - Q(x)]^2p_x(x)\mathrm dx$</li>
+<li>方差与输入信号分布有关，不存在普适的最佳量化方案</li>
+</ul>
+<h4 id="量化噪声的计算"><a href="#量化噪声的计算" class="headerlink" title="量化噪声的计算"></a>量化噪声的计算</h4><div>$$
+\sigma_q^2 =\sum\limits_{k=1}^{L}\int_{x_k}^{x_{k + 1}}(x - y_k)^2p_x(x)\mathrm dx
+$$</div>
+
+<p>从较容易的情况着手</p>
+<ul>
+<li>只考虑电平区间 $[-V,V]$ 之间的信号，并假设量化间隔很小，亦即分层电平很密</li>
+<li>在实际情况中，信号的分布函数处处可导，此时每个量化区间内信号的条件分布为均匀分布</li>
+</ul>
+<p>量化区间内，近似概率密度 $p_x(x) &#x3D; \frac{P_k}{\Delta_k}$</p>
+<p>密集分层的量化噪声近似</p>
+<div>$$
+\sigma_{qn}^2 = \sum\limits_{k=1}^{L}\int_{x_k}^{x_{k + 1}}(x - y_k)^2p_x(x)\mathrm dx = \sum\limits_{k=1}^{L}\frac{P_k}{\Delta_k}\int_{x_k}^{x_{k + 1}}(x - y_k)^2\mathrm dx = \frac{1}{12}\sum_{k = 1}^L P_k\Delta_k^2 = \frac{1}{12} \int_{-V}^{V}(\Delta_k)^2p_x(x)\mathrm dx
+$$</div>
+
+<p>若 $\Delta_k &#x3D; \Delta$，</p>
+<div>$$
+\sigma_{qn}^2 = \frac{1}{12}\sum_k P_k\Delta_k^2 = \frac{\Delta_k^2}{12}
+$$</div>
+
+<p>计算量化结果做无损压缩后的比特数：</p>
+<div>$$
+H(Q(x)) = -\sum_k P_k \log P_k = \underbrace{- \int_{-\infty}^{\infty}p_x(x)\log p_x(x) \mathrm dx }_{h(X)} + \log \frac{1}{\Delta}
+$$</div>
+
+<p>由 $\Delta &#x3D; \sqrt{12\sigma_{qn}^2} &#x3D; 2\sigma_{qn}\sqrt{3}$，</p>
+<div>$$
+H(x) = h(x) + \log \frac{1}{2\sigma_{qn}\sqrt{3}}
+$$</div>
+
+<p>无损压缩的 bit 数为： $\tilde{R} &#x3D; h(X) - \frac{1}{2}\log \sigma_{qn}^2 - 1.8$</p>
+<p>对于均匀量化：</p>
+<div>$$
+\Delta_k = \frac{x_{max} - x_{min}}{L} = \frac{2x_{max}}{L}, \forall k
+$$</div>
+
+<p>于是</p>
+<div>$$
+\sigma_{qn}^2 = \frac{\Delta^2}{12} = \frac{x_{max}^2}{3L^2}
+$$</div>
+
+<p>这里的 $\sigma_{qn}^2$ 是正常量化噪声，仅仅是计算了信号落在 $[-x_{max}, x_{max}]$ 内的情况</p>
+<p>如果信号落在 $[-x_{max}, x_{max}]$ 以外，就就近判断至两端的量化区间，产生过载噪声</p>
+<div>$$
+\sigma_{qo}^2 = \int_{x_{max}}^{\infty}(x - x_{max})^2p_x(x)\mathrm dx + \int^{-x_{max}}_{-\infty}(x + x_{max})^2p_x(x)\mathrm dx = 2\int_{x_{max}}^{\infty}(x - x_{max})^2p_x(x)\mathrm dx
+$$</div>
+
+<p>总噪声等于正常量化噪声加上过载噪声：</p>
+<div>$$
+\sigma_{qs}^2 = \sigma_{qn}^2 + \sigma_{qo}^2
+$$</div>
+
+<p>如果用 $R$ bit 编码：</p>
+<div>$$
+\Delta_k = \frac{2x_{max}}{L} = \frac{x_{max}}{2^{R - 1}}\\
+\sigma_{qn}^2 = \frac{\Delta^2}{12}\int_{-x_{max}}^{x_{max}}p_x(x)\mathrm dx = \frac{x_{max}^2}{3 \times 2^{2R}}\int_{-x_{max}}^{x_{max}}p_x(x)\mathrm dx
+$$</div>
+
+<p>定义非过载信号功率：</p>
+<div>$$
+\sigma_s^2 = \int_{-x_{max}}^{x_{max}}x^2p_x(x)\mathrm dx
+$$</div>
+
+<p>当 $\int_{-x_{max}}^{x_{max}}p_x(x)\mathrm dx \rightarrow 1$， $SNR_q \approx \frac{\sigma_s^2}{x_{max}^2&#x2F;(3 \times 2^{2R})} &#x3D; 3 \times 2^{2R} \times \zeta^2$，这里定义 $\zeta &#x3D; \frac{\sigma_s}{x_{max}}$ 为量化范围内信号的饱满程度。</p>
+<p>对数单位下：</p>
+<div>$$
+SNR_q(dB) = 6.02R + 20\log_{10}(\zeta) + 4.77
+$$</div>
+
+<ul>
+<li>多一个 bit，$SNR_q$ 提升 $6.02dB$</li>
+<li>$\zeta$ 要在合理范围，$\zeta$ 过大时过载会严重劣化性能</li>
+</ul>
+<h4 id="最优量化"><a href="#最优量化" class="headerlink" title="最优量化"></a>最优量化</h4><p>目标：给定量化区间总数，最小化量化噪声</p>
+<p>优化问题：</p>
+<div>$$
+\min \sum\limits_{k=1}^{L}\int_{x_k}^{x_{k + 1}}(x - y_k)^2 p_x(x)\mathrm dx\\
+s.t. x_1\le y_1 \le x_2 \le y_2 \le \dots \le y_L \le x_{L + 1}
+$$</div>
+
+<p>分层电平在重建电平的中点：</p>
+<div>$$
+\frac{\partial \sigma_q^2}{\partial x_k} = 0\\
+\Rightarrow x_{k, opt} = \frac{1}{2}(y_{k, opt} + y_{k - 1, opt})
+$$</div>
+
+<p>重建电平在量化区间的质心：</p>
+<div>$$
+\frac{\partial \sigma_q^2}{\partial y_k} = 0\\
+\Rightarrow y_{k, opt} = \frac{\int_{x_{k, opt}}^{x_{k+1, opt}}xp(x)\mathrm dx}{\int_{x_{k, opt}}^{x_{k+1, opt}}p(x)\mathrm dx}
+$$</div>
+
+<p>对于均匀分布，质心即中点（对于可导的概率分布，当分层很密的时候同样成立）</p>
+<div>$$
+ y_{k, opt} = \frac{\int_{x_{k, opt}}^{x_{k+1, opt}}xp(x)\mathrm dx}{\int_{x_{k, opt}}^{x_{k+1, opt}}p(x)\mathrm dx} = \frac{1}{2}(x_{k, opt} + x_{k + 1, opt})
+$$</div>
+
+<p>结合</p>
+<div>$$
+x_{k, opt} = \frac{1}{2}(y_{k, opt} + y_{k - 1, opt})
+$$</div>
+
+<p>可得均匀分布的最佳量化是区间等分，中点重建</p>
+<h4 id="工程用量化"><a href="#工程用量化" class="headerlink" title="工程用量化"></a>工程用量化</h4><p><img src="/../images/%E9%80%9A%E7%BD%91/2_4.jpg" loading="lazy"></p>
+<h4 id="语音信号的量化"><a href="#语音信号的量化" class="headerlink" title="语音信号的量化"></a>语音信号的量化</h4><p>$[-V, V]$ 内均匀量化的缺陷：</p>
+<ul>
+<li>最适合 $[-V, V]$ 之间的有限分布</li>
+<li>语音信号呈拉普拉斯分布，特点是：<ul>
+<li>信号功率小</li>
+<li>动态范围大（长拖尾）</li>
+</ul>
+</li>
+<li>如果采用均匀量化<ul>
+<li>较大的V：增大[-V，V]内的量化噪声</li>
+<li>较小的V：增大过载噪声</li>
+</ul>
+</li>
+</ul>
+<p>解决思路1：非均匀量化</p>
+<p><strong>语音信号的非均匀量化</strong></p>
+<p>均匀量化的问题</p>
+<ul>
+<li>对具有不同“概率权重”的区间“一视同仁”</li>
+<li>没有考虑概率密度对于量化噪声的影响</li>
+</ul>
+<p>解决方案</p>
+<ul>
+<li>对于信号经常出现的区域，使用较细的颗粒度进行量化<ul>
+<li>信号经常落入这个区域，减小该区域的量化噪声损失</li>
+</ul>
+</li>
+<li>对于信号不经常出现的区域，使用较粗的颗粒度进行量化<ul>
+<li>信号不经常落入这个区域，量化噪声稍大不会影响大局</li>
+</ul>
+</li>
+</ul>
+<p>采用取对数后均匀量化的方法：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_5.jpg" loading="lazy"></p>
+<p>语音信号的瞬时压扩：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_6.jpg" loading="lazy"></p>
+<p><strong>对数量化</strong></p>
+<ul>
+<li>正常量化信噪比与信号的分布无关</li>
+<li>过载导致的噪声与信号的分布有关！</li>
+</ul>
+<p>记 $\Delta_k$为对数化之前的量化区间, $\Delta_k^\prime &#x3D; \Delta$ 为对数化之后的量化区间</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_9.jpg" loading="lazy"></p>
+<p><strong>实用的对数量化</strong></p>
+<p>实际工程中，采用另外两个函数（线性放缩，更容易实现）：</p>
+<ul>
+<li>A律（欧洲提出，我国采用）</li>
+</ul>
+<div>$$
+f(x) = \begin{cases}
+    \frac{Ax}{1 + \ln A}, 0 \le x \le \frac{1}{A}\\
+    \frac{1 + \ln Ax}{1 + \ln A}, \frac{1}{A} \le x \le 1\\
+\end{cases}
+$$</div>
+
+<ul>
+<li><p>ITU G.712建议中取A＝87.6</p>
+</li>
+<li><p>小信号时，信噪比增加了24dB</p>
+</li>
+<li><p>μ律（美国提出）</p>
+</li>
+</ul>
+<div>$$
+f(x) = \frac{\ln (1 + \mu x)}{\ln (1 + \mu)}, 0 \le x \le 1
+$$</div>
+
+
+<ul>
+<li>ITU G.712建议中取μ＝255</li>
+<li>小信号时，信噪比增加了33.5dB</li>
+</ul>
+<p><strong>脉冲编码调制(PCM)</strong></p>
+<ul>
+<li>语音信号的实际压缩编码方式</li>
+<li>包括两个主要步骤</li>
+<li>抽样：$f_s &#x3D; 8000Hz$</li>
+<li>量化与编码：使用近似对数压扩，每个抽样量化为8位</li>
+<li>PCM的输出码率为64kbps</li>
+</ul>
+<p><strong>该码率与其推导过程十分重要</strong></p>
+<p><strong>PCM编码协议</strong></p>
+<p>基本思想</p>
+<ul>
+<li>用13折线近似A律</li>
+<li>用15折线近似μ律</li>
+</ul>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_7.jpg" loading="lazy"></p>
+<p>码字结构：</p>
+<div>$$
+\mathop{M_1}\limits_{极性码} \quad \underbrace{M_2 \quad M_3 \quad M_4}_{段落码}\quad \underbrace{M_5 \quad M_6\quad M_7 \quad M_8}_{电平码} \quad 
+$$</div>
+
+<p><img src="/../images/%E9%80%9A%E7%BD%91/2_8.jpg" loading="lazy"></p>
+<p>例：</p>
+<p>1250的输出：1 110 0011</p>
+<p>接收端解码： 1024 + 128 + 64 + 32 &#x3D; 1248</p>
+<h2 id="数字基带传输"><a href="#数字基带传输" class="headerlink" title="数字基带传输"></a>数字基带传输</h2><h3 id="符号映射"><a href="#符号映射" class="headerlink" title="符号映射"></a>符号映射</h3><p><strong>符号集合</strong></p>
+<p>$M &#x3D; |\mathcal{A}|$ 为符号集合 $\mathcal{A}$ 的符号数量。</p>
+<p><strong>bit 承载量</strong><br>每个符号最多可对应 $r &#x3D; \log_2|\mathcal{A}|$ 个 bit，称为集合的 bit 承载量</p>
+<p>数字通信的典型符号：</p>
+<ul>
+<li>ASK</li>
+<li>PAM</li>
+<li>PSK</li>
+<li>QAM</li>
+</ul>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/3_1.jpg" loading="lazy"></p>
+<p><strong>邻位最小差错映射：Grey 码</strong></p>
+<p>相邻符号对应的 bit 串仅有一位差异</p>
+<p><strong>符号周期（Symbol Period）</strong></p>
+<ul>
+<li>传输一个符号所需的平均时间</li>
+<li>$T_s$</li>
+</ul>
+<p>通信速率：</p>
+<ul>
+<li>符号速率：$R_s &#x3D; \frac{1}{T_s}$</li>
+<li>Bit 速率： $R_b &#x3D; R_s \log_2 M &#x3D; \frac{1}{T_s}\log_2 M$</li>
+</ul>
+<h3 id="数字调制"><a href="#数字调制" class="headerlink" title="数字调制"></a>数字调制</h3><p>基带调制：将时间上离散的符号，加载到时间上形成连续的波形</p>
+<p>通信信号具有带宽受限特性，因为：</p>
+<ul>
+<li>自然原因：各类通信线路，如双绞线，同轴电缆，射频功放等均对通过的频率有一定限制</li>
+<li>人为原因：多用户频谱共享通信，如蜂窝无线系统，需约束每路信号的带宽，以免相互干扰</li>
+</ul>
+<p>如何产生带限信号？</p>
+<p>产生一个信号 $s(t) &#x3D;\sum\limits_{k&#x3D;-\infty}^{\infty}a_kg(t- k T_s)$，$g(t) &#x3D; \frac{\sin 2\pi Wt}{2\pi Wt}$是个带限信号。</p>
+<div>$$
+G(f) = \begin{cases}
+    1, |f| \le W,\\
+    0, |f| \gt W
+\end{cases}
+$$</div>
+
+<p>让间隔 $T_s$ 的冲击 $a_k\delta(t - kT_s)$ 依次通过冲击响应为 $g(t)$ 的低通滤波器</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/3_2.jpg" loading="lazy"></p>
+<h3 id="Nyquist-准则：无ISI条件"><a href="#Nyquist-准则：无ISI条件" class="headerlink" title="Nyquist 准则：无ISI条件"></a>Nyquist 准则：无ISI条件</h3><p><strong>符号间串扰（Inter Symbol Interference, ISI）</strong></p>
+<p>对 $s(t)$ 采样：</p>
+<div>$$
+s(nT_s) = a_ng(0) + \underbrace{\sum\limits_{k=-\infty, k\ne n}^{\infty}a_kg\big((n - k)T_s\big)}_{\text{ISI}}
+$$</div>
+
+<p>怎么让 ISI 为0？</p>
+<p><strong>眼图：观察符号间串扰</strong></p>
+<p>眼图（Eye Pattern）是直观察看数字基带传输性能的有效方法，用一个示波器</p>
+<div>$$
+垂直输入 \xrightarrow{接} 匹配滤波器的输出\\
+水平扫描速度 \xrightarrow{设为} 𝑅_𝑠的整数倍
+$$</div>
+
+<p><img src="/../images/%E9%80%9A%E7%BD%91/3_3.jpg" alt="alt" loading="lazy"></p>
+<p>眼皮的厚度表示 ISI 的失真，眼睛的张开程度表示噪声容限。</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/3_4.jpg" alt="alt" loading="lazy"></p>
+<p>消除 ISI 对带限脉冲的要求</p>
+<p>时域特征：</p>
+<div>$$
+\left.\begin{align*}
+    g(0) &= 1\\
+    \sum\limits_{k=-\infty, k\ne n}^{\infty}a_kg\big((n - k)T_s\big) &= 0
+\end{align*}\right\rbrace \Leftrightarrow \sum\limits_{k=-\infty, k\ne n}^{\infty}a_{n - k}g\big(kT_s\big) = 0\\
+\Leftrightarrow g(kT_s) = \begin{cases}
+    1, k = 0,\\
+    0, k \ne 0
+\end{cases} \\
+\lrArr g(t)\sum\limits_{n=-\infty}^{\infty}\delta(t + nT_s) = \delta(t)
+$$</div>
+
+<p>从频域提取特征：</p>
+<div>$$
+g(t)\sum\limits_{n=-\infty}^{\infty}\delta(t + nT_s) = \delta(t) \lrArr G(f) *\sum\limits_{n=-\infty}^{\infty}\frac{1}{T_s}\delta(f + \frac{n}{T_s}) = 1\\
+\lrArr \sum\limits_{n=-\infty}^{\infty}G\left(f + \frac{n}{T_s}\right) = T_s
+$$</div>
+
+<p><strong>Nyquist 准则</strong></p>
+<p>将带限脉冲的频谱分别平移 $n&#x2F;T_s$（ $n$ 为任意整数）若其叠加的结果对任意频率恒为定值，则 ISI 为0</p>
+<h3 id="通信速率与带宽效率"><a href="#通信速率与带宽效率" class="headerlink" title="通信速率与带宽效率"></a>通信速率与带宽效率</h3><p><strong>理解 Nyquist 准则</strong></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/3_5.jpg" alt="alt" loading="lazy"></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/3_6.jpg" alt="alt" loading="lazy"></p>
+<ul>
+<li>最大符号速率受制于带宽 $R_s &#x3D; \frac{1}{T_s} \le 2W$</li>
+<li>低通发送滤波器应该满足残留对称条件</li>
+</ul>
+<p><strong>通信速率与带宽效率</strong></p>
+<div>$$
+R_s \le 2W\\
+R_b = R_s \log_2 M\\
+\Rightarrow R_b \le 2W \log_2 M
+$$</div>
+
+<ul>
+<li>针对给定形式的低通滤波器，可写出$R_s$与$W$之间的线性函数关系</li>
+</ul>
+<p><strong>信号功率与带宽效率</strong></p>
+<p>设单个符号的能量为 $E_s$</p>
+<p>则信号功率为单位时间内的能量</p>
+<div>$$
+P = \frac{E_s}{T_s} = E_sR_s
+$$</div>
+
+<p>无冗余编码时，一个比特的能量为$𝐸_𝑏$，则</p>
+<div>$$
+P = \frac{E_b\log_2 M}{T_s} = E_bR_b
+$$</div>
+
+<p>带宽效率的定义：单位带宽承载的速率</p>
+<div>$$
+\eta = \frac{R_b}{W} \le 2\log_2 M
+$$</div>
+
+
+<ul>
+<li>为什么不能无限制扩大符号集合？</li>
+</ul>
+<p>过大的符号集合对信噪比有更高的要求，噪声容易干扰符号的分辨</p>
+<h3 id="升余弦滤波器"><a href="#升余弦滤波器" class="headerlink" title="升余弦滤波器"></a>升余弦滤波器</h3><p><strong>升余弦滤波器</strong></p>
+<p>由于理想滤波器难以实现，所以常用满足残留对称条件的非理想低通生成基带脉冲，最常用的就是升余弦滤波器</p>
+<p>Raised Cosine(要记住)</p>
+<div>$$
+H(f) = \begin{cases}
+    T_s, &0 \le |f| \lt \frac{1 - \alpha}{2 T_s}\\
+    \frac{T_s}{2}\left\lbrace1 + \cos \left[\frac{\pi T_s}{\alpha}\left(|f| - \frac{1 - \alpha}{2T_s}\right)\right]\right\rbrace, &\frac{1 - \alpha}{2 T_s} \le |f| \le \frac{1 + \alpha}{2 T_s}\\
+    0, & |f| \gt \frac{1 + \alpha}{2 T_s}
+\end{cases}
+$$</div>
+
+<p>$\alpha &#x3D; 2WT_s - 1 \in [0, 1]$ 称为滚降系数，越小坡越陡，越大坡越缓。</p>
+<p>时域冲激响应：</p>
+<div>$$
+h(t) = \text{Sa}(\pi t/ T_s)\frac{\cos (\alpha\pi t/ T_s)}{1 - 4(\alpha t/T_s)^2}
+$$</div>
+
+<p>升余弦滤波器的性质：</p>
+<p><font color="red">常考性质：</font></p>
+<div>$$
+W = \frac{\alpha + 1}{2T_s} = \frac{\alpha + 1}{2}R_s \Rightarrow R_s/2 \le W \le R_s\\
+R_s = \frac{1}{T_s} = \frac{2}{\alpha + 1} W \Rightarrow W \le R_s \le 2W
+$$</div>
+
+<p>带宽效率</p>
+<div>$$
+\eta_b = \frac{R_s\log_2|\mathcal{S}|}{W} \le 2\log_2|\mathcal S|
+$$</div>
+
+<p>升余弦滤波器的带宽效率</p>
+<div>$$
+\eta_b = \frac{2\log_2|\mathcal{S}|}{\alpha + 1}
+$$</div>
+
+<p>PCM 语言信号速率 64kbps：8 bit 采样，8 bit 量化，8*8 &#x3D; 64.</p>
+<p>例题一：传送一路PCM语音信号</p>
+<ul>
+<li>若带宽限制为40kHz，采用二元码，则可用滚降系数范围<br>是多少？</li>
+<li>若采用四元码，最多需要多少带宽？</li>
+</ul>
+<p>解：PCM语音信号是64kbps</p>
+<ul>
+<li>采用二元码，则所需符号速率为 $R_s &#x3D; R_b &#x3D; 64kbps$</li>
+</ul>
+<ul>
+<li><p>则 $\frac{\alpha + 1}{2}64 \le 40$, $0\le \alpha \le 0.25$</p>
+</li>
+<li><p>采用四元码：$R_s &#x3D; \frac{R_b}{\log_24} &#x3D; 32kbps$</p>
+</li>
+<li><p>$W \le R_s &#x3D; 32kHz$</p>
+</li>
+</ul>
+<p>例题二：若传送一路信号$𝑅_𝑏$ &#x3D; 112kbps，信道带宽𝑊 &#x3D; 30𝑘bps,<br>求𝑀和𝛼</p>
+<div>$$
+\frac{\log_2M}{\alpha} = \frac{R_b}{2W} = \frac{28}{15} \in [1.5, 2]\\
+$$</div>
+
+<p>认定 $\log_2M &#x3D; k$ 为整数，则$k &#x3D; 2 或 3$。对应可解：</p>
+<div>$$
+\alpha_1 = \frac{1}{14}, M_1 = 4\\
+\alpha_2 = \frac{17}{28}, M_2 = 8
+$$</div>
+
+<h3 id="通信信号的功率谱计算"><a href="#通信信号的功率谱计算" class="headerlink" title="通信信号的功率谱计算"></a>通信信号的功率谱计算</h3><p>功率谱刻画了随机过程的功率在频域上的分布。</p>
+<ul>
+<li>对于宽平稳过程（自相关只与时差有关），功率谱易于从 $R(\tau)$ 的傅里叶变换得到，即$S(f) &#x3D; \mathcal{F}[R(\tau)]$</li>
+<li>但是，通信信号一般不是宽平稳过程，而是周期平稳过程：$R(t_1, t_2) &#x3D; R(t_1 + kT_s, t_2 + kT_s)$</li>
+</ul>
+<p>定义 </p>
+<div>$$
+\overline{R}(\tau) = \frac{1}{T_s} \int_{0}^{T_s}R(t+\tau, t)\mathrm dt
+$$</div>
+
+<p>则其功率谱</p>
+<div>$$
+S(f) = \mathcal{F}[\overline{R}(\tau)]
+$$</div>
+
+<p>若输入信号的功率谱 $S_{AI}(f)$，输出为$S_A(f)$，则对于宽平稳和周期平稳信号均有卷积关系：</p>
+<div>$$
+S_A(f) = S_{AI}(f)|H(f)|^2
+$$</div>
+
+<p>证明可以采用样本统计法：假设符号序列的长度为 $2N - 1$.</p>
+<div>$$
+s_{AI}(t) =\sum\limits_{k=-N}^{N}a_k\delta(t - k T_s)\\
+s_{A}(t) =\sum\limits_{k=-N}^{N}a_kh(t - k T_s)\\
+\hat s_{AI}(f) =\sum\limits_{k=-N}^{N}\exp(-j2k\pi T_sf)\\
+\hat s_{A}(f) = H(f)\sum\limits_{k=-N}^{N}\exp(-j2k\pi T_sf)
+$$</div>
+
+<p>功率谱的定义：</p>
+<div>$$
+S(f) = \lim\limits_{N\rightarrow\infty} \frac{E(|\hat s(f)|^2)}{(2N + 1)T_s}
+$$</div>
+
+<p>可以验证 $S_A(f) &#x3D; S_{AI}(f)|H(f)|^2$</p>
+<p>针对样本统计法，可以算出 $E(|\cdot|^2)$的表达式：</p>
+<div>$$
+S_A(f) = \frac{|H(f)|^2}{T_s}\sum\limits_{n=-\infty}^{\infty}R_a[n] \exp (-j2n\pi T_s f)
+$$</div>
+
+<p>这里$R_a[m]$ 是输入符号的自相关。</p>
+<p>先考虑无记忆调制，符号之间相互独立：</p>
+<div>$$
+R_a[n] = E[a_ia_{i+n}] = \begin{cases}
+    \sigma_a^2+m_a^2 &n=0\\
+    m_a^2 &n\ne 0
+\end{cases}
+$$</div>
+
+<p>其中，$m_a &#x3D; E[a_n]$，$\sigma_a^2 &#x3D; E[a_n^2] - m_a^2$</p>
+<p>于是，重写累加部分：</p>
+<div>$$
+\begin{align*}
+    &\sum\limits_{n=-\infty}^{\infty}R_a[n] \exp (-j2n\pi T_s f) \\
+    =& \sigma_a^2 + m_a^2\sum\limits_{n=-\infty}^{\infty}\exp\big[-jn(2\pi T_s)f\big]\\
+    =& \sigma_a^2 + \frac{1}{T_s}\sum\limits_{n=-\infty}^{\infty}\delta\bigg(f - \frac{n}{T_s}\bigg)
+\end{align*}
+$$</div>
+
+<p>从而</p>
+<div>$$
+S_A(f) = \underbrace{\frac{\sigma_a^2}{T_s}|H(f)|^2}_{连续谱} + \underbrace{\frac{m_a^2}{T_s^2}\sum\limits_{n=-\infty}^{\infty}\bigg|H\bigg(\frac{n}{T_s}\bigg)\bigg|^2 \delta\bigg(f - \frac{n}{T_s}\bigg)}_{线谱}
+$$</div>
+
+<p>此式应用的两个条件：</p>
+<ul>
+<li>无记忆</li>
+<li>不同符号波形一致</li>
+</ul>
+<p>线谱：可用于定时恢复。方便恢复时钟分量。</p>
+<p><strong>任意波形调制</strong></p>
+<p>之前将 $a_i$ 映射为 $a_ih(t)$，可以推广：</p>
+<div>$$
+\forall a_i \ne a_j, s_i(t) \ne s_j(t)
+$$</div>
+
+<p>有时候由于信号功率需要保持稳定（恒包络调制），对不同符号采用不同波形，而不是采用变化幅度的信号。</p>
+<p>若任意波形二元调制信号 $s(t) &#x3D;\sum\limits_{k&#x3D;-\infty}^{\infty}g_k(t)$</p>
+<div>$$
+g_k(t) = \begin{cases}
+    s_1(t - kT_s), w.p.\ p\\
+    s_2(t - kT_s), w.p.\ \bar p = 1 - p
+\end{cases}
+$$</div>
+
+<p>(w. p. &#x3D; with probability)</p>
+<p>分解为直流分量和交流分量：</p>
+<div>$$
+s(t) = \underbrace{E(s(t))}_{DC,记为v(t)} + \underbrace{s(t) - E(s(t))}_{AC, 记q(t)}
+$$</div>
+
+<p>则</p>
+<div>$$
+v(t) = \sum\limits_{k=-\infty}^{\infty}[ps_1(t - kT_s) + \bar p s_2(t - kT_s)]
+$$</div>
+
+<p>这是一个周期为$𝑇_𝑠$的确定性周期信号，功率谱由傅里叶展开计算</p>
+<div>$$
+S_v(f) =\sum\limits_{n=-\infty}^{\infty}|D_n|^2\delta(f - \frac{n}{T_s})\\
+D_n = \frac{1}{T_s}\int_{-T_s/2}^{T_s/2}v(t)e^{-j2\pi t/T_s}\mathrm dt = \frac{1}{T_s}\Big(p\hat s_1\big(\frac{n}{T_s}\big) + \bar p \hat s_2(\frac{n}{T_s}\big)\Big)
+$$</div>
+
+<div>$$
+S_v(f) = \frac{1}{T_s}\sum\limits_{n=-\infty}^{\infty}\bigg|\Big(p\hat s_1\big(\frac{n}{T_s}\big) + \bar p \hat s_2(\frac{n}{T_s}\big)\Big)\bigg|^2 \delta(f - \frac{n}{T_s})
+$$</div>
+
+<p>用样本统计法计算 $S_q(f)$：</p>
+<div>$$
+\begin{align*}
+    S_q(f) =& \lim\limits_{N\rightarrow\infty} \frac{E(|\hat q_N(f)|^2)}{(2N + 1)T_s}\\
+    =& \frac{p\bar p}{T_s}|\hat s_1 (f) - \hat s_2(f)|^2
+\end{align*}
+$$</div>
+
+<div>$$
+S(f) = \frac{p\bar p}{T_s}|\hat s_1 (f) - \hat s_2(f)|^2 + \frac{1}{T_s}\sum\limits_{n=-\infty}^{\infty}\bigg|\Big(p\hat s_1\big(\frac{n}{T_s}\big) + \bar p \hat s_2(\frac{n}{T_s}\big)\Big)\bigg|^2 \delta(f - \frac{n}{T_s})
+$$</div>
+
+<h3 id="基带解调"><a href="#基带解调" class="headerlink" title="基带解调"></a>基带解调</h3><p>最佳接收用于在给定发送功率下提高信噪比</p>
+<p>最佳判决用于在给定信噪比下降低误码率</p>
+<h4 id="基带传输的噪声模型"><a href="#基带传输的噪声模型" class="headerlink" title="基带传输的噪声模型"></a>基带传输的噪声模型</h4><p><img src="/../images/%E9%80%9A%E7%BD%91/4_1.jpg" alt="alt" loading="lazy"></p>
+<p>如何选择解调方案？</p>
+<p><strong>方案一：直接抽样</strong></p>
+<p>在信号的峰值位置 $t &#x3D; kT_s$ 抽样最好。</p>
+<p>但噪声方差满足：</p>
+<div>$$
+\sigma^2 = E \lbrace n^2(t_1) \rbrace = R(0) = \frac{n_0}{2}\delta(0) \rightarrow \infty
+$$</div>
+
+<p>（理想的白噪声信号具有无穷大功率）</p>
+<p>真实的噪声环境下，接收信号质量随着噪声信号功率的增加而变差。如果信号的峰值处恰好噪声很大，则产生严重失真。</p>
+<p><strong>方案二：能量累积</strong></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/4_2.jpg" alt="alt" loading="lazy"></p>
+<p>噪声信号仍为高斯随机变量：</p>
+<div>$$
+n = \int_{0}^{T_s}n(t)\mathrm dt
+$$</div>
+
+<p>噪声方差：</p>
+<div>$$
+\sigma^2 = E\lbrace n^2 \rbrace = \int_{0}^{T_s}\int_{0}^{T_s}\frac{n_0}{2}\delta(t_1 - t_2)\mathrm dt_1\mathrm dt_2 = \frac{n_0T_s}{2}
+$$</div>
+
+<p>信噪比：</p>
+<div>$$
+\frac{S}{N} = \frac{\left (\int_{0}^{T_s}a_i h(t)\mathrm dt \right)^2}{T_sn_0/2}
+$$</div>
+
+<p>直接积分不是最好的方案。</p>
+<p><strong>方案三：匹配滤波</strong></p>
+<p>匹配滤波的基本思想就是对接收值进行加权线性累加，从而最大化抽样时刻信号功率与噪声功率的比值。</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/4_3.jpg" alt="alt" loading="lazy"></p>
+<p>相关器为 $g(t)$。假设信号为实信号。复信号有类似结论。</p>
+<div>$$
+P_S = \left |\int_{0}^{T_s}a_ih(t)g(t)\mathrm dt  \right|^2\\
+P_N = \mathbf E \left [ \left | \int_{0}^{T_s}n(t)g(t)\mathrm dt \right|^2 \right] = \frac{1}{2}n_0 \int_{0}^{T_s}g^2(t)\mathrm dt
+$$</div>
+
+<p>利用 Cauchy-Schwartz 不等式：</p>
+<div>$$
+\frac{\left |\int_{0}^{T_s}a_ih(t)g(t)\mathrm dt  \right|^2}{\frac{1}{2}n_0 \int_{0}^{T_s}g^2(t)\mathrm dt} \le \frac{2}{n_0}\int_{0}^{T_s}a_i^2h^2(t)\mathrm dt
+$$</div>
+
+<p>等号成立当且仅当 $g(t) &#x3D; kh(t)$。</p>
+<p>若为复信号，则需要</p>
+<div>$$
+g(t) = h^*(t)
+$$</div>
+
+<p>如何把相关器写成滤波器形式？</p>
+<p>（滤波&#x3D;卷积，相关和卷积就是差一个反褶的关系）</p>
+<div>$$
+y(t) = [a_ih(t) + n(t)] * h_m(t) = \int_{-\infty}^{\infty}[a_ih(\tau) + n(\tau)]h_m(t - \tau)\mathrm d\tau
+$$</div>
+
+<p>考虑因果系统，一般将符号波形的最高点设置为 $t &#x3D; T_s$：</p>
+<div>$$
+y(T_s) = \int_{-\infty}^{\infty}[a_ih(\tau) + n(\tau)]h_m(T_s - \tau)\mathrm d\tau
+$$</div>
+
+<p>与相关器比较得到匹配滤波器的表达式：</p>
+<div>$$
+h_m(t) = h(T_s - t)
+$$</div>
+
+<p><img src="/../images/%E9%80%9A%E7%BD%91/4_4.jpg" alt="alt" loading="lazy"></p>
+<p>图中的“开关”是抽样。</p>
+<p>匹配滤波的频域解释：</p>
+<div>$$
+P_S = \left | \int_{-\infty}^{\infty}H(f)H_m(f)e^{j2\pi fT_s}\mathrm df \right|^2\\
+P_N = \frac{n_0}{2}\int_{-\infty}^{\infty}|H_m(f)|^2\mathrm df\\
+\frac{S}{N} = \frac{\left | \int_{-\infty}^{\infty}H(f)H_m(f)e^{j2\pi fT_s}\mathrm df \right|^2}{\frac{n_0}{2}\int_{-\infty}^{\infty}|H_m(f)|^2\mathrm df} = \frac{2}{n_0}\int_{-\infty}^{\infty}|H(f)|^2\mathrm df
+$$</div>
+
+<p>Cauchy-Schwartz</p>
+<div>$$
+H_m(f) = H^*(f)e^{-j2\pi fT_s}
+$$</div>
+
+<p><strong>匹配滤波的增益</strong></p>
+<p>数字传输的优势：数字传输中，基带脉冲h(t)是给定的，在整个码元周期内可以相干累加，而同时让噪声在整个周期内自我抵消</p>
+<div>$$
+\left (\frac{S}{N}  \right)_{\text{match}} \bigg/ \left (\frac{S}{N}  \right)_{\text{w.o.match}} = \frac{T_s \int_{0}^{T_s}h^2(t)\mathrm dt}{\left ( \int_{0}^{T_s}h(t)\mathrm dt \right)^2} \ge \frac{T_s \int_{0}^{T_s}h^2(t)\mathrm dt}{\int_{0}^{T_s}1\mathrm dt\int_{0}^{T_s}h^2(t)\mathrm dt} = 1
+$$</div>
+
+<p>匹配滤波的信噪比</p>
+<div>$$
+\frac{S}{N} = E \left [ \frac{2}{n_0} \int_{0}^{T_s}a_i^2h^2(t)\mathrm dt \right] = \frac{\int_{0}^{T_s}E[a_i^2]h^2(t)\mathrm dt}{n_0/2} = \frac{E_s}{n_0 / 2}
+$$</div>
+
+<p>分子——传送一个符号的能量</p>
+<p>分母——噪声谱密度，单位是能量的单位</p>
+<p>以上采用的是等效基带模型。采用实际物理波形模型：</p>
+<div>$$
+S = \frac{E_s}{T_s} = E_sR_s\\
+N = Wn_0\\
+\frac{S}{N} = \frac{E_s}{n_0}\frac{R_s}{W}\\
+$$</div>
+
+<p>两个模型推得的信噪比表达式不同，差异在于等效基带模型使用了匹配滤波器，获得了最优的信噪比：</p>
+<div>$$
+\frac{R_s}{W} \le 2 \Rightarrow\left (\frac{S}{N}  \right)_{\text{max}} = \frac{E_s}{n_0/2}
+$$</div>
+
+<p>从实际物理波形模型来看，上式取等的条件应该是基带脉冲采用的是理想低通（Sa 函数），如果用升余弦滤波</p>
+<div>$$
+\frac{R_s}{W} = \frac{2}{\alpha + 1} \Rightarrow \left(\frac{S}{N}\right)_{\text{max}} = \frac{E_s}{n_0/2}\frac{2}{\alpha + 1}
+$$</div>
+
+<p>但是，在等效基带模型中，我们考虑的是任意脉冲 $h(t)$，并没有要求它的形状，这两个模型在最优信噪比的产生条件上出现了矛盾？</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/4_5.jpg" alt="alt" loading="lazy"></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/4_6.jpg" alt="alt" loading="lazy"></p>
+<h4 id="传送一串符号"><a href="#传送一串符号" class="headerlink" title="传送一串符号"></a>传送一串符号</h4><p><img src="/../images/%E9%80%9A%E7%BD%91/4_7.jpg" alt="alt" loading="lazy"></p>
+<p>无 ISI 条件：</p>
+<div>$$
+h(t)*h_m(t) = h(t) * h(T_s - t)\\
+H(f)H_m(f) = H(f)H^*(f)e^{-j2\pi fT_s} = \left | H(f) \right|^2 e^{-j2\pi fT_s} 
+$$</div>
+
+<p>从而有根号奈奎斯特条件：</p>
+<div>$$
+H(f) = \sqrt{H_{N-I}(f)}e^{-j2\pi fT_s} 
+H_m(f) = \sqrt{H_{N-I}^*(f)}e^{-j2\pi fT_s} 
+$$</div>
+
+<p>这就要求发送和接受滤波器要满足如下要求：</p>
+<div>$$
+h_T(t) = h_{\sqrt{N}}\left ( t - \frac{T_s}{2} \right)\\
+h_R(t) = h_{\sqrt{N}}\left (\frac{T_s}{2}  - t\right) = h_T(T_s - t)
+$$</div>
+
+<h4 id="符号差错模型："><a href="#符号差错模型：" class="headerlink" title="符号差错模型："></a>符号差错模型：</h4><p><img src="/../images/%E9%80%9A%E7%BD%91/4_8.jpg" alt="alt" loading="lazy"></p>
+<div>$$
+y_i = \bar h a_i + n_i
+$$</div>
+
+<p><img src="/../images/%E9%80%9A%E7%BD%91/4_9.jpg" alt="alt" loading="lazy"></p>
+<h3 id="判决与差错"><a href="#判决与差错" class="headerlink" title="判决与差错"></a>判决与差错</h3><h3 id="最佳判决"><a href="#最佳判决" class="headerlink" title="最佳判决"></a>最佳判决</h3><p><img src="/../images/%E9%80%9A%E7%BD%91/5_2.jpg" alt="ima" loading="lazy"></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_1.jpg" alt="ima" loading="lazy"></p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_3.jpg" alt="alt" loading="lazy"></p>
+<p>多元符号的最佳判决</p>
+<div>$$
+a^* = \argmax_{a\in U} f(y|a)f(a)\\
+f(a) = \frac{1}{M}\\
+a^* = \argmax_{a\in U} f(y|a)\\
+$$</div>
+
+<p>$y &#x3D; a + n$ 的条件分布是</p>
+<div>$$
+f(y|a) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y - a)^2}{2\sigma^2}\right)
+$$</div>
+
+<p>从而得到</p>
+<div>$$
+a^* = \argmin_{a\in U} |y - a|
+$$</div>
+
+<p>选择一个符号，让它到接收符号y距离最小，以此作为判决结果！</p>
+<p>双极性码的判决门限：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_4.jpg" alt="alt" loading="lazy"></p>
+<p>单极性码的判决门限:</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_6.jpg" alt="alt" loading="lazy"></p>
+<h4 id="SER-amp-BER"><a href="#SER-amp-BER" class="headerlink" title="SER &amp; BER"></a>SER &amp; BER</h4><p>考虑二元符号</p>
+<p>发送 A 的出错概率：</p>
+<div>$$
+\int_{-\infty}^{0}f(y|a = A)\mathrm dy = \int_{A/\sigma}^{\infty}\frac{1}{\sqrt{2\pi}}\exp \left ( -\frac{t^2}{2} \right)\mathrm dt = Q \left ( \frac{A}{\sigma} \right)
+$$</div>
+
+<p>发送 -A 的出错概率：</p>
+<div>$$
+\int_{-\infty}^{0}f(y|a = A)\mathrm dy = Q \left ( \frac{A}{\sigma} \right)
+$$</div>
+
+<p>从而平均符号差错概率：</p>
+<div>$$
+P_s = \frac{1}{2}\left (Q \left ( \frac{A}{\sigma} \right) + Q \left ( \frac{A}{\sigma} \right)  \right) = Q \left ( \frac{A}{\sigma} \right)
+$$</div>
+
+<p>称为符号差错概率(Symbor Error Probability, SEP)，其统计结果称为误符号率（Symbol Error Ratio, SER）</p>
+<p>由于Q是减函数，所以误符号率随A增大而减小，随噪声标准差增大而增大</p>
+<p>误符号率不关心具体的A或标准差，而是由其比值所决定</p>
+<p>对于多元而言：</p>
+<p>对于任意符号集合，只要某判决门限与符号距离为A，则由于超出该判决门限而差错的条件概率就是：</p>
+<div>$$
+Q \left ( \frac{A}{\sigma} \right)
+$$</div>
+
+<p>计算信噪比：</p>
+<p>信号平均功率： $S &#x3D; \frac{1}{M}\sum\limits_{i&#x3D;1}^{M}|a_i|^2$</p>
+<p>信号峰值功率： $S_p &#x3D; \max_{a_i \in U} |a_i|^2$</p>
+<p>噪声功率： $N &#x3D; \sigma^2$</p>
+<p>对于双极性二元符号，平均功率为 $S &#x3D; A^2$</p>
+<p>从而信噪比为 </p>
+<div>$$
+\frac{S}{N} = \frac{A^2}{\sigma^2}
+$$</div>
+
+<p>利用等效关系得到误符号率和信噪比的关系</p>
+<div>$$
+P_s = Q \left ( \frac{A}{\sigma} \right) = Q \left ( \sqrt{\frac{S}{N}} \right)
+$$</div>
+
+<p>更一般的二元码 SER</p>
+<div>$$
+U = \lbrace D-A, D+A \rbrace\\
+\zeta = \frac{D}{A}\\
+P_s = Q(\sqrt{\frac{S}{(1 + \zeta^2)N}})
+$$</div>
+
+<p>更一般的 M 元码 SER</p>
+<p>符号集合为 $\lbrace D - (M - 1)A, \dots, D + (M  - 1)A \rbrace$</p>
+<div>$$
+\zeta = \frac{D}{A\sqrt{\frac{M^2 - 1}{3}}}\\
+P_s = \frac{2(M - 1)}{M}Q \left ( \sqrt{\frac{3}{M^2 - 1}\frac{S}{(1 + \zeta^2)N}} \right)
+$$</div>
+
+<p>双极性 M 元码的 SER (掌握计算方法)</p>
+<div>$$
+P_s = \frac{2(M - 1)}{M } Q \left ( \sqrt{\frac{3}{M^2 - 1} \frac{S}{N}}\right)
+$$</div>
+
+<p>无论M为奇数还是偶数，结果都是一样的！</p>
+<p>单极性 M 元码的 SER (掌握计算方法)</p>
+<div>$$
+P_s = \frac{2(M - 1)}{M } Q \left ( \sqrt{\frac{3}{2(M - 1)(2M - 1)} \frac{S}{N}}\right)
+$$</div>
+
+
+<p>要使得双极性和单极性码的 SER 相同，二者的信噪比的比值为</p>
+<div>$$
+\left ( \frac{S}{N} \right)_d \bigg / \left ( \frac{S}{N} \right)_s = \frac{M^2 - 1}{2(M - 1)(2M  - 1)} \approx \frac{1}{4}
+$$</div>
+
+<p>显然，双极性的性能更好，它对信噪比的要求是单极性的四分之一，更能忍受噪声。</p>
+<p>误比特率(Bit Error Rate, BER)：</p>
+<div>$$
+P_b \approx \frac{P_s}{\log_2M}
+$$</div>
+
+<p>注意这是近似结果，且有成立条件，只对二元码是严格成立的！</p>
+<ul>
+<li>假设一个符号的错判导致 1bit 的错误，假设成立的条件：<ul>
+<li>Grey 码映射</li>
+<li>信噪比不过于小</li>
+</ul>
+</li>
+</ul>
+<p>各类符号集合的 BER</p>
+<p>双极性二元码</p>
+<div>$$
+P_b = Q \left ( \sqrt{\frac{S}{N}} \right)
+$$</div>
+
+<p>单极性二元码</p>
+<div>$$
+P_b = Q \left ( \sqrt{\frac{S}{2N}} \right)
+$$</div>
+
+<p>单极性二元码损失了 3 dB.</p>
+<p>双极性 M 元码</p>
+<div>$$
+P_b = \frac{2(M - 1)}{M\log_2 M}Q(\sqrt{\frac{3}{M^2 - 1}\frac{S}{N}})
+$$</div>
+
+<p>单极性 M 元码</p>
+<div>$$
+P_b = \frac{2(M - 1)}{M\log_2 M} Q \left ( \sqrt{\frac{3}{2(M - 1)(2M - 1)} \frac{S}{N}}\right)
+$$</div>
+
+<p>由于</p>
+<div>$$
+\frac{S}{N} = 2\log_2 M\frac{E_b}{n_0}
+$$</div>
+
+<p>故可以把 SER 和 BER 用 $E_b&#x2F;n_0$ 表示：</p>
+<p>双极性二元码：</p>
+<div>$$
+P_s = Q \left ( \sqrt{\frac{2E_b}{n_0}} \right)\\
+P_b = Q \left ( \sqrt{\frac{2E_b}{n_0}} \right)
+$$</div>
+
+<p>单极性二元码：</p>
+<div>$$
+P_s = Q \left ( \sqrt{\frac{E_b}{n_0}} \right)\\
+P_b = Q \left ( \sqrt{\frac{E_b}{n_0}} \right)
+$$</div>
+
+<p>双极性 M 元码：</p>
+<div>$$
+P_s = \frac{2(M - 1)}{M}Q(\sqrt{\frac{6\log_2 M}{M^2 - 1}\frac{E_b}{n_0}})\\
+P_b = \frac{2(M - 1)}{M\log_2 M}Q(\sqrt{\frac{6\log_2 M}{M^2 - 1}\frac{E_b}{n_0}})
+$$</div>
+
+<p>单极性 M 元码：</p>
+<div>$$
+P_s = \frac{2(M - 1)}{M} Q \left ( \sqrt{\frac{3\log_2 M}{(M - 1)(2M - 1)} \frac{E_b}{n_0}}\right)\\
+P_b = \frac{2(M - 1)}{M\log_2 M} Q \left ( \sqrt{\frac{3\log_2 M}{(M - 1)(2M - 1)} \frac{E_b}{n_0}}\right)
+$$</div>
+
+<p>例子：相移键控 MPSK</p>
+<div>$$
+\begin{align*}
+    S_{MPSK}(t) =& \sum\limits_{n}^{}g(t - nT_s)A\cos(\omega_c t + \phi_n)\\
+    =& \left [\sum\limits_{n}^{}A\cos \phi_n g(t - nT_s) \right]\cos \omega_c t + \left [\sum\limits_{n}^{}A\sin \phi_n g(t - nT_s) \right]( - \sin \omega_c t)
+\end{align*}
+$$</div>
+
+<ul>
+<li>所有符号的模相同</li>
+<li>幅角在 $[0, 2\pi]$ 均匀分布</li>
+</ul>
+<p>可以用星座图表示：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_5.jpg" alt="alt" loading="lazy"></p>
+<p>根据信号的 $I, Q$ 表示</p>
+<p>计算 MPSK 的 SER:</p>
+<p>考虑星座点 $(A, 0)$</p>
+<p>接收信号的分布函数为</p>
+<div>$$
+f(a, b) - \frac{1}{2\pi \sigma_n^2}\exp \left ( -\frac{(a - A)^2 + b^2}{2\sigma_n^2} \right)
+$$</div>
+
+<p>变换到极坐标系</p>
+<div>$$
+f(\rho, \theta) = \frac{\rho}{2\pi\sigma_n^2}\exp \left ( -\frac{\rho^2 + A^2 - 2A\rho\cos\theta}{2\sigma_n^2} \right)\\
+f(\theta) = \int_{0}^{\infty}f(\rho, \theta)\mathrm d\rho = \frac{1}{2\pi}\exp \left ( -\frac{A^2}{2\sigma_n^2}\sin^2\theta \right)\int_{0}^{\infty}\rho\exp \left (-\frac{(\rho - A/\sigma_n\cos\theta)^2}{2} \right)\mathrm d\rho
+$$</div>
+
+<p>误符号率可以表示为</p>
+<div>$$
+P_{s, MPSK} = 1 - \int_{-\pi/M}^{\pi/M}f(\theta)\mathrm d\theta
+$$</div>
+
+<p>用信噪比表示：</p>
+<div>$$
+f(\theta) = \int_{0}^{\infty}f(\rho, \theta)\mathrm d\rho = \frac{1}{2\pi}\exp \left ( -\frac{S}{2N}\sin^2\theta \right)\int_{0}^{\infty}\rho\exp \left (-\frac{(\rho - \sqrt{S/N}\cos\theta)^2}{2} \right)\mathrm d\rho
+$$</div>
+
+<p>如果 $S&#x2F;N$ 很大：</p>
+<div>$$
+\begin{align*}
+    \int_{0}^{\infty}\rho\exp \left (-\frac{(\rho - \sqrt{S/N}\cos\theta)^2}{2} \right)\mathrm d\rho \approx& \int_{-\infty}^{\infty}\rho\exp \left (-\frac{(\rho - \sqrt{S/N}\cos\theta)^2}{2} \right)\mathrm d\rho\\
+    =& \sqrt{\frac{S}{N}}\cos\theta
+\end{align*}
+$$</div>
+
+<p>利用高信噪比近似：</p>
+<div>$$
+f(\theta) = \sqrt{\frac{S}{2\pi N}}\cos\theta \exp \left ( -\frac{S}{2N}\sin^2\theta \right)
+$$</div>
+
+<p>当 M 比较大时：</p>
+<div>$$
+\begin{align*}
+    P_{s, MPSK} =& 1 - \int_{-\pi/M}^{\pi/M}\sqrt{\frac{S}{2\pi N}}\cos\theta \exp \left ( -\frac{S}{2N}\sin^2\theta \right)\mathrm d\theta\\
+    \approx& \frac{2}{\sqrt{\pi}}\int_{\pi/M}^{\infty}\sqrt{\frac{S}{2N}}\cos\theta\exp \left ( -\frac{S}{2N}\sin^2\theta \right)\mathrm d\theta\\
+    =& \frac{2}{\sqrt{2\pi}}\int_{\pi/M}^{\infty}\exp \left ( -\frac{S}{2N}\sin^2\theta \right)\mathrm d\sqrt{\frac{S}{N}}\sin\theta\\
+    =& \frac{2}{\sqrt{2\pi}} \int_{\sqrt{S/N}\sin\pi/M}^{\infty}\exp \left ( -\frac{u^2}{2} \right)\mathrm du\\
+    =& 2Q \left ( \sqrt{\frac{S}{N}}\sin\frac{\pi}{M} \right)
+\end{align*}
+$$</div>
+
+<p>换算成 BER， $E_b&#x2F;n_0$</p>
+<div>$$
+P_{b, MPSK} = \frac{2}{\log_2M}Q \left ( \sqrt{2\log_2M\frac{E_b}{n_0}}\sin\frac{\pi}{M} \right)
+$$</div>
+
+<p>一个简单的方法：</p>
+<p>看起来像是先射箭后画靶。</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_7.jpg" alt="alt" loading="lazy"></p>
+<p>例子2：正交幅度调制 QAM</p>
+<p>信号表示</p>
+<div>$$
+\begin{align*}
+    S_{MQAM}(t) =& \left [\sum\limits_{n}^{}a_n g(t - nT_s) \right]\cos \omega_c t + \left [\sum\limits_{n}^{}b_n g(t - nT_s) \right]( - \sin \omega_c t)
+\end{align*}
+$$</div>
+
+<p>I,Q 两路的电平集合：</p>
+<div>$$
+a_n\in \lbrace \pm A, \dots, \pm(M - 1)A \rbrace\\
+b_n\in \lbrace \pm A, \dots, \pm(M - 1)A \rbrace\\
+$$</div>
+
+<p>QAM是一种典型的星座图，它分布于复平面的格点上，其符号的实虚部均为奇数（便于分析）</p>
+<p>解调过程：</p>
+<p>I 路信息提取：乘以同相载波 $\cos\omega_c t$，再低通滤波</p>
+<p>Q 路信息提取：乘以同相载波 $-\sin\omega_c t$，再低通滤波</p>
+<p>差错分析：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_8.jpg" alt="alt" loading="lazy"></p>
+<p>（通过后面的分析可以发现，降低误码率的关键是将符号间的最小距离最大化）</p>
+<p>计算各符号的差错概率：</p>
+<p>四个角：</p>
+<div>$$
+P_s = 1 - \left [ 1 - Q \left ( \frac{A}{\sigma} \right) \right]^2
+$$</div>
+
+<p>$4(L - 2)$ 个边点：</p>
+<div>$$
+P_s = 1 - \left [ 1 - Q \left ( \frac{A}{\sigma} \right) \right]\left [ 1 - 2Q \left ( \frac{A}{\sigma} \right) \right]
+$$</div>
+
+<p>$(L - 2)^2$ 个内点：</p>
+<div>$$
+P_s = 1 - \left [ 1 - 2Q \left ( \frac{A}{\sigma} \right) \right]^2
+$$</div>
+
+<p>计算平均 SEP：</p>
+<div>$$
+\begin{align*}
+    P_s =& \frac{1}{L^2}\lbrace 4(2Q - Q^2) + 4(L - 2)(3Q - 2Q^2) + (L - 2)^2(4Q - 4Q^2) \rbrace\\
+    \approx& \frac{4L^2 - 4L}{L^2}Q \left ( \frac{A}{\sigma_n} \right)
+\end{align*}
+$$</div>
+
+<p>省略了 $Q$ 的高阶量。</p>
+<p>计算平均功率：</p>
+<div>$$
+S = 2 \times \frac{2A^2}{L}[1^2 + 3^2 + \dots + (L - 1)^2] = \frac{2(L^2 - 1)}{3}A^2
+$$</div>
+
+<p>是同A的LPAM功率的两倍。因为MQAM有两路LPAM</p>
+<p>得到 SEP：</p>
+<div>$$
+P_s = \frac{4M - 4L}{M} Q \left (\sqrt{\frac{3}{2(M - 1)}\frac{S}{N}}  \right)\\
+M = L^2
+$$</div>
+
+<p>得到 BEP：</p>
+<div>$$
+P_b = 4 \left (1 - \frac{1}{\sqrt M}  \right) Q \left (\sqrt{\frac{3\log_2M}{2(M - 1)}\frac{E_b}{n_0}}  \right) \approx 4Q\left (\sqrt{\frac{3\log_2M}{2(M - 1)}\frac{E_b}{n_0}}  \right)\\
+$$</div>
+
+<p>注意到MQAM可以看成两路正交的MPAM</p>
+<div>$$
+\begin{align*}
+    P_{s, MQAM} =& 1 - (1 - P_{LPAM})^2\\
+    \approx& 2P_{LPAM}\\
+    =& 4 \left ( 1 - \frac{1}{\sqrt M} \right)Q \left ( \sqrt{\frac{3}{(M - 1)}\frac{S/2}{N}} \right)
+\end{align*}
+$$</div>
+
+<p>这个推导方式更简单。</p>
+<p>QAM 是在独立解映射条件下最好的方案。但是距离高斯信道容量还有一定距离。要达到更好的信道容量，可以采用联合解映射，将译码过程联合起来。</p>
+<p>例子3：频移键控 FSK</p>
+<p>一般来说，信号表达式和调制框图的相互反演是比较容易做的</p>
+<p>相对于PAM，PSK和QAM，FSK占用更大的频带，</p>
+<p>相干解调</p>
+<p>Coherent Demodulation</p>
+<ul>
+<li><p>反思FSK非相干解调方式，如果对每个频率的载波进行匹配，则可以提高信噪比</p>
+</li>
+<li><p>这种方法需要本地子载波</p>
+</li>
+<li><p>解调器的结构和非相干解调很像</p>
+</li>
+<li><p>无法用星座图方法表示，但是可以用类似的信号空间表示</p>
+</li>
+<li><p>若MFSK载频等间隔，则调制阶数约高，占用带宽越大</p>
+</li>
+<li><p>如果每次可以选择多个载频，甚至控制载频幅度，则可承载的符号量可以获得极大提升。由此便引申出OFDM技术</p>
+</li>
+</ul>
+<ul>
+<li>通过调制FSK的每个载波的幅度相位，可以承载更多的信息</li>
+</ul>
+<p>星座图没法表述 FSK. 可以使用信号空间方法来表示。</p>
+<p>差错分析：</p>
+<p>FSK 的判决门限为棱锥形状：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_9.jpg" alt="alt" loading="lazy"></p>
+<p>根据对称性，可以只考虑一个符号的差错概率。</p>
+<p>考虑 FSK 信号</p>
+<div>$$
+[A, 0, \dots, 0]
+$$</div>
+
+<p>匹配滤波的输出为</p>
+<div>$$
+[A + n_1, n_2, \dots, n_M]
+$$</div>
+
+<p>正确判决：信号落在本棱锥中</p>
+<div>$$
+A + n_1 \gt n_i, i = 2, \dots, M
+$$</div>
+
+<p>被判决符号的条件分布为</p>
+<div>$$
+f_{[A + n_1, n_2, \dots, n_M]}(\vec r) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left ( -\frac{(r_1 - A)^2}{2\sigma^2} \right)\prod_{i = 2}^M\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left ( -\frac{r_i^2}{2\sigma^2} \right)
+$$</div>
+
+<p>不满足正确判决条件的概率为</p>
+<div>$$
+\begin{align*}
+    P_s =& 1 - \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left ( -\frac{(r_1 - A)^2}{2\sigma^2} \right)\prod_{i = 2}^M \int_{-\infty}^{r_1}\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left ( -\frac{r_i^2}{2\sigma^2} \right)\mathrm dr_i\mathrm dr_1\\
+    =&1 - \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left ( -\frac{(r_1 - A)^2}{2\sigma^2} \right)\left (\int_{-\infty}^{r_1}\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left ( -\frac{r_i^2}{2\sigma^2} \right)\mathrm dr_i  \right)^{M - 1}\mathrm dr_1
+\end{align*}
+$$</div>
+
+<p>记 $x &#x3D; \frac{r_1}{\sigma}$</p>
+<div>$$
+\begin{align*}
+    P_s =& 1 - \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi }}\exp \left ( -\frac{(x - A/\sigma)^2}{2} \right)\left (1 - Q(x)\right)^{M - 1}\mathrm dx\\
+    =& 1 - \frac{1}{\sqrt{2\pi }}\int_{-\infty}^{\infty}\exp \left ( -\frac{u^2}{2} \right)\left (1 - Q \left (u + \frac{A}{\sigma}  \right)\right)^{M - 1}\mathrm du
+\end{align*}
+$$</div>
+
+<div>$$
+\frac{A}{\sigma} = \sqrt{\frac{S}{N}} = \sqrt{\log_2M\frac{2E_b}{n_0}}
+$$</div>
+
+<p>可得 SEP 的表达式</p>
+<div>$$
+\begin{align*}
+    P_s =& 1 - \frac{1}{\sqrt{2\pi }}\int_{-\infty}^{\infty}\exp \left ( -\frac{u^2}{2} \right)\left (1 - Q \left (u + \sqrt{\frac{S}{N}} \right)\right)^{M - 1}\mathrm du\\
+    =& 1 - \frac{1}{\sqrt{2\pi }}\int_{-\infty}^{\infty}\exp \left ( -\frac{u^2}{2} \right)\left (1 - Q \left (u + \sqrt{\log_2M\frac{2E_b}{n_0}} \right)\right)^{M - 1}\mathrm du
+\end{align*}
+$$</div>
+
+<p>另一种简单估界：</p>
+<p><img src="/../images/%E9%80%9A%E7%BD%91/5_10.jpg" alt="alt" loading="lazy"></p>
+<p>正交 2FSK 信号在最佳接收条件时的错误概率为</p>
+<div>$$
+P_{b,NCFSK} = Q(\sqrt{E_b/n_0})
+$$</div>
+
+<p>随着 M 的增加，MFSK 的差错性能渐优，这是以带宽的占用为代价的。</p>
+<p>PAM, QAM, ASK 等技术随着符号个数的增加，差错性能是越来越差。</p>
+<p>FDM——Frequency Division Multiplexing</p>
+<ul>
+<li>先将各路信号调制到不同频段，然后复用整个<br>通信带宽</li>
+<li>信道的非线性会在FDM系统中产生交调失真与<br>高次谐波，引起路际串话，因此，对信道的非<br>线性失真要求很高。此外，FDM用到的模拟滤<br>波器设计较为复杂。</li>
+</ul>
+<h4 id="OFDM-基本原理"><a href="#OFDM-基本原理" class="headerlink" title="OFDM 基本原理"></a>OFDM 基本原理</h4><p>Orthogonal Frequency division multiplexing</p>
+<ul>
+<li>把一串高速数据流分解为若干速率低得多的子数据流。</li>
+<li>将每个子数据流放置在对应的子载波上。</li>
+<li>将多个子载波合成，一起并行传输。</li>
+<li>优点：频谱利用率高。</li>
+</ul>
+<p>正交性的定义：</p>
+<div>$$
+\int_{0}^{T}S_1(t)S_2(t)\mathrm dt = 0
+$$</div>
+
+<p>设相邻子载波的频率间隔为 $1 &#x2F; T$，$T$ 为 OFDM 符号的持续时间，则<br>任意一对子载波的内积满足</p>
+<div>$$
+\frac{1}{T}\int_{0}^{T}e^{j2\pi \frac{k_1}{T}t}e^{-j2\pi \frac{k_2}{T}t}\mathrm dt = \begin{cases}
+    1, k_1 = k_2\\
+    0, k_1 \ne k_2
+\end{cases}
+$$</div>
+
+<p>带宽 $W$ 和 $B$ 的区别：</p>
+<p>物理带宽 $W$</p>
+<p>信号带宽 $B$：半功率带宽(3dB)，等效噪声带宽，谱零点带宽，功率比例带宽，最低功率谱带宽</p>
+<h4 id="带通信号的表示方法"><a href="#带通信号的表示方法" class="headerlink" title="带通信号的表示方法"></a>带通信号的表示方法</h4><div>$$
+x(t) = A(t) \cos [\omega_c t + \varphi (t)]\\
+$$</div>
+
+<p>同相分量：$x_I(t) &#x3D; A(t) \cos(\varphi(t))$</p>
+<p>正交分量：$x_Q(t) &#x3D; A(t) \sin(\varphi(t))$</p>
+<p>与幅度相位的关系：</p>
+<div>$$
+A(t) = \sqrt{x_I^2(t) + x_Q^2(t)}\\
+\varphi(t) = \tan^{-1} \left [ \frac{x_Q(t)}{x_I(t)} \right]
+$$</div>
+
+<p>带通信号的基带表示的方法</p>
+<div>$$
+x_{bb}(t) = x_I(t) + jx_Q(t)\\
+$$</div>
+
+<p>解析信号表示</p>
+<div>$$
+x_A(t) = x_{bb}(t)e^{j\omega_ct}\\
+x(t) = \real \lbrace {x_A(t)} \rbrace = \real \lbrace x_{bb}(t)e^{j\omega_ct} \rbrace
+$$</div>
+
+<p>原始带通信号是解析信号的实部</p>
+<p>从带通信号恢复基带信号？</p>
+<div>$$
+\breve{x}(t) = x(t) \circledast h(t)\\
+h(t) = \frac{1}{\pi t}\\
+\breve{x}(t) = \frac{1}{\pi} \int_{-\infty}^{\infty}\frac{s(\tau)}{t - \tau}\mathrm d\tau\\
+H(f) = -j \cdot \text{sgn}(f) = \begin{cases}
+    -j, &f\gt 0\\
+    0, &f=0\\
+    j, &f < 0
+\end{cases}
+$$</div>
+
+<p>构造解析信号</p>
+<div>$$
+x_A(t) = x(t) + j\breve{x}(t)\\
+$$</div>
+
+<p>频谱分析</p>
+<div>$$
+X_A(\omega) = [1 + \text{sgn}(\omega)]X(\omega) = \begin{cases}
+    2X(\omega), &\omega \gt 0\\
+    X(0) = 0, &\omega = 0\\
+    0, &\omega \lt 0
+\end{cases}\\
+X_{bb} = X_A(\omega + \omega_c)
+$$</div>
+
+<p>带通信道</p>
+<p>具有实数值的信道冲激响应（CIR） $h(t)$</p>
+<p>等效的解析冲激响应 $h_A(t) &#x3D; h(t) + j\breve{h}(t)$</p>
+<p>任意载波频率 $\omega_c$ 的等效基带冲激响应CIR</p>
+<div>$$
+h_{bb}(t) = h_A(t) \cdot e^{-j\omega_c t}
+$$</div>
+
+<p>带通收发信号关系 $y(t) &#x3D; x(t) * h(t)$，则</p>
+<div>$$
+Y(\omega) = H(\omega) X(\omega)\\
+Y_A(\omega) = H_A(\omega)X_A(\omega)\\
+Y_A(\omega) = [H(\omega) \cdot \frac{1}{2}\left (1 + \text{sgn}(\omega)  \right)]X_A(\omega) = \left [ \frac{1}{2}H_A(\omega) \right]X_A(\omega)
+$$</div>
+
+<p>$H_A(\omega)$ 只有正半轴部分</p>
+<div>$$
+Y_{bb}(\omega) = Y_A(\omega + \omega_c) = \left [ \frac{1}{2}H_A(\omega + \omega_c) \right]X_A(\omega + \omega_c) = H(\omega + \omega_c) X_{bb}(\omega)
+$$</div>
+
+<p>基带等效系统</p>
+<div>$$
+y_{bb}(t) = \frac{1}{2}h_{bb}(t) * x_{bb}(t)\\
+Y_{bb}(\omega) = H(\omega + \omega_c) X_{bb}(\omega)
+$$</div>
+
+<p>基带时域转移函数 $\frac{1}{2}h_{bb}(t)$</p>
+<p>基带频域转移函数 $H(\omega + \omega_c)$</p>
+<p>用正交基观点构造了信号波形</p>
+<div>$$
+x(t) = \sqrt{2}\cos 2\pi f_c t \sum\limits_{k=-\infty}^{\infty}x^I_kg(t - kT_s) + \sqrt{2}\sin 2\pi f_c t \sum\limits_{k=-\infty}^{\infty}x^Q_kg(t - kT_s)
+$$</div>
+
+<p>投影后的噪声：</p>
+<div>$$
+E \lbrace n_k^In_l^Q \rbrace = 0\\
+E \lbrace n_k^In_l^I \rbrace = \delta_{kl}\\
+E \lbrace n_k^Qn_l^Q \rbrace = \delta_{kl}
+$$</div>
+
+<p>等效符号差错模型</p>
+<div>$$
+y_k = x_k + n_k\\
+n_k \sim \mathcal{CN}(0, n_0)
+$$</div>
+
+<h2 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h2><p>差错控制的分类：</p>
+<ul>
+<li>检错重发 （ARQ）</li>
+<li>前向纠错 （FEC）</li>
+</ul>
+<p>前向纠错的分类：</p>
+<ul>
+<li>线性码，非线性码</li>
+<li>分组码（重点），卷积码</li>
+<li>系统码，非系统码</li>
+</ul>
+<p>编码增益</p>
+<p>给定误比特率的情况下，采用纠错编码后，$E_b&#x2F;n_0$的减小量称为编码增益。</p>
+<p>简单例子：</p>
+<p>重复编码</p>
+<p>BSC 重传三次：</p>
+<div>$$
+3p_e^2(1 - p_e) + p_e^3 \approx 3p_e^2
+$$</div>
+
+<p>信道编码：通过合理得增加冗余信息，纠正信道传输中可能出现的错误</p>
+<ul>
+<li>又称为纠错码（Error Correction Coding）</li>
+</ul>
+<p>理想信道编码的局限性：</p>
+<ul>
+<li>码长无穷大</li>
+<li>没发现代数结构，复杂度太大</li>
+</ul>
+<p>如何实用化：</p>
+<ul>
+<li>有限长。代价：误码率非零，效率低</li>
+<li>有代数结构。优点：便于译码</li>
+</ul>
+<p>评价标准</p>
+<ul>
+<li>误比特率：评价可靠性</li>
+<li>码率：评价有效性</li>
+</ul>
+<h3 id="分组码"><a href="#分组码" class="headerlink" title="分组码"></a>分组码</h3><p>奇偶监督码</p>
+<ul>
+<li>检错，而非纠错</li>
+<li>电路实现简单</li>
+</ul>
+<p>漏检概率：</p>
+<div>$$
+P_m =\sum\limits_{i=1}^{\lfloor\frac{n}{2}\rfloor}\binom{n}{2i}\varepsilon^{2i}(1 - \varepsilon)^{n - 2i}
+$$</div>
+
+<p>群计数码</p>
+<ul>
+<li>累计信息码元中1的个数，以二进制形式放在信息码元后面</li>
+<li>检错能力<ul>
+<li>强于奇偶校验码</li>
+<li>当{1变0数量&#x3D;0变1数}时，无法检出</li>
+</ul>
+</li>
+</ul>
+<p>纠错码的直观表示</p>
+<ul>
+<li>码字<ul>
+<li>对应 $n$ 维空间的点</li>
+</ul>
+</li>
+</ul>
+<p>Hamming 距离：两个码字之间不同码元的个数</p>
+<p><strong>Hamming 距离</strong></p>
+<ul>
+<li>$x_m$ 和 $x_m^\prime$ 中不同取值的位置数 $d_H(\mathbf x_m, \mathbf x_m^\prime)$</li>
+<li>即模2和中1的个数</li>
+</ul>
+<p>汉明码重</p>
+<ul>
+<li>二进制向量 $\mathbf x_m$ 1的个数 $w(\mathbf x_m)$</li>
+</ul>
+<p>最小距离</p>
+<p>一个分组码中任意两个码字的最小汉明距离 $d_{\text{min}}$</p>
+<h4 id="n-k-纠错码"><a href="#n-k-纠错码" class="headerlink" title="(n,k)纠错码"></a>(n,k)纠错码</h4><div>$$
+B = E + A, \forall A \in \chi\\
+S = BH^T = EH^T\\
+$$</div>
+
+<p>$S$ 与 $A$ 无关，$A$ 只是无用的陪同（coset）。</p>
+<p>陪集首：上述陪集的特征由 $S &#x3D; EH^T$ 标识，我们称 $E$ 为陪集首。</p>
+<p>陪集首一般选择集合中 “1” 最少的元素，这是为了优先标识错误数量较小的差错，这一类差错发生的概率较大。</p>
+<p>码重：</p>
+<div>$$
+w(A) =\sum\limits_{i=1}^{n}\mathbf 1 \lbrace a_i = 1 \rbrace = d_H(A, 0)
+$$</div>
+
+<p>001 -&gt; 0,0,0,0,0,1 -&gt; 101</p>
+<p>010 -&gt; 0,0,0,0,1,0 -&gt; 011</p>
+<p>011 -&gt; 0,0,0,1,0,0 -&gt; 110</p>
+<p>100 -&gt; 0,0,1,0,0,0 -&gt; 001</p>
+<p>101 -&gt; 0,1,0,0,0,0 -&gt; 010</p>
+<p>110 -&gt; 1,0,0,0,0,0 -&gt; 100</p>
+<p>111 -&gt; 0,1,0,0,0,1 -&gt; 111</p>
+<h4 id="交织器"><a href="#交织器" class="headerlink" title="交织器"></a>交织器</h4><p>线性码的改进：</p>
+<ul>
+<li>上述线性码，均适合于纠正零散错误</li>
+<li>Hamming码对于2个以上的差错就无能为力</li>
+<li>若差错总是成对出现，则Hamming码基本没用</li>
+<li>在通信系统中，往往存在不可抗拒的突发错误</li>
+</ul>
+<p>例如：无线信道的衰落引起的误码</p>
+<p>抗突发误码的方法：交织器</p>
+<p>基本原理</p>
+<ul>
+<li>为了对付突发的信道差错，交织器改变发送码元的时<br>间顺序</li>
+<li>将原本相邻的码元在时间上的距离最大化</li>
+<li>例子：考虑一个（n, k）分组码，其交织后的输出为</li>
+</ul>
+<p>将突发误码转换成零星误码</p>
+<p>交织器的性能：</p>
+<p>宽度</p>
+<ul>
+<li>就是分组码的码长n</li>
+<li>决定于所采用的分组码</li>
+</ul>
+<p>深度</p>
+<ul>
+<li>深度m决定了相邻码元交织后的间隔</li>
+<li>m又称交织深度</li>
+<li>若分组码能纠b个突发错误，则交织后能纠mb个突发错误</li>
+</ul>
+<p>解交织：</p>
+<ul>
+<li>从另一个角度来看，解交织打散了突发误码</li>
+<li>化整为零后的零散误码，就可以交给解码器对付了</li>
+</ul>
+<h3 id="卷积码"><a href="#卷积码" class="headerlink" title="卷积码"></a>卷积码</h3><p>输入无限长的激励，则输出信号无限长，</p>
+<p>若冲激响应有限，则输出只与某一段输入有关</p>
+<p>卷积码的参数 $n, k, N$</p>
+<p>约束长度，信息码位，每次输出</p>
+<p>使用树状图进行分类讨论</p>
+<p>树状图的冗余：</p>
+<ul>
+<li>树状图具有很多冗余表示</li>
+</ul>
+<p>树状图的应用：计算最小码距</p>
+<ul>
+<li>分组码的最小码距定义为非零码字的最小码重</li>
+<li>和分组码不同，卷积码没有分组的概念</li>
+<li>约束长度隐含了某种独立性，可以只考虑 $kN$ 的信息比特编码后的非零码字，也就是考虑 $nN$ 个非零的编码输出位</li>
+</ul>
+<p>状态图的应用</p>
+<ul>
+<li>自由距：无限长信息序列编码后的最小汉明距离</li>
+<li>自由距不等于最小距</li>
+</ul>
+<p>自由距等于寄存器从零状态开始，经过非零状态，然后回到零状态的输出1的个数的最小值</p>
+<p>卷积码的译码</p>
+<h4 id="维特比译码"><a href="#维特比译码" class="headerlink" title="维特比译码"></a>维特比译码</h4><p>网格图</p>
+<p>最大似然下的最优译码</p>
+<ul>
+<li>低复杂度</li>
+<li>采用最小汉明距离作为代价函数</li>
+</ul>
+<p>采用动态规划的卷积码译码成为 viterbi 译码</p>
+<ul>
+<li>viterbi 译码的起始状态是 0 状态</li>
+<li>viterbi 译码没有确定的代价函数，</li>
+</ul>
+<p>分组码译码可以知道是否译码错误了。通过校验矩阵来校验就行了。</p>
+<p>但是 viterbi 译码并不能肯定译码结果是否正确。</p>
+<h3 id="硬判决和软判决"><a href="#硬判决和软判决" class="headerlink" title="硬判决和软判决"></a>硬判决和软判决</h3><p>硬判决：任务是检测和矫正误码</p>
+<p>软判决：应用于卷积&#x2F; Viterbi 译码器，迭代译码  </p>
+<h3 id="检错重发-ARQ"><a href="#检错重发-ARQ" class="headerlink" title="检错重发 ARQ"></a>检错重发 ARQ</h3><p>$P_c &#x3D; (1 - \varepsilon)^n$ 为正确概率</p>
+<p>$P_d$ 检出错误概率</p>
+<p>$P_m$ 漏检概率</p>
+<div>$$
+P_c + P_d + P_m = 1
+$$</div>
+
+<p>总分组差错概率</p>
+<div>$$
+P_b = P_m + P_dP_m + P_d^2P_m + \dots = \frac{P_m}{1 - P_d} = \frac{P_m}{P_c + P_m}
+$$</div>
+
+<h4 id="停等ARQ"><a href="#停等ARQ" class="headerlink" title="停等ARQ"></a>停等ARQ</h4><p>收到上一个 ACK&#x2F;NAK 再发送下一个包或者重传上一个包</p>
+<p>假设发送方一直传输（一次就能传输成功），吞吐量的上限为</p>
+<div>$$
+\eta_{sw, 0} = \frac{k}{T_DR}\\
+T_D = T_m + 2 T_d + T_c + T_a = T_m + T_{dca} = \frac{k}{n + T_{dca}R}
+$$</div>
+
+<p>若有完美的差错检出能力 $P_d &#x3D; 1 - (1 - \varepsilon)^n$</p>
+<p>则</p>
+<div>$$
+\eta_{sw} = \frac{k/n}{1 + T_{dca}R/n}(1 - \varepsilon)^n
+$$</div>
+
+<h4 id="返回-N-ARQ"><a href="#返回-N-ARQ" class="headerlink" title="返回 N-ARQ"></a>返回 N-ARQ</h4><p>不等 ACK&#x2F;NAK 返回就传下一个包，若检错则重传从错误开始的所有包</p>
+<div>$$
+\eta_{GBN, 0} = \frac{k}{n}
+$$</div>
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2023/09/18/%E9%80%9A%E7%BD%91/" title="通网">https://blitherboom812.github.io/2023/09/18/%E9%80%9A%E7%BD%91/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/09/18/Computer-Network/" rel="prev" title="Computer Network"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Computer Network</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/02/27/%E6%95%B0%E9%80%BB/" rel="next" title="数逻"><span class="post-nav-text">数逻</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>
