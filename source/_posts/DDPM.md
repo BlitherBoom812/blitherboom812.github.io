@@ -323,7 +323,7 @@ $$
 
 神奇的事情发生了！我们的模型现在唯一需要预测的就是这个噪声项 $\varepsilon$ 长什么样。也就是说，现在的扩散模型 $\varepsilon_\theta$，输入是 $t$ 时刻含噪图像 $x_t$，要预测的是其含有的噪声 $\varepsilon$！至此，我们已经推出了 DDPM 的训练目标。
 
-刚才我们推导的某一步里指出，我们的损失函数等价于预测原图 $x_0$。的确如此！事实上预测原图和预测噪声在原理上是等价的，它们只不过相差一些系数。但是也有论文指出，预测原图和预测噪声相比，predicting the noise puts more weight on lower noise levels，在 t 较小的情况上花费更多时间。
+刚才我们推导的某一步里指出，我们的损失函数等价于预测原图 $x_0$。的确如此！事实上预测原图和预测噪声在原理上是等价的，它们只不过相差一些系数。但是也有论文指出，预测原图和预测噪声相比，predicting the noise puts more weight on lower noise levels，在 t 较小的情况上花费更多算力进行训练。
 
 另外，实际的 DDPM 会将时间 $t$ 也作为一个条件输入给模型 $\varepsilon_\theta$。我们实际上训练的是：
 
@@ -385,6 +385,7 @@ $$
 $$
 x_0 \approx x_\theta(x_t) = \frac{1}{\sqrt{\bar\alpha_t}} x_t - \frac{\sqrt{1 - \bar\alpha_t}}{\sqrt{\bar\alpha_t}}\varepsilon_\theta(x_t, t)\\
 x_{t-1} \sim q(x_{t-1}|x_t, x_0) = \mathcal N (\mu_q(x_t), \Sigma_q)\\
+（条件：t\ge2）
 $$
 
 由此可以推出
@@ -394,9 +395,28 @@ $$
 x_{t-1} &= \frac{\sqrt\alpha_t (1 - \bar\alpha_{t-1})x_t + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)x_0}{1-\bar\alpha_t} + \sqrt{\frac{(1-\alpha_t)(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}}\varepsilon\\
 &\approx \frac{\sqrt\alpha_t (1 - \bar\alpha_{t-1})x_t + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)(\frac{1}{\sqrt{\bar\alpha_t}} x_t - \frac{\sqrt{1 - \bar\alpha_t}}{\sqrt{\bar\alpha_t}}\varepsilon_\theta(x_t, t))}{1-\bar\alpha_t} + \sigma_t \varepsilon\\
 &=\frac{1}{\sqrt{\alpha_t}}(x_t - \frac{(1-\alpha_t)}{\sqrt{1 - \bar\alpha_t}}\varepsilon_\theta(x_t, t)) + \sigma_t \varepsilon
+（条件：t\ge2）
 \end{align*}
 $$
 
-这就是推理过程的公式。其中 $\varepsilon$ 为正态分布。这样我们也就能理解，为什么去噪过程还需要混合一个噪声 $\varepsilon$了，因为扩散模型输出的就是一个高斯分布，这个$\varepsilon$是模型输出的一部分。
+这就是推理过程的公式。其中 $\varepsilon$ 为正态分布。
+
+不过要注意，这个噪声项 $\varepsilon$ 的来源，可不是来自扩散模型 $\varepsilon_\theta(x_t, t)$ 的随机性，而是来自 $q(x_t|x_{t-1},x_0)$。$\varepsilon_\theta(x_t, t)$ 代表了从 $x_t$ 到 $x_0$ 相差多少噪声，这个噪声在给定 $x_t$ 和 $x_0$ 的情况下是固定的，它是一个确定值。虽然此时 $x_t$ 和 $x_0$ 都是确定的，但是从 $x_t$ 到 $x_{t-1}$ 的这个过程引入了新的高斯噪声，你即使知道 $x_t$ 和 $x_0$，仍然无法确定 $x_{t-1}$ 长什么样！这个随机项 $\varepsilon$ 代表的就是（已知 $x_0$ 的情况下）从 $x_t$ 到 $x_{t-1}$ 的不确定性。
+
+上面的公式只适用于 $t\ge2$ 的情况。很显然，$t=1$ 的时候你也没有 $q(x_{t-1}|x_{t}, x_0)$ 可用啊。请循其本，$t=1$ 的情况实际上来自于 ELBO 的 reconstruct term，需要用那里的公式解释。所以 $t = 1$ 的情况下，模型就直接输出最终图像就行了，不需要添加噪声项（因为噪声来自于 $q(x_{t-1}|x_{t}, x_0)$！）：
+
+$$
+x_0 \approx x_\theta(x_1) = \frac{1}{\sqrt{\alpha_1}} x_1 - \frac{\sqrt{1 - \alpha_1}}{\sqrt{\alpha_1}}\varepsilon_\theta(x_1, 1)\\
+$$
+
+不过我寻思一般 $T=1000$，最后一步恐怕噪声含量已经很低了。
+
+## 其他问题
+
+推理的时候，为什么不直接取概率最大的情况作为 $x_{t-1}$ 的值，也就直接让 $\varepsilon = 0$？要是这么设定，我们之前的推导就白做了，要知道，我们之前全部都是假设每一步去噪都符合高斯分布，你直接让噪声等于零，其实等价于让每一步高斯的方差 $\sigma_t^2$ 等于 0，直觉上好像退化成 auto encoder 了。在这种情况下，上面的所有公式肯定要发生变化。这个有空可以分析一下，如果我们让所有的 $\sigma_t$ 都等于 0，会发生什么。
+
+第二个问题，为什么 VAE 输出的时候不需要添加这个噪声项？很显然，VAE 不存在 denoise matching term，它只有 reconstruct term，这一项是和 $t = 1$ 的扩散模型一样，不需要加噪声的。
+
+最后一个问题。既然图像 $x_0$ 是从噪声 $x_T$ 变过来的，明明每一步都是减去一个噪声，为什么减着减着就变成了一个有规律的图像？到底从哪一步开始，噪声不再是噪声，而是突然变得有规律了？听起来像一个谷堆悖论。这个问题我还没有想清楚，不过我觉得扩散模型就是在构建 $x_T$ 到 $x_0$ 的一个映射，只是这个映射要迭代很多步而已，所以或许从一开始噪声 $x_T$ 就已经注定了会对应 $x_0$，并不是在中间某一步突变的。Flow Matching 方法能够直接用一条直线构建这种映射，也许会把这个问题展示得更加清楚。（当然，去噪过程是有一定随机性的，也许它一开始想走到图像 A，走着走着突然就往图像 B 去跑了，所以这个问题大概还有更好的解释吧。）
 
 （那么，什么是 Score Matching 呢？）
