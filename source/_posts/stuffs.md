@@ -380,6 +380,33 @@ You can report the issue on https://github.com/jjangga0214/hasura-cli/issues wit
 
 ## SSH 相关
 
+### ssh 端口转发的坑点
+
+转发之前一定要在远程服务器的 `/etc/ssh/sshd_config` 中配置：
+
+GatewayPorts **yes（或 clientspecified，不能是 no）**
+
+具体的原理我说不清楚。大概意思是，我们通常用以下方式进行远程端口转发：
+
+```
+ssh -CNgv -R <remote_ip>:<port>:<local_ip>:<port> <hostname>
+```
+
+一般会把 remote_ip 设为 0.0.0.0，以绑定到所有接口。但是，若不设置 GatewayPorts，则远程服务器上仍然只有 localhost 能够访问这个端口，如果你在 docker 容器内访问这个端口是不行的。我花了很多时间去排除 docker 容器到主机上的连接是否正确，包括使用 docker 的网关地址/host.docker.internal、修改 iptables、修改防火墙，都没什么用。因为实际上这个 ip 可以 ping 通，根本就不是 ip 地址或者防火墙的问题，是 ssh 转发里面限制了网关访问端口。
+
+claude-sonnet 给出的解释如下：
+
+| 配置选项            | 客户端命令                      | 实际绑定地址         | 说明           |
+| ------------------- | ------------------------------- | -------------------- | -------------- |
+| `no`              | `ssh -R 8000:...`             | `127.0.0.1:8000`   | 强制 localhost |
+| `no`              | `ssh -R 0.0.0.0:8000:...`     | `127.0.0.1:8000`   | 忽略客户端指定 |
+| `yes`             | `ssh -R 8000:...`             | `0.0.0.0:8000`     | 默认所有接口   |
+| `yes`             | `ssh -R 192.168.1.1:8000:...` | `192.168.1.1:8000` | 允许指定       |
+| `clientspecified` | `ssh -R 8000:...`             | `127.0.0.1:8000`   | 默认 localhost |
+| `clientspecified` | `ssh -R 0.0.0.0:8000:...`     | `0.0.0.0:8000`     | 允许客户端指定 |
+
+可以看到，如果服务端配置为 no，无论客户端怎么强制绑 `0.0.0.0` 都没用的，还是变成了 `localhost:8000` 的服务。如果设置为 yes，那么默认就绑 `0.0.0.0:8000`，要指定也是可以的。
+
 ### 服务器共用怎么设置自己的环境变量
 
 在 vscode user settings 中添加：
