@@ -496,7 +496,17 @@ taskkill /PID <process_id> /F
 
 `net start winnat`
 
-## Pytorch
+## AI
+
+### Could not load symbol cudnnGetLibConfig
+
+环境变量的问题，如果你在环境变量中将 LD_LIBRARY_PATH 指向了不正确的版本会导致这里出问题。
+
+运行下面的代码以获得正确的 cudnn 路径：
+
+```
+export LD_LIBRARY_PATH=`python3  -c 'import os; import nvidia.cublas.lib; import nvidia.cudnn.lib; print(os.path.dirname(nvidia.cublas.lib.__file__) + ":" + os.path.dirname(nvidia.cudnn.lib.__file__))'`
+```
 
 ### /usr/bin/ld: cannot find -lcuda
 
