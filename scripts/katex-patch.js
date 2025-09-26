@@ -3,8 +3,8 @@ debug = require("./config").debug;
 function process_katex_formula(input) {
     processed_input = input
     processed_input = processed_input
-        .replace("\\{", "\\lbrace")
-        .replace("\\}", "\\rbrace") //没这个会报错
+        .replace("\\{", "\\lbrace ")
+        .replace("\\}", "\\rbrace ") //没这个会报错
         .replace("<", "< ") // 防止转义成 html 标签
     return processed_input
 }
