@@ -23,7 +23,7 @@ jobs:
         
       - name: CopyDB
         run: |
-          git checkout hexo -- db.json
+          git checkout hexo -- db.json && ls
         
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
