@@ -5,7 +5,13 @@ module.exports = function (data) {
     if (debug) {
         console.log("before replace: " + data.content.match(/\$\$(.|\n)*?\$\$/g));
     }
-    data.content = data.content.replace(/\$\$((.|\n)*?)\$\$/g, "<div>$$$$$1$$$$<\/div>");
+    data.content = data.content.replace(/\$(([^\n]| )+?)\$/g, (match, p1, offset, string) => {
+        if (debug){
+            console.log("matched content: ", p1)
+        }
+        return `<div style="display: inline;">\$${p1}\$</div>`
+    });
+    data.content = data.content.replace(/\$\$((.|\n|\s)*?)\$\$/g, '<div style="display: inline;">$$$$$1$$$$<\/div>');
     if (debug) {
         console.log("after replace: " + data.content.match(/<div>\$\$(.|\n)*?\$\$<\/div>/g));
     }
