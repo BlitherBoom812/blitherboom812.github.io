@@ -1,0 +1,1234 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Digital Signal Processing | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="绪论信号信号是某种随时间或&#x2F;和空间变化的物理量，其包含有从信源到信宿的某种信息。 信号可以根据时间和幅度的取值方式分类  连续时间信号  在时间和幅度上均可以连续取值的信号   离散时间信号  仅在离散时间点上取值，但可在幅度上连续取值的信号   数字信号  仅在离散时间点上取值，且在幅度上只能离散取值的信号    系统 由若干相互作用和相互依赖的事物组合而成的具有特定功能的整体 具有它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Digital Signal Processing">
+<meta property="og:url" content="https://blitherboom812.github.io/2023/09/20/Digital-Signal-Processing/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="绪论信号信号是某种随时间或&#x2F;和空间变化的物理量，其包含有从信源到信宿的某种信息。 信号可以根据时间和幅度的取值方式分类  连续时间信号  在时间和幅度上均可以连续取值的信号   离散时间信号  仅在离散时间点上取值，但可在幅度上连续取值的信号   数字信号  仅在离散时间点上取值，且在幅度上只能离散取值的信号    系统 由若干相互作用和相互依赖的事物组合而成的具有特定功能的整体 具有它">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSP/4_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSP/5_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSP/5_2.jpg">
+<meta property="article:published_time" content="2023-09-20T01:51:58.000Z">
+<meta property="article:modified_time" content="2025-09-30T08:48:23.340Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/DSP/4_2.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">32</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%AA%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">绪论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7"><span class="toc-number">1.1.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%9A%84%E5%B1%80%E9%99%90"><span class="toc-number">1.3.</span> <span class="toc-text">数字信号处理的局限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">1.4.</span> <span class="toc-text">数字信号处理的发展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%A8%A1%E6%8B%9F%E5%88%B0%E6%95%B0%E5%AD%97"><span class="toc-number">1.5.</span> <span class="toc-text">从模拟到数字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.</span> <span class="toc-text">信号的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%97%B6%E5%9F%9F%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">离散信号的时域表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%8F%98%E6%8D%A2%E5%9F%9F%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.2.</span> <span class="toc-text">离散信号的变换域表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%AD%A3%E4%BA%A4%E5%87%BD%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.3.</span> <span class="toc-text">离散信号的正交函数表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7%E7%9A%84%E7%89%B9%E5%BE%81%E5%9F%9F%EF%BC%88%E9%87%8F%EF%BC%89%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.4.</span> <span class="toc-text">离散信号的特征域（量）表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%8D%95%E4%BD%8D%E6%8A%BD%E6%A0%B7%E4%BF%A1%E5%8F%B7%E8%A1%A8%E7%A4%BA%EF%BC%9A"><span class="toc-number">2.5.</span> <span class="toc-text">离散信号的单位抽样信号表示：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E9%95%BF%E7%A6%BB%E6%95%A3%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%AD%A3%E4%BA%A4%E5%87%BD%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.6.</span> <span class="toc-text">有限长离散信号的正交函数表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.7.</span> <span class="toc-text">离散系统的表示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DTFT-%E4%B8%8E-DFT"><span class="toc-number">3.</span> <span class="toc-text">DTFT 与 DFT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DTFT"><span class="toc-number">3.1.</span> <span class="toc-text">DTFT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DFT"><span class="toc-number">3.2.</span> <span class="toc-text">DFT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DFT-%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.1.</span> <span class="toc-text">DFT 的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-DFT"><span class="toc-number">3.2.2.</span> <span class="toc-text">理解 DFT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DFT-%E7%9A%84%E9%A2%91%E5%9F%9F%E9%87%8D%E6%9E%84"><span class="toc-number">3.2.3.</span> <span class="toc-text">DFT 的频域重构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-DFT-II"><span class="toc-number">3.2.4.</span> <span class="toc-text">理解 DFT II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DFT-%E7%9A%84%E5%91%A8%E6%9C%9F%E5%BB%B6%E6%8B%93"><span class="toc-number">3.2.5.</span> <span class="toc-text">DFT 的周期延拓</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DFT-%E6%80%A7%E8%B4%A8"><span class="toc-number">3.2.6.</span> <span class="toc-text">DFT 性质</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FFT"><span class="toc-number">4.</span> <span class="toc-text">FFT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA-2-DIT-FFT-%E7%AE%97%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">基 2 DIT-FFT 算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E9%A2%91%E8%B0%B1%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">数字频谱分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DFT-%E8%B0%B1%E5%88%86%E6%9E%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">5.1.</span> <span class="toc-text">DFT 谱分析的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DFT-%E8%B0%B1%E5%88%86%E6%9E%90%E7%9A%84%E4%B8%80%E8%88%AC%E8%BF%87%E7%A8%8B"><span class="toc-number">5.2.</span> <span class="toc-text">DFT 谱分析的一般过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%97%E6%B7%B7%E5%8F%A0%E6%BB%A4%E6%B3%A2"><span class="toc-number">5.2.1.</span> <span class="toc-text">抗混叠滤波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%87%E6%A0%B7"><span class="toc-number">5.2.2.</span> <span class="toc-text">采样</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E7%AA%97"><span class="toc-number">5.2.3.</span> <span class="toc-text">加窗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DFT%E8%AE%A1%E7%AE%97%E3%80%81%E6%8F%92%E5%80%BC%E5%8F%8A%E9%A2%91%E8%B0%B1%E8%BE%93%E5%87%BA"><span class="toc-number">5.2.4.</span> <span class="toc-text">DFT计算、插值及频谱输出</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DFT-%E8%B0%B1%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98"><span class="toc-number">5.3.</span> <span class="toc-text">DFT 谱分析问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%B1%E5%88%86%E6%9E%90%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">5.3.1.</span> <span class="toc-text">谱分析滤波器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DFT-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">DFT 的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%8D%B7%E7%A7%AF%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">6.1.</span> <span class="toc-text">线性卷积的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%B0%83%E9%A2%91-z-%E5%8F%98%E6%8D%A2"><span class="toc-number">6.2.</span> <span class="toc-text">线性调频 z 变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">6.3.</span> <span class="toc-text">短时傅里叶变换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LTI-%E7%B3%BB%E7%BB%9F"><span class="toc-number">7.</span> <span class="toc-text">LTI 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LTI-%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%97%B6%E5%9F%9F%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E5%86%B2%E6%BF%80%E5%93%8D%E5%BA%94"><span class="toc-number">7.1.</span> <span class="toc-text">LTI 系统的时域分析——冲激响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LTI-%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%97%B6%E5%9F%9F%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E5%86%B2%E6%BF%80%E5%93%8D%E5%BA%94-1"><span class="toc-number">7.2.</span> <span class="toc-text">LTI 系统的时域分析——冲激响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LTI-%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%9B%B6%E6%9E%81%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">7.3.</span> <span class="toc-text">LTI 系统的零极点分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IIR%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">7.4.</span> <span class="toc-text">IIR滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FIR-%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">7.5.</span> <span class="toc-text">FIR 滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FIR-%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E9%A2%91%E7%8E%87%E5%8F%96%E6%A0%B7%E7%BB%93%E6%9E%84"><span class="toc-number">7.6.</span> <span class="toc-text">FIR 滤波器的频率取样结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%B8%8C%E5%B0%94%E4%BC%AF%E7%89%B9%E5%8F%98%E6%8D%A2"><span class="toc-number">8.</span> <span class="toc-text">离散希尔伯特变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%85%B6%E8%AF%AF%E5%B7%AE%E6%BA%90"><span class="toc-number">9.</span> <span class="toc-text">典型数字信号处理系统及其误差源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E5%8C%96%E8%AF%AF%E5%B7%AE%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">9.1.</span> <span class="toc-text">量化误差的统计分析模型</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2023/09/20/Digital-Signal-Processing/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Digital Signal Processing</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2023-09-20 09:51:58" itemprop="dateCreated datePublished" datetime="2023-09-20T09:51:58+08:00">2023-09-20</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2025-09-30 16:48:23" itemprop="dateModified" datetime="2025-09-30T16:48:23+08:00">2025-09-30</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><p>信号是某种随时间或&#x2F;和空间变化的物理量，其包含有从信源到信宿的某种信息。</p>
+<p>信号可以根据时间和幅度的取值方式分类</p>
+<ul>
+<li>连续时间信号</li>
+<li><ul>
+<li>在时间和幅度上均可以连续取值的信号</li>
+</ul>
+</li>
+<li>离散时间信号</li>
+<li><ul>
+<li>仅在离散时间点上取值，但可在幅度上连续取值的<br>信号</li>
+</ul>
+</li>
+<li>数字信号</li>
+<li><ul>
+<li>仅在离散时间点上取值，且在幅度上只能离散取值<br>的信号</li>
+</ul>
+</li>
+</ul>
+<h3 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h3><ul>
+<li>由若干相互作用和相互依赖的事物组合而成的具有特<br>定功能的整体</li>
+<li>具有它自身的结构、行为和性质，通过输入和输出与<br>其所处的环境进行交互，通常实现一定的功能</li>
+<li>可通过分析给定输入下输出的性质，来研究其行为和<br>性质</li>
+</ul>
+<p>信号处理系统</p>
+<ul>
+<li>对信号进行某种操作的单元或模块</li>
+<li>从数学上看，可视为作用于函数上的算子</li>
+</ul>
+<p>通常根据信号处理单元而非输入输出信号性质分类</p>
+<ul>
+<li>连续（模拟）信号处理系统</li>
+<li><ul>
+<li>由电阻、电容、电感和放大器等组成的模拟电路完成信号处<br>理功能</li>
+</ul>
+</li>
+<li><ul>
+<li>直接处理连续信号</li>
+</ul>
+</li>
+<li>离散信号处理系统</li>
+<li><ul>
+<li>由CCD、电容和放大器等组成的离散电路完成信号处理功能</li>
+</ul>
+</li>
+<li><ul>
+<li>处理由连续信号采样而来的离散时间信号</li>
+</ul>
+</li>
+<li>数字信号处理系统</li>
+<li><ul>
+<li>信号处理功能由数字逻辑电路或通用计算机来完成</li>
+</ul>
+</li>
+<li><ul>
+<li>处理数字信号（例如来源于对连续信号的采样和量化）</li>
+</ul>
+</li>
+</ul>
+<p>模拟 -&gt; 采样量化 -&gt; 数字信号处理系统 -&gt; 模拟重建 -&gt; 模拟输出信号</p>
+<h3 id="数字信号处理的局限"><a href="#数字信号处理的局限" class="headerlink" title="数字信号处理的局限"></a>数字信号处理的局限</h3><ul>
+<li>ADC和DAC器件的处理能力</li>
+<li><ul>
+<li>是否能够准确提取出原连续信号中的信息首先决定于<br>ADC：采样率、量化位数、时钟抖动、线性度等</li>
+</ul>
+</li>
+<li>精度受量化和舍入误差影响</li>
+<li><ul>
+<li>有限字长效应：数字系统中数字表示和计算精度受字<br>长限制</li>
+</ul>
+</li>
+<li>适合于数字处理的信号带宽受处理能力的限制</li>
+<li><ul>
+<li>例如，信号带宽10MHz、采样率20MHz、FIR滤波器阶<br>数为500，则所需计算量为每秒10G次的乘累加</li>
+</ul>
+</li>
+<li><ul>
+<li>如果带宽为1GHz呢?</li>
+</ul>
+</li>
+</ul>
+<h3 id="数字信号处理的发展"><a href="#数字信号处理的发展" class="headerlink" title="数字信号处理的发展"></a>数字信号处理的发展</h3><ul>
+<li>20世纪初至50年代有许多前期的研究工作，从采样<br>定理的建立到声码器的数字仿真实验等，奠定了理论<br>基础</li>
+<li>1965年FFT的提出，是DSP发展的里程碑 （但其源头<br>可追溯到高斯时代）</li>
+<li>离散变换的进展：65年FFT，70年代余弦变换，80年<br>代中后期小波变换</li>
+<li>滤波器设计技术：IIR、FIR数字滤波器，多采样处理<br>和滤波器组理论，专用滤波器设计，小波滤波</li>
+<li>统计和自适应信号处理，阵列处理等，从统计学引入<br>信号处理发展的另一条主线——现代信号处理</li>
+<li>器件和系统的发展对数字信号处理有积极推动</li>
+</ul>
+<h3 id="从模拟到数字"><a href="#从模拟到数字" class="headerlink" title="从模拟到数字"></a>从模拟到数字</h3><p>模拟信号的数字化：ADC</p>
+<p>采样：本课程主要考虑均匀采样。</p>
+<div>$$
+x[n] = x_a(nT) -\infty \lt n \lt \infty\\ 
+f_s = 1/T\\
+\Omega_s = 2\pi f_s
+$$</div>
+
+<p>采样的实现：采样保持电路</p>
+<p>采样周期：与被采样信号的频带参数一起决定了采样过程是否会发生混叠。</p>
+<p>采样过程的模糊性：采样过程可看作一种由连续信号空间到离散信号空间的多对一映射；对于给定的采样周期，仍存在无穷多个连续信号与同一离散信号对应。需要施加某种约束条件。</p>
+<p> 采样过程的基本问题：</p>
+<ul>
+<li>采样过程是否会引起被采样信号的信息丢失？</li>
+<li>被采样的连续信号是否能从采样样本中完全恢复？</li>
+<li>采样过程的频域分析可获得上述问题的答案</li>
+<li><ul>
+<li>推导得到采样后离散信号和采样前连续信号频谱间的数学关系</li>
+</ul>
+</li>
+<li><ul>
+<li>确定可以消除采样过程模糊性的条件</li>
+</ul>
+</li>
+<li><ul>
+<li>为实际数字信号处理系统设计中采样频率的选择、抗混叠前置滤波器的设计提供指导</li>
+</ul>
+</li>
+</ul>
+<p>采样的数学表示：</p>
+<div>$$
+s(t) = \sum_{n = -\infty}^{\infty}\delta(t - nT)\\
+x_s(t) = x_a(t) \cdot s(t)\\
+x[n] = x_a(nT)
+$$</div>
+
+<p>对连续信号进行采样，其频谱是原始信号的周期延拓，延拓周期为采样频率</p>
+<div>$$
+\begin{align*}
+\text{时域} & \quad \quad \text{频域} \\
+x_a(t) & \quad \quad X_a(j\Omega)\\
+s(t) & \quad \quad S(j\Omega) = \frac{2\pi}{T} \sum_{k=-\infty}^{+\infty} \delta(\Omega - k\Omega_s)\\
+x_a(t) \cdot s(t) & \quad \quad X_S(j\Omega) = \frac{1}{T} \sum_{k=-\infty}^{+\infty} X_a\bigg(j(\Omega - k\Omega_s)\bigg)
+\end{align*}
+$$</div>
+
+<p>带限信号和带通信号：</p>
+<ul>
+<li>带限信号：$X_a(j\Omega) &#x3D; 0, |\Omega| \ge \Omega_H$</li>
+<li>带通信号：$X_a(j\Omega) &#x3D; 0, |\Omega| \ge \Omega_H\text{ or }|\Omega| \le \Omega_L$</li>
+</ul>
+<p>带限信号的采样：</p>
+<!-- int, sum, frac partial -->
+
+<div>$$
+X_S(j\Omega) = \frac{1}{T} \sum_{k=-\infty}^{+\infty} X_a[j(\Omega - k\Omega_S)], \Omega_s \ge 2\Omega_H
+$$</div>
+
+<p>对应的离散时间序列：</p>
+<div>$$
+X(e^{j\Omega T}) = X_S(j\Omega) = \frac{1}{T} \sum_{k=-\infty}^{+\infty} X_a[j(\Omega - k\Omega_S)]\\
+\Rightarrow X(e^{j\omega}) = X_S(j\Omega) = \frac{1}{T} \sum_{k=-\infty}^{+\infty} X_a[j(\omega - 2\pi k)/T]\\
+$$</div>
+
+<p>带通采样让时间以$T \rightarrow 1$的形式进行归一化，频率以$\Omega_s \rightarrow 2\pi$的形式进行归一化。</p>
+<p>Nyquist 采样定理：</p>
+<div>$$
+X_a(j\Omega) = 0, \forall |\Omega| \ge \Omega_H\\
+\Omega_s = 2\pi / T \gt 2\Omega_H
+$$</div>
+
+<p>或者归一化频率</p>
+<div>$$
+\omega_H = \Omega_H T <  \pi
+$$</div>
+
+<p>Remark：</p>
+<ul>
+<li>$𝑥_𝑎(𝑡)$ 是基带、带限信号</li>
+<li>Nyquist是充分条件，即对被采样信号无其他假设</li>
+<li>在仅知道连续信号最高频率时，Nyquist采样定理给出<br>了由采样信号唯一确定（或恢复）原信号的条件</li>
+<li><ul>
+<li>已知连续信号最高频率，可用于确定最低采样频率</li>
+</ul>
+</li>
+<li><ul>
+<li>已知采样频率，可确定无混叠连续信号的最高频率</li>
+</ul>
+</li>
+</ul>
+<p>带通信号的采样：</p>
+<div>$$
+\frac{2f_H}{m+1} \le f_s \le \frac{2f_L}{m}, m\in \N ,m \le f_L/B
+$$</div>
+
+<p>带限连续信号的重建：</p>
+<ul>
+<li>由离散序列𝑥[𝑛]和采样周期𝑇，恢复原连续信号$𝑥_𝑟(𝑡)$</li>
+<li>由序列到冲激串转换和重建滤波两个步骤构成</li>
+<li>重建后的信号表示为</li>
+</ul>
+<div>$$
+x_r(t) = \sum_{x = -\infty}^{\infty}x[n]h_r(t - nT)
+$$</div>
+
+<p>如选择截止频率$\Omega_c &#x3D; \pi&#x2F;T$的理想低通滤波器：</p>
+<div>$$
+x_r(t) = \sum_{x = -\infty}^{\infty}x[n]\frac{\sin[\pi(t - nT)/T]}{\pi(t - nT)/T}
+$$</div>
+理想低通滤波器通过对冲激串信号的内插重建了原来的连续信号
+
+<p><strong>Summary</strong></p>
+<p>原信号：</p>
+<div>$$
+x_c(t) \leftrightarrow X_c(j\Omega)
+$$</div>
+
+<p>采样后的信号：</p>
+<div>$$
+\sum\limits_{n=-\infty}^{\infty}x[n]\delta(t - nT_s) = \sum\limits_{n=-\infty}^{\infty}x_c(t)\delta(t - nT_s) \leftrightarrow \frac{1}{T_s}X(e^{j\Omega T_s}) = \frac{1}{T_s}\sum\limits_{n=-\infty}^{\infty}X_c(j(\Omega - n\Omega_s))
+$$</div>
+
+<p>数字域：</p>
+<div>$$
+x[n] \leftrightarrow X(e^{j\omega}) = \frac{1}{T_s} X_c(j\omega /T_s)
+$$</div>
+
+<p>恢复信号：</p>
+<div>$$
+h_r(t) \leftrightarrow H_r(j\Omega) = \begin{cases}
+    T_s, &|\Omega| \le \pi / T_s, \\
+    0,   &|\Omega| \gt \pi / T_s
+\end{cases}\\
+\begin{align*}
+    x_r(t)  &= \sum\limits_{n=-\infty}^{\infty}x[n]\delta(t - nT_s) * h_r(t)\\
+            &= \sum\limits_{n=-\infty}^{\infty} x_c(nT_s)h_r(t - nT_s)\\
+            &= x_c(t)
+\end{align*}\ \leftrightarrow\ \begin{align*}
+    X_r(j\Omega) &= T_s X(e^{j\Omega T_s})H_r(j\Omega)\\
+    &= X_c(j\Omega)
+\end{align*}
+$$</div>
+
+<p>数字时域和模拟时域之间的关系：</p>
+<div>$$
+n = \frac{t}{T_s} = tf_s
+$$</div>
+
+<p>数字频域和模拟频域之间的关系：</p>
+<div>$$
+\omega = \Omega T_s = \frac{2\pi f}{f_s}
+$$</div>
+
+<h2 id="信号的表示"><a href="#信号的表示" class="headerlink" title="信号的表示"></a>信号的表示</h2><h3 id="离散信号的时域表示"><a href="#离散信号的时域表示" class="headerlink" title="离散信号的时域表示"></a>离散信号的时域表示</h3><ul>
+<li>时域表示方法<ul>
+<li>数学表达式：可表示基本信号，但大多数实际信号无解析表达式</li>
+<li>图形表示：直观、易理解，但不适用于刻画复杂信号</li>
+<li>数据表示：离散信号最一般的表示方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="离散信号的变换域表示"><a href="#离散信号的变换域表示" class="headerlink" title="离散信号的变换域表示"></a>离散信号的变换域表示</h3><ul>
+<li>定义：假设离散时间信号为𝑥[𝑛] ，定义映射𝑇{·}，那么信号的变换域表示可以写作𝑋 &#x3D; 𝑇{𝑥[𝑛]}<ul>
+<li>𝑇{·}是从函数空间到函数空间的映射</li>
+<li>𝑋并不要求一定定义在整数域上</li>
+</ul>
+</li>
+<li>常用情形：级数表示<ul>
+<li>将信号分解成有限项或无穷多项基本信号加权和的形式，由和式中每个基本信号的加权值组成的序列形成了原信号的变换域表示</li>
+<li>傅里叶级数展开 $x[n] &#x3D; \sum_k a_k e^{j2\pi kn &#x2F;T}$</li>
+</ul>
+</li>
+</ul>
+<h3 id="离散信号的正交函数表示"><a href="#离散信号的正交函数表示" class="headerlink" title="离散信号的正交函数表示"></a>离散信号的正交函数表示</h3><ul>
+<li>使用信号空间的完备正交基来表示离散信号，<div>$$
+\lbrace\ldots ,\varphi_0[n] ,\varphi_1[n] ,\varphi_2[n] , \ldots\rbrace
+$$</div></li>
+<li>正交性：<div>$$
+\sum_{n} \varphi_k^*[n] \varphi_l[n] = \delta_{kl}
+$$</div>
+其中，$k \neq l$。</li>
+</ul>
+<ul>
+<li>完备性<ul>
+<li>任何一个信号都可由这组基函数通过线性叠加而构成</li>
+</ul>
+</li>
+<li>加权系数的计算<ul>
+<li>对基函数的投影：</li>
+</ul>
+</li>
+</ul>
+<div>$$
+c_k = \frac{\langle x[n], \phi_k[n]\rangle}{||\phi_k[n]||^2}
+$$</div>
+
+<p>DFT 的定义如下：</p>
+<div>$$
+X[k] = \sum_{n=0}^{N-1} x[n]e^{-j2\pi kn/N}
+$$</div>
+其中，$x[n]$为输入信号的离散样本，$N$为采样点数，$X[k]$为输出的频域样本。
+
+<p>DCT 的定义如下：</p>
+<div>$$
+X[k] = \sum_{n=0}^{N-1} x[n]\cos\left(\frac{\pi}{N}(n + 0.5)k\right)
+$$</div>
+其中，$x[n]$为输入信号的离散样本，$N$为采样点数，$X[k]$为输出的频域样本。
+
+<h3 id="离散信号的特征域（量）表示"><a href="#离散信号的特征域（量）表示" class="headerlink" title="离散信号的特征域（量）表示"></a>离散信号的特征域（量）表示</h3><ul>
+<li>特征量表示指由信号的时域或频域表示来计算用<br>于表征信号的特征量<ul>
+<li>例如能量、功率、均值、相关函数、功率谱</li>
+<li>特征量表示通常是单向性的，由特征量表示一般不能完整地恢复原信号的所有取值</li>
+<li>实践中，经常用特征量来表示随机信号</li>
+</ul>
+</li>
+</ul>
+<h3 id="离散信号的单位抽样信号表示："><a href="#离散信号的单位抽样信号表示：" class="headerlink" title="离散信号的单位抽样信号表示："></a>离散信号的单位抽样信号表示：</h3><p>单位抽样信号的移位作为基信号：</p>
+<div>$$
+\varphi_k[n] = \delta[n - k], \quad k \in (-\infty, \ldots, -1, 0, 1, \ldots, \infty)
+$$</div>
+
+<p>• 正交性验证：</p>
+<div>$$
+\langle\varphi_k[n],\varphi_l[n]\rangle = \sum_{n=-\infty}^{\infty} \delta[n - k] \delta[n - l] = \delta[k - l]
+$$</div>
+
+<p>• 系数计算：</p>
+<div>$$
+c_k = \frac{\langle x[n],\varphi_k[n]\rangle}{\varphi_k[n]^2} = x[k]
+$$</div>
+
+<p>• 离散信号的单位抽样表示为：</p>
+<div>$$
+x[n] = \sum_{k=-\infty}^{\infty} c_k\varphi_k[n] = \sum_{k=-\infty}^{\infty} x[k] \delta[n - k]
+$$</div>
+
+<p>离散信号的复指数信号表示如下：</p>
+<p>• 复指数信号作为基信号：</p>
+<div>$$
+\varphi_\omega[n] = e^{j\omega n}, \quad 0 \leq \omega <  2\pi
+$$</div>
+
+<p>• 正交性验证：</p>
+<div>$$
+\langle\varphi_{\omega_1}[n],\varphi_{\omega_2}[n]\rangle = \sum_{n=-\infty}^{\infty} e^{j\omega_1 n} e^{-j\omega_2 n} = \begin{cases} 
+0, & \omega_1 \neq \omega_2 \\
+\infty, & \omega_1 = \omega_2 
+\end{cases}
+$$</div>
+
+<p>• 系数计算：</p>
+<div>$$
+X(e^{j\omega}) = \langle x[n], e^{j\omega n} \rangle = x[n] e^{-j\omega n}
+$$</div>
+
+<p>• 离散信号的复指数信号表示为：</p>
+<div>$$
+x[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{j\omega}) e^{j\omega n} d\omega
+$$</div>
+
+<h3 id="有限长离散信号的正交函数表示"><a href="#有限长离散信号的正交函数表示" class="headerlink" title="有限长离散信号的正交函数表示"></a>有限长离散信号的正交函数表示</h3><p>• 对于长度为$N$的有限长离散序列，选择以下$N$个序列作为基信号：</p>
+<div>$$
+\varphi_k[n] = e^{j\frac{2\pi}{N}kn}R_N[n], \quad k = 0,1,2,\ldots,N-1
+$$</div>
+
+<p>• 正交性验证：</p>
+<div>$$
+\langle \varphi_k[n],\varphi_l[n] \rangle = \sum_{n=0}^{N-1} e^{j\frac{2\pi}{N}(k-l)n} = \begin{cases} 
+N, & k = l \\
+0, & k \neq l 
+\end{cases}
+$$</div>
+
+<p>• 系数计算：</p>
+<div>$$
+X[k] = \sum_{n=0}^{N-1} x[n] e^{-j\frac{2\pi}{N}kn}, \quad k = 0,1,2,\ldots,N-1
+$$</div>
+
+<p>• 有限长离散序列可以表示为：</p>
+<div>$$
+x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] e^{j\frac{2\pi}{N}kn}, \quad n = 0,1,2,\ldots,N-1
+$$</div>
+
+<ul>
+<li>离散信号的因果性:<ul>
+<li>𝑥[𝑛] &#x3D; 0，for 𝑛 &lt; 0</li>
+</ul>
+</li>
+</ul>
+<p>因果连续信号抽样后一定是因果离散信号。</p>
+<ul>
+<li>离散信号的对称性：</li>
+</ul>
+<p>• 共轭对称性：</p>
+<ul>
+<li>正对称：$x[n] &#x3D; x^*[-n]$</li>
+<li>反对称：$x[n] &#x3D; -x^*[-n]$</li>
+</ul>
+<p>• 任意信号都可以表示为奇分量和偶分量的和：<br>  $x[n] &#x3D; x_o[n] + x_e[n]$<br>  其中，$x_o[n] &#x3D; \frac{1}{2}(x[n] - x^*[-n])$为奇分量，$x_e[n] &#x3D; \frac{1}{2}(x[n] + x^*[-n])$为偶分量。</p>
+<p>• 若信号具有实因果性，可以通过奇分量或偶分量来恢复原信号：</p>
+<div>$$
+x[n] = \begin{cases}
+0, & n <  0 \\
+x_e[n], & n = 0 \\
+2x_e[n], & n > 0
+\end{cases}
+$$</div>
+
+<ul>
+<li>离散信号的周期性：<ul>
+<li>$𝑥[n] &#x3D; 𝑥[𝑛 + N]$</li>
+</ul>
+</li>
+</ul>
+<p>周期连续信号均匀采样后<strong>不</strong>一定是周期离散信号。</p>
+<div>$$
+\omega_0 = \Omega_0T = 2\pi\frac{T}{T_0}
+$$</div>
+
+<p>离散余弦信号的数字角频率 $\omega_0$ 由采样周期和连续信号周期的比值决定。该比值决定了采样后的信号是否具有周期性。</p>
+<h3 id="离散系统的表示"><a href="#离散系统的表示" class="headerlink" title="离散系统的表示"></a>离散系统的表示</h3><p>离散系统的表示可以使用以下公式来描述：</p>
+<div>$$y[n] = \sum\_{k=-\infty}^{\infty} h[k]x[n-k]$$</div>
+
+<p>其中，$y[n]$表示系统的输出，$x[n]$表示系统的输入，$h[k]$表示系统的单位冲激响应。这个公式是卷积的离散形式，也称为离散卷积。</p>
+<p>对于因果性，一个离散系统被称为因果性系统，如果它对任何$n &lt;  0$的输入信号$x[n]$都产生$y[n] &#x3D; 0$的输出。这意味着输出只依赖于当前和过去的输入。</p>
+<p>对于稳定性，一个离散系统被称为稳定系统，如果对于有界的输入信号$x[n]$，输出$y[n]$仍然是有界的。</p>
+<p>LTI（线性时不变）系统是指具有线性性质和时不变性质的系统。线性性质意味着系统满足叠加原理，即对于输入信号$x_1[n]$和$x_2[n]$，系统的输出满足$y_1[n] + y_2[n]$。时不变性质意味着系统的单位冲激响应$h[k]$与输入信号$x[n]$的延迟无关。</p>
+<p>单位冲激响应是指当输入信号为单位冲激函数$\delta[n]$时，系统的输出。单位冲激响应通常用$h[n]$表示。</p>
+<p>LTI系统可完全由单位冲激响应来表征。</p>
+<p>因果性判据：单位冲激响应是一个因果信号。<br>稳定性判据：$S &#x3D; \sum_{k &#x3D; -\infty}^\infty |h[k]| \lt +\infty$</p>
+<p><strong>特征函数与特征值</strong></p>
+<div>$$
+T\lbrace s[n]\rbrace = \lambda s[n]
+$$</div>
+
+<p><strong>LTI系统的特征函数与特征值</strong></p>
+<div>$$
+T\lbrace e^{j\omega n}\rbrace =\sum\limits_{k=-\infty}^{\infty}h[k]e^{j\omega (n - k)} = \underbrace{e^{j\omega n}}_{特征函数}\cdot\underbrace{\sum\limits_{k=-\infty}^{\infty}h[k]e^{-j\omega k}}_{特征值}
+$$</div>
+
+<p>$y[n]$ 可看作 $x[n]$ 经过特征信号分解、加权、求和的结果：</p>
+<div>$$
+y[n] = \frac{1}{2\pi} \int_{-\pi}^\pi H(e^{j\omega})X(e^{j\omega})e^{j\omega n}\mathrm d\omega
+$$</div>
+
+<ul>
+<li>频率响应函数：单位冲激响应的DTFT</li>
+</ul>
+<div>$$
+H(e^{j\omega}) =\sum\limits_{n=-\infty}^{\infty}h[n]e^{-j\omega n}
+$$</div>
+
+<ul>
+<li>系统函数</li>
+</ul>
+<div>$$
+H(z) =\sum\limits_{n=-\infty}^{\infty}h[n]z^{-n}
+$$</div>
+
+<ul>
+<li>系统差分方程</li>
+</ul>
+<div>$$
+\sum\limits_{k=0}^{N} a_ky[n - k] =\sum\limits_{k=0}^{M} b_kx[n - k]
+$$</div>
+
+<ul>
+<li>系统状态空间</li>
+</ul>
+<div>$$
+\lambda[n + 1] = A\lambda[n] + Bx[n]\\
+y[n] = C\lambda[n] + Dx[n]
+$$</div>
+
+<h2 id="DTFT-与-DFT"><a href="#DTFT-与-DFT" class="headerlink" title="DTFT 与 DFT"></a>DTFT 与 DFT</h2><h3 id="DTFT"><a href="#DTFT" class="headerlink" title="DTFT"></a>DTFT</h3><div>$$
+\begin{cases}
+    X(e^{j\omega}) =\sum\limits_{n=-\infty}^{\infty}x[n]e^{-j\omega n}\\
+    x[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi}X(e^{j\omega})e^{j\omega n}\mathrm d\omega
+\end{cases}
+$$</div>
+
+<p>与连续频谱的关系：</p>
+<div>$$
+X(e^{j\omega}) = \frac{1}{T}\sum\limits_{k=-\infty}^{\infty}X_a\left[j\left(\frac{\omega}{T} - k\frac{2\pi}{T}\right)\right]\\
+\omega = \Omega T
+$$</div>
+
+<p>基本性质：</p>
+<ul>
+<li>周期性</li>
+</ul>
+<div>$$
+X(e^{j\omega}) = X(e^{j\omega + 2k\pi}), k\in \Z
+$$</div>
+
+<ul>
+<li>线性</li>
+</ul>
+<div>$$
+ax[n] + by[n] \lrarr aX(e^{j\omega}) + bY(e^{j\omega})
+$$</div>
+
+<ul>
+<li>频域求导</li>
+</ul>
+<div>$$
+nx[n] \lrarr j\frac{\mathrm dX(e^{j\omega})}{\mathrm d\omega}
+$$</div>
+
+<ul>
+<li>Parseval 定理：</li>
+</ul>
+<div>$$
+\sum\limits_{n=-\infty}^{\infty}||x[n]||^2 = \frac{1}{2\pi}\int_{-\pi}^{\pi}||X(e^{j\omega})||^2\mathrm d\omega
+$$</div>
+
+<ul>
+<li>序列的调制</li>
+</ul>
+<div>$$
+x[n]e^{j\omega_0 n} \lrarr X(e^{j(\omega - \omega_0)})
+$$</div>
+
+<p>实现数字变频：</p>
+<div>$$
+x_B[n] = x[n]e^{-j\frac{\pi}{2}n}
+$$</div>
+
+<ul>
+<li>序列的平移</li>
+</ul>
+<div>$$
+x[n - n_0] \lrarr e^{-j\omega n_0}X(e^{j\omega})
+$$</div>
+
+<ul>
+<li>共轭对称性</li>
+</ul>
+<div>$$
+x_e[n] \lrarr \text{Re}\lbrace X(e^{j\omega}) \rbrace
+$$</div>
+
+<div>$$
+x_o[n] \lrarr \text{Im}\lbrace X(e^{j\omega}) \rbrace
+$$</div>
+
+<p>下面是修正后的表格：</p>
+<table>
+<thead>
+<tr>
+<th align="center">序列 $x[n]$</th>
+<th align="center">DTFT $X(e^{j\omega})$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$x[n]$</td>
+<td align="center">$X(e^{j\omega})$</td>
+</tr>
+<tr>
+<td align="center">$x^*[n]$</td>
+<td align="center">$X^*(e^{-j\omega})$</td>
+</tr>
+<tr>
+<td align="center">$x^*[-n]$</td>
+<td align="center">$X^*(e^{j\omega})$</td>
+</tr>
+<tr>
+<td align="center">$x_R[n]$</td>
+<td align="center">$X_e(e^{j\omega})$</td>
+</tr>
+<tr>
+<td align="center">$jx_I[n]$</td>
+<td align="center">$X_o(e^{j\omega})$</td>
+</tr>
+<tr>
+<td align="center">$x_e[n]$</td>
+<td align="center">$X_R(e^{j\omega})$</td>
+</tr>
+<tr>
+<td align="center">$x_o[n]$</td>
+<td align="center">$jX_I(e^{j\omega})$</td>
+</tr>
+<tr>
+<td align="center">以下为实信号</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">$x[n] &#x3D; x^*[n]$</td>
+<td align="center">，$X(e^{j\omega}) &#x3D; X^*(e^{-j\omega})$</td>
+</tr>
+<tr>
+<td align="center">$x_e[n] &#x3D; \frac{1}{2}(x[n] + x[-n])$</td>
+<td align="center">$X_R(e^{j\omega})$ 实、偶函数</td>
+</tr>
+<tr>
+<td align="center">$x_o[n] &#x3D; \frac{1}{2}(x[n] - x[-n])$</td>
+<td align="center">$jX_I(e^{j\omega})$  虚、奇函数</td>
+</tr>
+</tbody></table>
+<ul>
+<li>卷积与相关性质<ul>
+<li>时域卷积： $x[n] * y[n] \lrarr X(e^{j\omega})\cdot Y(e^{j\omega})$</li>
+<li>频域卷积：$x[n] \cdot y[n] \lrarr \frac{1}{2\pi}X(e^{j\omega}) * Y(e^{j\omega})$</li>
+<li>时域相关：<ul>
+<li>互相关：$r_{xy}[k] &#x3D;\sum\limits_{k&#x3D;-\infty}^{\infty}x[n]y^*[n - k]$</li>
+<li>自相关：$r_{xx}[k] &#x3D;\sum\limits_{k&#x3D;-\infty}^{\infty}x[n]x^*[n - k]$</li>
+<li>$R_{xy}(e^{j\omega}) &#x3D; X(e^{j\omega}) \cdot Y^*(e^{j\omega})$</li>
+<li>$R_{xx}(e^{j\omega}) &#x3D; X(e^{j\omega}) \cdot X^*(e^{j\omega})$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>DTFT的存在条件：</strong></p>
+<p>取决于 $\sum\limits_{n&#x3D;-\infty}^{\infty}x[n]e^{-j\omega n}$ 的收敛性</p>
+<p>有限和序列 $X_N(e^{j\omega}) &#x3D;\sum\limits_{n&#x3D;-N}^{N}x[n]e^{-j\omega n}$</p>
+<ul>
+<li>若 $x[n]$ 绝对可和，则 DTFT 存在，且一致收敛</li>
+<li>若序列满足平方可和，则 DTFT 满足均方收敛性<ul>
+<li>截断误差的能量趋于0，但是某些点的误差的绝对值不一定趋于0（例如理想低通滤波器，有吉布斯现象，在截止频率附近存在一个独立于 $N$ 的震荡，即使 $N$ 趋于无穷，在某些频率点上还是存在9%左右的误差）</li>
+</ul>
+</li>
+</ul>
+<p><strong>特殊信号的 DTFT</strong></p>
+<ul>
+<li>符号序列</li>
+</ul>
+<div>$$
+\text{sgn}[n] = \begin{cases}
+    1, &n\gt 0,\\
+    0, &n = 0\\
+    -1, &n \lt 0
+\end{cases} \lrarr \text{SGN}(e^{j\omega}) = \frac{1}{j} \cot \left(\frac{\omega}{2}\right)
+$$</div>
+
+<ul>
+<li>阶跃序列</li>
+</ul>
+<div>$$
+u[n] = \frac{1}{2}(\text{sgn}[n] + 1) + \frac{1}{2} \delta[n] \lrarr U(e^{j\omega}) = \frac{1}{1 - e^{-j\omega} + \pi} + \pi\sum\limits_{k=-\infty}^{\infty}\delta(\omega - 2\pi k)
+$$</div>
+
+<ul>
+<li>离散周期单位冲激串</li>
+</ul>
+<div>$$
+x[n] =\sum\limits_{k=-\infty}^{\infty}\delta[n - kN]\lrarr X(e^{j\omega}) =\sum\limits_{k=-\infty}^{\infty}e^{-j\omega k N} = \frac{2\pi}{N}\sum\limits_{k=-\infty}^{\infty}\delta(\omega - \frac{2k\pi}{N})
+$$</div>
+
+<p>离散时限信号与周期单位冲激串的卷积，在频域上表现为对 DTFT 的采样，这正是从 DTFT 到 DFT 的过渡。</p>
+<h3 id="DFT"><a href="#DFT" class="headerlink" title="DFT"></a>DFT</h3><p>DTFT给出了离散信号频域的全部信息，但在实际应用中存在如下困难：</p>
+<ul>
+<li>实际信号往往没有解析表达式，无法计算其DTFT</li>
+<li>实际物理装置只能采集有限长度的数据</li>
+<li>DTFT给出的频谱是连续的，无法用数字设备记录和存储全部的值</li>
+</ul>
+<h4 id="DFT-的定义"><a href="#DFT-的定义" class="headerlink" title="DFT 的定义"></a>DFT 的定义</h4><div>$$
+\begin{cases}
+    X[k] =\sum\limits_{n=0}^{N - 1}x[n]W_N^{nk}, &k = 0, 1, 2, \dots, N - 1\\
+    x[n] =\frac{1}{N}\sum\limits_{n=0}^{N - 1}x[n]W_N^{-nk}, &k = 0, 1, 2, \dots, N - 1\\
+\end{cases}
+$$</div>
+
+<p>其中，</p>
+<div>$$
+W_N = e^{-j\frac{2\pi}{N}}
+$$</div>
+
+<h4 id="理解-DFT"><a href="#理解-DFT" class="headerlink" title="理解 DFT"></a>理解 DFT</h4><p>DFT 是 DTFT 的频域采样</p>
+<div>$$
+X(e^{j\omega}) =\sum\limits_{n=-\infty}^{\infty}x[n]e^{j\omega n}\\
+X[k] = X(e^{j\omega})\big |_{\omega_k = \frac{2\pi}{N}k} =\sum\limits_{n=-\infty}^{\infty}x[n]e^{-j\frac{2\pi}{N}kn}
+$$</div>
+
+<ul>
+<li><p>频域乘积等价于时域卷积，因此对离散序列在频域上以2𝜋&#x2F;𝑁为周期进行采样，等效于离散信号在时域上进行周期延拓，延拓周期为𝑁</p>
+</li>
+<li><p>为保证离散序列频域采样对应的时域序列不发生混叠，要求原离散序列为有限长且长度不超过𝑁。</p>
+</li>
+</ul>
+<h4 id="DFT-的频域重构"><a href="#DFT-的频域重构" class="headerlink" title="DFT 的频域重构"></a>DFT 的频域重构</h4><ul>
+<li>首先需要 $N \ge L$</li>
+</ul>
+<div>$$
+\begin{align*}
+    X(e^{j\omega}) &=\sum\limits_{n=0}^{N - 1}x[n]e^{-j\omega n} =\sum\limits_{n=0}^{N - 1}\bigg[\frac{1}{N}\sum\limits_{n=0}^{N - 1}X[k]e^{j\frac{2k\pi}{N}n}\bigg]e^{-j\omega n}\\
+    &=\sum\limits_{k=0}^{N - 1}X[k]\bigg[\frac{1}{N}\sum\limits_{n=0}^{N - 1}e^{-j(\omega - \frac{2k\pi}{N}n)}\bigg]\\
+    &=\sum\limits_{k=0}^{N - 1} X[k]P\bigg(\omega - \frac{2k\pi}{N}\bigg)
+\end{align*}
+$$</div>
+
+<p>其中，内插函数</p>
+<div>$$
+P(\omega) = \frac{1}{N}\sum\limits_{n=0}^{N - 1} e^{-j\omega n} = \frac{1}{N}\frac{\sin (\omega N / 2)}{\sin (\omega / 2)}e^{-j \frac{N - 1}{2}\omega}
+$$</div>
+
+<h4 id="理解-DFT-II"><a href="#理解-DFT-II" class="headerlink" title="理解 DFT II"></a>理解 DFT II</h4><p>离散正交变换的定义：</p>
+<ul>
+<li>定义变换矩阵 $A$， 若 $A$ 满足 $A^HA &#x3D; cI$，其中$c$为常数，则称 $X &#x3D; Ax$ 为离散正交变换。若 $c &#x3D; 1$，则称变换是归一化的。</li>
+<li>归一化的离散正交变换满足 Parseval 定理：$||X||^2 &#x3D; X^HX &#x3D; x^HA^HAx &#x3D; x^Hx &#x3D; ||x||^2$</li>
+</ul>
+<p>DFT 是对离散时间信号的加权求和，其向量形式</p>
+<ul>
+<li>$X[k] &#x3D; w_k^Hx$, $w_k &#x3D; [e^{j\frac{2\pi0k}{N}}, e^{j\frac{2\pi1k}{N}}, \dots, e^{j\frac{2\pi(N - 1)k}{N}}]^T$</li>
+<li>$X &#x3D; [X[0], X[1], \dots, X[N - 1]]^T$，则有$X &#x3D; [w_0, w_1, \dots, w_{N - 1}]^Hx &#x3D; W_Nx$</li>
+</ul>
+<div>$$
+X = W_Nx\\
+x = \frac{1}{N} W_N^HX
+$$</div>
+
+<h4 id="DFT-的周期延拓"><a href="#DFT-的周期延拓" class="headerlink" title="DFT 的周期延拓"></a>DFT 的周期延拓</h4><p>• DFT本意是用有限个离散频域样本来表示有限长离散序列</p>
+<p>– 时域采样对应着频域周期延拓，频域采样对应着时域周期延拓</p>
+<p>• 由于周期延拓，DFT总是面对着周期序列</p>
+<p>– 在DFT计算和应用中，总是选择时域和频域的主值区间</p>
+<p>– DFT这种隐含的周期性决定了其与DTFT具有不同的性质</p>
+<p><strong>周期延拓的数学表示</strong></p>
+<div>$$
+\big((n)\big)_N
+$$</div>
+
+<p>周期延拓可以表示为：</p>
+<div>$$
+\tilde X[k] = X\bigg[\big((k)\big)_N\bigg]
+\tilde x[n] = X\bigg[\big((n)\big)_N\bigg]
+$$</div>
+
+<p>也可表示为卷积和：</p>
+<div>$$
+\tilde{X}[k] = X[k] *\sum\limits_{m=-\infty}^{\infty}\delta[k - mN] =\sum\limits_{m=-\infty}^{\infty}X[k - mN]\\\tilde{x}[n] = x[n] *\sum\limits_{m=-\infty}^{\infty}\delta[n - mN] =\sum\limits_{m=-\infty}^{\infty}x[n - mN]
+$$</div>
+
+<h4 id="DFT-性质"><a href="#DFT-性质" class="headerlink" title="DFT 性质"></a>DFT 性质</h4><ul>
+<li>线性性<ul>
+<li>前提：变换长度 $N$ 相同</li>
+<li>如果不相同，补零到长度 $N \ge \max(N_1, N_2)$</li>
+</ul>
+</li>
+<li>反转性质：若时域循环反转，则频域循环反转<ul>
+<li>$\text{DFT} \Bigg\lbrace x\big[\big((-n)\big)_N\bigg] R_N[n]\Bigg\rbrace &#x3D; X\bigg[\big((-k)\big)_N\bigg] R_N[k]$</li>
+<li>0 时刻不变，其余前后反转</li>
+</ul>
+</li>
+<li>共轭性质：若时域共轭，则频域共轭且循环反转<ul>
+<li>$\text{DFT}\lbrace x^*[n]\rbrace &#x3D; X^*[N - k]$</li>
+</ul>
+</li>
+<li>对偶性质：序列的DFT的DFT<ul>
+<li>$\text{DFT}\lbrace X[n]\rbrace &#x3D; NX^*[N - k]$</li>
+</ul>
+</li>
+<li>周期序列的共轭对称性：<ul>
+<li>共轭对称：$x_{ep}[n] &#x3D; x^*_{ep}\bigg[\big((-n)\big)_N\bigg]$</li>
+<li>共轭反对称：$x_{ep}[n] &#x3D; -x^*_{ep}\bigg[\big((-n)\big)_N\bigg]$</li>
+<li>任意有限长序列的周期延拓总可以分解为周期共轭对称和反对称的分量和的形式<ul>
+<li>$x[n] &#x3D; x_{ep}[n] + x_{op}[n]$</li>
+<li>$x_{ep}[n] &#x3D; \frac12 (x[n] + x^*\bigg[\big((-n)\big)_N\bigg])$</li>
+<li>$x_{op}[n] &#x3D; \frac12 (x[n] - x^*\bigg[\big((-n)\big)_N\bigg])$</li>
+</ul>
+</li>
+<li>实序列的DFT是周期共轭对称序列</li>
+<li>虚序列的DFT是周期共轭反对称序列</li>
+<li>周期共轭对称序列的DFT是实的</li>
+<li>周期共轭反对称序列的DFT是虚的</li>
+</ul>
+</li>
+<li>循环卷积性质：<ul>
+<li>有限长循环移位的 DFT 可以由原序列 DFT 乘上一个线性的相位因子得到：$\text{DFT}\Bigg \lbrace\bigg[x\big((n - m)\big)_N\bigg]\Bigg \rbrace &#x3D; X[k]e^{-j\frac{2\pi k}{N}m}$</li>
+<li>在 DTFT 中：$x[n] * y[n] &#x3D; \text{IDTFT}\lbrace X(e^{j\omega}) \cdot Y(e^{j\omega})\rbrace$</li>
+<li>DFT 中：$x[n] \circledast y[n] &#x3D;\sum\limits_{m&#x3D;0}^{N - 1}x[m]y\bigg[\big((n - m)\big)_N\bigg] &#x3D;\sum\limits_{m&#x3D;0}^{N - 1}x\bigg[\big((n - m)\big)_N\bigg]y[m]$</li>
+</ul>
+</li>
+<li>Parseval 定理：<ul>
+<li>$\sum\limits_{n&#x3D;0}^{N - 1}|x[n]|^2 &#x3D; \frac{1}{N}\sum\limits_{k&#x3D;0}^{N - 1}|X[k]|^2$</li>
+</ul>
+</li>
+</ul>
+<h2 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h2><p>FFT 算法是一大类 DFT 快速算法的总称。</p>
+<ul>
+<li>基 2 FFT 算法：$N &#x3D; 2^m$</li>
+<li>基 4 FFT 算法：$N &#x3D; 4^m$</li>
+<li>分裂基算法：基本蝶形是倒 L 型，$N &#x3D; 2^m$</li>
+<li>组合数 FFT 算法：变换点数为组合数，即$N &#x3D; N_1N_2$</li>
+</ul>
+<p>根据处理基本蝶形的结构特点，可以分为：</p>
+<ul>
+<li>DIT (Decimation-In-Time)</li>
+<li>DIF (Decimation-In-Frequency)</li>
+</ul>
+<h3 id="基-2-DIT-FFT-算法"><a href="#基-2-DIT-FFT-算法" class="headerlink" title="基 2 DIT-FFT 算法"></a>基 2 DIT-FFT 算法</h3><p>按照奇偶时间拆分成两个短序列。</p>
+<p>长序列的 DFT 可以由两个短序列的 DFT 组合得到。</p>
+<div>$$
+X[k] = \sum\limits_{m=0}^{N/2 - 1}x[2m]W_N^{2mk} + \sum\limits_{m=0}^{N/2 - 1} x[2m + 1]W_N^{(2m + 1)k}\\
+f_1[n] = x[2n], f_2[n] = x[2n + 1]\\
+X[k] = F_1[k] + W_N^kF_2[k]\\
+X[k + N/2] = F_1[k] - W_N^kF_2[k]
+$$</div>
+
+<p>反复抽取，变成2点 DFT：</p>
+<div>$$
+\begin{bmatrix}
+    X[0]\\
+    X[1]
+\end{bmatrix} = \begin{bmatrix}
+    x[0] + x[1]\\
+    x[0] - x[1]
+\end{bmatrix}
+$$</div>
+
+<p><img src="/../images/DSP/4_2.jpg" alt="alt" loading="lazy"></p>
+<p>计算复杂度：</p>
+<ul>
+<li>乘法次数为$\frac{N}{2}\log_2N$，$m_a &#x3D; Nm &#x3D; N\log_2 N$</li>
+</ul>
+<p>输入和输出序列的顺序关系：二进制下的倒序关系。</p>
+<ul>
+<li>每次均分时，输入序列按照奇偶性划分，输出序列按照是否过半划分</li>
+<li>输入序列的奇偶性等价于最低位为1还是0，输出序列是否过半等价于最高位为1还是0</li>
+<li>因此输入映射到输出序列是低位映射到高位的关系。</li>
+</ul>
+<h2 id="数字频谱分析"><a href="#数字频谱分析" class="headerlink" title="数字频谱分析"></a>数字频谱分析</h2><h3 id="DFT-谱分析的基本概念"><a href="#DFT-谱分析的基本概念" class="headerlink" title="DFT 谱分析的基本概念"></a>DFT 谱分析的基本概念</h3><p>频谱：信号经过傅里叶变换转换到频域后，其频域表示的幅度和相位随频率变化的关系分别称为信号的幅度谱和相位谱</p>
+<p>基于 DFT 的数字频谱分析</p>
+<p>利用离散信号 DFT 结果 $X[k]$ 与原连续信号频谱 $X_a(j\Omega)$ 之间存在对应关系来获得连续信号的频谱。</p>
+<div>$$
+X[k] = X(e^{j\omega})|_{\omega = \frac{2\pi}{N}k}
+$$</div>
+
+<div>$$
+X(e^{j\omega}) = \frac{1}{T_s}X_a(j\Omega)|_{\Omega = \frac{\omega}{T_s}}
+$$</div>
+
+<div>$$
+ X_a(j\Omega_k)= T_s X[k]
+$$</div>
+
+<p>利用 DFT 结果获得连续信号的频谱：</p>
+<div>$$
+X_a(j\Omega_k) = X_a \left ( j\frac{2\pi k}{NT_s} \right) = \begin{cases}
+    T_sX[k], 0 \le k \le \lceil \frac{N}{2} \rceil, \\
+    T_sX[k + N], - \lceil \frac{N - 1}{2} \rceil\le k \lt 0
+\end{cases}
+$$</div>
+
+<p>基于DFT的频谱分析方法存在的问题</p>
+<ul>
+<li>理论上连续正弦信号的频谱应为冲激函数，但DFT结果为有限值</li>
+<li>DFT结果在连续正弦信号频谱幅度为0的位置却不为零</li>
+</ul>
+<h3 id="DFT-谱分析的一般过程"><a href="#DFT-谱分析的一般过程" class="headerlink" title="DFT 谱分析的一般过程"></a>DFT 谱分析的一般过程</h3><h4 id="抗混叠滤波"><a href="#抗混叠滤波" class="headerlink" title="抗混叠滤波"></a>抗混叠滤波</h4><p><img src="/../images/DSP/5_1.jpg" alt="alt" loading="lazy"></p>
+<h4 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h4><p>提高采样率</p>
+<ul>
+<li>优点：能够无混叠分析的信号带宽增大</li>
+<li>缺点：数据率提高，系统复杂度增加，成本上升</li>
+</ul>
+<h4 id="加窗"><a href="#加窗" class="headerlink" title="加窗"></a>加窗</h4><p>由于DFT只能处理有限长序列，需要对输入信号<br>通过加窗进行截断</p>
+<ul>
+<li>窗长可根据频率分辨率、实时性和设备存储能力的要<br>求来权衡</li>
+<li>窗函数的形式也可根据主瓣宽度和旁瓣电平进行选择</li>
+</ul>
+<div>$$
+w_R[n] = \begin{cases}
+    1, 0 \le n \lt M\\
+    0, \text{others}
+\end{cases}
+$$</div>
+
+<div>$$
+x_w[n] = x[n]w_R[n]
+$$</div>
+
+<h4 id="DFT计算、插值及频谱输出"><a href="#DFT计算、插值及频谱输出" class="headerlink" title="DFT计算、插值及频谱输出"></a>DFT计算、插值及频谱输出</h4><p>DFT计算</p>
+<ul>
+<li>可能需要补零，以获得更密集的频域采样，以及使变换点数𝑁满足FFT算法的要求（基2-FFT、基4-FFT）</li>
+</ul>
+<p>插值</p>
+<ul>
+<li>由DFT结果获得DTFT的估计值</li>
+<li>插值方法：<ul>
+<li>精确插值： $X(e^{j\omega}) &#x3D;\sum\limits_{k&#x3D;0}^{N - 1} X[k] P \left ( \omega - \frac{2\pi k}{N} \right)$, $P(\omega) &#x3D; \frac{\sin(\omega N&#x2F;2)}{\sin(\omega&#x2F;2)}e^{-j\frac{N-1}{2}\omega}$</li>
+<li>近似插值：线性插值，二次插值</li>
+</ul>
+</li>
+</ul>
+<p>连续信号频谱输出<br>– 通过坐标变换得到连续信号频谱 $X_a(j\Omega) &#x3D; T_sX(e^{j\Omega T_s})$</p>
+<h3 id="DFT-谱分析问题"><a href="#DFT-谱分析问题" class="headerlink" title="DFT 谱分析问题"></a>DFT 谱分析问题</h3><h4 id="谱分析滤波器"><a href="#谱分析滤波器" class="headerlink" title="谱分析滤波器"></a>谱分析滤波器</h4><div>$$
+s(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty}S(j\Omega)e^{j\Omega t}\mathrm d\Omega\\
+s(nT_s) = \frac{1}{2\pi} \int_{-\infty}^{\infty}S(j\Omega)e^{j\Omega nT_s}\mathrm d\Omega\\
+x[n] = \begin{cases}
+    s(nT_s), n = 0, 1, \dots, M - 1,\\
+    0, M, M + 1, \dots, N - 1
+\end{cases}\\
+X[k] =\sum\limits_{n=0}^{N - 1}x[n]e^{-j\frac{2\pi nk}{N}} = \frac{1}{2\pi}\int_{-\infty}^{\infty}\sum\limits_{n=0}^{M - 1}e^{j(\Omega T_s - 2\pi k/N)n}\mathrm d\Omega
+$$</div>
+
+<p>令 $\theta &#x3D; T_s(\Omega - \Omega_k)$，</p>
+<div>$$
+\varphi_k(M, \theta) = \sum\limits_{n=0}^{M - 1}e^{j(\Omega T_s - 2\pi k/N)n} = \frac{\sin(M\theta / 2)}{\sin(\theta/2)} e^{j\frac{M - 1}{2}\theta}
+$$</div>
+
+<p>梳状滤波特性</p>
+<p><img src="/../images/DSP/5_2.jpg" alt="alt" loading="lazy"></p>
+<p>周期内存在多个过零点，把滤波器响应分割成多个区间</p>
+<ul>
+<li>主瓣：谱分析滤波器频率响应最大的那个区间</li>
+<li>主峰：主瓣中最大频率响应点 $Ω &#x3D; \frac{2\pi k}{NT_s}$处，高度为𝑀</li>
+<li>主瓣宽度：主瓣两边过零点之间的距离4𝜋⁄𝑀𝑇𝑠</li>
+<li>旁瓣：除响应最大的那个区间外的其它区间</li>
+</ul>
+<p>DFT频谱分析方法能否反映连续信号的频谱？</p>
+<ul>
+<li>DFT的结果主要给出了连续信号落在相应谱分析滤波器主瓣内的那部分信号的频域信息</li>
+<li>由于相邻谱分析滤波器主瓣间有交叠，同一个信号可能会在相邻两个谱分析滤波器都有响应</li>
+<li>谱分析滤波器的旁瓣会在其他谱分析滤波器的主瓣位置出现，其对应的DFT结果不可避免的包含了其他滤波器主瓣位置处的信号成分</li>
+</ul>
+<p>DFT 可用于连续信号的频谱分析，但由于其谱分析滤波器频率分割不理想的本质，必须对其输出结果进行小心的解释</p>
+<p>DFT谱估计得到的是对加窗后序列DTFT的采样</p>
+<div>$$
+x_w[n] = x[n]w_R[n]\\
+X_w(e^{j\omega}) = \frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{j\omega})W_R(e^{j(\omega - \theta)})\mathrm d\theta
+$$</div>
+
+<p>对于矩形窗：</p>
+<div>$$
+W_R(e^{j\omega}) = \text{DTFT}(w_R[n]) = \frac{\sin(M\omega / 2)}{\sin(\omega/2)} e^{-j\frac{M - 1}{2}\omega}
+$$</div>
+
+<p>频率分辨力的定义：两个等幅单频信号能够被区分开的最小频率间隔</p>
+<p>矩形窗的主瓣宽度为 $4\pi&#x2F;MT_s$</p>
+<p>实际工程中，采用 3dB带宽并加上适当余量作为频率分辨力</p>
+<ul>
+<li>矩形窗的数字角频率分辨力为 $\Delta \omega &#x3D; 2\pi &#x2F; M$</li>
+<li>连续信号的分辨力为 $\Delta f &#x3D; f_s&#x2F;M$</li>
+</ul>
+<p>分辨力仅决定于信号时长 $MT_s$。</p>
+<p>混叠效应</p>
+<p>混叠效应本质上由采样过程引起</p>
+<ul>
+<li>混叠效应带来的问题</li>
+<li>如果采样过程带来了混叠，DFT结果无法将已混叠的频<br>率分量分开</li>
+<li>采样之前作抗混叠滤波，把带外频率成分滤除</li>
+<li>增大采样频率（减小采样周期）<br>– 无法仅从DFT结果中判读原连续信号的模拟频率</li>
+<li>需要原连续信号频率分布或抗混叠滤波通带的先验<br>知识</li>
+</ul>
+<p>栅栏效应</p>
+<ul>
+<li>DFT 无法精确表示不在离散采样点的频率值</li>
+<li>频率估计的最大误差为 $\pi &#x2F; N$</li>
+<li>可以通过加窗补零（增大 $N$）的方法改善</li>
+<li>通过局部插值的方法获得更精确的频率估计：精确插值，线性插值，二次插值</li>
+</ul>
+<h2 id="DFT-的应用"><a href="#DFT-的应用" class="headerlink" title="DFT 的应用"></a>DFT 的应用</h2><h3 id="线性卷积的计算"><a href="#线性卷积的计算" class="headerlink" title="线性卷积的计算"></a>线性卷积的计算</h3><p>假设有限长因果序列 $h[n]$ 和 $x[n]$，长度分别为 $P$ 和 $L$，均扩展到 $N$ 个点进行卷积</p>
+<ul>
+<li>当 $N \ge P + L - 1$ 时，两种卷积的结果相等</li>
+<li>当 $N \lt P + L - 1$ 时，循环卷积出现混叠</li>
+</ul>
+<p>基于 DFT 的 FIR 滤波器实现</p>
+<p>FIR 滤波器需要计算有限长序列和无限长序列的线性卷积</p>
+<ul>
+<li>$h[n]$ 有限</li>
+<li>$x[n]$ 无限</li>
+</ul>
+<p>方法1：重叠相加法</p>
+<div>$$
+x[n] =\sum\limits_{r=0}^{\infty}x_r[n - rL]\\
+y[n] = h[n] * \sum\limits_{r=0}^{\infty}x_r[n - rL] = \sum\limits_{r=0}^{\infty}h[n] * x_r[n - rL]\\
+$$</div>
+
+<p>整个序列的线性卷积等于各段线性卷积后的移位加和</p>
+<p>IDFT 后，需要一个专门的加法器进行重叠部分的相加运算</p>
+<p>方法二：重叠保留法</p>
+<p>取 $L$ 点 $x[n]$ 与扩展的 $P$ 点 $h[n]$ 做循环卷积，取结果的后 $L - P + 1$ 个点作为结果。</p>
+<p>两种方法、直接计算线性相关的计算量对比？</p>
+<h3 id="线性调频-z-变换"><a href="#线性调频-z-变换" class="headerlink" title="线性调频 z 变换"></a>线性调频 z 变换</h3><p>CZT 的定义</p>
+<div>$$
+X_{cz}(z)|_{z = z_k} =\sum\limits_{n=0}^{N - 1}x[n]z_k^{-n}\\
+z_k = AW^{-k} = (A_0e^{j\theta_0})(W_0e^{-j\varphi_0})^{-k}
+$$</div>
+
+<p>一种广义的 DFT，在复平面螺旋线上的采样。</p>
+<p>CZT 的计算</p>
+<ul>
+<li>利用定义直接计算</li>
+<li>利用卷积计算，而卷积可以利用 FFT 计算</li>
+</ul>
+<div>$$
+X_{cz}(z_k) = W^{\frac{k^2}{2}}\sum\limits_{n=0}^{N - 1}f[n]h[k - n]\\
+f[n] = x[n]A^{-n}W^{\frac{n^2}{2}}\\
+h[n] = W^{-\frac{n^2}{2}}
+$$</div>
+
+<h3 id="短时傅里叶变换"><a href="#短时傅里叶变换" class="headerlink" title="短时傅里叶变换"></a>短时傅里叶变换</h3><p>问题：基于傅里叶的频谱分析可以指导信号观测窗内的频率成分，但是无法得知这些频率成分何时出现，何时消失，持续多久</p>
+<p>定义</p>
+<div>$$
+\text{STFT}(t^\prime, \Omega) = \int_{-\infty}^{\infty}x(\tau)g^*(\tau - t^\prime)e^{-j\Omega\tau}\mathrm d\tau
+$$</div>
+
+<ul>
+<li>窗的长度<ul>
+<li>窗长需要足够短，确保落入窗的信号近似平稳</li>
+<li>窗越长，频率分辨率越高，窗越短，时间分辨率越高<ul>
+<li>窗无限长，退化成 FT</li>
+<li>无限短，退化成 $s(t^\prime)e^{-j\Omega t^\prime}$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>窗的类型<ul>
+<li>矩形窗，汉明窗，布莱克曼窗</li>
+<li>主瓣宽度与旁瓣电平之间的权衡</li>
+</ul>
+</li>
+</ul>
+<p>不确定性原理</p>
+<div>$$
+\Delta t \cdot \Delta \Omega \ge \frac{1}{2}
+$$</div>
+
+
+<h2 id="LTI-系统"><a href="#LTI-系统" class="headerlink" title="LTI 系统"></a>LTI 系统</h2><h3 id="LTI-系统的时域分析——冲激响应"><a href="#LTI-系统的时域分析——冲激响应" class="headerlink" title="LTI 系统的时域分析——冲激响应"></a>LTI 系统的时域分析——冲激响应</h3><p>根据冲激响应长度不同：</p>
+<ul>
+<li>FIR:用 $h[n]$ 表示系统</li>
+<li>IIR：用系统函数或者差分方程表示</li>
+</ul>
+<h3 id="LTI-系统的时域分析——冲激响应-1"><a href="#LTI-系统的时域分析——冲激响应-1" class="headerlink" title="LTI 系统的时域分析——冲激响应"></a>LTI 系统的时域分析——冲激响应</h3><p>复指数序列是 LTI 系统的特征函数</p>
+<div>$$
+T \lbrace e^{j\omega n} \rbrace = H(e^{j\omega})e^{j\omega n}
+$$</div>
+
+<p>频率响应函数的表示方式</p>
+<ul>
+<li>$H(e^{j\omega}) &#x3D; H_R(e^{j\omega}) + jH_I(e^{j\omega})$</li>
+<li>$H(e^{j\omega}) &#x3D; |H(e^{j\omega})|e^{j\angle H(e^{j\omega})}$</li>
+<li>幅频特性：<ul>
+<li>$|H(e^{j\omega})|$</li>
+<li>$20\log |H(e^{j\omega})|$，单位 dB</li>
+</ul>
+</li>
+<li>相频特性<ul>
+<li>$arg(H(e^{j\omega}))$：连续相位</li>
+<li>$Arg(H(e^{j\omega}))$：主值相位</li>
+<li>无卷绕相位：$\angle H(e^{j\omega}) &#x3D; \tan^{-1}\frac{H_I(e^{j\omega})}{H_R(e^{j\omega})}$</li>
+<li>定义主值区间 $arg(H(e^{j\omega})) &#x3D; ARG[H(e^{j\omega})] + 2\pi r(\omega)$，$r(\omega)$是补偿函数，仅取整数</li>
+</ul>
+</li>
+</ul>
+<p>相位延迟</p>
+<p>群延迟</p>
+<div>$$
+-\frac{\mathrm d}{\mathrm d\omega}\text{arg}[H_{id}(e^{j\omega})]
+$$</div>
+
+<p>可以表征窄带信号的相位失真（或者延迟）</p>
+<div>$$
+x[n] = a[n]e^{j\omega_c n}\\
+a[n] = c_1e^{j\omega_1n}\\
+y[n] \approx |H(e^{j\omega_c})|c_1e^{j(\omega_1 + \omega_c)n + j\varphi(\omega_1 + \omega_c)} \approx |H(e^{j\omega_c})|\underbrace{a[n - \tau_g(\omega_c)]}_{群延迟给出了包络延迟}\underbrace{e^{j\omega_c[n - \tau_p(\omega_c)]}}_{相位延迟\tau_p(\omega_c) = \varphi(\omega_c)}
+$$</div>
+
+<h3 id="LTI-系统的零极点分析"><a href="#LTI-系统的零极点分析" class="headerlink" title="LTI 系统的零极点分析"></a>LTI 系统的零极点分析</h3><div>$$
+\sum\limits_{k=0}^{N}a_ky[n - k] =\sum\limits_{k=0}^{M}b_kx[n - k]\\
+H[z] = \frac{\sum\limits_{k=0}^{M}b_kz^{-k}}{\sum\limits_{k=0}^{N}a_kz^{-k}} = \left ( \frac{b_0}{a_0} \right)\frac{\prod_{k = 1}^M(1 - c_kz^{-1})}{\prod_{k = 1}^N(1 - d_kz^{-1})}
+$$</div>
+
+<p>$z &#x3D; 0, z &#x3D; \infty$ 也可能是零点！求解的时候不要忘了。</p>
+<p>系统稳定性的条件：绝对可和。或者说 $H(z)$ 的极点在单位圆内。</p>
+<p>可逆性的条件：$h[n] * h_i[n] &#x3D; \delta[n]$， $H(8z)H_i(z) &#x3D; 1$</p>
+<ul>
+<li>逆系统的极点和零点就是原系统的零点和极点</li>
+<li>逆系统和原系统必须有重叠的 ROC，因此可以确定逆系统的 ROC</li>
+</ul>
+<p>频率响应</p>
+<p>群延迟</p>
+<div>$$
+\text{grd}[] =\sum\limits_{k=1}^{N}\frac{|d_k|^2 - \Re{d_ke^{-j\omega}}}{1 + |d_k|^2 - 2\Re{d_ke^{-j\omega}}} - \sum\limits_{k=1}^{M}\frac{|c_k|^2 - \Re{c_ke^{-j\omega}}}{1 + |c_k|^2 - 2\Re{c_ke^{-j\omega}}}
+$$</div>
+
+<h3 id="IIR滤波器"><a href="#IIR滤波器" class="headerlink" title="IIR滤波器"></a>IIR滤波器</h3><div>$$
+y[n] =\sum\limits_{k=1}^{N}a_ky[n - k] +\sum\limits_{k=0}^{M}b_kx[n - k]\\
+H(z) = \frac{\sum\limits_{k=0}^{M}b_kz^{-k}}{1 -\sum\limits_{k=1}^{N}a_kz^{-k}}
+$$</div>
+
+<p>直接 I 型</p>
+<p>直接 II 型：交换次序，合并延迟单元</p>
+<p>级联形式：</p>
+<div>$$
+H(z) = K \prod_{k = 1}^{N_s} \frac{b_{0k} + b_{1k}z^{-1} + b_{2k}z^{-2}}{1 - a_{1k}z^{-1} - a_{2k}z^{-2}}
+$$</div>
+
+<p>考虑到有限字长效应，级联形式可以以更加灵活的方式减小有限字长的影响。可以控制零点和极点的位置。</p>
+<p>级联形式也可以用直接 I, II 型实现。</p>
+<p>多径衰落就是一个 FIR 滤波器，因此具有频率选择特性。</p>
+<p>并联形式</p>
+<div>$$
+H(z) =\sum\limits_{k=0}^{N_p}C_kz^{-k} +\sum\limits_{k=1}^{N_2}\frac{e_{0k}+e_{1k}z^{-1}}{1 - a_{1k} - a_{2k}z^{-2}}
+$$</div>
+
+<p>各子系统的计算误差互不影响，防止误差传递和放大，可控极点位置</p>
+<p>流图转置定理：支路方向取反，系数不变，输入和输出交换位置</p>
+<h3 id="FIR-滤波器"><a href="#FIR-滤波器" class="headerlink" title="FIR 滤波器"></a>FIR 滤波器</h3><div>$$
+H(z) =\sum\limits_{n=0}^{N - 1}h[n]z^{-n}
+$$</div>
+
+<p>抽头延迟线 or 横向滤波器结构</p>
+<p>具有转置形式</p>
+<p>级联形式</p>
+<div>$$
+H(z) = \prod_{k = 1}^{M_1}(f_{0k} - f_{1k}z^{-1}\prod_{k = 1}^{M_2}(b_{0k} + b_{1k} z^{-1} + b_{2k}z^{-2})
+$$</div>
+
+<p>线性相位特性</p>
+<div>$$
+H(e^{j\omega}) = A(e^{j\omega})e^{-j\omega\alpha}
+$$</div>
+
+<div>$$
+h[n] = h[M - n] (I, II)\\
+h[n] = - h[M - n] (III,IV)
+$$</div>
+
+<p>线性相位 FIR 滤波器的直接形式</p>
+<p>偶数</p>
+<div>$$
+y[n] = \begin{cases}
+    \sum\limits_{k=0}^{M/2 - 1}h[k](x[n - k] + x[n - M + k]) + h[M/2]x[n - M/2], &I type
+    \sum\limits_{k=0}^{M/2 - 1}h[k](x[n - k] - x[n - M + k]), &III type
+\end{cases}
+$$</div>
+
+<p>奇数</p>
+<div>$$
+y[n] = \begin{cases}
+    \sum\limits_{k=0}^{(M - 1)/2}h[k](x[n - k] + x[n - M + k]), &II type
+    \sum\limits_{k=0}^{(M - 1)/2}h[k](x[n - k] - x[n - M + k]), &IV type
+\end{cases}
+$$</div>
+
+<p>级联形式</p>
+<p>对应四种零点分布情况，有四种网络结构</p>
+<div>$$
+H(z) = 1 \pm z^{-1}\\
+H(z) = 1 - 2\cos(\theta)z^{-1} + z^{-2}\\
+H(z) = (1 - rz^{-1})(1 - r^{-1}z^{-1})\\
+H(z) = 1 + bz^{-1} + cz^{-2} + bz^{-3} + z^{-4}
+$$</div>
+
+<h3 id="FIR-滤波器的频率取样结构"><a href="#FIR-滤波器的频率取样结构" class="headerlink" title="FIR 滤波器的频率取样结构"></a>FIR 滤波器的频率取样结构</h3><div>$$
+H(z) =\sum\limits_{n=0}^{N - 1}h[n]z^{-n} = \frac{1}{N}(1 - z^{-N})\sum\limits_{k=0}^{N - 1}\frac{H(k)}{1 - W_N^{-j}z^{-1}}
+$$</div>
+
+<p>$H(k)$ 是 FFT 变换。</p>
+<p>若冲激响应是实序列，可以用共轭对称性将成对的一阶子系统合称为二阶子系统</p>
+<div>$$
+H_k(z) + H_{-k}(z) = 2|H(k)| \frac{\cos\theta(k) - (\cos(\theta(k) - \frac{2\pi}{N}k))z^{-1}}{1 - 2\cos(\frac{2\pi}{N}k)z^{-1} + z^{-2}}
+$$</div>
+
+<p>其中 $\theta(k)$ 是 $H(k)$ 的相位</p>
+<p>不成对的子系统？</p>
+<div>$$
+H_0(z) = \frac{H(0)}{1 - z^{-1}}\\
+H_{N/2}(z) = \frac{H(0)}{1 + z^{-1}}
+$$</div>
+
+<p>FIR 滤波器的时分复用结构</p>
+<h2 id="离散希尔伯特变换"><a href="#离散希尔伯特变换" class="headerlink" title="离散希尔伯特变换"></a>离散希尔伯特变换</h2><div>$$
+h[n] = \begin{cases}
+    \frac{1 - \cos(n\pi)}{n\pi}, n \ne 0\\
+    0, n = 0
+\end{cases}
+$$</div>
+
+<h2 id="典型数字信号处理系统及其误差源"><a href="#典型数字信号处理系统及其误差源" class="headerlink" title="典型数字信号处理系统及其误差源"></a>典型数字信号处理系统及其误差源</h2><ul>
+<li>引起有限字长的误差源<ul>
+<li>AD 变换引入的误差</li>
+<li>有限精度引起的误差</li>
+<li>限制乘法运算位数的误差</li>
+<li>防止加法溢出压缩信号电平的误差</li>
+</ul>
+</li>
+</ul>
+<h3 id="量化误差的统计分析模型"><a href="#量化误差的统计分析模型" class="headerlink" title="量化误差的统计分析模型"></a>量化误差的统计分析模型</h3><div>$$
+Q_B \lbrace x[n] \rbrace = x[n] + e[n]\\
+$$</div>
+
+<p>$e[n]$ 是各态历经的平稳随机序列，与 $x[n]$ 相互统计独立，具有白噪声的性质，不同时刻的取值相互独立，是均匀分布的。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2023/09/20/Digital-Signal-Processing/" title="Digital Signal Processing">https://blitherboom812.github.io/2023/09/20/Digital-Signal-Processing/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/09/20/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="prev" title="数字系统设计"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">数字系统设计</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/09/20/%E9%87%8F%E7%AD%92/" rel="next" title="量筒"><span class="post-nav-text">量筒</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>
