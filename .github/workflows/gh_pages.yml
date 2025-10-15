@@ -37,9 +37,7 @@ jobs:
       # Step 4. （可选）查看结果
       - name: Verify timestamps
         run: |
-          git restore-mtime -v | head -n 10
-          stat source/_posts/* || true
-          find . -type f | head -n 3 | xargs stat -c '%y %n'
+          git restore-mtime -v
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
