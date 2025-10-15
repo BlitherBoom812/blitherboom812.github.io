@@ -20,12 +20,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+      
+      # Step 2. 安装 git-restore-mtime
+      - name: Install git-restore-mtime
+        run: |
+          sudo apt update
+          sudo apt install -y git-restore-mtime
+
+      # Step 3. 恢复文件时间戳
+      - name: Restore file modification times
+        run: |
+          git restore-mtime
+      
+      # Step 4. （可选）查看结果
+      - name: Verify timestamps
+        run: |
+          stat source/_posts/* || true
+          find . -type f | head -n 3 | xargs stat -c '%y %n'
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      
       - name: Generate
         run: |
           npm i && npx hexo g
