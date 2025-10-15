@@ -20,9 +20,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      # Fix timestamps
-      - name: restore timestamps
-        uses: step-security/git-restore-mtime-action@v2
+      
+      - name: Install git-restore-mtime from source
+        run: |
+          sudo apt remove -y git-restore-mtime || true
+          git clone https://github.com/MestreLion/git-tools.git
+          sudo install git-tools/git-restore-mtime /usr/local/bin/git-restore-mtime
+
+      # Step 3. 恢复文件时间戳
+      - name: Restore file modification times
+        run: |
+          git restore-mtime
+
       # Step 4. （可选）查看结果
       - name: Verify timestamps
         run: |
