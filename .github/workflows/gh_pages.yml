@@ -20,17 +20,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
-      # Step 2. 安装 git-restore-mtime
-      - name: Install git-restore-mtime
-        run: |
-          pip install git-restore-mtime
-
-      # Step 3. 恢复文件时间戳
-      - name: Restore file modification times
-        run: |
-          git restore-mtime
-
+      # Fix timestamps
+      - name: restore timestamps
+        uses: step-security/git-restore-mtime-action@v2
       # Step 4. （可选）查看结果
       - name: Verify timestamps
         run: |
