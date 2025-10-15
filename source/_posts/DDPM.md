@@ -2,7 +2,7 @@
 title: 扩散模型（一）DDPM 原理学习
 katex: true
 date: 2025-07-25 12:11:59
-tags:
+tags: paper
 ---
 最近看了 lhy 的 Diffusion Model 教程，对于之前一直不理解的 Diffusion Model 的训练和推理过程终于获得了新的认识，还和 VAE，Flow-based 等方法构建起了统一的联系。这篇笔记作为对于 DDPM 论文公式推导的一个尝试。
 
