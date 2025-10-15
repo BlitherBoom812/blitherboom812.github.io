@@ -20,10 +20,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       
       - name: Install git-restore-mtime from source
         run: |
-          sudo apt remove -y git-restore-mtime || true
+          git log --oneline -n 10
           git clone https://github.com/MestreLion/git-tools.git
           sudo install git-tools/git-restore-mtime /usr/local/bin/git-restore-mtime
 
@@ -35,6 +37,7 @@ jobs:
       # Step 4. （可选）查看结果
       - name: Verify timestamps
         run: |
+          git restore-mtime -v | head -n 10
           stat source/_posts/* || true
           find . -type f | head -n 3 | xargs stat -c '%y %n'
 
