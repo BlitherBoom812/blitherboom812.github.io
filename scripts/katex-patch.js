@@ -15,8 +15,9 @@ module.exports = function (data) {
         console.log("matched: ", match)
         return_value = process_katex_formula(p1)
             .replace(/_/g, "\\_") // 防止被解析成 markdown 的下划线
+            .replace(/\*/g, "\\\*") // 防止被解析成 markdown 的下划线
             .replace("\\\\", "\\\\\\\\") // 防止被解析成 markdown 的转义符
-        // console.log("revised: ", return_value)
+        console.log("revised: ", return_value)
         return `$${return_value}$`
     });
     data.content = data.content.replace(/\$\$([\s\S]*?)\$\$/g, (match, p1) => {
