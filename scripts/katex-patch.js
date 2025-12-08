@@ -3,9 +3,10 @@ debug = require("./config").debug;
 function process_katex_formula(input) {
     processed_input = input
     processed_input = processed_input
-        .replace("\\{", "\\lbrace ")
-        .replace("\\}", "\\rbrace ") //没这个会报错
-        .replace("<", "< ") // 防止转义成 html 标签
+        .replaceAll("\\{", "\\lbrace ")
+        .replaceAll("\\}", "\\rbrace ") //没这个会报错
+        .replaceAll("\\|", "\\Vert ") // 防止斜杠被干掉
+        .replaceAll("<", "< ") // 防止转义成 html 标签
     return processed_input
 }
 module.exports = function (data) {
