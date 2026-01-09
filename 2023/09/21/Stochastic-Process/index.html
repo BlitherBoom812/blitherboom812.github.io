@@ -1,0 +1,2247 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Stochastic-Process | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="随机过程随机过信号与系统：研究确定信号随着时间、空间的变化 概率论：研究随机信号，但是不随时间、空间变化 随机过程：研究随机的信号随着时间、空间的变化  期末70分梭哈 考试题目不随机，就跟不上这门课的要求。  概率与随机变量回顾样本空间 $\Omega$  性质：  非负性： $P(A) \ge 0$  规范性： $P(\Omega), P(\emptyset) &#x3D; 0$  可加性： $P(\b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stochastic-Process">
+<meta property="og:url" content="https://blitherboom812.github.io/2023/09/21/Stochastic-Process/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="随机过程随机过信号与系统：研究确定信号随着时间、空间的变化 概率论：研究随机信号，但是不随时间、空间变化 随机过程：研究随机的信号随着时间、空间的变化  期末70分梭哈 考试题目不随机，就跟不上这门课的要求。  概率与随机变量回顾样本空间 $\Omega$  性质：  非负性： $P(A) \ge 0$  规范性： $P(\Omega), P(\emptyset) &#x3D; 0$  可加性： $P(\b">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/stochastic/exer_1.jpg">
+<meta property="article:published_time" content="2023-09-21T02:10:49.000Z">
+<meta property="article:modified_time" content="2024-01-08T04:35:20.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/stochastic/exer_1.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E9%9A%8F%E6%9C%BA%E8%BF%87"><span class="toc-number">1.</span> <span class="toc-text">随机过程随机过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.1.</span> <span class="toc-text">概率与随机变量回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.</span> <span class="toc-text">随机过程的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">基本研究方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%90%86%E8%AE%BA%E4%B8%8E%E4%BA%8C%E9%98%B6%E7%9F%A9%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%97%B6%E5%9F%9F%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">相关理论与二阶矩过程——时域分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">自相关函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%BD%E5%B9%B3%E7%A8%B3%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">宽平稳随机过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E4%BA%A4%E5%A2%9E%E9%87%8F%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.</span> <span class="toc-text">正交增量过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E7%9A%84%E6%9E%81%E9%99%90%E3%80%81%E8%BF%9E%E7%BB%AD%E3%80%81%E5%AF%BC%E6%95%B0%E3%80%81%E7%A7%AF%E5%88%86"><span class="toc-number">2.4.</span> <span class="toc-text">随机过程的极限、连续、导数、积分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E7%9A%84%E9%81%8D%E5%8E%86%E6%80%A7"><span class="toc-number">2.5.</span> <span class="toc-text">随机过程的遍历性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E7%9A%84%E7%BA%BF%E6%80%A7%E5%B1%95%E5%BC%80"><span class="toc-number">2.6.</span> <span class="toc-text">随机过程的线性展开</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%B1%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">谱分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E7%BA%A7%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">周期函数的傅里叶级数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">3.2.</span> <span class="toc-text">非周期函数的傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86"><span class="toc-number">3.2.1.</span> <span class="toc-text">知识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">3.2.2.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%BD%E5%B9%B3%E7%A8%B3%E8%BF%87%E7%A8%8B%E9%80%9A%E8%BF%87%E7%BA%BF%E6%80%A7%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.3.</span> <span class="toc-text">宽平稳过程通过线性系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%AE%BD%E5%B9%B3%E7%A8%B3%E5%BA%8F%E5%88%97"><span class="toc-number">3.4.</span> <span class="toc-text">离散时间宽平稳序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E5%AE%9A%E7%90%86"><span class="toc-number">3.5.</span> <span class="toc-text">采样定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E9%80%9A%E9%87%87%E6%A0%B7"><span class="toc-number">3.6.</span> <span class="toc-text">带通采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E8%BF%87%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">高斯过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="toc-number">4.2.</span> <span class="toc-text">多元高斯分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%8F%98%E9%87%8F%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83"><span class="toc-number">4.3.</span> <span class="toc-text">高斯变量的条件分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AB%98%E6%96%AF%E8%BF%87%E7%A8%8B%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%80%A7%E8%B4%A8"><span class="toc-number">4.4.</span> <span class="toc-text">实高斯过程的若干性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%B6%E5%9D%87%E5%80%BC%E5%B8%A6%E9%80%9A%E9%AB%98%E6%96%AF%E8%BF%87%E7%A8%8B"><span class="toc-number">4.5.</span> <span class="toc-text">零均值带通高斯过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E7%9B%B8%E4%BD%8D%E6%AD%A3%E5%BC%A6%E6%B3%A2%E4%BF%A1%E5%8F%B7%E5%8F%A0%E5%8A%A0%E9%9B%B6%E5%9D%87%E5%80%BC%E5%B8%A6%E9%80%9A%E9%AB%98%E6%96%AF"><span class="toc-number">4.6.</span> <span class="toc-text">随机相位正弦波信号叠加零均值带通高斯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E8%BF%87%E7%A8%8B%E7%BB%8F%E8%BF%87%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0"><span class="toc-number">4.7.</span> <span class="toc-text">高斯过程经过非线性函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E2%80%94%E2%80%94%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7"><span class="toc-number">4.8.</span> <span class="toc-text">高斯——马尔可夫性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brown-%E8%BF%90%E5%8A%A8"><span class="toc-number">4.9.</span> <span class="toc-text">Brown 运动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markov-%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">Markov 过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Markov-%E9%93%BE"><span class="toc-number">5.1.</span> <span class="toc-text">Markov 链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Markov-%E7%89%B9%E6%80%A7"><span class="toc-number">5.2.</span> <span class="toc-text">Markov 特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BD%90%E6%AC%A1%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A1%A8%E7%A4%BA"><span class="toc-number">5.3.</span> <span class="toc-text">齐次马尔科夫链的迭代表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0"><span class="toc-number">5.4.</span> <span class="toc-text">一维随机游走</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%AF%E5%B0%94%E8%8E%AB%E6%A0%BC%E6%B4%9B%E5%A4%AB%E6%96%B9%E7%A8%8B"><span class="toc-number">5.5.</span> <span class="toc-text">柯尔莫格洛夫方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="toc-number">5.6.</span> <span class="toc-text">状态分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%BF%94%E6%80%A7"><span class="toc-number">5.7.</span> <span class="toc-text">常返性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%BF%94%E4%B8%8E%E9%9D%9E%E5%B8%B8%E8%BF%94"><span class="toc-number">5.7.1.</span> <span class="toc-text">常返与非常返</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%B8%B8%E8%BF%94%E4%B8%8E%E9%9B%B6%E5%B8%B8%E8%BF%94"><span class="toc-number">5.7.2.</span> <span class="toc-text">正常返与零常返</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E6%80%A7%E8%B4%A8"><span class="toc-number">5.7.3.</span> <span class="toc-text">补充性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E7%9A%84%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83%E5%92%8C%E6%9E%81%E9%99%90%E6%A6%82%E7%8E%87"><span class="toc-number">5.7.4.</span> <span class="toc-text">马尔可夫链的平稳分布和极限概率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E8%BF%87%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">泊松过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">6.1.</span> <span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E8%BF%87%E7%A8%8B"><span class="toc-number">6.1.1.</span> <span class="toc-text">计数过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E8%BF%87%E7%A8%8B-1"><span class="toc-number">6.1.2.</span> <span class="toc-text">泊松过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">6.2.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E4%B8%8E%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83"><span class="toc-number">6.3.</span> <span class="toc-text">泊松与二项分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="toc-number">6.4.</span> <span class="toc-text">泊松相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E9%97%B4%E9%9A%94%E6%97%B6%E9%97%B4%E7%9A%84%E5%88%86%E5%B8%83"><span class="toc-number">6.4.1.</span> <span class="toc-text">事件间隔时间的分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4%E7%9A%84%E5%88%86%E5%B8%83"><span class="toc-number">6.4.2.</span> <span class="toc-text">等待时间的分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E9%82%BB%E4%B8%A4%E6%AC%A1%E4%BA%8B%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E8%AE%A1%E6%95%B0"><span class="toc-number">6.4.3.</span> <span class="toc-text">相邻两次事件之间的计数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#n%E4%B8%AA%E4%BA%8B%E4%BB%B6%E5%88%B0%E8%BE%BE%E6%97%B6%E9%97%B4%E7%9A%84%E7%9A%84%E8%81%94%E5%90%88%E5%88%86%E5%B8%83"><span class="toc-number">6.4.4.</span> <span class="toc-text">n个事件到达时间的的联合分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E6%B3%8A%E6%9D%BE%E8%BF%87%E7%A8%8B%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9A%E4%B9%89"><span class="toc-number">6.4.5.</span> <span class="toc-text">总结泊松过程的几种定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="toc-number">6.5.</span> <span class="toc-text">顺序统计量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%BD%90%E6%AC%A1%E6%B3%8A%E6%9D%BE%E8%BF%87%E7%A8%8B"><span class="toc-number">6.6.</span> <span class="toc-text">非齐次泊松过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%90%88%E6%B3%8A%E6%9D%BE"><span class="toc-number">6.7.</span> <span class="toc-text">复合泊松</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%82%E6%95%B0%E6%B3%8A%E6%9D%BE"><span class="toc-number">6.8.</span> <span class="toc-text">随机参数泊松</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E7%9A%84%E6%B3%8A%E6%9D%BE%E8%BF%87%E7%A8%8B"><span class="toc-number">6.9.</span> <span class="toc-text">过滤的泊松过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E7%81%AD%E8%BF%87%E7%A8%8B"><span class="toc-number">7.</span> <span class="toc-text">生灭过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#M-x2F-M-x2F-1"><span class="toc-number">7.1.</span> <span class="toc-text">M&#x2F;M&#x2F;1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%98%E8%AF%BE"><span class="toc-number">8.</span> <span class="toc-text">习题课</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2023/09/21/Stochastic-Process/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Stochastic-Process</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2023-09-21 10:10:49" itemprop="dateCreated datePublished" datetime="2023-09-21T10:10:49+08:00">2023-09-21</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-01-08 12:35:20" itemprop="dateModified" datetime="2024-01-08T12:35:20+08:00">2024-01-08</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="随机过程随机过"><a href="#随机过程随机过" class="headerlink" title="随机过程随机过"></a>随机过程随机过</h2><p>信号与系统：研究确定信号随着时间、空间的变化</p>
+<p>概率论：研究随机信号，但是不随时间、空间变化</p>
+<p>随机过程：研究随机的信号随着时间、空间的变化</p>
+<blockquote>
+<p>期末70分梭哈</p>
+<p>考试题目不随机，就跟不上这门课的要求。</p>
+</blockquote>
+<h3 id="概率与随机变量回顾"><a href="#概率与随机变量回顾" class="headerlink" title="概率与随机变量回顾"></a>概率与随机变量回顾</h3><p>样本空间 $\Omega$ </p>
+<p>性质：</p>
+<ul>
+<li>非负性： $P(A) \ge 0$ </li>
+<li>规范性： $P(\Omega), P(\emptyset) = 0$ </li>
+<li>可加性： $P(\bigcup\limits_{k = 1}^{\infty}A_k) = \sum\limits_{k=1}^{\infty}P(A_k)$ </li>
+</ul>
+<p>贝叶斯：</p>
+
+$$
+P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum\limits_{j = 1}^{k}P(B_j)P(A|B_j)}
+$$
+
+
+<p>随机变量：</p>
+<p>分布函数，概率密度函数</p>
+<p>期望，方差，协方差，相关系数</p>
+<p>伯努利分布，高斯分布，泊松分布，瑞利分布</p>
+<p>伯努利分布的概率密度函数：</p>
+<p>当 $k=1$ 时， $P(X=1) = p$ <br>当 $k=0$ 时， $P(X=0) = 1-p$ </p>
+<p>高斯分布的概率密度函数：</p>
+ $P(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$ 
+
+<p>二维高斯分布的概率密度函数：</p>
+ $P(x,y) = \frac{1}{2\pi\sigma_x\sigma_y\sqrt{1-\rho^2}}\exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{(x-\mu_x)^2}{\sigma_x^2}-2\rho\frac{(x-\mu_x)(y-\mu_y)}{\sigma_x\sigma_y}+\frac{(y-\mu_y)^2}{\sigma_y^2}\right]\right)$ 
+
+<p>其中， $\mu_x$ 和 $\mu_y$ 是均值， $\sigma_x$ 和 $\sigma_y$ 是标准差， $\rho$ 是相关系数。</p>
+<p>泊松分布的概率密度函数：</p>
+ $P(k;\lambda) = \frac{\lambda^k}{k!}\exp(-\lambda)$ 
+
+<p>瑞利分布的概率密度函数：</p>
+ $P(x;\sigma) = \frac{x}{\sigma^2}\exp\left(-\frac{x^2}{2\sigma^2}\right)$ 
+
+<h3 id="随机过程的基本概念"><a href="#随机过程的基本概念" class="headerlink" title="随机过程的基本概念"></a>随机过程的基本概念</h3><p>定义：</p>
+<p>给定概率空间 $(\Omega, \mathcal{F}, P)$ ，定义参数集 $T \subset R$ ， $t \in T$ </p>
+
+$$
+X = \lbrace X(t, \omega), t \in T, \omega \in \Omega \rbrace
+$$
+
+
+<p>简记为 $X(t)$ :  $X = \lbrace X(t), t \in T\rbrace$ </p>
+<p>解释：</p>
+<ul>
+<li>二元单值函数</li>
+<li>对每个固定t， $X(t, \omega)$ 是一个随机变量</li>
+<li>每个 $\omega_0 \in \Omega$ ,  $X(t, \omega_0)$ 是定义在T上的函数，记为 $x(t, \omega_0)$ </li>
+</ul>
+<p>单样本为随机变量：均值、方差、协方差、有限维联合分布等</p>
+<p>随机过程的函数特性：时间的相关性，连续性和离散性，随机过程的导数、微分、积分、卷积、级数展开、微分方程、积分方程等</p>
+<p>二重性的联合特征：</p>
+<p>分类：</p>
+<p>离散时间，离散分布：Bernouli过程</p>
+<p>离散时间，连续分布：自回归过程</p>
+<p>连续参数离散随机过程：Poission过程</p>
+<p>连续参数连续型随机过程：Brown运动</p>
+<p>数学特征：</p>
+<p>相互独立和不相关是两个概念，无必然因果联系。</p>
+<p>根据数字特征分类：</p>
+<ul>
+<li>独立增量过程</li>
+<li>平稳过程及二阶矩过程</li>
+<li>马尔可夫过程</li>
+<li>更新过程</li>
+</ul>
+<p>独立增量过程是一种随机过程，具有以下特性：</p>
+<ol>
+<li><p>零起点：独立增量过程在零时刻（通常表示为 $t=0$ ）的取值为零，即 $X(0) = 0$ 。</p>
+</li>
+<li><p>独立增量：对于任意时刻 $t_1 &lt; t_2 &lt; \cdots &lt; t_n$ ，随机变量 $X(t_2)-X(t_1), X(t_3)-X(t_2), \cdots, X(t_n)-X(t_{n-1})$ 是相互独立的。</p>
+</li>
+</ol>
+<p>若对一切 $0\le s \lt t$ ，增量 $X(t) - X(s)$ 的分布仅依赖于 $t - s$ ，则称之为平稳增量，具有平稳增量的独立增量过程称为独立平稳增量过程，例如泊松和布朗。</p>
+<p>二阶矩过程： $D(X(t))$ </p>
+<p>宽平稳过程：</p>
+<p>宽平稳过程可以用以下简单的数学表达式表示：</p>
+<ol>
+<li><p>均值平稳性：对于宽平稳过程  $X(t)$ ，其均值满足  $E[X(t)] = \mu$ ，其中  $\mu$  是一个常数。</p>
+</li>
+<li><p>自相关平稳性：宽平稳过程的自相关函数在时间差  $\tau$  下为常数，可以表示为  $R_X(\tau) = R_X(t,t+\tau) = \text{常数}$ ，其中  $R_X(\tau)$  表示宽平稳过程的自相关函数。</p>
+</li>
+</ol>
+<p>严平稳过程（Strict-sense stationary process），也称为严格平稳过程或强平稳过程，是一种具有更强平稳性质的随机过程。它满足以下两个条件：</p>
+<ol>
+<li><p>时移不变性：严平稳过程的统计性质在时间上任意平移保持不变。具体而言，对于任意时间差  $\tau$  和任意时间点  $t$ ，随机变量  $X(t)$  和  $X(t+\tau)$  的联合分布相同，即联合分布满足  $P(X(t) \in A, X(t+\tau) \in B) = P(X(0) \in A, X(\tau) \in B)$ ，其中  $A,B$  是任意集合。</p>
+</li>
+<li><p>自相关平稳性：严平稳过程的自相关函数只与时间差有关，与参考时刻无关。具体而言，对于任意时间差  $\tau$  和任意时间点  $t$ ，自相关函数满足  $R_X(t,t+\tau) = R_X(\tau)$ ，其中  $R_X(\tau)$  表示严平稳过程的自相关函数。</p>
+</li>
+</ol>
+<p>马尔可夫过程是一种具有马尔可夫性质的随机过程。它可以用以下公式和概念来定义：</p>
+<ol>
+<li><p>状态空间：马尔可夫过程的状态空间是一个离散集合，表示可能的状态集合。通常用符号  $S$  表示， $S = \{s_1, s_2, \ldots\}$ 。</p>
+</li>
+<li><p>马尔可夫性质：马尔可夫过程具有马尔可夫性质，也称为无后效性。即，在给定当前时刻的状态  $X(t)$  之下，未来的状态  $X(t+\Delta t)$  只依赖于当前的状态  $X(t)$ ，与过去的状态  $X(t-1), X(t-2), \ldots$  无关。</p>
+</li>
+<li><p>转移概率：转移概率描述了在给定当前状态  $s_i$  的情况下，马尔可夫过程在下一个时刻转移到状态  $s_j$  的概率。转移概率通常用符号  $P_{ij}$  表示，即  $P_{ij} = P(X(t+\Delta t) = s_j \mid X(t) = s_i)$ 。</p>
+</li>
+</ol>
+<p>通过状态空间和转移概率，可以构建一个马尔可夫过程的状态转移矩阵（Transition Matrix），它描述了从一个状态到另一个状态的转移概率情况。</p>
+<p>更新过程：</p>
+<p>更新过程可以使用以下公式来描述：</p>
+<ol>
+<li><p>到达时间：假设到达时间的随机变量序列为  $T_1, T_2, T_3, \ldots$ ，其中  $T_i$  表示事件  $i$  的到达时间。</p>
+</li>
+<li><p>描述参数：更新过程的到达率（或强度）表示单位时间内平均发生事件的次数。通常用符号  $\lambda$  表示，即  $\lambda = \lim_{t \to \infty} \frac{N(t)}{t}$ ，其中  $N(t)$  表示时间  $t$  之前（包括  $t$ ）发生的事件次数。</p>
+</li>
+<li><p>插值函数：更新过程的插值函数（或插值过程）表示给定时间  $t$  时，最近的到达时间是多久之前。记为  $S(t)$ ，即  $S(t) = \sup\{T_i \leq t\}$ ，表示最近的到达时间小于等于  $t$  的时间点。</p>
+</li>
+</ol>
+<p>可以定义复随机过程：</p>
+<p>复随机过程是一组复数值随机变量的集合  $\{X(t), t \in T\}$ ，其中  $X(t)$  是定义在概率空间  $(\Omega, \mathcal{F}, P)$  上的复数值随机变量，表示在时间点  $t$  上的取值。</p>
+<p>具体而言，对于每个时间点  $t \in T$ ， $X(t)$  是一个复数值随机变量，可以表示为  $X(t) = R(t) + iI(t)$ ，其中  $R(t)$  和  $I(t)$  分别表示实部和虚部。</p>
+<p>复随机过程可以通过概率空间  $(\Omega, \mathcal{F}, P)$  上的复数随机变量以及时间参数  $T$  来描述，并且在不同时间点上表现出复数值随机变量的随机性质。</p>
+<p>数学特征：</p>
+<p>均值函数（一阶原点矩）： $\mu_X(t) = E[X(t)]$ </p>
+<p>方差函数： $\text{Var}[X(t)] = E[(X(t) - \mu_X(t))(X(t) - \overline{\mu_X(t)} )]$ </p>
+<p>自相关函数： $R_X(t_1, t_2) = E[(X(t_1) - \mu_X(t_1))(X(t_2) - \overline{\mu_X(t_2)} )]$ </p>
+<p>自协方差函数： $\text{Cov}[X(t_1), X(t_2)] = E[(X(t_1) - \mu_X(t_1))(X(t_2) - \overline{\mu_X(t_2)} )]$ </p>
+<p>均方值函数： $E[|X(t)|^2] = \int_{-\infty}^{\infty} |x|^2 f_X(x,t)dx$ </p>
+<h3 id="基本研究方法"><a href="#基本研究方法" class="headerlink" title="基本研究方法"></a>基本研究方法</h3><ul>
+<li>相关方法</li>
+<li>Markov 方法</li>
+</ul>
+<p><strong>相关</strong></p>
+<p>若随机过程在任意时刻的均值和方差都存在，则称之为二阶矩过程（second order process），即均方可积空间上的随机变量。</p>
+<p>均方可积空间是内积空间。相关运算是均方可积的内积运算：</p>
+
+$$
+\langle X, Y \rangle = E(X\overline Y)
+$$
+
+
+
+<p>宽平稳（wide-sense stationary）:</p>
+
+$$
+R_X(t, s) = R_X(t + D, s + D) = R(t - s)
+$$
+
+
+<p>功率谱密度：</p>
+
+$$
+S_X(\omega) = \int_{-\infty}^{\infty}R_X(\tau)\exp(-j\omega\tau)\mathrm d\tau
+$$
+
+
+<p>最优线性估计</p>
+<p><strong>Markov</strong></p>
+<p>有限维联合分布可以由各阶的条件分布表示出来：</p>
+
+$$
+\begin{align*}
+    &F_{X(t_1), \dots, X(t_n)}(x_1, \dots, x_n) \\
+    =&F_{X(t_n)|X(t_{n - 1}), \dots, X(t_1)}(x_n|x_{n - 1}, \dots, x_1)F_{X(t_{n - 1}), \dots, X(t_1)}(x_1, \dots, x_{n - 1})\\
+    =&F_{X(t_n)|X(t_{n - 1}), \dots, X(t_1)}(x_n|x_{n - 1}, \dots, x_1)\dots F_{X(t_2)|X(t_1)}(x_2|x_1)F_{X(t_1)}(x_1)
+\end{align*}
+$$
+
+
+<p>无后效性的 markov 过程：</p>
+
+$$
+F_{X(t_n)|X(t_{n - 1}), \dots, X(t_1)}(x_n|x_{n - 1}, \dots, x_1) = F_{X(t_n)|X(t_{n - 1})}(x_n|x_{n - 1})
+$$
+
+
+<p>从而所有高阶依赖关系都可以简化为二阶依赖：</p>
+
+$$
+F_{X(t_1), \dots, X(t_n)}(x_1, \dots, x_n)=F_{X(t_n)|X(t_{n - 1})}(x_n|x_{n - 1})\dots F_{X(t_2)|X(t_1)}(x_2|x_1)F_{X(t_1)}(x_1)
+$$
+
+
+<h2 id="相关理论与二阶矩过程——时域分析"><a href="#相关理论与二阶矩过程——时域分析" class="headerlink" title="相关理论与二阶矩过程——时域分析"></a>相关理论与二阶矩过程——时域分析</h2><h3 id="自相关函数"><a href="#自相关函数" class="headerlink" title="自相关函数"></a>自相关函数</h3><p>由二阶矩过程的定义可知，均方可积空间的自相关函数、自协方差函数、互相关函数、互协方差函数均存在。</p>
+<p>均值函数（一阶原点矩）： $\mu_X(t) = E[X(t)]$ </p>
+<p>方差函数： $\text{Var}[X(t)] = E[(X(t) - \mu_X(t))^2]$ </p>
+<p>自相关函数： $R_X(t_1, t_2) = E[(X(t_1))(X^*(t_2))]$ </p>
+<p>自协方差函数： $C_X(t_1, t_2) = \text{Cov}[X(t_1), X(t_2)] = E[(X(t_1) - \mu_X(t_1))(X(t_2) - \mu_X(t_2))^*]$ </p>
+<p>均方值函数： $E[X^2(t)] = \int_{-\infty}^{\infty} x^2 f_X(x,t)dx$ </p>
+<p>互相关函数和互协方差函数：</p>
+<ul>
+<li>如果 $E[X(s)Y(t)]存在$ ，记为 $R_{XY}(s, t)$ </li>
+<li>如果 $\text{cov}(X(s), Y(t))存在$ ，记为 $C_{XY}(s, t)$ </li>
+</ul>
+
+$$
+R_{XY}(t_1, t_2) = E[(X(t_1))(Y^*(t_2))]
+$$
+
+
+
+$$
+C_{XY}(t_1, t_2) = E[(X(t_1) - \mu_X(t_1))(Y(t_2) - \mu_Y(t_2))^*]
+$$
+
+
+
+$$
+C_{XY}(s, t) = R_{XY}(s,t) - \mu_X(s)\mu_Y(t)
+$$
+
+
+<p>不相关：</p>
+
+$$
+C_{XY}(s, t) = 0
+$$
+
+
+
+$$
+R_{XY}(s,t) = m_X(s)m_Y(t)
+$$
+
+
+
+<p>自相关函数具有共轭对称性：</p>
+
+$$
+R(t_1, t_2) = R^*(t_2, t_1)
+$$
+
+
+<p>离散化的自相关矩阵同样是共轭对称的：</p>
+
+$$
+R = E[XX^H]\\
+R_{ij} = R^*_{ji}
+$$
+
+
+<p>自相关矩阵是非负定的：</p>
+
+$$
+\lambda R \lambda^H = \lambda XX^H\lambda^H \ge 0
+$$
+
+
+<p>当  $P(\lambda X = 0) = 1$  时等号成立。</p>
+<p>非负定性是自相关函数的一种特征性质。如果一个二元函数满足非负定性质，则一定可以构造出一个随机过程，使得其自相关函数为给定的二元函数。</p>
+<p>自相关矩阵非负定，分解的特征值均非负。其物理意义是信号的能量或者功率。</p>
+<p>自相关函数对加法和乘法的封闭性：</p>
+
+$$
+R(t, s) = \alpha R_1(t, s) + \beta R_2(t, s)
+$$
+
+
+<p>仍然是某一随机过程的自相关函数。</p>
+<p>证明：取  $Z(t) = \alpha^{1/2} X(t) + \beta^{1/2} Y(t)$ 。这里  $X(t), Y(t)$ 是独立的。</p>
+
+$$
+R(t, s) = R_1(t, s)R_2(t, s)
+$$
+
+
+<p>也是自相关函数。取  $Z(t) = X(t)Y(t)$ 。</p>
+<h3 id="宽平稳随机过程"><a href="#宽平稳随机过程" class="headerlink" title="宽平稳随机过程"></a>宽平稳随机过程</h3><p><strong>宽平稳</strong></p>
+<p>对于随机过程  $X(t), t \in T$ ，若  $\forall t, s\in T$ </p>
+
+$$
+E(X(t)) = E(X(s))\\
+R_X(t, s) = R_X(t + D, s + D)
+$$
+
+
+<p>称随机过程  $X(t)$  具有宽平稳性。</p>
+<p>宽平稳过程的均值是常数，自相关函数与相对时间差有关。故宽平稳过程的自相关函数可以写成一元函数： $R_X(\tau), \tau = t - s$ 。</p>
+<p><strong>严平稳</strong></p>
+<p>对于随机过程  $X(t), t \in T$ ，若  $\forall n, \forall t_1, t_2, \dots, t_n \in T$ ， $\forall D \in T$ ，都有</p>
+
+$$
+F_{t_1, t_2, \dots, t_n}(x_1, x_2, \dots, x_n) = F_{t_1 + D, t_2+D, \dots, t_n + D}(x_1, x_2, \dots, x_n)
+$$
+
+
+<p>则称随机过程  $X(t), t\in T$ 具有严平稳性。</p>
+<p>在二阶矩存在的条件下，严平稳蕴含宽平稳，而反过来，宽平稳一般无法得到严平稳。</p>
+<p>高斯过程的严平稳与宽平稳等价。</p>
+<p><strong>联合宽平稳</strong></p>
+
+$$
+R_{X, Y}(t, s) = R_{XY}(t + D, s + D), \forall D \in T
+$$
+
+
+<p><strong>宽平稳过程的性质</strong></p>
+<p>设  $R_X(\tau)$  为宽平稳过程的自相关函数，  $m_X$  为该过程的均值。</p>
+
+$$
+\begin{align}
+    R_X(\tau) = \overline{R_X(-\tau)}\\
+    R_X(0)\ge |m_X|^2\\
+    |R_X(\tau)| \le R_X(0)\\
+    R_X(\tau) \text{是一元非负定函数。}
+\end{align}
+$$
+
+
+<h3 id="正交增量过程"><a href="#正交增量过程" class="headerlink" title="正交增量过程"></a>正交增量过程</h3><p><strong>正交增量过程</strong></p>
+<p>对于二阶矩过程  $X(t), t \in \R$ ，若  $\forall t_1 \lt t_2 \le t_3 \lt t_4$ ， $t_1, t_2, t_3, t_4 \in \R$ ，满足</p>
+
+$$
+E(X(t_4) - X(t_3))(\overline{X(t_2) - X(t_1)}) = 0
+$$
+
+
+<p>则称  $X(t), t \in \R$  为正交增量过程。</p>
+<p><strong>独立增量过程</strong></p>
+<p>对于二阶矩过程  $X(t), t \in \R$ ，若  $\forall t_1 \lt t_2 \le t_3 \lt t_4$ ， $t_1, t_2, t_3, t_4 \in \R$ ， $X(t_4) - X(t_3)$  和  $X(t_2) - X(t_1)$  统计独立，则称为独立增量过程。</p>
+<p>均值为0的独立增量过程是正交增量过程。</p>
+<p><strong>平稳增量过程</strong></p>
+<p>对于随机过程  $X(t), t \in \R$ ，若  $X(t) - X(s)$  的分布仅仅依赖于  $t - s$ ，则称为平稳增量过程。</p>
+<p>定理：</p>
+<p>随机过程  $X(t), t \in [0, \infty]$ ，满足  $X(0) = 0$ ，则其为正交增量过程的充要条件为</p>
+
+$$
+R_X(s, t) = F(\min(s, t))
+$$
+
+
+<p>其中， $F(\cdot)$ 是单调不减的函数。</p>
+<h3 id="随机过程的极限、连续、导数、积分"><a href="#随机过程的极限、连续、导数、积分" class="headerlink" title="随机过程的极限、连续、导数、积分"></a>随机过程的极限、连续、导数、积分</h3><p><strong>均方极限</strong></p>
+
+$$
+E(|ka|^2)
+$$
+
+
+
+
+<p>唯一性：若  $X_n \xrightarrow{m.s} X, X_n \xrightarrow{m.s}Y$ ，则  $E(|X - Y|^2) = 0$ .</p>
+<p>可加性：</p>
+<p>数字特征相同：</p>
+<p>如何判定  ${X_n}$  是否收敛？</p>
+<p>Cauchy 准则</p>
+
+$$
+X_n \xrightarrow{m.s}{X} \Leftrightarrow E(|X_m - X_n|^2) = 0, m, n \rightarrow \infty
+$$
+
+
+<p>洛伊夫准则：</p>
+
+$$
+X_n \xrightarrow{m.s} X \lrArr E\lbrace X_n X_m^*\rbrace \rightarrow \text{constant}
+$$
+
+
+<p><strong>均方连续</strong></p>
+<p>二阶矩过程， $t \rightarrow t_0, X(t) \xrightarrow{m.s.} X(t_0)$ ，则称  $X(t)$  在  $t_0$  处连续</p>
+<p>定理</p>
+<p>以下命题等价：</p>
+<ol>
+<li> $R(t, s)$  在  $(t_0, t_0)$  上连续， $\forall t_0 \in T$ </li>
+<li> $X(t)$  在  $T$  上均方连续</li>
+<li> $R(t, s)$  在  $T \times T$  上连续</li>
+</ol>
+<p>推论</p>
+<p>对于宽平稳过程  $X(t)$ ， $R(\tau)$  为自相关函数，以下命题等价：</p>
+<ol>
+<li> $R(\tau)$  在  $\tau = 0$  处连续；</li>
+<li> $X(t)$  在  $T$  上均方连续；</li>
+<li> $R(\tau)$  在 T 上连续。</li>
+</ol>
+<p><strong>均方导数</strong></p>
+<p>若  $\frac{X(t_0 + h) - X(t_0)}{h}\xrightarrow{m.s.}Y(t_0), \forall t_0 \in T, h \rightarrow 0$ ，则称 $\lbrace X(t) \rbrace$  在均方意义下的导数为  $Y(t)$ 。</p>
+<p>如何判断  $X(t)$  是否均方可导？</p>
+<p>Cauchy 准则</p>
+
+$$
+E\left(|\frac{X(t_0 + h) - X(t_0)}{h} - \frac{X(t_0 + g) - X(t_0)}{g}|^2\right) \rightarrow 0, \forall h, g \rightarrow 0
+$$
+
+
+<p>洛伊夫准则</p>
+
+$$
+E\left(\left(\frac{X(t_0 + h) - X(t_0)}{h}\right)\left(\frac{X(t_0 + g) - X(t_0)}{g}\right)^*\right) \rightarrow 0, \forall h, g \rightarrow 0
+$$
+
+
+<p>均方导数判定定理</p>
+
+$$
+\frac{\partial^2 R(t, s)}{\partial t \partial s} 在 (t_0, t_0) 存在且连续，则 X(t) 在 t_0 处存在均方倒数
+$$
+
+
+<p>均方导数的性质：</p>
+ $f(t)$  为线性函数
+
+<ul>
+<li> $E(X^\prime(t)) = \frac{\mathrm d }{\mathrm dt} E(X(t))$ </li>
+<li> $E(X^\prime(t)\overline{X(s)}) =\frac{\partial }{\partial t}R_x(t, s)$ </li>
+<li> $E(X(t)\overline{X^\prime(s)}) =\frac{\partial }{\partial s}R_x(t, s)$ </li>
+<li> $E(X^\prime(t)\overline{X^\prime(s)}) =\frac{\partial^2 }{\partial t\partial s}R_x(t, s)$ </li>
+</ul>
+<p><strong>均方积分</strong></p>
+<p>若黎曼和  $\sum\limits_{k=1}^{n}X(v_k)h(v_k)(t_k - t_{k - 1})$  在  $n \rightarrow \infty, \max\lbrace t_k - t_{k - 1}\rbrace \rightarrow 0$  时均方收敛，其中  $h(t)$  为确定的可积函数，则称 $\lbrace X(t)\rbrace$  为均方可积，记为  $\int_{a}^{b}X(t)h(t)\mathrm dt$ 。</p>
+<p>判定定理</p>
+
+$$
+\lbrace X(t)h(t) \rbrace 均方可积 \Leftrightarrow \int_{a}^{b}\int_{a}^{b}R_X(t, s)h(t)h^*(s)\mathrm dt\mathrm ds 存在
+$$
+
+
+<p>均方积分的性质：</p>
+<ul>
+<li> $E\left( \int_{a}^{b}X(t)h(t)\mathrm dt\right) = \int_{a}^{b}E(X(t))h(t)\mathrm dt$ </li>
+<li> $E\left( \left(\int_{a}^{b}X(t)h(t)\mathrm dt\right)\left(\int_{a}^{b}X(s)h(s)\mathrm ds\right)^*\right) = \int_{a}^{b}E(X(t))h(t)\mathrm dt$ </li>
+<li>三角不等式： $\sqrt{ E \left(|\int_{a}^{b}X(t)h(t)\mathrm dt|^2\right) } \le \int_{a}^{b}\sqrt{E\left(|X(t) - h(t)|^2\right)}\mathrm dt$ </li>
+<li>均方积分与均方导数： $X(t)$  在  $[a, b]$  上均方连续， $Y(t) = \int_{a}^{t}X(s)\mathrm ds$ ，其中等号代表均方相等，则  $\lbrace Y(t)\rbrace$  在  $[a, b]$  可导，并称在均方意义下  $\lbrace Y(t) \rbrace$  的导数为  $\lbrace X(t) \rbrace$ </li>
+</ul>
+<h3 id="随机过程的遍历性"><a href="#随机过程的遍历性" class="headerlink" title="随机过程的遍历性"></a>随机过程的遍历性</h3><p>统计平均：对样本空间取平均</p>
+
+$$
+E\lbrace X(t_0) \rbrace = \int_{}^{}x\mathrm dF_X(x;t_0)
+$$
+
+
+<p>时间平均：</p>
+
+$$
+\langle X(t) \rangle = \frac{1}{T} \int_{-T/2}^{T/2}X(t)\mathrm dt
+$$
+
+
+<p>统计平均和时间平均的关系？</p>
+<p>时间平均更容易获得。如果我们可以通过时间平均来获得统计平均？</p>
+<p><strong>遍历性</strong></p>
+<p>定义-宽平稳过程均值遍历：</p>
+
+$$
+\langle X(t) \rangle = \lim\limits_{T\rightarrow\infty} \frac{1}{2T} \int_{-T}^{T}X(t)\mathrm dt \mathop{=}\limits^{a.s.} E \lbrace X(t) \rbrace = \mu
+$$
+
+
+<p>a.s. &#x3D; with probability 1</p>
+<p>左边是随机变量，右边是一个确定的数。这样的相等，意味着左边的随机变量的均值确定，方差为0.</p>
+<p>定义：宽平稳过程自相关遍历</p>
+
+$$
+\langle X(t + \tau)X^*(t) \rangle = \lim\limits_{T\rightarrow\infty} \frac{1}{2T} \int_{-T}^{T}X(t + \tau)X^*(t)\mathrm dt \mathop{=}\limits^{a.s.} R_X(\tau) = E \lbrace X(t + \tau)X^*(t)\rbrace
+$$
+
+
+<p>a.s. &#x3D; with probability 1</p>
+<p>定理：</p>
+<p>宽平稳过程  $X(t)$  满足均值遍历  $\lrArr$  </p>
+
+$$
+D(\langle X(t) \rangle) = \lim\limits_{T \rightarrow\infty} \frac{1}{2T}\int_{-2T}^{2T}\left(1 - \frac{|\tau|}{2T}\right)(R_X(\tau) - |\mu|^2)\mathrm d\tau = 0
+$$
+
+
+<p>定理：</p>
+<p>宽平稳过程具有均值遍历性的充要条件是：</p>
+
+$$
+\lim\limits_{T\rightarrow\infty} \frac{1}{2T}\int_{-T}^{T}C_X(\tau)\mathrm d\tau = 0 或者 \lim\limits_{T\rightarrow\infty} \frac{1}{T}\int_{0}^{T}C_X(\tau)\mathrm d\tau = 0
+$$
+
+
+<p>时间比较长的时候相关性消失了，也就是说过了一段时间同一轨道的样本就独立了，等价于多个轨道的样本，时间平均和统计平均就相等了。</p>
+<p>2个推论：</p>
+<ul>
+<li>若实数宽平稳过程的协方差函数满足  $\int_{0}^{+\infty}C_x(\tau)\mathrm d\tau\lt +\infty$ ，则该过程具有均值遍历性</li>
+<li>若实数宽平稳过程的协方差函数满足  $C_x(\tau) \rightarrow 0, \tau \rightarrow +\infty$ ，则该过程具有均值遍历性</li>
+</ul>
+<h3 id="随机过程的线性展开"><a href="#随机过程的线性展开" class="headerlink" title="随机过程的线性展开"></a>随机过程的线性展开</h3><p><strong>卡胡曼-洛伊夫展开</strong></p>
+<p>在平方可积空间上</p>
+<p>定义范数</p>
+<p>定义内积，正交</p>
+<p>在  $L^2[a, b]$  中一定有一组标准正交基函数  $\phi_1(t), \phi_2(t), \phi_3(t)\dots$  满足</p>
+
+$$
+\begin{cases}
+    \langle \phi_i, \phi_j \rangle = 0, i\ne j\\
+    \langle \phi_i, \phi_i \rangle = 1
+\end{cases}
+$$
+
+
+<ul>
+<li> $f$  可以用有限个基函数线性加和来逼近</li>
+<li> $\langle f, \phi_n \rangle$  表示  $f$  在  $\phi_n$  基上的坐标。</li>
+</ul>
+<p>周期性宽平稳随机过程可以用傅里叶级数展开</p>
+
+$$
+E\left(\left |X(t) -\sum\limits_{n=-\infty}^{\infty}c_ne^{j\omega_0t}  \right |^2\right) = 0
+$$
+
+
+<p>一般的用 KL 展开</p>
+<p>随机向量的双正交展开：</p>
+<p>零均值的  $n$  元随机向量  $\mathbf X \in R^n$  可以如下展开：</p>
+
+$$
+X = \sum\limits_{k=1}^{n} \xi_k \mathbf e_k
+$$
+
+
+<p>基向量选择的是自相关矩阵  $\mathbf R$  的特征向量。</p>
+<p>如果我们用  $\mathbf K$  个维度来逼近  $\mathbf X$ ，为了使得误差最小，选取最大的 $\mathbf K$ 个特征值：  $\mathbf X =\sum\limits_{k=1}^{K} \alpha_k\mathbf e_k$ 。这就是主成分分析（PCA）。</p>
+<h2 id="谱分析"><a href="#谱分析" class="headerlink" title="谱分析"></a>谱分析</h2><h3 id="周期函数的傅里叶级数"><a href="#周期函数的傅里叶级数" class="headerlink" title="周期函数的傅里叶级数"></a>周期函数的傅里叶级数</h3>
+$$
+x(t) =\sum\limits_{n=-\infty}^{\infty}a_n e^{j\omega_0 t}, \omega_0 = \frac{2\pi}{T}\\
+a_n = \frac{1}{T}\int_{0}^{T}x(t)e^{-jn\omega_0t}\mathrm dt
+$$
+
+
+<p>帕斯瓦尔定理</p>
+
+$$
+\frac{1}{T}\int_{0}^{T}|x(t)|^2\mathrm dt =\sum\limits_{n=-\infty}^{\infty}|a_n|^2
+$$
+
+
+<p>自相关函数</p>
+
+$$
+R(\tau) = \frac{1}{T}\int_{0}^{T}x(t + \tau)x^*(t)\mathrm dt
+$$
+
+
+<p>功率谱密度</p>
+
+$$
+S(\omega) =\sum\limits_{n=-\infty}^{\infty}|a_n|^2\delta(\omega - n \omega_0)
+$$
+
+
+<p>从而有</p>
+
+$$
+S(\omega) = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau
+$$
+
+
+<h3 id="非周期函数的傅里叶变换"><a href="#非周期函数的傅里叶变换" class="headerlink" title="非周期函数的傅里叶变换"></a>非周期函数的傅里叶变换</h3><h4 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h4>
+$$
+F(\omega) = \int_{-\infty}^{\infty}x(t)\exp(-j\omega t)\mathrm dt\\
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}F(\omega)\exp(j\omega t)\mathrm d\omega = \int_{-\infty}^{\infty}F(f)\exp(j2\pi ft)\mathrm df
+$$
+
+
+<p>帕斯瓦尔定理</p>
+
+$$
+\int_{-\infty}^{\infty}|x(t)|^2\mathrm dt = \int_{-\infty}^{\infty}|F(f)|^2\mathrm df
+$$
+
+
+
+$$
+时域采样 \lrarr 频域周期延拓\\
+时域周期延拓 \lrarr 频域采样\\
+$$
+
+
+<p>自相关函数</p>
+
+$$
+R(\tau) = \int_{-\infty}^{\infty}x(t + \tau)x^*(t)\mathrm dt
+$$
+
+
+<p>能量谱密度</p>
+
+$$
+S(\omega) = |F(\omega)|^2 = \left |\int_{-\infty}^{\infty}x(t)e^{j\omega t}\mathrm dt  \right|^2\\
+$$
+
+
+<p>波赫纳尔——辛钦定理</p>
+
+$$
+S(\omega) = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau\\
+R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}S(\omega)e^{j\omega\tau}\mathrm d\omega, S(\omega)\ge 0
+$$
+
+
+<p>实过程的  $S(\omega)$  为偶函数。</p>
+<p>离散随机过程的功率谱：</p>
+<p>只在整数点 k 采样</p>
+
+$$
+S(\omega) =\sum\limits_{k=-\infty}^{\infty}R(k)e^{-j\omega k}\\
+R(k) = \frac{1}{2\pi}\int_{-\pi}^{\pi}S(\omega)e^{j\omega k}\mathrm d\omega
+$$
+
+
+<p>周期过程（自相关函数有周期性）的功率谱</p>
+
+$$
+S(\omega) =\sum\limits_{n=-\infty}^{\infty}b_n\delta(\omega - n \Delta \omega)\\
+R(\tau) = \frac{1}{2\pi}\sum\limits_{n=-\infty}^{\infty}b_ne^{jn\Delta\omega\tau}
+$$
+
+
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>白噪声  $E \lbrace X(t) \rbrace = 0$ ，</p>
+
+$$
+S(\omega) = N_0, -\infty \lt \omega \le \infty\\
+R(\tau) = N_0\delta(\tau)
+$$
+
+
+<ul>
+<li>任意两个不同时刻  $X(t_1), X(t_2)$  都不相关。</li>
+<li>在各个频率上都有分量，且强度一致。</li>
+</ul>
+<p>高斯白噪声：各时刻服从高斯分布的白噪声</p>
+<p>色噪声：  $R(\tau)$  不是冲击函数。</p>
+<ul>
+<li>当某过程  $R(\tau)$  比较胖的时候，功率谱比较瘦<ul>
+<li>相隔较长时间  $X(t)$  与  $X(t + \tau)$  还相关，说明信号变化慢，对应频域低频多<br>分量多</li>
+</ul>
+</li>
+<li>当某过程  $R(\tau)$  比较瘦时，功率谱比较胖</li>
+<li>相隔一点时间，  $X(t)$  与  $X(t + \tau)$  不太相关，说明信号变化快，对应频域高频分量多。</li>
+</ul>
+<p>互谱密度</p>
+
+$$
+S_{XY}(\omega) = \int_{-\infty}^{\infty}R_{XY}(\tau)e^{-j\omega \tau}\mathrm d\tau
+$$
+
+
+<p>称为互谱密度，不具有功率的含义。</p>
+
+$$
+S_{YX}(\omega) = S_{XY}^*(\omega)\\
+R_{XY}(\tau) = 0, \forall \tau \lrArr S_{XY}(\omega) = 0, \forall \omega
+$$
+
+
+
+$$
+Z(t) = X(t) + Y(t)\\
+R_Z(\tau) = E \lbrace (X(t + \tau) + Y(t + \tau))\overline{(X(t) + Y(t))} \rbrace = R_X(\tau) + R_{XY}(\tau) + R_{XY}
+$$
+
+
+<p>一个宽平稳过程分别通过两个 LTI 系统：</p>
+
+$$
+Y_1(t) = X(t) * h_1(t)\\
+Y_2(t) = X(t) * h_2(t)\\
+R_{Y_1Y_2}(\tau) = R_X(\tau) * h_1(\tau) * h_2^*(-\tau)\\
+S_{Y_1Y_2}(\omega) = S_X(\omega)H_1(\omega)H_2^*(\omega)\\
+$$
+
+
+<p>两个过程输入两个系统，输出过程的互谱（互相关函数的傅里叶变换）。怎么求？</p>
+<p>（输入为联合宽平稳）</p>
+
+$$
+\hat X(t) = X(t) * f(t)\\
+\hat Y(t) = Y(t) * g(t)\\
+R_{\hat X\hat Y}(\tau) = R_{XY}(\tau) * f(\tau) * g^*(-\tau)\\
+S_{\hat X\hat Y}(\omega) = S_{XY}(\omega)F(\omega)G^*(\omega)
+$$
+
+
+
+<h3 id="宽平稳过程通过线性系统"><a href="#宽平稳过程通过线性系统" class="headerlink" title="宽平稳过程通过线性系统"></a>宽平稳过程通过线性系统</h3>
+$$
+Y(t) = \int_{-\infty}^{\infty}h(t - \tau)X(\tau)\mathrm d\tau
+$$
+
+
+<p>总结：</p>
+<ul>
+<li>输出过程的均值：易求，因为宽平稳过程的均值为常数</li>
+<li>输出过程的自相关函数：有点麻烦</li>
+</ul>
+<p>首先看输出与输入的自相关</p>
+
+$$
+R_{YX}(\tau) = \int_{-\infty}^{\infty}h(v)R_x(\tau - v)\mathrm dv\\
+R_Y(\tau) = \int_{-\infty}^{\infty}h^*(-u)R_{YX}(\tau - u)\mathrm du
+$$
+
+
+
+$$
+R_Y(\tau) = R_X(\tau) * h(\tau) * h^*(-\tau)\\
+S_Y(\omega) = |H(\omega)|^2S_X(\omega)
+$$
+
+
+<p>因此，输出的自相关，也可以用功率谱求解。</p>
+<h3 id="离散时间宽平稳序列"><a href="#离散时间宽平稳序列" class="headerlink" title="离散时间宽平稳序列"></a>离散时间宽平稳序列</h3>
+$$
+R_{YX}(k) = h(k) * R_X(k)\\
+R_Y(k) = h^*(-k) * h(k) * R_X(k)\\
+S_Y(z) = H(z) H^*(\frac{1}{z^*})S_X(z)\\
+其中 H(z) =\sum\limits_{}^{}h(k)z^{-k}\\
+令 z = e^{j\omega}\\
+S_Y(\omega) = |H(\omega)|^2S_X(\omega)
+$$
+
+
+<p>理想白噪声通过低通滤波器：</p>
+
+$$
+S_Y(f) = \begin{cases}
+    k_0, -f_c \le f \le f_c,\\
+    0, \text{otherwise.}
+\end{cases}\\
+R_Y(0) = 2f_ck_0\\
+R(\tau) = R_Y(0)\frac{\sin(2\pi f_c\tau)}{2\pi f_c\tau}
+$$
+
+
+<p>从自相关函数可看出，相隔  $\frac{n}{2f_c}$  的两个时刻不相关。因此，以  $2f_c$  为采样频率的噪声采样数据彼此不相关。</p>
+<p>可以证明宽平稳过程功率谱非负： $S_X(f) \ge 0$ ：</p>
+
+$$
+E \lbrace |Y(t)|^2 \rbrace =  R_Y(0) = \int_{-\infty}^{\infty}S_Y(f)\mathrm df = \int_{-\infty}^{\infty}S_X(f)|H(f)|^2\mathrm df \ge 0
+$$
+
+
+<p>如果  $S_X(f)$  在某个地方小于0，可以设计对应的滤波器  $H(f)$ 将这个小于0的区域滤出来，从而  $\int_{-\infty}^{\infty}S_X(f)|H(f)|^2\mathrm df \le 0$ ，导致矛盾。</p>
+<p>线性系统例子：</p>
+<p>滑动平均</p>
+
+$$
+Y(t) = \frac{1}{T}\int_{t-T}^{t}X(s)\mathrm ds
+$$
+
+
+<p>转化为滤波器：</p>
+
+$$
+R_Y(t) = R_X(t) * h(t) * h^*(-t)\\
+h(t) = \begin{cases}
+    \frac{1}{T}, 0 \le t \le T,\\
+    0, \text{otherwise.}
+\end{cases}
+$$
+
+
+<p>令 </p>
+
+$$
+g(t) = h(t) * h^*(t) = \begin{cases}
+    \frac{1}{T}\left ( 1 - \frac{|t|}{T} \right), t \in [-T, T],\\
+    0,\text{otherwise.}
+\end{cases}
+$$
+
+
+<p>理想的矩形窗</p>
+
+$$
+R_Y(t) = \int_{-\infty}^{\infty}g(t - \tau)R_X(\tau)\mathrm d\tau = \int_{-T}^{T}\frac{1}{T}\left ( 1 - \frac{|t - \tau|}{T} \right)R_X(\tau)\mathrm d\tau
+$$
+
+
+<p>从频域看</p>
+
+$$
+H(\omega) = \text{sinc} \left ( \frac{\omega T}{2} \right)e^{-j\omega \frac{T}{2}}\\
+S_Y(\omega) = S_X(\omega)\left |\text{sinc} \left ( \frac{\omega T}{2} \right)  \right|^2
+$$
+
+
+<p>是一个低通滤波器。</p>
+<p>例子2：MTI 滤波</p>
+<p>静止目标反射信号相同，运动目标反射回波不同。因此设计滤波器消去静止目标。称为“对消”。</p>
+
+$$
+Y(t) = X(t) - X(t - T)
+$$
+
+
+<p>在频域看：</p>
+
+$$
+H(\omega) = 1 - e^{j\omega T}
+$$
+
+
+<p>静止目标，多普勒频率为0，因此频域响应为0；运动目标，多普勒频率不为0，频域响应不为0。因此这是一个高通滤波器。</p>
+<p>还可以多次对消：</p>
+
+$$
+Y_1(t) = X(t) - X(t - T)\\
+Y_2(t) = Y_1(t) - Y_1(t - T)\\
+Y_3(t) = Y_2(t) - Y_2(t - T)\\
+\vdots\\
+Y_n(t) = Y_{n - 1}(t) - Y_{n - 1}(t - T)
+$$
+
+
+<p>频率响应：</p>
+
+$$
+H(\omega) = (1 - e^{-j\omega T})^n
+$$
+
+
+<h3 id="采样定理"><a href="#采样定理" class="headerlink" title="采样定理"></a>采样定理</h3><p>随机过程下的采样定理</p>
+ $|f| \le f_0$ , 当  $f_s \le 2f_0$  时，均方意义下有
+
+
+$$
+X(t) =\sum\limits_{k=-\infty}^{\infty}X(kT) \text{sinc} \left ( \frac{\pi}{T}(t - kT) \right)
+$$
+
+
+<p>证明：</p>
+
+$$
+\begin{align*}
+    &要证明 N \rightarrow \infty 时,\\
+    &\varepsilon_N = E \left \lbrace  \left | X(t) -\sum\limits_{k=-N}^{N}X(kT)\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2 \right \rbrace \rightarrow 0\\
+    &利用E \lbrace X(a) X^*(b) \rbrace = R_X(a - b) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{j\omega a}e^{-j\omega b}S_X(\omega)\mathrm d\omega，展开上式\\
+    &\varepsilon_N = \frac{1}{2\pi}\int_{-\infty}^{\infty}\left | e^{j\omega t} -\sum\limits_{k=-N}^{N}e^{j\omega kT}\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2  S_X(\omega)\mathrm d\omega\\
+    &= \frac{1}{2\pi}\int_{-\omega_s/2}^{\omega_s/2}\left | e^{j\omega t} -\sum\limits_{k=-N}^{N}e^{j\omega kT}\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2  S_X(\omega)\mathrm d\omega\\
+    &对 e^{j\omega t}做周期延拓，周期为 \omega_s，可以做频域傅里叶级数展开\\
+    &e^{j\omega t} = \sum\limits_{k=-\infty}^{\infty}\alpha_k e^{j\omega \frac{2\pi}{\omega_s}} = \sum\limits_{k=-\infty}^{\infty}\alpha_k e^{j\omega kT}\\
+    &\alpha_k = \frac{1}{\omega_s}\int_{-\omega_s/2}^{\omega_s/2}e^{j\omega t}e^{-j\omega kT}\mathrm d\omega = \frac{\sin(\frac{\omega}{2}(t - kT))}{\frac{\omega}{2}(t - kT)}\\
+    &从而\left | e^{j\omega t} -\sum\limits_{k=-N}^{N}e^{j\omega kT}\text{sinc} \left ( \frac{\pi}{T}(t - kT) \right) \right|^2 = \left | e^{j\omega t} -\sum\limits_{k=-N}^{N}\alpha_k e^{j\omega kT}\right|^2 \rightarrow 0, N \rightarrow \infty
+\end{align*}
+$$
+
+
+<ul>
+<li>采样定理两边是均方相等。</li>
+<li>当满足采样定理时，离散点包含全部信息，任意取值点可以恢复。</li>
+<li>频带边界点<ul>
+<li>当功率谱在  $\pm \omega_0$  处有  $\delta$  函数时，以  $f_s = 2f_0$  无法恢复信号。</li>
+<li>例如： $X(t) = \cos(\omega_0 t + \phi)$ ， $\phi$  为随机相位，在 $[0, 2\pi]$ 内均匀分布。</li>
+<li> $R(\tau) = \frac{1}{2}\cos(\omega_0\tau)$ </li>
+<li> $S(\omega) = \delta(\omega - \omega_0) + \delta(\omega + \omega_0)$ </li>
+<li>采样点  $X(kT) = (-1)^kX(0)$ ，与  $X(0)$  严重相关。</li>
+</ul>
+</li>
+</ul>
+<p>欠采样</p>
+
+$$
+\begin{align*}
+    E \lbrace |\varepsilon(t)|^2 \rbrace =& \int_{\omega_s/2}^{-\omega_s/2}\sum\limits_{n=-\infty}^{\infty}|1 - e^{jn\omega t}|S(\omega + n\omega_s)\mathrm d\omega\\
+    =&\sum\limits_{n=-\infty}^{\infty}4\sin^2(\omega_snt/2) \cdot \int_{\omega_s/2}^{-\omega_s/2}S(\omega + n\omega_s)\mathrm d\omega\\
+\end{align*}\\
+
+上面的级数为积分的加权求和。 n = 0 时权重为0，对应[-\omega_s/2, \omega_s/2] 内的功率谱。\\
+n\ne 0 时，权不为0，对应[-\omega_s/2, \omega_s/2]外的频谱，如果在这个区间外功率谱不是0，那 |\varepsilon|^2 将大于0。
+
+$$
+
+
+<h3 id="带通采样"><a href="#带通采样" class="headerlink" title="带通采样"></a>带通采样</h3>
+$$
+X(\omega) = 0, |\omega - \omega_c| &gt; \omega_0, |\omega + \omega_c| &gt; \omega_0
+$$
+
+
+<p>一般研究实信号  $g(t)$ ，频谱具有共轭对称性，只需要考虑正半轴的频带就可以了：</p>
+
+$$
+G(-\omega) = G^*(\omega)\\
+A(\omega) = A(-\omega), \varphi(-\omega) = -\varphi(\omega)
+$$
+
+
+<p>希尔伯特变换：</p>
+
+$$
+H(\omega) = \begin{cases}
+    -j, \omega \gt 0,\\
+    0, \omega = 0,\\
+    j, \omega \lt 0.
+\end{cases}
+$$
+
+
+
+$$
+\lbrace G(\omega)H(\omega) \rbrace^* = G(-\omega)H(-\omega)
+$$
+
+
+<p>希尔伯特把正频率移相  $-90\degree$ ，负频率移相  $+90\degree$ </p>
+<p>时域表示：</p>
+<p>滤波器的时域响应为</p>
+
+$$
+\hat h(t) = \frac{1}{\pi t}
+$$
+
+
+<p>g(t) 做两次希尔伯特变换，相位转了  $180\degree$ ：</p>
+
+$$
+g(t)\xrightarrow{H(\omega)}\hat g(t) \xrightarrow{H(\omega)} -g(t)
+$$
+
+
+<p>正交性：</p>
+
+$$
+\int_{-\infty}^{\infty}g(t)\hat g(t)\mathrm dt = 0
+$$
+
+
+<p>看成 $\hat g(t)$  与  $g(-t)$  的卷积：</p>
+
+$$
+\int_{-\infty}^{\infty}g(t)\hat g(t)\mathrm dt = \int_{-\infty}^{\infty}g(- (u - t))\hat g(t)\mathrm dt|_{u = 0} = g(-t) * \hat g(t) |_{t = 0}\\
+g(-t) \rightarrow G^*(\omega) = G(-\omega), \hat g(t) \rightarrow G(\omega)H(\omega)\\
+g(-t) * \hat g(t)|_{t = 0} = \int_{-\infty}^{\infty}G^*(\omega)G(\omega)H(\omega)e^{j\omega t}\mathrm d\omega|_{t = 0} = 0
+$$
+
+
+<p>希尔伯特变换与原信号相加得到单边的频谱：</p>
+
+$$
+g(t) \rightarrow A^* + A\\
+j\hat g(t) \rightarrow \\
+g(t) + j\hat g(t) \rightarrow 2A\\
+$$
+
+
+<p>下变频：</p>
+
+$$
+\tilde{g}(t) = \lbrace g(t) + j\hat g(t) \rbrace e^{-j\omega_c t} = g_I(t) + jg_Q(t)\\
+g_I(t) = g(t) \cos \omega_c t + \hat g(t) \sin (\omega_c t)\\
+g_Q(t) = - g(t) \sin \omega_c t + \hat g(t) \cos (\omega_c t)\\
+$$
+
+
+<p>实际上是一个旋转矩阵，把单边频信号  $\tilde g(t)$  顺时针旋转了  $\omega_ct$ 变成了基带复信号。</p>
+<p>与原信号频谱的关系：</p>
+
+$$
+g_I(t) \rightarrow G(f - f_c) + G(f + f_c) \\
+g_Q(t) \rightarrow G(f - f_c)(+j) + G(f + f_c)(-j)\\
+(f \le |f_0|)
+$$
+
+
+<p>调制和解调的流程</p>
+<ul>
+<li>调制：不需要得到  $\hat g(t)$ </li>
+<li>解调：通过低通滤波代替 $\hat g(t)$ </li>
+</ul>
+<p>随机过程的希尔伯特变换</p>
+ $X(t)$ 为实的带通随机过程
+
+
+$$
+R_X(-\tau) = E\left \lbrace  X(t - \tau)X^*(t) \right \rbrace = E\left \lbrace  X(t)X^*(t + \tau) \right \rbrace = E\left \lbrace  X(t + \tau)X(t) \right \rbrace = R_X(\tau)\\
+S_X(-\omega) = \int_{-\infty}^{\infty}R_X(\tau)e^{-j(-\omega) \tau}\mathrm d\tau = \int_{-\infty}^{\infty}R_X(-u)e^{-j\omega\tau}\mathrm du = \int_{-\infty}^{\infty}R_X(u)e^{-j\omega\tau}\mathrm du = S_X(\omega)
+$$
+
+
+<p>通过希尔伯特滤波器后：</p>
+
+$$
+\hat X(t) = X(t) * h(t)\\
+R_{\hat X}(\tau) = R_X(\tau) * h(t) * h^*(-t) = R_X(\tau)\\
+S_{\hat X}(\omega) = S_X(\omega)|H(\omega)|^2 = S_X(\omega)
+$$
+
+
+<p>互相关：</p>
+
+$$
+\hat R_X(\tau) = R_{\hat XX}(\tau) = E \left \lbrace \int_{-\infty}^{\infty}X(t + \tau - u)\frac{1}{\pi u}\mathrm duX(t)   \right\rbrace = \int_{-\infty}^{\infty}R_X(\tau)\frac{1}{\pi u}\mathrm du
+$$
+
+
+
+$$
+R_{X\hat X}(\tau) = -\hat R_X(\tau)
+$$
+
+
+<p>因此</p>
+
+$$
+Y = X + j\hat X\\
+R_Y(\tau) = R_X(\tau) + R_{\hat X}(\tau) + jR_{\hat XX}(\tau) - jR_{X\hat X}(\tau) = 2R_X(\tau) + 2j\hat R_X(\tau)\\
+S_Y(f) = \begin{cases}
+    4S_X(f), &f \gt 0\\
+    0, &f\lt 0
+\end{cases}
+$$
+
+
+<p>实的带通随机过程配合虚部的希尔伯特变换，同样也是只有正频率</p>
+<p>反之，如果功率谱只有正频率有值，则实部和虚部互为希尔伯特变换，实部和虚部的信息是重复的。</p>
+<p>随机信号的下变频：</p>
+
+$$
+\tilde{X}(t) = \lbrace X(t) + j\hat X(t) \rbrace e^{-j\omega_c t} = X_I(t) + jX_Q(t)\\
+X_I(t) = X(t) \cos \omega_c t + \hat X(t) \sin (\omega_c t)\\
+X_Q(t) = - X(t) \sin \omega_c t + \hat X(t) \cos (\omega_c t)\\
+$$
+
+
+<p>同样是顺时针旋转了  $2\pi f_c t$  之后得到了基带信号</p>
+<p>研究基带信号的实部、虚部的统计特性</p>
+ $\tilde{X}(t)$  还是一个平稳过程
+
+
+$$
+E \lbrace \tilde{X}(t) \rbrace = E \lbrace X_I(t) \rbrace = E \lbrace X_Q(t) \rbrace = 0\\
+R_{X_I}(\tau) = R_X(\tau)\cos(2\pi f_c\tau) + \hat R_X(\tau)\sin(2\pi f_c\tau)\\
+R_{X_Q}(\tau) = R_X(\tau)\cos(2\pi f_c\tau) + \hat R_X(\tau)\sin(2\pi f_c\tau)\\
+R_{X_I}(\tau) = R_{X_Q}(\tau)\\
+R_{X_Q}(0) = R_{X_I}(0) = R_{X}(0)(三者方差一样)\\
+\hat R_X(0) = 0(奇函数，不具备自相关函数的性质)\\
+S_{X_I}(f) = S_{X_Q}(f) = \begin{cases}
+    S_X(f - f_c) + S_X(f + f_c), &|f| \le f_0,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+
+<p>基带信号虚部和实部的互相关</p>
+
+$$
+R_{X_IX_Q}(\tau) = R_X(\tau)\sin(2\pi f_c\tau) - \hat R_X(\tau)\cos (2\pi f_c\tau)，奇函数
+$$
+
+
+
+$$
+R_{X_IX_Q}(0) = 0
+$$
+
+
+<p>因此同一时刻实部和虚部不相关。</p>
+<p>互谱密度</p>
+
+$$
+S_{X_IX_Q}(f) = \begin{cases}
+    jS_X(f + f_c) - jS_X(f - f_c), &|f| \lt f_0,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+
+<p>只有当正频谱和负频谱分别跟  $f = \pm f_c$  对称时，互谱密度恒为0。此时，任意两个时间的虚部和实部信号都是不相关的。</p>
+<h2 id="高斯过程"><a href="#高斯过程" class="headerlink" title="高斯过程"></a>高斯过程</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>随机向量 $X = (X(t_1), \dots, X(t_n))^T$  服从  $n$  元高斯分布，称为高斯过程。</p>
+<p>均值  $\mu_k$  &#x3D;  $E \lbrace X_k \rbrace$ </p>
+<p>协方差阵</p>
+
+$$
+\Sigma = E \lbrace (X - \mu)(X - \mu)^T \rbrace = \begin{bmatrix}
+    b_{11}& \dots &b_{1n}\\
+    \vdots& \ddots & \vdots\\
+    b_{n1} & \dots & b_{nn}
+\end{bmatrix}\\
+b_{ij} = E \lbrace (X_i - \mu_i)(X_j - \mu_j)^T \rbrace\\
+b_{ij} = b_{ji}^* = b_{ji}
+$$
+
+
+<p>做特征分解</p>
+
+$$
+\Sigma v_i = \lambda_i v_i\\
+Q = (v_1, v_2, \dots, v_n)正交阵, Q^{-1} = Q^T\\
+\Sigma = Q\text{diag}(\lambda_1, \dots, \lambda_n)Q^T\\
+\Sigma^{-1} = Q^T\text{diag}(\lambda_1^{-1}, \dots, \lambda_n^{-1})Q
+$$
+
+
+<h3 id="多元高斯分布"><a href="#多元高斯分布" class="headerlink" title="多元高斯分布"></a>多元高斯分布</h3>
+$$
+f(x) = K \cdot \exp \left \lbrace  -\frac{1}{2}(x - \mu)\Sigma^{-1}(x - \mu)^T \right \rbrace
+$$
+
+
+<p>线性变换以消去下标 $ij$ 项：</p>
+
+$$
+\Sigma^{-1} = A^TA\\
+y = A(x - \mu)\\
+(x - \mu)\Sigma^{-1}(x - \mu)^T = y^Ty
+$$
+
+
+
+$$
+1 = K \int \dots \int \exp \left \lbrace  -\frac{1}{2}(x - \mu)\Sigma^{-1}(x - \mu)^T \right \rbrace \mathrm dx_1 \dots \mathrm dx_n\\
+K = \frac{1}{(\sqrt{2\pi})^n\cdot \sqrt{|\Sigma|}}
+$$
+
+
+<p>多元高斯矢量的特征函数</p>
+
+$$
+\omega = (\omega_1, \omega_2,\dots, \omega_n)^T\\
+\Phi_X(\omega) = E \lbrace e^{j\omega^TX} \rbrace = E \lbrace e^{j(\omega_1 X_1 + \omega_2 X_2 + \dots + \omega_n X_n)} \rbrace = \exp \left \lbrace  j\omega^T\mu - \frac{1}{2}\omega^T\Sigma\omega \right \rbrace
+$$
+
+
+<p>特征函数不要求  $\Sigma$  可逆。概率密度函数要求  $\Sigma$  正定，特征值都大于0.</p>
+<p>当  $X$  为高斯矢量时</p>
+
+$$
+\Phi_X(\omega) = \int_{}^{}\int_{}^{}\dots\int_{}^{} K \cdot \exp \left \lbrace  -\frac{1}{2}(x - \mu)^T\Sigma^{-1}(x - \mu) \right \rbrace\mathrm dx_1\mathrm dx_2\dots\mathrm dx_n = \int_{}^{}\int_{}^{}\dots\int_{}^{} K \cdot \exp \left \lbrace  -\frac{y^Ty}{2} \right \rbrace \sqrt{|\Sigma|}
+$$
+
+
+<p>高斯白噪声的协方差矩阵只有对角元，对角元为方差。</p>
+<p>可以用逼近处理  $|\Sigma| = 0$ ：</p>
+
+$$
+\Sigma_K = \Sigma + \frac{1}{K}I\\
+\Phi_X(\omega) = \exp \left \lbrace  j\omega^T\mu - \frac{1}{2}\omega^T \left (\Sigma + \frac{1}{K}I  \right)\omega \right \rbrace\\
+f(x) = \frac{1}{\sqrt{2\pi}^n \sqrt{|\Sigma_K|}} \cdot \exp \left \lbrace  -\frac{1}{2}(x - \mu)\Sigma^{-1}(x - \mu)^T \right \rbrace
+$$
+
+
+<p>然后再讨论  $K \rightarrow \infty$  的情况。</p>
+<p>多元高斯矢量的边缘分布</p>
+<p>任取子矢量  $\lbrace K_1, K_2, \dots, K_m \rbrace \subseteq {1, 2, \dots, n}$ </p>
+<p>观察  $\tilde{ X} = (X_{K_1}, X_{K_2}, \dots, X_{K_m})^T$  的分布</p>
+
+$$
+\tilde{\Phi}(\tilde\omega) = E \lbrace e^{j(\omega_{K_1}\tilde X_{K_1} + \omega_{K_2}\tilde X_{K_2} + \dots + \omega_{K_m}\tilde X_{K_m})} \rbrace = \exp \left \lbrace  j\tilde\omega^T\mu - \frac{1}{2}\tilde\omega^T\Sigma\tilde\omega \right \rbrace
+$$
+
+
+<p>用置换矩阵  $P$  将  $\Sigma$  的第  $K_1, K_2, \dots, K_m$  行、列移到  $\Sigma$  的左上角，对应的  $\omega$  也置换：</p>
+
+$$
+P\omega = \begin{pmatrix}
+    \tilde{\omega}\\
+    0
+\end{pmatrix}\\
+P^T\Sigma P^T = \begin{pmatrix}
+    \tilde{\Sigma} & B\\
+    C & D
+\end{pmatrix}
+$$
+
+
+<p>置换到左上角后，容易看出子矢量的特征函数可以通过将原矢量其他的 $\omega$ 置零得到，均值就是选择对应的均值，协方差矩阵就是把对应的行列元素抽出来：</p>
+
+$$
+\omega^T\Sigma\omega = (\tilde{\omega}, 0)^T\begin{pmatrix}
+    \tilde{\Sigma} & B\\
+    C & D
+\end{pmatrix}\begin{pmatrix}
+    \tilde{\omega}\\
+    0
+\end{pmatrix} = \tilde{\omega}^T\tilde{\Sigma}\tilde{\omega}
+$$
+
+
+<p>利用特征函数求数字特征：</p>
+
+$$
+\frac{\partial^2\Phi}{\partial \omega_k\partial \omega_l}|_{\omega_k = \omega_l = 0} = -(\mu_l\mu_k + b_{kl})\\
+E \lbrace X_kX_l \rbrace = \mu_l\mu_k + b_{kl}
+$$
+
+
+
+$$
+E \lbrace X_1^{k_1}\dots X_n^{k_n} \rbrace = j^{\sum\limits_{i=1}^{n}k_i} \frac{\partial^{k_1 + k_2 + \dots k_n}}{\partial^{k_1}\omega_1\partial^{k_2}\omega_2\dots \partial^{k_n}\omega_n}\bigg|_{\omega_1 = \omega_2 = \dots = \omega_n = 0}
+$$
+
+
+<p>高斯的矢量分布的高阶矩完全由一阶矩  $\mu$  和二阶矩  $\Sigma$  决定。例如可以用特征函数推出：</p>
+
+$$
+\begin{align*}
+    &E \left \lbrace  X_1X_2X_3X_4 \right \rbrace \\
+    =& j^4 \frac{\partial^4\Phi}{\partial \omega_1\partial \omega_2\partial \omega_3\partial \omega_4}\bigg|_{\omega_1 = \omega_2 = \omega_3 = \omega_4 = 0} \\
+    =& E \left \lbrace  X_1X_2  \right \rbrace E \left \lbrace  X_3X_4  \right \rbrace + E \left \lbrace  X_1X_3  \right \rbrace E \left \lbrace  X_2X_4  \right \rbrace + E \left \lbrace  X_1X_4  \right \rbrace E \left \lbrace  X_2X_3  \right \rbrace
+\end{align*}
+$$
+
+
+<p>独立性</p>
+<p>独立性说的是统计，不相关说的是线性（二阶矩）</p>
+<p>一般来说</p>
+
+$$
+独立 \Rightarrow 不相关\\
+不相关 \not \Rightarrow 独立
+$$
+
+
+<p>但是，对于高斯分布而言：</p>
+
+$$
+独立 \lrArr 不相关
+$$
+
+
+<p>这是因为高斯分布完全由一阶和二阶矩决定。</p>
+<p>定理：</p>
+ $n$  元向量  $X = \binom{X_1}{X_2}$  服从  $N(\mu, \Sigma)$ ，则  $X_1, X_2$  独立  $\lrArr$   $\Sigma_{12} = 0$ 
+
+
+$$
+\Sigma = \begin{pmatrix}
+    \Sigma_{11}&\Sigma_{12}\\
+    \Sigma_{21}&\Sigma_{22}
+\end{pmatrix}
+$$
+
+
+<p>充分性：</p>
+
+$$
+\Sigma_{12} = E \left \lbrace (X_1 - \mu_1)^T(X_2 - \mu_2)  \right \rbrace = E \left \lbrace (X_1 - \mu_1)\right\rbrace E\left \lbrace(X_2 - \mu_2)  \right \rbrace = 0
+$$
+
+
+<p>必要性：</p>
+
+$$
+f(x_1, x_2) = \frac{1}{(2\pi)^{n/2}\sqrt{|\Sigma|}}\exp \left \lbrace -\frac{1}{2}\begin{pmatrix}
+    x_1 - \mu_1\\
+    x_2 - \mu_2
+\end{pmatrix}^T\begin{pmatrix}
+    \Sigma_{11}&0\\
+    0&\Sigma_{22}
+\end{pmatrix} \begin{pmatrix}
+    x_1 - \mu_1\\
+    x_2 - \mu_2
+\end{pmatrix} \right  \rbrace = f(x_1)f(x_2)
+$$
+
+
+<p>可见  $X_1, X_2$  统计独立。</p>
+<p>对于高斯过程：</p>
+
+$$
+严平稳 \lrArr 宽平稳
+$$
+
+
+<p>即  $X(t_1), X(t_2), \dots, X(t_n)$  和  $X(t_1 + \tau), X(t_2 + \tau), \dots, X(t_n + \tau)$  有相同的  $\mu, \Sigma$  等价于具有相同的分布函数。</p>
+<p>线性变换</p>
+<p>定理：  $X$  服从高斯分布，矩阵  $C_{m\times n}$ ，  $Y = CX$ ，则  $Y$  服从高斯分布  $N \left(C\mu, C \Sigma C^T \right)$ 。</p>
+<p>高斯过程经过微分，积分，滤波等线性操作，输出还是高斯过程。</p>
+<p>有一种重要的线性变换：去相关。</p>
+
+$$
+\Sigma_X = \begin{pmatrix}
+    \Sigma_{11}&\Sigma_{12}\\
+    \Sigma_{21}&\Sigma_{22}
+\end{pmatrix}\\
+Y = \begin{pmatrix}
+    Y_1\\Y_2
+\end{pmatrix}= \begin{pmatrix}
+    I & A\\
+    0 & I
+\end{pmatrix}\begin{pmatrix}
+    X_1\\X_2
+\end{pmatrix}\\
+E \left \lbrace  (Y_1 - E(Y_1))(Y_2 - E(Y_2))^T \right \rbrace = \Sigma_{12} + A\Sigma_{22 } = 0
+$$
+
+
+<p>需要</p>
+
+$$
+-\Sigma_{12}\Sigma_{22}^{-1} = A\\
+$$
+
+
+<p>计算协方差</p>
+
+$$
+E \left \lbrace  (Y - E(Y))(Y - E(Y))^T \right \rbrace = \begin{pmatrix}
+    \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}&0\\
+    0&\Sigma_{22}
+\end{pmatrix}
+$$
+
+
+<p>去相关之后方差减小了。可以认为  $X_1 = Y_1 - AX_2$  中， $- AX_2$ 是与  $Y$  “独立” 的“噪声项”，这个噪声导致了  $X_1$  的方差大于去相关之后的  $Y$  的方差。</p>
+<p>去相关与是否是高斯矢量无关。但是对于高斯矢量，去相关之后，两个矢量就独立了，具有重要的意义。</p>
+<p>对于一般的二阶矩过程，希望找到一个矩阵  $U$  ，使得  $Y = UX$  的各个分量不相关：</p>
+
+$$
+E \left \lbrace  (Y - \mu_Y)(Y - \mu_Y)^T \right \rbrace = \text{diag}\\
+E \left \lbrace  U(X - \mu_X)(X - \mu_X)^TU^T \right \rbrace  = \text{diag} = U\Sigma U^T
+$$
+
+
+<p>所以，本质上就是分析了协方差矩阵  $\Sigma$  的特征值。也就是二阶矩章节讲到的主成分分析：</p>
+
+$$
+\text{diag}(\lambda_1, \dots, \lambda_n)
+$$
+
+
+<p>选取  $\lambda_i$  大的特征矢量，张成主成分空间。</p>
+<p>信号处理中有信号空间（特征值大的）和噪声空间（特征值小的，被噪声掩盖了）。</p>
+<p>有时候  $Y$  的各个分量不相关还不能完全消去元素之间的统计关系。只是线性不相关。不相关的约束实际上很弱。</p>
+<p>如果要设计  $U$ ，使得  $Y = UX$  的各个分量独立，运算很复杂。</p>
+<p>但是，对于高斯矢量而言，不相关就是独立。所以对于高斯过程，主成分分析  $\lrArr$  独立成分分析。</p>
+<h3 id="高斯变量的条件分布"><a href="#高斯变量的条件分布" class="headerlink" title="高斯变量的条件分布"></a>高斯变量的条件分布</h3><p>仍是高斯：</p>
+
+$$
+f_{X_1|X_2}(x_1|x_2) = \frac{1}{\sqrt{\tilde{\Sigma}_{11}}(2\pi)^{\frac{n_1}{2}}}\exp \left \lbrace -\frac{1}{2}(x_1 - \tilde{\mu}_1)^T\tilde{\Sigma}_{11}^{-1}(x_1 - \tilde{\mu}_1)   \right\rbrace\\
+E \lbrace X_1 | X_2 \rbrace = \mu_1 + \Sigma_{12}\Sigma_{22}^{-1}(X_2 - \mu_2)\\
+E \lbrace (X_1 - E(X_1 | X_2))(X_1 - E(X_1|X_2))^T|X_2 \rbrace = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}
+$$
+
+
+<h3 id="实高斯过程的若干性质"><a href="#实高斯过程的若干性质" class="headerlink" title="实高斯过程的若干性质"></a>实高斯过程的若干性质</h3><p>实高斯过程完全由均值函数和协方差函数确定。</p>
+<p>严平稳等价于宽平稳。</p>
+<p>若实高斯过程均方可导，则  $\lbrace X^\prime(t) \rbrace$  也是高斯过程。</p>
+<p>高斯过程通过一般线性系统仍然是高斯过程。</p>
+
+$$
+Y(t) = \int_{a}^{b}X(\tau)h(t, \tau)\mathrm d\tau\\
+更强的结论：\left \lbrace  \binom{X(t)}{Y(t)} \right \rbrace 是高斯过程。
+$$
+
+
+<h3 id="零均值带通高斯过程"><a href="#零均值带通高斯过程" class="headerlink" title="零均值带通高斯过程"></a>零均值带通高斯过程</h3>
+$$
+Z(t) = X(t) + j \hat X(t)\\
+X_B(t) = X_I(t) + j X_Q(t)\\
+V(t) = \sqrt{X_I^2(t) + X_Q^2(t)}\\
+\Theta(t) = \arctan \frac{X_Q(t)}{X_I(t)}\\
+$$
+
+
+<p>此时有</p>
+
+$$
+X(t) = V(t)\cos(\omega_ct + \Theta(t))\\
+\binom{X_I(t)}{X_Q(t)} = \binom{\ \ \ \cos(\omega_ct)\quad \sin(\omega_c t)}{-\sin(\omega_ct)\quad \cos(\omega_ct)}\binom{X(t)}{\hat X(t)}
+$$
+
+
+<p>幅度为瑞利分布，相位为均匀分布，相互统计独立：</p>
+
+$$
+f_V(v) = \frac{v}{\sigma^2}e^{-\frac{v^2}{2\sigma^2}}, v \ge 0\\
+f_\Theta(\theta) = \frac{1}{2\pi}, \theta \in [0, 2\pi]
+$$
+
+
+<h3 id="随机相位正弦波信号叠加零均值带通高斯"><a href="#随机相位正弦波信号叠加零均值带通高斯" class="headerlink" title="随机相位正弦波信号叠加零均值带通高斯"></a>随机相位正弦波信号叠加零均值带通高斯</h3>
+$$
+Y(t) = A\sin(\omega_ct + \Phi) + X(t)
+$$
+
+
+<p>结果是幅度为莱斯分布，相位均匀分布，二者统计独立：</p>
+
+$$
+f_{V(t)}(v) = \frac{v}{\sigma^2}\exp(-\frac{v^2 + A^2}{2\sigma^2})I_0(\frac{Av}{\sigma^2})\\
+f_\Theta(\theta) = \frac{1}{2\pi}
+$$
+
+
+<h3 id="高斯过程经过非线性函数"><a href="#高斯过程经过非线性函数" class="headerlink" title="高斯过程经过非线性函数"></a>高斯过程经过非线性函数</h3><p>限幅器</p>
+
+$$
+h(x) = \begin{cases}
+    1, x\ge 0,\\
+    0, x \lt 0
+\end{cases}
+$$
+
+
+<p>服从两点分布</p>
+
+$$
+P(Y(t) = 1) = P(Y(t) = 0) = \frac{1}{2}\\
+E_Y(t) = 0\\
+R_Y(t, s) = P \lbrace X(t)X(s) \ge 0 \rbrace - P \lbrace X(t)X(s) \lt 0 \rbrace
+$$
+
+
+
+$$
+P \lbrace X(t)X(s) \ge 0 \rbrace = \int_{0}^{\infty}\int_{0}^{\infty}\frac{1}{2\pi\sqrt{|\Sigma|^{-1}}}\exp((x_1\ x_2)\Sigma^{-1}\binom{x_1}{x_2})\mathrm dx_2\mathrm dx_1 = \frac{\pi/2 + \sin^{-1}(-\rho)}{2\pi}
+$$
+
+
+<p>全线性检波（求绝对值）</p>
+
+$$
+E(Y) = \frac{2\sigma}{2\pi}\int_{0}^{\infty}\frac{y}{\sigma^2}\exp(-\frac{y^2}{2\sigma^2})\mathrm dy = \sqrt{\frac{2}{\pi}}\sigma\\
+R_Y(t, s) E \lbrace |X(t)||X(s)| \rbrace = \frac{2\sigma^2}{\pi} \lbrace \sqrt{1 - \rho^2} + \rho\sin^{-1}\rho \rbrace, \rho = \frac{R_X(t - s)}{\sigma^2}\\
+\int_{0}^{\infty}\int_{0}^{\infty}x_1x_2\frac{1}{2\pi\sigma^2\sqrt{1 - \rho^2}}\exp(-\frac{x_1^2 - 2\rho x_1x_2 + x_2^2}{2\sigma(1 - \rho^2)})\mathrm dx_1\mathrm dx_2
+$$
+
+
+<p>半波线性检波</p>
+
+$$
+h(x) = \begin{cases}
+    x, x\ge 0,\\
+    0, x\lt 0
+\end{cases}
+$$
+
+
+
+$$
+R_Y(t, s) = \frac{\sigma^2}{\pi} \lbrace \sqrt{1 - \rho^2} + \rho\sin^{-1}\rho \rbrace\\
+$$
+
+
+<p>平方率检波</p>
+
+$$
+h(x) = x^2
+$$
+
+
+
+$$
+P(Y(t) \le y) = P(-\sqrt{y} \le Y(t) \le \sqrt{y}) = 2\Phi(\frac{\sqrt{y}}{\sigma}) - 1\\
+f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma}\frac{1}{\sqrt{y}}\exp \lbrace -\frac{y}{2\sigma^2} \rbrace,\ (y \gt 0)\\
+E \lbrace Y(t) \rbrace = \sigma^2\\
+R_Y(t,s) = E \lbrace X^2(t_1)X^2(t_2) \rbrace = \sigma^2 + \sigma^2 + \rho\sigma^2 + \rho\sigma^2 = 2(\rho + 1)\sigma^2
+$$
+
+
+<p>基带信号的包络经过平方律检波</p>
+
+$$
+X_I^2 + X_Q^2 = V^2 服从复指数分布
+$$
+
+
+<h3 id="高斯——马尔可夫性"><a href="#高斯——马尔可夫性" class="headerlink" title="高斯——马尔可夫性"></a>高斯——马尔可夫性</h3><p>马尔可夫特性：</p>
+
+$$
+f(x_n|x_1, \dots, x_{n - 1}) = f(x_n|x_{n - 1})
+$$
+
+
+<p>如果一个过程既是高斯的，又是马尔可夫的，会有很好的性质。</p>
+<p>对于零均值高斯分布：</p>
+
+$$
+X(t) 是 \text{Markov} \lrArr R(t_1, t_3) = \frac{R(t_1, t_2)R(t_2, t_3)}{R(t_2, t_2)}
+$$
+
+
+<p>正向很好证明，反向证明的关键是计算均值和方差。</p>
+
+$$
+X(t) 是 \text{Markov} \lrArr \forall t_1\le t_2\le...\le t_n, E \lbrace X_n|X_1, X_2, \dots, X_{n - 1} \rbrace = E \lbrace X_n|X_{n - 1} \rbrace
+$$
+
+
+<p>从右到左：条件协方差  $E\lbrace (Y_1 - E \lbrace Y_1|Y_2 \rbrace)^2|Y_2\rbrace = \Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}$  跟  $Y_2$  无关（这并不是说条件协方差和协方差具有相同的意义，只是数值上正好相等）</p>
+
+$$
+E(X_n|X_{n - 1}) = \frac{E(X_nX_{n - 1})}{E(X_{n - 1}^2)}X_{n - 1}\\
+$$
+
+
+<p>残差与已有信息正交：</p>
+
+$$
+E \lbrace [X_n - E(X_n | X_{n - 1})] \cdot X_k \rbrace = 0, k = 1, 2, \dots, n - 1\\
+$$
+
+
+<p>类似于最小二乘估计：</p>
+
+$$
+X_n - \alpha_n X_{n - 1} 是一个高斯过程，与 X_1, X_2, \dots, X_n 独立
+$$
+
+
+<p>自回归方程：</p>
+
+$$
+X_n = \alpha_n X_{n - 1} + \beta_nY_n\\
+Y_n \sim N(0, 1)
+$$
+
+
+<h3 id="Brown-运动"><a href="#Brown-运动" class="headerlink" title="Brown 运动"></a>Brown 运动</h3><p>从一维随机游走开始：</p>
+
+$$
+P \lbrace X_i = a \rbrace = P \lbrace X_i = -a \rbrace = \frac{1}{2}\\
+Y =\sum\limits_{i=1}^{\infty}X_i
+$$
+
+
+<p>令  $t = nT$ ，固定  $t$ ，令  $n \rightarrow \infty$ ，由 CLT 可知成为一个高斯分布：</p>
+
+$$
+E(Y) = 0\\
+D(Y) = \frac{t}{T}a^2\\
+\frac{a^2}{T} = \beta\\
+f_Y(y) = \frac{1}{\sqrt{2\pi}\sqrt{\beta t}}\exp (-\frac{y^2}{2\beta t})
+$$
+
+
+<p>随着时间增加，不确定性越来越大。</p>
+<p>标准布朗运动：</p>
+<p>（1） $B(t)$  满足独立增量，平稳增量<br>（2） $B(t)$  的每个样本轨道都是连续的<br>（3） $\forall t, B(t)$  遵循高斯分布，均值0，方差  $t$ </p>
+
+$$
+f_t(x) = \frac{1}{\sqrt{2\pi t}}\exp (-\frac{x^2}{2t})
+$$
+
+
+<p>布朗运动是高斯白噪声的积分：</p>
+
+$$
+Y(t) = \int_{0}^{t}X(u)\mathrm du
+$$
+
+
+<p>可见布朗运动的不规则。</p>
+<h2 id="Markov-过程"><a href="#Markov-过程" class="headerlink" title="Markov 过程"></a>Markov 过程</h2><h3 id="Markov-链"><a href="#Markov-链" class="headerlink" title="Markov 链"></a>Markov 链</h3><p>一种状态离散、时间离散的随机过程。</p>
+<h3 id="Markov-特性"><a href="#Markov-特性" class="headerlink" title="Markov 特性"></a>Markov 特性</h3><p>马尔可夫特性的一种表示：</p>
+<p>在已知现在的条件下，过去与将来独立。</p>
+
+$$
+P(C,A | B) = P(C | B, A) \cdot P(A|B) = P(C|B)P(A|B)
+$$
+
+
+<p>其他表示：过去用集合事件表示</p>
+
+$$
+P \lbrace X_{n+1}=j|(X_{n-1}, \dots, X_1)\in A, X_n=i \rbrace = P \lbrace X_{n+1}=j|X_n=i \rbrace
+$$
+
+
+<p>进一步，过去是一个集合，未来也是一个集合：</p>
+
+$$
+P \lbrace X_{n+1}\in B|(X_{n-1}, \dots, X_1)\in A, X_n=i \rbrace = P \lbrace X_{n+1}\in B|X_n=i \rbrace
+$$
+
+
+<p>但是，变量“现在”必须取值为一个确定的值，不能是一个集合。对现在的状态一定要精确掌握，不能放宽约束。</p>
+<p>口号：从小事做起（泊松），从现在做起（马尔可夫）</p>
+<p>转移概率</p>
+
+$$
+P_{ij}(m, n) = P \lbrace X_n = a_j | X_m = a_i \rbrace
+$$
+
+
+
+$$
+P_{ij}(m, n) \ge 0\\
+\sum\limits_{j}^{}P_{ij}(m, n) = 1
+$$
+
+
+<p>一步转移概率：</p>
+
+$$
+P_{ij}(m, m + 1) 或 P_{ij}(m)
+$$
+
+
+<p>状态转移矩阵</p>
+<p>观察变量族的联合分布</p>
+<h3 id="齐次马尔科夫链的迭代表示"><a href="#齐次马尔科夫链的迭代表示" class="headerlink" title="齐次马尔科夫链的迭代表示"></a>齐次马尔科夫链的迭代表示</h3>
+$$
+X_0 \xrightarrow{Z_1} X_1 \xrightarrow{Z_2} X_2 \dots \xrightarrow{Z_n} X_{n}
+$$
+
+
+
+$$
+X_{n+1} = f(X_n,Z_{n+1}) = P \lbrace X_{n+1} = j | X_n = i \rbrace
+$$
+
+
+<p>也称为新息过程</p>
+<h3 id="一维随机游走"><a href="#一维随机游走" class="headerlink" title="一维随机游走"></a>一维随机游走</h3><p>吸收壁</p>
+<p>反射壁 - 完全反射壁</p>
+<p>成功逃跑</p>
+<p>等待服务人数</p>
+
+$$
+X_{n + 1} = \begin{cases}
+    X_n - 1 + Y_{n + 1}, X_n \ne 0\\
+    Y_{n + 1}, X_0
+\end{cases}\\
+P = \begin{bmatrix}
+    a_0 & a_1 & a_2 & \dots\\
+    a_0 & a_1 & a_2 & \dots\\
+        & a_0 & a_1 & \dots\\
+        &     & a_0 & \dotsb
+\end{bmatrix}
+$$
+
+
+<h3 id="柯尔莫格洛夫方程"><a href="#柯尔莫格洛夫方程" class="headerlink" title="柯尔莫格洛夫方程"></a>柯尔莫格洛夫方程</h3><p>多步转移矩阵概率</p>
+
+$$
+P_{ij}(m, n) = \sum_k P(X_n = j | X_r = k) \cdot P(X_r = k | X_m = i)
+$$
+
+
+<p>或者表示为</p>
+
+$$
+P_{ij}^{(p + q)} = \sum_{k \in \Omega} P_{ik}^{(p)} P_{kj}^{(q)}
+$$
+
+
+<p>由于上面转移阵步数  $p, q$  的任意性，多步跳变矩阵可以转变为矩阵相乘：</p>
+
+$$
+P^{(L)} = P^{(L - 1)}P^{(1)} = ... = P^L
+$$
+
+
+<p>求多步转移矩阵：适用于齐次马尔可夫</p>
+<p>齐次马尔可夫链的  $P$  与时间起点无关</p>
+<p>先求  $P^{(n)} = P^n$ ，再看  $[P^n]_{ij}$  就是要求的转移概率。</p>
+<p>如何求  $P^n$  ？</p>
+<p>首先做特征分解  $PU = U\Lambda$ </p>
+
+$$
+P^n = U \Lambda^nU^{-1}
+$$
+
+
+<p>二元通信信道</p>
+
+$$
+P  = \begin{pmatrix}
+    1 - \alpha & \alpha\\
+    \beta & 1 - \beta
+\end{pmatrix}\\
+U = \begin{pmatrix}
+    1 & -\alpha\\
+    1 & \beta
+\end{pmatrix}
+$$
+
+
+
+
+$$
+P^n = \frac{(1 - \alpha - \beta)^n}{\alpha + \beta}\begin{pmatrix}
+    \alpha & -\alpha\\
+    -\beta & \beta
+\end{pmatrix} + \frac{1}{\alpha + \beta} \begin{pmatrix}
+    \beta & \alpha\\
+    \beta & \alpha
+\end{pmatrix}
+$$
+
+
+<p>在  $|1 - \alpha - \beta| &lt; 1$  的条件下，无穷步跳变后：</p>
+
+$$
+P^n = \frac{1}{\alpha + \beta} \begin{pmatrix}
+    \beta & \alpha\\
+    \beta & \alpha
+\end{pmatrix}
+$$
+
+
+<p>各列相等，说明这个马尔可夫链与初始状态无关，历史被淡忘——马尔可夫性。</p>
+ $1 - \alpha - \beta = -1$  时，极限不存在
+
+
+$$
+P = \begin{pmatrix}
+    0 & 1\\
+    1 & 0\\
+\end{pmatrix}
+$$
+
+
+<h3 id="状态分类"><a href="#状态分类" class="headerlink" title="状态分类"></a>状态分类</h3><p>可达性： $\exists m, s.t. P_{ij}^{(m)} &gt; 0$ </p>
+<p>互通性： $\exist m, n, s.t. P_{ij}^{(m)} &gt; 0, P_{ji}^{(n)} &gt; 0$ ，是等价关系。</p>
+<p>不可约(irreducible)，不可分</p>
+<p>马尔可夫链中每两个状态都是互通的，也叫互通链。</p>
+<p>闭集： $\forall i \in C, j\not \in C, i \not \rightarrow j$ </p>
+<p>不可约的另一定义：除了把整个链作为闭集，不存在取其中一些状态构成其他闭集了。</p>
+<p>激励状态</p>
+<p>稳定状态（闭集）</p>
+<p>一般情况，Markov 链的转移矩阵行列重排后可化为：</p>
+
+$$
+P = \begin{pmatrix}
+    u_1\\
+    &u_2\\
+    &&\ddots\\
+    &&&u_k\\
+    v_1&v_2&\dots&v_k&v_{k+1}
+\end{pmatrix}
+$$
+
+
+<p>对闭集而言，可以在闭集内使用柯尔莫格洛夫方程：</p>
+
+$$
+P_{ij}^{(n + m)} =\sum\limits_{r\in \Omega_1}^{}P_{ir}^{(n)}P_{rj}^{(m)}
+$$
+
+
+<p>首次达到时间： $T_{ij}(\omega) = \min \lbrace n: X_0(\omega) = i, X_n(\omega) = j, n \ge 1 \rbrace$ </p>
+
+$$
+T_{ij} \in [1, 2, ..., \infty)
+$$
+
+
+<p>首次到达概率</p>
+
+$$
+f_{ij}^{(n)} = P \lbrace T_{ij} = n| X_0 = i \rbrace
+$$
+
+
+<p>此时有</p>
+
+$$
+f_{ij}^{(1)} = P_{ij}
+$$
+
+
+<p>定义</p>
+
+$$
+f_{ij} =\sum\limits_{k=1}^{\infty^-} f_{ij}^{(k)}
+$$
+
+
+<p>为迟早到达的概率。</p>
+
+$$
+f_{ij}^{(\infty)} = 1 - f_{ij}
+$$
+
+
+<p>表示永远无法到达的概率。</p>
+<p>定理：</p>
+
+$$
+P_{ij}^{(n)} =\sum\limits_{r=1}^{n} f_{ij}^{(r)}P_{jj}^{(n - r)}
+$$
+
+
+<p>考虑  $P_{ij}^{(0)} = \delta_{ij}$ ，上述可以写成卷积形式：</p>
+
+$$
+F_{ij}(z) = \sum\limits_{r=0}^{\infty} f_{ij}^{(r)}z^r\\
+G_{ij}(z) = \sum\limits_{r=0}^{\infty} f_{ij}^{(r)}z^{r}\\
+G_{ij}(z) = \delta_{ij} + F_{ij}(z)G_{jj}(z)
+$$
+
+
+
+$$
+i \rightarrow j \lrArr  f_{ij} \gt 0
+$$
+
+
+<h3 id="常返性"><a href="#常返性" class="headerlink" title="常返性"></a>常返性</h3><h4 id="常返与非常返"><a href="#常返与非常返" class="headerlink" title="常返与非常返"></a>常返与非常返</h4><p>若  $f_{ij} = 1$ ，称状态 i 为常返态</p>
+<p>令  $z = 1$ ：</p>
+
+$$
+G_{ij}(1) = \delta_{ij} + F_{ij}(1)G_{jj}(1)\\
+i = j \rArr G_{ii}(1) = \frac{1}{1 - F_{ii}(1)} \rArr \sum_{n = 0}^{\infty}P_{ii}^{(n)} = \frac{1}{1 - f_{ii}}
+$$
+
+
+<p>常返性判别：</p>
+
+$$
+常返态 \lrArr f_{ii} = 1 \lrArr \sum\limits_{n=0}^{\infty}P_{ii}^{(n)} = +\infty\\
+非常返态 \lrArr f_{ii} \lt 1 \lrArr \sum\limits_{n=0}^{\infty}P_{ii}^{(n)} = \frac{1}{1 - f_{ii}} &lt; +\infty\\
+$$
+
+
+<p>后面会证明，这种返回的次数都是无穷大。</p>
+<p>常返的理解：</p>
+
+$$
+\forall n, A_n = \begin{cases}
+    A_n = 1, X_n = i,\\
+    A_n = 0, X_n \ne i.
+\end{cases}
+$$
+
+
+
+$$
+E \lbrace \sum\limits_{k=0}^{\infty}A_k | X_0 = i \rbrace = \sum\limits_{k=0}^{\infty}P_{ii}^{(0)}\\
+$$
+
+
+<p>从判别定理可以看出，在期望意义上，常返态被无限次访问。</p>
+<p>推论1：既然常返态被无穷次返回，非常返态被有限次访问，则在有限状态的 Markov 链中一定存在常返态。</p>
+<p>反证法：如果全是有限返回次数，那所有态的访问次数加起来还是有限的，但是马尔可夫可以访问无限次，矛盾。所以一定有常返态。</p>
+<p>推论1.1：如果非常返态的个数有限，则足够长的时间后，状态一定会到达常返态。</p>
+<p>推论1.2：若 j 非常返，则 $\forall i$ </p>
+
+$$
+\sum\limits_{n=0}^{\infty}P_{ij}^{(n)} &lt; \infty (i 到达 j的次数为有限值)\\
+\lim_{n \rightarrow \infty} P_{ij}^{(n)} = 0
+$$
+
+
+<p>推论2：若  $i$  常返， $i \lrarr j$ ，则  $j$  也是常返的。</p>
+<p>推论3：若  $i$  为常返， $i \rarr j$ ，则  $j \rarr i$ </p>
+<h4 id="正常返与零常返"><a href="#正常返与零常返" class="headerlink" title="正常返与零常返"></a>正常返与零常返</h4> $f_{ii}^n$  可以视为首次返回时间  $T_{ii}$  的概率分布。对于非常返态不能这么看，因为  $f_{ii} &lt; 1$ 。
+
+<p>对于常返态的  $T_{ii}$ ，可以计算期望</p>
+
+$$
+\mu_i = E \lbrace T_{ii} \rbrace = \sum\limits_{n = 1}^{\infty} n f_{ii}^{(n)}
+$$
+
+
+<p>若均值为无穷大，则称为零常返。</p>
+<p>零常返与非常返是有区别的。零常返是可以常返，只是大概率步数很多。</p>
+<p>定义返回的速率，可推导</p>
+
+$$
+\lim _{n \rightarrow \infty} \frac{1}{n} \sum\limits_ {k=0}^{n - 1} P_{jj}^{(k)} = \frac{1}{\mu_j}
+$$
+
+
+<p>正常返意味着速率为常数，零常返意味着速率为 0。</p>
+<p>判定定理：</p>
+
+$$
+j 状态零常返 \lrArr \sum\limits_{n=0}^{\infty}P_{jj}^{(n)} = \infty, 且 n \rightarrow \infty 时，P_{jj}^{(n)} = 0
+$$
+
+
+<p>条件一就是常返的判定定理。条件二比较特殊：</p>
+
+$$
+\lim_{n \rightarrow \infty}P_{jj}^{(n)} = \frac{1}{\mu_j}
+$$
+
+
+<p>如果是零常返，这个极限就是0。在条件二上，零常返和非常返是一样的。</p>
+<p>定理：常返态  $i$ ， $i \rarr j$ ，则  $i, j$  同为正常返或者零常返</p>
+<h4 id="补充性质"><a href="#补充性质" class="headerlink" title="补充性质"></a>补充性质</h4>
+$$
+q_{jj}(M) = P \lbrace \sum\limits_{k=0}^{\infty}A_k \ge M | X_0 = j \rbrace\\
+\lim_{M \rarr \infty}q_{jj}(M) = \begin{cases}
+    1, f_{jj} = 1\\
+    0, f_{jj} &lt; 1\\
+\end{cases}
+$$
+
+
+<p>下面研究常返态  $j$ ，不可约链</p>
+<p>“从常返态触发，返回次数为无穷大”这件事的概率为 1.</p>
+
+$$
+\lim_{M \rarr \infty} q_{rj}(M) = 1, \forall
+$$
+
+
+<p>“任意状态访问常返态的次数为无穷大”的概率为1.</p>
+
+$$
+q_{ij}(M) = f_{ij}q_{jj}(M)
+$$
+
+
+<p>两边取极限可得  $f_{ij} = 1$ </p>
+<p>结论3： 从不可约链任何状态出发，迟早访问状态  $j$ </p>
+
+$$
+\lim_{n \rarr \infty} P_{ij}^{(n)} = \frac{1}{\mu_j}
+$$
+
+
+<p>结论4：极限概率与初始状态无关。</p>
+<p>分类方式</p>
+<p>对于每个常返态 i，存在一个 i 可达状态构成的状态集 C 。则这些状态彼此相通，构成一个不可约闭集，都常返</p>
+<p>马尔可夫链可以唯一划分为  $C_1, C_2, ..., T$ ，其中  $C_i$  互为不相交的不可约闭集。T 为非常返态。每个闭集中，常返类型一致，不同闭集不互通。</p>
+<p>定理：马尔科夫链若有一个零常返，有无穷多个零常返。</p>
+<p>推论：有限状态马尔可夫链的常返态必然为正常返。</p>
+<h4 id="马尔可夫链的平稳分布和极限概率"><a href="#马尔可夫链的平稳分布和极限概率" class="headerlink" title="马尔可夫链的平稳分布和极限概率"></a>马尔可夫链的平稳分布和极限概率</h4><p>对于不可约链：</p>
+
+$$
+\lim_{n \rarr \infty}P_{ij}^{(n)} = 0，j非常返\\
+P_{ij}^{(n)} = \frac{1}{\mu_j} = 0，j零常返\\
+P_{ij}^{(n)} = \frac{1}{\mu_j}，j正常返
+$$
+
+
+<p>极限概率用  $\pi_j$ 表示</p>
+<p>对于非常返和零常返，极限概率都是0。零常返的链一定有无穷个状态。</p>
+<p>对于正常返， $\pi_j \gt 0, \sum\limits_{j\in S}^{}\pi_j = 1$ </p>
+<p>从柯式方程得出：</p>
+
+$$
+\pi_j = \sum\limits_{i}^{}\pi_iP_{ij}
+$$
+
+
+<p>矩阵形式：</p>
+
+$$
+\lim_{n \rarr \infty} P^n = \Pi = \begin{bmatrix}
+    \pi_1 & \pi_2 & \cdots & \pi_n & \cdots\\
+    \pi_1 & \pi_2 & \cdots & \pi_n & \cdots\\
+    \cdots & \cdots & \cdots & \cdots & \cdots\\
+\end{bmatrix}
+$$
+
+
+
+<h2 id="泊松过程"><a href="#泊松过程" class="headerlink" title="泊松过程"></a>泊松过程</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><h4 id="计数过程"><a href="#计数过程" class="headerlink" title="计数过程"></a>计数过程</h4><p>在  $[0, t]$  内发生某类事件的次数记为  $\lbrace N(t), t\ge 0 \rbrace$ ，则称  $\lbrace N(t) \rbrace$  为计数过程。</p>
+<h4 id="泊松过程-1"><a href="#泊松过程-1" class="headerlink" title="泊松过程"></a>泊松过程</h4><p>若满足以下条件：</p>
+<ol>
+<li> $N(0) = 0$ </li>
+<li>非负性： $N(t)$  的取值非负整数；</li>
+<li>非降性： $N(t)$  是随时间单调不减的；</li>
+<li>独立增量性：对于  $0 \le t_1 &lt; t_2 &lt; \ldots &lt; t_n$ ， $N(t_2) - N(t_1), N(t_3) - N(t_2), \ldots, N(t_n) - N(t_{n-1})$  是相互独立的随机变量；</li>
+<li>平稳增量性：对于  $0 \le s &lt; t$ ， $N(t) - N(s)$  的分布只与时间间隔  $t-s$  有关，而与具体的时刻  $s$  无关。</li>
+<li> $P(N(t + \Delta t) - N(t) = 1) = \lambda\Delta t + o(\Delta t), P(N(t + \Delta t) - N(t) \ge 2) = o(\Delta t)$ 
+则称  $\lbrace N(t), t\ge 0 \rbrace$  为泊松过程。</li>
+</ol>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>泊松的表达式</p>
+
+$$
+P_n(t) = P(N(t) = n) = \frac{(\lambda t)^n}{n!}e^{-\lambda t}
+$$
+
+
+<p>泊松分布的特征函数</p>
+
+$$
+\phi_{N(t)}(\omega) = \exp \left \lbrace \lambda t (e^{j\omega} - 1) \right \rbrace
+$$
+
+
+<p>泊松过程的数字特征</p>
+
+$$
+E(N(t)) = \lambda t\\
+R(t_1, t_2) = \lambda t_1 + \lambda^2 (t_1t_2) (t_1 \le t_2)\\
+C(t_1, t_2) = \min \lbrace t_1, t_2 \rbrace
+$$
+
+
+<h3 id="泊松与二项分布"><a href="#泊松与二项分布" class="headerlink" title="泊松与二项分布"></a>泊松与二项分布</h3><p>泊松分布是二项分布的极限。</p>
+<p>泊松脉冲串：</p>
+
+$$
+X(t) = \frac{\mathrm dN(t)}{\mathrm dt} = \sum\limits_{i}^{}\delta(t - t_i)\\
+E(X(t)) = \lambda
+$$
+
+
+<h3 id="泊松相关问题"><a href="#泊松相关问题" class="headerlink" title="泊松相关问题"></a>泊松相关问题</h3><h4 id="事件间隔时间的分布"><a href="#事件间隔时间的分布" class="headerlink" title="事件间隔时间的分布"></a>事件间隔时间的分布</h4> $S_n$  表示第 n 件事到达的时刻
+
+ $T_n$  表示相邻两件事发生的间隔
+
+
+$$
+P\lbrace S_n \gt t \rbrace = P \lbrace N(t) \le n - 1 \rbrace
+$$
+
+
+
+$$
+f_{T_n}(t) = \lambda e^{-\lambda t}\\
+E(T_n) = 1 / \lambda
+$$
+
+
+ $T_n$  和  $T_m$  是独立的。
+
+<h4 id="等待时间的分布"><a href="#等待时间的分布" class="headerlink" title="等待时间的分布"></a>等待时间的分布</h4><p>概率密度函数与特征函数互为傅里叶变换</p>
+
+$$
+\Phi_{T_i}(\omega) = \frac{\lambda}{\lambda - j\omega}\\
+\Phi_{S_n}(\omega) = \left (\frac{\lambda}{\lambda - j\omega}  \right)^n\\
+$$
+
+
+<p>要求  $S_n$  的概率密度函数，可以看作  $T_n$  的卷积：</p>
+
+$$
+f_{S_n}(t) = \frac{(\lambda t)^{n - 1}}{(n - 1)!}\lambda e^{-\lambda t}\\
+$$
+
+
+<p>称为  $\Gamma$  分布，参数  $\lambda, n$ 。</p>
+<h4 id="相邻两次事件之间的计数"><a href="#相邻两次事件之间的计数" class="headerlink" title="相邻两次事件之间的计数"></a>相邻两次事件之间的计数</h4><p>两次公交车到来（速度  $\mu$ ）之间，等车人数（速度  $\lambda$ ）的计数：</p>
+
+$$
+P(L = k) = (\frac{\mu}{\mu + \lambda})(\frac{\lambda}{\mu + \lambda})^k
+$$
+
+
+<h4 id="n个事件到达时间的的联合分布"><a href="#n个事件到达时间的的联合分布" class="headerlink" title="n个事件到达时间的的联合分布"></a>n个事件到达时间的的联合分布</h4>
+$$
+f_{S_1...S_n|N(t) = n}(u_1, u_2, ..., u_n) = \frac{n!}{t^n}
+$$
+
+
+<p>如果是有编号的（不是按顺序到达）：</p>
+
+$$
+f_{V_1...V_n|N(t) = n}(t_1, t_2, ..., t_n) = \frac{1}{t^n}
+$$
+
+
+<p>以下分布的极限，就是泊松过程：</p>
+
+$$
+P \lbrace N(s) = k | N(t) = n \rbrace = \binom{n}{k}(\frac{\lambda s}{n})^k(1 - \frac{\lambda s}{n})^{n - k}
+$$
+
+
+<h4 id="总结泊松过程的几种定义"><a href="#总结泊松过程的几种定义" class="headerlink" title="总结泊松过程的几种定义"></a>总结泊松过程的几种定义</h4><ol>
+<li>N(0) &#x3D; 0，独立增量，平稳增量， $\Delta t$  内发生一个事件的概率  $\lambda \Delta t$ ，发生两件事以上的概率小</li>
+<li>事件时间间隔独立同分布，服从复指数分布，则计数为泊松</li>
+<li>N 个客体随机地分布在  $[0, t]$  区间上，每个客体的出现时间均匀分布，且相互时间独立，当  $n \rightarrow \infty, t \rightarrow \infty$ ，极限分布为泊松分布</li>
+<li>二项分布的极限</li>
+</ol>
+<h3 id="顺序统计量"><a href="#顺序统计量" class="headerlink" title="顺序统计量"></a>顺序统计量</h3><p>统计量是样本的某个函数  $g(X_1, ..., X_n)$ 。例如：最大值、中值、平均值、样本协方差阵</p>
+<p>顺序统计量：根据到达时刻排序。例如  $S_1, S_2, ..., S_n$  就是  $V_1, V_2, ..., V_n$  的顺序统计量</p>
+
+$$
+f_{Y_k}(x) = \binom{n}{k - 1}F(x)\binom{n - k + 1}{1}f(x)(1 - F(x))^{n - k}
+$$
+
+
+<p>有序的顺序统计量的分布：</p>
+
+$$
+f_{Y_1...Y_n}(y_1, y_2, ..., y_n) = n!f(y_1)f(y_2)...f(y_n)
+$$
+
+
+<h3 id="非齐次泊松过程"><a href="#非齐次泊松过程" class="headerlink" title="非齐次泊松过程"></a>非齐次泊松过程</h3><p>四个条件：</p>
+ $N(0) = 0$ 
+
+ $N(t)$  独立增量
+
+ $P(N(t + \Delta t) - N(t) = 1) = \lambda(t)\Delta t + o(\Delta t)$ 
+
+ $P(N(t + \Delta t) - N(t) \ge 2) = o(\Delta t)$ 
+
+<p>定理：</p>
+
+$$
+P(N(t_0 + t) - N(t_0) = n) = \frac{[m(t_0 + t) - m(t_0)]^n}{n!}e^{-[m(t_0 + t) - m(t_0)]}
+$$
+
+
+<p>其中，</p>
+
+$$
+m(t) = \int_{0}^{t}\mathrm \lambda(u) du
+$$
+
+
+<p>其意义可以理解为事件的个数。</p>
+<p>令  $m(t + t_0) - m(t_0) = \alpha$ </p>
+
+$$
+P(N(t_0 + t) - N(t_0) = n) = \frac{\alpha^n}{n!}e^{-\alpha}
+$$
+
+
+<p>则期望和方差</p>
+
+$$
+E(N(t_0 + t) - N(t_0)) = \alpha\\
+V(N(t_0 + t) - N(t_0)) = \alpha
+$$
+
+
+<h3 id="复合泊松"><a href="#复合泊松" class="headerlink" title="复合泊松"></a>复合泊松</h3> $Y_n$  随机变量族， $N(t)$  泊松过程，称 $X(t) = \sum_{n = 1}^{N(t)}Y_n$  为复合泊松。
+
+
+$$
+E \lbrace X(t) \rbrace = \lambda t \cdot E \lbrace Y_i \rbrace\\
+D \lbrace X(t) \rbrace = \lambda t \cdot E \lbrace Y_i^2 \rbrace\\
+G_X(z) = \exp(\lambda t G_Y(z) - 1)\\
+\phi_X(\omega) = \exp(\lambda t \phi_Y(\omega) - 1)
+$$
+
+
+<h3 id="随机参数泊松"><a href="#随机参数泊松" class="headerlink" title="随机参数泊松"></a>随机参数泊松</h3><p>参数  $\lambda$  是随机变量，PDF为  $f(\lambda)$ </p>
+<ul>
+<li>是平稳增量</li>
+<li>不是独立增量</li>
+</ul>
+
+$$
+P(Y(t) = n) = \int^{+\infty}_{0}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda
+$$
+
+
+<p>母函数：</p>
+
+$$
+G_{Y(t)}(z) = \int_{0}^{\infty}\exp (\lambda t(z - 1))f(\lambda)\mathrm d\lambda
+$$
+
+
+
+$$
+E(Y(t)) = \int_{0}^{\infty}\lambda t f(\lambda)\mathrm d\lambda\\
+V(Y(t)) = \int_{0}^{\infty}\lambda t f(\lambda)\mathrm d\lambda\\
+$$
+
+
+<p>数据统计的后验分布</p>
+
+$$
+P(\Lambda \le x | Y(t) = n) = \frac{\int_{0}^{x}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda}{\int_{0}^{\infty}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda}\\
+f_\Lambda(x|Y(t) = n) = \frac{\frac{(x t)^n}{n!}e^{-x t}f(x)}{\int_{0}^{\infty}\frac{(\lambda t)^n}{n!}e^{-\lambda t}f(\lambda)\mathrm d\lambda}
+$$
+
+
+<h3 id="过滤的泊松过程"><a href="#过滤的泊松过程" class="headerlink" title="过滤的泊松过程"></a>过滤的泊松过程</h3><p>统计一段时间影响的总和</p>
+
+$$
+Y(t) = \sum\limits_{i=1}^{N(t)}h(t, S_i, A_i)
+$$
+
+
+<p>特征函数：</p>
+
+$$
+\Phi_{Y(t)}(\omega) = \exp \left ( \lambda t \left ( \int_{0}^{t}\frac{1}{t}\exp(j\omega h(t, v))\mathrm dv - 1\right) \right)
+$$
+
+
+<p>均值：</p>
+
+$$
+E(Y(t)) = \frac{1}{j}\frac{\partial \Phi_{Y(t)}}{\partial \omega} = \underbrace{\lambda t}_{平均到达个数} \underbrace{\int_{0}^{t}\frac{1}{t}\exp(j\omega h(t, v))\mathrm dv}_{每个事件在 t 时刻的影响}
+$$
+
+
+<h2 id="生灭过程"><a href="#生灭过程" class="headerlink" title="生灭过程"></a>生灭过程</h2><p>该过程状态可以用整数序列  $n = 0, 1, 2, 3, ...$  来表示</p>
+<p>状态转移只能发生在临近状态之间</p>
+<p>在 $[t, t + \Delta t)$  区间内，n状态转移到  $n + 1$  状态的概率为  $\lambda \Delta t$ ， 转移到  $n - 1$  状态的概率为  $\mu \Delta t$ 。</p>
+<h3 id="M-x2F-M-x2F-1"><a href="#M-x2F-M-x2F-1" class="headerlink" title="M&#x2F;M&#x2F;1"></a>M&#x2F;M&#x2F;1</h3><p>系统平均顾客人数  $L = \frac{\lambda / \mu}{1 - \lambda / \mu}$ </p>
+<p>排队平均人数</p>
+
+$$
+L_Q = \sum\limits_{n=1}^{\infty}(n - 1)p_n = \frac{\lambda^2}{(\mu - \lambda)\mu}\\
+L_Q \ne L - 1
+$$
+
+
+<p>前面有一个人，等待时间：负指数分布的无记忆性</p>
+
+$$
+f_T(t|T &gt; t_0) = \mu e^{-\mu (t - t_0)}
+$$
+
+
+<p>从而不管你什么时候来，平均等待时间为  $1/\mu$ ，和一个人被服务的时间是一样的。</p>
+<h2 id="习题课"><a href="#习题课" class="headerlink" title="习题课"></a>习题课</h2><p><img src="/../images/stochastic/exer_1.jpg" alt="alt" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2023/09/21/Stochastic-Process/" title="Stochastic-Process">https://blitherboom812.github.io/2023/09/21/Stochastic-Process/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/10/09/Python-OJ/" rel="prev" title="Python-OJ"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Python-OJ</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/09/20/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="next" title="数字系统设计"><span class="post-nav-text">数字系统设计</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

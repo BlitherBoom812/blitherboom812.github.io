@@ -1,0 +1,1976 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Introduction-to-Probability | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="IntroductionProbability SpaceProbability space is a triple  $(\Omega, \mathcal{F}, \mathbf{P})$ , comprised of the following threeelements: 1 Sample space  $\Omega$ : the set of all possible outcomes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction-to-Probability">
+<meta property="og:url" content="https://blitherboom812.github.io/2023/02/20/Introduction-to-Probability/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="IntroductionProbability SpaceProbability space is a triple  $(\Omega, \mathcal{F}, \mathbf{P})$ , comprised of the following threeelements: 1 Sample space  $\Omega$ : the set of all possible outcomes">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/prob/L2_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/prob/L6_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/prob/L14_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/prob/L15_1.jpg">
+<meta property="article:published_time" content="2023-02-20T13:05:41.000Z">
+<meta property="article:modified_time" content="2023-06-18T10:31:23.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/prob/L2_1.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Probability-Space"><span class="toc-number">2.</span> <span class="toc-text">Probability Space</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-space"><span class="toc-number">2.1.</span> <span class="toc-text">Sample space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#algegra"><span class="toc-number">2.2.</span> <span class="toc-text"> $\sigma$ -algegra</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Borel-field"><span class="toc-number">2.3.</span> <span class="toc-text">Borel field</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Uncountable"><span class="toc-number">2.4.</span> <span class="toc-text">Uncountable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Probability-measures"><span class="toc-number">2.5.</span> <span class="toc-text">Probability measures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Discrete-models"><span class="toc-number">2.6.</span> <span class="toc-text">Discrete models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Continuous-Models"><span class="toc-number">2.7.</span> <span class="toc-text">Continuous Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Some-properties-of-Probability-measure"><span class="toc-number">2.8.</span> <span class="toc-text">Some properties of Probability measure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conditional-Probability"><span class="toc-number">2.9.</span> <span class="toc-text">Conditional Probability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Total-probability-theorem"><span class="toc-number">2.10.</span> <span class="toc-text">Total probability theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inference-and-Bayes%E2%80%99-rule"><span class="toc-number">2.11.</span> <span class="toc-text">Inference and Bayes’ rule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Independence"><span class="toc-number">2.12.</span> <span class="toc-text">Independence</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Independence-of-two-disjoint-events"><span class="toc-number">2.12.1.</span> <span class="toc-text">Independence of two disjoint events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Conditional-independence"><span class="toc-number">2.12.2.</span> <span class="toc-text">Conditional independence</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Discrete-Random-Variables"><span class="toc-number">3.</span> <span class="toc-text">Discrete Random Variables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Definition"><span class="toc-number">3.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Expectation-and-Variance"><span class="toc-number">3.2.</span> <span class="toc-text">Expectation and Variance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conditional"><span class="toc-number">3.3.</span> <span class="toc-text">Conditional</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-discrete-random-variables"><span class="toc-number">3.4.</span> <span class="toc-text">Multiple discrete random variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Independence-1"><span class="toc-number">3.5.</span> <span class="toc-text">Independence</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Continuous-Random-Variables"><span class="toc-number">4.</span> <span class="toc-text">Continuous Random Variables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Probability-Density-Function"><span class="toc-number">4.1.</span> <span class="toc-text">Probability Density Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Common-Example-for-PDF"><span class="toc-number">4.2.</span> <span class="toc-text">Common Example for PDF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cumulative-Distribution-Functions"><span class="toc-number">4.3.</span> <span class="toc-text">Cumulative Distribution Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Examples-for-CDF"><span class="toc-number">4.4.</span> <span class="toc-text">Examples for CDF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Normal-Random-Variables"><span class="toc-number">4.5.</span> <span class="toc-text">Normal Random Variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Continuous-Random-Variables"><span class="toc-number">4.6.</span> <span class="toc-text">Multiple Continuous Random Variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conditional-and-Independence"><span class="toc-number">4.7.</span> <span class="toc-text">Conditional and Independence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-continuous-Bayes%E2%80%99s-rule"><span class="toc-number">4.8.</span> <span class="toc-text">The continuous Bayes’s rule</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Derived-distributions-and-Entropy"><span class="toc-number">5.</span> <span class="toc-text">Derived distributions and Entropy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Derived-Distribution"><span class="toc-number">5.1.</span> <span class="toc-text">Derived Distribution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Entropy"><span class="toc-number">5.2.</span> <span class="toc-text">Entropy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maximum-entropy-distributions"><span class="toc-number">5.3.</span> <span class="toc-text">Maximum entropy distributions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Convolution-covariance-correlation-and-conditional-expectation"><span class="toc-number">6.</span> <span class="toc-text">Convolution, covariance, correlation, and conditional expectation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolution"><span class="toc-number">6.1.</span> <span class="toc-text">Convolution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Covariance-and-Correlation"><span class="toc-number">6.2.</span> <span class="toc-text">Covariance and Correlation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conditional-expectation"><span class="toc-number">6.3.</span> <span class="toc-text">Conditional expectation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conditional-expectation-as-an-estimator"><span class="toc-number">6.4.</span> <span class="toc-text">Conditional expectation as an estimator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transforms-and-sum-of-a-random-number-of-random-variables"><span class="toc-number">7.</span> <span class="toc-text">Transforms and sum of a random number of random variables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Properties"><span class="toc-number">7.1.</span> <span class="toc-text">Properties</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inversion-of-transforms"><span class="toc-number">7.2.</span> <span class="toc-text">Inversion of transforms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transform-of-Mixture-of-Distributions"><span class="toc-number">7.3.</span> <span class="toc-text">Transform of Mixture of Distributions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sum-of-independend-RVs"><span class="toc-number">7.4.</span> <span class="toc-text">Sum of independend RVs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Weak-law-of-large-numbers"><span class="toc-number">8.</span> <span class="toc-text">Weak law of large numbers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Markov-inequality"><span class="toc-number">8.1.</span> <span class="toc-text">Markov inequality</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chebyshev%E2%80%99s-Inequality"><span class="toc-number">8.2.</span> <span class="toc-text">Chebyshev’s Inequality</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-law-of-large-numbers-1"><span class="toc-number">8.3.</span> <span class="toc-text">Weak law of large numbers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convergence-%E2%80%9Cin-Probability%E2%80%9D"><span class="toc-number">8.4.</span> <span class="toc-text">Convergence “in Probability”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Many-types-of-convergence"><span class="toc-number">8.5.</span> <span class="toc-text">Many types of convergence</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Central-Limit-Theorem"><span class="toc-number">9.</span> <span class="toc-text">Central Limit Theorem</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem"><span class="toc-number">9.1.</span> <span class="toc-text">Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Normal-Approximation-Based-on-the-Central-Limit-Theorem"><span class="toc-number">9.2.</span> <span class="toc-text">Normal Approximation Based on the Central Limit Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Proof"><span class="toc-number">9.3.</span> <span class="toc-text">Proof</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Strong-Law-of-Large-Numbers"><span class="toc-number">10.</span> <span class="toc-text">The Strong Law of Large Numbers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-1"><span class="toc-number">10.1.</span> <span class="toc-text">Theorem</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Borel-Cantelli-lemma-amp-Bernoulli-Process"><span class="toc-number">11.</span> <span class="toc-text">Borel-Cantelli lemma &amp; Bernoulli Process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Limit-of-set-sequence"><span class="toc-number">11.1.</span> <span class="toc-text">Limit of set sequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Borel-Cantelli-Lemma"><span class="toc-number">11.2.</span> <span class="toc-text">Borel-Cantelli Lemma</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stochastic-process"><span class="toc-number">11.3.</span> <span class="toc-text">Stochastic process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Bernoulli-Process"><span class="toc-number">11.4.</span> <span class="toc-text">The Bernoulli Process</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Poisson-Process"><span class="toc-number">12.</span> <span class="toc-text">The Poisson Process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Definition-1"><span class="toc-number">12.1.</span> <span class="toc-text">Definition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bernoulli-x2F-Poisson-Relation"><span class="toc-number">12.2.</span> <span class="toc-text">Bernoulli&#x2F;Poisson Relation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PMF-of-Number-of-Arrivals"><span class="toc-number">12.3.</span> <span class="toc-text">PMF of Number of Arrivals  $N$ </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Time-of-the-first-arrival"><span class="toc-number">12.4.</span> <span class="toc-text">Time  $T$  of the first arrival</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interarrival-times"><span class="toc-number">12.5.</span> <span class="toc-text">Interarrival times</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merging-Poisson-Processes"><span class="toc-number">12.6.</span> <span class="toc-text">Merging Poisson Processes</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2023/02/20/Introduction-to-Probability/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Introduction-to-Probability</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2023-02-20 21:05:41" itemprop="dateCreated datePublished" datetime="2023-02-20T21:05:41+08:00">2023-02-20</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2023-06-18 18:31:23" itemprop="dateModified" datetime="2023-06-18T18:31:23+08:00">2023-06-18</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Probability-Space"><a href="#Probability-Space" class="headerlink" title="Probability Space"></a>Probability Space</h2><p>Probability space is a triple  $(\Omega, \mathcal{F}, \mathbf{P})$ , comprised of the following three<br>elements:</p>
+<p>1 Sample space  $\Omega$ : the set of all possible outcomes of an experiment</p>
+<p>2  $\sigma$ -algebra (or  $\sigma$ -field)  $\mathcal F$ : a collection of subsets of  $\Omega$ </p>
+<p>3 Probability measure  $\mathbf P$ : a function that assigns a nonnegative<br>probability to every set in the  $\sigma$ -algebra  $\mathcal F$ </p>
+<h3 id="Sample-space"><a href="#Sample-space" class="headerlink" title="Sample space"></a>Sample space</h3><p>Mutually exclusive: no identical element.</p>
+<p>Collectively exhaustive: all results should be included.</p>
+<h3 id="algegra"><a href="#algegra" class="headerlink" title="-algegra"></a> $\sigma$ -algegra</h3><p>not unique</p>
+<p>3 requirements:</p>
+
+$$
+\varnothing \in \mathcal F\\
+\forall A \in \mathcal F, A^c \in \mathcal F\\
+\forall A_k \in \mathcal F, k=1, 2, ..., 
+\cup_{k=1}^{\infty}A_k\in \mathcal F
+$$
+
+
+<h3 id="Borel-field"><a href="#Borel-field" class="headerlink" title="Borel field"></a>Borel field</h3><p>used to measure intervals</p>
+<p>when  $\Omega$  is continuous( $\R$  for example), Borel field is useful.</p>
+<p>“minimum”  $\sigma$ -algebra means deleting any element in the  $\mathcal B (\mathbf R)$  will miss the requirements.</p>
+<p><img src="/../images/prob/L2_1.jpg" loading="lazy"></p>
+<h3 id="Uncountable"><a href="#Uncountable" class="headerlink" title="Uncountable"></a>Uncountable</h3><p>decimal numbers between 0 and 1 are uncountable.</p>
+<h3 id="Probability-measures"><a href="#Probability-measures" class="headerlink" title="Probability measures"></a>Probability measures</h3>
+$$
+P:\mathcal F \rightarrow [0, 1]
+$$
+
+
+<p><strong>Nonnegativity</strong>  $P(A)\ge0, \forall A \in \mathcal{  F}$ </p>
+<p><strong>Normalization</strong>   $P(\empty)=0, P(\Omega)=1$ </p>
+<p><strong>Countable additivity</strong>  $A_1, A_2, ... \text { is disjoint in }\mathcal F, P(A_1\cup A_2\cup ...)=P(A_1)+P(A_2)+...$ </p>
+<ul>
+<li>They are the axioms of probability. </li>
+<li>Probability is a mapping from  $\sigma$ -algebra to a real number betwenn 0 and 1, which intuitively specifies the “likelihood” of any event. </li>
+<li>There exist non-measurable sets, on which we cannot define a probability measure.</li>
+</ul>
+<h3 id="Discrete-models"><a href="#Discrete-models" class="headerlink" title="Discrete models"></a>Discrete models</h3>
+$$
+P(\{s_1, ..., s_n\})=P(s_1)+...+P(s_n)\\
+P(A) = \frac{\text{\# of elements of }A}{\text{total \# of elements of sample points}}
+$$
+
+
+
+<h3 id="Continuous-Models"><a href="#Continuous-Models" class="headerlink" title="Continuous Models"></a>Continuous Models</h3><p>Probability &#x3D; Area</p>
+<h3 id="Some-properties-of-Probability-measure"><a href="#Some-properties-of-Probability-measure" class="headerlink" title="Some properties of Probability measure"></a>Some properties of Probability measure</h3>
+$$
+A\sub B\Rightarrow P(A)\le P(B)\\
+P(A\cup B)=P(A)+P(B)-P(A\cap B)\\
+P(A\cup B) \le P(A) + P(B)\\
+P(A\cup B \cup C)=P(A) + P(A^C\cap B) + P(A^C\cap B^C\cap C)
+$$
+
+
+<h3 id="Conditional-Probability"><a href="#Conditional-Probability" class="headerlink" title="Conditional Probability"></a>Conditional Probability</h3>
+$$
+P(A|B)=\frac{P(A\cap B)}{P(B)}
+$$
+
+
+<ul>
+<li>If  $P(B)=0$ ,  $P(A|B)$  is undefined.</li>
+<li>For a fixed event  $B$ ,  $P(A|B)$  can be verified as a legitimate probability measure on the new universe.  $P(A, B)\ge 0$ ,  $P(\Omega|B)=1$ ,  $P(A_1\cup A_2\cup...|B)=P(A_1|B)+P(A_2|B)+...$ </li>
+<li><div> $P(A|B)=\frac{\text{ \# of elements of }A\cap B}{\text{total \# of elements of }B}$ </div></li>
+</ul>
+<h3 id="Total-probability-theorem"><a href="#Total-probability-theorem" class="headerlink" title="Total probability theorem"></a>Total probability theorem</h3><p>Let  $A_1, ..., A_n$  be disjoint events that form a partition of the sample space and assume that  $P(A_i)&gt;0$  for all  $i$ . Then for any event B, we have</p>
+
+$$
+P(B) = \sum_{i=1}^n P(A_i\cap B) = \sum_{i=1}^nP(A_i)P(B|A_i)
+$$
+
+
+<p><strong>Remark</strong> </p>
+<ul>
+<li>The definition of partition is that  $\cup_{i=1}^n A_i = \Omega, A_i\cap A_j = \emptyset, \forall i\ne j$ </li>
+<li>The probability of B is a weighted average of its conditional probability under each scenario</li>
+<li>Each scenario is weighted according to its prior probability</li>
+<li>Useful when  $P(B|A_i)$  is known or easy to derive</li>
+</ul>
+<h3 id="Inference-and-Bayes’-rule"><a href="#Inference-and-Bayes’-rule" class="headerlink" title="Inference and Bayes’ rule"></a>Inference and Bayes’ rule</h3><p>Let  $A_1, ..., A_2$  be disjoint events that from a partition of the sample space and assume that  $P(A_i) \gt 0$   for all  $i$ . Then for any event  $B$  such that  $P(B)\gt 0$ , we have </p>
+
+$$
+P(A_i|B) = \frac{P(A_i)P(B|A_i)}{P(B)} = \frac{P(A_i)P(B|A_i)}{\sum_{j=1}^nP(A_j)P(B|A_j)}
+$$
+
+
+<p><strong>Remarks</strong></p>
+<ul>
+<li>Relates conditional probabilities of the form  $P(A_i|B)$  with conditional probabilities of the form  $P(B|A_i)$ </li>
+<li>often used in inference: effect  $B$   $\lrarr$  cause  $A_i$ </li>
+</ul>
+<p>The meaning of  $P(A_i|B)$  in the view of Bayes: the belief of  $A_i$  is revised if we observed effect  $B$ . If the cause and the effect are closely binded( $P(B|A_i) &gt; P(B|A_i^c)$ ), then the belief  $A_i$  is enhanced by the observation of effect  $B$ ( $P(A_i|B) &gt; P(A)$ ). This can be derived from the Bayes’ rule through simple calculation. If  $P(A_i|B)=P(A_i)$ , then  $B$  provides no information on  $A_i$ .</p>
+<h3 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h3><h4 id="Independence-of-two-disjoint-events"><a href="#Independence-of-two-disjoint-events" class="headerlink" title="Independence of two disjoint events"></a>Independence of two disjoint events</h4><p>Events A and B are called <strong>independent</strong> if </p>
+
+$$
+P(A\cap B) = P(A)\cdot P(B)
+$$
+
+<p>or equivalently, when  $P(B) &gt; 0$ , </p>
+
+$$
+P(A|B) = P(A)
+$$
+
+
+<p><strong>Remarks</strong></p>
+<ul>
+<li>Occurrence of B provides no information about A’s occurrence</li>
+<li>Equivalence due to  $P(A\cap B) = P(B)\cdot P(A|B)$ </li>
+<li>Symmetric with respect to  $A$  and  $B$ .</li>
+<li><ul>
+<li>applies even if  $P(B) = 0$ </li>
+</ul>
+</li>
+<li><ul>
+<li>implies  $P(B|A) = P(B)$  and  $P(A|B^c) = P(A)$ </li>
+</ul>
+</li>
+<li>Does not imply that A and B are disjoint, indeed opposite!</li>
+<li><ul>
+<li>Two disjoint events are never independent!( $P(A\cap B) = 0$ , but  $P(A)\cdot P(B)\ne 0$ )</li>
+</ul>
+</li>
+</ul>
+<h4 id="Conditional-independence"><a href="#Conditional-independence" class="headerlink" title="Conditional independence"></a>Conditional independence</h4>
+$$
+P(A\cap B | C) = P(A| C) \cdot P(B|C)
+$$
+
+
+<p><strong>Definition</strong></p>
+<p>Event  $A_1, A_2, ..., A_n$  are called independent if: </p>
+
+$$
+P(A_i\cap A_j\cap ...\cap A_q) = P(A_1)P(A_j)...P(A_q)
+$$
+
+
+<p>for any distinct indices  $i, j, \dots q$  chosen from  $\{1, \dots n\}$ .</p>
+<p>Pairwise is independence does not imply independence.</p>
+<h2 id="Discrete-Random-Variables"><a href="#Discrete-Random-Variables" class="headerlink" title="Discrete Random Variables"></a>Discrete Random Variables</h2><p>Random Variable is neither random, nor variable.</p>
+<h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><p>We care about the probability that  $X \le x$  instead  $X = x$  in the consideration of generality. </p>
+<p><strong>Random variables</strong></p>
+<p>Given a probability space  $(\Omega, F, P)$ , a random variable is a function  $X: \Omega \rightarrow \R$  with the probability that  $\{\omega \in \Omega: X(\omega) \le x\} \in \mathcal F$  for each  $x\in \R$ . Such a function  $X$  is said to be  $\mathcal F$ -measurable.</p>
+<p><strong>Probability Mass Function(PMF)</strong></p>
+
+$$
+p_X(x)=P(X=x)=P(\{\omega \in \Omega \text{ s.t. } X(\omega)=x\})
+$$
+
+
+<p>Bonulli PMF: </p>
+
+$$ 
+p_X(k) = \begin{cases}
+    p, &\text{if } k = 1\\
+    1-p, &\text{if }k=0
+\end{cases}
+$$
+
+
+<p>Binomial PMF:  $p_X(k)=\binom{n}{k}p^k(1-p)^{n-k}$ </p>
+<p>Geometric PMF:  $p_X(k)=(1-p)^{k-1}p$ </p>
+<p>Poisson PMF:  $p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}$ . Note:  $\sum_{k=0}^\infty e^{-\lambda}\frac{\lambda^k}{k!}=e^{-\lambda}e^\lambda=1$ </p>
+<p>If  $y=g(x)$ ,  $p_Y(y)=\sum_{\lbrace x|g(x)=y \rbrace} p(x)$ .</p>
+<h3 id="Expectation-and-Variance"><a href="#Expectation-and-Variance" class="headerlink" title="Expectation and Variance"></a>Expectation and Variance</h3><p><strong>Expectation</strong></p>
+
+$$
+E[X] = \sum_x xp_X(x)
+$$
+
+
+<p>Note: we assume that the sum converges.</p>
+<p>Properties:</p>
+
+$$
+E[Y]=\sum_x g(x)p_X(x)\\
+E[\alpha X + \beta] = \alpha E[X] + \beta
+$$
+
+
+<p><strong>Variance</strong></p>
+
+$$
+\text{var}(X) = E \left[(X-E[X])^2\right]=\sum_x (x-E[X])^2 p_X(x)
+$$
+
+
+<p>Standard deviation:  $\sigma_X=\sqrt{\text{var}(X)}$ </p>
+<p>Properties: </p>
+
+$$
+\text{var}(X) = E[X^2] -(E[X])^2\\
+\text{var}(X)\ge 0\\
+\text{var}(\alpha X + \beta) = \alpha^2\text{var} (X)
+$$
+
+
+<p><strong>Bernoulli RV</strong></p>
+
+$$
+p_X(k) = \begin{cases}
+    p, &\text{if } k = 1\\
+    1-p, &\text{if }k=0
+\end{cases}\\
+E[X] = p\\
+E[X^2] = p\\
+\text{var}(X) = p(1-p)
+$$
+
+
+<p><strong>Discrete Uniform RV</strong></p>
+
+$$
+p_X(k) = \begin{cases}
+    \frac {1}{b-a+1}, &\text{if } k = a, a+1, ..., b\\
+    0, &\text{otherwise}
+\end{cases}\\
+E[X] = \frac{a+b}{2}\\
+\text{var}(X) = \frac{(b-a)(b-a+2)}{12}
+$$
+
+
+<p><strong>Poisson RV</strong></p>
+
+$$
+p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}\\
+E[X] = \lambda\\
+\text{var}(X)=\lambda
+$$
+
+
+<h3 id="Conditional"><a href="#Conditional" class="headerlink" title="Conditional"></a>Conditional</h3>
+$$
+p_{X|A(x)} = P(X=x|A) = \frac{P(\{X=x\}\cap A)}{P(A)}
+$$
+
+
+
+$$
+\sum_x p_{X|A}(x) = 1
+$$
+
+
+
+$$
+E[X|Y=y] = \sum_x xp_{X|Y}(x|y)\\
+E[g(X)|Y=y] = \sum_x g(x)p_{X|Y}(x|y)
+$$
+
+
+<p><strong>Total expectation theorem</strong></p>
+ $A_1, \dots, A_n$  is a partition of sample space
+
+
+$$
+P(B) = P(A_1)P(B|A_1) + \dotsb + P(A_n)P(B|A_n)\\
+p_X(x) = P(A_1)p_{X|A_1}(x) + \dotsb + P(A_n)p_{X|A_n}(x)\\
+E[X] = P(A_1)E[X|A_1] + \dotsb + P(A_n)E[X|A_n]
+$$
+
+
+<p>We derive the expectation and variance use the theories above.</p>
+<p><strong>Geometric PMF example</strong></p>
+
+$$
+p_X(k) = (1-p)^{k-1}p, k = 1, 2, \dots\\
+E[X] = \sum_{k=1}^\infty kp_X(k) = \sum_{k=1}^\infty k(1-p)^{k-1}p\\
+E[X^2] = \sum_{k=1}^\infty k^2p_X(k) = \sum_{k=1}^\infty k^2(1-p)^{k-1}p\\
+\text {var}(X) = E[X^2] - (E[X])^2
+$$
+
+
+<p>However, the Geometric has a memoryless property.</p>
+
+$$
+p_{X|X&gt;1}(k) = \frac{P(\{X&gt;1\}\cap \{X=k\})}{P(X&gt;1)} = \frac{(1-p)^{k-1}p}{1-p} = (1-p)^{k-2}p
+$$
+
+
+<p>Thus, </p>
+
+$$
+E[X] = P(X=1)E[X|X=1] + P(X&gt;1)E[X|X&gt;1]=p+(1-p)(E[1 + X])\\
+\Rightarrow E[X] = 1/p\\
+E[X^2] = P(X=1)E[X^2|X=1] + P(X&gt;1)E[X^2|X&gt;1] = p + (1-p)E[(1+X)^2]=p + (1-p)(1+2E[X]+E[X^2])\\
+\Rightarrow E[X^2] = \frac{2-p}{p^2}\\
+\Rightarrow\text{var} (X) = \frac{1-p}{p^2}
+$$
+
+
+<h3 id="Multiple-discrete-random-variables"><a href="#Multiple-discrete-random-variables" class="headerlink" title="Multiple discrete random variables"></a>Multiple discrete random variables</h3><p><strong>Joint PMFs</strong></p>
+
+$$
+p_{X, Y}(x, y) = P(X = x, Y= y) = P(\{X(\omega) = x\}\cap \{Y(\omega) = y\})
+$$
+
+
+
+$$
+\sum_x\sum_y p_{X, Y}(x, y) = 1
+$$
+
+
+<p><strong>Marginal PMF</strong></p>
+
+$$
+p_X(x) = \sum_y P(X=x, Y=y) = \sum_y p_{X, Y}(x, y)
+$$
+
+
+<p><strong>Conditional PMF</strong></p>
+
+$$
+p_{X|Y}(x|y) = P(X = x | Y = y) = \frac{p_{X, Y}(x, y)}{p_Y(y)}
+$$
+
+
+
+$$
+\sum_x p_{X|Y}(x|y) = 1
+$$
+
+
+<p><strong>Funcitons of multiple RVs</strong></p>
+
+$$
+Z = g(X, Y)\\
+p_Z(z) = \sum_{\lbrace (x, y)|g(x, y)=z \rbrace  } p_{X, Y}(x, y)
+$$
+
+
+<p><strong>Expectations</strong></p>
+
+$$
+E[g(X, Y)] = \sum_x\sum_y g(x, y)p(X, Y)(x, y)\\
+E[g(X, Y, Z)] = \sum_x\sum_y\sum_z g(x, y, z)p(X, Y, Z)(x, y, z)
+$$
+
+
+
+$$
+E[g(X,  Y)] \not\equiv g(E[X], E[Y])
+$$
+
+
+<p><strong>linearity</strong></p>
+
+$$
+E[\alpha X + \beta] = \alpha E[X] + \beta\\
+E[X + Y + Z] = E[X] + E[Y] + E[Z]
+$$
+
+
+<p>Let’s calculate the Mean of Binominal RV.</p>
+
+$$
+X_i=
+\begin{cases}
+    1, &\text{if success in trial } i,\\
+    0, & \text{otherwise.}
+\end{cases}\\
+X = X_1 + X_2 + \dotsb X_n\\
+E[X] = \sum_{i = 1}^n E[X_i] = np\\
+\text{var}(X) = np(1-p)
+$$
+
+
+<h3 id="Independence-1"><a href="#Independence-1" class="headerlink" title="Independence"></a>Independence</h3><p><strong>Independence</strong></p>
+
+$$
+p_{X, Y}(x, y) = p_X(x) \cdot p_Y(y)
+$$
+
+
+<p>if  $X$  and  $Y$  are independent:</p>
+
+$$
+E[XY] = E[X]E[Y]\\
+E[g(X)h(Y)] = E[g(X)]E[h(Y)]\\
+\text{var}(X + Y) = \text{var}(X) + \text{var}(Y)
+$$
+
+
+<p><strong>Conditional independence</strong></p>
+
+$$
+p_{X, Y|A}(X, Y) = p_{X|A}(x) \cdot p_{Y|A}(y)
+$$
+
+
+<h2 id="Continuous-Random-Variables"><a href="#Continuous-Random-Variables" class="headerlink" title="Continuous Random Variables"></a>Continuous Random Variables</h2><h3 id="Probability-Density-Function"><a href="#Probability-Density-Function" class="headerlink" title="Probability Density Function"></a>Probability Density Function</h3><ul>
+<li> $f_X(x)\ge 0\text{ for all }x$ </li>
+<li> $\int_{-\infty}^\infty f_X(x)\mathrm dx = 1$ </li>
+<li>If  $\delta$  is very small, then  $P([x, x+\delta])\approx f_X(x) \cdot \delta$ </li>
+<li>For any subset  $B$  of the real line,  $P(X\in B) = \int_B f_X(x)\mathrm d x$ .</li>
+</ul>
+<p><strong>Expectation</strong></p>
+
+$$
+E[X] = \int_{-\infty}^\infty xf_X(x)\mathrm dx\\
+E[g(x)] = \int_{-\infty}^\infty g(x)f_X(x)\mathrm dx
+$$
+
+
+<p>Assuming that the integration is well-defined. The Cauchy distribution ( $\frac{1}{1+x^2}$ )doesn’t have expectation since  $\frac{x}{1+x^2}$  is not absolutely integrably.</p>
+<p><strong>Variance</strong></p>
+
+$$
+\text{var}(X) = E[(X - E[X])^2] = \int_{-\infty}^\infty(x - E[x])^2 f_X(x)\mathrm dx\\
+0\le \text{var}(x) = E[X^2] - (E[X])^2
+$$
+
+
+<p><strong>Uniform RV</strong></p>
+
+$$
+f_X(x) = \begin{cases}
+    \frac{1}{b-a}, &\text{if }a\le x\le b,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+
+
+$$
+E[X] = \frac{a+b}{2}\\
+E[X^2] = \frac{a^2+b^2 + ab}{3}\\
+\text{var}(X) = \frac{(b-a)^2}{12}
+$$
+
+
+
+<p>Properties:</p>
+
+$$
+E[aX+b] = aE[X] + b\\
+\text{var}(aX+b) = a^2\text{var}(X)
+$$
+
+
+<h3 id="Common-Example-for-PDF"><a href="#Common-Example-for-PDF" class="headerlink" title="Common Example for PDF"></a>Common Example for PDF</h3><p><strong>Exponential Random Variable</strong></p>
+
+$$
+f_X(x) = \begin{cases}
+    \lambda e^{-\lambda x}, &\text{if }x \ge 0,\\
+    0, &\text{otherwise.}
+\end{cases}
+$$
+
+
+
+$$
+P(X\ge a) = e^{-\lambda a}\\
+E[X] = \frac{1}{\lambda}\\
+\text{var}(X) = \frac{1}{\lambda^2}
+$$
+
+
+<h3 id="Cumulative-Distribution-Functions"><a href="#Cumulative-Distribution-Functions" class="headerlink" title="Cumulative Distribution Functions"></a>Cumulative Distribution Functions</h3>
+$$
+F_X(x) = P(X\le x) = \begin{cases}
+    \sum_{k\le x}p_X(k), &\text{if } X \text{ is discrete,}\\
+    \int_{-\infty}^x f_X(t)\mathrm dt, &\text{if } X \text{ is continuous.}
+\end{cases}
+$$
+
+
+<p><strong>Properties</strong></p>
+
+$$
+\text{if } x \le y, \text{then } F_X(x)\le F_X(y).\\
+F_X(x)\text{ tends to 0 as } x \rightarrow -\infty, \text{and to 1 as} x \rightarrow \infty\\
+\text{If } X \text{ is discrete, then } F_X(x) \text{ is a piecewise constant function of }x.\\
+\text{If } X \text{ is continuous, then } F_X(x) \text{is a continuous funciton of }x.\\
+\text{If } X \text{ is discrete and takes integer values, the PMF and the CDF can be obtained from each other by summing or differcing: }\\
+F_X(k) = \sum_{i = -\infty}^k p_X(i),\\
+p_X(k) = P(X\le k) - P(X \le k -1) = F_X(k) - F_X(k - 1),\\
+\text{ for all integers }k.\\
+\text{If } X \text{ is continuous, the PDF and the CDF can be obtained from each other by integration or differentiation: }\\
+F_X(x) = \int_{-\infty}^x f_X(t)\mathrm dt, f_X(x) = \frac{\mathrm dF_X}{\mathrm dx}(x)
+$$
+
+
+<h3 id="Examples-for-CDF"><a href="#Examples-for-CDF" class="headerlink" title="Examples for CDF"></a>Examples for CDF</h3><p><strong>Geometric CDF</strong></p>
+
+$$
+F_{\text{geo}}(n) = \sum_{k = 1}^n p(1-p)^{k-1} = 1-(1-p)^n, \text{for } n = 1, 2, \dots
+$$
+
+
+<p><strong>Exponential CDF</strong></p>
+
+$$
+F_{\text{exp}}(x) = P(X\le x) = 0, \text{ for } x\le0,\\
+F_{\text{exp}}(x) = \int_{0}^x \lambda e^{-\lambda t}\mathrm dt = 1 - e^{-\lambda x}, \text{for }x\ge 0.
+$$
+
+
+<p>Exponential Distribution is Memoriless, like Geometric: </p>
+
+$$
+P(X \ge c + x| X \ge c) = e^{-\lambda x} = P(X \ge x)\\
+$$
+
+
+<p>The relationship: </p>
+<p><img src="/../images/prob/L6_1.jpg" loading="lazy"></p>
+<h3 id="Normal-Random-Variables"><a href="#Normal-Random-Variables" class="headerlink" title="Normal Random Variables"></a>Normal Random Variables</h3>
+$$
+f_X(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/2\sigma^2}\\
+E[X] =\mu\\
+\text{var}(X) = \sigma^2
+$$
+
+
+<p>Gaussian is good, since adding two Gaussian functions resulting in a new Gaussian functions. And with a huge mount of samples, the distribution is close to Gaussian(Central limit theorem).</p>
+<p><strong>The Standard Normal Random Variable</strong></p>
+<p>Normal(Gaussian)</p>
+
+$$
+Y = \frac{X - \mu}{\sigma}\\
+f_Y(y) = \frac{1}{\sqrt{2\pi}}e^{-y^2/2}\\
+E[Y] = 0\\
+\text{var}(Y) = 1\\
+$$
+
+
+<p>The CDF of Normal Random Variable  $\Phi(y)$  can not be derived directly, we can use the standard normal table to get the value.</p>
+
+$$
+\Phi(-y) = 1 - \Phi(y)
+$$
+
+
+<h3 id="Multiple-Continuous-Random-Variables"><a href="#Multiple-Continuous-Random-Variables" class="headerlink" title="Multiple Continuous Random Variables"></a>Multiple Continuous Random Variables</h3><p><strong>Joint PDFs</strong></p>
+<p>The two continuous RVs X and Y, with the same experiment, are jointly continuous if they can be described by a joint PDF  $f_{X, Y}$ , where  $f_{X, Y}$  is a nonnegative function that satisfies </p>
+
+$$
+P((X, Y) \in B) = \iint_{(x, y)\in B} f(X, Y)\mathrm d x\mathrm dy
+$$
+
+
+<p>for every subset B of the two-dimensional plane. In particular, when B is the form  $B = \{(x, y)|a\le x \le b, c\le y \le d\}$ , we have</p>
+
+$$
+P(a\le X \le b, c \le Y \le d) = \int_c^d\int_a^bf_{X, Y}(x, y)\mathrm dx\mathrm dy
+$$
+
+
+<p><strong>Normalization</strong> </p>
+
+$$
+\int_{-\infty}^\infty\int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dx\mathrm dy = 1
+$$
+
+
+<p><strong>Interpretation(Small rectangle)</strong></p>
+
+$$
+P(a\le X \le a + \delta, c \le Y \le c + \delta) \approx f_{X, Y}(a, c)\cdot\delta^2
+$$
+
+
+<p><strong>Marginal PDF</strong></p>
+
+$$
+P(X\in A) = P(X \in A, Y \in (-\infty, \infty)) = \int_A \int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dy\mathrm dx
+$$
+
+
+
+$$
+f_X(x) = \int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dy\\
+f_Y(y) = \int_{-\infty}^\infty f_{X, Y}(x, y)\mathrm dx
+$$
+
+
+<p><strong>Joint CDF</strong></p>
+<p>If X and Y are two RVs asscociated with the same experiment, then the joint CDF of X and Y is the function</p>
+
+$$
+F_{X, Y}(x, y) = P(X\le x, Y\le y) = P(X\le x|Y\le y)P(Y\le y) = \int_{-\infty}^y\int_{-\infty}^x f_{X, Y}(u, v)\mathrm du\mathrm dv
+$$
+
+
+<p>Conversely</p>
+
+$$
+f_{X, Y}(x, y) = \frac{\partial^2F_{X, Y}}{\partial x\partial y}(x, y)
+$$
+
+
+<p><strong>Expectations</strong></p>
+
+$$
+E[g(X, Y)] = \int_{-\infty}^\infty\int_{-\infty}^\infty g(x, y)f_{X, Y}(x, y)\mathrm dx\mathrm dy
+$$
+
+
+<p>If g is linear, of the form of  $g(x, y) = ax + by + c$ , then</p>
+
+$$
+E[g(X, Y)] = aE[X] + bE[Y] + c
+$$
+
+
+<p>X and Y are called independent if </p>
+
+$$
+f_{X, Y}(x, y) = f_X(x)f_Y(y)
+$$
+
+
+<h3 id="Conditional-and-Independence"><a href="#Conditional-and-Independence" class="headerlink" title="Conditional and Independence"></a>Conditional and Independence</h3><p><strong>Conditional PDFs</strong></p>
+<p>Let X and Y be continuous RVs with joint PDF  $f_{X, Y}$ . For any  $f_Y(y) \gt 0$ , the conditional PDF of X given Y &#x3D; y is defined by</p>
+
+$$
+f_{X|Y}(x|y) = \frac{f_{X, Y}(x, y)}{f_Y(y)}
+$$
+
+
+<p>Discrete case: </p>
+
+$$
+p_{X|Y}(x|y) = \frac{p_{X, Y}(x, y)}{p_Y(y)}
+$$
+
+
+<p>By analogy, for fixed y would like: </p>
+
+$$
+P(x \le X \le x + \delta|Y = y) \approx f_{X|Y}(x|y)\cdot\delta
+$$
+
+
+<p>But {Y &#x3D; y} is a zero-probability event.</p>
+<p>Let  $B = \{y\le Y \le y + \epsilon\}$ , for small  $\epsilon &gt; 0$ . Then</p>
+
+$$
+P(x \le X \le x + \delta|Y \in B) \approx \frac{P(x \le X \le x + \delta)}{P(y \le Y \le y + \epsilon)} \approx \frac{f_{X, Y}(x, y)\cdot\epsilon\delta}{f_Y(y)\cdot\epsilon} \approx f_{X|Y}(x|y)\cdot\delta
+$$
+
+
+<p>Limiting case when  $\epsilon \rightarrow 0$ , to define conditional PDF where the denominator is a zero-probability event.</p>
+<p><strong>Conditional Expectation</strong></p>
+<p>The conditional expectation of X given that A has happened is defined by </p>
+
+$$
+E[X|A] = \int_{-\infty}^\infty xf_{X|A}(x)\mathrm dx
+$$
+
+
+<p>For a function g, we have</p>
+
+$$
+E[g(X)|A] = \int_{-\infty}^\infty g(x)f_{X|A}(x)\mathrm dx
+$$
+
+
+<p><strong>Total expectation theorem</strong></p>
+<p>Le  $A_1, A_2, \dots A_n$  be disjoint events that form a partition of the sample space  $\Omega$ . And  $P(A_i)\gt 0$  for all  $i$ . Then</p>
+
+$$
+E[g(X)] = \sum_{i=1}^n P(A_i)E[g(X)|A_i]
+$$
+
+
+<p>Conditional Expectation</p>
+<p>The conditional expectation of X given that  $Y = y$  has happened is defined by </p>
+
+$$
+E[X|Y=y] = \int_{-\infty}^\infty xf_{X|Y}(x|y)\mathrm dx
+$$
+
+
+<p>For a function g, we have</p>
+
+$$
+E[g(X)|Y=y] = \int_{-\infty}^\infty g(x)f_{X|Y}(x|y)\mathrm dx
+$$
+
+
+<p>Total expectation theorem</p>
+
+$$
+E[X] = E_{Y}\left[E_{X|Y}[X|Y]\right] = \int_{-\infty}^\infty E[X|Y = y]f_Y(y)\mathrm dy
+$$
+
+
+<p><strong>Independence</strong></p>
+<p>Two continuous RVs  $X$  and  $Y$  are independent if and only if</p>
+
+$$
+f_{X, Y}(x, y) = f_X(x)f_Y(y)
+$$
+
+
+<p>Independence is the same as the condition</p>
+
+$$
+f_{X|Y}(x|y) = f_X(x)
+$$
+
+
+<p>If  $X$  and  $Y$  are independent, then</p>
+
+$$
+E[XY] = E[X]E[Y]\\
+E[g(x)h(y)] = E[g(x)]E[h(y)], \forall g, h\\
+\text{var}(X + Y) = \text{var}(X) + \text{var}(Y)\\
+$$
+
+
+<h3 id="The-continuous-Bayes’s-rule"><a href="#The-continuous-Bayes’s-rule" class="headerlink" title="The continuous Bayes’s rule"></a>The continuous Bayes’s rule</h3>
+$$
+f_{Y|X}(y|x) = \frac{f_Y(y)f_{X|Y}(x|y)}{f_Y(y)}
+$$
+
+
+<p>Based on the normalization property  $\int_{-\infty}^\infty f_{X|Y}(x|y)\mathrm dx = 1$ ,</p>
+
+$$
+f_{Y|X}(y|x) = \frac{f_Y(y)f_{X|Y}(x|y)}{\int_{-\infty}^\infty f_X(t)f_{Y|X}(y|t)\mathrm dt}
+$$
+
+
+<h2 id="Derived-distributions-and-Entropy"><a href="#Derived-distributions-and-Entropy" class="headerlink" title="Derived distributions and Entropy"></a>Derived distributions and Entropy</h2><h3 id="Derived-Distribution"><a href="#Derived-Distribution" class="headerlink" title="Derived Distribution"></a>Derived Distribution</h3><p>If we want to calculate the expectation  $E[g(X)]$ , there’s no need to calculate the PDF  $f_X$  of  $X$ .</p>
+<p>But sometimes we want the PDF  $f_Y$  of  $Y = g(X)$ , where  $Y$  is a new RV.</p>
+<p><strong>Principal Method</strong></p>
+<p>Two-step procedure for the calculation of the PDF of a function  $Y=g(X)$  of a continuous RV  $X$ </p>
+<ol>
+<li>Calcualte the CDF  $F_Y$  of  $Y$ :  $F_Y(y) = P(Y \le y)$ </li>
+<li>Differentiate  $F_Y$  to obtain the PDF  $f_Y$  of  $Y$ :  $f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y)$ </li>
+</ol>
+<p><strong>The PDF of  $Y=aX + b$ </strong></p>
+<p>Suppose  $a&gt;0$  and  $b$  are constants.</p>
+
+$$
+f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y) = \frac{\mathrm d}{\mathrm d y} F_X(\frac{y-b}{a}) = \frac{1}{a}f_X(\frac{y-b}{a})
+$$
+
+
+<p>If  $X$  is Normal, then  $Y = aX + b$  is also Normal.</p>
+<p>Suppose X is normal with mean  $\mu$  and variance  $\sigma^2$ . Then</p>
+
+$$
+f_Y(y) = \frac{1}{a\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y-b-a\mu)^2}{2a^2\sigma^2}\right)
+$$
+
+
+
+$$
+Y = aX + b \sim N(a\mu + b, a^2\sigma^2)
+$$
+
+
+<p><strong>The PDF of a strictly monotonic function</strong></p>
+<p>Suppose  $g$  is a strictly monotonic function and that for some function  $h$  and all  $x$  in the range of  $X$  we have </p>
+
+$$
+y = g(x) \text{ if and only if } x = h(y)
+$$
+
+
+<p>Assume that  $h$  is differentiable.</p>
+<p>Then the PDF of  $Y = g(X)$  is given by</p>
+
+$$
+f_Y(y) = \frac{\mathrm d F_Y}{\mathrm d y}(y) = \frac{\mathrm d}{\mathrm d y} F_X(h(y)) = f_X(h(y))\left|\frac{\mathrm d h}{\mathrm d y}(y)\right|
+$$
+
+
+<h3 id="Entropy"><a href="#Entropy" class="headerlink" title="Entropy"></a>Entropy</h3><p><strong>Defintion</strong></p>
+<p>Discrete case</p>
+<p>Let  $X$  be a discrete RV defined on probability space  $(\Omega, \mathcal F, P)$ . The <strong>entropy</strong> of  $X$  is defined by</p>
+
+$$
+H(X) = -E[\ln p_X(X)] = -\sum_{k} p_X(x_k)\ln p_X(x_k)
+$$
+
+
+<p>Continuous case</p>
+<p>Let  $X$  be a continuous RV defined on probability space  $(\Omega, \mathcal F, P)$ . The <strong>differential entropy</strong> of  $X$  is defined by</p>
+
+$$
+H(X) = -E[\ln f_X(X)] = -\int_{-\infty}^\infty f_X(x)\ln f_X(x)\mathrm dx
+$$
+
+
+
+<p><strong>Remarks</strong></p>
+<ul>
+<li>a special expectation of a random variable</li>
+<li>a measure of uncertainty in a random experiment</li>
+<li><ul>
+<li>the larger the entropy, the more uncertain the experiment</li>
+</ul>
+</li>
+<li><ul>
+<li>For a deterministic event, the entropy is zero</li>
+</ul>
+</li>
+<li>The base of logarithm can be different. Changing the base od the logarithm is equivalent to multiplying the entropy by a constant.</li>
+<li><ul>
+<li>With base 2, we say that the entropy is in units of <strong>bits</strong></li>
+</ul>
+</li>
+<li><ul>
+<li>With base e, we say that the entropy is in units of <strong>nats</strong></li>
+</ul>
+</li>
+<li>The basis of information theory</li>
+</ul>
+<h3 id="Maximum-entropy-distributions"><a href="#Maximum-entropy-distributions" class="headerlink" title="Maximum entropy distributions"></a>Maximum entropy distributions</h3><p>• Maximum entropy distributions</p>
+<p>− Distributions with maximum entropy under some constraints</p>
+<p>− Gaussian, exponential, and uniform distributions are all maximum entropy distributions under certain conditions</p>
+<p>• Why studying maximum entropy distributions?</p>
+<p>− The most random distribution, reflecting the maximum uncertainty about the quantity of interest</p>
+<p><strong>Definition</strong></p>
+<p><strong>Discrete Case</strong></p>
+<p>X can be a finite number of values  $x_1, x_2, \dots, x_n$ , satisfying  $p_X(x_k) = p_k.$ </p>
+<p>We have the following optimization problem:</p>
+
+$$
+\max_{X} H(X) = \max_{p_1, p_2, \dots, p_n} \left(-\sum_{k=1}^n p_k\ln p_k\right)\\
+\text{s.t.} \sum_{k=1}^n p_k = 1, p_k \ge 0 \text{ for } k = 1, 2, \dots, n
+$$
+
+
+<p><strong>Solution</strong></p>
+<p>Applying the Lagrange multiplier method, we have</p>
+
+$$
+L(p_1, p_2, \dots, p_n;\lambda) = -\sum_{k=1}^n p_k\ln p_k + \lambda\left(\sum_{k=1}^n p_k - 1\right)\\
+\frac{\partial L}{\partial p_k} = -\ln p_k - 1 + \lambda = 0\\
+\Rightarrow p_k = e^{\lambda - 1}\\
+$$
+
+
+<p>Note that the above is true for all  $k$ . So we have</p>
+
+$$
+p_k = e^{\lambda - 1}  = \frac1{n}\text{ for } k = 1, 2, \dots, n.
+$$
+
+
+<p><strong>Continuous Case 1</strong></p>
+ $X \in [-\infty, \infty]$ .
+
+<p>Constrain on mean and variance,<br>we have the following optimization problem:</p>
+
+$$
+\max_{X}h(X), \\
+\text{s.t. }E[X] = \mu, \quad Var(X) = \sigma^2
+$$
+
+
+<p>In detail, </p>
+
+$$
+\max_{X} H(X) = \max_{\mu, \sigma^2} \left(-\int_{-\infty}^\infty f_X(x)\ln f_X(x)\mathrm dx\right)\\
+\text{s.t. }\int_{-\infty}^\infty f(x)\mathrm dx = 1, \quad \int_{-\infty}^\infty xf(x)\mathrm dx = \mu, \quad \int_{-\infty}^\infty x^2f(x)\mathrm dx = \sigma^2 + \mu^2
+$$
+
+
+<p>Solving the above problem, we have Gaussian distribution with mean  $\mu$  and variance  $\sigma^2$ .</p>
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$
+
+
+<p><strong>Solution</strong></p>
+<p>For all measurable functions  $g$ , we have</p>
+
+$$
+G(t) = h(f + tg) = -\int_{\infty}^\infty (f(x) + tg(x))\ln (f(x) + tg(x))\mathrm dx
+$$
+
+
+<p>Therefore,</p>
+
+$$
+h(f_{opt})\ge h(f_{opt} + tg)\\
+\Rightarrow G(0)\ge G(t), \forall t \in \R
+$$
+
+
+ $G(t)$  reaches its maximum at  $t = 0$ .
+
+<p>Then apply the Lagrange multiplier method, we have</p>
+
+$$
+\overline{G}(t) = G(t) + c_0h_0(t) + c_1h_1(t) + c_2h_2(t)\\
+$$
+
+
+<p>Get the derivative of  $\overline{G}(t)$  with regard to  $t$ , and let the derivative equal to zero.</p>
+<p><strong>Continuous Case 2</strong></p>
+ $X \in [0, \infty)$ .
+
+<p>Constrain on mean only, we have the following optimization problem:</p>
+
+$$
+\max_{X}h(X), \\
+\text{s.t. }E[X] = \mu
+$$
+
+
+<p>In detail,</p>
+
+$$
+\max_{X} H(X) = \max_{\mu} \left(-\int_{0}^\infty f_X(x)\ln f_X(x)\mathrm dx\right)\\
+\text{s.t. }\int_{0}^\infty f(x)\mathrm dx = 1, \quad \int_{0}^\infty xf(x)\mathrm dx = \mu
+$$
+
+
+<p>Solving the above problem, we have exponential distribution with parameter  $\lambda$ .</p>
+
+$$
+f(x) = \lambda e^{-\lambda x}, x \in [0, \infty)
+$$
+
+
+<p><strong>Continuous Case 3</strong></p>
+ $X \in [a, b]$ .
+
+<p>No constrain, we have the unconstrained optimization problem:</p>
+
+$$
+\max_{X}h(X)
+$$
+
+
+<p>In detail,</p>
+
+$$
+\max_{X} H(X) = \max_{a, b} \left(-\int_{a}^b f_X(x)\ln f_X(x)\mathrm dx\right)\\
+\text{s.t. }\int_{a}^b f(x)\mathrm dx = 1
+$$
+
+
+<p>Solving the above problem, we have uniform distribution within  $[a, b]$ .</p>
+
+$$
+f(x) = \frac{1}{b-a}, x \in [a, b]
+$$
+
+
+<h2 id="Convolution-covariance-correlation-and-conditional-expectation"><a href="#Convolution-covariance-correlation-and-conditional-expectation" class="headerlink" title="Convolution, covariance, correlation, and conditional expectation"></a>Convolution, covariance, correlation, and conditional expectation</h2><h3 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h3><p><strong>Discrete case</strong></p>
+
+$$
+\begin{align*}
+p_W(w) &= P(X+Y=w)\\
+&= \sum_{x}P(X=x, Y=w-x)\\
+&= \sum_{x}P(X=x)P(Y=w-x)\\
+&= \sum_{x}p_X(x)p_Y(w-x)\\
+\end{align*}
+$$
+
+
+<p>PMF  $p_W$  is the convolution of PMFs  $p_X$  and  $p_Y$ .</p>
+<p><strong>The distribution of  $X+Y$ </strong></p>
+<p>Mechanics:</p>
+<ul>
+<li>Put the PMF’s on top of each other</li>
+<li>Flip the PMF of  $Y$ </li>
+<li>Shift the flipped PMF by  $w$  (to the right if  $w&gt;0$ )</li>
+<li>Cross-multiply and add</li>
+</ul>
+<p><strong>Continuous Case</strong></p>
+
+$$
+\begin{align*}
+&W = X+Y, X, Y \text{ are independent}\\
+&P(W\le w|X=x) = P(Y\le w-x)\\
+&f_{W|X}(w|x) = f_Y(w-x)\\
+&f_{W, X}(w, x) = f_X(x)f_Y(w-x)\\
+&f_W(w) = \int_{-\infty}^\infty f_X(x)f_Y(w-x)\mathrm dx\\
+\end{align*}
+$$
+
+
+<p><strong>Sum of 2 independent normal RVs</strong></p>
+
+$$
+\begin{align*}
+    & X\sim N(\mu_1, \sigma_1^2), Y\sim N(\mu_2, \sigma_2^2)\\
+    &f_{X,Y}(x, y) = \frac{1}{2\pi \sigma_x\sigma_y}\text{exp}\left\lbrace-\frac{(x-\mu_x)^2}{2\sigma_x^2} - \frac{(y-\mu_y)^2}{2\sigma_y^2}\right\rbrace
+\end{align*}
+$$
+
+
+<p>which is constant on the ellipse(circle if  $\sigma_x = \sigma_y$ ).</p>
+
+$$
+\begin{align*}
+    X\sim N(0, \sigma_x), &Y\sim N(0, \sigma_y)\\
+    W &= X+Y\\
+    f_W(w) &= \int_{-\infty}^\infty f_{X,Y}(x, w-x)\mathrm dx\\
+    &= \int_{-\infty}^\infty \frac{1}{2\pi \sigma_x\sigma_y}\text{exp}\left\lbrace-\frac{x^2}{2\sigma_x^2} - \frac{(w-x)^2}{2\sigma_y^2}\right\rbrace\mathrm dx\\
+    =ce^{-\gamma \omega^2}
+\end{align*}
+$$
+
+
+ $W$  is Normal.
+
+<p>Mean &#x3D; 0, Variance &#x3D;  $\sigma_x^2 + \sigma_y^2$ </p>
+<p>Same argument for nonzero mean case.</p>
+<p><strong>The difference of two independent RVs</strong></p>
+ $X$  and  $Y$   are independent exponential RVs with parameter  $\lambda$ .
+
+<p>Fix some  $z\ge 0$  and note that  $f_Y(x-z)$  is non zero when  $x\ge z$ .</p>
+
+$$
+\begin{align*}
+    Z &= X - Y\\
+    f_Z(z) &= \int_{-\infty}^\infty f_X(x)f_{-Y}(z - x)\mathrm dx\\
+    &= \int_{-\infty}^\infty f_X(x)f_{Y}(x - z)\mathrm dx\\
+    &= \int_{z}^\infty \lambda e^{-\lambda x}\lambda e^{-\lambda(x-z)}\mathrm dx\\
+    &= \frac{\lambda}{2}e^{-\lambda z}
+\end{align*}
+$$
+
+
+<p>The answer for the case  $z\le 0$ </p>
+
+$$
+f_{X-Y}(z) = f_{Y-X}(z) = f_Z(-z)
+$$
+
+
+<p>The first quality holds by symmetry.</p>
+<h3 id="Covariance-and-Correlation"><a href="#Covariance-and-Correlation" class="headerlink" title="Covariance and Correlation"></a>Covariance and Correlation</h3><p><strong>Definition</strong></p>
+<p>The covariance of two RVs  $X$  and  $Y$ , denoted by  $\text{cov}(X, Y)$ , is defined by</p>
+
+$$
+\text{cov}(X, Y) = E\left[(X - E[X])(Y - E[Y])\right]
+$$
+
+
+<p>or, </p>
+
+$$
+\text{cov}(X, Y) = E[XY] - E[X]E[Y]
+$$
+
+
+ $X$  and  $Y$  are **uncorrelated** if  $\text{cov}(X, Y) = 0$ .
+
+<p><strong>Zero mean case</strong>  $\text{cov}(X, Y) = E[XY]$ </p>
+<p><strong>Properties</strong></p>
+
+$$
+\text{cov}(X, Y) = \text{var}(X, Y)\\
+\text{cov}(X, aY+b) = a\cdot\text{cov}(X, Y)\\
+\text{cov}(X, Y+Z) = \text{cov}(X, Y) + \text{cov}(X, Z)\\
+\text{independent} \Rightarrow \text{cov}(X, Y) = 0(\text{converse is not true})
+$$
+
+
+<p><strong>Variance of the sum of RVs</strong></p>
+
+$$
+\text{var}\left(\sum_{i = 1}^nX_i\right) = \sum_{i = 1}^n\text{var}(X_i) + \sum_{\lbrace(i, j)|i\ne j\rbrace}\text{cov}(X_i, X_j)
+$$
+
+
+<p>In particular, </p>
+
+$$
+\text{var}(X_1 + X_2) = \text{var}(X_1) + \text{var}(X_2) + 2\text{cov}(X_1, X_2)
+$$
+
+
+<p><strong>Correlation coefficient</strong></p>
+<p>The correlation coefficient  $\rho(X, Y)$  of two RVs  $X$  and  $Y$  that have nonzero variance is defined as</p>
+
+$$
+\begin{align*}
+\rho &= E\left[\frac{(X - E[X])}{\sigma_X} \cdot \frac{(Y - E[Y])}{\sigma_Y}\right]\\
+&= \frac{\text{cov}(X, Y)}{\sigma_X\sigma_Y}
+\end{align*}
+$$
+
+
+<ul>
+<li> $-1 \le \rho \le 1$ </li>
+<li> $|\rho| = 1 \Leftrightarrow (X-E[X]) = c(Y-E[Y])$ </li>
+<li>Independent  $\Rightarrow \rho = 0(\text{converse is not true})$ </li>
+</ul>
+<p><strong>Conditional expected value</strong></p>
+
+$$
+E[X|Y = y] = \sum_x xp_{X|Y}(x|y)
+$$
+
+
+<h3 id="Conditional-expectation"><a href="#Conditional-expectation" class="headerlink" title="Conditional expectation"></a>Conditional expectation</h3><p><strong>Definition</strong></p>
+
+$$
+E[X|Y = y] = \begin{cases}
+    \sum_x xp_{X|Y}(x|y), & X \text{discrete},\\
+    \int_{-\infty}^\infty xf_{X|Y}(x|y)\mathrm dx, & X \text{continuous}.
+\end{cases}
+$$
+
+
+ $E[X|Y=y]$  is a function of  $y$ .
+
+
+$$
+E[X|Y = y] = \frac{y}{2}(\text{number})\\
+E[X|Y] = \frac{Y}{2}(\text{RV})
+$$
+
+
+<p><strong>Law of iterated expectations</strong></p>
+
+$$
+E[X] = E[E[X|Y]] = \begin{cases}
+    \sum_y E[X | Y = y]p_Y(y), & Y \text{discrete},\\
+    \int_{-\infty}^\infty E[X|Y = y]f_Y(y)\mathrm dy, & Y \text{continuous}.
+\end{cases}
+$$
+
+
+<h3 id="Conditional-expectation-as-an-estimator"><a href="#Conditional-expectation-as-an-estimator" class="headerlink" title="Conditional expectation as an estimator"></a>Conditional expectation as an estimator</h3><p>Denote the conditional expectation</p>
+
+$$
+\hat{X} = E[X|Y]
+$$
+
+
+<p>as an estimator of  $X$  given  $Y$ , and the estimation error</p>
+
+$$
+\tilde{X} = X - \hat{X}
+$$
+
+
+<p>is a RV.</p>
+<p><strong>Properties of the estimator</strong>: </p>
+<p><strong>Unbiased</strong></p>
+<p>For <strong>any</strong> possible  $Y=y$ :</p>
+
+$$
+E[\tilde{X}|Y] = E[X - \hat{X} | Y] = E[X | Y] - E[\hat{X}|Y] = \hat{X} - \hat{X} = 0
+$$
+
+
+<p>By the law of iterated expectations</p>
+
+$$
+E[\tilde{X}] = E[E[\tilde{X}|Y]] = 0
+$$
+
+
+<p><strong>Uncorrelated</strong></p>
+
+$$
+E[\hat{X}\tilde{X}] = E[E[\hat{X}\tilde{X}|Y]] = E[\hat{X}E[\tilde{X}|Y]] = 0
+$$
+
+
+
+$$
+\text{cov}(\hat{X}, \tilde{X}) = E[\hat{X}\tilde{X}] - E[\hat{X}]E[\tilde{X}] = 0
+$$
+
+
+<p>Since  $X = \hat{X} + \tilde{X}$ , the variance of X can be decomposed as</p>
+
+$$
+\text{var}(X) = \text{var}(\hat{X}) + \text{var}(\tilde{X})
+$$
+
+
+
+$$
+\text{var}(\tilde{X}) = \text{var}(E[X|Y])
+$$
+
+
+<p>Conditional variance</p>
+
+$$
+\text{var}(X|Y) = E[(X - E[X|Y])^2|Y] = E[\tilde{X}^2|Y]
+$$
+
+
+<p>here comes the law of total variance:</p>
+
+$$
+\text{var}(X) = \text{var}(E[X|Y]) + E[\text{var}(X|Y)] 
+$$
+
+
+<p>The total variability is avarage variability within sections + variability between sections.</p>
+<p><strong>Law of iterated expectations</strong></p>
+
+$$
+E[X] = E[E[X|Y]] = \sum_y E[X|Y = y]p_Y(y)
+$$
+
+
+
+<p><strong>Conditional variance</strong></p>
+
+$$
+\text{var}(X|Y) = E[(X - E[X|Y])^2|Y] = E[\tilde{X}^2|Y]
+$$
+
+
+<p><strong>Law of total variance</strong></p>
+
+$$
+\text{var}(X) = \text{var}(E[X|Y]) + E[\text{var}(X|Y)] 
+$$
+
+
+
+<h2 id="Transforms-and-sum-of-a-random-number-of-random-variables"><a href="#Transforms-and-sum-of-a-random-number-of-random-variables" class="headerlink" title="Transforms and sum of a random number of random variables"></a>Transforms and sum of a random number of random variables</h2><p>The transform associated with a RV  $X$  is a function  $M_X(s)$  of a scalar parameter  $s$ , defined by</p>
+
+$$
+M_X(s) = E[e^{sX}] = \begin{cases}
+    \sum_x e^{sx}p_X(x), & X \text{discrete},\\
+    \int_{-\infty}^\infty e^{sx}f_X(x)\mathrm dx, & X \text{continuous}.
+\end{cases}
+$$
+
+
+<p><strong>Remarks</strong></p>
+<ul>
+<li>a function of  $s$ , rather than a number</li>
+<li>not necessarily defined for all (complex) s</li>
+<li>always well defined for  $\Re(s)=0$ </li>
+<li>compared with Laplace transform</li>
+</ul>
+<h3 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h3><p><strong>Sanity Checks</strong></p>
+
+$$
+M_X(0) = 1\\
+|M_X(s)| \le 1 \text{ for } \Re(s) = 0
+$$
+
+
+<p><strong>Linear operation</strong></p>
+
+$$
+M_{aX + b}(s) = e^{bs}M_X(as)\\
+M_{X + Y}(s) = M_X(s)M_Y(s) (\text{if X, Y independent})
+$$
+
+
+<p><strong>Expected Values</strong></p>
+
+$$
+E[X^n] = \frac{\partial^n M_X(s)}{\partial s^n}\bigg|_{s=0}
+$$
+
+
+
+$$
+P(X = c) = \lim_{N\rightarrow \infty}\frac 1N\sum_{k = 1}^N M_X(jk)e^{-jkc}
+$$
+
+
+<p>since</p>
+
+$$
+\lim_{N\rightarrow \infty}\frac 1N\sum_{k = 1}^N M_X(jk)e^{-jkc} = \sum_{x = 1}^\infty p_X(x)\lim_{N\rightarrow \infty}\frac 1N\sum_{k = 1}^N e^{-jc(k - x)} = \sum_{x = 1}^\infty p_X(x)\lim_{N\rightarrow \infty}\frac{1}{N} \frac{e^{j(x-c)} - e^{Nj(x - c)}}{1-e^{j(x-c)}} = p_X(c)
+$$
+
+
+<p><strong>Example</strong></p>
+ $X$  is a Poisson RV with parameter  $\lambda$ 
+
+
+$$
+p_X(x) = \frac{\lambda^x}{x!}e^{-\lambda}
+$$
+
+
+
+$$
+M(s) = \sum_{x = 0}^\infty e^{sx}\frac{\lambda^x}{x!}e^{-\lambda} = e^{-\lambda}\sum_{x = 0}^\infty \frac{(e^s\lambda)^x}{x!} = e^{-\lambda}e^{e^s\lambda} = e^{\lambda(e^s - 1)}
+$$
+
+
+ $X$  is an exponential RV with parameter  $\lambda$ 
+
+
+$$
+f_X(x) = \lambda e^{-\lambda x}
+$$
+
+
+
+$$
+M(s) = \int_0^\infty e^{sx}\lambda e^{-\lambda x}\mathrm dx = \frac{\lambda}{\lambda - s}
+$$
+
+
+ $Y$  is a standard normal RV, 
+
+
+$$
+M_Y(s) = \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}}e^{-(y^2/2)}e^{sy}\mathrm dy = e^{s^2/2}
+$$
+
+
+<p>Consider  $X = \sigma Y + \mu$ </p>
+
+$$
+M_X(s) = e^{s^2\sigma^2/2 + \mu s}
+$$
+
+
+<h3 id="Inversion-of-transforms"><a href="#Inversion-of-transforms" class="headerlink" title="Inversion of transforms"></a>Inversion of transforms</h3><p><strong>Inversion Property</strong></p>
+<p>The transform  $M_X(s)$  associated with a RV  $X$  uniquely determines the CDF of  $X$ , assuming that  $M_X(s)$  is finite for all  $s$  in some interval  $[-a, a]$ , where  $a$  is a positive number.</p>
+<p>Example:</p>
+
+$$
+\begin{align*}
+M(s) &= \frac{pe^s}{1 - (1 - p)e^s}\\
+&= pe^s(1 + (1-p)e^s + (1-p)^2e^{2s} + \dotsb)\\
+&= \sum_{k = 1}^\infty p(1-p)^{k - 1}e^{ks}
+\end{align*}
+$$
+
+
+<p>The probability  $P(X = k)$  is found by reading the coefficient of the term  $e^{ks}$ :</p>
+
+$$
+P(X = k) = p(1-p)^{k-1}
+$$
+
+
+<h3 id="Transform-of-Mixture-of-Distributions"><a href="#Transform-of-Mixture-of-Distributions" class="headerlink" title="Transform of Mixture of Distributions"></a>Transform of Mixture of Distributions</h3><p>Let  $X_1,\dotsb, X_n$  be continuous RVs with PDFs  $f_{X_1}, \dotsb, f_{X_n}$ .</p>
+<p>The value  $y$  of RV  $Y$  is generated as follows: an index  $i$  is chosen with a corresponding probability  $p_i$ , and  $y$  is taken to be equal to the value  $X_i$ . Then, </p>
+
+$$
+f_Y(y) = p_1f_{X_1}(y) + \dotsb + p_nf_{X_n}(y)\\
+M_Y(s) = p_1M_{X_1}(s) + \dotsb + p_nM_{X_n}(s)
+$$
+
+
+<h3 id="Sum-of-independend-RVs"><a href="#Sum-of-independend-RVs" class="headerlink" title="Sum of independend RVs"></a>Sum of independend RVs</h3><p>Let  $X$  and  $Y$  be independent RVs, and let  $Z = X + Y$ . The transform associated with  $Z$  is </p>
+
+$$
+M_Z(s) = M_X(s)M_Y(s)
+$$
+
+
+<p>Since</p>
+
+$$
+M_Z(s) = E[e^{sZ}] = E[e^{s(X + Y)}] = E[e^{sX}e^{sY}] = E[e^{sX}]E[e^{sY}] = M_X(s)M_Y(s)
+$$
+
+
+<p>Generalization:</p>
+<p>A collection of independent RVs:  $X_1, \dotsb, X_n$ ,  $Z = X_1 + \dotsb + X_n$  ,</p>
+
+$$
+M_Z(s) = M_{X_1}(s)\dotsb M_{X_n}(s)
+$$
+
+
+<p><strong>Example</strong></p>
+<p>Let  $X_1, \dotsb, X_n$  be independent Bernoulli RVs with a common parameter  $p$ :</p>
+
+$$
+M_{X_i}(s) = 1 - p + pe^s
+$$
+
+
+ $Z = X_1 + \dotsb + X_n$  is binomial with parameters n and p:
+
+
+$$
+M_z(s) = (1 - p + pe^s)^n
+$$
+
+
+<p>Let  $X$  and  $Y$  be independent Poisson RVs with means  $\lambda$  and  $\mu$ , and let  $Z = X + Y$ . Then  $Z$  is still Poisson with mean  $\lambda + \mu$ .</p>
+
+$$
+M_Z(s) = M_X(s)M_Y(s) = e^{(\lambda +\mu)(e^s - 1)}
+$$
+
+
+<p>Let  $X$  and  $Y$  be independent Gaussian RVs with means  $\mu_x$  and  $\mu_y$ , and variances  $\sigma_x^2, \sigma_y^2$ . And let  $Z = X + Y$ . Then  $Z$  is still Gaussian with mean  $\mu_x + \mu_y$  and variance  $\sigma_x^2 + \sigma_y^2$ </p>
+
+$$
+M_X(s) = \exp\bigg\lbrace\frac{\sigma_x^2s^2}{2} + \mu_x s\bigg\rbrace\\
+M_Y(s) = \exp\bigg\lbrace\frac{\sigma_y^2s^2}{2} + \mu_y s\bigg\rbrace\\
+M_Z(s) = M_X(s)M_Y(s) = \exp\bigg\lbrace\frac{(\sigma_x^2 + \sigma_y^2)s^2}{2} + (\mu_x + \mu_y)s\bigg\rbrace
+$$
+
+
+<p>Consider</p>
+
+$$
+Y = X_1 + \dotsb + X_N
+$$
+
+
+<p>where  $N$  is a RV that takes integer values, and  $X_1, \dotsb, X_N$  are identically distributed RVs.</p>
+<p>Assume that  $N, X_1, \dotsb$  are independent.</p>
+
+$$
+E[Y|N = n] = E[X_1 + X_2 + \dotsb + X_n|N = n] = nE[X]\\
+E[Y|N] = NE[X]\\
+E[Y] = E[E[Y|N]] = E[NE[X]] = E[N]E[X]
+$$
+
+
+<p>For the variance, </p>
+
+$$
+E[Y|N] = NE[X]\\
+\text{var}(E[Y|N]) = (E[X])^2\text{var}(N)\\
+\text{var}(Y|N=n) = n\text{var}(X)\\
+\text{var}(Y|N) = N \text{var}(X)\\
+E[\text{var}(Y|N)] = E[N]\text{var}(X)\\
+$$
+
+
+<p>So, </p>
+
+$$
+\text{var}(Y) = E[\text{var}(Y|N)] + \text{var}(E[Y|N]) = E[N]\text{var}(X) + (E[X])^2\text{var}(N)
+$$
+
+
+<p>For transform,</p>
+
+$$
+E[e^{sY}|N = n] = E[e^{sX_1}\dotsb e^{sX_n}|N = n] = E[e^{sX}]^n = (M_X(s))^n\\
+M_Y(s) = E[e^{sY}] = E[E[e^{sY}|N]] = E[(M_X(s))^N] = \sum_{n = 0}^\infty (M_X(s))^n p_N(n) = \sum_{n = 0}^\infty e^{n\log M_X(s)}p_N(n) = M_N(\log M_X(s))
+$$
+
+
+<p><strong>Summary on Properties</strong></p>
+<p>Consider the sum</p>
+
+$$
+Y = X_1 + \dotsb + X_N
+$$
+
+
+<p>where  $N$  is a RV that takes integer values, and  $X_1, X_2, \dotsb$  are identically distributed RVs. Assume that  $N$ ,  $X_1, X_2, \dotsb$  are independent.</p>
+
+$$
+E[Y] = E[N]E[X]\\
+\text{var}(Y) = E[N]\text{var}(X) + (E[X])^2\text{var}(N)\\
+M_Y(s) = M_N(\log M_X(s))
+$$
+
+
+<p><strong>Example</strong></p>
+<p>Assume that  $N$  and  $X_i$  are both geometrically distributed with parameters  $p$  and  $q$  respectively. All of these RVs are independent.  $Y = X_1 + \dotsb + X_N$ </p>
+
+$$
+M_N(s) = \frac{pe^s}{1 - (1-p)e^s}\\
+M_X(s) = \frac{qe^s}{1 - (1-q)e^s}\\
+M_Y(s) = M_N(\log M_X(s)) = \frac{pqe^s}{1 - (1-pq)e^s}
+$$
+
+
+ $Y$  is also geometrically distributed, with parameter  $pq$ .
+
+<h2 id="Weak-law-of-large-numbers"><a href="#Weak-law-of-large-numbers" class="headerlink" title="Weak law of large numbers"></a>Weak law of large numbers</h2><h3 id="Markov-inequality"><a href="#Markov-inequality" class="headerlink" title="Markov inequality"></a>Markov inequality</h3><p>If a RV  $X$  can only take nonnegative values, then</p>
+
+$$
+P(X \ge a) \le \frac{E[X]}{a}, \text{ for all } a \gt 0.
+$$
+
+
+<p>Intuition: If a nonnegative RV has a small mean, then the probability that it takes a large value must be small。</p>
+<p>Fix a positive number  $a$ , </p>
+
+$$
+E[X] = \int_0^\infty xf_X(x)dx = \int_0^a xf_X(x)dx + \int_a^\infty xf_X(x)dx \ge 0 + \int_a^\infty xf(x)dx \ge \int_a^\infty af_X(x)dx = aP(X \ge a)
+$$
+
+
+<h3 id="Chebyshev’s-Inequality"><a href="#Chebyshev’s-Inequality" class="headerlink" title="Chebyshev’s Inequality"></a>Chebyshev’s Inequality</h3><p>If  $X$  is a RV with mean  $\mu$  and variance  $\sigma^2$ , then</p>
+
+$$
+P(|X - \mu| \ge c) \le \frac{\sigma^2}{c^2}
+$$
+
+
+<p>Intuition: If a RV has small variance, then the probability that it takes a value far from its mean is also small.</p>
+
+$$
+\begin{align*}
+\sigma^2 &= \int (x - \mu)^2f_X(x)\mathrm dx\\
+&\ge \int_{-\infty}^{\mu - c} (x - \mu)^2f_X(x)\mathrm dx + \int_{ \mu + c}^\infty (x - \mu)^2f_X(x)\mathrm dx\\
+&\ge \int_{-\infty}^{\mu - c} c^2f_X(x)\mathrm dx + \int_{ \mu + c}^\infty c^2f_X(x)\mathrm dx\\
+&= \int_{|x - \mu| \ge c} c^2f_X(x)\mathrm dx\\
+&=c^2P(|X - \mu| \ge c)
+\end{align*}
+$$
+
+
+<p>The upperbounds of  $\sigma^2$ :</p>
+
+$$
+X \in [a, b]\\
+\sigma^2 \le (b - a)^2/4
+$$
+
+
+<p><strong>Chernoff inequality</strong></p>
+<p>If a RV  $X$  has MGF  $M_X(s)$ , then</p>
+
+$$
+P(X \ge a) \le e^{-\max_{s\ge 0}\left(sa - \ln M_X(s)\right)}
+$$
+
+
+<p>or, for  $s \ge 0$ </p>
+
+$$
+P(X\ge a) \le e^{-sa}M_X(s)
+$$
+
+
+<p>for  $s \lt 0$ </p>
+
+$$
+P(X \le a) \le e^{-sa}M_X(s)
+$$
+
+
+<p>proof: for  $s \ge 0$ </p>
+
+$$
+M_X(s) = \int_{-\infty}^a e^{sx}f_X(x)\mathrm dx + \int_a^{\infty} e^{sx}f_X(x)\mathrm dx\\
+\ge 0 + e^{sa}\int_a^{\infty} f_X(x)\mathrm dx = e^{sa}P(X \ge a)
+$$
+
+
+<h3 id="Weak-law-of-large-numbers-1"><a href="#Weak-law-of-large-numbers-1" class="headerlink" title="Weak law of large numbers"></a>Weak law of large numbers</h3><p>Let  $X_1, X_2, \dots$  be independent identically distributed (i.i.d.) RVs with finite mean  $\mu$  and variance  $\sigma^2$ </p>
+
+$$
+M_n = \frac{X_1 + X_2 + \dotsb + X_n}{n}\\
+E[M_n] = \mu\\
+\text{var}(M_n) = \frac{\sigma^2}{n}
+$$
+
+
+<p>Applying the Chebyshev inequality and we get:</p>
+
+$$
+P(|M_n - \mu| \ge \epsilon) \le \frac{\text{var}(M_n)}{\epsilon^2} = \frac{\sigma^2}{n\epsilon^2}
+$$
+
+
+<p>For large  $n$ , the bulk of the distribution of  $M_n$  is concentrated near  $\mu$ </p>
+<p><strong>Theorem</strong></p>
+<p>Let  $X_1, X_2, \dots$  be independent identically distributed (i.i.d.) RVs with finite mean  $\mu$  and variance  $\sigma^2$ . For every  $\epsilon \gt 0$ , we have</p>
+
+$$
+P(|M_n - \mu| \ge \epsilon) = P\left(\left|\frac{X_1 + \dotsb + X_n}{n} - \mu\right|\ge \epsilon\right) \rightarrow 0, \text{ as } n \rightarrow \infty
+$$
+
+
+ $M_n$  converges **in probability** to  $\mu$ .
+
+<h3 id="Convergence-“in-Probability”"><a href="#Convergence-“in-Probability”" class="headerlink" title="Convergence “in Probability”"></a>Convergence “in Probability”</h3><p>Theorem: Convergence in Probability</p>
+<p>Let  $\lbrace Y_n\rbrace$ (or  $Y_1, Y_2, \dots$ ) be a sequence of RVs(not necessarily independent), and let  $a$  be a real number. We say that the sequence  $Y_n$  <strong>converges to</strong>  $a$  in probability, if for every  $\epsilon \gt 0$ , we have </p>
+
+$$
+\lim_{n \rightarrow \infty} P(|Y_n - a| \ge \epsilon) = 0
+$$
+
+
+<p>(almost all) of the PMF&#x2F;PDF of  $Y_n$ , eventually gets concentrated (arbitrarily) close to  $a$ .</p>
+<h3 id="Many-types-of-convergence"><a href="#Many-types-of-convergence" class="headerlink" title="Many types of convergence"></a>Many types of convergence</h3><p>Deterministic limits:  $\lim_{n\rightarrow \infty} a_n = a$ </p>
+
+$$
+|a_n - a|\le \epsilon, \forall n \ge N, \epsilon \gt 0
+$$
+
+
+<p>Convergence in probability:  $X_n\stackrel P{\rightarrow} X$ </p>
+
+$$
+\lim_{n \rightarrow \infty}P(|X_n - X|\ge \epsilon) = 0, \forall \epsilon \gt 0
+$$
+
+
+<p>(WLLN)</p>
+<p>Convergence in Distribution:  $X_n \stackrel{D}{\rightarrow} X$ </p>
+
+$$
+\lim_{n \rightarrow \infty} P(X_n \le x) = P(X \le x), \forall x
+$$
+
+
+<p>For all points of  $x$  at which the function  $F_X(x) = P(X\le x)$ is continuous.</p>
+<p>(CLT)</p>
+<p>Convergence with probability  $1$ (almost surely):  $X_n \stackrel{\text{a.s.}}{\rightarrow} X$ </p>
+
+$$
+P\left(\lbrace\omega\in \Omega: \lim_{n\rightarrow\infty}X_n(\omega) =X(\omega)\rbrace\right) = 1
+$$
+
+
+<p>or </p>
+
+$$
+P\left(\lim_{n\rightarrow\infty}X_n(\omega) =X(\omega)\right) = 1
+$$
+
+
+<p>Lemma:</p>
+
+$$
+X_n \stackrel{\text{a.s.}}{\rightarrow} X \Leftrightarrow \lim_{m \rightarrow\infty}P(|X_n - X|\le \epsilon, \forall n \gt m) = 1, \forall \epsilon \gt 0\\
+\Leftrightarrow P(|X_n - X|\gt \epsilon, \text{i.o.}) = 0, \forall \epsilon \gt 0
+$$
+
+
+<p>i.o. stand for infinitely often</p>
+<p>(SLLN)</p>
+<p>Convergence in Mean&#x2F;in Norm:  $X_n \stackrel{r}{\rightarrow}X$ </p>
+<p>if  $E[X_n^r] \lt \infty$  for all  $n$  and </p>
+
+$$
+\lim_{n \rightarrow \infty}E[|X_n - X|^r] = 0
+$$
+
+
+<p>Relations:</p>
+
+$$
+\left(X_n\stackrel {\text{a.s.}}{\rightarrow} X\right) \Rightarrow\left(X_n\stackrel P{\rightarrow} X\right) \Rightarrow \left(X_n\stackrel D{\rightarrow} X\right) \\
+\left(X_n\stackrel {r}{\rightarrow} X\right) \Rightarrow\left(X_n\stackrel P{\rightarrow} X\right) \Rightarrow \left(X_n\stackrel D{\rightarrow} X\right) \\
+\forall r\ge s\ge 1, \left(X_n\stackrel {r}{\rightarrow} X\right) \Rightarrow\left(X_n\stackrel s{\rightarrow} X\right)
+$$
+
+
+<p>The converse assertions fail in general!</p>
+<p>The relation between “almost surely” and “in r-th mean” is complicated. There exist sequences which converge almost surely but<br>not in mean, and which converge in mean but not almost surely!</p>
+<h2 id="Central-Limit-Theorem"><a href="#Central-Limit-Theorem" class="headerlink" title="Central Limit Theorem"></a>Central Limit Theorem</h2><h3 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h3><p>Let  $X_1, X_2, \dots$  be i.i.d. RVs with mean  $\mu$  and variance  $\sigma^2$ . Let </p>
+
+$$
+Z_n = \frac{X_1 + X_2 + \dotsb + X_n - n\mu}{\sigma\sqrt{n}}
+$$
+
+
+<p>Then</p>
+
+$$
+\lim_{n\rightarrow \infty}P(Z_n\le z) = \Phi (z) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^z e^{-\frac{x^2}{2}}\mathrm dx
+$$
+
+
+<p>CDF of  $Z_n$  converges to normal CDF(converge in distribution)</p>
+<h3 id="Normal-Approximation-Based-on-the-Central-Limit-Theorem"><a href="#Normal-Approximation-Based-on-the-Central-Limit-Theorem" class="headerlink" title="Normal Approximation Based on the Central Limit Theorem"></a>Normal Approximation Based on the Central Limit Theorem</h3><p>Let  $S_n = X_1 + \dotsb + X_n$ , where  $X_i$  are  $\text{i.i.d.}$  RVs with mean  $\mu$  and variance  $\sigma^2$ . If  $n$  is large, the probability  $P(S_n ≤ c)$  can be approximated by<br>treating  $S_n$  as if it were normal, according to the following procedure.</p>
+<ol>
+<li>Calculate the mean  $n\mu$  and the variance  $n\sigma^2$  of  $S_n$ </li>
+<li>Calculate the normalinzd value  $z = (c - n\mu)/(\sigma\sqrt{n})$ </li>
+<li>Use the approxmation</li>
+</ol>
+
+$$
+    P(S_n \le c)  \approx \Phi(z)
+$$
+
+
+<p>where  $\Phi(z)$  is available from the standard normal CDF.</p>
+<h3 id="Proof"><a href="#Proof" class="headerlink" title="Proof"></a>Proof</h3><p>Suppose that  $X_1, X_2, \dots$  has mean zero.</p>
+
+$$
+\begin{align*}
+M_{Z_n}(s) &= E[e^{sZ_n}]\\
+&=E\left[\exp\left(\frac{s}{\sigma\sqrt{n}}\sum_{i = 1}^n X_i\right)\right]\\
+&=\prod_{i = 1}^n E[e^{\frac{s}{\sigma\sqrt{n}}X_i}]\\
+&=\prod_{i = 1}^n M_{X_i}\left(\frac{s}{\sigma\sqrt{n}}\right)\\
+&=\left(M_{X}\left(\frac{s}{\sigma\sqrt{n}}\right)\right)^n\\
+\end{align*}
+$$
+
+
+<p>Suppose that the transform  $M_X(s)$  has a second order Taylor series expansion around  $s=0$ ,</p>
+
+$$
+M_X(s) = a + bs + cs^2 + o(s^2)
+$$
+
+
+<p>where  $a = M_X(0) = 1, b = M_X'(0) = E[X] = 0, c = \frac{1}{2}M_X''(0) = \frac{\sigma^2}{2}$ </p>
+<p>Then</p>
+
+$$
+M_{Z_n}(s) = \left(1 + \frac{s^2}{2n} + o\left(\frac{s^2}{n}\right)\right)^n
+$$
+
+
+<p>As  $n\rightarrow \infty$ , </p>
+
+$$
+\lim_{n\rightarrow \infty}M_{Z_n}(s) = \lim_{n\rightarrow \infty}\left(1 + \frac{s^2}{2n} + o\left(\frac{s^2}{n}\right)\right)^n = e^{\frac{s^2}{2}}
+$$
+
+
+<p>Approxmation on binomial:</p>
+<p>(De Moivre-Laplace Approxmation to the Binomial)</p>
+
+$$
+P(k \le S_n \le l) = P\left(\frac{k - np}{\sqrt{np(1-p)}} \le \frac{S_n - np}{\sqrt{np(1 - p)}} \le \frac{l - np}{\sqrt{np(1 - p)}}\right)\\
+\approx \Phi\left(\frac{l - np}{\sqrt{np(1 - p)}}\right) - \Phi\left(\frac{k - np}{\sqrt{np(1 - p)}}\right)
+$$
+
+
+<h2 id="The-Strong-Law-of-Large-Numbers"><a href="#The-Strong-Law-of-Large-Numbers" class="headerlink" title="The Strong Law of Large Numbers"></a>The Strong Law of Large Numbers</h2><h3 id="Theorem-1"><a href="#Theorem-1" class="headerlink" title="Theorem"></a>Theorem</h3><p>Let  $X_1, X_2, \dots$  be i.i.d. RVs with mean  $\mu$ .</p>
+
+$$
+P(\lim_{n \rightarrow\infty}\frac{X_1 + \dots + X_n}{n} = \mu) = 1.
+$$
+
+
+<h2 id="Borel-Cantelli-lemma-amp-Bernoulli-Process"><a href="#Borel-Cantelli-lemma-amp-Bernoulli-Process" class="headerlink" title="Borel-Cantelli lemma &amp; Bernoulli Process"></a>Borel-Cantelli lemma &amp; Bernoulli Process</h2><h3 id="Limit-of-set-sequence"><a href="#Limit-of-set-sequence" class="headerlink" title="Limit of set sequence"></a>Limit of set sequence</h3>
+$$
+\limsup_n A_n = \bigcap_{n = 1}^\infty \bigcup_{k = n}^\infty A_k\\
+\liminf_n A_n = \bigcup_{n = 1}^\infty \bigcap_{k = n}^\infty A_k
+$$
+
+
+<p>If upper limit equals to lower limit, the limit of set sequence exists.</p>
+
+$$
+\limsup_n A_n \supseteq \liminf_n A_n\\
+\limsup_n A_n = \liminf_n A_n = \lim_n A_n
+$$
+
+
+<p>Upper limit can also be denoted as</p>
+
+$$
+\limsup_n A_n = \{\omega: \omega \in A_n, \text{i.o.}\} = \lbrace A_n, \text{i.o.}\rbrace
+$$
+
+
+<h3 id="Borel-Cantelli-Lemma"><a href="#Borel-Cantelli-Lemma" class="headerlink" title="Borel-Cantelli Lemma"></a>Borel-Cantelli Lemma</h3><p>Let  $\lbrace A_n, n = 1, 2, \dotsb\rbrace$  be a sequence of events, then</p>
+
+$$
+\sum_{n = 1}^\infty P(A_n)\lt \infty \xRightarrow{} P(A_n, \text{i.o.}) = 0
+$$
+
+
+<p>Let  $\lbrace A_n, n = 1, 2, \dotsb\rbrace$  be a sequence of <strong>independent</strong> events, then</p>
+
+$$
+\sum_{n = 1}^\infty P(A_n) = \infty \xRightarrow{} P(A_n, \text{i.o.}) = 1
+$$
+
+
+<h3 id="Stochastic-process"><a href="#Stochastic-process" class="headerlink" title="Stochastic process"></a>Stochastic process</h3><p>A stochastic process is a mathematical model of a probabilistic experiment that evolves in time and generates a sequence of<br>numerical values.</p>
+<ul>
+<li>Bernoulli process(memoryless, discrete time)</li>
+<li>Poisson process(memoryless, continuous time)</li>
+</ul>
+<h3 id="The-Bernoulli-Process"><a href="#The-Bernoulli-Process" class="headerlink" title="The Bernoulli Process"></a><strong>The Bernoulli Process</strong></h3><p>is a sequence of independent Bernoulli trials, each with probability of success  $p$ .</p>
+
+$$
+P(\text{success}) = P(X_i = 1) = p\\
+P(\text{failure}) = P(X_i = 0) = 1 - p
+$$
+
+
+<p><strong>Independence property</strong>: For any given time  $n$ , the sequence of  $X_{n + 1}, X_{n + 2}, \dots$  is also a Bernoulli process, and is independent from  $X_1, \dots, X_n$ </p>
+<p><strong>Memoryless property</strong>: Let  $n$  be a given time and let  $\overline T$  be the time of the first success after<br>time  $n$ . Then  $\overline T − n$  has a geometric distribution with parameter  $p$ ,<br>and is independent of the RVs  $X_1, \dots , X_n$ .</p>
+
+$$
+P(\overline T - n = t | \overline T \gt n) = (1 - p)^{t - 1}p = P(T = t)
+$$
+
+
+<p><strong>Interarrival times</strong></p>
+<p>Denote the  $k$ th success as  $Y_k$ , the  $k$ th interarrival time as  $T_k$ .</p>
+
+$$
+T_1 = Y_1, T_k = Y_k - Y_{k - 1}, k = 2, 3, \dots
+$$
+
+
+<p>represents the number of trials following the  $(k - 1)$ th success until the next success.</p>
+<p>Note that</p>
+
+$$
+Y_k = T_1 + T_2 + \dotsb + T_k
+$$
+
+
+<p>Alternative description of the Bernoulli process: </p>
+<ul>
+<li>Start with a sequence of independent geometric RVs  $T_1, T_2, \dots$  with common parameter p, and let these stand for the interarrival times.</li>
+<li>Record a success at times  $T_1$ ,  $T_1 + T_2$ , etc.</li>
+</ul>
+
+$$
+E[Y_k] = \frac{k}{p}\\
+\text{var}(Y_k) = \frac{k(1 - p)}{p^2}
+$$
+
+
+
+$$
+p_{Y_k}(t) = \binom{t - 1}{k - 1}p^k(1 - p)^{t - k}
+$$
+
+
+<p><strong>Splitting of a Bernoulli process</strong></p>
+<p>Whenever there is an arrival, we choose to either keep it (with probability  $q$ ), or to discard it (with probability  $1 − q$ ).</p>
+<p>Both the process of arrivals that are kept and the process of discarded arrivals are Bernoulli processes, with success probability  $pq$  and  $p(1 − q)$ , respectively, at each time.</p>
+<p><strong>Merging of a Bernoulli process</strong></p>
+<p>In a reverse situation, we start with two independent Bernoulli processes (with parameters  $p$  and  $q$  respectively). An arrival is<br>recorded in the merged process if and only if there is an arrival in at least one of the two original processes.</p>
+<p>The merged process is Bernoulli, with success probability  $p+q−pq$  at each time step.</p>
+<h2 id="The-Poisson-Process"><a href="#The-Poisson-Process" class="headerlink" title="The Poisson Process"></a>The Poisson Process</h2><h3 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h3><p>An arrival process is called a Poisson process with rate  $λ$  if it has the following properties:</p>
+<p><strong>Time homogenity</strong></p>
+
+$$
+P(k, \tau) = P(k \text{ arrivals in interval of duration }\tau)
+$$
+
+
+<p><strong>Independence</strong></p>
+<p>Numbers of arrivals in disjoint time intervals are independent.</p>
+<p><strong>Small interval probabilities</strong></p>
+
+$$
+\begin{cases}
+    1 - \lambda\tau + o(\tau), & \text{if } k = 0,\\
+    \lambda\tau + o_1(\tau), & \text{if } k = 1,\\
+    o_k(\tau), & \text{if } k &gt; 1.
+\end{cases}
+$$
+
+
+<h3 id="Bernoulli-x2F-Poisson-Relation"><a href="#Bernoulli-x2F-Poisson-Relation" class="headerlink" title="Bernoulli&#x2F;Poisson Relation"></a>Bernoulli&#x2F;Poisson Relation</h3><p>In a short time interval  $\delta$ </p>
+
+$$
+n = t / \delta\\
+p = \lambda\delta\\
+np = \lambda t
+$$
+
+
+<p>For binomial PMF  $p_S(k;n,p)$ ,</p>
+
+$$
+\lim_{n\rightarrow \infty}p_S(k;n, p) = \lim_{n\rightarrow\infty}\frac{n!}{(n - k)!k!}p^k(1 - p)^{n - k} = \frac{(\lambda t)^k}{k!}e^{-\lambda t} = P(k, t)
+$$
+
+
+<h3 id="PMF-of-Number-of-Arrivals"><a href="#PMF-of-Number-of-Arrivals" class="headerlink" title="PMF of Number of Arrivals "></a>PMF of Number of Arrivals  $N$ </h3>
+$$
+P(k, \tau) = \frac{(\lambda\tau)^ke^{-\lambda\tau}}{k!}
+$$
+
+
+
+$$
+E[N_t] = \lambda t\\
+\text{var}(N_t) = \lambda t
+$$
+
+
+<h3 id="Time-of-the-first-arrival"><a href="#Time-of-the-first-arrival" class="headerlink" title="Time  of the first arrival"></a>Time  $T$  of the first arrival</h3>
+$$
+F_T(t) = P(T \le t) = 1 - P(T \gt t) = 1 - e^{-\lambda t}, t\ge 0\\
+f_T(t) = \lambda e^{-\lambda t}, t\ge 0
+$$
+
+
+<p><strong>Memoryless property</strong> The  time to next arrival is independent of the past.</p>
+<h3 id="Interarrival-times"><a href="#Interarrival-times" class="headerlink" title="Interarrival times"></a>Interarrival times</h3><p>We also denote the time of the kth success as  $Y_k$ , and denote the<br>kth interarrival time as  $T_k$ . That is,</p>
+
+$$
+T_1 = Y_1, T_k = Y_k - Y_{k - 1}, k = 2, 3, \dots
+$$
+
+
+<p>Note that</p>
+
+$$
+Y_k = T_1 + T_2 + \dotsb + T_k
+$$
+
+
+
+$$
+f_{Y_k}(y) = \frac{\lambda^ky^{k-1}e^{-\lambda y}}{(k - 1)!}, y\ge 0
+$$
+
+
+<h3 id="Merging-Poisson-Processes"><a href="#Merging-Poisson-Processes" class="headerlink" title="Merging Poisson Processes"></a>Merging Poisson Processes</h3><p><img src="/../images/prob/L14_1.jpg" loading="lazy"></p>
+
+$$
+P(\text{Arrival is red} | \text{1 arrival})\approx \frac{\lambda_1\delta}{(\lambda_1 + \lambda_2) \delta}
+$$
+
+
+<p><img src="/../images/prob/L15_1.jpg" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2023/02/20/Introduction-to-Probability/" title="Introduction-to-Probability">https://blitherboom812.github.io/2023/02/20/Introduction-to-Probability/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/02/22/Signal-and-Systems/" rel="prev" title="Signals and Systems"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Signals and Systems</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/01/21/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="CSAPP学习笔记"><span class="post-nav-text">CSAPP学习笔记</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

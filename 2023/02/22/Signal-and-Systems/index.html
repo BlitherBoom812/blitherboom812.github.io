@@ -1,0 +1,2683 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Signals and Systems | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="March 15 BasicClassificationDeterministic &amp; random Periodic&#x2F;non-periodic Continuous&#x2F;Discrete(time) Analog&#x2F;Digital(Amplitude &amp; time) OperationsShifting Reflection Scaling Diffren">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Signals and Systems">
+<meta property="og:url" content="https://blitherboom812.github.io/2023/02/22/Signal-and-Systems/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="March 15 BasicClassificationDeterministic &amp; random Periodic&#x2F;non-periodic Continuous&#x2F;Discrete(time) Analog&#x2F;Digital(Amplitude &amp; time) OperationsShifting Reflection Scaling Diffren">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec2_.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec2_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec2_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec3_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec3_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec7_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec7_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec7_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec7_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec9_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec9_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec9_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec9_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec9_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec9_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec10_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec11_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec11_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec11_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec12_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec13_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec14_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec14_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec14_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec14_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec14_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec14_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec14_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec15_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec15_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec15_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec15_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec15_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec15_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec16_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec16_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec16_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec16_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec16_.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec17_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec18_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec18_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec18_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec18_34jpg.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec18_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec19_1jpg.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec19_2jpg.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec19_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec20_8.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/digital/lec_11_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec21_4.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec21_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec21_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec21_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec21_9.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_11.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_12.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_13.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_14.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_15.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_16.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_17.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_18.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_19.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec22_20.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/ss/lec23_1.jpg">
+<meta property="article:published_time" content="2023-02-22T01:46:36.000Z">
+<meta property="article:modified_time" content="2023-06-08T11:28:13.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/ss/lec2_.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic"><span class="toc-number">1.</span> <span class="toc-text">Basic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Classification"><span class="toc-number">1.1.</span> <span class="toc-text">Classification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Operations"><span class="toc-number">1.2.</span> <span class="toc-text">Operations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Singularity-Signals"><span class="toc-number">1.3.</span> <span class="toc-text">Singularity Signals</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Unit-ramp-function"><span class="toc-number">1.3.1.</span> <span class="toc-text">Unit ramp function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unit-step-function"><span class="toc-number">1.3.2.</span> <span class="toc-text">Unit step function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Rectangular-pulse"><span class="toc-number">1.3.3.</span> <span class="toc-text">Rectangular pulse</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sign-function"><span class="toc-number">1.3.4.</span> <span class="toc-text">Sign function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unit-impulse-function"><span class="toc-number">1.3.5.</span> <span class="toc-text">Unit impulse function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Impulse-doublet-function"><span class="toc-number">1.3.6.</span> <span class="toc-text">Impulse doublet function</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Signal-Decomposition"><span class="toc-number">1.4.</span> <span class="toc-text">Signal Decomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Pulse-Component"><span class="toc-number">1.4.1.</span> <span class="toc-text">Pulse Component</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-modeling-and-Classification"><span class="toc-number">1.5.</span> <span class="toc-text">System modeling and Classification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-classification"><span class="toc-number">1.6.</span> <span class="toc-text">System classification</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linear-or-Non-linear"><span class="toc-number">1.6.1.</span> <span class="toc-text">Linear or Non-linear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Time-variant-or-Time-invariant"><span class="toc-number">1.6.2.</span> <span class="toc-text">Time-variant or Time-invariant</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory-or-Memoryless"><span class="toc-number">1.6.3.</span> <span class="toc-text">Memory or Memoryless</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Continuous-or-Discrete"><span class="toc-number">1.6.4.</span> <span class="toc-text">Continuous or Discrete</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lumped-or-Distributed-Parameter"><span class="toc-number">1.6.5.</span> <span class="toc-text">Lumped- or Distributed-Parameter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Causal-or-Non-Causal"><span class="toc-number">1.6.6.</span> <span class="toc-text">Causal or Non-Causal</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reversible-or-irreversible"><span class="toc-number">1.6.7.</span> <span class="toc-text">Reversible or irreversible</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LTI-System"><span class="toc-number">1.7.</span> <span class="toc-text">LTI System</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linearity"><span class="toc-number">1.7.1.</span> <span class="toc-text">Linearity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Time-Invariant"><span class="toc-number">1.7.2.</span> <span class="toc-text">Time-Invariant</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Time-Domain-TD-Analysis"><span class="toc-number">2.</span> <span class="toc-text">Time-Domain(TD) Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Determining-Coefficients"><span class="toc-number">2.1.</span> <span class="toc-text">Determining Coefficients</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Zero-input-and-state-Responses"><span class="toc-number">2.1.1.</span> <span class="toc-text">Zero-input and -state Responses</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Impulse-and-Step-Responses"><span class="toc-number">2.2.</span> <span class="toc-text">Impulse and Step Responses</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolution"><span class="toc-number">2.3.</span> <span class="toc-text">Convolution</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fourier-Transform"><span class="toc-number">3.</span> <span class="toc-text">Fourier Transform</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fourier-Series"><span class="toc-number">3.1.</span> <span class="toc-text">Fourier Series</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FS-for-typical-periodic-signals"><span class="toc-number">3.2.</span> <span class="toc-text">FS for typical periodic signals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fourier-Transform-1"><span class="toc-number">3.3.</span> <span class="toc-text">Fourier Transform</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FT-for-typical-aperiodic-signals"><span class="toc-number">3.4.</span> <span class="toc-text">FT for typical aperiodic signals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FT-on-impulse-and-step-functions"><span class="toc-number">3.5.</span> <span class="toc-text">FT on impulse and step functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Properties-of-FT"><span class="toc-number">3.6.</span> <span class="toc-text">Properties of FT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolution-theorem"><span class="toc-number">3.7.</span> <span class="toc-text">Convolution theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FT-for-Periodic-Signals"><span class="toc-number">3.8.</span> <span class="toc-text">FT for Periodic Signals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FT-for-periodically-sampled-signals"><span class="toc-number">3.9.</span> <span class="toc-text">FT for periodically sampled signals</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#L-Transform"><span class="toc-number">4.</span> <span class="toc-text">L Transform</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Unilateral-L-transform"><span class="toc-number">4.1.</span> <span class="toc-text">Unilateral L-transform</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comman-LT-Pairs"><span class="toc-number">4.2.</span> <span class="toc-text">Comman LT Pairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Properties-of-LT"><span class="toc-number">4.3.</span> <span class="toc-text">Properties of LT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Applications"><span class="toc-number">4.4.</span> <span class="toc-text">Applications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-Function"><span class="toc-number">4.5.</span> <span class="toc-text">System Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TD-characteristics-by-0-point-distribution"><span class="toc-number">4.6.</span> <span class="toc-text">TD characteristics by 0-point distribution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stability-of-Linear-System"><span class="toc-number">4.7.</span> <span class="toc-text">Stability of Linear System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Two-sided-Bilateral-LT"><span class="toc-number">4.8.</span> <span class="toc-text">Two-sided (Bilateral) LT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extra-Attention"><span class="toc-number">4.9.</span> <span class="toc-text">Extra Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FT-in-Telecom-Systems"><span class="toc-number">5.</span> <span class="toc-text">FT in Telecom. Systems</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Filter"><span class="toc-number">5.1.</span> <span class="toc-text">Filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modulation-and-demodulation"><span class="toc-number">5.2.</span> <span class="toc-text">Modulation and demodulation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Applications-of-BPF"><span class="toc-number">5.3.</span> <span class="toc-text">Applications of BPF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recover-Continuous-Time-signal-from-its-Samples"><span class="toc-number">5.4.</span> <span class="toc-text">Recover Continuous Time signal from its Samples</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mulitplexing-FDM-and-TDM"><span class="toc-number">5.5.</span> <span class="toc-text">Mulitplexing FDM and TDM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector-Analysis-of-Signals"><span class="toc-number">6.</span> <span class="toc-text">Vector Analysis of Signals</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vector-Space"><span class="toc-number">6.1.</span> <span class="toc-text">Vector Space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Objective-for-singal-decomposition"><span class="toc-number">6.2.</span> <span class="toc-text">Objective for singal decomposition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basics"><span class="toc-number">6.3.</span> <span class="toc-text">Basics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Complete-Orthogonal-Function-and-Parseval%E2%80%99s-Theorem"><span class="toc-number">6.4.</span> <span class="toc-text">Complete Orthogonal Function and Parseval’s Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Correlation"><span class="toc-number">6.5.</span> <span class="toc-text">Correlation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Energy-amp-Power-Spectral-Density"><span class="toc-number">6.6.</span> <span class="toc-text">Energy &amp; Power Spectral Density</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESD-x2F-PSD-of-the-System-Response"><span class="toc-number">6.7.</span> <span class="toc-text">ESD&#x2F;PSD of the System Response</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Match-Filters"><span class="toc-number">6.8.</span> <span class="toc-text">Match Filters</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Discrete-time-signals"><span class="toc-number">7.</span> <span class="toc-text">Discrete time signals</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sequence-operation"><span class="toc-number">7.1.</span> <span class="toc-text">Sequence operation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Typical-sequences"><span class="toc-number">7.2.</span> <span class="toc-text">Typical sequences</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Signal-Decomposition-1"><span class="toc-number">7.3.</span> <span class="toc-text">Signal Decomposition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Difference-equations"><span class="toc-number">7.4.</span> <span class="toc-text">Difference equations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zero-input-and-zero-state-responses"><span class="toc-number">7.5.</span> <span class="toc-text">Zero-input and zero-state responses</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Impulse-response-of-DT-systems"><span class="toc-number">7.6.</span> <span class="toc-text">Impulse response of DT systems</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolution-Sum"><span class="toc-number">7.7.</span> <span class="toc-text">Convolution Sum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Important-Concepts"><span class="toc-number">7.8.</span> <span class="toc-text">Important Concepts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Z-Transform"><span class="toc-number">7.9.</span> <span class="toc-text">Z-Transform</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mapping-of-ZT-and-LT"><span class="toc-number">7.10.</span> <span class="toc-text">Mapping of ZT and LT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solving-difference-equation-by-Z-T"><span class="toc-number">7.11.</span> <span class="toc-text">Solving difference equation by Z-T</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-function-of-DT-system"><span class="toc-number">7.12.</span> <span class="toc-text">System function of DT system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Discrete-time-Fourier-Transform-DTFT"><span class="toc-number">7.13.</span> <span class="toc-text">Discrete-time Fourier Transform(DTFT)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Frequency-Response-of-DT-system"><span class="toc-number">7.14.</span> <span class="toc-text">Frequency Response of DT system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analog-and-digital-Filter"><span class="toc-number">7.15.</span> <span class="toc-text">Analog and digital Filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feedback-System-Signal-Flow-Graphs"><span class="toc-number">7.16.</span> <span class="toc-text">Feedback System: Signal Flow Graphs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#State-variable-analysis-of-system"><span class="toc-number">8.</span> <span class="toc-text">State-variable analysis of system</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#General-form-and-setup-method-CT"><span class="toc-number">8.1.</span> <span class="toc-text">General form and setup method (CT)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solving-CT-system%E2%80%99s-state-equations"><span class="toc-number">8.2.</span> <span class="toc-text">Solving CT system’s state equations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#That-for-DT-system"><span class="toc-number">8.3.</span> <span class="toc-text">That for DT system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-Transform-on-state-vectors"><span class="toc-number">8.4.</span> <span class="toc-text">Linear Transform on state vectors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Controllable-amp-Observable"><span class="toc-number">8.5.</span> <span class="toc-text">Controllable &amp; Observable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDMA"><span class="toc-number">9.</span> <span class="toc-text">CDMA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">9.1.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Code-design"><span class="toc-number">9.2.</span> <span class="toc-text">Code design</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2023/02/22/Signal-and-Systems/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Signals and Systems</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2023-02-22 09:46:36" itemprop="dateCreated datePublished" datetime="2023-02-22T09:46:36+08:00">2023-02-22</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2023-06-08 19:28:13" itemprop="dateModified" datetime="2023-06-08T19:28:13+08:00">2023-06-08</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>March 15</p>
+<h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>Deterministic &amp; random</p>
+<p>Periodic&#x2F;non-periodic</p>
+<p>Continuous&#x2F;Discrete(time)</p>
+<p>Analog&#x2F;Digital(Amplitude &amp; time)</p>
+<h3 id="Operations"><a href="#Operations" class="headerlink" title="Operations"></a>Operations</h3><p>Shifting</p>
+<p>Reflection</p>
+<p>Scaling</p>
+<p>Diffrential</p>
+<p>Integral</p>
+<p>Addition</p>
+<p>Multiplication</p>
+<p>Convolution</p>
+
+$$
+f_1(t) * f_2(t) = \int_{-\infty}^{\infty}f_1(\tau)f_2(t-\tau)\mathrm d\tau
+$$
+
+
+<h3 id="Singularity-Signals"><a href="#Singularity-Signals" class="headerlink" title="Singularity Signals"></a>Singularity Signals</h3><h4 id="Unit-ramp-function"><a href="#Unit-ramp-function" class="headerlink" title="Unit ramp function"></a>Unit ramp function</h4>
+$$
+R(t) = 0, t\lt 0; t, t&gt;0
+$$
+
+
+<h4 id="Unit-step-function"><a href="#Unit-step-function" class="headerlink" title="Unit step function"></a>Unit step function</h4>
+$$
+u(t) = 0, t&lt;0;1/2, t=0;1, t&gt;0
+$$
+
+
+<h4 id="Rectangular-pulse"><a href="#Rectangular-pulse" class="headerlink" title="Rectangular pulse"></a>Rectangular pulse</h4>
+$$
+u(t) - u(t-t_0)
+$$
+
+
+<h4 id="Sign-function"><a href="#Sign-function" class="headerlink" title="Sign function"></a>Sign function</h4>
+$$
+sgn(t) = 1, t&gt;0;-1, t&lt;0
+$$
+
+<p>define  $sgn(0)=0$ , then  $sgn(t)=2u(t)-1$ </p>
+<h4 id="Unit-impulse-function"><a href="#Unit-impulse-function" class="headerlink" title="Unit impulse function"></a>Unit impulse function</h4><p>Dirac definition</p>
+
+$$
+\int_{-\infty}^{\infty}\delta(t)\mathrm dt=1\\
+\delta(t)=0(t\ne 0)
+$$
+
+
+$$
+\delta(t)=\lim_{\tau \rightarrow0}\left[U(t+\frac\tau2)-U(t-\frac \tau 2)\right]
+$$
+
+
+
+$$
+\int_{-\infty}^{\infty}\delta(t)f(t)=f(0)\\
+\int_{-\infty}^{\infty}\delta(t - t_0)f(t)=f(t_0)\\
+\delta(t)=\delta(-t)\\
+\frac{d}{dt}u(t)=\delta(t)
+$$
+
+
+<h4 id="Impulse-doublet-function"><a href="#Impulse-doublet-function" class="headerlink" title="Impulse doublet function"></a>Impulse doublet function</h4> $\delta^\prime(t)$ 
+<p>Double impulses at t&#x3D;0 which are mirror-imaged with their amplitude of infinite. </p>
+
+$$
+\int^{\infty}_{-\infty}\delta^\prime(t)\mathrm dt=0\\
+\int^{\infty}_{-\infty}f(t)\delta^\prime(t)\mathrm dt=-f^{\prime}(0)\\
+\text{shifted:}\int^{\infty}_{-\infty}f(t)\delta^\prime(t-t_0)\mathrm dt=-f^{\prime}(t_0)\\
+$$
+
+<p><img src="/../images/ss/lec2_.jpg" loading="lazy"></p>
+<h3 id="Signal-Decomposition"><a href="#Signal-Decomposition" class="headerlink" title="Signal Decomposition"></a>Signal Decomposition</h3>
+$$
+f(t) = f_D+f_A(t)\\
+f(t)=f_e(t)+f_o(t)\\
+f(t)=f_r(t)+jf_i(t)\\
+f_r(t)=\frac{1}{2}\left[f(t)+f^*(t)\right]\\
+f_i(t)=\frac{1}{2}\left[f(t)-f^*(t)\right]
+$$
+
+
+<h4 id="Pulse-Component"><a href="#Pulse-Component" class="headerlink" title="Pulse Component"></a>Pulse Component</h4>
+$$
+f(t)=\int_{-\infty}^{\infty}f(t_1)\delta(t-t_1)\mathrm dt_1
+$$
+
+
+<p>We also have orthogonal function decomposition(Chap.3, Chap.6).</p>
+<h3 id="System-modeling-and-Classification"><a href="#System-modeling-and-Classification" class="headerlink" title="System modeling and Classification"></a>System modeling and Classification</h3><p>System model can be represented by math equation(including input-output description and state variables or state equation) graphic symbol and block diagrams.</p>
+<p>We use the input-output description mostly. If controling something internal is needed, state euqtion is useful.</p>
+<p>Block diagram: </p>
+<p><img src="/../images/ss/lec2_2.jpg" loading="lazy"><br><img src="/../images/ss/lec2_3.jpg" loading="lazy"></p>
+<h3 id="System-classification"><a href="#System-classification" class="headerlink" title="System classification"></a>System classification</h3><h4 id="Linear-or-Non-linear"><a href="#Linear-or-Non-linear" class="headerlink" title="Linear or Non-linear"></a>Linear or Non-linear</h4>
+$$
+e_1(t)\rightarrow r_1(t),
+e_2(t)\rightarrow r_2(t)\Rightarrow\\
+a_1e_1(t)+a_2e_2(t)\rightarrow a_1r_1(t)+a_2r_2(t)
+$$
+
+
+<h4 id="Time-variant-or-Time-invariant"><a href="#Time-variant-or-Time-invariant" class="headerlink" title="Time-variant or Time-invariant"></a>Time-variant or Time-invariant</h4><h4 id="Memory-or-Memoryless"><a href="#Memory-or-Memoryless" class="headerlink" title="Memory or Memoryless"></a>Memory or Memoryless</h4><p>with memory: dynamic system, differential equation</p>
+<p>without memory: instant system, algebraic equation</p>
+<h4 id="Continuous-or-Discrete"><a href="#Continuous-or-Discrete" class="headerlink" title="Continuous or Discrete"></a>Continuous or Discrete</h4><p>Continuous  Differential equation</p>
+<p>Discrete  Difference equation</p>
+<h4 id="Lumped-or-Distributed-Parameter"><a href="#Lumped-or-Distributed-Parameter" class="headerlink" title="Lumped- or Distributed-Parameter"></a>Lumped- or Distributed-Parameter</h4><p>Lumped: constant coefficient differential equation</p>
+<p>Distributed: partial equation</p>
+<h4 id="Causal-or-Non-Causal"><a href="#Causal-or-Non-Causal" class="headerlink" title="Causal or Non-Causal"></a>Causal or Non-Causal</h4><p>when  $t&lt;0, e(t)=0 \Rightarrow t&lt;0, r(t)=0$  Generic definition?</p>
+<p>the future state cannot have effect on now state. The state of causal system can only be determined by now and past states.</p>
+<h4 id="Reversible-or-irreversible"><a href="#Reversible-or-irreversible" class="headerlink" title="Reversible or irreversible"></a>Reversible or irreversible</h4><p>different input to different output, otherwise irreversible.</p>
+<h3 id="LTI-System"><a href="#LTI-System" class="headerlink" title="LTI System"></a>LTI System</h3><h4 id="Linearity"><a href="#Linearity" class="headerlink" title="Linearity"></a>Linearity</h4><p>Linearity leads to superposition and homogeneity.</p>
+<h4 id="Time-Invariant"><a href="#Time-Invariant" class="headerlink" title="Time-Invariant"></a>Time-Invariant</h4><p>a time shift in the input results in a same time shift in the output.</p>
+
+$$
+e(t)\rightarrow r(t)\Rightarrow e(t-t_0)\rightarrow r(t-t_0)\\
+\lim_{\Delta t\rightarrow 0}\frac{e(t)-e(t-\Delta t)}{\Delta t}\rightarrow \lim_{\Delta t\rightarrow 0}\frac{r(t)-r(t-\Delta t)}{\Delta t}\\
+\frac{\mathrm de(t)}{dt}\rightarrow \frac{\mathrm dr(t)}{dt}
+$$
+
+
+<p>If every coefficient is time independent, the system is time invariant.</p>
+<h2 id="Time-Domain-TD-Analysis"><a href="#Time-Domain-TD-Analysis" class="headerlink" title="Time-Domain(TD) Analysis"></a>Time-Domain(TD) Analysis</h2>
+$$
+C_0\frac{d^nr(t)}{dt^n}+C_1\frac{d^{n-1}r(t)}{dt^{n-1}} + ... + C_nr(t)\\
+=E_0\frac{d^me(t)}{dt^m}+E_1\frac{d^{m-1}e(t)}{dt^{m-1}}+...+E_me(t)
+$$
+
+
+<p><strong>Three Steps</strong></p>
+<ul>
+<li>Homogeneous</li>
+<li>Particular</li>
+<li>Calculation on coefficients</li>
+</ul>
+<h3 id="Determining-Coefficients"><a href="#Determining-Coefficients" class="headerlink" title="Determining Coefficients"></a>Determining Coefficients</h3><p>If functions are continuous, we can get their boundary conditions by determining the derivatives.</p>
+<p>Then the coefficients can be solved by multipling the inverse of Vandermonde matrix with the boundary condition matrix.</p>
+<h4 id="Zero-input-and-state-Responses"><a href="#Zero-input-and-state-Responses" class="headerlink" title="Zero-input and -state Responses"></a>Zero-input and -state Responses</h4><p><strong>Zero-input response</strong> The response caused by the initial state (i.e., energy originally stored in the system), and it is denoted by  $r_{zi}(t)$ </p>
+<p><strong>Zero-state response</strong>  $r(0_-)\equiv 0$ , the response caused only by the external excitation and it is denoted by  $r_{zs}(t)$ </p>
+<p><img src="/../images/ss/lec3_1.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec3_2.jpg" loading="lazy"></p>
+<p>The combination of zero-input response and the zero-state response is not necessarily linear, since the existence of constant. If one of them vanishes, the other is linear.</p>
+<h3 id="Impulse-and-Step-Responses"><a href="#Impulse-and-Step-Responses" class="headerlink" title="Impulse and Step Responses"></a>Impulse and Step Responses</h3><p><strong>Impulse Response</strong> the zero-state response  $h(t)$  to  $\delta (t)$ , which can be equalized to the initial condition.</p>
+<p>Note: normally  $n&gt;m$ .</p>
+<p><strong>Unit Step Response</strong> The zero-state response  $g(t)$  to  $u(t)$ </p>
+<p>There might be a forced term in  $g(t)$ .</p>
+
+$$
+g(t) = \int_0^th(\tau)d\tau
+$$
+
+
+<h3 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h3><p>Zero-state required</p>
+
+$$
+e(t) = \int_{-\infty}^{\infty}e(\tau)\delta(t-\tau)\mathrm d\tau\\
+\Rightarrow r(t)=\int_{-\infty}^{\infty}e(\tau)h(t-\tau)\mathrm d\tau\\
+\Rightarrow r(t)=e(t)*h(t)
+$$
+
+
+<p>the definition of convoluiton:</p>
+
+$$
+f_1(t)*f_2(t)=\int_{-\infty}^{\infty}f_1(\tau)f_2(t-\tau)\mathrm d\tau
+$$
+
+
+<p><strong>Integral interval</strong>  $e(t)=0, \forall t&lt;0$ ,  $h(t)=0,\forall t&lt;0$ , so  $r(t)=\int_0^t{e(\tau)h(t-\tau)\mathrm d\tau}$ </p>
+<p>The condition for applying convolution:</p>
+<ul>
+<li>For linear system ONLY</li>
+<li>For time variant systems,  $h(t, \tau)$  means response at time  $t$  generated by the impulse at time  $\tau$ , then  $r(t)=\int_0^th(t,\tau)e(\tau)\mathrm d \tau$ ; for time-invariant system is a special case,  $h(t,\tau)=h(t-\tau)$ .</li>
+</ul>
+<p><strong>The Properties of Convolution</strong> The commutative property, the distributive property, the associative property</p>
+<p>Differential:</p>
+
+$$
+(f_1(t)*f_2(t))^\prime=f_1^\prime(t)*f_2(t)
+$$
+
+
+<p>Integral</p>
+
+$$
+\int f_1(t)*f_2(t)=f_1(t) * \int f_2(t)
+$$
+
+
+
+$$
+(f_1(t) * f_2(t))^{(i)}=f_1^{(j)}(t) * f_2^{(i-j)}(t)
+$$
+
+
+<p><strong>Convolution with  $\delta (t)$  or  $u(t)$ </strong></p>
+<p>(1)  $f(t) * \delta(t) = f(t)$ </p>
+<p>(2)  $f(t) * \delta(t - t_0) = f(t-t_0)$ </p>
+<p>(3)  $f(t) * u(t) = \int_{\infty}^{t}f(\tau)\mathrm d\tau$ </p>
+<p>(4)  $f(t) * \delta^\prime(t) = f^\prime(t)$ </p>
+<h2 id="Fourier-Transform"><a href="#Fourier-Transform" class="headerlink" title="Fourier Transform"></a>Fourier Transform</h2><h3 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h3><p>requirements:</p>
+<ul>
+<li>has finite number of discontinuities</li>
+<li>has finite number of maxima and minima</li>
+<li> $\int_{t_0}^{t_0+T_1} |f(t)|\mathrm dt &lt; \infty$ </li>
+</ul>
+
+$$
+\begin{align*}
+f(t)&=a_0+\sum_{n=1}^\infty \left[a_n\cos(n\omega_1)t + b_n\sin(n\omega_1t)\right]\\
+&=c_0 + \sum_{n=1}^\infty c_n\cos \left(n\omega_1t+\varphi_n \right)\\
+&=\sum_{n=-\infty}^{\infty}F_ne^{jn\omega_1 t}
+\end{align*}
+$$
+
+
+
+$$
+\begin{align*}
+    a_0&=\frac{1}{T_1}\int_{t_0}^{t_0+T_1}f(t)\mathrm dt=c_0\\
+    a_n&=\frac{2}{T_1}\int_{t_0}^{t_0+T_1}f(t)\cos(n\omega_1t)\mathrm dt\\
+    b_n&=\frac{2}{T_1}\int_{t_0}^{t_0+T_1}f(t)\sin(n\omega_1t)\mathrm dt\\
+    c_n&=\sqrt{a_n^2+b_n^2}\\
+    \varphi_n&=-\tg^{-1}\frac{b_n}{a_n}\\
+    F_n&=\frac 1{T_1}\int_{t_0}^{t_0+T_1}f(t)e^{-jn\omega_1t}\mathrm dt\\
+    &=\frac 12e^{j\varphi_n}\\
+    &=\frac 12(a_n-jb_n)
+\end{align*}
+$$
+
+
+<p><strong>note</strong> When  $b_n=0$ ,  $\varphi_n = a_n &gt; 0\ ?\ 0:\pi$ </p>
+<p>In the last part, the negative frequency is introduced for the convenience of the signal analysis. Therefore the amplitude is reduced to half.</p>
+<p><strong>FS for special functions</strong></p>
+<ol>
+<li>Even function  $c_n=a_n, \varphi_n = 0, F_n=F_{-n}=\frac 12 a_n$ </li>
+<li>Odd function  $a_0=0, a_n=0, \varphi_n=-\frac{\pi}{2}, F_n=F_{-n}=-\frac{1}{2}jb_n$ </li>
+<li>Half-wave Odd (odd harmonic) function,  $f(t)=-f\left(t\pm \frac{T_1}2{}\right)$ , contains only odd harmonics(both sine and cosine)</li>
+<li>Finite term series</li>
+</ol>
+<h3 id="FS-for-typical-periodic-signals"><a href="#FS-for-typical-periodic-signals" class="headerlink" title="FS for typical periodic signals"></a>FS for typical periodic signals</h3><p><strong>Periodic square wave</strong></p>
+
+$$
+f(t)=\frac{E\tau}{T_1}+\sum_{n=1}^{\infty}\frac{2E\tau}{T_1}\text{Sa}(\frac{n\omega_1\tau}{2})
+$$
+
+
+<ol>
+<li>Spectrum is discrete with frequency spacing  $\omega_1 = \frac{2\pi}{T_1}$ . When  $T_1 \rightarrow \infty$ , the spectrum will be continuous.</li>
+<li>Amplitude:  $\text{Sa}\left(\frac{n\pi\tau}{T_1}\right)$  or  $\text{Sa} \left(\frac{n\omega_1\tau}{2}\right)$ , cross zero when  $\omega_1 = \frac{2m\pi}{\tau}$ </li>
+<li>Non-zero FS coefficients of a aperiodic signal are infinite with most energy concentrated at low frequency components (within  $\left(-\frac{2\pi}{\tau},\frac{2\pi}{\tau}\right)$ ). Thus we define the bandwith  $B_{\omega} = \frac{2\pi}{\tau}$ </li>
+</ol>
+<p><strong>Periodic symmetric square wave</strong></p>
+<p>Since the spectrum crosses zero when  $\omega_1 = \frac{2m\pi}{\tau}$ , the even harmonic vanishes. Also the sine component vanishes.</p>
+
+$$
+c_n = \frac{2E\tau}{T_1}\left|\text{Sa}\left(\frac{n\omega_1\tau}{2}\right)\right|\\
+f(t) = \frac{2E}{\pi}\left[\cos(\omega_1t) - \frac{1}3\cos(3\omega_1t) + \frac{1}{5}\cos(5\omega_1t)-...\right]
+$$
+
+
+<p><strong>Periodic Serrated Pulse</strong></p>
+
+$$
+f(t) = \sum_{n = 1}^\infty \frac{E}{n\pi}(-1)^{n+1}\sin (n\omega_1t)
+$$
+
+
+<p><strong>Periodic Triangular Pulse</strong></p>
+
+$$
+f(t)=\frac E2 + \frac{4E}{\pi^2}\sum_{n=1}^\infty\frac{1}{n^2}\sin^2\left(\frac{n\pi}{2}\right)\cos(n\omega_1t)\\=\frac E2 + \frac{4E}{\pi^2}\sum_{n=1}^\infty\frac{1}{(2n-1)^2}\cos((2n-1)\omega_1t)
+$$
+
+
+<p><strong>consine of non-negative values</strong></p>
+
+$$
+f(t) = \frac E\pi - \frac{2E}{\pi}\sum_{n=1}^\infty\frac{1}{n^2-1}\cos(\frac {n\pi}2)\cos(n\omega_1t)
+$$
+
+
+<p><strong>cosine of absoulute values</strong></p>
+
+$$
+f(t) = \frac{2E}{\pi} + \frac{4E}{\pi}\sum_{n=1}^\infty (-1)^{n+1}\frac{1}{4n^2-1}\cos(2n\omega_0t)
+$$
+
+
+<p>其中 $\omega_0$  &#x3D;  $2\omega_1$ </p>
+<h3 id="Fourier-Transform-1"><a href="#Fourier-Transform-1" class="headerlink" title="Fourier Transform"></a>Fourier Transform</h3><p>The case where  $T_1\rightarrow \infty$ . Signal becomes aperiodic.</p>
+<p>Also,  $\omega_1\rightarrow 0$  results in the continuous frequency axis. For square wave the magnitude  $\frac{E\tau}{T_1}\rightarrow 0$ .</p>
+
+$$
+f(t) =\sum_{n=-\infty}^{\infty}F(n\omega_1)e^{jn\omega_1 t}\\
+F(n\omega_1) = \frac 1T_1\int_{-\frac {T_1}2}^{\frac {T_1}2}f(t)e^{-jn\omega_1t}\mathrm dt
+$$
+
+
+<p>We use spectrum density to replace spectrum, making the magnitude dropping to zero remain its meaning.</p>
+
+$$
+\frac{F(n\omega_1)}{\omega_1} = \frac{1}{2\pi}\int_{-\frac {T_1}2}^{\frac {T_1}2}f(t)e^{-jn\omega_1t}\mathrm dt\\
+F(\omega) = \lim_{\omega_1\rightarrow 0}\frac{2\pi F(n\omega_1)}{\omega_1}=\lim_{T_1\rightarrow \infty}\int_{-\frac {T_1}2}^{\frac {T_1}2}f(t)e^{-jn\omega_1t}\mathrm d t=\int_{-\infty}^\infty f(t)e^{-j\omega t}\mathrm d t\\
+f(t) = \sum_{n=-\infty}^{\infty}F(n\omega_1)\cdot \frac{1}{\omega_1}e^{jn\omega_1 t} \Delta(n\omega_1) = \frac{1}{2\pi}\int_{-\infty}^\infty F(\omega)e^{j\omega t}\mathrm d\omega
+$$
+
+
+
+$$
+F(\omega) = |F(\omega)|e^{j\varphi(\omega)}
+$$
+
+
+<p>The fourier transfrom is continuous waveform, where every frequency has no energy but energy density, used to analyse aperiodic function.</p>
+<p>Sufficient condition, but not necessary.</p>
+
+$$
+\int_{-\infty}^\infty |f(t)|\mathrm dt&lt;\infty
+$$
+
+
+<h3 id="FT-for-typical-aperiodic-signals"><a href="#FT-for-typical-aperiodic-signals" class="headerlink" title="FT for typical aperiodic signals"></a>FT for typical aperiodic signals</h3><p><strong>Rectangular pulses</strong></p>
+
+$$
+F(\omega) = \int_{-\tau/2}^{\tau/2} Ee^{-j\omega t}\mathrm dt = E\tau \text{Sa}\left(\frac{\omega \tau}{2}\right)
+$$
+
+
+<p><strong>Raised Cosine Signal</strong></p>
+
+$$
+f(t) = \frac{E}{2}(1+\cos\frac{\pi t}{\tau})(u(t+\tau) - u(t - \tau))\\
+F(\omega) = \int_{-\tau}^{\tau}(1+\cos\frac{\pi t}{\tau})\mathrm dt = \frac{E\tau}{1 - \left(\frac{\omega \tau}{\pi}\right)^2}\text{Sa}({\omega \tau})
+$$
+
+
+<p>More compacted than square signal( $|F(\omega)|\propto \frac 1{\omega^3}$ ). An explanation is that the raised cosine has no discontinuities.</p>
+<p>Generally:</p>
+<ol>
+<li> $f(t)$  has discontinuities,  $|F(\omega)|\propto \frac 1{\omega}$ </li>
+<li> $\frac{d}{dt}f(t)$  has discontinuities,  $|F(\omega)|\propto \frac 1{\omega^2}$ </li>
+<li> $\frac{d^2}{dt^2}f(t)$  has discontinuities,  $|F(\omega)|\propto \frac 1{\omega^3}$ </li>
+</ol>
+<p>The <strong>width</strong>  $\tau$  of the raised cosine signal is defined at  $\frac E2$  rather than at the bottom, making it easy to compare with<br>     the rectangular pulse of same width. The first zeros of the<br>   frequency spectrum are identical.</p>
+<p>raised consine is energy-concentrative and has been widely used in digital communications.</p>
+<p><strong>Single-sided exponential singal</strong> </p>
+
+$$
+f(t) = e^{-at}u(t)\\
+F(\omega) = \frac{1}{a+j\omega}
+$$
+
+
+<p><strong>Two-sided, anti-symmetric exponential signal</strong></p>
+
+$$
+f(t) = -e^{at}u(-t) + e^{-at}u(t)\\
+F(\omega) = \frac{-2j\omega}{a^2+\omega^2}
+$$
+
+
+<p><strong>Sign function</strong></p>
+
+$$
+\text{sgn}(t) = u(t) - u(-t)\\
+F(\omega) = \lim_{a\rightarrow 0}\frac{-2j\omega}{a^2+\omega^2}= \frac{2}{j\omega}
+$$
+
+
+<p><strong>Gaussian singal</strong></p>
+
+$$
+f(t) = Ee^{-\left(\frac{t}{\tau}\right)^2}\\
+F(\omega) = \sqrt \pi E\tau e^{-\left(\frac{\omega\tau}{2}\right)^2}
+$$
+
+
+<p><strong>Sinc Function</strong></p>
+
+$$
+f(t) = \frac{E}{\pi}\frac{\sin(\omega_c t)}{t}\\
+F(\omega) = E(u(\omega - \omega_c ) + u(\omega + \omega_c ))\\
+$$
+
+
+
+<h3 id="FT-on-impulse-and-step-functions"><a href="#FT-on-impulse-and-step-functions" class="headerlink" title="FT on impulse and step functions"></a>FT on impulse and step functions</h3>
+$$
+\mathcal F[\delta(t)] = 1\\
+\mathcal F[1] = 2\pi \delta(\omega)
+$$
+
+
+<p>The spectrum of impulse function covers the entire frequency range. The interferences caused by a variety of electric sparks always cover the full frequency range.</p>
+
+$$
+\mathcal F[\delta^\prime (t)]= j\omega\\
+\mathcal F[\delta^{(n)}(t)] = (j\omega)^n
+$$
+
+
+
+$$
+\mathcal F[u(t)] = \pi \delta(\omega) + \frac{1}{j\omega}
+$$
+
+
+<p>Due to the DC component in u(t), an impulse exists.</p>
+<h3 id="Properties-of-FT"><a href="#Properties-of-FT" class="headerlink" title="Properties of FT"></a>Properties of FT</h3><p><strong>Symmetry</strong>  $\mathcal F[F(t)]= 2\pi f(-\omega)$  , if  $f(t)$  is a even function,  $\mathcal F[F(t)]= 2\pi f(\omega)$ </p>
+<p><strong>Linearity</strong>  $\mathcal{F}[\Sigma_{i=1}^{n}a_if_i(t)] = \Sigma_{i=1}^{n}a_iF_i(\omega)$ </p>
+<p><strong>Odd-Even, Imaginary-Real</strong>  $f(t) = f_e(t)+f_o(t)$ , then</p>
+
+$$
+\begin{align*}
+  F(\omega) &= \int_{-\infty}^\infty f(t)\cos \omega t \mathrm dt -j\int_{-\infty}^\infty f(t)\sin \omega t \mathrm dt\\
+  &=R(\omega)+jX(\omega)\\
+  &=\int_{-\infty}^\infty f_e(t)\cos \omega t \mathrm dt -j\int_{-\infty}^\infty f_o(t)\sin \omega t \mathrm dt\\
+\end{align*}.
+$$
+
+
+ $R(\omega)$  is an even function of  $\omega$ ,  $X(\omega)$  is an odd function of  $\omega$ .
+
+ $|F(\omega) = \sqrt{R^2(\omega)+F^2(\omega)}|$  is even function.
+
+ $\varphi(\omega) = \tg^{-1}\frac{R(\omega)}{X(\omega)}$ 
+
+<p>if  $f(t)$  is real and even, then  $f(t)=f_e(t), F(\omega)=R(\omega)$ , the phase shift is  $0$  or  $\pi$ .</p>
+<p>if  $f(t)$  is real and odd,  $f(t) = f_o(t)$ , then  $F(\omega)=jX(\omega)$ ,  $F(\omega)$  has only imaginary part and is odd, the phase shift is  $\pm \frac{\pi}{2}$ </p>
+<p><strong>Scaling</strong>  $\mathcal{F}[f(at)]=\frac 1{|a|}F\left(\frac{\omega}a\right)$  Expansion in TD results in Compression in FD.</p>
+<p><strong>Time Shifting</strong>  $\mathcal{F}[f(t\pm t_0)] = F(\omega)e^{\pm j\omega t_0}$ </p>
+<p><strong>Frequency Shifting</strong>  $\mathcal F[f(t)e^{\pm j\omega_0t}] = F(\omega\mp\omega_0)$ </p>
+<p><strong>Differentiation property</strong> $\mathcal F\left[\frac{\mathrm d}{\mathrm dt}f(t)\right] = j\omega F(\omega)$ </p>
+ $\mathcal F\left[\frac{\mathrm d^n}{\mathrm dt^n}f(t)\right] = (j\omega)^n F(\omega)$ 
+
+ $\mathcal F\left[\frac{\mathrm d^n}{\mathrm d\omega^n}F(\omega)\right] = (-jt)^nf(t)$ 
+
+
+<p><strong>Integration Property</strong>  $\mathcal{F}\left[\int_{-\infty}^t f(\tau)\mathrm{d} \tau\right] = \frac{F(\omega)}{j\omega} + \pi F(0)\delta(\omega)$ </p>
+<h3 id="Convolution-theorem"><a href="#Convolution-theorem" class="headerlink" title="Convolution theorem"></a>Convolution theorem</h3>
+$$
+\mathcal F[f_1(t)* f_2(t)] = F_1(\omega)F_2(\omega)\\
+\mathcal F[f_1(t)\cdot f_2(t)] = \frac 1{2\pi} F_1(\omega) * F_2(\omega)
+$$
+
+
+<h3 id="FT-for-Periodic-Signals"><a href="#FT-for-Periodic-Signals" class="headerlink" title="FT for Periodic Signals"></a>FT for Periodic Signals</h3>
+$$
+\mathcal F[\cos (\omega_0 t)] = \pi [\delta(\omega + \omega_0) + \delta(\omega - \omega_0)]\\
+\mathcal{F} [\sin (\omega_0 t)] = j\pi [\delta(\omega+\omega_0) + \delta(\omega - \omega_0)]
+$$
+
+
+<p>FT for periodic of  $T_1$  &amp;  $\omega_1=2\pi/T_1$ </p>
+
+$$
+\mathcal F[f(t)] = 2\pi\sum_{n=-\infty}^{+\infty} F_n\delta(\omega - n\omega_1)\\
+F_n = \frac 1{T_1}\int_{-T_1/2}^{T_1/2}f(t)e^{-jn\omega_1 t}\mathrm dt = \frac{1}{T_1}F_0(\omega)\vert_{\omega =n\omega_1}
+$$
+
+
+<p>Where  $F_0(\omega)$  is the FT considering waveform of  $f(t)$  only in  $|t|\le T_1/2$ .</p>
+<p>example: </p>
+
+$$
+f(t) = \sum_{n=0}^{\infty}\delta(t-nT_1), F_n=\frac{1}{T_1}\\
+F(\omega) = \frac{2\pi}{T_1}\sum_{n=0}^{\infty}\delta(\omega - n\omega_1)=\omega_1\sum_{n=0}^{\infty}\delta(\omega - n\omega_1)
+$$
+
+
+
+$$
+F_0(ω) \text{ determines the profile of } F(ω)\\
+T_1\text{ determines the density of the impulses
+}\\
+T_1↑, ω_1↓\text{, intensity of harmonics}↓\\
+T_1↓,ω_1↑\text{, intensity of harmonics}↑\\
+$$
+
+
+<p><img src="/../images/ss/lec7_1.jpg" loading="lazy"></p>
+<p>In the same way: </p>
+<p><img src="/../images/ss/lec7_2.jpg" loading="lazy"></p>
+<h3 id="FT-for-periodically-sampled-signals"><a href="#FT-for-periodically-sampled-signals" class="headerlink" title="FT for periodically sampled signals"></a>FT for periodically sampled signals</h3>
+$$
+F(\omega) = \mathcal F[f(t)]\\
+P(\omega) = \mathcal F[p(t)]\\
+f_s(t) = f(t)p(t)\\
+F_s(\omega) =\frac{1}{2\pi} F(\omega) * P(\omega)
+$$
+
+
+<p>Then, </p>
+
+$$
+P(\omega) = 2\pi \sum_{n = -\infty}^{+\infty} P_n\delta(\omega - \omega_s)\\
+F(\omega) * P(\omega) = 2\pi \sum_{n = -\infty}^{+\infty} P_nF(\omega - n\omega_s)\\
+F_s(\omega) = \sum_{n = -\infty}^{+\infty} P_nF(\omega - n\omega_s)
+$$
+
+
+<p><img src="/../images/ss/lec7_3.jpg" loading="lazy"></p>
+<p>For the frequency-domain sampling: </p>
+
+$$
+F_1(\omega) = F(\omega)P(\omega)\\
+P(\omega) = \sum_{n=-\infty}^{+\infty} \delta(\omega - n\omega_1)\\
+f_1(t) = f(t) *  \frac{1}{\omega_1}\sum_{n=-\infty}^{+\infty} \delta(t - nT_1) = \frac{1}{\omega_1}\sum_{n=-\infty}^{\infty} f(t-nT_1)
+$$
+
+
+<p><strong>The Sampling Theorem</strong></p>
+
+$$
+\omega_s \ge 2\omega_m
+$$
+
+
+<p>A band-limited signal whose spectrum is strictly within  $[0, f_m]$  could be uniquely determined by the samples on itself, if and only if the sampling interval  $T_s \le 1/(2f_m)$ .</p>
+ $T_s = \frac{1}{2f_m}$  is called the **Nyquist interval**.
+
+ $2f_m$  is called the **Nyquist frequency**.
+
+<p>对于单频信号，奈奎斯特频率的采样可能会出现问题。例如正弦信号，每次采样都采在零点上，那就没法复现信号。单频信号没法描述带宽。</p>
+<p>A FD verison:</p>
+<p><img src="/../images/ss/lec7_4.jpg" loading="lazy"></p>
+<h2 id="L-Transform"><a href="#L-Transform" class="headerlink" title="L Transform"></a>L Transform</h2><h3 id="Unilateral-L-transform"><a href="#Unilateral-L-transform" class="headerlink" title="Unilateral L-transform"></a>Unilateral L-transform</h3>
+$$
+F(s) = \int^{\infty}_{0}f(t)e^{-st}\mathrm dt, s=\sigma+j\omega\\
+f(t)=\frac{1}{2\pi j}\int_{\sigma-j\infty}^{\sigma+j\infty}F(s)e^{st}\mathrm ds
+$$
+
+
+ $F(s) = \mathcal{L}[f(t)]$  is called image function,  $f(t) = \mathcal{L}^{-1}[F(s)]$  is called primitive function.
+
+<p>assuming that  $f(t)$  is causal and always 0 if  $t&lt;0$ .</p>
+
+$$
+\mathcal L \left[\frac{\mathrm df(t)}{\mathrm dt}\right] = -f(0) + sF(s)
+$$
+
+
+<p>The initial state is automatically included in differential equation.</p>
+<p>We define the <strong>unilateral</strong> L-Transform as: </p>
+
+$$
+F(s) = \int_{0_-}^{\infty}f(t)e^{-st}\mathrm dt\\
+\mathcal L \left[\frac{\mathrm df(t)}{\mathrm dt}\right] = -f(0_-) + sF(s)
+$$
+
+
+<p>Conditions for L-Transform: </p>
+<ol>
+<li>Limited discontinuities</li>
+<li>Exponential order</li>
+</ol>
+<p>The strong attenuation factor can make the function convergent.</p>
+<p>Region of Convergence (ROC)</p>
+<p>Axis of convergence</p>
+<p>Coordinate of convergence  $\sigma_0$ </p>
+<h3 id="Comman-LT-Pairs"><a href="#Comman-LT-Pairs" class="headerlink" title="Comman LT Pairs"></a>Comman LT Pairs</h3>
+$$
+\begin{align*}
+f(t)&\Rightarrow F(s)\\  
+\delta(t) &\Rightarrow 1\\
+u(t) &\Rightarrow \frac 1s\\
+e^{-at} &\Rightarrow \frac{1}{s+a}\\
+t^n & \Rightarrow \frac{n!}{s^{n+1}}\\
+\sin (\omega t)&\Rightarrow \frac{\omega}{s^2 + \omega^2}\\
+\cos (\omega t)&\Rightarrow \frac{s}{s^2+\omega^2}\\
+\end{align*}
+$$
+
+
+<h3 id="Properties-of-LT"><a href="#Properties-of-LT" class="headerlink" title="Properties of LT"></a>Properties of LT</h3><p><strong>Linarity</strong></p>
+
+$$
+\mathcal L [k_1f_1(t) + k_2f_2(t)] = k_1F_1(s) + k_2F_2(s)\\
+$$
+
+
+<p><strong>Differentiation</strong></p>
+
+$$
+\mathcal L \left[\frac{\mathrm d f(t)}{\mathrm d t}\right] = sF(s) - f(0_-)
+$$
+
+
+<p><strong>Intergration</strong></p>
+
+$$
+\mathcal L\left[\int_{-\infty}^t f(\tau)\mathcal d\tau\right]=\frac{F(s)}{s} + \frac{f^{(-1)}(0)}{s}
+$$
+
+
+<p><strong>Time Shifting</strong></p>
+
+$$
+\mathcal L\left[f(t-t_0)u(t-t_0)\right] = e^{-st_0}F(s)
+$$
+
+
+<p>Use  $u(t-t_0)$  to avoid nagative part of  $f(t)$  emerges.</p>
+<p><strong>Frequency Shifting</strong></p>
+
+$$
+\mathcal L[f(t)e^{-at}] = F(s+a)
+$$
+
+
+<p><strong>Scaling</strong></p>
+
+$$
+\mathcal L[f(at)] = \frac 1a F\left(\frac{s}{a}\right)
+$$
+
+
+<p><strong>s-Domain Differentiation</strong></p>
+
+$$
+\frac{\mathrm d}{\mathrm ds}\mathcal L[f(t)] = \mathcal L[-tf(t)]
+$$
+
+
+<p><strong>s-Domain Differentiation</strong></p>
+
+$$
+\int_s^\infty F(s) = \mathcal{L}\left[\frac{f(t)}{t}\right]
+$$
+
+
+<p><strong>Initial value</strong></p>
+
+$$
+f(0_+) = \lim_{s\rightarrow\infty}sF(s)
+$$
+
+
+<p><strong>Final value</strong></p>
+
+$$
+\lim_{t\rightarrow\infty} f(t) = \lim_{s\rightarrow0} sF(s)
+$$
+
+
+<p>Generalized limit:  $\lim_{t\rightarrow\infty} \sin(\omega t)=0$ </p>
+<p><strong>Convolution</strong></p>
+
+$$
+\mathcal L[f_1(t)*f_2(t)] = F_1(s)F_2(s)
+$$
+
+
+<h3 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h3><p><strong>Differential Equations</strong></p>
+
+$$
+  F(s) = \frac{A(s)}{B(s)} = \frac{a_ns^n + a_{n-1}s^{n-1} + \cdots + a_1s + a_0}{b_ms^m + b_{m-1}s^{m-1} + \cdots + b_1s + b_0} % The division of two polynomials
+$$
+
+
+<p>(assume that  $n&lt;m$ )</p>
+<p>The roots of numerator is called zeros, while the roots of denominator is called poles.</p>
+<p>Unknown function F(s) can be represented by the ratio of two polynomials if all initial states are 0.</p>
+<ol>
+<li>real poles</li>
+</ol>
+
+$$
+F(s) = \frac{A(s)}{(s-p_1)(s-p_2)(s-p_3)}
+$$
+
+
+<ol start="2">
+<li>complex conjugate poles</li>
+</ol>
+
+$$
+F(s) = \frac{A(s)}{D(s)[(s+\alpha)^2 + \beta^2]} = \frac{F_1(s)}{[(s+\alpha)^2 + \beta^2]} = \frac{F_1(s)}{(s+\alpha - j\beta)(s+\alpha + j\beta)} + \dots
+$$
+
+
+
+$$
+k_1 = (s+\alpha - j\beta)F(s)|_{s = -\alpha + j\beta} = \frac {F_1(-\alpha + j\beta)}{2j\beta}\\
+k_2 = (s+\alpha + j\beta)F(s)|_{s = -\alpha - j\beta} = \frac {F_1(-\alpha - j\beta)}{-2j\beta}
+$$
+
+
+<ol start="3">
+<li>Multiple poles</li>
+</ol>
+
+$$
+F(s) = \frac {A(s)}{B(s)} = \frac{A(s)}{(s-p_1)^k D(s)}\\
+= \frac{K_{11}}{(s-p_1)^k}+\frac{K_{12}}{(s-p_1)^{k-1}}+\dotsb+\frac{K_{1k}}{s-p_1} + \frac{E(s)}{D(s)}(s-p_1)^k
+$$
+
+
+<p><img src="/../images/ss/lec9_1.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec9_2.jpg" loading="lazy"></p>
+<p>Circuit model:</p>
+<p><img src="/../images/ss/lec9_3.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec9_4.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec9_5.jpg" loading="lazy"></p>
+<p>Use initial value and final value to verify it.</p>
+<h3 id="System-Function"><a href="#System-Function" class="headerlink" title="System Function"></a>System Function</h3>
+$$
+\begin{cases}
+  R(s) = H(s) \cdot E(s)\\
+  r(t) = h(t) * e(t)
+\end{cases}
+\Rightarrow H(s) = L[h(t)]
+$$
+
+
+<p><strong>Driving point function &amp; transfer function</strong></p>
+<p><img src="/../images/ss/lec9_6.jpg" loading="lazy"></p>
+<p>L-transform can be used in the following analysis:</p>
+<ul>
+<li>TD characteristics (response decomposition)</li>
+<li>FD characteristics (steady-state with sine signal input,applications such as filtering) </li>
+<li>Stability (active network, feedback, oscillator, control system)</li>
+</ul>
+<h3 id="TD-characteristics-by-0-point-distribution"><a href="#TD-characteristics-by-0-point-distribution" class="headerlink" title="TD characteristics by 0-point distribution"></a>TD characteristics by 0-point distribution</h3><p>Three cases: </p>
+<ul>
+<li>Real poles</li>
+<li>Complex conjugate poles</li>
+<li>Real pole of high-order</li>
+</ul>
+<ol>
+<li>Zero pole of H(s)</li>
+</ol>
+<p><img src="/../images/ss/lec10_1.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec10_2.jpg" loading="lazy"></p>
+<p>Zero only affects the phase and amplitude, while the shape and type of waveform is determined by the poles.</p>
+<ol start="2">
+<li>pole distribution  $\Leftrightarrow$  corresponding natural&#x2F;forced responses</li>
+</ol>
+
+$$
+H(s) = \frac{\prod_{i = 1}^m(s-z_{hj})}{\prod_{i = 1}^n(s-p_{hi})}\\
+E(s) = \frac{\prod_{i = 1}^u(s-z_{el})}{\prod_{i = 1}^v(s-p_{ek})}\\
+\text{if } m + u &lt; n + v\\
+R(s) = E(s)H(s) = \sum_{k=1}^n\frac{K_{hk}}{s - p_{hk}} + \sum_{k=1}^v\frac{K_{ek}}{s-p_{ek}}
+$$
+
+
+<p>The natural response of  $r(t)$  is only related to  $p_{hk}$ , while the forced response is only related to  $p_{ek}$ .</p>
+ $K_{hk}$ ,  $K_{ek}$  are related to both  $H(s)$  and  $E(s)$ .
+
+<p>However natural and forced responses could not be completely separated, if there exists  $k, k^\prime$  satisfying  $p_{hk}=p_{ek^\prime}$ .</p>
+ $p_{hi}$  are called natural frequency of the system.
+
+<p>However, some common factors may be eliminated: </p>
+
+$$
+\frac{(s+1)}{(s+1)(s+2)} = \frac{1}{(s+2)}
+$$
+
+
+
+$$
+H(s) = \frac{\Delta_{jk}}{\Delta}
+$$
+
+
+<p>All the poles of  $H(s)$  are the natural frequencies of the system, but  $h(t)$  may not include all the natural frequencies(but the root of  $\Delta$  contains all natural frequencies).</p>
+<p>In most cases:</p>
+
+$$
+\text{Re}(p_{hi}) &lt; 0, \text{Re}(p_{ei}) = 0
+$$
+
+
+<p>Thus the natural response is transient, while the forced response is steady-state.</p>
+<p>However, some natural response can be steady-state(conjugate poles of  $Re(p_{hi})$ ), while some forced response can be transient.</p>
+<p><img src="/../images/ss/lec10_3.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec10_4.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec10_5.jpg" loading="lazy"></p>
+
+$$
+E_m|H(j\omega)|\sin (\omega_0t + \varphi_0)
+$$
+
+
+
+$$
+H(j\omega) =K\cdot \frac{\prod(j\omega - z_j)}{\prod (j\omega - p_i)}
+$$
+
+
+<p><img src="/../images/ss/lec10_7.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec10_6.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec10_8.jpg" loading="lazy"></p>
+<p>for band-pass filter, </p>
+<p>BW is where Peak(dB) - 3dB</p>
+<p>for low-pass filter,</p>
+<p>BW &#x3D;  $f_{\text{cut-off}}$ </p>
+<p>According to the sampling theorem, the signal bandwith is often determined by the first zero of the spectrum.</p>
+<p><strong>All Pass Systems</strong></p>
+
+$$
+R_e(p_i) = -R_e(z_i)\\
+I_m(p_i) = I_m(z_i)
+$$
+
+
+<p>The Amplitude is const., while the phase can change.</p>
+<p><strong>Minimum-phase system&#x2F;function</strong></p>
+<p>Definition: A stable system with poles on left-half s-plane is called minimum-phase system&#x2F;function, if all the zeros are also on left-half s-plane or at the jω-axis. Otherwise is a non-minimum-phase system&#x2F;function.<br><img src="/../images/ss/lec11_1.jpg" loading="lazy"></p>
+<p>Property: A non-minimum-phase function can be represented as the product of  a minimum-phase function and an all-pass function.</p>
+<h3 id="Stability-of-Linear-System"><a href="#Stability-of-Linear-System" class="headerlink" title="Stability of Linear System"></a>Stability of Linear System</h3><p>A system is considered to be stable if bounded input always leads to bounded output.</p>
+<p>Bounded-input, Bounded-output(BIBO)</p>
+<p>The necessary &amp; sufficient conditions for BIBO:</p>
+
+$$
+\int_{-\infty}^\infty|h(t)|\mathrm dt \le M
+$$
+
+
+<p>Poles are: </p>
+<ul>
+<li>on the left half-plane:  $\lim_{t\rightarrow \infty}[h(t)] = 0$ , stable system</li>
+<li>on the right half-plane, or at  $j\omega$ -axis with order of more than one:  $\lim_{t\rightarrow \infty}[h(t)] = \infty$ , unstable system</li>
+<li>at  $j\omega$ -axis with order of one:  $h(t)$  is non-zero or oscillated with equal amplitude, critical stable system</li>
+</ul>
+<h3 id="Two-sided-Bilateral-LT"><a href="#Two-sided-Bilateral-LT" class="headerlink" title="Two-sided (Bilateral) LT"></a>Two-sided (Bilateral) LT</h3>
+$$
+F_B(s) = \int_{-\infty}^\infty f(t)e^{-st}\mathrm{d} t
+$$
+
+
+<ul>
+<li>t starts from −∞, i.e., non-causal signal as the input<br>or regarding the initial condition as the input.</li>
+<li>Easily to be associated with F-transform and Z-<br>transforms</li>
+</ul>
+<p>We determine the ROC by:</p>
+
+$$
+\lim_{t\rightarrow \infty} f(t)e^{-\sigma t} = 0\\
+\lim_{t\rightarrow -\infty} f(t)e^{-\sigma t} = 0
+$$
+
+
+<p>NOTE: </p>
+<ul>
+<li>If no overlap between the two constraints, then  $F_B(s)$  does not exist.</li>
+<li> $F_B(s)$  and  $f(t)$  are not uniquely corresponding to each other.( $\int_{-\infty}^\infty u(t)e^{-st}\mathrm{d} t = \frac{1}{s}$ ,  $\int_{-\infty}^\infty -u(-t)e^{-st}\mathrm{d} t=\frac{1}{s}$ )</li>
+<li>Two-sided L-Transform shares almost all the properties with its single-sided counterpart except for the initial-value theorem.</li>
+<li>Two-sided L-Transform has very limited applications as most continuous-time systems are causal.</li>
+</ul>
+<p>**Relationship between LT and FT **</p>
+<ul>
+<li> $\sigma_0 &gt; 0$ ,  $F(\omega)$  does not exist</li>
+<li> $\sigma_0 = 0$ , impulse appears in  $F(\omega)$ </li>
+<li> $\sigma_0 &lt; 0$ ,  $F(\omega)$  exists,  $F(\omega) = F(s)|_{s=j\omega}$ </li>
+</ul>
+<p><img src="/../images/ss/lec11_2.jpg" loading="lazy"><br>(The LT above is unilateral LT.)</p>
+<p><img src="/../images/ss/lec11_3.jpg" loading="lazy"></p>
+<h3 id="Extra-Attention"><a href="#Extra-Attention" class="headerlink" title="Extra Attention"></a>Extra Attention</h3> $1 + e^{-s}$  also has zero(many!). Note that if it is on the denominator.
+
+<h2 id="FT-in-Telecom-Systems"><a href="#FT-in-Telecom-Systems" class="headerlink" title="FT in Telecom. Systems"></a>FT in Telecom. Systems</h2><p>System discussed in this chapter are strictly stable: </p>
+
+$$
+\mathcal{F}[f(t)] = F(s)|_{s=j\omega}
+$$
+
+
+<p>Because even for critical stable system, FT is not  the same as LT(containing  $\delta$ ), there will be ambiguity between  $H(j\omega)$  and  $H(s)|_{s=j\omega}$ .</p>
+<p>For every freq. component, it is reshaped in its phase and amplitude by the system function when passing through the system, related with its frequency. Thus the system can distort the original signal.</p>
+<p><strong>Distortion</strong></p>
+<p>2 types of distortion:</p>
+<ul>
+<li>Non-linear distortion (new frequency components)</li>
+<li>Linear distortion (without new frequency components), just the amplitude and&#x2F;or phase distortion.</li>
+</ul>
+<p> <strong>Distortionless transmission</strong></p>
+
+$$
+e(t)\rightarrow ke(t - t_0)
+$$
+
+
+
+$$
+R(j\omega) = \int_{-\infty}^\infty ke(t -t_0)e^{-j\omega t}\mathrm dt=ke^{-j\omega t_0}\int_{-\infty}^\infty e(x)e^{-j\omega x}\mathrm dx=ke^{-j\omega t_0} E(j\omega)
+$$
+
+
+<p>So,  $H(j\omega) = ke^{-j\omega t_0}$ ,  $h(t)=K\delta(t - t_0)$ .</p>
+<p>The Amplitude is frequency independent,  $BW\rightarrow \infty$ .</p>
+<p>Phase response is linear at negative slope.</p>
+<p>The impulse response of a distortionless linear system is<br>     also an impulse.</p>
+<p>The physical scenario: group delay.</p>
+
+$$
+\tau = -\frac{\mathrm d\varphi (\omega)}{\mathrm d\omega}
+$$
+
+
+<p>Condition for phase distortionless property: the group delay remains a constant.</p>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p><strong>Ideal Low pass (LP) Filter</strong></p>
+
+$$
+H(j\omega) = \begin{cases}
+  1 \cdot e^{-j\omega t_0}, &|\omega|&lt; \omega_c,\\
+  0, &|\omega|&gt; \omega_c.
+\end{cases}
+$$
+
+
+<p><img src="/../images/ss/lec12_1.jpg" loading="lazy"></p>
+<p><strong>The Impulse response of Ideal LP</strong></p>
+<p><img src="/../images/ss/lec12_2.jpg" loading="lazy"></p>
+<ul>
+<li>Severe distortion.  $BW_{\delta(t)}\rightarrow \infty$ , but  $BW_{\text{Lowpass}}=\omega_c$ , the higier frequency is eliminated.</li>
+<li>Non-causal. When  $t\lt 0$ ,  $h(t)\ne 0$ .</li>
+</ul>
+<p><strong>Unit-step response of Ideal LP</strong></p>
+<p><img src="/../images/ss/lec12_3.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec12_4.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec12_5.jpg" loading="lazy"></p>
+<p>The response is similar to the input if  $\frac{1}{2}=\frac{\pi}{\omega_c}\llless \tau$ . </p>
+<p><strong>Gibbs phenomenon</strong>: 9% overshoot at discontinuity. Use other window functions can eliminate this, e.g. raised-cosine window.</p>
+<h3 id="Modulation-and-demodulation"><a href="#Modulation-and-demodulation" class="headerlink" title="Modulation and demodulation"></a>Modulation and demodulation</h3><p>Means of modulation:</p>
+<p><strong>Spectrum shifting</strong> </p>
+ $f(t) = g(t)\cos(\omega_0t)$ ,  $F(\omega) =\frac{1}{2\pi} G(\omega) * \pi[\delta(\omega - \omega_0) + \delta (\omega + \omega_0)] = \frac{1}{2}[G(\omega + \omega_0) + G(\omega - \omega_0)]$ .
+
+<p><img src="/../images/ss/lec12_6.jpg" loading="lazy"></p>
+<p>Demodulation: </p>
+<p><strong>coherent demodulation</strong></p>
+ $g_0(t)=[g(t)\cos(\omega_0 t)]\cos(\omega_0t) = \frac{1}{2}g(t) + \frac{1}{2}g(t)\cos2\omega_0t$ 
+
+<p><img src="/../images/ss/lec12_7.jpg" loading="lazy"></p>
+<p><strong>Envelope Detection</strong></p>
+<p><img src="/../images/ss/lec12_8.jpg" loading="lazy"></p>
+<h3 id="Applications-of-BPF"><a href="#Applications-of-BPF" class="headerlink" title="Applications of BPF"></a>Applications of BPF</h3><p><strong>Window Function</strong><br>(Page 304)</p>
+
+$$
+h_a(t) = \frac{\sqrt a \sin\left(\frac{\pi t}{a}\right)\cos \left(\frac{3\pi t}{a}\right)}{\sqrt{ \pi} \pi t}\\
+H_a(\omega) = \begin{cases}
+  \frac{1}{2}\sqrt{\frac{a}{\pi}}, \text{if } \frac{2\pi}{a}\le |\omega| \le \frac{4\pi}{a},\\
+  0, \text{otherwise}.
+\end{cases}
+$$
+
+
+<p><img src="/../images/ss/lec13_1.jpg" loading="lazy"></p>
+<h3 id="Recover-Continuous-Time-signal-from-its-Samples"><a href="#Recover-Continuous-Time-signal-from-its-Samples" class="headerlink" title="Recover Continuous Time signal from its Samples"></a>Recover Continuous Time signal from its Samples</h3><p><strong>Analysis on signal after band-pass filter</strong></p>
+<p>Page 301</p>
+<p><strong>Sampling with impulse func.</strong></p>
+<p>FD analysis:</p>
+<p>Sampled signal(By impulse function):</p>
+
+$$
+F_s(\omega) = \frac{1}{T_s}\sum_{n=-\infty}^\infty F(\omega - n\omega_s)
+$$
+
+
+<p>Ideal LP Filter:</p>
+
+$$
+H(j\omega) = \begin{cases}
+  T_s, &|\omega|&lt; \omega_c,\\
+  0, &|\omega|&gt; \omega_c.
+\end{cases}
+$$
+
+
+<p>Recovered signal: </p>
+
+$$
+F(\omega) = F_s(\omega) \cdot H(\omega)
+$$
+
+
+<p>TD analysis:</p>
+<p>Sampled signal:</p>
+
+$$
+f_s(t) = \sum_{n=-\infty}^\infty f(nT_s)\delta(t - nT_s)
+$$
+
+
+<p>Ideal LP Filter:</p>
+
+$$
+h(t) = T_s\frac{\omega_c}\pi \text{Sa}(\omega_c t)
+$$
+
+
+<p>Recovered signal:</p>
+
+$$
+f(t) = f_s(t) * h(t) = T_s\frac{\omega_c}\pi  \sum_{n=-\infty}^\infty f(nT_s) \text{Sa}(\omega_c (t-nT_s))
+$$
+
+
+<p><img src="/../images/ss/lec14_1.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec14_2.jpg" loading="lazy"></p>
+<p><strong>Sampling with a zero-order hold</strong></p>
+<p><img src="/../images/ss/lec14_3.jpg" loading="lazy"></p>
+
+$$
+h_0(t) = u(t) - u(t - T_s)\\
+f_{s0}(t) = f_s(t)* h_0(t)
+$$
+
+
+
+$$
+\begin{align*} 
+&\mathcal F\{f_{s0}(t)\} \\&=\mathcal F\{f_s(t)\} \cdot \mathcal F\{h_0(t)\} \\ &=F_s(\omega) \cdot H_0(\omega)\\
+&=\sum_{-\infty}^{\infty}F(\omega - n\omega_s) \cdot  \text{Sa}(\frac{\omega_c T_s}{2})e^{-j\frac{\omega T_s}{2}}\\
+\end{align*}
+$$
+
+
+<p>LP Filter for compensation</p>
+
+$$
+H_{0r}(\omega) = \begin{cases}
+  \frac{1}{\text{Sa}(\frac{\omega T_s}{2})}e^{j\omega T_s/2}, &|\omega| \le \omega_s/2,\\
+  0, &|\omega|&gt; \omega_s/2.
+\end{cases}
+$$
+
+
+<p>Linear phase response is OK! No needed for delay compensation. </p>
+<p><strong>1st-order hold Sampling</strong></p>
+<p><img src="/../images/ss/lec14_4.jpg" loading="lazy"></p>
+<h3 id="Mulitplexing-FDM-and-TDM"><a href="#Mulitplexing-FDM-and-TDM" class="headerlink" title="Mulitplexing FDM and TDM"></a>Mulitplexing FDM and TDM</h3><p>Transmit mulitple singals over a single channel concurrently.</p>
+<p>Frequency Division Multiplexing (FDM) － OFDM (Orthogonal FDM)</p>
+<p>Time Division Multiplexing (TDM)－sharing slot, statistical multiplexing</p>
+<p>Code Division Multiplexing (CDM)－ Code division, logical multiplexing</p>
+<p>Wavelength Division Multiplexing (WDM)－ Optical carrier</p>
+<p><img src="/../images/ss/lec14_5.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec14_6.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec14_7.jpg" loading="lazy"></p>
+<h2 id="Vector-Analysis-of-Signals"><a href="#Vector-Analysis-of-Signals" class="headerlink" title="Vector Analysis of Signals"></a>Vector Analysis of Signals</h2><h3 id="Vector-Space"><a href="#Vector-Space" class="headerlink" title="Vector Space"></a>Vector Space</h3><p><img src="/../images/ss/lec15_1.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec15_2.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec15_3.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec15_4.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec15_5.jpg" loading="lazy"></p>
+<h3 id="Objective-for-singal-decomposition"><a href="#Objective-for-singal-decomposition" class="headerlink" title="Objective for singal decomposition"></a>Objective for singal decomposition</h3>
+$$
+r(t) = H[e(t)] = H\left[\sum_{i=0}^ne_i(t)\right] = \sum_{i=0}^nH[e_i(t)]
+$$
+
+
+<h3 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h3><p><strong>Orthogonal Vector</strong></p>
+<p><img src="/../images/ss/lec15_6.jpg" loading="lazy"></p>
+<p><strong>Orthogonal Function</strong></p>
+<p>Represend  $f_1(t)$  in terms of  $f_2(t)$ (both real), for  $t_1&lt;t&lt;t_2$ </p>
+
+$$
+f_1(t)\approx c_{12}f_2(t)
+$$
+
+
+<p>Residual error  $\overline{\varepsilon^2} = \overline{f_e^2(t)} = \frac{1}{t_2 - t_1}\int_{t_1}^{t_2}[f_1(t) - c_{12}f_2(t)]^2\mathrm dt$ </p>
+<p>Let  $\frac{\mathrm d \overline{\varepsilon^2}}{\mathrm d c_{12}} = 0$ , then  $\overline{\varepsilon^2}$  is minimized.</p>
+<p>The coefficient can be determined as</p>
+
+$$
+c_{12} = \frac{\int_{t_1}^{t_2}f_1(t)f_2(t)\mathrm dt}{\int_{t_1}^{t_2}f_2^2(t)\mathrm dt} = \frac{\langle f_1, f_2\rangle}{\langle f_2, f_2\rangle}
+$$
+
+
+<p>If  $c_{12} = 0$ , then  $f_1(t), f_2(t)$  are called <strong>Orthogonal Functions</strong>.</p>
+<p>And </p>
+
+$$
+\int_{t_1}^{t_2}f_1(t)f_2(t)\mathrm dt = 0
+$$
+
+
+<p><strong>Orthogonal Function Set</strong></p>
+<p>Any real function  $f(t)$  can be represented as the sum of  $n$ -D orthogonal real functions.</p>
+
+$$
+f(t) = \sum_{r=1}^n c_rg_r(t)
+$$
+
+
+<p>According to the minimal mean square error, the coefficient can be determined as</p>
+
+$$
+c_r = \frac{\int_{t_1}^{t_2}f(t)g_r(t)\mathrm dt}{\int_{t_1}^{t_2}g_r^2(t)\mathrm dt} = \frac{\langle f, g_r\rangle}{\langle g_r, g_r\rangle}
+$$
+
+
+<p>If  $g_1(t), g_2(t), ..., g_n(t)$  are orthogonal to each other, i.e.</p>
+
+$$
+\int_{t_1}^{t_2}g_r(t)g_s(t)\mathrm dt =\begin{cases}
+  K_i, &r = s,\\
+  0, &r \ne s
+\end{cases}
+$$
+
+
+<p>Then  $f(t)$  can be represented as the sum of  $n$ -D orthogonal real functions.</p>
+<p>Then  $g_1(t), g_2(t), ..., g_n(t)$  are called <strong>Orthogonal Function Set</strong>.</p>
+<p>If  $\int_{t_1}^{t_2}g_i^2(t)\mathrm dt = 1$ , the orthogonal function set is called <strong>Orthonormal Function Set</strong>.</p>
+<p><strong>Orthogonality of Complex Function</strong></p>
+
+$$
+c_{12} = \frac{\int_{t_1}^{t_2}f_1(t)f_2^*(t)\mathrm dt}{\int_{t_1}^{t_2}f_2(t)f_2^*(t)\mathrm dt} = \frac{\langle f_1, f_2^*\rangle}{\langle f_2, f_2^*\rangle}
+$$
+
+
+<p><strong>Orthogonal Function Set</strong> satisfies</p>
+
+$$
+\int_{t_1}^{t_2}g_r(t)g_s^*(t)\mathrm dt =\begin{cases}
+  K_i, &r = s,\\
+  0, &r \ne s
+\end{cases}
+$$
+
+
+<p>The definition of Orthogonal is</p>
+
+$$
+\int_{t_1}^{t_2}f_1(t)f_2^*(t)\mathrm dt = \int_{t_1}^{t_2}f_2(t)f_1^*(t)\mathrm dt = 0
+$$
+
+
+<p>NOTE:</p>
+<ul>
+<li><p>If two signals are orthogonal within a given interval, they are not necessarily orthogonal within other intervals.</p>
+</li>
+<li><p>If two signals are not orthogonal, they must be correlated.</p>
+</li>
+</ul>
+<h3 id="Complete-Orthogonal-Function-and-Parseval’s-Theorem"><a href="#Complete-Orthogonal-Function-and-Parseval’s-Theorem" class="headerlink" title="Complete Orthogonal Function and Parseval’s Theorem"></a>Complete Orthogonal Function and Parseval’s Theorem</h3><p><strong>Complete Orthogonal Funtion Set</strong></p>
+
+$$
+\overline{\varepsilon^2} = \frac{1}{t_2-t_1}\left[\int_{t_1}^{t_2}f^2(t)\mathrm dt  - \sum_{r = 1}^nc_r^2K_r\right]
+$$
+
+
+<p>If  $\lim_{t_2 \to \infty}\overline{\varepsilon^2} = 0$ , then  $\{g_r(t)\}$  is said to be a <strong>Complete Orthogonal Function Set</strong>.</p>
+<p>Alternative definition of complete orthogonal set</p>
+<p>Other than the elements in  $\{g_r(t)\}$ , there is no finite-energy signal  $x(t)$ , which satisfies</p>
+
+$$
+\int_{t_1}^{t_2}x(t)g_r(t)\mathrm dt = 0, \forall r\\
+\text{or } \int_{t_1}^{t_2}x(t)g_r^*(t)\mathrm dt = 0, \forall r
+$$
+
+
+
+<p>Trigonometric Set</p>
+
+$$
+\left\{\cos n\omega_1 t\right\}_{n\rightarrow\infty}\\
+\left\{\sin n\omega_1 t\right\}_{n\rightarrow\infty}
+$$
+
+
+<p>Complex exponential set</p>
+
+$$
+\left\{e^{jn\omega_1 t}\right\}_{n\rightarrow\infty}
+$$
+
+
+<p><strong>Parseval’s Theorem</strong></p>
+
+$$
+\int_{t_1}^{t_2}f(t)^2\mathrm dt = \sum_{r=1}^\infty c_r^2K_r = \sum_{r=1}^\infty\int_{t_1}^{t_2}[c_rg_r(t)]^2\mathrm dt
+$$
+
+
+<p>Physical interpretation:</p>
+<p>The energy (power) of a signal always equals to the sum of the energy (power) of all its components in a complete orthogonal function set. </p>
+<p>Mathematical interpretation:</p>
+<p>The norm of vector signals keeps invariant under orthogonal transform.</p>
+<h3 id="Correlation"><a href="#Correlation" class="headerlink" title="Correlation"></a>Correlation</h3><p>Physical interpretation:</p>
+<p>Gauge of the similarity of two signals </p>
+<p><strong>Energy and Power Signals</strong></p>
+<p>Instaneous Power  $p(t) = i^2(t) R$ </p>
+<p>The energy consumed by  $R$  in a period</p>
+
+$$
+E = \int_{-T_0/2}^{T_0/2}p(t)\mathrm dt = R\int_{-T_0/2}^{T_0/2}i^2(t) \mathrm dt
+$$
+
+
+<p>Average Power:</p>
+
+$$
+P = \frac{1}{T_0}\int_{-T_0/2}^{T_0/2}p(t)\mathrm dt = \frac{1}{T_0}R\int_{-T_0/2}^{T_0/2}i^2(t) \mathrm dt
+$$
+
+
+<p>The energy signals and power signals:</p>
+
+$$
+E = \lim_{T_0 \to \infty}\int_{-T_0/2}^{T_0/2}f^2(t)\mathrm dt\\
+P = \lim_{T_0 \to \infty}\frac{1}{T_0}\int_{-T_0/2}^{T_0/2}f^2(t)\mathrm dt
+$$
+
+
+<p><strong>Correlation Coefficient</strong></p>
+
+$$
+\rho_{12} = \frac{\int_{t_1}^{t_2}f_1(t)f_2^*(t)\mathrm dt}{\sqrt{\int_{t_1}^{t_2}f_1^2(t)\mathrm dt}\sqrt{\int_{t_1}^{t_2}f_2^2(t)\mathrm dt}} = \frac{\langle f_1, f_2\rangle}{\sqrt{\langle f_1, f_1\rangle}\sqrt{\langle f_2, f_2\rangle}} = \frac{\langle f_1, f_2\rangle}{\|f_1\|_2\|f_2\|_2} 
+$$
+
+
+<p>If  $f_1(t)$  is a linear function of  $f_2(t)$ , then  $\rho_{12} = \pm1$ ,  $\overline{\varepsilon^2} = 0$ .</p>
+<p>If  $f_1(t)$  is orthogonal to  $f_2(t)$ , then  $\rho_{12} = 0$ ,  $\overline{\varepsilon^2}$  is maximized.</p>
+<ul>
+<li>Describe the correlation of two signals from the perspective of energy difference.</li>
+<li>Quantitatively measure the correlation of two signals in terms of inner product.</li>
+</ul>
+<p><strong>Correlation Function</strong></p>
+<p>The similarity between one signal with a delayed version of another signal.</p>
+<p>(1)  $f_1(t)$  and  $f_2(t)$  are both real and energy signals</p>
+
+$$
+R_{12}(\tau) = \int_{-\infty}^{\infty}f_1(t)f_2(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_1(t + \tau)f_2(t)\mathrm dt\\
+R_{21}(\tau) = \int_{-\infty}^{\infty}f_2(t)f_1(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_2(t + \tau)f_1(t)\mathrm dt\\
+R_{12}(\tau) = R_{21}(-\tau)
+$$
+
+
+<p>(2)  $f_1(t)$  and  $f_2(t)$  are both complex and energy signals</p>
+<p>If  $f_1(t) = f_2(t) = f(t)$ </p>
+<p>Autocorrelation:</p>
+
+$$
+R(\tau) = \int_{-\infty}^{\infty}f(t)f(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f(t + \tau)f(t)\mathrm dt\\
+$$
+
+
+<p>(2)  $f_1(t)$  and  $f_2(t)$  are both complex and energy signals</p>
+
+$$
+R_{12}(\tau) = \int_{-\infty}^{\infty}f_1(t)f_2^*(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_1(t + \tau)f_2^*(t)\mathrm dt\\
+R_{21}(\tau) = \int_{-\infty}^{\infty}f_2(t)f_1^*(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f_2(t + \tau)f_1^*(t)\mathrm dt\\
+R_{12}(\tau) = R_{21}^*(-\tau)
+$$
+
+
+<p>Autocorrelation:</p>
+
+$$
+R(\tau) = \int_{-\infty}^{\infty}f(t)f^*(t-\tau)\mathrm dt = \int_{-\infty}^{\infty}f(t + \tau)f^*(t)\mathrm dt\\
+R(\tau) = R^*(-\tau)
+$$
+
+
+
+<p>(3)  $f_1(t)$  and  $f_2(t)$  are both real and power signals</p>
+
+$$
+R_{12}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_1(t)f_2(t-\tau)\mathrm dt \right]\\
+R_{21}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_2(t)f_1(t-\tau)\mathrm dt \right]\\
+$$
+
+
+<p>Autocorrelation</p>
+
+$$
+R(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f(t)f(t-\tau)\mathrm dt \right]\\
+$$
+
+
+<p>(4)  $f_1(t)$  and  $f_2(t)$  are both complex and power signals</p>
+
+$$
+R_{12}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_1(t)f_2^*(t-\tau)\mathrm dt \right]\\
+R_{21}(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f_2(t)f_1^*(t-\tau)\mathrm dt \right]\\
+$$
+
+
+<p>Autocorrelation</p>
+
+$$
+R(\tau) = \lim_{T\rightarrow\infty}\left[\frac1T\int_{-T/2}^{T/2}f(t)f^*(t-\tau)\mathrm dt \right]\\
+$$
+
+
+<p><strong>Correlation Theorem</strong></p>
+
+$$
+\mathcal F(x(t)) = X(\omega)\\
+\mathcal F(y(t)) = Y(\omega)\\
+\mathcal F(R_{xy}(\tau)) = X(\omega)Y^*(\omega)\\
+$$
+
+
+<p>If  $x(t) = y(t)$ , The FT of the autocorrelation function is  $\mathcal F[{R_{xx}(\tau)}] = |X(\omega)|^2$ </p>
+<p>If  $y(t)$  is a real and even function:  $Y^*(\omega) = Y(\omega)$ </p>
+<p> Then the correlation theorem is equivalent to the convolution theorem</p>
+
+$$
+\mathcal F(\int_{-\infty}^\infty x(t)y(t-\tau)\mathrm dt) = X(\omega)Y(\omega)\\
+$$
+
+
+<p>Generally, </p>
+
+$$
+R_{12}(t) = f_1(t) * f_2(-t)
+$$
+
+
+<h3 id="Energy-amp-Power-Spectral-Density"><a href="#Energy-amp-Power-Spectral-Density" class="headerlink" title="Energy &amp; Power Spectral Density"></a>Energy &amp; Power Spectral Density</h3>
+$$
+R(\tau) = \int_{-\infty}^{\infty}f(t)f^*(t-\tau)\mathrm dt\\
+$$
+
+
+
+$$
+R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2 e^{j\omega\tau}\mathrm d\omega\\
+|F(\omega)|^2 = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\tau\\
+$$
+
+
+$$
+R(0) = \int_{-\infty}^{\infty}f(t)f^*(t)\mathrm dt = \int_{-\infty}^{\infty}\lvert f(t)\rvert^2\mathrm dt\\
+R(0) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2\mathrm d\omega\\
+$$
+
+
+
+$$
+\int_{-\infty}^{\infty}\lvert f(t)\rvert^2\mathrm dt = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert F(\omega)\rvert^2\mathrm d\omega
+$$
+
+
+<p><strong>Energy Spectral Density</strong></p>
+
+$$
+\mathcal{E}(\omega) = \lvert F(\omega)\rvert^2\\
+$$
+
+
+
+$$
+\mathcal{E}(\omega) = \mathcal{F}[R(\tau)]\\
+R(\tau) = \mathcal{F}^{-1}[\mathcal{E}(\omega)]\\
+$$
+
+
+<p><strong>Power Spectral Density</strong></p>
+
+$$
+\mathcal F[ R(\tau)] = \mathcal P(\omega)\\
+$$
+
+
+<p>It is called Power Spectral Density (PSD).</p>
+<p>Wiener-Khinchin Theorem</p>
+
+$$
+R(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal P(\omega)e^{j\omega\tau}\mathrm d\tau\\
+\mathcal P(\omega) = \int_{-\infty}^{\infty}R(\tau)e^{-j\omega\tau}\mathrm d\omega\\
+$$
+
+
+<h3 id="ESD-x2F-PSD-of-the-System-Response"><a href="#ESD-x2F-PSD-of-the-System-Response" class="headerlink" title="ESD&#x2F;PSD of the System Response"></a>ESD&#x2F;PSD of the System Response</h3>
+$$
+|R(j\omega)|^2 = |H(j\omega)|^2|E(j\omega)|^2\\
+\mathcal{E}_r(\omega) = |H(j\omega)|^2\mathcal{E}_e(\omega)\\
+\mathcal{P}_r(\omega) = |H(j\omega)|^2\mathcal{P}_e(\omega)\\
+$$
+
+
+<p><img src="/../images/ss/lec16_1.jpg" loading="lazy"></p>
+<p>The last line of this table is wrong. The correct is:</p>
+
+$$
+R_h(\tau) = h(\tau) * h^*(-\tau)
+$$
+
+
+<h3 id="Match-Filters"><a href="#Match-Filters" class="headerlink" title="Match Filters"></a>Match Filters</h3>
+$$
+H(j\omega) = kS(-j\omega)e^{-j\omega t_m}\\
+h(t) = ks(t_m - t)\\
+$$
+
+
+ $t_m$  is the signal width in TD.
+
+<h2 id="Discrete-time-signals"><a href="#Discrete-time-signals" class="headerlink" title="Discrete time signals"></a>Discrete time signals</h2><p>Discrete time-axis, but continuous amplitude-axis</p>
+<h3 id="Sequence-operation"><a href="#Sequence-operation" class="headerlink" title="Sequence operation"></a>Sequence operation</h3><p><strong>Addition</strong>  $z(n) = x(n) + y(n)$ </p>
+<p><strong>Multiplication</strong>  $z(n) = x(n) * y(n)$ </p>
+<p><strong>Multiplied a coefficient</strong>  $z(n) = a * x(n)$ </p>
+<p><strong>Shift</strong>  $z(n) = x(n - m)$  right shift( $m&gt;0$ ),  $z(n) = x(n +m)$  left shift</p>
+<p><strong>Reflection</strong>  $z(n) = x(-n)$ </p>
+<p><strong>Difference</strong>  $\Delta x(n) = x(n + 1) - x(n)$  Forawrd difference, </p>
+ $\nabla x(n) = x(n) - x(n - 1)$  Backward difference
+
+ $\nabla^mx(n) = \nabla(\nabla^{m-1}x(n))$ 
+
+<p><strong>Summation</strong>  $z(n) = \sum_{k = -\infty}^{n}x(k)$ </p>
+<p><strong>Scaling</strong>  $z(n) = z(2n)$  squeeze, </p>
+ $z(n) = x(n/2)$ , extend
+
+<h3 id="Typical-sequences"><a href="#Typical-sequences" class="headerlink" title="Typical sequences"></a>Typical sequences</h3><p><img src="/../images/ss/lec16_2.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec16_3.jpg" loading="lazy"></p>
+<p>Relations of several singal waveforms</p>
+
+$$
+u(n) = \sum_{k = 0}^{\infty}\delta(n - k)\\
+\delta(n) = u(n) - u(n - 1)\\
+R_N(n) = u(n) - u(n - N)\\
+$$
+
+
+<h3 id="Signal-Decomposition-1"><a href="#Signal-Decomposition-1" class="headerlink" title="Signal Decomposition"></a>Signal Decomposition</h3>
+$$
+x(n) = \sum_{m = -\infty}^{\infty}x_m\delta(n - m)\\
+$$
+
+
+
+$$
+\delta(n - m) = \begin{cases}
+1, & n = m\\
+0, & n \neq m
+\end{cases}
+$$
+
+
+<h3 id="Difference-equations"><a href="#Difference-equations" class="headerlink" title="Difference equations"></a>Difference equations</h3><p><img src="/../images/ss/lec16_4.jpg" loading="lazy"></p>
+<p>Numerical solution of difference equations</p>
+<p>General form of difference equation:</p>
+
+$$
+\sum_{k = 0}^N a_ky(n - k) = \sum_{r = 0}^M b_ry(n - r)\\
+$$
+
+
+<p><strong>Methods:</strong></p>
+<ul>
+<li>Recursive method</li>
+<li><ul>
+<li>Intuitive, difficult to formulate the closed-form solutions</li>
+</ul>
+</li>
+<li>Time-domain classical method</li>
+<li><ul>
+<li>Obtain homogeneous and particular solutions and using the  boundary condition to determine the coefficients.</li>
+</ul>
+</li>
+<li>The sum of the zero-input and zero-state responses</li>
+<li><ul>
+<li>Convolution (next class)</li>
+</ul>
+</li>
+<li>Z-transform (Chapter 8)</li>
+<li>State variable method (Chapter 11)</li>
+</ul>
+<p><strong>Homogeneous Solution</strong></p>
+
+$$
+\sum_{k = 0}^N a_ky(n - k) = 0\\
+$$
+
+
+<p>The <strong>characteristic root</strong>  $\alpha_k$  satisfies:</p>
+
+$$
+a_0\alpha^N + a_1\alpha^{N-1} + \cdots + a_N = 0\\
+$$
+
+
+<p>The homogeneous solution is:</p>
+
+$$
+y(n) = c_1\alpha_1^n + c_2\alpha_2^n + \cdots + c_N\alpha_N^n\\
+$$
+
+
+<p><strong>Particular Solutions</strong>:</p>
+<p><img src="/../images/ss/lec16_.jpg" loading="lazy"></p>
+<p><strong>General steps</strong></p>
+<ol>
+<li>Obtain homogeneous solutions from characteristic equation  $c_1\alpha_1^n + c_2\alpha_2^n + \cdots + c_N\alpha_N^n$ </li>
+<li>Determine the form of the particular solution  $D(n)$ </li>
+<li>The complete solution  $c_1\alpha_1^n + c_2\alpha_2^n + \cdots + c_N\alpha_N^n + D(n)$ </li>
+<li>Introduce the boundary condition and set up equations
+$$
+y(0) = C_1 +C_2 + \cdots + C_N + D(0)\\
+y(1) = C_1\alpha_1 +C_2\alpha_2 + \cdots + C_N\alpha_N + D(1)\\
+\vdots\\
+y(N - 1) = C_1\alpha_1^{N - 1} + C_2\alpha_2^{N - 1} + \cdots + C_N\alpha_N^{N - 1} + D(N - 1)\\
+\Rightarrow\\
+Y(k) - D(k) = VC\\
+C = V^{-1}(Y(k) - D(k))\\
+$$
+</li>
+</ol>
+<h3 id="Zero-input-and-zero-state-responses"><a href="#Zero-input-and-zero-state-responses" class="headerlink" title="Zero-input and zero-state responses"></a>Zero-input and zero-state responses</h3>
+$$
+y(k) = y_{zi}(k) + y_{zs}(k)
+$$
+
+
+<p><strong>Zero-Input Response</strong></p>
+ $D(k) = 0 \Rightarrow C_{zi} = V^{-1}Y_{zi}(k)$ 
+
+<p><strong>Zero-State Response</strong></p>
+
+$$
+\begin{align*}
+  C_{zs} &= V^{-1}[Y_{zs}(k) - D(k)]\\
+C_{zs} &= V^{-1}[Y(k) - Y_{zi}(k) - D(k)]\\
+C &= C_{zi} + C_{zs}\\
+\end{align*}
+$$
+
+
+<p><strong>Natural Response</strong>  $\sum_{k = 1}^NC_k\alpha_k^n$ </p>
+<p><strong>Forced Response</strong>  $D(n)$ </p>
+<p>Characteristics of the boundary condition for difference equations</p>
+<p>N-th order difference equation should have N independent boundary conditions.</p>
+<p>Compared with continuous systems, there are no big differences between  $0_+$  and  $0_-$  in discrete systems. </p>
+ $y(-1), y(-2), \dots, y(-N)$  are the system memory (storage) before the excitation is added:  $0_-$ 
+
+<p>Derive (together with the excitation)  $y(0), y(1), …, y(N-1): 0_+$ </p>
+<p>Using Z-transform can avoid mistakes－similar to the Laplace transform in continuous systems.</p>
+<h3 id="Impulse-response-of-DT-systems"><a href="#Impulse-response-of-DT-systems" class="headerlink" title="Impulse response of DT systems"></a>Impulse response of DT systems</h3><p>Similar to CT System, h(n) reflects system’s property</p>
+<p><strong>Causality</strong>  $h(n) = h(n) u(n)$  (unlateral,  $n\lt 0$  no response)</p>
+<p><strong>Stability</strong>  $\sum_{n=-\infty}^\infty |h(n)| \lt \infty$  (absolutely summable)</p>
+<pre><code> NOTE:  critical stability can be considered as either stable or unstable, e.g.,  system whose impulse response is a sine sequence
+</code></pre>
+<p>Not all practical discrete systems are necessarily causal：</p>
+<ul>
+<li>Variable is not time, like image processing</li>
+<li>Variable is time, but data has been recorded and processed, like voice processing, meteorology, stock systems.</li>
+</ul>
+<p>Example: Smooth windowing</p>
+
+$$
+y(n) = \frac{1}{2M+1}\sum_{k=-M}^M x(n-k)
+$$
+
+
+<p>Discrete non-causal system</p>
+<h3 id="Convolution-Sum"><a href="#Convolution-Sum" class="headerlink" title="Convolution Sum"></a>Convolution Sum</h3>
+$$
+y(n) = \sum_{m = -\infty}^\infty x(m)h(n - m) = h(n) * x(n)
+$$
+
+
+<p>Similar to CT system, also satisfies both distributive and associative laws </p>
+<p>Calculation of convolution：<br>Four steps: reflection, shift, multiplication and summation. </p>
+<p>Calculation of correlation：<br>Cross- &amp; auto-correlation: shift, multiplication &amp; summation. </p>
+<p>Example:</p>
+
+$$
+x(n) = u(n) - u(n - N)\\
+h(n) = a^nu(n)\\
+y(n) = x(n) * h(n)
+$$
+
+
+
+$$
+y(n) = \sum_{m = -\infty}^\infty [u(m) - u(m - N)]a^{n - m}u(n - m)
+$$
+
+
+<p>if  $n &lt; 0$ , then  $y(n) = 0$ </p>
+<p>if  $0 \le n \lt N - 1$ ,  $y(n) = \sum_{m = 0}^na^{n-m} = \frac{1}{1 - a}[1 - a^{n+1}]$ </p>
+<p>if  $n \ge N - 1$ ,  $y(n) = \frac{1 - a^{-N}}{1 - a^{-1}}a^n$ </p>
+<p><strong>Deconvolution</strong></p>
+<p><strong>Signal retrieval</strong> y(n) and h(n) are known, how to derive x(n)?</p>
+<p><em>Measurement equipment (linear system), like sensor for measuring blood pressure</em></p>
+<p><strong>System identification</strong> y(n) and x(n) are known, how to derive h(n)?</p>
+<p><em>Earthquake signal, like geological survey, oil exploration, etc.</em></p>
+
+$$
+\begin{bmatrix*}
+   y(0)\\
+   y(1)\\
+   y(2)\\
+   \vdots\\
+   y(n)
+\end{bmatrix*} = 
+\begin{bmatrix*}
+  h(0) & 0 & 0 & \dotsb & 0\\
+  h(1) & h(0) & 0 & \dotsb & 0\\
+  h(2) & h(1) & h(0) & \dotsb & 0\\
+  \vdots & \vdots & \vdots & \ddots & \vdots\\
+  h(n) & h(n-1) & h(n-2) & \dotsb & h(0)\\
+\end{bmatrix*}\begin{bmatrix*}
+   x(0)\\
+   x(1)\\
+   x(2)\\
+   \vdots\\
+   x(n)
+\end{bmatrix*}
+$$
+
+
+<p>Thus, </p>
+
+$$
+x(n) = \left[y(n) - \sum_{m = 0}^{n-1} x(m) h(n - m)\right]/h(0)\\
+h(n) = \left[y(n) - \sum_{m = 0}^{n-1} h(m) x(n - m)\right]/x(0)
+$$
+
+
+<h3 id="Important-Concepts"><a href="#Important-Concepts" class="headerlink" title="Important Concepts"></a>Important Concepts</h3><p><img src="/../images/ss/lec17_1.jpg" loading="lazy"></p>
+<ol>
+<li>Symbol rate :  clock period is  $T$ , signal symbol rate is  $f = 1/T$ .</li>
+<li>Information rate: information rate equals to symbol rate for binary encoding, otherwise, equal to multiplication between symbol rate and number of information bits per symbol.</li>
+<li>Signal bandwidth: the first zero of non-return-to-zero (NRZ) signal’s spectrum is  $1/T$ ,  so the signal bandwidth is  $B=1/T =f$ .</li>
+</ol>
+<blockquote>
+<p>这句话是在介绍非归零码（Non-Return-to-Zero，简称NRZ）信号的带宽计算方式。</p>
+<p>在信号处理和通信中，信号的频谱表示了信号在不同频率上的能量分布。对于一个NRZ信号，它的频谱图中第一个零点（也就是在零周围出现的第一个极小值点）出现在频率为 $1/T$ 处，其中 $T$ 是NRZ信号中一个脉冲的时间长度。这是因为NRZ信号的频谱是由一个周期为 $T$ 的方波产生的，其频率成分只包含正弦函数的奇次谐波。其中，最低的一个谐波频率是 $f=\frac{1}{T}$ ，对应的是频率为 $f$ 的正弦波。所以，NRZ信号的带宽 $B$ 就被定义为 $f=1/T$ 。</p>
+<p>简而言之，NRZ信号的带宽是由脉冲的时间长度决定的，具体来说，带宽等于脉冲频率的一半，即带宽等于 $f=1/T$ 。</p>
+</blockquote>
+<p>NOTE:</p>
+<p>When NRZ code is used, signal bandwidth &#x3D; symbol rate</p>
+<p>When return-to-zero (RZ) code is used, signal bandwidth &gt; symbol rate</p>
+<p>Using NRZ code can save bandwidth yet high frequency components of the rectangular signal will suffer from the severe inter-symbol interference (ISI). So the raised cosine or Sa function is preferred.</p>
+<blockquote>
+<p>ChatGPT:</p>
+<p>归零码和非归零码都是数字通信中常用的编码方式。</p>
+<p>归零码（Return-to-Zero，简称RZ）是一种二进制码，其中一个信号所代表的位是由一个脉冲表示的。发送二进制“1”时，脉冲电平为高电平，发送二进制“0”时，脉冲电平为低电平。在归零码中，一个信号位所代表的脉冲之后，信号在下一时刻会回到零电平。由于归零码中每个脉冲结束时信号回到零电平，因此这种编码方式具有稳定可靠的特点，但是传输的带宽相对较大。</p>
+<p>非归零码（Non-Return-to-Zero，简称NRZ）的编码方式与归零码不同之处在于，在NRZ信号中，一个信号所代表的位是由一个固定电平表示的。当信号所代表的位是二进制“1”时，固定电平为高电平；当信号所代表的位是二进制“0”时，固定电平为低电平。这种编码方式的好处是带宽更小，但是却存在着在多个二进制“1”连续发送时，出现误解的情况。</p>
+<p>综上所述，归零码是二进制码中脉冲与幅度的双重编码，不易产生传输误码，但其对于通信带宽需求较大；而非归零码不需要对脉冲进行编码，在带宽方面具有一定的优势，但长时间连续发送相同信息时会产生误解。</p>
+</blockquote>
+<h3 id="Z-Transform"><a href="#Z-Transform" class="headerlink" title="Z-Transform"></a>Z-Transform</h3><p>Similar to the L-Tranform.</p>
+<p><strong>Definition</strong></p>
+
+$$
+X(z) = Z(x(n)) = \sum_{n = -\infty}^{\infty} x(n) z^{-n}
+$$
+
+
+<p><strong>Z-T of Typical Series</strong></p>
+ $z \in \Complex$ 
+
+
+$$
+\delta(n) \rightarrow 1\\
+u(n) \rightarrow \frac{1}{1-z^{-1}}(|z| \gt 1)\\
+nu(n) \rightarrow \frac{z^{-1}}{(1-z^{-1})^2}(|z| \gt 1)\\
+a^n u(n) \rightarrow \frac{1}{1-az^{-1}}(|z| \gt |a|)\\
+\cos(\omega_0 n) u(n) \rightarrow \frac{1-z^{-1}\cos(\omega_0)}{1-2z^{-1}\cos(\omega_0) + z^{-2}}\\
+\sin(\omega_0 n) u(n) \rightarrow \frac{z^{-1}\sin(\omega_0)}{1-2z^{-1}\cos(\omega_0) + z^{-2}}\\
+$$
+
+
+<p><strong>The Region of Convergence</strong></p>
+<p><img src="/../images/ss/lec18_1.jpg" loading="lazy"></p>
+<p><strong>Inverse Z-Transform</strong></p>
+
+$$
+x(n) = \frac{1}{2\pi j} \oint_C X(z) z^{n-1} dz
+$$
+
+
+<p><strong>Method</strong></p>
+<p><strong>Contour Integration(residue method)</strong></p>
+<p>Right-sided sequence</p>
+
+$$
+x(n) = \sum_{k = 1}^{N} Res\{X(z)z^{n-1}\}|_{z = z_k}
+$$
+
+
+<p>Left-sided sequence</p>
+
+$$
+x(n) = - \sum_{k = 1}^{N} Res\{X(z)z^{n-1}\}|_{z = z_k}
+$$
+
+
+<p><strong>Power series expansion(Long division)</strong></p>
+<p><img src="/../images/ss/lec18_2.jpg" loading="lazy"></p>
+<p>If it is right sided, </p>
+
+$$
+X(z) = \sum_{n = 0}^\infty x(n)z^{-n}
+$$
+
+
+<p>If it is left sided,</p>
+
+$$
+X(z) = \sum_{n = -\infty}^{-1}x(n)z^{-n}
+$$
+
+
+<p><strong>Partial Fraction Expansion</strong></p>
+
+$$
+\frac{z}{z - a} \lrarr \begin{cases}
+ a^nu(n), &|z|\gt |a|\\
+ -a^nu(-n-1), &|z|\lt |a|
+\end{cases}
+$$
+
+
+<p><img src="/../images/ss/lec18_3.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec18_34jpg.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec18_6.jpg" loading="lazy"></p>
+<p><strong>Properties of Z-T</strong></p>
+<p><strong>Linearity</strong></p>
+<p>Addition and homogeneity</p>
+<p><font color="red">ROC may change!</font></p>
+<p>i.e. poles are cancelled when added: ROC will enlarge or and shrink.</p>
+<p><strong>Time shifting</strong></p>
+<p>(a) bilateral: If  $\mathcal Z[x(n)] = X(z), R_{X_1} &lt; |z| &lt; R_{X_2}$ , then  $\mathcal{Z}[x(n-m)] = z^{-m}X(z), R_{X_1} &lt; |z| &lt; R_{X_2}$ .</p>
+<p>(b) unilateral: if  $\mathcal{Z}[x(n)] = X(z), R_{X_1} &lt; |z|$ , then  $\mathcal{Z}[x(n-m)] = z^{-m}[X(z) + \sum_{k = -m}^{-1}x(k)z^{-k}], R_{X_1}\lt |z|$ , and  $\mathcal{Z}[x(n+m)] = z^{m}[X(z) - \sum_{k = 0}^{m-1}x(k)z^{-k}], R_{X_1}\lt |z|$ </p>
+<p>For casual sequence,  $n &lt; 0, x(n) = 0$ , the unilateral is also  $\mathcal{Z}[x(n-m)] = z^{-m}X(z)$ .</p>
+<p>The reason is that the unilateral z transform doesn’t contain the  $n&lt;0$  parts of sequence, but after shifting, sometimes must be counted(right shift), sometimes must be discarded(left shift).</p>
+<p><strong>Linear weighting on sequence(Z domain differentiation)</strong></p>
+
+$$
+\mathcal{Z}[x(n)] = X(z) \Rightarrow nx(n)\lrarr -z\frac{dX(z)}{dz}
+$$
+
+
+<p>Generalization:</p>
+
+$$
+n^mx(n)\lrarr \bigg[-z\frac{d}{dz}\bigg]^m X(z)
+$$
+
+
+<p><strong>Geometric progression(Z-domain scaling)</strong></p>
+
+$$
+a^n(x^n) \lrarr X(\frac{z}{a})\\
+(R_{x1} \lt \bigg|\frac{z}{a}\bigg| \le R_{x2})
+$$
+
+
+
+$$
+a^{-n}x(n) \lrarr X(az)\\
+(-1)^nx(n) \lrarr X(-z)
+$$
+
+
+<p><strong>Initial-value theorem</strong></p>
+
+$$
+x(0) = \lim_{z \rightarrow \infty }X(z)
+$$
+
+
+<p><strong>Final-value theorem</strong></p>
+
+$$
+\lim_{n \rightarrow \infty } x(n) = \lim_{z \rightarrow 1}[(z-1)X(z)]
+$$
+
+
+<p>condition: when  $n \rightarrow \infty$ ,  $x(n)$  converge </p>
+<p>Thus, the poles of  $X(z)$  are inside the unit circle, the radius of ROC is less than 1.</p>
+<p>For  $a^nu(n), |a| \lt 1$ , the final value is 0.</p>
+<p>Or, if the pole is on the unit circle, it should be 1, and is of the 1st order.</p>
+ $u(n)$ 's final value is 1.
+
+<p><img src="/../images/ss/lec19_1jpg.jpg" loading="lazy"></p>
+<p><strong>Time-domain convolution theorem</strong></p>
+<p>If  $\mathcal{Z}{x(n)} = X(z), (R_{x1} \lt |z| \lt R_{x2}), \mathcal{Z}{h(n)} = H(z), (R_{h1} \lt |z| \lt R_{h2})$ </p>
+
+$$
+\mathcal{Z}[x(n) * h(n)] = X(z)H(z)\\
+\max(R_{x1}, R_{h1}) \lt |z| \lt \min(R_{x2}, R_{h2})
+$$
+
+
+<p>If poles are cancelled in multiplication, ROC is enlarged.</p>
+<p>Conclusion: (Z Transform) convolution in time-domain is equivalent to multiplication (of Z Transform) in Z-domain.</p>
+<p><strong>Z domain convolution theorem</strong></p>
+
+$$
+\mathcal{Z}[x(n)h(n)] = \frac{1}{2\pi j} \oint_C X(\frac{z}{v})H(v)v^{-1}dv
+$$
+
+
+<p>or </p>
+
+$$
+\mathcal{Z}[x(n)h(n)] = \frac{1}{2\pi j} \oint_C X(v)H(\frac{z}{v})v^{-1}dv
+$$
+
+
+<p>where  $C$  is a closed contour in the intersection of ROCs of  $X(\frac{z}{v})$  and  $H(v)$  or  $X(v)$  and  $H(\frac z v)$ .</p>
+<p>let  $v = \rho e^{j\theta}, z = r e^{j\varphi}$ , </p>
+<p>then </p>
+
+$$
+\mathcal Z[x(n)h(n)] = \frac{1}{2\pi}\int_{-\pi}^\pi X(\rho e^{j\theta})H(\frac r\rho e^{-j(\varphi - \theta)})d\theta
+$$
+
+
+<h3 id="Mapping-of-ZT-and-LT"><a href="#Mapping-of-ZT-and-LT" class="headerlink" title="Mapping of ZT and LT"></a>Mapping of ZT and LT</h3>
+$$
+z = e^{sT} ,\omega_s = \frac{2\pi}{T}
+\\
+re^{j\theta} = e^{(\sigma + j\omega)T}\\
+$$
+
+
+<p>then, </p>
+
+$$
+r = e^{\sigma T} = e^{2\pi\frac{\sigma}{\omega_s}}\\
+\theta = \omega T = 2\pi\frac{\omega}{\omega_s}
+$$
+
+
+<p>when  $\sigma$  is constant, </p>
+<p>vertical line in  $s$ -plane maps the circle in  $z$ -plane.</p>
+ $s$ -plane imaginary axis maps the unit circle in  $z$ -plane.
+
+<p>when  $\omega$  is constant,</p>
+<p><img src="/../images/ss/lec19_2jpg.jpg" loading="lazy"></p>
+<p><strong>Correspondence of ZT and LT</strong></p>
+<p><img src="/../images/ss/lec19_3.jpg" loading="lazy"></p>
+<h3 id="Solving-difference-equation-by-Z-T"><a href="#Solving-difference-equation-by-Z-T" class="headerlink" title="Solving difference equation by Z-T"></a>Solving difference equation by Z-T</h3>
+$$
+\sum_{k = 0}^N a_ky(n-k) = \sum_{r = 0}^M b_rx(n-r)
+$$
+
+
+<p>Two methods:</p>
+<ul>
+<li>TD method</li>
+<li>Z-T method (notice the ROC)</li>
+</ul>
+<p><strong>ZT method</strong></p>
+<ol>
+<li>perform unilateral Z-T on both sides.</li>
+</ol>
+ $x(n-r), y(n-k)$  are both right shifted series
+
+
+$$
+\sum_{k = 0}^N a_kz^{-k}[Y(z) + \sum_{l = -k}^{-1}y(l)z^{-l} ]= \sum_{r = 0}^M b_rz^{-r}[X(z) + \sum_{m = -r}^{-1}x(m)z^{-m} ]
+$$
+
+
+<ol start="2">
+<li>Derive  $Y(z)$ </li>
+<li>Perform inverse transform on  $Y(z)$  to get  $y(n)$ (ROC!)</li>
+</ol>
+<p><strong>Zero input response</strong></p>
+
+$$
+x(n) = 0\\
+Y(z) = \frac{-\sum_{k = 0}^M[a_kz^{-k}\cdot \sum_{l = -k}^{-1}y(l)z^{-l}]}{\sum_{k = 0}^Na_kz^{-k}}
+$$
+
+
+<p><strong>Zero state response</strong></p>
+
+$$
+y(l) = 0\\
+\text{ casual sequence }: x(m) = 0\\
+\sum_{k = 0}a_kz^{-k}Y(z) = \sum_{r = 0}^M b_rz^{-r}X(z)\\
+Y(z) = X(z)\cdot\frac{\sum_{r = 0}^M b_rz^{-r}}{\sum_{k = 0}^Na_kz^{-k}} = X(z)\cdot H(z)
+$$
+
+
+<h3 id="System-function-of-DT-system"><a href="#System-function-of-DT-system" class="headerlink" title="System function of DT system"></a>System function of DT system</h3><p><strong>Unit Impulse&#x2F;sample response  $h(n)$  and system function H(z)</strong></p>
+
+$$
+y(n) = x(n) * h(n)\\
+Y(z) = H(z)\cdot X(z)
+$$
+
+
+
+$$
+H(z) = \frac{Y(z)}{X(z)} = \frac{\sum_{r = 0}^M b_rz^{-r}}{\sum_{k = 0}^Na_kz^{-k}}
+$$
+
+
+<p>Factorization</p>
+
+$$
+H(z) = \frac{\prod_{r = 1}^M(1-z_rz^{-1})}{\prod_{k=1}^N1-p_kz^{-1}}
+$$
+
+
+<p>We can draw the conclusions directly from the relationship between Z-T and L-T</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Imaginary axis</td>
+<td> $\sigma=0$ </td>
+<td>Constant amplitude</td>
+<td> $r = 1$ </td>
+<td>Unit circle</td>
+</tr>
+<tr>
+<td>Right half plane</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Left half plane</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Real axis</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/../images/ss/lec20_1.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec20_2.jpg" loading="lazy"></p>
+<p><strong>Stability and Causality</strong></p>
+<p>Stable: iff</p>
+
+$$
+\sum_{n=-\infty}^\infty |h(n)|\lt \infty
+$$
+
+
+
+$$
+z = 1, H(z) = \sum_{n=-\infty}^\infty h(n)\lt \infty
+$$
+
+
+<p>The condition is ROC of stable system includes the unit circle.</p>
+<p>Causal:</p>
+
+$$
+h(n) = h(n)u(n)
+$$
+
+
+<p>Condition is ROC includes  $\infty$ :  $R_{X_1}\lt |z|$ </p>
+<p><strong>Stable and causal</strong></p>
+
+$$
+a\le |z| \le \infty, a\le 1
+$$
+
+
+<h3 id="Discrete-time-Fourier-Transform-DTFT"><a href="#Discrete-time-Fourier-Transform-DTFT" class="headerlink" title="Discrete-time Fourier Transform(DTFT)"></a>Discrete-time Fourier Transform(DTFT)</h3><p><strong>Definition</strong></p>
+
+$$
+\mathcal{F}[x(t)\delta_T(t)] = \int_{-\infty}^\infty x(t)\delta_T(t)e^{-j\omega t}dt = \sum_{n=-\infty}^\infty x(nT)e^{-j\omega nT}
+$$
+
+
+<p>take  $T = 1$ </p>
+
+$$
+\sum_{n=-\infty}^\infty x(n)e^{-j\omega n} = \text{DTFT[x(n)]}
+$$
+
+
+<p>The relation ship with Z-T:</p>
+
+$$
+X(z) = \sum_{n = -\infty}^\infty x(n)z^{-n}, z = e^{j\omega}\\
+$$
+
+
+
+$$
+DTFT[x(n)] = X(z)|_{|z|=1} = X(z)|_{z = e^{j\omega}} = X(e^{j\omega})
+$$
+
+
+<p>Inverse transform</p>
+
+$$
+x(n) = \frac{1}{2\pi j}\oint_{|z| = 1}X(z)z^{n-1}\mathrm dz=\frac{1}{2\pi}\int_{-\pi}^\pi X(e^{j\omega})e^{j\omega n}\mathrm d\omega
+$$
+
+
+<h3 id="Frequency-Response-of-DT-system"><a href="#Frequency-Response-of-DT-system" class="headerlink" title="Frequency Response of DT system"></a>Frequency Response of DT system</h3><p>The steady-state response to sine sequence</p>
+
+$$
+x(n) = A\sin(n\omega)(n\ge 0)\\
+y_{ss}(n) = A|H(e^{j\omega})|\sin(n\omega + \varphi)\\
+H(e^{j\omega}) = \sum_{n=-\infty}^\infty h(n)e^{-jn\omega}
+$$
+
+
+<p>The FT of  $h(n)$ ,  $H(e^{j\omega})$  is a periodic function with period of  $\omega_s = 2\pi /T = 2\pi$ .</p>
+<p>If  $h(n)$  is real, then the amplitude&#x2F;phase response is even&#x2F;odd function.</p>
+<p>The amplitude is determined within  $[0, \omega_s/2]$ </p>
+<p><img src="/../images/ss/lec20_3.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec20_4.jpg" loading="lazy"></p>
+<p>NOTE:</p>
+<ul>
+<li>We can derive the frequency response (function of  $\omega$ ) by letting  $D$  move along the unit circle once.</li>
+<li> $H(j\omega)$  is periodic. The frequency response from 0 to  $\omega_s/2$  can be determined by letting  $D$  move along half circle.</li>
+<li>If pole  $p_i$  is close to the unit circle, there will be a peak in the frequency response. If zero  $z_i$  is close to the unit circle, there will be a notch in the frequency response.</li>
+<li>For statble systems,  $p_i$  should be inside the unit circle, while  $z_i$  could be inside or outside the unit circle.</li>
+<li>poles and zeros at origin have no influence on amplitude.</li>
+</ul>
+<h3 id="Analog-and-digital-Filter"><a href="#Analog-and-digital-Filter" class="headerlink" title="Analog and digital Filter"></a>Analog and digital Filter</h3><p><strong>Fundamental Principles</strong></p>
+<p><img src="/../images/ss/lec20_5.jpg" loading="lazy"></p>
+<p>The spectrum of  $x(t)$  is strictly inside  $\pm \omega_m$ .</p>
+<p>We choose the sampling frequency: $\omega_s = \frac{2\pi}{T} \ge 2\omega_m$ </p>
+<p><img src="/../images/ss/lec20_6.jpg" loading="lazy"></p>
+<p><strong>Classifications of digital filters</strong></p>
+
+$$
+y(n) = \sum_{k=0}^M b_kx(n-k) - \sum_{k=1}^N a_ky(n-k)
+$$
+
+
+<p>In terms of structure</p>
+<p>recursive:  $a_k\ne 0$  at least for one  $k$ </p>
+<p>non-recursive:  $a_k=0$ , for all  $k$ </p>
+<p>In terms of the characteristics of  $h(n)$ </p>
+<p>Infinite impulse response(IIR): recursive, non-linear phase</p>
+<p>Finite impulse response(FIR): non-recursive, linear phase.</p>
+<p><strong>IIR filter</strong></p>
+<p>Impulse invariance</p>
+<p>Based on the s-domain analog filters.</p>
+<p>Design method 1: <strong>冲激响应不变法</strong></p>
+<p>Replace  $\frac{1}{s-s_k}$  with  $\frac{1}{1-e^{s_kT}z^{-1}}$ . Then  $H_a(s)$  become  $H(z)$ .</p>
+<p>The relationship between the continuous and discrete filters:</p>
+
+$$
+H(z)|_{z = e^{sT}} = \frac{1}{T}\sum_{k=-\infty}^\infty H_a(s + j\frac{2\pi}{T}k)
+$$
+
+
+<p>The result is just repeat the original filter at sampling frequency, thus it attenuates slower.</p>
+<p>NOTE:The digital filter implemented this way has aliasing.</p>
+<p>The frequency response of analog filter must be attenuated enough within  $\omega_s$ .</p>
+<p>This approach can only realize LP and BP filter, but not HP and band-stop one. </p>
+<p><strong>method 2: Bilinear transformation</strong> emerges to address this problem (you can study it by yourself)</p>
+
+$$
+s = \frac{2}{T}\left(\frac{1 - z^{-1}}{1 + z^{-1}}\right)\\
+z = \frac{1 + \frac{sT}{2}}{1 - \frac{sT}{2}}
+$$
+
+
+<p>Bilinear transformation is non-linear transformation.</p>
+<p>To implement digital filter, A&#x2F;D and D&#x2F;A are required, along with ROM, RAM, ALU, delay units (shift registers), etc.</p>
+<p><strong>FIR filter</strong></p>
+
+$$
+H(z) = \sum_{k = 0}^{N-1}b_kz^{-k} = \sum_{n=0}^{N-1}h(n)z^{-n}
+$$
+
+
+<p>Poles are at  $z=0$ .  $N - 1$  zeros.</p>
+<p>FIR filter has linear-phase iff</p>
+
+$$
+h(n) = h(N - 1 - n)(\text{evenly symmetric})\\
+h(n) = -h(N - 1 - n)(\text{oddly symmetric})
+$$
+
+
+<p><img src="/../images/ss/lec20_7.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec20_8.jpg" loading="lazy"></p>
+<h3 id="Feedback-System-Signal-Flow-Graphs"><a href="#Feedback-System-Signal-Flow-Graphs" class="headerlink" title="Feedback System: Signal Flow Graphs"></a>Feedback System: Signal Flow Graphs</h3><p><strong>Operator and Transfer Operator:</strong></p>
+
+$$
+p = \frac{d}{dt}\\
+\frac{1}{p} = \int_{-\infty}^t(\cdot)d\tau
+$$
+
+
+
+$$
+(C_0p^n + C_1p^{n-1} + \dotsb + C_n)r(t) = (E_0p^m + E_1p^{m - 1} + \dotsb + E_m)e(t)\\
+D(p)r(t) = N(p)e(t)
+$$
+
+
+<p>Rules:</p>
+<ul>
+<li>Common factors can’t be eliminated.</li>
+<li>Be careful when changing the order of operation( $\frac{d}{dt}\int_{-\infty}^tx(\tau)d\tau = x(t)$ ,  $\int_{-\infty}^t\frac{d}{d\tau}x(\tau)d\tau = x(t) - x(-\infty)$ )</li>
+</ul>
+<p>transfer operator:</p>
+
+$$
+r(t) = \frac{N(t)}{D(t)}e(t) = H(p)e(t)
+$$
+
+
+<p><strong>Brief introduction to the signal flow graphs(SFG)</strong></p>
+<p><img src="/../images/digital/lec_11_1.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec21_4.jpg" loading="lazy"></p>
+<p>Terminnologies in SFG</p>
+<p>Node, Transfer function, Branch(The branch gain is the transfer function), Source node, Sink node, Mixed node.</p>
+<p><strong>Properties of SFG</strong></p>
+<ol>
+<li>Signal only passes through a branch with the direction indicated by the arrowhead.</li>
+<li>Signals of incoming branches are added at a node, and the added signal appears on the all outgoing branches.</li>
+<li>A sink node can be separated from a mixed node.</li>
+<li>For a given system, the SFGs can be different.(equations for a system can be different)</li>
+<li>After the SFG being inversed, the transfer function keeps invariant, but the signals represented by the inner nodes will be different.</li>
+</ol>
+<p>Note: Inversion is done by inversing the transfer direction of each branch, and exchanging the source and sink nodes as well.</p>
+<p>Algebra of SFG</p>
+<p><img src="/../images/ss/lec21_5.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec21_6.jpg" loading="lazy"></p>
+<p>Simplify:</p>
+<p>NOTE: The SFG can be simplified using the following steps:</p>
+<p>a. Merge the cascaded branches to decrease the number of nodes;</p>
+<p>b. Merge the parallel branches to decrease the number of branches;</p>
+<p>c. Eliminate all the loops. </p>
+<p>Then, the system function can be readily derived.</p>
+<p><img src="/../images/ss/lec21_7.jpg" loading="lazy"></p>
+<p><strong>Mason’s Formula</strong></p>
+
+$$
+H = \frac{1}{\Delta} \sum_k g_k\Delta_k
+$$
+
+<p><img src="/../images/ss/lec21_9.jpg" loading="lazy"></p>
+<h2 id="State-variable-analysis-of-system"><a href="#State-variable-analysis-of-system" class="headerlink" title="State-variable analysis of system"></a>State-variable analysis of system</h2>
+$$
+\mathbf {\lambda = A\lambda + Be}\\
+\mathbf{r = C\lambda + De}
+$$
+
+
+<p>Features of the state-variable analytical method </p>
+<ul>
+<li>(1)Provide internal characteristics of the system</li>
+<li>(2) Convenient to represent and analyze the multi-input, multi-output (MIMO) cases</li>
+<li>(3) Easy to be extended to time-variant or nonlinear cases</li>
+<li>(4) Introduce two important concepts: controllability and observability</li>
+<li>(5) Convenient for numerical computation</li>
+</ul>
+<h3 id="General-form-and-setup-method-CT"><a href="#General-form-and-setup-method-CT" class="headerlink" title="General form and setup method (CT)"></a>General form and setup method (CT)</h3>
+$$
+\frac{d}{dt}\mathbf{\lambda}(t)_{k \times 1} = \mathbf{A}_{k \times k}\mathbf{\lambda}(t)_{k \times 1} + \mathbf{B}_{k \times m}\mathbf{e}(t)_{m \times 1}\\
+\mathbf{r}(t)_{r \times 1} = \mathbf{C}_{r \times k}\mathbf{\lambda}(t)_{k \times 1} + \mathbf{D}_{r \times m}\mathbf{e}(t)_{m \times 1}
+$$
+
+
+ $r$  responses,  $k$  state variables,  $m$  inputs.
+
+<p>For time-variant system,  $\mathbf{A, B, C, D}$  are fuction of  $t$ .</p>
+<p>Direct methods:</p>
+<ul>
+<li>observation</li>
+<li>Topological analysis</li>
+</ul>
+<p>Used in curcuit analysis.</p>
+<p>Indirect methods:</p>
+<ul>
+<li>From block diagram or flow graph</li>
+<li>From input-output equation</li>
+<li>From transfer function</li>
+</ul>
+<p>Used in controlled system analysis.</p>
+<p><strong>From input-output equation</strong></p>
+
+$$
+\frac{r(t)}{e(t)} = \frac{b_0p^k + \dotsb + b_k}{p^k + \dotsb + a_k}
+$$
+
+
+<p>NOTE : under the zero-state condition,  $p$  is equivalent to  $s$  </p>
+
+$$
+H(p) = \frac{b_0 + b_1p^{-1} + \dotsb + b_kp^{-k}}{1 + a_1p^{-1} + \dotsb + a_kp^{-k}}
+$$
+
+
+<p>The SFG is:</p>
+<p><img src="/../images/ss/lec22_11.jpg" loading="lazy"></p>
+
+$$
+\dot{\lambda}_1 = \lambda_2\\
+\dot{\lambda}_2 = \lambda_3\\
+\vdots\\
+\dot{\lambda}_k = -a_k\lambda_1 - a_{k-1}\lambda_2 - \dotsb - a_1\lambda_k + e(t)\\
+r(t) = b_k\lambda_1 + b_{k-1}\lambda_2 + \dotsb + b_1\lambda_k + b_0(-a_k\lambda_1 - a_{k-1}\lambda_2 - \dotsb - a_1\lambda_k + e(t))\\
+=(b_k - a_kb_0)\lambda_1 + (b_{k-1} - a_{k-1}b_0)\lambda_2 + \dotsb + (b_1 - a_1b_0)\lambda_k + b_0e(t)
+$$
+
+
+
+$$
+\mathbf A = \begin{bmatrix}
+  0 & 1 & 0 & \dotsb & 0\\
+  0 & 0 & 1 & \dotsb & 0\\
+  \vdots & \vdots & \vdots & \ddots & \vdots\\
+  0 & 0 & 0 & \dotsb & 1\\
+  -a_k & -a_{k-1} & -a_{k-2} & \dotsb & -a_1
+\end{bmatrix}\\
+B = \begin{bmatrix}
+  0\\
+  0\\
+  \vdots\\
+  0\\
+  1
+\end{bmatrix}\\
+\mathbf C = \begin{bmatrix}
+  b_k - a_kb_0 & b_{k-1} - a_{k-1}b_0 & \dotsb & b_1 - a_1b_0
+\end{bmatrix}\\
+D = b_0
+$$
+
+
+<p>If  the order of differential equation on the left side is higher than that on the right side:</p>
+
+$$
+b_0 = 0, \mathbf{D} = 0
+$$
+
+
+<p>If the derivatives of the excitation on the right side are absent,</p>
+
+$$
+\mathbf{C} = [b_k, 0, \dotsb, 0], \mathbf{D} = 0
+$$
+
+
+<p><strong>Factorizing Transfer operator</strong></p>
+<p><img src="/../images/ss/lec22_12.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec22_13.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec22_14.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec22_15.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec22_16.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec22_17.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec22_18.jpg" loading="lazy"></p>
+<h3 id="Solving-CT-system’s-state-equations"><a href="#Solving-CT-system’s-state-equations" class="headerlink" title="Solving CT system’s state equations"></a>Solving CT system’s state equations</h3><p><strong>Time domain method</strong> using computer.</p>
+<p><strong>Transform-domain(Laplace-tranform) method</strong></p>
+
+$$
+\frac{d}{dt}\mathbf{}{\lambda}(t) = \mathbf{A\lambda}(t) + \mathbf{Be}(t)\\
+\mathbf{r}(t) = \mathbf{C\lambda}(t) + \mathbf{De}(t)\\
+\mathbf{\lambda}(0_-) = \begin{bmatrix}
+\lambda_1(0_-)\\
+\lambda_2(0_-)\\
+\vdots\\
+\lambda_k(0_-)\\
+\end{bmatrix}
+$$
+
+
+
+$$
+s\mathbf \Lambda(s) - \mathbf{\lambda}(0_-) = \mathbf{A\Lambda}(s) + \mathbf{BE}(s)\\
+\mathbf{R}(s) = \mathbf{C\Lambda}(s) + \mathbf{DE}(s)
+$$
+
+
+
+$$
+\mathbf{\Lambda}(s) = (s\mathbf {I} - \mathbf{A})^{-1}\mathbf{\lambda}(0_-) + (s\mathbf {I} - \mathbf{A})^{-1}\mathbf{BE}(s)\\
+\mathbf R(s) =\mathbf{C} (s\mathbf {I} - \mathbf{A})^{-1}\mathbf{\lambda}(0_-) + (\mathbf C(s\mathbf {I} - \mathbf{A})^{-1}\mathbf{B + D)E}(s) 
+$$
+
+
+<p>Let  $\Psi(s) = (s\mathbf I - \mathbf A)^{-1}$ , which is called <strong>characteristic matrix</strong>.</p>
+
+$$
+\mathbf\lambda(t) = \mathcal{L}^{-1}[\Psi(s)\lambda(0_-)] + \mathcal{L}^{-1}[\Psi(s)\mathbf{B}] * e(t)\\
+\mathbf r(t) = \mathbf{C}\mathcal{L}^{-1}[\Psi(s)\lambda(0_-)] + \lbrace\mathbf{C}\mathcal{L}^{-1}[\mathbf\Psi(s)\mathbf{B] + D}\delta(t)\rbrace * e(t)
+$$
+
+
+<p><strong>Time-domain method</strong></p>
+
+$$
+e^{\mathbf At} = \sum_{k = 0}^\infty \frac{1}{k!}A^kt^k
+$$
+
+
+<p>properties</p>
+
+$$
+e^{\mathbf At}e^{-\mathbf At} = \mathbf I\\
+e^{\mathbf At} = [e^{-\mathbf At}]^{-1}\\
+\frac{d}{dt}e^{\mathbf At} = \mathbf Ae^{\mathbf At} = e^{\mathbf At} \mathbf A\\
+$$
+
+
+
+$$
+\frac{d}{dt}\mathbf \lambda(t) = \mathbf A\mathbf \lambda(t) + \mathbf B\mathbf e(t)\\
+e^{-\mathbf At}\frac{d}{dt}\mathbf \lambda(t) = e^{-\mathbf At}\mathbf A\mathbf \lambda(t) + e^{-\mathbf At}\mathbf B\mathbf e(t)\\
+\frac{d}{dt}e^{-\mathbf At}\mathbf \lambda(t) = e^{-\mathbf At}\mathbf B\mathbf e(t)\\
+\lambda(t) = e^{\mathbf At}\mathbf \lambda(0_-) + \int_0^te^{\mathbf A(t - \tau)}\mathbf B\mathbf e(\tau)d\tau\\
+=e^{\mathbf At}\lambda(0_-) + e^{\mathbf At} \mathbf B * \mathbf e(t)
+$$
+
+
+<p>output</p>
+
+$$
+\mathbf r(t) = \mathbf C e^{\mathbf At}\mathbf \lambda(0_-) + \mathbf C e^{\mathbf At} \mathbf B * \mathbf e(t) + \mathbf D\mathbf e(t)\\
+= \mathbf C e^{\mathbf At}\mathbf \lambda(0_-) + [\mathbf C e^{\mathbf At} \mathbf B + \mathbf D\delta(t)] * \mathbf e(t)
+$$
+
+
+<p>Correspond to LT:</p>
+
+$$
+\mathcal{L}[e^{\mathbf At}] = (s\mathbf I - \mathbf A)^{-1}
+$$
+
+
+<p><strong>Derive System Functions</strong></p>
+<p><img src="/../images/ss/lec22_19.jpg" loading="lazy"></p>
+<p><img src="/../images/ss/lec22_20.jpg" loading="lazy"></p>
+<h3 id="That-for-DT-system"><a href="#That-for-DT-system" class="headerlink" title="That for DT system"></a>That for DT system</h3><p><strong>State equation setup</strong></p>
+
+$$
+\begin{align*}
+  \mathrm\lambda(n + 1) &= \mathbf A\mathrm\lambda(n) + \mathbf B\mathrm x(n)\\
+  \mathrm y(n) &= \mathbf C\mathrm\lambda(n) + \mathbf D\mathrm x(n)
+\end{align*}
+$$
+
+
+<p>Solving:</p>
+
+$$
+\lambda(n) = \underbrace{A^n\lambda(0)u(n)}_{\text{Zero Input}} + \underbrace{\left[\sum_{i=0}^{n-1}A^{n-1-i}Bx(i)\right]u(n-1)}_{\text{Zero State}}\\
+y(n) = \underbrace{CA^n\lambda(0)u(n)}_{\text{Zero Input}} + \underbrace{\left[\sum_{i=0}^{n-1}CA^{n-1-i}Bx(i)\right]u(n-1) + Dx(n)u(n)}_{\text{Zero State}}
+$$
+
+
+<p>The Impulse response is:</p>
+
+$$
+h(n) = CA^{n-1}Bu(n-1) + D\delta(n)
+$$
+
+
+<p>Calculate  $A^n$ : Cayley-Hamilton Theorem</p>
+<p><strong>ZT Solution</strong></p>
+
+$$
+\begin{align*}
+  z\mathrm\Lambda(z) - z\lambda(0) &= \mathbf A\mathrm\Lambda(z) + \mathbf B\mathrm X(z)\\
+  \mathrm Y(z) &= \mathbf C\mathrm\Lambda(z) + \mathbf D\mathrm X(z)
+\end{align*}
+$$
+
+
+
+$$
+\mathrm \Lambda(z) = (z\mathbf I - \mathbf A)^{-1}\lambda(0) + (z\mathbf I - \mathbf A)^{-1}\mathbf B\mathrm X(z)\\
+\mathrm Y(z) = \mathbf C(z\mathbf I - \mathbf A)^{-1}\lambda(0) + \left[\mathbf C(z\mathbf I - \mathbf A)^{-1}\mathbf B + \mathbf D\right]\mathrm X(z)
+$$
+
+
+<p>then </p>
+
+$$
+\lambda(n) = \mathcal{Z}^{-1}\left[(z\mathbf I - \mathbf A)^{-1}z\right]\lambda(0) + \mathcal{Z}^{-1}\left[(z\mathbf I - \mathbf A)^{-1}\mathbf B\right] * \mathcal{Z}^{-1}\left[\mathrm X(z)\right]\\
+y(n) = \mathcal{Z}^{-1}\left[\mathbf C(z\mathbf I - \mathbf A)^{-1}z\right]\lambda(0) + \mathcal{Z}^{-1}\left[\mathbf C(z\mathbf I - \mathbf A)^{-1}\mathbf B + \mathbf D\right] * \mathcal{Z}^{-1}\left[\mathrm X(z)\right]
+$$
+
+
+<p>Comparing this with CT solution, we find</p>
+
+$$
+A^n = \mathcal{Z}^{-1}\left[(\mathbf I - z^{-1}\mathbf A)^{-1}\right]\\
+$$
+
+
+
+$$
+H(z) = C(\mathbf I - z^{-1}\mathbf A)^{-1}\mathbf B + D
+$$
+
+
+<h3 id="Linear-Transform-on-state-vectors"><a href="#Linear-Transform-on-state-vectors" class="headerlink" title="Linear Transform on state vectors"></a>Linear Transform on state vectors</h3>
+$$
+\mathbf{\gamma} = \mathbf P\mathbf \lambda
+$$
+
+
+<p>The equations become:</p>
+
+$$
+\frac{d}{dt}\gamma(t) =\mathbf{PAP}^{-1}\mathbf \gamma(t) + \mathbf{PB}e(t)\\
+\mathbf y(t) = \mathbf {CP}^{-1}\gamma(t) + \mathbf D\mathbf e(t)
+$$
+
+
+<p>Similarity transform doesn’t change the eigenvalues.</p>
+<p><strong>Transform function matrix keeps invariant under linear transformation.</strong></p>
+<p>We can <strong>diagonalize</strong> the matrix A.</p>
+<p>Calculate eigenvalues  $\alpha$  -&gt; calulate eigenvectors  $\xi$  -&gt;  $\mathbf P^{-1} = [\xi_i]$ ,  $\hat A = \text{diag}(\alpha_i)$ </p>
+<h3 id="Controllable-amp-Observable"><a href="#Controllable-amp-Observable" class="headerlink" title="Controllable &amp; Observable"></a>Controllable &amp; Observable</h3><p>Controllable is </p>
+
+$$
+\text{rank} [A\ AB\ \dots\ A^{k-1}B] \text{ is full}
+$$
+
+
+<p>Uncontrollabilty is the input can’t change the response.</p>
+<p>Obeservability is </p>
+
+$$
+\text{rank} \begin{bmatrix}
+  C\\
+  CA\\
+  \vdots\\
+  CA^{k-1}
+  \end{bmatrix}
+  \text{ is full}
+$$
+
+
+<p>Unobserverbility is the response is not affected by the input.</p>
+<p>After the diagonalization of A: </p>
+<p>B doesnt contain zero  $\Leftrightarrow$  completely controllable. Otherwise, the 0s is coresponding to the uncontrollable state variables.</p>
+<p>C doesnt contain zero  $\Leftrightarrow$  completely observable. Otherwise, the 0s is coresponding to the unobservable state variables.</p>
+<p>In fact:</p>
+
+$$
+H(s) = C(s\mathbf I - \mathbf A)^{-1}\mathbf B + D \stackrel{D = 0}{=} \sum_{i=1}^n \frac{C_iB_i}{s - \alpha_i}
+$$
+
+
+<p>The  $H(s)$  only contains the controllable and observable state variables. So the state and output equations contains more information than the  $H(s)$ .</p>
+<p><img src="/../images/ss/lec23_1.jpg" loading="lazy"></p>
+<h2 id="CDMA"><a href="#CDMA" class="headerlink" title="CDMA"></a>CDMA</h2><p>Use a set of orthogonal codes to support multiple users by orthorgonal multiplexing.</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Assume K users need to connect with the base station simultaneously for CDMA system.</p>
+<ol>
+<li>Design a set of orthogonal codes</li>
+<li>Design on the transmitter</li>
+<li>Design on the receiver</li>
+</ol>
+<p>An example of Code 4:</p>
+
+$$
+\begin{align*}
+  \mathbf c_1 &= [1\ 1\ 1\ 1\ -1\ -1\ -1\ -1]\\
+  \mathbf c_2 &= [1\ 1\ -1\ -1\ 1\ 1\ -1\ -1]\\
+  \mathbf c_3 &= [1\ -1\ 1\ -1\ 1\ -1\ 1\ -1]\\
+  \mathbf c_4 &= [1\ -1\ -1\ 1\ 1\ -1\ -1\ 1]
+\end{align*}
+$$
+
+
+
+$$
+R_{x, y}(j) = \begin{cases}
+  \sum_{k = 0}^{N - 1 - j} x(k)y(k + j), &0 \le j \le N - 1\\
+  \sum_{k = 0}^{N - 1 + j} x(k - j)y(k), &-N + 1 \le j \le 0\\
+  0, & |j| \ge N
+\end{cases}
+$$
+
+
+<p>Must satisfy:</p>
+
+$$
+R_{k, i}  \begin{cases}
+  =T, &k = i, \tau=0\\
+  \ll T, &k \ne i \text{ or } \tau \ne 0
+  \end{cases}
+$$
+
+
+<p>second:</p>
+<p>(1) frequency shifting:  $d_k(t)\cos(\omega t)$ </p>
+<p>(2) spreading:  $s_k(t) = d_k(t)c_k(t)\cos(\omega t)$ </p>
+<p>third: coherent detection&#x2F;de-spreading</p>
+<p>Core:</p>
+<ul>
+<li>Orthogonal code design(signal design)</li>
+<li>Code capturing and tracking(signal processing and system design)</li>
+<li>Multi-use  detection and channel estimation(singal processing and system design)</li>
+</ul>
+<h3 id="Code-design"><a href="#Code-design" class="headerlink" title="Code design"></a>Code design</h3><p>requirements:</p>
+<ul>
+<li>sharp auto-correlation curve</li>
+<li>zero cross-correlation</li>
+<li>largest possible orthogonal code set</li>
+<li>highest possible complexity for security performance</li>
+</ul>
+<p>Commonly used codes:</p>
+<ul>
+<li>Walsh code</li>
+<li>PN sequence</li>
+<li>GOLD codes</li>
+</ul>
+
+$$
+H_1 = (0)\\
+H_2 = \begin{pmatrix}
+  H_1 & H_1\\
+  H_1 & \overline{H_1}
+\end{pmatrix} = \begin{pmatrix}
+  0 & 0\\
+  0 & 1
+\end{pmatrix}\\
+H_4 = \begin{pmatrix}
+  H_2 & H_2\\
+  H_2 & \overline{H_2}
+  \end{pmatrix}
+$$
+
+
+<ul>
+<li>sliding window capturing</li>
+<li>multiple correlators to detect phase match</li>
+</ul>
+<p>The period of address code is much shorter than the period of data code:  $T_c &lt; T_d$ , so the modulated signal is much wider in FD, whose spectrum is called <strong>spread spectrum</strong>.</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2023/02/22/Signal-and-Systems/" title="Signals and Systems">https://blitherboom812.github.io/2023/02/22/Signal-and-Systems/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/02/27/%E6%95%B0%E9%80%BB/" rel="prev" title="数逻"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">数逻</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/02/20/Introduction-to-Probability/" rel="next" title="Introduction-to-Probability"><span class="post-nav-text">Introduction-to-Probability</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

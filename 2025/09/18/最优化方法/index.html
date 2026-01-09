@@ -1,0 +1,2994 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>最优化方法 | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="约定向量 x 大于常数等价于 x 的每个分量大于某个常数 基础知识多面集的表示定理定理：设  $S&#x3D;\lbrace x|Ax\boldsymbol{&#x3D;}b,x\boldsymbol{\geqslant}0\rbrace$  为非空多面集，则有 (1) 极点集非空，且存在有限个极点 $x^{(1)},\cdots,x^{(k)}.$  (2) 极方向集合为空集的充要条件是S有界；若S无界，则存在有限">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最优化方法">
+<meta property="og:url" content="https://blitherboom812.github.io/2025/09/18/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="约定向量 x 大于常数等价于 x 的每个分量大于某个常数 基础知识多面集的表示定理定理：设  $S&#x3D;\lbrace x|Ax\boldsymbol{&#x3D;}b,x\boldsymbol{\geqslant}0\rbrace$  为非空多面集，则有 (1) 极点集非空，且存在有限个极点 $x^{(1)},\cdots,x^{(k)}.$  (2) 极方向集合为空集的充要条件是S有界；若S无界，则存在有限">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1759975640473.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1763429002233.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1764212622718.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1764639077147.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1764639082792.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765238769186.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765240221128.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765243217549.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765243234034.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765419551237.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765419557492.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765419568259.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765420028682.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765420035867.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765422713952.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765422782977.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765422882972.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765847057265.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765847089272.png">
+<meta property="article:published_time" content="2025-09-18T03:01:39.000Z">
+<meta property="article:modified_time" content="2026-01-08T02:14:26.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1759975640473.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%9D%A2%E9%9B%86%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%AE%9A%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">多面集的表示定理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="toc-number">2.</span> <span class="toc-text">线性规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LP-%E9%97%AE%E9%A2%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="toc-number">2.1.</span> <span class="toc-text">LP 问题的基本性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E8%A7%A3"><span class="toc-number">2.1.1.</span> <span class="toc-text">可行解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E6%9E%81%E7%82%B9"><span class="toc-number">2.1.2.</span> <span class="toc-text">最优极点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E5%92%8C%E5%9F%BA%E6%9C%AC%E8%A7%A3"><span class="toc-number">2.1.3.</span> <span class="toc-text">基和基本解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E5%BD%A2%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">单纯形法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6"><span class="toc-number">2.3.</span> <span class="toc-text">对偶</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E9%97%AE%E9%A2%98%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.3.1.</span> <span class="toc-text">对偶问题的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E9%97%AE%E9%A2%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="toc-number">2.3.2.</span> <span class="toc-text">对偶问题的基本性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%8D%95%E7%BA%AF%E5%BD%A2%E6%B3%95"><span class="toc-number">2.3.3.</span> <span class="toc-text">对偶单纯形法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E6%95%8F%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">灵敏度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%B7%E5%80%BC%E7%B3%BB%E6%95%B0-%E5%8F%98%E5%8C%96"><span class="toc-number">3.1.</span> <span class="toc-text">价值系数  $c$  变化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%9F%BA%E5%8F%98%E9%87%8F%E5%8F%98%E5%8C%96"><span class="toc-number">3.1.1.</span> <span class="toc-text">非基变量变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E5%8F%98%E9%87%8F%E5%8F%98%E5%8C%96"><span class="toc-number">3.1.2.</span> <span class="toc-text">基变量变化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%B3%E7%AB%AF%E5%90%91%E9%87%8F-%E5%8F%98%E5%8C%96"><span class="toc-number">3.2.</span> <span class="toc-text">右端向量  $b$  变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E7%BA%A6%E6%9D%9F%E7%9F%A9%E9%98%B5"><span class="toc-number">3.3.</span> <span class="toc-text">改变约束矩阵  $A$ </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%96%B0%E7%9A%84%E7%BA%A6%E6%9D%9F"><span class="toc-number">3.4.</span> <span class="toc-text">增加新的约束</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E8%A7%84%E5%88%92"><span class="toc-number">4.</span> <span class="toc-text">整数规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%9D%E5%AE%9A%E7%95%8C%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">分枝定界法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%B2%E5%B9%B3%E9%9D%A2%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">割平面法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%82%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">内点法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%B8%E9%9B%86%E5%88%86%E7%A6%BB%E5%AE%9A%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">凸集分离定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E6%80%A7%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">最优性条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98"><span class="toc-number">7.1.</span> <span class="toc-text">无约束问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96%E6%9C%80%E4%BC%98%E6%80%A7%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.2.</span> <span class="toc-text">约束优化最优性条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%8F%8A%E9%9E%8D%E7%82%B9%E9%97%AE%E9%A2%98"><span class="toc-number">7.3.</span> <span class="toc-text">对偶及鞍点问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">8.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%90%9C%E7%B4%A2"><span class="toc-number">9.</span> <span class="toc-text">一维搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%BC%E6%95%B0%E7%9A%84%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">10.</span> <span class="toc-text">使用导数的最优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%85%B1%E8%BD%AD%E6%96%B9%E5%90%91%E6%B3%95"><span class="toc-number">10.1.</span> <span class="toc-text">线性共轭方向法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E4%B8%80%E8%88%AC%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95"><span class="toc-number">10.2.</span> <span class="toc-text">用于一般函数的共轭梯度法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95-Quasi-Newton-Method"><span class="toc-number">10.3.</span> <span class="toc-text">拟牛顿法(Quasi-Newton Method)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E6%9C%80%E4%BC%98%E5%8C%96%E7%9A%84%E7%9B%B4%E6%8E%A5%E6%96%B9%E6%B3%95"><span class="toc-number">11.</span> <span class="toc-text">无约束最优化的直接方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E8%BD%AE%E6%8D%A2%E6%B3%95-Cyclic-Coordinate-Method"><span class="toc-number">11.1.</span> <span class="toc-text">坐标轮换法(Cyclic Coordinate Method)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E6%90%9C%E7%B4%A2%E6%B3%95%EF%BC%88%E6%AD%A5%E9%95%BF%E5%8A%A0%E9%80%9F%E6%B3%95%EF%BC%89"><span class="toc-number">11.2.</span> <span class="toc-text">模式搜索法（步长加速法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Powell%E6%96%B9%E6%B3%95%EF%BC%88%E6%96%B9%E5%90%91%E5%8A%A0%E9%80%9F%E6%B3%95%EF%BC%89"><span class="toc-number">11.3.</span> <span class="toc-text">Powell方法（方向加速法）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E6%96%B9%E5%90%91%E6%B3%95"><span class="toc-number">12.</span> <span class="toc-text">可行方向法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zoutendijk%E5%8F%AF%E8%A1%8C%E6%96%B9%E5%90%91%E6%B3%95"><span class="toc-number">12.1.</span> <span class="toc-text">Zoutendijk可行方向法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Topkis-Veinott%E5%8F%AF%E8%A1%8C%E6%96%B9%E5%90%91%E6%B3%95"><span class="toc-number">12.2.</span> <span class="toc-text">Topkis-Veinott可行方向法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rosen%E6%A2%AF%E5%BA%A6%E6%8A%95%E5%BD%B1%E6%B3%95"><span class="toc-number">12.3.</span> <span class="toc-text">Rosen梯度投影法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wolfe%E6%97%A2%E7%BA%A6%E6%A2%AF%E5%BA%A6%E6%B3%95"><span class="toc-number">12.4.</span> <span class="toc-text">Wolfe既约梯度法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E6%97%A2%E7%BA%A6%E6%A2%AF%E5%BA%A6%E6%B3%95"><span class="toc-number">12.5.</span> <span class="toc-text">广义既约梯度法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%A9%E7%BD%9A%E5%87%BD%E6%95%B0%E6%B3%95"><span class="toc-number">13.</span> <span class="toc-text">惩罚函数法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E7%82%B9%E6%B3%95"><span class="toc-number">13.1.</span> <span class="toc-text">外点法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%82%B9%E6%B3%95-1"><span class="toc-number">13.2.</span> <span class="toc-text">内点法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%98%E5%AD%90%E6%B3%95"><span class="toc-number">13.3.</span> <span class="toc-text">乘子法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92"><span class="toc-number">14.</span> <span class="toc-text">二次规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lagrange-%E6%96%B9%E6%B3%95"><span class="toc-number">14.1.</span> <span class="toc-text">Lagrange 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E6%B6%88%E5%8E%BB%E6%B3%95"><span class="toc-number">14.2.</span> <span class="toc-text">直接消去法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E6%B6%88%E5%8E%BB%E6%B3%95"><span class="toc-number">14.3.</span> <span class="toc-text">广义消去法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E4%BD%9C%E7%94%A8%E9%9B%86%E6%96%B9%E6%B3%95"><span class="toc-number">14.4.</span> <span class="toc-text">起作用集方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lemke%E7%AE%97%E6%B3%95"><span class="toc-number">14.5.</span> <span class="toc-text">Lemke算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E8%B7%9F%E8%B8%AA%E6%B3%95"><span class="toc-number">14.6.</span> <span class="toc-text">路径跟踪法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92%E6%96%B9%E6%B3%95"><span class="toc-number">14.7.</span> <span class="toc-text">序列二次规划方法</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2025/09/18/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">最优化方法</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2025-09-18 11:01:39" itemprop="dateCreated datePublished" datetime="2025-09-18T11:01:39+08:00">2025-09-18</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2026-01-08 10:14:26" itemprop="dateModified" datetime="2026-01-08T10:14:26+08:00">2026-01-08</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>约定向量 x 大于常数等价于 x 的每个分量大于某个常数</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="多面集的表示定理"><a href="#多面集的表示定理" class="headerlink" title="多面集的表示定理"></a>多面集的表示定理</h3><p>定理：设  $S=\lbrace x|Ax\boldsymbol{=}b,x\boldsymbol{\geqslant}0\rbrace$  为非空多面集，则有</p>
+<p>(1) 极点集非空，且存在有限个极点 $x^{(1)},\cdots,x^{(k)}.$ </p>
+<p>(2) 极方向集合为空集的充要条件是S有界；若S无界，则存在有限个极方向 $d^{(1)},d^{(2)},\cdots,d^{(l)}.$ </p>
+ $x\in S$ 的充要条件是
+
+
+$$
+x=\sum_{j=1}^k\lambda_jx^{(j)}+\sum_{j=1}^l\mu_jd^{(j)}
+$$
+
+
+<p>其中 $\lambda_j\geq0,j=1,2,\cdots,k,\sum_{j=1}^k\lambda_j=1$ </p>
+
+$$
+\mu_j\geq0,j=1,2,\cdots,l.
+$$
+
+
+
+<h2 id="线性规划"><a href="#线性规划" class="headerlink" title="线性规划"></a>线性规划</h2><p>LP 的标准形式</p>
+<ol>
+<li>极小化型</li>
+<li>约束方程为等式</li>
+<li>所有的决策变量为非负值</li>
+<li>约束方程的右端项系数为非负值</li>
+</ol>
+
+$$
+\min z = cx, \\
+s.t.\ Ax = b,\\
+x \ge 0
+$$
+
+
+<p>非标准型 LP 模型可以转化为标准型 LP 模型</p>
+<ol>
+<li>取个负号</li>
+<li>约束方程为不等式：加一个松弛变量变为等式。</li>
+<li>变量无非负约束：令  $x_j = x_j^\prime - x_j^{\prime\prime}$ </li>
+<li>决策变量有上下界：平移到0处。</li>
+</ol>
+<h3 id="LP-问题的基本性质"><a href="#LP-问题的基本性质" class="headerlink" title="LP 问题的基本性质"></a>LP 问题的基本性质</h3><h4 id="可行解"><a href="#可行解" class="headerlink" title="可行解"></a>可行解</h4><p>线性规划的可行域是凸集。</p>
+<h4 id="最优极点"><a href="#最优极点" class="headerlink" title="最优极点"></a>最优极点</h4><p>考虑标准形式：</p>
+
+$$
+\begin{cases}\min&cx\\s.t.&Ax=b\\&x\geq0&\end{cases}
+$$
+
+
+<p>把多面集表示定理代入其中：</p>
+
+$$
+\begin{cases}\min&\sum_{j=1}^k\lambda_jcx^{(j)}+\sum_{j=1}^l\mu_jcd^{(j)}=f\left(x\right)\\s.t.&\sum_{j=1}^k\lambda_j=1\\&\lambda_j\geq0,j=1,\cdots,k\\&\mu_j\geq0,j=1,\cdots,l.&\end{cases}
+$$
+
+
+<p>若存在  $j$  使得  $cd^{(j)} \lt 0$ ，此时可以取  $\mu_j\to-\infty$ ，则  $f(x)\to-\infty$ 。</p>
+<p>若所有的 d 都满足  $cd^{(j)} \ge 0$ ，取  $\mu_j = 0, j = 1, 2, \dots, l$ ，得到</p>
+
+$$
+\begin{cases}\min&\sum_{j=1}^k\lambda_jcx^{(j)}=f\left(x\right)\\s.t.&\sum_{j=1}^k\lambda_j=1\\&\lambda_j\geq0,j=1,\cdots,k\end{cases}
+$$
+
+
+<p>此时只需要找到  $p = \arg\min_{j}cx^{(j)}$ ，取  $\lambda_p = 1$ ,  $\lambda_j = 0 (j\ne p)$  即可得到最大值。</p>
+<p>定理2. 设线性规划(L)的可行域非空，则</p>
+<p>（1）(L)存在最优解的充要条件是对任意的 $j$ ,  $cd^{(j)}≥0$ , 其中 $d^{(j)}$ 为可行域的极方向。</p>
+<p>（2）若(L)存在最优解，则目标函数的最优值可在某个极点达到。</p>
+<h4 id="基和基本解"><a href="#基和基本解" class="headerlink" title="基和基本解"></a>基和基本解</h4><p>设标准形式中  $\text{rank}(A_{m\times n}) = m = (P_1\ P_2\ \dots\ P_n)$ ， $Ax = P_1x_1+\dots+P_nx_n$ ，则可以从  $A$  的列中取出  $m$  个  $P_j$ 组合成一个可逆矩阵  $B$  称为基，与取出来的  $P_j$  对应的  $x_j$  称为基向量。</p>
+<p>设  $A = [B\ N]$ ， $Ax = Bx_B + Nx_N = b$ ，解得</p>
+
+$$
+x_B = B^{-1}b - B^{-1}Nx_N
+$$
+
+
+<p>取  $x_N = 0$ ，此时  $x = \begin{bmatrix}B^{-1}b\\0\end{bmatrix}$  为 (LP) 的基本解。</p>
+<p>若  $B^{-1}b \ge 0$ ，则  $x$  称为基本可行解， $B$  为可行基矩阵， $x_{B_1}, x_{B_2}, \dots, x_{B_m}$  为一组可行基。</p>
+<p>若  $B^{-1}b \gt 0$ ，则称基本可行解是非退化的，否则是退化的。</p>
+<p><strong>基本可行解与极点之间的关系</strong></p>
+<p>引理1：对于可行解  $\bar x$ ，  $\bar x$  是基本可行解的充要条件是  $\bar x$  的非零分量对应到  $A$  中的列向量线性无关。</p>
+<p>定理2：设  $S$  是  $(L)$  的可行域， $\bar x \in S$ ，则  $\bar x$  是  $S$  极点的充要条件为  $\bar x$  是  $(L)$  的基本可行解。</p>
+<blockquote>
+<p>思考：本质上是因为“极点”的唯一性，正好对应了基矩阵可逆，求解出来的基本可行解也是唯一的。<br>从几何意义思考标准形式：1.  $Ax=b$  本质上代表了一个 k 维的子空间，k 是矩阵的秩，如果 k &#x3D; 1 就是直线，k &#x3D; 2 就是平面；2.  $x\ge0$  是一组边界，它会截取子空间的一部分，以 k &#x3D; 2，n &#x3D; 3 为例，这意味着我们用一个平面去与三维空间的第一卦限相交的部分作为可行域，不考虑退化的情况，通常它是一个 n 条边界的图形，正好对应 n 个变量分别等于 0 的情况。3.  $cx$  不用解释了，这就是一个 n - 1 维的空间。</p>
+</blockquote>
+<p>定理3：设  $S = \{x| Ax=b, x\ge 0\}$  的方向  $d$  有  $k$  个非零分量，则  $d$  是  $S$  的极方向 等价于  $d$  的非零分量对应到 A 的列向量的秩为 k - 1。</p>
+<p><strong>基本可行解的存在问题</strong></p>
+<p>定理1. 如果(LP)有可行解,则一定存在基本可行解.</p>
+<p>定理2. 如果(LP)有最优解，则存在一个基本可行解是最优解。</p>
+<h3 id="单纯形法"><a href="#单纯形法" class="headerlink" title="单纯形法"></a>单纯形法</h3><p>设  $A = (B\ N)$ ， $x=(x_B\ x_N)^T$ ，则  $Bx_B + Nx_N = b$ ，取  $x_N = 0$  得到  $x_B = B^{-1}b$ ， $f(x) = c_BB^{-1}b$ 。则  $x = (B^{-1}b\quad 0)^T$  为基本可行解。</p>
+<blockquote>
+<p>这里有个问题， $B^{-1}b \ge 0$  一定成立吗？如果不成立那么这就不是基本可行解，只是基本解。</p>
+</blockquote>
+<p>但是基本可行解未必是最优解，我们考虑  $x_N\ne0$  的情况。一般地由  $Bx_B + Nx_N = b$  得到  $x_B = B^{-1}b - B^{-1}Nx_N$ ， $f(x) = c_Bx_B + c_Nx_N = c_BB^{-1}b - (c_BB^{-1}N - c_N)x_N$ 。</p>
+<p>如果  $c_BB^{-1}N - c_N \le 0$ ，则  $f(x) \ge c_BB^{-1}b$ ，当且仅当  $x_N = 0$  的时候取等。此时  $x = (B^{-1}b\quad 0)^T$  就是最优解。 $c_BB^{-1}N - c_N = (z_i - c_j)_{m+1\le i \le n}$  为判别数。</p>
+<p>假如判别数里面有正数，假设其中最大的正数为  $z_r-c_r$ ，这就说明我们可以通过增大  $x_r$  的方式来减小  $f(x)$  的值。而  $x\ge 0$  又约束了我的  $x_r$  不能无限增加，因为  $x_B =  B^{-1}b - B^{-1}Nx_N = B^{-1}b - \sum_{j=m+1}^{n}B^{-1}P_jx_j \ge 0$ ，因此  $B^{-1}P_rx_r \le B^{-1}(b-\sum_{j\ne r, m+1\le j \le n}B^{-1}P_jx_j) \le B^{-1}b$ 。设  $y_k = B^{-1}P_k$ ， $\bar b = B^{-1}b$ ，则此时有  $y_kx_r \le \bar b, \forall 1\le k \le m$ 。因此  $\max x_r = \min \lbrace \frac{\bar b_k}{y_k}|y_k \gt 0 \rbrace$ 。</p>
+<p>假如所有的  $y_k \le 0$ ，则  $x_r$  无上界，从而  $f(x)$  也没有最大值。</p>
+<p>假如存在  $y_k \gt 0$ ，则我们假设  $x_r = \frac{\bar b_k}{y_k}$  时取得最大值。此时  $x_k = \bar b_k - y_kx_r = 0$ ，也就是说原来的基变量  $x_k$  变成了 0，原来的非基变量  $x_r$  变成了大于 0 的数。我们就需要把新的  $x_r$  加入基变量中， $x_k$  踢出基变量，从而  $f(x)$  的值变得更小了。</p>
+<p>如果某非基变量的检验数为零，则线性规划问题存在多个最优解。</p>
+<p><strong>两阶段法</strong></p>
+<p>有时候第一个基本可行解不太好求，特别是表格里没有单位矩阵的时候。我们可以用两阶段法简化计算。</p>
+<p>第一阶段：引入人工变量  $x_a$ ，这时候就有单位矩阵了，用单纯形法解出下列问题的最优解：</p>
+
+$$
+\begin{cases}&\min e^Tx_a, e=(1\ 1\ \dots\ 1)^T\\&Ax+x_a=b\\&x,(x_a)_{m\times1}\geq0&\end{cases}
+$$
+
+
+<p>最优解  $(\bar x\ \bar x_a)^T$ 。</p>
+<p>如果  $\bar x_a \ne 0$ ，则原方程没有可行解。因为假如原方程有可行解  $x_0$ ，则 $Ax_0 = b$ ，从而  $x_a = 0$  成立，为最优解，矛盾。</p>
+<p>如果  $\bar x_a = 0$ ，有两种情况：</p>
+<p>（1）如果  $\bar x_a$  都是非基变量，则  $\bar x$  就是原来的基本可行解；</p>
+<p>（2）如果  $\bar x_a$  中存在基变量，那么就需要换基，把  $\bar x_a$  换走。</p>
+<p>此时， $\bar x_a$  都等于 0，</p>
+<p><strong>大 M 法</strong></p>
+<p>和两阶段法思想类似，但是把两个函数合成一个了。</p>
+
+$$
+\begin{cases}\min&cx+Me^Tx_a,e=\left(11\cdots1\right)_{m\times1}^T,M&gt;0\\s.t.&Ax+x_a=b\\&x,x_a\geq0&\end{cases}
+$$
+
+
+<p>用单纯形法求解上述问题最优解  $(\bar x^T\ \bar x_a^T)$ ：</p>
+<p>（1）如果  $\bar x_a = 0$ ，则  $\bar x$  为原问题的最优解；</p>
+<p>（2）如果  $\bar x_a \ne 0$ ，则原问题无最优解。</p>
+<p>函数无界的充要条件： $Ad=0$  且  $cd &lt; 0$ 。</p>
+<p>（3）不存在最优解（函数无界） 且  $\bar x_a = 0$ ，说明原问题没有最优解。</p>
+<p>（4）不存在最优解（函数无界） 且  $\bar x_a \ne 0$ ，说明原问题没有可行解。</p>
+<p>这个方法怪就怪在  $M $  是<em>任意大</em>的正数，并不是一个固定值。</p>
+<p>单纯形法容易卡在循环之中，达不到最优解。</p>
+<p>主要原因是基变量中有取值为 0 的项，即  $\bar b_k = 0$ ，按照单纯形法肯定会把  $x_k$  出基，然后换进来另一个  $x_r$ ，但是你换进来的  $x_r$  还是等于 0（这样取值显然为基本可行解），导致极点实际上始终不变，目标函数也一直不变。</p>
+<p>解决退化的方法有:“摄动法”、“字典序法”、Bland规则等</p>
+<h3 id="对偶"><a href="#对偶" class="headerlink" title="对偶"></a>对偶</h3><h4 id="对偶问题的定义"><a href="#对偶问题的定义" class="headerlink" title="对偶问题的定义"></a>对偶问题的定义</h4><p>第一类对称形式</p>
+<p>(L)</p>
+
+$$
+\min cx\\
+Ax \ge b\\
+x \ge 0
+$$
+
+
+<p>第二类对称形式</p>
+<p>(D)</p>
+
+$$
+\max wb\\
+wA \le c\\
+w\ge 0
+$$
+
+
+
+<p>对偶的对偶是原问题。</p>
+<p>对于 (D)，可以写成</p>
+
+$$
+\min (-b^T)w^T\\
+(-A^T)w^T \ge -c^T\\
+w^T\ge 0
+$$
+
+
+<p>这个问题的对偶问题是</p>
+
+$$
+\max x^T(-c^T)\\
+x^T(-A^T)^T \le -b^T\\
+x^T\ge 0
+$$
+
+
+<p>也就是</p>
+
+$$
+\min cx\\
+Ax \ge b\\
+x \ge 0
+$$
+
+
+<p>对称形式的对偶问题规划：</p>
+<p>（1）min 变成 max</p>
+<p>（2）价值系数和右端向量互换</p>
+<p>（3）系数矩阵转置</p>
+<p>（4）大于等于变成小于等于</p>
+<p>原问题的约束方程的个数等于对偶问题中变量的个数，反过来原问题的变量个数就是对偶问题约束方程的个数。</p>
+<p>非对称形式的对偶：</p>
+
+$$
+\min cx\\
+Ax = b\\
+x \ge 0
+$$
+
+
+<p>它的对偶形式为</p>
+
+$$
+\max wb\\
+wA \le c\\
+w 无限制
+$$
+
+
+<p>总结：</p>
+<table>
+<thead>
+<tr>
+<th>原问题</th>
+<th>对偶问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td> $\min$ </td>
+<td> $\max$ </td>
+</tr>
+<tr>
+<td>价值系数</td>
+<td>右端向量</td>
+</tr>
+<tr>
+<td>右端向量</td>
+<td>价值系数</td>
+</tr>
+<tr>
+<td>系数矩阵</td>
+<td>系数矩阵转置</td>
+</tr>
+<tr>
+<td>变量  $\le 0$ </td>
+<td>约束  $\ge$ </td>
+</tr>
+<tr>
+<td>变量  $\ge 0$ </td>
+<td>约束  $\le$ </td>
+</tr>
+<tr>
+<td>变量无限制</td>
+<td>约束  $=$ </td>
+</tr>
+<tr>
+<td>约束  $\ge $ </td>
+<td>变量  $\ge 0$ </td>
+</tr>
+<tr>
+<td>约束  $\le $ </td>
+<td>变量  $\le 0$ </td>
+</tr>
+<tr>
+<td>约束  $=$ </td>
+<td>变量无限制</td>
+</tr>
+</tbody></table>
+<h4 id="对偶问题的基本性质"><a href="#对偶问题的基本性质" class="headerlink" title="对偶问题的基本性质"></a>对偶问题的基本性质</h4><p>弱对偶定理： $x^{(0)}, w^{(0)}$  分别是 (L), (D) 的可行解，则  $cx^{(0)} \ge w^{(0)}b$ 。</p>
+<p>对于对称形式的情况：</p>
+
+$$
+cx^{(0)} \ge w^{(0)}Ax^{(0)} \ge w^{(0)}b
+$$
+
+
+<p>推论1：若 LP&#x2F;DLP 有无界解，则其对偶问题无可行解；若 LP&#x2F;DLP 无可行解，则其对偶问题或者无可行解，或者目标函数值趋于无穷。</p>
+<p>推论2：极大化问题的任何一个可行解所对应的目标函数值都是其对偶问题的目标函数值的下界。</p>
+<p>推论3：极小化问题的任何一个可行解所对应的目标函数值都是其对偶问题的目标函数值的上界。</p>
+<p>定理2：最优性准则：若  $x^{(0)}, w^{(0)}$  分别是 (L), (D) 的可行解，并且  $cx^{(0)} = w^{(0)}b$ ，则  $x^{(0)}, w^{(0)}$  是各自问题的最优解。</p>
+<p>定理3：强对偶定理：如果 (L), (D) 均有可行解，则 (L), (D) 均有最优解，且 (L), (D) 的最优目标函数值相等。</p>
+<p>此时对偶问题的最优解  $w^{(0)}$  恰好等于单纯形乘子  $c_BB^{-1}$ .</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1759975640473.png" alt="1759975640473" loading="lazy"></p>
+<p>定理4：互补松弛定理（对称形式）</p>
+<p>(L):</p>
+
+$$
+\begin{array}{ll} \min & cx \\ \text{s.t.} & Ax \ge b \\ & x \ge 0 \end{array}
+$$
+
+
+<p>(D):</p>
+
+$$
+\begin{aligned}\max&&wb\\\mathbf{s.t.}&&wA\leq c\\&&w\geq0\end{aligned}
+$$
+
+
+<p>已知  $x^{(0)}, w^{(0)}$  为 (L)，(D) 问题的可行解，则  $x^{(0)}, w^{(0)}$  为 (L), (D) 最优解的充要条件为  $\forall 1 \le i \le m, 1 \le j \le n$ ，</p>
+<p>(1)  $x_j^{(0)} \gt 0 \Rightarrow w^{(0)}P_j = c_j$ </p>
+<p>(2)  $w^{(0)}P_j \lt c_j \Rightarrow x_j^{(0)} = 0$ </p>
+<p>(3)  $w^{(0)}_j \gt 0 \Rightarrow A_ix^{(0)} = b_i$ </p>
+<p>(4)  $A_ix^{(0)} \gt b_i \Rightarrow w^{(0)}_i = 0$ </p>
+<p>实际上 (1)(2) 等价于  $(c - w^{0}A)x^{(0)} = 0$ ，(3)(4) 等价于  $w^{(0)}(Ax^{(0)} - b) = 0$ 。</p>
+<p>互补松弛定理（非对称形式）</p>
+<p>(L):</p>
+
+$$
+\begin{cases}\min cx\\s.t.&Ax=b\\&x\geq0&\end{cases}
+$$
+
+
+<p>(D):</p>
+
+$$
+\begin{cases}\max&wb\\s.t.&wA\leq c&&\end{cases}
+$$
+
+
+<p>已知  $x^{(0)}, w^{(0)}$  为 (L)，(D) 问题的可行解，则  $x^{(0)}, w^{(0)}$  为 (L), (D) 最优解的充要条件为  $\forall 1 \le i \le m, 1 \le j \le n$ ，</p>
+<p>(1)  $x_j^{(0)} \gt 0 \Rightarrow w^{(0)}P_j = c_j$ </p>
+<p>(2)  $w^{(0)}P_j \lt c_j \Rightarrow x_j^{(0)} = 0$ </p>
+<p>利用上述定理我们可以先求解对偶问题的最优解，再根据互补定理推出原问题的最优解。</p>
+<p>定理：KKT 条件（在线性规划中的特例）</p>
+<p>(L):</p>
+
+$$
+\begin{array}{ll} \min & cx \\ \text{s.t.} & Ax \ge b \\ & x \ge 0 \end{array}
+$$
+
+
+<p>对于线性规划 (L) 来说， $x^*$  是它的最优解的充要条件为 存在  $w_{m\times 1}, r_{n \times 1}$  使得</p>
+
+$$
+\begin{align}
+Ax^*\geq b,\quad x^*\geq0\\
+c^T-A^Tw-r=0,\quad w\geq0,\quad r\geq0\\
+w^T(Ax^*-b)=0,\quad r^Tx^*=0
+\end{align}
+$$
+
+
+<p>这和互补松弛定理是等价的。因此，互补松弛定理是 KKT 条件的一个特例。</p>
+<p>对偶问题最优解在经济学上称为影子价格。</p>
+<p>原问题：给定资源供应约束，寻找最小的供应成本。</p>
+
+$$
+f^* = cx^* = w^*b
+$$
+
+
+<p>此时</p>
+
+$$
+\frac{\partial f^*}{\partial b_i} = w^*_i
+$$
+
+
+<p>意味着当资源要求  $b_i$  增加一个单位时，最低成本会增加  $w^*_i$ 。因此  $w^*_i$  描述了“资源的稀缺性&#x2F;珍贵性”， $w^*_i$  越大，则意味着对应的资源越珍贵，想要增大该资源的供应量，付出的代价就越高。</p>
+<h4 id="对偶单纯形法"><a href="#对偶单纯形法" class="headerlink" title="对偶单纯形法"></a>对偶单纯形法</h4><p>(L):</p>
+
+$$
+\begin{aligned}\min&\quad cx\\\mathbf{s.t.}&\quad Ax=b\\&\quad x\geq0\end{aligned}
+$$
+
+
+<p>(D):</p>
+
+$$
+\begin{aligned}\max&&wb\\\mathbf{s.t.}&&wA\leq c\end{aligned}
+$$
+
+
+<p>对偶可行的基本解：如果 (L) 的一个基本解（不一定是可行解） $x^{(0)}$  对应的单纯形乘子  $w = c_BB^{-1}$  是对偶问题 (D) 的可行解，则称  $x^{(0)}$  为对偶可行的基本解。</p>
+<p>如果对偶可行的基本解在 (L) 中也可行，则可知原问题的判别数  $\le 0$ ，从而  $x^{(0)}$  就是原问题的最优解。</p>
+<p>原先用两阶段和大 M 法的问题现在可以用对偶单纯性法求解了。</p>
+<p>若初始对偶可行的基本解不易直接得到，则解一个扩充问题，通过这个问题的求解，给出原问题的解答:</p>
+
+$$
+x_B + \sum_{j\in R} y_j\bar x_j = \bar b\\
+\sum_{j\in R}x_j + x_{n+1} = M\\
+x_j \ge 0, j=1,2,\dots, n+1
+$$
+
+
+<p>此时表格扩充了一行。如果判别数那一行有大于 0 的数，选取其中最大的那个判别数进基， $x_{n+1}$  进基，这时候由于出基的  $z_k-c_k$  是最大的判别数，通过高斯消元一减，判别数这一行全部都小于 0 了。于是我们就得到了扩充问题的对偶可行基本解，继续求解直到得到扩充问题的最优解。</p>
+<p>此时有以下的可能：</p>
+<ol>
+<li>若扩充问题没有最优解，则原问题没有最优解。</li>
+<li>若扩充问题的最优解为  $(x^{(0)}_1, x^{(0)}_2,\dots, x^{(0)}_n, x^{(0)}_{n+1})^T$ ， $(x^{(0)}_1, x^{(0)}_2,\dots, x^{(0)}_n)$  若不含  $M$ ，则是原问题的可行解；若含  $M$ ，取任何  $M$  使得  $x^{(0)}\ge0$  都是原问题的可行解。如果此时得到的最优值与  $M$  无关，则上面找到的还是原问题的最优解。若最优值与  $M$  有关，则原问题无界。</li>
+</ol>
+<h2 id="灵敏度分析"><a href="#灵敏度分析" class="headerlink" title="灵敏度分析"></a>灵敏度分析</h2><h3 id="价值系数-变化"><a href="#价值系数-变化" class="headerlink" title="价值系数  变化"></a>价值系数  $c$  变化</h3><h4 id="非基变量变化"><a href="#非基变量变化" class="headerlink" title="非基变量变化"></a>非基变量变化</h4><p>此时只有对应的检验数发生变化： $z_k - c_k + (c_k - c_k^\prime)$ ，在原来的单纯性表中将对应的替换即可。</p>
+<h4 id="基变量变化"><a href="#基变量变化" class="headerlink" title="基变量变化"></a>基变量变化</h4> $c_r^\prime = c_r + \Delta c_r$ ，此时：
+
+
+$$
+z_j^\prime - c_j^\prime = z_j - c_j  + \Delta c_ry_{rj} (j\ne r)\\
+z_r^\prime - c_r^\prime = 0
+$$
+
+
+<p>只需要把第  $r$  行乘上  $\Delta c_r$ ，再加到判别数那一行就行了。（第  $r$  个判别数不变，还是 0）</p>
+<h3 id="右端向量-变化"><a href="#右端向量-变化" class="headerlink" title="右端向量  变化"></a>右端向量  $b$  变化</h3><p>若  $B^{-1}b^\prime \ge 0$ ，则最优基不变，但是基变量取值，目标函数取值变化。</p>
+<p>若  $B^{-1}b^\prime \not\ge 0$ ，此时原来问题的解是对偶可行解，需要把右端替换成  $B^{-1}b^\prime$ ， $c_BB^{-1}b$  继续用对偶单纯形法求解。</p>
+<p>其实就是给最后一列加上  $B^{-1}\Delta b$ ， $c_BB^{-1} \Delta b$ 。</p>
+<h3 id="改变约束矩阵"><a href="#改变约束矩阵" class="headerlink" title="改变约束矩阵 "></a>改变约束矩阵  $A$ </h3><p>若非基列变了，影响对应的列  $y_j = B^{-1}P_j$ ， $z_j - c_j$ ，如果新的判别数仍然小于等于 0，则最优解，最优值不变；</p>
+<p>基列变了，全部重新计算。</p>
+<h3 id="增加新的约束"><a href="#增加新的约束" class="headerlink" title="增加新的约束"></a>增加新的约束</h3>
+$$
+\begin{cases}\min&cx\\s.t.&Ax=b\\&P^{m+1}x\leq b_{m+1}\\&x\geq0&\end{cases}
+$$
+
+
+<ol>
+<li>若原最优解满足新增加的约束，则它也是新问题的最优解。</li>
+<li>若原最优解不满足新增加约束</li>
+</ol>
+
+$$
+\begin{cases}\min&cx\\s.t.&x_B+B^{-1}Nx_N=B^{-1}b\\
+&P_B^{m+1}x_B+P_N^{m+1}x_N+x_{n+1}=b_{m+1}\\
+&x,x_{n+1}\geq0&\end{cases}
+$$
+
+
+<p>对新加的行进行高斯消元，表格如下：</p>
+
+$$
+\begin{array}{ccc|c}
+x_B&x_N&x_{n+1}\\
+\hline
+I&B^{-1}N&0&B^{-1}b\\
+0&P_N^{m+1}-P_B^{m+1}B^{-1}N&1&b_{m+1}-P_B^{m+1}B^{-1}b\\
+\hline
+0&c_BB^{-1}N-c_N&0&c_BB^{-1}b\end{array}
+$$
+
+
+<p>判别数仍然保持小于等于0，因此可用对偶单纯形法求解。</p>
+<h2 id="整数规划"><a href="#整数规划" class="headerlink" title="整数规划"></a>整数规划</h2><p>规划中的变量（部分或全部）限制为整数时，称为整数规划。若在线性规划模型中，变量限制为整数，则称为整数线性规划。</p>
+<p>变量全限制为整数的，称纯（完全）整数规划。</p>
+<p>变量部分限制为整数的，称混合整数规划。</p>
+<p>要求决策变量仅取0或1,称为0-1规划问题</p>
+<p>一般形式：</p>
+ $\max cx$ 
+
+ $s.t.$   $\begin{cases} Ax= b\\ x_i\geq 0, x_i\text{部 分 或 全 部 为 整 数 }& \end{cases}$ 
+
+
+ $\min cx$ 
+
+ $s.t.$   $\begin{cases} Ax= b\\ x_i\geq 0, x_i\text{部 分 或 全 部 为 整 数 }& \end{cases}$ 
+
+<p>IP 问题可行域不为凸集。</p>
+<p>整数规划特点</p>
+<p>伴随规划有最优解，当自变量限制为整数后，其整数规划解出<br>现下述情况：①原线性规划最优解全是整数，则整数规划最优解与线性规划最优解一致。②整数规划无可行解。③有可行解（当然就存在最优解），但最优值变差。</p>
+<p>求解方法分类：</p>
+<ol>
+<li>割平面法——主要求解纯整数线性规划</li>
+<li>分枝定界法——可求纯或混合整数线性规划</li>
+<li>隐枚举法——求解“0-1”整数规划：<ul>
+<li>过滤隐枚举法；</li>
+<li>分枝隐枚举法</li>
+</ul>
+</li>
+<li>匈牙利法——解决指派问题（“01”规划特殊情<br>形）。</li>
+<li>蒙特卡洛法——求解各种类型规划</li>
+</ol>
+<h3 id="分枝定界法"><a href="#分枝定界法" class="headerlink" title="分枝定界法"></a>分枝定界法</h3><p>设原问题  $(A_0)$ </p>
+
+$$
+\begin{cases}\max z=10x_1+20x_2\\s.t.\quad0.25x_1+0.4x_2\leq3\\x_1\leq8\\x_2\leq4\\x_1,x_2\geq0,\text{整数}&\end{cases}
+$$
+
+
+<p>伴随问题为  $(B_0)$ </p>
+
+$$
+\begin{aligned}\\&\begin{cases}\max&f=10x_1+20x_2\\s.t.&0.25x_1+0.4x_2\leq3\\&x_1\leq8\\&x_2\leq4\\&x_1,x_2\geq0&\end{cases}\end{aligned}
+$$
+
+
+<p>利用单纯形法求解  $B_0$  得到  $x_0^* = (5.6, 4)^T$ ， $f_0^* = 136$ ，这个解不满足  $(A_0)$  的条件。</p>
+<p>那么原问题的初始上界为  $\bar z \le f_0^* = 136$ 。</p>
+<p>显然  $(0, 0)^T$  满足  $(A_0)$ ，可取初始下界  $\underline z = 0$ </p>
+<p>接下来，增加约束条件对原问题进行分支：</p>
+ $(A_1)$ 
+
+
+$$
+\begin{cases}\max z=10x_1+20x_2\\s.t.&0.25x_1+0.4x_2\leq3\\x_1&\leq8\\&x_2\leq4\\&x_1&\leq5\\&x_1,x_2\geq0,\text{整数}&\end{cases}
+$$
+
+
+ $(A_2)$ 
+
+
+$$
+\begin{cases}\max z=10x_1+20x_2\\s.t.\quad0.25x_1+0.4x_2\leq3\\x_1&\leq8\\x_2\leq4\\x_1\geq6\\x_1,x_2\geq0,\text{整数}&\end{cases}
+$$
+
+
+<p>对应的伴随规划  $(B_1), (B_2)$ 。</p>
+<p>分别求解一对分支的伴随规划：</p>
+<ol>
+<li>无可行解：说明该枝情况已查明，不需要再继续分枝，称该分枝为“树叶”．</li>
+<li>得到整数最优解：说明该枝情况也已查明，不需要再继续分枝，称该分枝为“树叶”．</li>
+<li>得到非整数解：<ol>
+<li>若此时目标值小于当前的下界  $\underline z$ ，就说明这是一个“枯枝”，不用继续探索；</li>
+<li>若此时目标值大于当前的下界  $\underline z$ ，则需要继续分支，查明有没有更好的目标值。</li>
+</ol>
+</li>
+</ol>
+ $(B_1), (B_2)$  的最优解和值： $x^*_1 = (5, 4)^T, f_1^* = 130$ ， $x^*_2 = (6, 3.75)^T, f_2^* = 135$ 。
+
+<p>接下来，需要修改下界和上界：</p>
+<ol>
+<li>每求出一个整数解使目标值大于当前的下界，就证明最优值的下界可以继续提升，则更新  $\underline z$  为当前最大的目标值；</li>
+<li>每求完一对分支，就可以更新上界  $\bar z$ ，为当前所有分支中取值最大的那个。</li>
+</ol>
+<p>当所有的分支都被查明，并且此时  $\bar z = \underline z$ ，则得到原问题的整数最优解。</p>
+<p>一般整数规划的求解是 NP-complete 问题，只有少数特殊任务有好的算法。</p>
+<h3 id="割平面法"><a href="#割平面法" class="headerlink" title="割平面法"></a>割平面法</h3><p>适用范围： 纯整数规划问题、混合整数规划问题</p>
+
+$$
+\begin{aligned}\min z&=cx\\s.t.&\sum_{j=1}^na_{ij}x_j=b_i(i=1,2,\cdots,m)\\
+&x_j 为整数 \\
+&x_j \ge 0  (i = 1, 2, \dots, m, j = 1, 2, \dots, n)
+\end{aligned}
+$$
+
+
+
+
+$$
+\min z=cx\\
+Ax = b\\
+x \ge 0\\
+x_i为整数
+$$
+
+
+<p>假设只考虑线性规划，算出单纯形表：</p>
+
+$$
+\begin{array}{cc|ccccccc}
+&&x_1&x_2&\ldots&x_m&x_{m+1}&\ldots&x_n\\
+\hline
+&x_1&1&0&\ldots&0&y_{1m+1}&\ldots&y_{1n}&b_1^{\prime}\\
+&x_2&0&1&\ldots&0&y_{2m+1}&\ldots&y_{2n}&b_2^{\prime}\\&\ldots\\
+&x_r&0&0&\ldots&0&y_{rm+1}&\ldots&y_{rn}&b_r^{\prime}\\
+&\ldots\\
+&x_m&0&0&\ldots&1&y_{mm+1}&\ldots&y_{mn}&b_m^{\prime}\\
+&&0&&&C_BB^{-1}N-C_N&&&&C_BB^{-1}b\end{array}
+$$
+
+
+<p>若  $b_i^\prime$  都是整数，则  $(b_1^\prime, \dots, b_m^\prime)$  就是原问题的最优解。</p>
+<p>假设  $b_r$  不是整数，考虑第  $r$  个方程：</p>
+
+$$
+x_r + \sum_{j = m+1}^n x_jy_{rj} = b_r^\prime
+$$
+
+
+<p>设 </p>
+
+$$
+b_r^\prime = \lfloor b_r^\prime\rfloor + f_r\\
+y_{rj} = \lfloor y_{rj}\rfloor + f_{rj}
+$$
+
+
+<p>原问题改写为</p>
+
+$$
+\sum_{j = m+1}^n x_jf_{rj} =  f_r + (\lfloor b_r^\prime\rfloor - x_r - \sum_{j = m+1}^n x_j\lfloor y_{rj} \rfloor) 
+$$
+
+
+<p>如果  $(\lfloor b_r^\prime\rfloor - x_r - \sum_{j = m+1}^n x_j\lfloor y_{rj} \rfloor) \ge -1$ ，则  $\sum_{j = m+1}^n x_jf_{rj} \le f_r  - 1 \lt 0$  矛盾！</p>
+<p>因此  $(\lfloor b_r^\prime\rfloor - x_r - \sum_{j = m+1}^n x_j\lfloor y_{rj} \rfloor)  \ge 0$ ，即 </p>
+
+$$
+-\sum_{j = m+1}^n x_jf_{rj} \le -f_r
+$$
+
+
+<p>添加辅助变量：</p>
+
+$$
+y_r -\sum_{j = m+1}^n x_jf_{rj} = -f_r\\
+y_r \ge 0 为整数
+$$
+
+
+<p>称为 Gomory 约束（割平面方程），从而使得原可行域中的非整数区域被删除。</p>
+<p>通过不断添加割平面方程，极点会逐个变成整数，从而找到整数最优解。</p>
+<h2 id="内点法"><a href="#内点法" class="headerlink" title="内点法"></a>内点法</h2><p>计算复杂性</p>
+<p>算法性能：</p>
+<ul>
+<li>（1）在最坏情况下算法所表现出来的性能———–最坏性能</li>
+<li>（2）在各种情况可能出现时，算法所表现出来的期望性能。———平均性能</li>
+</ul>
+<p>问题(problem):需要回答的一种提问，通常包含一些参数和取值未定的自由变量，可以从两个方面加以描述：</p>
+<ul>
+<li>（1）对所有参数的一般描述；</li>
+<li>（2）对回答（也称为解）所需要满足的特性的描述。</li>
+</ul>
+<p>实例(instance)：当对一个问题中的参数赋予特定的数值时，如何寻找相应的回答（解），这种提问称为该问题的一个实例。</p>
+<p>算法：是一组含义明确的简单指令。一个问题是算法可解的(solvable)：存在一个求解该问题的算法，只要让算法运行足够长的时间，并且保证满足算法在运行过程中所需要的存储空间，它就能求解该问题的任何一个实例。</p>
+<p>停机问题：不可能构造出一个程序来确定任意给出的程序是否会陷入无限循环。</p>
+<p>算法复杂性：描述算法的存储要求和运行时间要求，分为算法的空间复杂性和算法的时间复杂性。</p>
+<p>时间复杂性：利用算法需要的初等运算次数来表示算法的时间复杂性。</p>
+<p>输入规模(input size)：表示一个实例所需要的字符串长度。</p>
+<p>一般用  $\lceil1 + \log_2r\rceil$  可以表示整数  $r$  。</p>
+
+$$
+\begin{aligned}&L=\left\lceil1+\log_2m\right\rceil+\left\lceil1+\log_2n\right\rceil+\sum_{j=1}^n\left\{\left\lceil1+\log_2\mid c_j\mid\right\rceil\right\}\\&+\sum_{i=1}^m\sum_{j=1}^n\left\{\left\lceil1+\log_2\mid a_{ij}\mid\right\rceil\right\}+\sum_{i=1}^m\left\{\left\lceil1+\log_2\mid b_j\mid\right\rceil\right\}\\
+&\le mn + m + n + 2 + \log_2\underline{|P|}_{A, b, c中所有非零数乘积}
+\end{aligned}
+$$
+
+
+<p>旅行商问题，二进制输入长度的总量不超过  $L = n(n-1) + \log_2|P|$ ， $P$  为所有非零  $d_{ij}$  的乘积。假设每个  $d_{ij}$  都有上限  $K$ ，则</p>
+
+$$
+L \le n(n-1)(1 + \log_2K)
+$$
+
+
+<p>复杂度：基本计算总次数C(I)同实例I的计算机二进制输入长度d(I)的关系为</p>
+
+$$
+C(I) \le ag(d(I))
+$$
+
+
+<p>则称  $C(I) = O(g(d(I)))$ 。</p>
+<p>假如某个算法使得  $g(x)$  为多项式，则该算法对于实例  $I$  是多项式时间算法。</p>
+<p>如果  $g(x)$  为指数函数，则称为指数时间算法。</p>
+<p>多项式时间算法的优点：</p>
+<ul>
+<li>随着问题输入规模的增加，算法的计算量（即算法复杂性）呈多项式增长；</li>
+<li>一个多项式时间算法利用另一个多项式时间算法作为其“子程序”，构造一个新的复合型算法，则新算法仍是多项式时间算法。</li>
+</ul>
+<p>线性规划问题的单纯性方法是指数时间算法：</p>
+
+$$
+\begin{aligned}&\max&&\sum_{i=1}^n2^{n-i}x_i\\&s.t.&&x_i+2\sum_{j=1}^{i-1}2^{i-j}x_j\leq a^{i-1},i=2,\cdots,n\\&&&x_i\geq0,\quad i=1,2,\cdots,n\end{aligned}
+$$
+
+
+<p>定理： $a \gt 2$  时，用单纯形算法求解上述问题时需要  $2^n - 1$  次迭代。</p>
+<p>最坏情况：指数；平均情况：多项式</p>
+<p>椭球法是第一个可以在多項式时间內解决一般线性规划问题的解法。</p>
+<p>定理：存在求解 LP 问题的多项式时间算法的充要条件是存在求解线性不等式组的多项式时间算法。</p>
+<h2 id="凸集分离定理"><a href="#凸集分离定理" class="headerlink" title="凸集分离定理"></a>凸集分离定理</h2><p>定理 1：若  $S$  是  $E^n$  的闭凸集,  $y\not\in S$ ，存在唯一的  $\bar x \in S$  使得</p>
+
+$$
+||y - \bar x || = \inf_{x \in S}||y - x|| \gt 0
+$$
+
+
+<p>并且， $\forall x \in S$ ，总有</p>
+
+$$
+(y - \bar x)(\bar x - x) \ge 0
+$$
+
+
+<p>定理 2：若  $S$  是  $E^n$  的非空闭凸集， $y\not\in S$ ，存在非零向量  $p$  和数  $\varepsilon \gt 0$ ，使得对任意  $x \in S$ ，有  $p^Ty \ge \varepsilon + p^Tx$ 。</p>
+<p>定理 3：设  $S$  是  $E^n$  的非空凸集， $y \in \partial S$ ，则存在非零向量  $p$ ，使得  $\forall x \in clS$ （即  $S$  的闭包），有  $p^Ty \ge p^Tx$ 。</p>
+<p>推论 4：（点和凸集的分离定理）设  $S$  是  $E^n$  的非空凸集， $y \not \in S$ ，则存在非零向量  $p$  使得对任意  $x \in clS$ ，有  $p^T(x - y) \le 0$ 。</p>
+<p>定理 5：（凸集分离定理）设  $S_1$ ， $S_2$  是  $E^n$  的两个非空凸集， $S_1 \cap S_2 = \varnothing$ ，则存在非零向量  $p$  使得</p>
+
+$$
+\inf \lbrace p^Tx | x \in S_1\rbrace \ge \sup \lbrace p^Tx | x \in S_2\rbrace
+$$
+
+
+<p>定理 6：设  $S_1$  是  $E^n$  的非空有界闭凸集， $S_2$  是  $E^n$  的非空闭凸集， $S_1 \cap S_2 = \varnothing$ ，则存在非零向量  $p$ ，数  $\varepsilon \gt 0$  使得</p>
+
+$$
+\inf \lbrace p^Tx | x \in S_1\rbrace \ge \varepsilon + \sup \lbrace p^Tx | x \in S_2\rbrace
+$$
+
+
+<p>Farkas 定理： $Ax \le 0, c^Tx \gt 0$  有解的充要条件是  $A^Ty = c, y\ge0$  无解。</p>
+<blockquote>
+<p>利用凸集分离定理证明这些东西，感觉某种意义上是推对偶问题的有力工具，但是暂时没有搞明白它有什么规律，两个系统之间的关系是什么。而且证明过程虽然模板化，但是又有一些细节不一样（比如 Gordan 定理会取极限、取范数之类的操作），似乎难以给出一个统一的规律。</p>
+</blockquote>
+<p>可以写成一组对偶的优化问题：</p>
+<p>(L)：</p>
+
+$$
+\min 0^Ty\\
+A^Ty = c\\
+y \ge 0
+$$
+
+
+<p>(D):</p>
+
+$$
+\max c^Tx\\
+Ax \le 0
+$$
+
+
+<p>假设两个问题同时有解，根据弱对偶定理， $c^Tx \le 0^Tx = 0$ ，因此  $Ax \le 0, c^Tx \gt 0$  无解。</p>
+<p>显然 (D) 总是有解，假如 (L) 无解，只能说明 (D) 有无界解，即  $c^Tx \to \infty$ ，因此存在  $x$  使得  $c^Tx \gt 0$ .</p>
+<p>Gordan 定理： $Ax \lt 0$  有解的充要条件是不存在非零向量  $y \ge 0$ ， $A^Ty = 0$ 。</p>
+<p>凸函数： $f(x) \le af(x^{(1)}) + (1-a)f(x^{(2)}), a \in [0, 1]$ </p>
+<p>凸函数的和仍然是凸函数。</p>
+<p>凸函数乘上一个非负数，仍然是凸函数。因此，凸函数的非负线性组合仍然是凸函数。</p>
+ $f(x)$  为凸集  $S$  上的凸函数，则集合  $S_c = \lbrace x|x\in S, f(x) \le c\rbrace$  为凸集。
+
+ $S$  是  $E^n$  中的非空凸集， $f$  是定义在  $S$  上的凸函数，则  $f$  在  $S$  上的局部极小点是整体极小点，并且极小点的集合是凸集。
+
+ $g(x) = \max (f_1(x), f_2(x))$  也是凸函数。
+
+<p>凸函数的判别</p>
+
+$$
+\nabla f(x) = (\frac{\partial f(x)}{\partial x_1}\quad \dots \frac{\partial f(x)}{\partial x_n})^T
+$$
+
+
+
+$$
+\nabla^2 x = \begin{bmatrix}
+\frac{\partial^2 f(x)}{\partial x_1^2} &\dots& \frac{\partial^2 f(x)}{\partial x_1\partial x_n}\\
+\vdots & \ddots & \vdots\\
+\frac{\partial^2 f(x)}{\partial x_n\partial x_1} & \dots & \frac{\partial^2 f(x)}{\partial x_n^2}
+\end{bmatrix}
+$$
+
+
+<p>方向导数： $Df(x^0; p) = \nabla f(x^0)^T p$ 。</p>
+<p>一阶充要条件：</p>
+ $S$  是  $E^n$  中的非空凸集， $f$  是定义在  $S$  上的可微函数，则  $f(x)$  为凸函数的充要条件为  $\forall x^{(1)}, x^{(2)} \in S$ ，有
+
+
+$$
+f(x^{(2)}) \ge f(x^{(1)}) + \nabla f(x^{(1)})^T(x^{(2)} - x^{(1)})\\
+$$
+
+
+ $f(x)$  为严格凸函数的充要条件为  $\forall x^{(1)}, x^{(2)} \in S$ ，有
+
+
+$$
+f(x^{(2)}) \gt f(x^{(1)}) + \nabla f(x^{(1)})^T(x^{(2)} - x^{(1)})\\
+$$
+
+
+<p>二阶充要条件：</p>
+ $S$  是  $E^n$  中的非空凸集， $f$  是定义在  $S$  上的二阶可微函数，则  $f(x)$  为凸函数的充要条件为  $\forall x \in S$ ， $\nabla^2 f(x)$  是半正定的。
+
+<p>如果  $\nabla^2 f(x)$  是正定的，可以推出  $f(x)$  为严格凸函数。</p>
+<p>定理： $f(x)$  是定义在凸集  $S$  上的可微凸函数，如果存在  $x^*\in S$  使得  $\forall x \in S$  都有  $\nabla f(x^*)^T(x - x^*) \ge 0$ ，则  $x^*$  是凸集  $S$  上的全局极小点。</p>
+<p>凸规划：</p>
+
+$$
+\begin{aligned}&\min\quad f(x)\\&s.t.\quad g_i(x)\geq0,i=1,\cdots,m\\&h_j(x)=0,j=1,\cdots,l\end{aligned}
+$$
+
+
+<p>其中  $f(x)$  是凸函数， $g_i(x)$  是凹函数， $h_j(x)$  是线性函数，则称该问题为凸规划。</p>
+<h2 id="最优性条件"><a href="#最优性条件" class="headerlink" title="最优性条件"></a>最优性条件</h2><h3 id="无约束问题"><a href="#无约束问题" class="headerlink" title="无约束问题"></a>无约束问题</h3>
+$$
+\min f(x)\\
+s.t. x\in E^n
+$$
+
+
+<p>必要条件：</p>
+<p>（一阶必要条件）定理 1：若  $\bar x$  是局部极小点，则  $\nabla f(\bar x) = 0$ .</p>
+ $\nabla f(x^*) = 0$  时称  $x^*$  为驻点，如果  $x^*$  既不是局部极大点也不是局部极小点，则  $x^*$  称为鞍点。
+
+<p>（二阶必要条件）定理 2：若  $\bar x$  是局部极小点，则  $\nabla f(\bar x) = 0$ ，且  $\nabla^2 f(\bar x)$  是半正定的。</p>
+<p>（二阶充分条件）定理 3：若  $\nabla f(\bar x) = 0$ ，且  $\nabla^2 f(\bar x)$  是正定的，则  $\bar x$  是严格局部极小点。</p>
+<p>对于二次正定函数  $f(x) = \frac12x^TAx + b^Tx + c$ （ $A$  对称正定），有唯一极小点  $x^* = -A^{-1}b$ 。</p>
+<p>定理 4：设  $f(x)$  是  $E^n$  上的可微凸函数， $\bar x \in E^n$ ，则  $\bar x$  为整体极小点的充要条件是  $\nabla f(\bar x) = 0$ 。</p>
+<h3 id="约束优化最优性条件"><a href="#约束优化最优性条件" class="headerlink" title="约束优化最优性条件"></a>约束优化最优性条件</h3><p>定义： $F_0 = \lbrace d| \nabla f(\bar x)^T d \lt 0\rbrace$  称为点  $\bar x$  处的下降方向集。</p>
+<p>定义： $S\subset E^n$ ， $\bar x \in clS$ ，非零向量  $d$ ，若存在  $\delta \gt 0$  使得对任意  $\lambda \in (0, \delta)$ ，都有  $\bar x + \lambda d \in S$ ，称为  $d$  为集合  $S$  在  $x$  的可行方向。 $D$  为上述可行方向的集合，称为可行方向锥。</p>
+<p>定理 1：（几何最优性条件）：考虑问题</p>
+
+$$
+\min f(x)\\
+s.t. x \in S
+$$
+
+
+<p>设  $S$  为  $E^n$  的非空集合， $\bar x \in S$ ， $f(x)$  在  $x$  处可微，若  $\bar x$  是局部最优解，则  $F_0\cap D = \varnothing$ 。</p>
+<p><strong>不等式约束问题的一阶最优性条件</strong></p>
+
+$$
+\begin{cases}
+\min& f(x)\\
+s.t.& g_i(x) \ge 0, i = 1,\dots,m
+\end{cases}
+\tag{1}
+$$
+
+
+<p>可行域  $S = \lbrace x| g_i(x) \ge 0, i = 1\dots, m\rbrace$ 。</p>
+<p>若  $\bar x \in S$ ，使得  $g_i(\bar x) = 0$ ，则该不等式约束称为关于可行点  $\bar x$  的起作用约束，或等式约束；否则，若  $\bar x$  使得某个  $g_i(\bar x) \gt 0$ ，称这个不等式约束为关于  $\bar x$  的不起作用约束，或松约束。</p>
+<p>记  $I = \lbrace i | g_i(\bar x) = 0, \bar x \in S\rbrace$ ， $G_0 = \lbrace d| \nabla g_i(\bar x) ^Td \gt 0, i \in I\rbrace$  称为局部约束方向锥（内方向锥）。</p>
+<p>定理 2：若  $\bar x$  是问题  $(1)$  的局部最优解，则  $F_0\cap G_0 =\varnothing$ 。实际上  $G_0 \subseteq D$ 。</p>
+<p>性质：若  $d$  为约束问题在  $x$  点的可行方向，则  $\nabla g_i(x)^Td \ge 0, \forall i \in I(x)$ 。</p>
+<p>定理 3：(Fritz John 条件)  $x \in S$ ， $f, g_i(i\in I)$  在  $\bar x$  处可微， $g_i(i\not \in I)$  在  $\bar x$  处连续，若  $\bar x$  是问题  $(1)$  的局部最优解，则存在不全为 0 的数  $w_0, w_i(i \in I)$  使得</p>
+
+$$
+w_0\nabla f(\bar x) - \sum_{i\in I}w_i\nabla g(\bar x) = 0\\
+w_0, w_i \ge 0
+$$
+
+
+<p>这样的  $\bar x$  称为 Fritz John 点。</p>
+<p>定理 3’：(Fritz John 条件)若  $\bar x$  是问题  $(1)$  的局部最优解，则存在不全为 0 的数  $w_0, w_1, \dots w_m$  使得</p>
+
+$$
+w_0\nabla f(\bar x) - \sum_{i = 1}^mw_i\nabla g(\bar x) = 0\\
+w_ig_i(\bar x) = 0\\
+w_0, w_i \ge 0
+$$
+
+
+<p>这个和上面的是等价的，因为有互补松弛条件  $w_ig_i(\bar x) = 0$ 。如果  $i \in I$ ，则必有  $g_i(\bar x) = 0$ ；若  $i \not\in I$ ，则  $g_i(\bar x) \gt 0$ ，因此必有  $w_i = 0$ 。</p>
+<p>定理 2’ （KKT 条件）考虑问题</p>
+
+$$
+\begin{cases}
+\min& f(x)\\
+s.t.& g_i(x) \ge 0, i = 1,\dots,m
+\end{cases}
+$$
+
+
+ $x \in S$ ， $f, g_i(i\in I)$  在  $\bar x$  处可微， $g_i(i\not \in I)$  在  $\bar x$  处连续， $\lbrace\nabla g_i(\bar x) | i \in I\rbrace$  线性无关，若  $\bar x$  是局部最优解，则存在非负数  $w_i, i\in I$  使得
+
+
+$$
+\nabla f(\bar x) - \sum_{i \in I} w_i\nabla g(\bar x) = 0
+$$
+
+
+<p>上述条件称为 KKT 条件，等价于</p>
+
+$$
+\nabla f(\bar x) - \sum_{i=1}^m w_i\nabla g(\bar x) = 0\\
+w_ig_i(\bar x) = 0, i = 1, \dots, m\\
+w_i \ge 0
+$$
+
+
+<p>KKT 条件说明：在一定条件下，在最优值点, 目标函数的梯度可以表示成起作用约束函数梯度的非负线性组合。但是有约束规格，起作用约束函数的梯度在最优值点向量组线性无关。</p>
+<p>定理 3：（一阶充分条件）设问题</p>
+
+$$
+\begin{cases}
+\min f(x)\\
+s.t. g_i(x) \ge 0, i = 1, 2, \dots, m
+\end{cases}
+$$
+
+
+<p>如果  $f$  为凸函数， $g_i$  为凹函数， $h_j$  为线性函数， $S$  为可行域， $\bar x \in S$ ， $\lbrace i | g_i(\bar x) = 0\rbrace$ 。若  $f, g_i(i \in I)$  在  $\bar x$  点可微， $g_i(i\not \in I)$  在  $\bar x$  点连续，且  $\bar x$  满足 KKT 条件，则  $\bar x$  为整体极小点。</p>
+<p><strong>一般约束问题的一阶最优性条件</strong></p>
+<p>一般约束问题：</p>
+
+$$
+\begin{cases}
+\min f(x)\\
+s.t. g_i(x) \ge 0, i = 1, \dots, m\\
+h_j(x) = 0, j = 1, \dots, l\\
+\end{cases}\tag{NP}
+$$
+
+
+<p>定义：对于  $\bar x \in S$ ，起作用的约束下标集记为  $I$ ，如果向量组</p>
+
+$$
+\lbrace \nabla g_i(\bar x), \nabla h_j(\bar x) | i \in I, j = 1, 2, \dots, l\rbrace
+$$
+
+
+<p>线性无关，则称  $\bar x$  为给定约束  $g(x) \ge 0, h(x) = 0$  的正则点。</p>
+<p>定义：称点集  $\lbrace x = x(t) | t_0 \le t \le t_1\rbrace$  为曲面  $S = \lbrace x | h(x) = 0\rbrace$  上的一条曲线，如果对于所有  $t \in [t_0, t_1]$  均有  $h(x(t)) = 0$ 。</p>
+<p>如导数  $x'(t) = \frac{\mathrm dx(t)}{\mathrm dt}$  存在， 则称曲线是可微的。</p>
+<p>设曲面  $S = \lbrace x | h(x) = 0\rbrace$  上有一个点  $\bar x$ 。</p>
+<p>定义：称点集  $\lbrace x = x(t) | t_0 \le t \le t_1\rbrace$  为曲面  $S$  上过  $\bar x$  的一条曲线，如果对所有的  $t \in [t_0, t_1]$  均有  $h(x(t)) = 0$ ，而且存在  $t^* \in [t_0, t_1]$  使得  $x(t^*) = \bar x$ 。</p>
+<p>曲面  $S$  上在点  $\bar x$  处所有可微曲线构成的切向量的集合称为切平面，记为  $T(\bar x)$ 。</p>
+<p>定义  $H = \lbrace d| \nabla h(x)^T d = 0\rbrace$ ，其中  $\nabla h(x) = (\nabla h_1(x), \nabla h_2(x), \dots, \nabla h_l(x))$ 。</p>
+<p>结论：若向量  $d \in T(\bar x)$ ，则有  $d \in H$ 。换言之  $T(\bar x) \subset H$ 。</p>
+<p>定理：若  $\bar x$  是  $S$  的正则点，则  $T(\bar x) = H$ 。</p>
+<p>定理：设  $\bar x \in S$ ， $f(x)$  和  $g_i(x)(x\in I)$  在  $\bar x$  处可微， $g_i(x)(i\not\in I)$  在  $\bar x$ 处连续， $h_j(j = 1, 2, \dots, l)$  在  $\bar x$  处连续可微，若  $\bar x$  是问题  $(NP)$  的局部最优解，且  $\bar x$  是  $S$  的正则点，则在  $\bar x$  处有</p>
+
+$$
+F_0 \cap G_0 \cap H_0 = \varnothing
+$$
+
+
+<p>其中</p>
+
+$$
+F_0 = \lbrace d \ \nabla f(\bar x)^Td \lt 0\rbrace\\
+G_0 = \lbrace d \ \nabla g(\bar x)^Td \gt 0\rbrace\\
+H_0 = \lbrace d \ \nabla h(\bar x)^Td = 0\rbrace
+$$
+
+
+<p>引理：若系统  $Ax \lt 0, Bx = 0$  无解，则系统  $A^Ty + B^Tz = 0, y \ge 0$ ，且  $y\ne 0$  或者  $z\ne 0$  有解。</p>
+<p>定理 1：（Fritz John 条件）设  $\bar x \in S$ ， $I = \lbrace i | g_i(\bar x) = 0\rbrace$ ， $f(x), g_i(x) (i\in I)$  在  $\bar x$  处可微， $g_i(x)(i \not\in I)$  在  $\bar x$  处连续， $h_j(j = 1, \dots, l)$  在  $\bar x$  处连续可微，若  $\bar x$  是问题  $(NP)$  的局部最优解，则存在不全为0的数  $w_0$ ， $w_i(i\in I)$  和  $v_j(j = 1, 2, \dots, l)$  使得</p>
+
+$$
+\begin{cases}
+w_0\nabla f(\bar x)  - \sum_{i \in I}w_i\nabla g_i(x) - \sum_{j = 1}^lv_j\nabla h_j(\bar x) = 0\\
+w_0, w_i \ge 0, i \in I
+\end{cases}
+$$
+
+
+<p>上述条件又等价于</p>
+
+$$
+\begin{cases}
+w_0\nabla f(\bar x)  - \sum_{i = 1}^mw_i\nabla g_i(x) - \sum_{j = 1}^lv_j\nabla h_j(\bar x) = 0\\
+w_ig_i(\bar x) = 0, i = 1, 2, \dots, m\\
+w_0, w_i \ge 0, i \in I
+\end{cases}
+$$
+
+
+<p>定理 2（KKT 必要条件）： 设  $\bar x$  为可行点， $I = \lbrace g_i(\bar x) = 0\rbrace$ 。 $f, g_i(i\in I)$  在  $\bar x$  处连续可微，向量集</p>
+
+$$
+\lbrace \nabla g_i(\bar x), \nabla h_j(x) | i \in I, j = 1, \dots, l\rbrace
+$$
+
+
+<p>线性无关，若  $\bar x$  是局部最优解，则存在数  $w_i, i\in I$  和  $v_j(j = 1, \dots, l)$ ，使得</p>
+
+$$
+\nabla f(\bar x) - \sum_{i \in I} w_i\nabla g_i(\bar x) - \sum_{j = 1}^l v_j\nabla h_j(\bar x) = 0\\
+w_i \ge 0 (i \in I)
+$$
+
+
+<p>上述结论等价于</p>
+
+$$
+\nabla f(\bar x) - \sum_{i = 1}^m w_i\nabla g_i(\bar x) - \sum_{j = 1}^l v_j\nabla h_j(\bar x) = 0\\
+w_ig_i(\bar x) = 0, i = 1, \dots, m\\
+w_i \ge 0 (i \in I)
+$$
+
+
+<p>定义广义的 Lagrange 函数：</p>
+
+$$
+L(x, w, v) = f(x) - w^Tg(x) - v^Th(x)
+$$
+
+
+<p>定理 2’（KKT 必要条件）： 设  $\bar x$  为可行点， $I = \lbrace g_i(\bar x) = 0\rbrace$ 。 $f, g_i(i\in I)$  在  $\bar x$  处连续可微，向量集</p>
+
+$$
+\lbrace \nabla g_i(\bar x), \nabla h_j(x) | i \in I, j = 1, \dots, l\rbrace
+$$
+
+
+<p>线性无关，若  $\bar x$  是局部最优解，则存在乘子向量  $\bar w \ge 0, \bar v$  使得</p>
+
+$$
+\nabla_x L (\bar x, \bar w, \bar v) = 0\\
+\bar w^T g(\bar x) = 0
+$$
+
+
+<p>一般形式的一阶必要条件（KKT 必要条件）可表示为：</p>
+
+$$
+\begin{cases}
+\nabla_x L (\bar x, \bar w, \bar v) = 0\\
+w_i g_i(\bar x) = 0, i = 1, \dots, m\\
+g_i(x) \ge 0, i = 1, \dots, m\\
+h_j(x) = 0, j = 1, \dots, l\\
+w_i \ge 0, i = 1, \dots, m
+\end{cases}
+$$
+
+
+<p>定理 3（一阶充分条件）：设问题</p>
+
+$$
+\begin{cases}
+\min f(x)\\
+s.t. g_i(x) \ge 0, i = 1, \dots, m\\
+h_j(x) = 0, j = 1, \dots, l\\
+\end{cases}
+$$
+
+
+<p>中， $f$  是凸函数， $g_i$  是凹函数， $h_j$  是线性函数， $S$  为可行域， $\bar x \in S$ ， $I\lbrace i | g_i(\bar x)\rbrace$ 。 $f$  和  $g_i(i\in I)$  在点  $\bar x$  可微， $h_j$  在点  $\bar x$  连续可微， $g_i(i\not\in I)$  在  $\bar x$  处连续，且在  $\bar x$  处 KKT 条件成立，则  $\bar x$  为整体极小点。</p>
+<p>推论：问题</p>
+
+$$
+\begin{cases}
+\min &cx\\
+s.t.& Ax \ge b\\
+&x \ge 0
+\end{cases}
+$$
+
+
+<p>则  $x^*$  是最优解等价于存在  $w \in \R^m, v\in \R^n$  使得</p>
+
+$$
+\begin{cases}
+Ax^* \ge b\\
+x^* \ge 0\\
+c - w^TA - v^T = 0\\
+w^T(Ax^* - b) = 0\\
+v^Tx^* = 0\\
+w, v \ge 0
+\end{cases}
+$$
+
+
+<p>注：实际上这个问题的 lagrange 函数为  $L(x, w, v) = cx - w^T(Ax - b) - v^Tx$ ，因此  $\nabla_x L(x, w, v) = c^T - Aw - v$ 。</p>
+<p><strong>二阶条件</strong></p>
+<p>Lagrange 乘子问题</p>
+
+$$
+L(x, w, v) = f(x) - w^Tg(x) - v^Th(x)
+$$
+
+
+<p>其中  $w \in E^m, v \in \R^l$  称为 Lagrange 乘子</p>
+<p>是否存在  $x \in E^n, w \in \R^m, v \in \R^l$  满足方程组：</p>
+
+$$
+\begin{cases}
+\nabla_x L(x, w, v) = \nabla f(x) - \nabla g(x) w - \nabla h(x)v = 0\\
+\nabla_w L(x, w, v) = - g(x) \le 0\\
+\nabla_v L(x, w, v) = h(x) = 0\\
+w \ge 0\\
+w_ig_i(x) = 0, i = 1, 2, \dots, m
+\end{cases}\tag{LM}
+$$
+
+
+<p>定理(KKT 必要条件)：考虑问题</p>
+
+$$
+\begin{cases}
+\min & f(x) \\
+s.t. & g_i(x) \ge 0, i = 1, \dots, m\\
+& h_j(x) = 0, j = 1, \dots, l
+\end{cases}
+$$
+
+
+<p>设  $\bar x$  为可行点， $I = \lbrace i | g_i(\bar x) = 0\rbrace$ ， $f, g_i(i\in I)$  在  $\bar x$  处连续可微，向量集</p>
+
+$$
+\lbrace \nabla g_i(\bar x), \nabla h_j(x) | i \in I, j = 1, \dots, l\rbrace
+$$
+
+
+<p>线性无关，若  $\bar x$  是局部最优解，则存在  $\bar w, \bar v$  使得  $(\bar x, \bar w, \bar v)$  为问题  $(LM)$  的解。</p>
+<p>定义：设  $S$  是  $\R^n$  中的一个非空集合，点  $\bar x \in clS$ ，集合</p>
+
+$$
+T = \lbrace d | x^{(k)} \in S, x^{(k)}\to \bar x, \lambda_k \gt 0, d = \lim_{k\to\infty}\lambda_k(x^{(k)} - \bar x)\rbrace
+$$
+
+
+<p>称为  $S$  在  $\bar x$  处的切锥，或者称为序列化可行方向锥，记为  $SFD(\bar x， S)$ 。</p>
+<p>命题：假设确定集合  $S$  的所有约束函数在  $x \in S$  处连续可微，则有</p>
+
+$$
+D(x, S) \subseteq SFD(x, S)
+$$
+
+
+<p>其中  $D(x, S)$  是  $x$  的可行方向锥， $SFD(x, S)$  为  $x$  点的切锥。</p>
+<p>问题：</p>
+
+$$
+\begin{cases}
+\min & f(x)\\
+s.t. & g_i(x) \ge 0\\
+& h_j(x) = 0
+\end{cases}\tag{NP}
+$$
+
+
+<p>设  $\bar x$  是问题  $(NP)$  的一个 KKT 点， $I = \lbrace i | g_i(\bar x) = 0\rbrace$ ，即存在数  $\bar w_i, i \in I$  和  $\bar v_j$  使得</p>
+
+$$
+\nabla f(\bar x) - \sum_{i \in I} \bar w_i \nabla g_i(\bar x) - \sum_{j = 1}^l \bar v_j\nabla h_j(\bar x) = 0\\
+\bar w_i \ge 0, i \in I
+$$
+
+
+<p>定义</p>
+
+$$
+\bar S = \left\lbrace x
+    \begin{array}{|cc}
+      x \in \R^n&\\
+      g_i(x) = 0, & i \in I 且 \bar w_i \gt 0\\
+      g_i(x) \ge 0, & i \in I 且 \bar w_i = 0\\
+      h_j(x) = 0, & j = 1, \dots, l
+    \end{array}
+\right\rbrace
+$$
+
+
+<p>设  $\bar S$  在点  $\bar x$  处的切锥为  $\bar T$ 。</p>
+<p>定义</p>
+
+$$
+\bar G = \left\lbrace d
+    \begin{array}{|cc}
+      d \in \R^n&\\
+      \nabla g_i(\bar x)^Td = 0, & i \in I 且 \bar w_i \gt 0\\
+      \nabla g_i(\bar x)^Td \ge 0, & i \in I 且 \bar w_i = 0\\
+      \nabla h_j(\bar x)^Td = 0, & j = 1, \dots, l
+    \end{array}
+\right\rbrace
+$$
+
+
+<p>定理（二阶必要条件）：设  $\bar x$  是  $(NP)$  的局部最优解， $f, g_i$  和  $h_j$  二次连续可微，且存在  $\bar w, \bar v$  使得  $(\bar x, \bar w, \bar v)$  为  $(LM)$  的解，又假设在  $\bar x$  处，约束规格  $\bar G = \bar T$  成立，则对于任意的  $d \in \bar G$  都有</p>
+
+$$
+d^T\nabla_x^2 L(\bar x, \bar w, \bar v)d \ge 0
+$$
+
+
+<p>即  $\nabla_x^2 L(\bar x, \bar w, \bar v)$  在子空间上是半正定的。</p>
+<p>定理（二阶必要条件）</p>
+<p>设  $\bar x$  是  $(NP)$  的局部最优解， $f, g_i$  和  $h_j$  二次连续可微，又假设在  $\bar x$  处， $\lbrace \nabla g_i(\bar x), i \in I, \nabla h_j(\bar x), j = 1, \dots, l\rbrace$  线性无关，则存在  $\bar w, \bar v$  使得  $(\bar x, \bar w, \bar v)$  为  $(LM)$  的解，且矩阵  $\nabla_x^2 L(\bar x, \bar w,\bar v)$  在子空间  $\bar G$  上是半正定的，其中</p>
+
+$$
+\bar G = \left\lbrace d
+    \begin{array}{|cc}
+      \nabla g_i(\bar x)^Td = 0, & i \in I 且 \bar w_i \gt 0\\
+      \nabla g_i(\bar x)^Td \ge 0, & i \in I 且 \bar w_i = 0\\
+      \nabla h_j(\bar x)^Td = 0, & j = 1, \dots, l
+    \end{array}
+\right\rbrace
+$$
+
+
+<blockquote>
+<p>这两个二阶必要条件，第一个好证但难用，第二个难证但好用。</p>
+</blockquote>
+<p>定理（二阶充分条件）：设  $f, g_1(i = 1, \dots, m)$  和  $h_j(j = 1, \dots, l)$  是二次连续可微函数， $\bar x$  为可行解，若存在  $\bar w, \bar v$  使得  $\bar x, \bar w, \bar v$  为  $(LM)$  的解，且矩阵  $\nabla_x^2 L(\bar x, \bar w, \bar v)$  在子空间  $\bar G$  上是正定的，则  $\bar x$  是严格局部极小点。</p>
+<h3 id="对偶及鞍点问题"><a href="#对偶及鞍点问题" class="headerlink" title="对偶及鞍点问题"></a>对偶及鞍点问题</h3><p><strong>Lagrange 对偶问题</strong></p>
+
+$$
+\min f(x)\\
+\begin{aligned}
+s.t.&\quad g_i(x) \ge 0, i = 1, \dots, m\\
+& h_j(x) = 0, j = 1, \dots, l\\
+& x \in D
+\end{aligned}\tag{1}
+$$
+
+
+<p>定义  $(1)$  的对偶问题：</p>
+
+$$
+\max \theta(w, v)\\
+s.t. w\ge 0
+$$
+
+
+<p>其中， $\theta(w, v) = \inf \lbrace f(x) - \sum_{i = 1}^n w_ig_i(x) - \sum_{j = 1}^l v_jh_j(x)|x \in D\rbrace$ 。若上式不存在有限的下界，令  $\theta(w, v) = -\infty$ 。其中， $\theta(w, v)$  称为 Lagrange 对偶函数。</p>
+<p>对任意的  $x \in D$ ， $\theta(w, v)$  必然是一个凹函数，因此，对偶问题一定是一个凸规划问题。</p>
+<p>原规划问题等价于  $\min_{x \in D}\max_{w \ge 0, v} L(x, w, v)$ ，对偶问题等价于  $\max_{w\ge0, v}\min_{x \in D} L(x, w, v)$ 。</p>
+<p>选择不同的集约束，会得到不同的对偶问题。</p>
+<p><strong>对偶定理</strong></p>
+<p>弱对偶定理：设  $\bar x, (\bar w, \bar v)$  分别是原问题和对偶问题的可行解，则</p>
+
+$$
+\theta(\bar w, \bar v) \le f(\bar x) - \bar w^T g(\bar x) - \bar v^T h(\bar x) \le f(\bar x)
+$$
+
+
+<p>推论 1：对原问题和对偶问题，必有  $\inf\lbrace f(x) | g(x) \ge 0, h(x) = 0, x \in D\rbrace \ge \sup\lbrace \theta(w, v) | w \ge 0\rbrace$ </p>
+<p>推论 2：若  $f(\bar x) \le \theta(\bar w, \bar v)$ <br>, 其中  $\bar x$  为原问题的可行解， $\bar w \ge 0$ ，则  $\bar x$  和  $(\bar w, \bar v)$  分别是原问题和对偶问题的最优解。</p>
+<p>推论 3：若  $\inf\lbrace f(x) | g(x) \ge 0, h(x) = 0, x \in D\rbrace = -\infty$ ，则  $\forall w \ge 0$ ，有  $\theta(w, v) = -\infty$ 。</p>
+<p>推论 4：若  $\sup \lbrace \theta(w, v)| w \ge 0 \rbrace = +\infty$  ，则原问题没有可行解。</p>
+<blockquote>
+<p>可以看出，对偶问题一定有可行解。</p>
+</blockquote>
+<p>对偶间隙： $\delta = f_{\min} - \theta_{\max}$ </p>
+<p>完全对偶：对偶间隙为 0.</p>
+<p>强对偶：对偶间隙为 0，原问题和对偶问题都存在最优解。</p>
+<p>引理：设  $D$  为非空凸集， $f: D \to \R$  为凸函数， $g_i: D \to \R$  为凹函数， $h(x)$  为线性函数，对于下面两个不等式系统：</p>
+<ol>
+<li>存在  $x \in D$ ，使得  $f(x) \lt 0, g(x) \ge 0, h(x) = 0$ ；</li>
+<li>存在  $(\lambda_0, \lambda^T, \mu^T) \ne 0$ ，使得  $(\lambda_0, \lambda^T) \ge 0$ ，并且  $\lambda_0 f(x) - \lambda^T g(x) - \mu^T h(x) \ge 0\quad(\forall x \in D)$ </li>
+</ol>
+<p>若系统 (1) 无解，则系统 (2) 有解；若系统 (2) 有满足  $\lambda_0 \gt 0$  的解，则系统 (1) 无解。</p>
+<p>强对偶定理：设  $D$  为非空开凸集， $f$  和  $g_i(i = 1, \dots, m)$  分别是  $E^n$  上的凸函数和凹函数， $h_j(j = 1, \dots, l)$  是  $E^n$  上的线性函数，即  $h(x) = Ax - b$ ，又设存在  $\hat x \in D$  使得</p>
+
+$$
+g(\hat x) \gt 0, h(\hat x) = 0, 0 \in \text{int} H(D)
+$$
+
+
+<p>（ $\text{int} M$ ）表示  $M$  的内部。这个条件称为 Slater 约束规格。</p>
+<p>其中， $H(D) = \lbrace h(x) | x \in D\rbrace$ ，则</p>
+
+$$
+f_{\min} = \theta_{\max}
+$$
+
+
+<p>并且，若  $\inf$  为有限值，则存在某个  $(\bar w, \bar v)$  使得</p>
+
+$$
+\sup\lbrace \theta(w, v) | w \ge 0\rbrace
+$$
+
+
+<p>在  $(\bar w, \bar v)$  处达到， $ \bar w \ge 0$ ；若  $\inf$  在  $\bar x$  处达到，则  $\bar w^T g(\bar x) = 0$ 。</p>
+<p><strong>鞍点最优性条件</strong></p>
+<p>定义：设  $L(x, w, v)$  为 Lagrange 函数， $\bar x \in E^n$ ， $\bar w \in E^m$ ,  $\bar w \ge 0$ ， $\bar v \in E^l$ ，如果对任意  $ x \in E^n, w \in E^m, w \ge 0$  及  $v \in E^l$  都有</p>
+
+$$
+L(\bar x, w, v) \le L(\bar x, \bar w, \bar v) \le L(x, \bar w, \bar v)
+$$
+
+
+<p>则称  $(\bar x, \bar w, \bar v)$  为  $L(x, w, v)$  的鞍点。</p>
+<p>Lagrange 函数的鞍点必定是 Lagrange 函数关于  $x$  的极小点，关于  $(w, v) (w \ge 0)$  的极大点。</p>
+<p>鞍点定理：</p>
+<ol>
+<li>设  $(\bar x, \bar w, \bar v)$  是原问题的 Langrange 函数  $L(x, w, v)$  的鞍点，则  $\bar x$  和  $(\bar w, \bar v)$  分别是原问题和对偶问题的最优解。</li>
+<li>假设  $f$  是凸函数， $g_i(x) (i = 1, \dots, m)$  是凹函数， $h_j(x) (j = 1, \dots, l)$  是线性函数，即  $h(x) = Ax - b$ ，且  $A$  是行满秩矩阵，又设存在  $\hat x$  使得  $g(\hat x) \gt 0, h(\hat x) = 0$ ，若  $\bar x$  是原问题的最优解，则存在  $(\bar w, \bar v) (\bar w \ge 0)$ ，使得  $(\bar x, \bar w, \bar v)$  是 Lagrange 函数的鞍点。</li>
+</ol>
+<blockquote>
+<p>鞍点可能不存在，即便存在，也很难求。</p>
+</blockquote>
+<p><strong>鞍点与 KKT 条件的关系</strong></p>
+<p>定理： $\min \lbrace f(x) | g(x) \ge 0, h(x) = 0\rbrace$  中，可行域为  $S$ ， $\bar x \in S$  满足 KKT 条件，即存在  $\bar w \ge 0, \bar v$  使得</p>
+
+$$
+\nabla f(\bar x) - \nabla g(\bar x)\bar w - \nabla h(\bar x)\bar v = 0
+$$
+
+
+<p>且  $f$  为凸函数， $g_i (i \in I)$  为凹函数， $h_j$  为线性函数，则  $(\bar x, \bar w, \bar v)$  为 Lagrange 函数  $L(x, w, v)$  的鞍点；反之，设  $f, g_i, h_j$  可微，若  $(\bar x, \bar w, \bar v) (\bar w \ge 0)$  是 Lagrange 函数的鞍点，则  $(\bar x, \bar w, \bar v)$  满足 KKT 条件。</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1763429002233.png" alt="1763429002233" loading="lazy"></p>
+<p><strong>Langrange 乘子的意义</strong></p>
+
+$$
+\tag{NP}\begin{cases}
+\min & f(x)\\
+s.t. & g_i(x) \ge 0, i = 1, \dots, m\\
+& h_j(x) = 0, j = 1, \dots, l
+\end{cases}
+$$
+
+
+<p>设  $(NP)$  的局部最优解为  $x^*$ ，相应的 Lagrange 乘子为  $w^*, v^*$ ， $w^* \ge 0$ 。</p>
+<p>进行扰动：</p>
+
+$$
+\tag{NP}\begin{cases}
+\min & f(x)\\
+s.t. & g_i(x) \ge \varepsilon_i, i = 1, \dots, m\\
+& h_j(x) = \lambda_j, j = 1, \dots, l
+\end{cases}
+$$
+
+
+<p>扰动问题的局部最优解为  $x^*(\varepsilon, \lambda)$ ，相应的 Lagrange 乘子为  $w^*(\varepsilon), v^*(\lambda)$ ，则有</p>
+
+$$
+\nabla_\lambda f(x^*(\lambda))|_{\lambda = 0} = w^*\\
+\nabla_\varepsilon f(x^*(\varepsilon))|_{\varepsilon = 0} = v^*
+$$
+
+
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>下降迭代算法：重复过程得到序列的极限。在每次迭代中，后继点处的函数值要有所减少。</p>
+<p>定理：设目标函数  $f(x)$  具有一阶偏导数， $x^{(k + 1)}$  由下列规则产生：</p>
+
+$$
+\begin{cases}
+f(x^{(k)} + \lambda_kd^k) = \min_{\lambda} f(x^{(k)} + \lambda d^k)\\
+x^{(k + 1)} = x^{(k)} + \lambda_kd^k
+\end{cases}
+$$
+
+
+<p>则有  $\nabla f(x^{(k+1)})^Td^k = 0$ 。</p>
+<p>定义：给定集合  $X\subset E^n$ ，记其幂集（即所有子集构成的集合）为  $2^X$ ，称集值映射  $A: X \to 2^X$  为一个算法映射。</p>
+<p>解集合：把满足某些条件的点集定义为解集合。当迭代点属于该集合时，停止迭代。</p>
+<p>常用的解集合：</p>
+
+$$
+\begin{aligned}&\Omega=\left\{\overline{x}\mid\left\|\nabla f(\overline{x})\right\|=0\right\}\\&\Omega=\left\{\overline{x}\mid\overline{x}\text{为}KKT\text{点}\right\}\\&\Omega=\left\{\overline{x}\mid\overline{x}\in S,f(\overline{x})\leq b\right\}\end{aligned}
+$$
+
+
+<p>其中， $b$  是某个可接受的目标函数值。</p>
+<p>下降函数：定义：</p>
+
+$$
+\begin{aligned}&\text{定义:设}\Omega\subset X\text{为解集合,}A\text{为}X\text{上的一个算法,}\alpha(x)\text{是定义}\\&\text{在}X\text{上的连续实函数,若满足}\\&1.\text{ 当}x\notin\Omega\text{且}y\in A(x)\text{时,}\alpha(y)&lt;\alpha(x)\\&2.\text{当}x\in\Omega\text{且}y\in A(x)\text{时,}\alpha(y)\leq\alpha(x)\end{aligned}
+$$
+
+
+<p>则称  $\alpha$  是关于解集合  $\Omega$  和算法  $A$  的下降函数。</p>
+<p>对于非线性规划问题</p>
+
+$$
+\begin{cases}\min f(x)\\s.t.&x\in S&\end{cases}
+$$
+
+
+<p>通常取  $\|\nabla f(x)\|$  或者  $f(x)$  为下降函数。</p>
+<p>闭映射：给定两个非空闭集  $X \subset E^m$  和  $Y \subset E^n$ ，以及一个集值映射  $A: X \to 2^Y$ ，假设点列  $\lbrace x^{(k)}\rbrace$  和  $\lbrace y^{(k)}\rbrace$  满足  $x^{(k)} \in X, y^{(k)} \in A(x^{(k)})$ 。若  $x^{(k)} \to x, y^{(k)} \to y$  蕴含着  $y \in A(x)$ ，则称  $A$  在  $x \in X$  处是闭的。若  $A$  在集合  $S\subseteq X$  上每一点都是闭的，则称  $A$  在集合  $S$  上是闭映射。</p>
+<p>合成映射：设  $X, Y, $  分别是空间  $E^n, E^p, E^q$  中的非空闭集， $A: X\to 2^Y, B: Y \to 2^Z$ 。若集值映射  $C: X\to 2^Z$  定义如下：</p>
+
+$$
+\forall x\in X,\quad C(x)=\bigcup_{y\in A(x)}B(y)
+$$
+
+
+<p>则称  $C$  是  $A$  和  $B$  的合成映射，记为  $C = BA$ 。</p>
+<p>定理：给定集值映射  $A: X\to 2^Y, B: Y \to 2^Z$ ，假设  $A$  在点  $x \in X$  处是闭的， $B$  在  $A(x)$  上是闭的，对于  $x^{(k)} \to x$ ，若  $y^{(k)} \in A(x^{(k)})$ ，且  $\lbrace y^{(k)} \rbrace$  存在收敛子列，则合成映射  $C = BA$  在点  $x$  处是闭的。</p>
+<p>推论 1：给定集值映射  $A: X\to 2^Y, B: Y \to 2^Z$ ，假设  $A$  在点  $x \in X$  处是闭的， $B$  在  $A(x)$  上是闭的，若  $Y$  是紧集，则合成映射  $C = BA$  在点  $x$  处是闭的。</p>
+<p>推论 2：给定集值映射  $A: X\to Y, B: Y \to 2^Z$ ，假设  $A$  在点  $x \in X$  处是连续的， $B$  在  $A(x)$  上是闭的，则合成映射  $C = BA$  在点  $x$  处是闭的。</p>
+<p>算法收敛问题：设  $\Omega$  为解集合， $A: X\to 2^X$  为算法映射。给定一个集合  $Y \subset X$ ，若对于任意的初始点  $x^{(1)} \in Y$ ，算法映射  $A$  所产生的序列  $\lbrace x^{(k)} \rbrace$  中的任一收敛子序列的极限都属于  $\Omega$ ，则称算法映射  $A$  在  $Y$  上收敛。</p>
+<p>若集合  $Y$  是任意选取的（该集合不必限定在解集合  $\Omega$  的很小邻域内），则相应的收敛性称为全局收敛性。若  $Y$  只能取接近  $\Omega$  的点集，则相应的收敛性称为局部收敛性。</p>
+<p>定理：设  $A$  为  $X$  上的一个算法， $\Omega$  为解集合，给定初始点  $x^{(1)} \in X$ ，进行如下迭代：</p>
+<p>若  $x^{(k)} \in \Omega$ ，则停止迭代；否则取  $x^{(k + 1)} \in A(x^{(k)})$ ，用  $k + 1$  替代  $k$ ，重复上述过程。</p>
+<p>如果下面的条件成立：</p>
+<ol>
+<li>序列  $\lbrace x^{(k)} \rbrace$  含于  $X$  的某个紧子集中；</li>
+<li>存在一个连续函数  $\alpha$ ，它是关于  $\Omega$  和  $A$  的下降函数；</li>
+<li>映射  $A$  在  $\Omega$  的补集上是闭的。</li>
+</ol>
+<p>则序列  $\lbrace x^{(k)}\rbrace$  的任一收敛子序列的极限都属于  $\Omega$ 。</p>
+<p>实用收敛准则</p>
+<ol>
+<li> $\|x^{(k+1)} - x^{(k)}\| \lt \varepsilon$ </li>
+<li> $f(x^{(k)}) - f(x^{(k + 1)}) \lt \varepsilon$ ，或者  $\frac{x^{(k + 1) - x^{(k)}}}{\|x^{(k)}\|} \lt \varepsilon$ </li>
+<li> $\|\nabla f(x^{(k)})\| \lt \varepsilon$ （对于无约束最优化）</li>
+</ol>
+<p>收敛速率</p>
+<p>设序列  $\lbrace \gamma^{(k)}\rbrace$  收敛于  $\gamma^*$ ，定义满足</p>
+
+$$
+\overline{\lim\limits_{k\to+\infty}}\frac{\left\|\gamma^{(k+1)}-\gamma^*\right\|}{\left\|\gamma^{(k)}-\gamma^*\right\|^p}=\beta&lt;\infty 
+$$
+
+
+<p>的非负数  $p$  的上确界为序列  $\lbrace \gamma^{(k)}\rbrace$  的收敛级。</p>
+<p>若序列的收敛级为  $p$ ，则称序列是  $p$  级收敛的。</p>
+<p>若  $p = 1$  且  $\beta \lt 1$ ，则称序列是以收敛比  $\beta$  线性收敛的。</p>
+<p>若  $p \gt 1$  或者  $p = 1$  且  $\beta = 0$ ，则称序列是超线性收敛的。</p>
+<p>收敛级  $p$  越大，序列收敛得越快；当收敛级  $p$  相同时，收敛比  $\beta$  越小，序列收敛得越快。</p>
+<p>算法的渐进收敛速度</p>
+<p>设  $\lbrace x^k \rbrace$  为算法产生的迭代点列且收敛于  $x^*$ 。</p>
+<p>算法 Q-线性收敛：对于充分大的  $k$  有</p>
+
+$$
+\frac{\|x^{k+1}-x^*\|}{\|x^k-x^*\|}\leq a,\quad a\in(0,1)
+$$
+
+
+<p>Q-超线性收敛：</p>
+
+$$
+\lim_{k\to\infty}\frac{\|x^{k+1}-x^{*}\|}{\|x^{k}-x^{*}\|}=0
+$$
+
+
+<p>Q-次线性收敛：对于充分大的  $k$  有</p>
+
+$$
+\lim_{k\to\infty}\frac{\|x^{k+1}-x^{*}\|}{\|x^{k}-x^{*}\|}=1,
+$$
+
+
+<p>Q-二次收敛：对于充分大的  $k$  有</p>
+
+$$
+\frac{\|x^{k+1}-x^*\|}{\|x^k-x^*\|^2}\leq a,\quad a&gt;0
+$$
+
+
+<p>算法的二次终止性</p>
+<p>若某个算法对于任意的正定二次函数，从任意的初始点出发，都能经有限步迭代达到其极小点，则称该算法具有二次终止性。</p>
+<p>用二次终止性作为判断算法优劣的原因：</p>
+<ul>
+<li>正定二次函数具有某些较好的性质，因此一个好的算法应能够在有限步内达到其极小点。</li>
+<li>对于一个一般的目标函数，若在其极小点处的Hesse矩阵正定，由于</li>
+</ul>
+
+$$
+\begin{aligned}f(x)&=f\left(x^*\right)+\nabla f\left(x^*\right)^T\left(x-x^*\right)\\&+\frac12\left(x-x^*\right)^T\nabla^2f\left(x^*\right)\left(x-x^*\right)+o\left(\left\|x-x^*\right\|\right)\end{aligned}
+$$
+
+<ul>
+<li>因此可以猜想，对正定二次函数好的算法，对于一般目标函数也应具有较好的性质。</li>
+</ul>
+<h2 id="一维搜索"><a href="#一维搜索" class="headerlink" title="一维搜索"></a>一维搜索</h2>
+$$
+(LS)\quad\min_\lambda f(x^{(k)}+\lambda d^{(k)})
+$$
+
+
+<p>如果求得的  $\lambda_k$  使得</p>
+
+$$
+f\left(x^{(k)}+\lambda_kd^{(k)}\right)=\min_\lambda f\left(x^{(k)}+\lambda d^{(k)}\right)
+$$
+
+
+<p>则称为精确一维搜索 (Exact Line Search)。 $\lambda_k$  称为最优步长。</p>
+<p>如果存在  $\lambda_k$  使得</p>
+
+$$
+f\left(x^{(k)}+\lambda_kd^{(k)}\right)&lt;f\left(x^{(k)}\right)
+$$
+
+
+<p>称为非精确一维搜索 (Inexact Line Search)。</p>
+<p>精确一维搜索通常有两种实现方式：</p>
+<ol>
+<li>试探法：按某种方式找试探点，通过一系列试探点来确定极小点。</li>
+<li>函数逼近法（插值法）：用某种较简单的曲线逼近原来的函数曲线，通过求逼近函数的极小点来估计目标函数的极小点。</li>
+</ol>
+<p>基本性质： $f(x_k+\alpha_kd_k)\leqslant f(x_k+\alpha d_k),\quad\forall\:\alpha&gt;0$ ； $f_{\alpha}^{\prime}(\boldsymbol{x}_{k}+\alpha_{k}\boldsymbol{d}_{k})=\boldsymbol{d}_{k}^{\mathrm{T}}\nabla f(\boldsymbol{x}_{k}+\alpha_{k}\boldsymbol{d}_{k})=0$ 。</p>
+<p>算法映射  $M: E^n \times E^n \to 2^{E^n}$  定义为：</p>
+
+$$
+M(x, d) = \lbrace y | y = x + \bar \lambda d, f(x + \bar \lambda d) = \min_{\lambda \ge 0}f(x + \lambda d)\rbrace
+$$
+
+
+<p>定理：设  $f(x)$  是定义在  $E^n$  上的连续函数， $d\ne 0$ ，则算法映射  $M$  在  $(x, d)$  处是闭的。</p>
+<p>试探法：</p>
+<p>定义：称  $f(x)$  在闭区间  $[a, b]$  上是单峰的，是指  $f(x)$  在  $[a, b]$  内有唯一的一点  $x^*$ ，使得对任意的  $x_1, x_2 \in [a, b], x_1 \lt x_2$ ，有：</p>
+<p>当  $x_2 \le x^*$  时， $f(x_1) \gt f(x_2)$ ；<br>当  $x^* \le x_1$  时， $f(x_2) \gt f(x_1)$ 。</p>
+<p>定理：设  $f(x)$  是  $[a, b]$  上的单峰函数， $x_1, x_2 \in [a, b]$  且  $x_1 \lt x_2$ 。则</p>
+<p>若  $f(x_1) \gt f(x_2)$ ，则对任意的  $x \in [a, x_1]$ ，有  $f(x) \gt f(x_2)$ 。</p>
+<p>若  $f(x_1) \le f(x_2)$ ，则对任意的  $x \in [x_2, b]$ ，有  $f(x) \ge f(x_1)$ 。</p>
+<p>0.618法的基本思想：通过取试探点使包含极小点的区间不断缩短，当区间长度小到一定程度时，区间上各点的函数值均接近极小值，因此任意一点都可以作为极小点的近似。</p>
+<p>根据上面的定理我们可以取区间内的左右两点  $\lambda_k, \mu_k$  并比较他们的函数值大小，把一定不存在极值点的区间去掉，得到新的包含区间。</p>
+<p>我们希望：</p>
+
+$$
+b_k - \mu_k = \lambda_k - a_k\\
+b_{k + 1} - a_{k + 1} = \alpha (b_k - a_k)
+$$
+
+
+<p>分两种情况：</p>
+
+$$
+f(\lambda_k) \gt f(\mu_k) \Rightarrow [a_{k+1}, b_{k+1}] = [\lambda_k, b_k]\\
+f(\lambda_k) \le f(\mu_k) \Rightarrow [a_{k+1}, b_{k+1}] = [a_k, \mu_k]\\
+$$
+
+
+<p>解得</p>
+
+$$
+\lambda_k = a_k + (1 - \alpha)(b_k - a_k)\\
+\mu_k = a_k + \alpha(b_k - a_k)
+$$
+
+
+<p>假设新区间  $[a_{k+1}, b_{k+1}] = [a_k, \mu_k]$ ，我们希望  $\mu_{k + 1} = \lambda_k$ ，即  $\alpha^2 = 1 - \alpha$ ，此时就不需要计算  $f(\mu_{k+1})$ ，直接使用之前计算过的  $f(\lambda_k)$  的值即可。此时解得  $\alpha \approx 0.618$ 。</p>
+<p>牛顿法：</p>
+<p>定义算法映射</p>
+
+$$
+A(x) = x - \frac{f^\prime(x)}{f^{\prime\prime}(x)}
+$$
+
+
+<p>定理：假设  $f(x)$  存在连续三阶导数， $\bar x$  满足  $f^\prime(\bar x) = 0$ ， $f^{\prime\prime}(\bar x) \ne 0$ ，初点  $x^{(1)}$  充分接近  $\bar x$ ，则牛顿法产生的序列  $\lbrace x^{(k)}\rbrace$  至少以二级收敛速度收敛于  $\bar x$ 。</p>
+<p>缺点：初点选择十分重要。如果初始点靠近极小点，则可能很快收敛；如果初始点远离极小点，迭代产生的点列可能不收敛于极小点。</p>
+<p>抛物线法</p>
+<p>在极小点附近用二次三项式  $\varphi(x)$  逼近目标函数，令  $\varphi(x)$  与  $f(x)$  在三点  $x^{(1)} \lt x^{(0)} \lt x^{(2)}$  处有相同的函数值，并假设  $f(x^{(1)}) \gt f(x^{(0)}), f(x^{(0)}) \lt f(x^{(2)})$ 。</p>
+
+$$
+\begin{aligned}&\varphi(x)=a+bx+cx^2\\&\varphi(x^{(0)})=a+bx^{(0)}+cx^{(0)2}=f(x^{(0)})\\&\varphi(x^{(1)})=a+bx^{(1)}+cx^{(1)2}=f(x^{(1)})\\&\varphi(x^{(2)})=a+bx^{(2)}+cx^{(2)2}=f(x^{(2)})\end{aligned}\\
+B_1=(x^{(0)^2}-x^{(2)^2})f(x^{(1)})\quad B_2=(x^{(2)^2}-x^{(1)^2})f(x^{(0)})\\B_3=(x^{(1)^2}-x^{(0)^2})f(x^{(2)})\quad C_1=(x^{(0)}-x^{(2)})f(x^{(1)})\\C_2=(x^{(2)}-x^{(1)})f(x^{(0)})\quad C_3=(x^{(1)}-x^{(0)})f(x^{(2)})\\
+x^{(3)}=\overline{x}^{(k)}=\frac{B_1+B_2+B_3}{2(C_1+C_2+C_3)}\\
+$$
+
+
+<p>三次插值法</p>
+<p>选取两个初始点  $x_1$  和  $x_2$ ， $x_1 \lt x_2$ ， $f^\prime(x_1) \lt 0, f^\prime(x_2) \gt 0$ 。</p>
+
+$$
+\varphi(x)=a(x-x_1)^3+b(x-x_1)^2+c(x-x_1)+d\\
+\varphi(x_1)=f(x_1),\quad\varphi^{\prime}(x_1)=f^{\prime}(x_1)\\\varphi(x_2)=f(x_2),\quad\varphi^{\prime}(x_2)=f^{\prime}(x_2)
+$$
+
+
+<p>得到</p>
+
+$$
+\begin{cases}d=f(x_1)\\c=f'(x_1)&lt;0\\a(x_2-x_1)^3+b(x_2-x_1)^2+c(x_2-x_1)+d=f(x_2)\\3a(x_2-x_1)^2+2b(x_2-x_1)+c=f'(x_2)\end{cases}
+$$
+
+
+<p>求出</p>
+
+$$
+\overline{x}-x_1=-\frac{c}{2b} (a = 0)\\
+\overline{x}-x_1=\frac{-b+\sqrt{b^2-3ac}}{3a}=\frac{-c}{b+\sqrt{b^2-3ac}} (a \ne 0)
+$$
+
+
+<p>精确线搜索：</p>
+<ul>
+<li>目标函数沿搜索方向下降量达到最大</li>
+<li>理想化策略，计算量大，很难取到</li>
+<li>便于算法理论分析（如二次终止性、收敛速率等）</li>
+<li>该步长搜索对全局最优解的帮助不大</li>
+</ul>
+<p>非精确线搜索</p>
+<p>Armijo步长规则、 Goldstein步长规则、 Wolfe步长规则</p>
+<p>Armijo步长规则：主要思想：先取一个较大的步长看目标函数是否有满意的下降量。否则依次按比例压缩，直至满足要求。又称进退试探法。</p>
+
+$$
+\sigma \in (0, 1)\\
+f(x_k+\alpha d_k)\leq f(x_k)+\sigma\alpha\nabla f(x_k)^Td_k
+$$
+
+
+<p>Goldstein步长规则</p>
+<p>由于Armijo规则引入的步长的取值范围包含了0的附近，为了保证迭代步长不会太小，Goldstein做了改进</p>
+
+$$
+\sigma \in (0, \frac12)\\
+f(\boldsymbol{x}_{k}+\alpha\boldsymbol{d}_{k})\leqslant f(\boldsymbol{x}_{k})+\sigma\alpha\boldsymbol{g}_{k}^{\mathrm{T}}d_{k},\\
+f(\boldsymbol{x}_{k}+\alpha\boldsymbol{d}_{k})\geqslant f(\boldsymbol{x}_{k})+(1-\sigma)\alpha\boldsymbol{g}_{k}^{\mathrm{T}}\boldsymbol{d}_{k}
+$$
+
+
+<p>3、Wolfe步长</p>
+
+$$
+0 \lt \sigma_1 \lt \sigma_2 \lt 1\\
+f(\boldsymbol{x}_k+\alpha\boldsymbol{d}_k)\leqslant f(\boldsymbol{x}_k)+\sigma_1\alpha\boldsymbol{g}_k^\mathrm{T}\boldsymbol{d}_k\\
+\nabla f(\boldsymbol{x}_k+\alpha\boldsymbol{d}_k)^\mathrm{T}\boldsymbol{d}_k\geqslant\sigma_2\boldsymbol{g}_k^\mathrm{T}\boldsymbol{d}_k
+$$
+
+
+<p>确保梯度变化率不低于初始值的  $\sigma_2$  倍（防止步长过小）</p>
+<p>加强版：强Wolfe步长规则</p>
+<p>第二个条件变成：</p>
+
+$$
+|\nabla f(\boldsymbol{x}_k+\alpha\boldsymbol{d}_k)^\mathrm{T}\boldsymbol{d}_k|\geqslant\sigma_2|\boldsymbol{g}_k^\mathrm{T}\boldsymbol{d}_k|
+$$
+
+
+<p>所有方法的相同点：均要求目标函数有满意的下降量且控制步长不能太小。</p>
+<p>不同点：</p>
+<ul>
+<li>Goldstein步长很少用；第二式将最优步长排除；</li>
+<li>Armijo步长最为常见；</li>
+<li>Wolfe步长包含最优步长，特别适用于共轭梯度与拟牛顿方法；</li>
+<li>Armijo、Goldstein步长通过进退试探技术；</li>
+<li>Wolfe步长需借助多项式插值等技术。</li>
+</ul>
+<h2 id="使用导数的最优化方法"><a href="#使用导数的最优化方法" class="headerlink" title="使用导数的最优化方法"></a>使用导数的最优化方法</h2><p>精确一维搜索的重要性质：</p>
+<p>定理：设  $f(x)$  具有连续的偏导数，且  $x^{(k + 1)}$  是从  $x^{(k)}$  出发沿方向  $d{(k)}$  做一维搜索而得到的，即</p>
+
+$$
+f(x^{(k)}+\lambda_kd^{(k)})=\min f(x^{(k)}+\lambda d^{(k)})
+$$
+
+
+<p>则  $\nabla f(x^{(k+1)})^Td^{(k)}=0$ 。</p>
+<p>下降迭代算法的步骤：</p>
+<p>最速下降法：</p>
+
+$$
+\begin{aligned}&\min\quad f(x)\\&s.t.\quad x\in E^n\end{aligned}
+$$
+
+
+<p>且  $f(x)$  具有一阶连续偏导数，则取搜索方向： $d^{(k)}=-\nabla f(x^{(k)})$ </p>
+<p>步骤：</p>
+<ol>
+<li>给定初点  $x^P{(1)}$ 。</li>
+<li>计算搜索方向  $d^{(k)}=-\nabla f(x^{(k)})$ 。</li>
+<li>若  $\|d^{(k)}\| \le \varepsilon$ ，则停止计算；否则，从  $x^{(k)}$  出发，沿  $d^{(k)}$  进行一维搜索，求  $\lambda_k$  使得</li>
+</ol>
+
+$$
+f(x^{(k)}+\lambda_kd^{(k)})=\min_{\lambda\geq0}f(x^{(k)}+\lambda d^{(k)})
+$$
+
+
+<ol start="4">
+<li>令  $x^{(k + 1)} = x^{(k)} + \lambda_k d^{(k)}$ ，返回 2.</li>
+</ol>
+<p>定理：设  $f(x)$  是连续可微的实函数，解集合  $\Omega = \lbrace \bar x |\nabla f(\bar x) = 0 \rbrace$ ，最速下降法产生的序列  $\lbrace x^{(k)} \rbrace$  含于某个紧集，则序列  $\lbrace x^{(k)} \rbrace$  的每个聚点  $\hat x \in \Omega$ 。</p>
+<p>收敛速度估计：</p>
+<p>定理：对严格凸二次函数  $f(x) = \frac12 x^TGx$ ，最优步长最速下降算法线性收敛，即</p>
+
+$$
+\frac{f_{k + 1} - f(x^*)}{f_k - f(x^*)} \le \left(\frac{\lambda_1 - \lambda_n}{\lambda_1 + \lambda_n}\right)^2\\
+\frac{\|\boldsymbol{x}_{k+1}-\boldsymbol{x}^*\|}{\|\boldsymbol{x}_k-\boldsymbol{x}^*\|}\leqslant\frac{\lambda_1-\lambda_n}{\lambda_1+\lambda_n}\sqrt{\frac{\lambda_1}{\lambda_n}}
+$$
+
+
+<p>其中  $\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n \gt 0$  为目标函数 Hesse 阵的特征根。 $x^* = 0$  为目标函数的最小值点。</p>
+<ul>
+<li>很强条件下(目标函数二次、严格凸)最速下降算法的收敛速度估计</li>
+<li>线性收敛是一个很慢的收敛速度；</li>
+<li>有例为证：该估计是精确的，没有提升的空间。</li>
+</ul>
+<p>不具有二次终止性。</p>
+<p>优点：</p>
+<ul>
+<li>迭代过程简单，计算量与存储量小；</li>
+<li>开始时函数值下降较快，可以快速靠近最优解。</li>
+</ul>
+<p>缺点：相邻两搜索方向正交，导致锯齿现象，不适于算法收局。</p>
+<p>原因：最速下降法的搜索方向基于目标函数的线性近似。</p>
+<p>因此有牛顿法：用一个二次函数去近似目标函数，然后精确地求出这个二次函数的极小点。</p>
+<p>牛顿方向： $d^{(k)}=-\nabla^2f(x^{(k)})^{-1}\nabla f(x^{(k)})$ </p>
+<p>定理：设  $f(x)$  为二次可微函数， $x \in E^n$ ， $\bar x$  满足  $\nabla f(\bar x) = 0$ ，且  $\nabla^2 f(\bar x)^{-1}$  存在，又设  $x^{(1)}$  充分接近  $\bar x$ ，使得存在  $k_1, k_2 \gt 0$ ，满足  $k_1k_2 \lt 1$ ，且对每一个</p>
+
+$$
+x\in X=\left\{x\left\|x-\overline{x}\right\|\leq\left\|x^{(1)}-\overline{x}\right\|\right\}
+$$
+
+
+<p>都有</p>
+
+$$
+\left\|\nabla^{2}f(x)^{-1}\right\|\leq k_{1}
+$$
+
+
+<p>和</p>
+
+$$
+\frac{\left\|\nabla f(\overline{x})-\nabla f(x)-\nabla^2f(x)(\overline{x}-x)\right\|}{\left\|\overline{x}-x\right\|}\leq k_2
+$$
+
+
+<p>成立，则牛顿法产生的收敛序列收敛于  $\bar x$ 。</p>
+<p>步骤：</p>
+<ol>
+<li>给定初点  $x^{(1)}$ 。</li>
+<li>若  $\|\nabla f(x^{(k)})\| \lt \varepsilon$ ，停止搜索。</li>
+<li>令  $x^{(k + 1)} = x^{(k)} -\nabla^2f(x^{(k)})^{-1}\nabla f(x^{(k)})$ ，返回 2.</li>
+</ol>
+<p>算法特点：步长恒取1，无线搜索</p>
+<p>用Newton法求解无约束问题会出现以下情形：</p>
+<p>（1）收敛到极小点。（2）收敛到鞍点。（3）Hesse矩阵不可逆，无法迭代下去。</p>
+<p>优点:（1）Newton法产生的点列 $\{x^{(k)}\}$ 若收敛，则收敛速度快—具有至少二阶收敛速率。(2) Newton法具有二次终止性。</p>
+<p>缺点:（1）可能会出现在某步迭代时，目标函数值上升。（2）当初始点远离极小点时，牛顿法产生的点列可能不收敛，或者收敛到鞍点，或者Hesse矩阵不可逆，无法计算。（3）计算量和存储量大：需要计算目标函数的梯度和Hesse矩阵的逆矩阵。</p>
+<p>几种补救和改进措施：</p>
+<ul>
+<li>引入线搜索，阻尼牛顿法，保证收敛性</li>
+<li>结合最速下降法，设计“杂交”牛顿法，保证下降性</li>
+<li>计算牛顿方程的近似解，建立非精确牛顿算法，降低计算量</li>
+<li>寻求新的搜索方向，共轭梯度法、拟牛顿算法</li>
+</ul>
+<p>阻尼牛顿法</p>
+<ol>
+<li>给定初点  $x^{(1)} \in E^n$ 。</li>
+<li>计算  $\nabla f(x^{(k)}), \nabla^2 f(x^{(k)})^{-1}$ 。</li>
+<li>若  $\|\nabla f(x^{(k)})\| \lt \varepsilon$ ，<br>从  $x^{(k)}$  出发，沿  $d^{(k)}$  进行一维搜索，求  $\lambda_k$  使得</li>
+</ol>
+
+$$
+f(x^{(k)}+\lambda_kd^{(k)})=\min_{\lambda\geq0}f(x^{(k)}+\lambda d^{(k)})
+$$
+
+
+<ol start="4">
+<li>令  $x^{(k + 1)} = x^{(k)} + \lambda_k d^{(k)}$ ，返回 2.</li>
+</ol>
+<p>修正牛顿法</p>
+<ol>
+<li>给定初点  $x^{(1)} \in E^n$ 。</li>
+<li>计算  $\nabla f(x^{(k)}), G_k = \nabla^2 f(x^{(k)})$ ，若  $\|\nabla f(x^{(k)})\| \lt \varepsilon$ ，则停止计算；</li>
+<li>置  $B_k = G_k + \varepsilon I$ ，其中  $\varepsilon_k$  是一个非负数，使得  $B_k$  是对称正定矩阵，计算修正牛顿方向  $d^{(k)}=-B_k^{-1}\nabla f(x^{(k)})$ <br>从  $x^{(k)}$  出发，沿  $d^{(k)}$  进行一维搜索，求  $\lambda_k$  使得</li>
+</ol>
+
+$$
+f(x^{(k)}+\lambda_kd^{(k)})=\min_{\lambda\geq0}f(x^{(k)}+\lambda d^{(k)})
+$$
+
+
+<ol start="4">
+<li>令  $x^{(k + 1)} = x^{(k)} + \lambda_k d^{(k)}$ ，返回 2.</li>
+</ol>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1764212622718.png" alt="1764212622718" loading="lazy"></p>
+<h3 id="线性共轭方向法"><a href="#线性共轭方向法" class="headerlink" title="线性共轭方向法"></a>线性共轭方向法</h3><p>把线性方程组  $Ax = b$  转化为严格凸二次规划问题： $\min_{x}\frac12 x^TAx - b^Tx$ 。</p>
+<p>共轭方向：</p>
+<p>定义：设  $A$  是  $n\times n$  对称正定矩阵，若  $E^n$  中的两个方向  $d^{(1)}$  和  $d^{(2)}$  满足</p>
+
+$$
+(d^{(1)})^TAd^{(2)} = 0
+$$
+
+
+<p>则称这两个方向关于  $A$  共轭，或称它们关于  $A$  正交。</p>
+<p>若  $d^{(1)}, d^{(2)}, \dots, d^{(k)}$  是  $E^n$  中的  $k$  个方向，它们俩俩关于  $A$  共轭，即满足  $(d^{(i)})^TAd^{(j)} = 0$ ， $i\ne j$ ， $i, j = 1, \dots, k$ ，则称这组方向  $A$  是共轭，或者称它们为  $A$  的  $k$  个共轭方向。</p>
+<p>定理 1：设  $A$  是  $n$  阶对称正定矩阵， $d^{(1)}, d^{(2)}, \dots, d^{(k)}$  是  $k$  个  $A$  共轭的非零向量， 则这  $k$  个向量线性无关。</p>
+<p>定理 2：设有二次函数， $f(x) = \frac12x^TAx+b^Tx+c$ ，其中  $A_{n\times n}$  是对称正定矩阵， $d^{(0)},d^{(1)},\cdots,d^{(n-1)}$  是  $A$  共轭的非零向量，从任意一点  $x^{(0)} \in E^n$  出发，依次沿这组向量进行一维搜索，</p>
+
+$$
+\min f(x^{(k)}+\lambda d^{(k)})=f(x^{(k)}+\lambda_kd^{(k)})\\x^{(k+1)}=x^{(k)}+\lambda_kd^{(k)}\quad k=0,1,\cdots,n-1
+$$
+
+
+<p>则  $\nabla f(x^{(k+1)})^Td^{(j)}=0,j=0,1,\cdots,k$ </p>
+<p>定理（扩张子空间定理）：设有函数  $f(x)=\frac12x^TAx+b^Tx+c$ ，其中  $A$  为  $n$  阶对称正定矩阵， $d^{(1)},d^{(2)}, \dots, d^{(k)}$  是  $A$  共轭的非零向量。以任意的  $x^{(1)} \in E^{(n)}$  为初始点，依次沿  $d^{(1)}, d^{(2)}, \dots, d^{(k)}$  进行一维搜索，得到点  $x^{(2)}, x^{(3)}, \dots, x^{(k+1)}$ ，则  $x^{(k + 1)}$  是  $f(x)$  在线性流形</p>
+
+$$
+M_{k}\left(x^{(1)};\left\lbrace d^{(1)},d^{(2)},\cdots,d^{(k)}\right\rbrace\right)=\left\lbrace x|x=x^{(1)}+\sum_{i=1}^{k}\mu_{i}d^{(i)},\mu_{i}\in \R\right\rbrace=x^{(1)}+B_{k}
+$$
+
+
+<p>上的唯一极小点，特别的，当  $k = n$  时， $x^{(n + 1)}$  是  $f(x)$  在  $E^n$  上的唯一极小点。</p>
+<p>共轭方向法</p>
+<p>步骤：</p>
+<ol>
+<li>给定初始点  $x^{(0)} \in E^n$ ，选定下降方向  $d^{(0)}$ ，令  $k = 0$ 。</li>
+<li>从  $x^{(k)}$  出发，沿  $d^{(k)}$  方向进行一维搜索，求  $\lambda_k$ ： $\min f(x^{(k)}+\lambda d^{(k)})=x^{(k)}+\lambda_kd^{(k)}$ ；</li>
+<li>若  $\|\nabla f(x^{(k+1)})\| = 0$ ，则停止迭代，否则转 4.</li>
+<li>选择共轭方向  $d^{(k + 1)}$  使得满足  $d^{(j)^T} A d^{(k + 1)} = 0, j = 0, 1, \dots, k$ ，令  $k = k + 1$ ，返回 2.</li>
+</ol>
+<p>结论： $\lambda_k=-\frac{d^{(k)T}(Ax^{(0)}+b)}{d^{(k)T}Ad^{(k)}}=-\frac{\nabla f(x^{(k)})^Td^{(k)}}{d^{(k)T}Ad^{(k)}}.$  因此上述算法不需要以为搜索，可以使用这个公式计算步长。</p>
+<p>共轭梯度法(Conjugate Gradient Method)(FR法)</p>
+<p>记  $\nabla f(x^{(k)}) = g_k$ 。</p>
+<p>在共轭梯度法中，初始点处的搜索方向取为该点的负梯度方向，即取</p>
+
+$$
+d^{(1)}=-\nabla f(x^{(1)})=-g_1
+$$
+
+
+<p>而以下各共轭方向  $d^{(k)}$  由第  $k$  次迭代点  $x^{(k)}$  处的负梯度  $-g_k$  与已经得到的共轭向量  $d^{(k - 1)}$  的线性组合来确定。</p>
+
+$$
+\begin{aligned}&d^{(k)}=-g_k+\beta_{k-1}d^{(k-1)}\\&\beta_{k-1}=\frac{d^{(k-1)^T}Ag_k}{d^{(k-1)^T}Ad^{(k-1)}}\\&x^{(k+1)}=x^{(k)}+\lambda_kd^{(k)}\\&\lambda_k=\frac{g_k^Tg_k}{d^{(k)^T}Ad^{(k)}}\end{aligned}
+$$
+
+
+<p>定理：对于正定二次函数，FR 法在  $m \le n$  次一维搜索之后终止，且对  $\forall 1 \le i \le m$ ，下列关系成立：</p>
+<ol>
+<li> $d^{(i)^T}Ad^{(j)}=0,j=1,2,\cdots,i-1$ ；</li>
+<li> $g_i^Tg_j=0,j=1,2,\cdots,i-1$ ；</li>
+<li> $g_i^Td^{(i)}=-g_i^Tg_i$ （蕴含  $d^{(1)} \ne 0$ ）</li>
+</ol>
+<p>实际上，梯度之间的递推式为  $g_{i + 1} = g_i + \lambda_i Ad^{(i)}$ 。</p>
+<p>由此可以得到定理： $\beta_i=\frac{d^{(i)T}Ag_{i+1}}{d^{(i)T}Ad^{(i)}}=\frac{\left\|g_{i+1}\right\|^2}{\left\|g_i\right\|^2}(i\geq1,g_i\neq0).$ </p>
+<blockquote>
+<p>第三个公式可以直接从第二个公式得出，既然每次搜索的梯度都是正交的，而  $d^{(i)}$  永远是前  $i$  个  $g$  的线性组合，因此  $d^{(i)}$  在  $g^{(i)}$  方向的投影就是  $g^{(i)}$ 。从  $g_k$  得到  $d_k$  的本质是一个类似于施密特正交化的东西，只不过正交换成了共轭。值得注意的是，上述结论只对二次函数成立，一般情况下未必成立，在一般情况下，假如采用精确的一维搜索，则仍然有  $g_k \perp d_{k-1}$ ，至于  $\beta$  怎么取就有很多种选择方法了。</p>
+</blockquote>
+<p>步骤（FR 共轭梯度法）</p>
+<ol>
+<li>给定初始点  $x^{(1)}$ ，置  $k = 1$ 。</li>
+<li>计算  $g_k = \nabla f(x^{(k)})$ ，若  $\|g_k\| = 0$ ，则停止计算得到  $\bar x = x^{(k)}$ ；否则进行下一步。</li>
+<li>令  $d^{(k)} = - g_k + \beta_{k - 1}d^{(k - 1)}$ ，其中，当  $k = 1$  时， $\beta_{k - 1} = 0$ ，当  $k \gt 1$  时， $\beta_{k-1}=\frac{\left\|g_k\right\|^2}{\left\|g_{k-1}\right\|^2}$ </li>
+<li>设  $x^{(k + 1)} = x^{(k)} + \lambda_k d^{(k)}$ ，其中  $\lambda_k = -\frac{g_k^Td^{(k)}}{d^{(k)^T}Ad^{(k)}}$ 。</li>
+<li>若  $k = n$ ，则停止计算，得  $\bar x = x^{(k + 1)}$ ；否则，置  $k = k + 1$ ，返回 2.</li>
+</ol>
+<p>收敛速度：对于严格的凸二次函数</p>
+
+$$
+f(x) = \frac12 x^T Ax - b^Tx
+$$
+
+
+<p>若系数矩阵  $A$  有  $r$  个相异的特征根，则最优步长规则下的共轭梯度法至多  $r$  步迭代之后终止。</p>
+<p>线性共轭梯度法小结</p>
+<p>对大规模线性方程组问题, 由于线性共轭梯度法小的计算量和储存量及快速收敛性, 使其计算效率方面高于传统的Gauss消元法和系数矩阵的分解算法.所以,对于大规模线性方程组问题,线性共轭梯度法往往成为首选. 不过,对于小规模的线性方程组问题, Gauss消元法更简便</p>
+<h3 id="用于一般函数的共轭梯度法"><a href="#用于一般函数的共轭梯度法" class="headerlink" title="用于一般函数的共轭梯度法"></a>用于一般函数的共轭梯度法</h3><p>迭代的延续方法：</p>
+<ol>
+<li>直接延续：即总用公式  $d^{(k+1)}=-g_{k+1}+\beta_{k}d^{(k)}$  构造搜索方向；</li>
+<li>重新开始，把n步作为一轮，每搜索一轮之后，取一次最速下降方向，开始下一轮。</li>
+</ol>
+<p>步骤</p>
+<ol>
+<li>给定初始点  $x^{(1)}$ ，允许误差  $\varepsilon \gt 0$ ，置  $y^{(1)} = x^{(1)}$ ， $d^{(1)} = -\nabla f(y^{(1)}), k = j = 0$ 。</li>
+<li>若  $\|\nabla f(y^{(j)})\| \lt \varepsilon$ ，则停止计算；否则做一维搜索，求  $\lambda_j$  满足  $f(y^{(j)} + \lambda_j d^{(j)}) = \min f(y^{(j)} + \lambda d^{(j)})$ ，令  $y^{(j + 1)} = y^{(j)} + \lambda_j d^{(j)}$ 。</li>
+<li>若  $j \lt n$ ，则转 4，否则转 5.</li>
+<li>令  $d^{(j+1)}=-\nabla f(y^{(j+1)})+\beta_jd^{(j)}$ ， $\beta_{j}=\frac{\left\|\nabla f(y^{(j+1)})\right\|^{2}}{\left\|\nabla f(y^{(j)})\right\|^{2}}$ ，置  $j = j + 1$ ，转  $2$ 。</li>
+<li>令  $x^{(k + 1)} = y^{(n + 1)}$ ， $y^{(1)} = x^{(k + 1)}$ ， $d^{(1)} = -\nabla f(y^{(1)}), j = 1, k = k + 1$ ，返回 2.</li>
+</ol>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1764639077147.png" alt="1764639077147" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1764639082792.png" alt="1764639082792" loading="lazy"></p>
+<h3 id="拟牛顿法-Quasi-Newton-Method"><a href="#拟牛顿法-Quasi-Newton-Method" class="headerlink" title="拟牛顿法(Quasi-Newton Method)"></a>拟牛顿法(Quasi-Newton Method)</h3><p>这是一种求解无约束极值问题的有效算法，由于它既避免了计算二阶导数、矩阵及其求逆过程，又比最速下降法的收敛速度快，特别是对高维问题具有显著的优越性，所以，它被公认为求解无约束极值问题最有效的算法之一。</p>
+<h2 id="无约束最优化的直接方法"><a href="#无约束最优化的直接方法" class="headerlink" title="无约束最优化的直接方法"></a>无约束最优化的直接方法</h2><h3 id="坐标轮换法-Cyclic-Coordinate-Method"><a href="#坐标轮换法-Cyclic-Coordinate-Method" class="headerlink" title="坐标轮换法(Cyclic Coordinate Method)"></a>坐标轮换法(Cyclic Coordinate Method)</h3><p>基本思想：</p>
+
+$$
+\begin{aligned}x^{(1)}&\Longrightarrow x_{11}\overset{e_1}{\operatorname*{\to}}x_{12}\overset{e_2}{\operatorname*{\to}}x_{13}\overset{e_n}{\operatorname*{\to}}x_{1n+1}\\
+x_{1n+1}&\Rightarrow x_{21}\to x_{22}\to x_{23}\to\cdots\to x_{2n}\to x_{2n+1}\\
+x_{2n+1}&\Rightarrow x_{31}\to x_{32}\to x_{33}\to\cdots\end{aligned}
+$$
+
+
+<p>步骤：</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765238769186.png" alt="1765238769186" loading="lazy"></p>
+<p>这种方法简单、直观，但对于山脊形函数或自变量间有大的交互作用不适用。</p>
+<h3 id="模式搜索法（步长加速法）"><a href="#模式搜索法（步长加速法）" class="headerlink" title="模式搜索法（步长加速法）"></a>模式搜索法（步长加速法）</h3><p>探测移动：依次沿n个坐标轴进行，用于确定新的基点和有利于函数值下降的方向。</p>
+<p>模式移动：沿相邻两个基点连线方向进行，试图使函数值更快减少。</p>
+<p>特点：收敛速度比较慢，但编制程序比较简单，对变量不多的问题可以使用，而且确实是一种可靠的方法，另外，此法可用于求解非线性目标规划问题。</p>
+<h3 id="Powell方法（方向加速法）"><a href="#Powell方法（方向加速法）" class="headerlink" title="Powell方法（方向加速法）"></a>Powell方法（方向加速法）</h3><p>定理：设  $f(x) = \frac12 x^TAx+b^Tx + c$ ， $A$  对称正定，任意给定方向  $d \in E^n$  和点  $x^{(0)}, x^{(1)} \in E^n (x^{(0)} \ne x^{(1)})$ ，从  $x^{(0)}$  出发沿着  $d$  做一维搜索得到极小点  $x^{(a)}$ ，从  $x^{(1)}$  出发沿  $d$  做一维搜索得到极小点  $x^{(b)}$ ，则  $x^{(b)} - x^{(a)}$  与  $d$  是  $A$  共轭的。</p>
+<p>定理：设  $f(x) = \frac12 x^TAx+b^Tx + c$ ， $A$  对称正定，任意给定方向  $d \in E^n$  和点  $x^{(0)}, x^{(1)} \in E^n (x^{(0)} \ne x^{(1)})$ ，从  $x^{(0)}$  出发沿着  $k$  个共轭方向  $d^{(1)},d^{(2)},\dots,d^{(k)}$  做一维搜索得到极小点  $x^{(a)}$ ，从  $x^{(1)}$  出发沿  $k$  个共轭方向  $d^{(1)},d^{(2)},\dots,d^{(k)}$  做一维搜索得到极小点  $x^{(b)}$ ，则  $x^{(b)} - x^{(a)}$  与  $k$  个共轭方向  $d^{(1)},d^{(2)},\dots,d^{(k)}$  是  $A$  共轭的。</p>
+<p>整个过程分成若干个循环，每个循环有n+1个一维搜索，即先经过n个线性无关方向的一维搜索，把所得的点与此循环开始点连接起来，再沿着连线的方向进行第n+1次一维搜索，然后用连线的方向代替原来n个方向中的一个，再开始下一个循环。</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765240221128.png" alt="1765240221128" loading="lazy"></p>
+<p>Powell算法的二次终止性：</p>
+<p>定理：对二次正定函数  $f(x) = \frac12x^TAx + b^Tx + c$ ，如果每轮迭代中前  $n$  个方向均线性无关，那么 Powell 方法至多经  $n$  轮迭代达到极小点。</p>
+<p>正交程度与共轭程度</p>
+<p>正交程度：设  $d^{(1)},d^{(2)},\dots,d^{(k)}$  是  $\R^n$  中的  $n$  个向量，其正交程度定义为</p>
+
+$$
+\delta\Big(d^{(1)},d^{(2)},\cdots,d^{(n)}\Big)=\begin{cases}0,&\exists d^{(i)}=0,\\
+\frac{\left|\det\left(d^{(1)},d^{(2)},\cdots,d^{(n)}\right)\right|}{\prod_{i=1}^n\left\|d^{(i)}\right\|},&\text{其它}.\end{cases}
+$$
+
+
+<p>定理 1： $\delta (d^{(1), d^{(2)}, \dots, d^{(n)}}) \le 1$ ，且等式成立当且仅当  $d^{(1)}, d^{(2)}, \dots, d^{(n)}$  是  $n$  个非零的正交向量。</p>
+
+$$
+Q = (d^{(1)}, d^{(2)}, \dots, d^{(n)})\\
+\det (Q^TQ) \le \prod_{i=1}^n (d^{(i)})^Td^{(i)}
+$$
+
+
+<p>考虑一般的正定二次函数</p>
+
+$$
+f(x) = \frac12x^TAx + b^Tx + c
+$$
+
+
+<p>设  $d^{(1)}, d^{(2)}, \dots, d^{(n)}$  为一组  $A$  共轭的向量，令  $\bar d^{(i)} = \sqrt A d^{(i)}$ ，则正交方向对应于共轭方向。</p>
+<p>定义：设  $A$  为  $n$  阶正定对称矩阵， $d^{(1)}, d^{(2)}, \dots, d^{(n)}$  是  $\R^n$  中的  $n$  个向量，其  $A$  共轭程度定义为</p>
+
+$$
+\Delta(d^{(1)}, d^{(2)}, \dots,d^{(n)}) =\begin{cases}0,&\exists d^{(i)}=0,\\
+\frac{\left|\det\left(\sqrt{A}\right)\right\|\det\left(d^{(1)},d^{(2)},\cdots,d^{(n)}\right)|}{\prod_{i=1}^n\sqrt{\left(d^{(i)}\right)^TAd^{(i)}}},&\text{其它}\end{cases}
+$$
+
+
+<p>定理 2： $\Delta(d^{(1)}, d^{(2)}, \dots,d^{(n)})$ ，等号成立当且仅当  $d^{(1)}, d^{(2)}, \dots,d^{(n)}$  是  $n$  个非零  $A$  共轭向量。</p>
+<p>改进 Powell 方法的判别条件：若</p>
+
+$$
+\begin{aligned}\mu&=\max\left\{f\left(x^{(i)}\right)-f\left(x^{(i+1)}\right)|i=1,2,\cdots,n\right\}\\&=f\left(x^{(m)}\right)-f\left(x^{(m+1)}\right)\end{aligned}\\
+\left|\lambda_{n+1}\right|&gt;\left(\frac{f\left(x^{(1)}\right)-f\left(x^{(n+2)}\right)}{\mu}\right)^{\frac12}
+$$
+
+
+<p>则用方向  $p^{(n+1)}$  替换方向  $p(m)$ 。</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765243217549.png" alt="1765243217549" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765243234034.png" alt="1765243234034" loading="lazy"></p>
+<h2 id="可行方向法"><a href="#可行方向法" class="headerlink" title="可行方向法"></a>可行方向法</h2><p>根据约束条件的处理方式, 求解方法大致有两类:</p>
+<p>一是间接方法, 先将约束优化问题进行某种处理得到一个新问题, 然后通过求解后者求解原优化问题, 如罚函数方法等.</p>
+<p>二是直接方法, 在可行域内直接极小化目标函数. 其迭代过程一般通过如下两种策略实现:</p>
+<p>(1)可行方向法：沿可行下降方向进行线搜索产生新的可行迭代点,</p>
+<p>(2)投影方法：借助投影等技术由当前迭代点沿可行域的边界进行曲线搜索.</p>
+<p>直接方法比较适合可行域结构简单的凸约束优化问题, 搜索方向<br>多基于负梯度方向, 因此, 收敛速度至多是线性的.</p>
+<h3 id="Zoutendijk可行方向法"><a href="#Zoutendijk可行方向法" class="headerlink" title="Zoutendijk可行方向法"></a>Zoutendijk可行方向法</h3><p>一．线性约束的情形</p>
+
+$$
+\begin{cases}\min\:f(x)\\s.t.Ax\geq b\\Ex=e&\end{cases}\quad(1)
+$$
+
+
+<p>其中  $f$ 可微， $A_{m\times n}\text{,}E_{l\times n}\text{, }x_{n\times1}\text{, }b_{m\times1}\text{, }e_{l\times1}$ ， $S=\{x\mid Ax\ge b,Ex=e\}$ 。</p>
+<p>定义：对于  $\min_{x\in E^n} f(x)$ ，设  $\bar x \in E^n$  是任给一点， $d\ne 0$ ，若存在  $\delta \gt 0$  使得对任意的  $\lambda \in (0, \delta)$ ，有  $f(\bar x + \lambda d) \lt f(\bar x)$ ，则称  $d$  为  $f(x)$  在点  $\bar x$  处的下降方向。</p>
+
+$$
+F_0=\left\{d\right|\nabla f(\overline{x})^Td&lt;0\}
+$$
+
+
+<p>称为  $\bar x$  处的下降方向集。</p>
+<p>定义：设集合  $S \subset E^n$ ， $\bar x \in clS$ ， $d$  为非零向量，若存在  $\delta \gt 0$  使得对任意  $\lambda \in (0, \delta)$  都有</p>
+
+$$
+\bar x + \lambda d\in S
+$$
+
+
+<p>则称  $d$  为集合  $S$  在  $\bar x$  的可行方向。</p>
+
+$$
+D=\left\{d\right|d\neq0,\overline{x}\in clS,\exists\delta&gt;0,\forall\lambda\in(0,\delta),\text{有}\overline{x}+\lambda d\in S\big\}
+$$
+
+
+<p>为  $\bar x$  的可行方向锥。</p>
+
+$$
+\begin{aligned}&\text{min }f(x)\\&s.t.\quad Ax\geq b\\&Ex=e\end{aligned}\tag{1}
+$$
+
+
+<p>定理 1：设  $\bar x$  是问题 (1) 的可行解，在  $\bar x$  点处，有  $A_1\bar x = b_1, A_2 \bar x \gt b_2$ ，其中  $A = \binom{A_1}{A_2}, b = \binom{b_1}{b_2}$ ，则非零向量  $d$  是  $\bar x$  处可行方向的充要条件为  $A_1d \ge 0, Ed = 0$ 。</p>
+
+$$
+\begin{aligned}&\text{min }\nabla f(x)^Td\\&\text{s.t.}\quad A_1d\geq0\\&Ed=0\\&\mid d_j\mid\leq1,j=1,2,\cdots,n\end{aligned}\tag{2}
+$$
+
+
+<p>定理2：在问题 (1) 中，设  $x$  为可行解，在点  $x$  点处，有  $A_1x = b_1, A_2 x \gt b_2$ ，其中  $A = \binom{A_1}{A_2}, b = \binom{b_1}{b_2}$ ，则  $x$  为 KKT 点的充要条件是问题 (2) 的目标函数最优值为 0。</p>
+<p>假设  $x^{(k)}$  是 (1) 的可行解， $d^{(k)}$  是下降可行方向，需要求</p>
+
+$$
+\begin{aligned}\min\:f(x^{(k)}+\lambda d^{(k)})&=f(x^{(k)}+\lambda_kd^{(k)})\\x^{(k+1)}&=x^{(k)}+\lambda_kd^{(k)}\end{aligned}
+$$
+
+
+<p>转化为一维搜索问题：</p>
+
+$$
+\begin{aligned}&\min\:f(x^{(k)}+\lambda d^{(k)})\\&s.t.\quad A(x^{(k)}+\lambda d^{(k)})\geq b\\&E(x^{(k)}+\lambda d^{(k)})=e\\&\lambda\geq0\end{aligned}\tag{3}
+$$
+
+
+<p>由于  $d^{(k)}$  是可行方向，因此必然有  $Ed^{(k)} = 0, Ex^{(k)} = e$ ，第二个约束多余的。</p>
+<p>考虑第一个约束，假设  $A_1x^{(k)}=b_1\text{,}A_2x^{(k)}&gt;b_2$ ，即</p>
+
+$$
+\begin{pmatrix}A_1x^{(k)}+\lambda A_1d^{(k)}\\A_2x^{(k)}+\lambda A_2d^{(k)}\end{pmatrix}{\geq}\binom{b_1}{b_2}
+$$
+
+
+ $d^{(k)}$  满足  $A_1d^{(k)} \ge 0$ ，因此可以将第一个约束简化为
+
+
+$$
+A_2x^{(k)}+\lambda A_2d^{(k)}\geq b_2
+$$
+
+
+<p>因此问题 (3) 等价于</p>
+
+$$
+\begin{aligned}&\text{min }f(x^{(k)}+\lambda d^{(k)})\\&\text{s.t.}\quad A_2x^{(k)}+\lambda A_2d^{(k)}\geq b_2\\&\lambda\geq0\end{aligned}
+$$
+
+
+<p>令  $\hat{b}=b_{2}-A_{2}x^{(k)},\hat{d}=A_{2}d^{(k)}$ ，则 (4) 可以得到</p>
+
+$$
+\lambda_{\mathrm{max}}=\begin{cases}\min\left\{\frac{\hat{b}_{i}}{\hat{d}}|\hat{d}_{i}&lt;0\right\}&\hat{d}\not\geq0\\\infty&\hat{d}\geq0\end{cases}
+$$
+
+
+<p>如何确定问题 (1) 的初始可行解？</p>
+<p>引入人工变量，求解辅助问题：</p>
+
+$$
+\begin{cases}\min&\left(\sum_{i=1}^{m}\xi_{i}+\sum_{i=1}^{l}\eta_{i}\right)\\s.t.&Ax+\xi\geq b\\&Ex+\eta=e\\&\xi,\eta\geq0&&\end{cases}
+$$
+
+
+<p>如果有最优解  $(\bar x, \bar \xi, \bar \eta) = (\bar x, 0 , 0)$ ，则  $\bar x$  为 (1) 的一个可行解。</p>
+<p>可行方向法步骤如下：</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765419551237.png" alt="1765419551237" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765419557492.png" alt="1765419557492" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765419568259.png" alt="1765419568259" loading="lazy"></p>
+<p>对于非线性约束的情形：</p>
+
+$$
+\begin{aligned}&\min\:f(x)\\&s.t.\quad g_i(x)\geq0,i=1,2,\cdots,m\end{aligned}\tag{A}
+$$
+
+
+<p>定理：设  $x$  是问题  $A$  的可行解， $I = \{i|g_i(x) = 0\}$  是在  $x$  处起作用的约束下标集，又设  $f(x), g_i(x) (i \in I)$  在  $x$  处可微， $g_i(x)(i \not\in I)$  在  $x$  处连续，如果  $\nabla f(x)^Td \lt 0, \nabla g_i(x)^Td \gt 0 (i \in I)$ ，则  $d$  是可行下降方向。</p>
+<p>因此可以通过下面的方式求解下降可行方向：</p>
+
+$$
+\begin{aligned}&\text{min }z\\&s.t.\quad\nabla f(x)^Td-z\leq0\\&\nabla g_i(x)^Td+z\geq0,\quad i\in I\\&-1\leq d_i\leq1,\quad i=1,2,\cdots,n\end{aligned}\tag{B}
+$$
+
+
+<p>设这个问题的最优解为  $(\bar z, \bar d^T)$ ，若  $\bar z \lt 0$ ，则  $\bar d$  为在  $x$  处的可行下降方向。</p>
+<p>定理：设  $x$  是问题  $(A)$  的可行解， $I = \{i|g_i(x) = 0\}$ ，则  $x$  为 Fritz John 点的充要条件为问题  $(B)$  的目标函数最优值 &#x3D; 0.</p>
+<p>因此步骤如下：</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765420028682.png" alt="1765420028682" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765420035867.png" alt="1765420035867" loading="lazy"></p>
+<p>Zoutendijk算法的收敛问题</p>
+<p>Zoutendijk算法映射A&#x3D;MD，其中D是确定方向的映射，M是一维搜索。</p>
+<p>结论：D和M不一定是闭映射。</p>
+<p>Zoutendijk可行方向法缺陷：不收敛</p>
+<h3 id="Topkis-Veinott可行方向法"><a href="#Topkis-Veinott可行方向法" class="headerlink" title="Topkis-Veinott可行方向法"></a>Topkis-Veinott可行方向法</h3><p>Zoutendijk可行方向法不收敛原因分析：起作用的约束集迭代过程中会发生突变，从而引起搜索方向的陡变</p>
+<p>改进措施: x处的下降可行方向d由如下线性规划问题来确定. </p>
+
+$$
+\begin{aligned}&\text{min }z\\&s.t.\quad\nabla f(x)^Td-z\leq0\\&\nabla g_i(x)^Td+z\geq-g_i(x)\quad i=1,2,\cdots,m\\&-1\leq d_i\leq1\quad i=1,2,\cdots,n\end{aligned}
+$$
+
+
+<p>定理：考虑如下问题：</p>
+
+$$
+\begin{aligned}&\min\:f(x)\\&s.t.\quad g_i(x)\geq0,i=1,2,\cdots,m\end{aligned}\tag{A}
+$$
+
+
+<p>其中  $f(x), g_i(x)$  均为可微函数，又设  $\{x^{(k)}\}$  是Topkis-Veinott算法产生的序列，则  $\{x^{(k)}\}$  的任一聚点是 Fritz John 点。</p>
+<p>收敛速率：线性收敛</p>
+<h3 id="Rosen梯度投影法"><a href="#Rosen梯度投影法" class="headerlink" title="Rosen梯度投影法"></a>Rosen梯度投影法</h3>
+$$
+\begin{aligned}&\text{min }f(x)\\
+&\text{s.t.}\quad Ax\geq b\\
+&Ex=e\end{aligned}\tag{1}
+$$
+
+
+<p>基本思想: 当迭代点在可行域内部时,沿迭代点的负梯度方向搜索;当迭代点达到约束区域的边界上时,用起作用约束系数矩阵的行向量生成一个子空间，沿负梯度方向在该子空间的正交补中的投影方向搜索.</p>
+<p>正交投影矩阵： $Q = M^T(MM^T)^{-1}M$ ，满足  $Q^T=Q, QQ=Q$ ，并且  $Q$  是半正定的。</p>
+<p>定理 1：设  $x$  为问题 (1) 的可行解，在  $x$  处有  $A_1x = b_1, A_2x \gt b_2$ ，其中</p>
+
+$$
+A=\begin{bmatrix}A_1\\A_2\end{bmatrix}\quad b=\begin{bmatrix}b_1\\b_2\end{bmatrix}
+$$
+
+
+<p>又设  $M = \binom{A_1}{E}$  为满秩矩阵，令</p>
+
+$$
+P=I-M^T\left(MM^T\right)^{-1}M
+$$
+
+
+<p>若  $P\nabla f(x) \ne 0$ ，令  $d = -P\nabla f(x)$ ，则  $d$  为下降可行方向。</p>
+<p>定理 2：设  $x$  为问题 (1) 的可行解，在点  $x$  处，有  $A_1x = b_1, A_2x \gt b_2$ ，其中</p>
+
+$$
+A=\begin{bmatrix}A_1\\A_2\end{bmatrix}\quad b=\begin{bmatrix}b_1\\b_2\end{bmatrix}
+$$
+
+
+<p>又设  $M = \binom{A_1}{E}$  为满秩矩阵，令</p>
+
+$$
+\begin{aligned}&P=I-M^T\left(MM^T\right)^{-1}M\\&W=\left(MM^T\right)^{-1}M\nabla f(x)=\begin{bmatrix}u\\v\end{bmatrix}\end{aligned}
+$$
+
+
+<p>其中  $u$  和  $v$  分别对应于  $A_1$  和  $E$  。则</p>
+<p>(1) 若  $u \ge 0$  则  $x$  为 KKT 点；</p>
+<p>(2) 若  $u$  中含有负分量，设  $u_j \lt 0$ ，此时从  $A_1$  中去掉  $u_j$  对应的行，得到  $\hat A_1$ ，令</p>
+
+$$
+\begin{aligned}\hat{M}=&\begin{bmatrix}\hat{A}_1\\E\end{bmatrix}&\hat{P}=I-\hat{M}^T\left(\hat{M}\hat{M}^T\right)^{-1}\hat{M}\\&d=-\hat{P}\nabla f(x)\end{aligned}
+$$
+
+
+<p>则  $d$  为  $x$  处的下降可行方向。</p>
+<p>步骤：</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765422713952.png" alt="1765422713952" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765422782977.png" alt="1765422782977" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765422882972.png" alt="1765422882972" loading="lazy"></p>
+<p>收敛性</p>
+<p>优点：是非线性规划的一个基本方法.方法简单,实际应用的数值效果好.方法的重要性还在于,一些更有效的近代算法继续采用了它的基本思想。</p>
+<p>收敛速度至多是线性的！</p>
+<h3 id="Wolfe既约梯度法"><a href="#Wolfe既约梯度法" class="headerlink" title="Wolfe既约梯度法"></a>Wolfe既约梯度法</h3>
+$$
+\begin{aligned}&\min f(x)\\&s.t.\quad Ax=b,\quad x\geq0\\&A_{m\times n},r(A)=m,b_{m\times1},f\text{是}E^{n}\text{上的连续可微函数}\end{aligned}
+$$
+
+
+<p>基本思想：借鉴求解线性规划的单纯形算法，选择某些变量为基变量，其它的作为非基变量，将基变量用非基变量表示，并从目标函数中消去基变量，得到以非基变量为自变量的简化的目标函数，进而利用此函数的负梯度构造下降可行方向。</p>
+<p>既约梯度: 简化目标函数关于非基变量的梯度。</p>
+
+$$
+A=(B,N),\quad x=\begin{pmatrix}x_B\\x_N\end{pmatrix}
+$$
+
+
+<p>可以转化问题：</p>
+
+$$
+\begin{aligned}&\text{min }f(x_B,x_N)\\&s.t.\quad Bx_B+Nx_N=b\\&x_B,x_N\geq0\end{aligned}\Leftrightarrow \begin{aligned}&\min F(x_N)\\&s.t.\quad x_B,x_N\geq0\end{aligned}\\
+\begin{aligned}&x_B=B^{-1}b-B^{-1}Nx_N\\&\Rightarrow F(x_N)=f(x_B(x_N),x_N)\end{aligned}
+$$
+
+
+ $f(x)$  的既约梯度：
+
+
+$$
+\begin{aligned}&r(x_N)=\nabla F(x_N)\\&=\nabla_{x_N}f(x)-(B^{-1}N)^T\nabla_{x_B}f(x)\end{aligned}
+$$
+
+
+<p>确定下降可行方向：</p>
+<p>定义  $d_N^{(k)}$ ：</p>
+
+$$
+d_{N_j}^{(k)}=\begin{cases}-x_{N_j}^{(k)}r_j\big(x_N^{(k)}\big)&\text{当}r_j(x_N^{(k)})&gt;0\\-r_j\big(x_N^{(k)}\big)&\text{当}r_j(x_N^{(k)})\le0\end{cases}
+$$
+
+
+<p>可行方向满足  $Ad^{(k)} = Bd_B^{(k)} + Nd_N^{(k)} = 0$ </p>
+
+$$
+d^{(k)}=\begin{pmatrix}-B^{-1}Nd_{N}^{(k)}\\\\d_{N}^{(k)}\end{pmatrix}
+$$
+
+
+<p>定理：设  $x$  是可行解， $A = (B, N)$  为  $m\times n$  矩阵， $B$  为  $m$  阶可逆矩阵， $x = (x_B^T, x_N^T)^T$ ， $x_B \gt 0$ ，函数  $f$  在点  $x$  处可微，又设</p>
+
+$$
+d=\begin{pmatrix}-B^{-1}Nd_N\\d_N\end{pmatrix}
+$$
+
+
+<p>其中 </p>
+
+$$
+d_{N_j}=\begin{cases}-x_{N_j}r_j(x_N)&r_j(x_N)&gt;0\\-r_j(x_N)&r_j(x_N)\leq0&\end{cases}
+$$
+
+
+<p>如果  $d \ne 0$ ，则  $d$  为下降可行方向，而且  $d = 0$  的充要条件为  $x$  是 KKT 点。</p>
+<p>证明：容易得到  $Ad = 0$ 。注意到  $x_B \gt 0$ ，且当  $x_{N_j} = 0$  时，有  $d_{N_j} \ge 0$ ，因此  $d$  为可行方向。由于</p>
+
+$$
+\begin{aligned}\nabla f(x)^Td&=\nabla_{x_B}f(x)^Td_B+\nabla_{x_N}f(x)^Td_N\\&=\nabla_{x_B}f(x)^T(-B^{-1}Nd_N)+\nabla_{x_N}f(x)^Td_N\\&=r(x_N)^Td_N\end{aligned}
+$$
+
+
+<p>当  $d_N \ne 0$  时， $r(x_N)^Td_N \lt 0$ ，因此  $d$  为下降方向。</p>
+<p>综上  $d$  为下降可行方向。</p>
+<p>设  $x$  为 KKT 点，则存在乘子  $w_B, w_N \ge 0$  和  $v$  使得</p>
+
+$$
+\begin{bmatrix}\nabla_{x_B}f(x)\\\nabla_{x_N}f(x)\end{bmatrix}-\begin{bmatrix}B^T\\N^T\end{bmatrix}v-\begin{bmatrix}w_B\\w_N\end{bmatrix}=\begin{bmatrix}0\\0\end{bmatrix}\\
+w_B^Tx_B = 0\\
+w_N^Tx_N = 0
+$$
+
+
+<p>由于  $x_B \gt 0$ ，所以  $w_B = 0$ ，所以  $w_N = \nabla_{x_N} f(x) - (B^{-1}N)^T\nabla_{x_B}f(x) = r(x_N)\ge 0$ ，因此  $r(x_N)^Tx_N = 0$ 。此时有</p>
+
+$$
+d_{N_j}=\begin{cases}-x_{N_j}r_j(x_N),r_j(x_N)&gt;0,\\
+0,\quad r_j(x_N)=0
+\end{cases}
+$$
+
+
+<p>因此  $r(x_N)^Tx_N = d_N = 0$ ，从而  $d = 0$ 。</p>
+<p>设  $d = 0$ ，则  $r(x_N)$  的分量均非负。令</p>
+
+$$
+w_N = r(x_N) = \nabla_{x_N} f(x) - (B^{-1}N)^T\nabla_{x_B}f(x) \ge 0
+$$
+
+
+<p>又令  $w_B = 0, v = (B^T)^{-1}\nabla_{x_B}f(x)$ ，则有</p>
+
+$$
+\begin{bmatrix}\nabla_{x_B}f(x)\\\nabla_{x_\mathrm{N}}f(x)\end{bmatrix}-\begin{bmatrix}B^T\\N^T\end{bmatrix}v-\begin{bmatrix}w_B\\w_N\end{bmatrix}=\begin{bmatrix}0\\0\end{bmatrix}\\
+\begin{aligned}&{w_{B}}^{T}{x_{B}}=0\\&{w_{N}}^{T}{x_{N}}=0\end{aligned}
+$$
+
+
+<p>因此  $x$  为 KKT 点。</p>
+<p>对于步长，我们应该在  $[0, \lambda_{\max}]$  进行一维搜索：</p>
+
+$$
+\lambda_{\max}=\begin{cases}\infty&\text{当}d^{(k)}\geq0\\\\\min\left\{-\frac{x_j^{(k)}}{d_j^{(k)}}|d_j^{(k)}&lt;0\right\}&\text{其他情形}\end{cases}
+$$
+
+
+<p>步骤：</p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765847057265.png" alt="1765847057265" loading="lazy"></p>
+<p><img src="/../images/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1765847089272.png" alt="1765847089272" loading="lazy"></p>
+<p>定理：设 问题 </p>
+
+$$
+\begin{aligned}
+\min&f(x)\\
+s.t.&\quad Ax=b,\quad x\geq0
+\end{aligned}
+$$
+
+
+<p>中， $f$  是  $E^n$  上的连续可微函数，若  $A$  的任意  $m$  列均线性无关且所有基本可行解非退化，则 Wolfe 既约梯度法产生的点列  $\lbrace x^{(k)}\rbrace$  的任意聚点是 KKT 点。</p>
+<h3 id="广义既约梯度法"><a href="#广义既约梯度法" class="headerlink" title="广义既约梯度法"></a>广义既约梯度法</h3>
+$$
+\begin{aligned}&\text{min }f(x)\\&s.t.\quad h_j(x)=0,\quad j=1,2,\cdots,m\\&l\leq x\leq u\end{aligned}
+$$
+
+
+<p>其中  $f, h_j$  都是连续可微函数， $x \in E^n$ ， $m \le n$ ， $l$  和  $u$  都是  $n$  维列向量：</p>
+
+$$
+l=(l_1,\cdots,l_n)^T,\quad u=(u_1,\cdots,u_n)^T
+$$
+
+
+<p>将变量区分为基变量向量  $x_B$  和非基变量向量  $x_N$ ， $h(x)$  的 Jacobi 矩阵：</p>
+
+$$
+\frac{\partial h}{\partial x}=\begin{pmatrix}\frac{\partial h_1}{\partial x_1}&\cdots&\frac{\partial h_1}{\partial x_n}\\\vdots&&\vdots\\\frac{\partial h_m}{\partial x_1}&\cdots&\frac{\partial h_m}{\partial x_n}\end{pmatrix}=\left(\frac{\partial h}{\partial x_B},\quad\frac{\partial h}{\partial x_N}\right)
+$$
+
+
+<p>假设  $\frac{\partial h}{\partial x_B}$  可逆，则  $x_B$  可以用  $x_N$  表示，可以把目标变为  $F(x_N)=f(x_B(x_N),x_N)$ 。</p>
+<p>求出既约梯度 </p>
+
+$$
+r(x_N)=\frac{\mathrm{d}f}{\mathrm{d}x_N}=\nabla_{x_N}f-\left(\left(\frac{\partial h}{\partial x_B}\right)^{-1}\frac{\partial h}{\partial x_N}\right)^T\nabla_{x_B}f.
+$$
+
+
+<p>给定一点  $x^{(k)}$ ，定义  $d_N^{(k)}$  使得</p>
+
+$$
+d_{N_j}^{(k)}=\begin{cases}0&\text{当}x_{N_j}^{(k)}=l_{N_j}\text{且}r_j\left(x_N^{(k)}\right)&gt;0\\&\text{或当}x_{N_j}^{(k)}=u_{N_j}\text{且}r_j\left(x_N^{(k)}\right)&lt;0\\-r_j\left(x_N^{(k)}\right)&\text{其他情形}&\end{cases}
+$$
+
+
+<p>确定步长：</p>
+
+$$
+\begin{aligned}&\text{令}\quad\hat{x}_{N}=x_{N}^{(k)}+\lambda d_{N}^{(k)}\\&\text{使得}\quad l_{N}\leq\hat{x}_{N}\leq u_{N}\\&\text{求解非线性方程组:}\quad h\big(y,\hat{x}_{N}\big)=0\\&\text{得到}\hat{y}.\text{若}\widehat{y}\text{满足}\\&f\left(\hat{y},x_{N}^{(k)}\right){&lt;}f\left(x_{B}^{(k)},x_{N}^{(k)}\right)\\&\text{且}\quad l_{B}\leq\hat{y}\leq u_{B}\\&\text{则得到新的可行点}(\hat{y},\hat{x}_{N});\text{否则减少步长,}\\&\text{重复以上过程。}\end{aligned}
+$$
+
+
+<h2 id="惩罚函数法"><a href="#惩罚函数法" class="headerlink" title="惩罚函数法"></a>惩罚函数法</h2><h3 id="外点法"><a href="#外点法" class="headerlink" title="外点法"></a>外点法</h3>
+$$
+\begin{pmatrix}A\end{pmatrix}\quad
+\begin{cases}\min\:&f(x)\\
+s.t.&g_i(x)\geq0,\:i=1,2,\cdots,m\\
+&h_j(x)=0,\:j=1,2,\cdots,l
+\end{cases}
+$$
+
+
+<p>引入罚项</p>
+
+$$
+p(x)=\sum_{i=1}^m\varphi[g_i(x)]+\sum_{j=1}^l\psi[h_j(x)]
+$$
+
+
+<p>常见的取法：</p>
+
+$$
+\varphi[g_i(x)]=[\max\{0,-g_i(x)\}]^\alpha\quad\psi[h_j(x)]=\left|h_j(x)\right|^\beta 
+$$
+
+
+<p>其中  $\alpha \ge 1, \beta \ge 1$  为常数，通常取 </p>
+ $\alpha=\beta=2$ 
+
+<p>此时只要优化：</p>
+
+$$
+\min\:F(x,\sigma)=f(x)+\sigma p(x)
+$$
+
+
+<p>其中  $\sigma$  是一个很大的正数。</p>
+<p>算法思路：<br>1、在每一迭代步, 取上一迭代过程得到的最小值点作为下一次迭代的初始点。外点罚函数的最优值点可视作原规划问题最优解的一个好的近似, 而且罚因子越大, 其近似度越高；</p>
+<p>2、若罚函数的最优值点属于可行域，则它是原问题的最优值点，否则，追究其不属于可行域的原因，是由于惩罚得不够，应加大惩罚量.</p>
+<p>3、实际计算时并不急于让罚因子增长太快，原因是这会使罚函数<br>序列的最小值点出现大的跳跃，从而在极小化罚函数  $F(x,\sigma_k)$  时，选取  $x^{(k-1)}$  作为初始点失去意义.</p>
+<p>步骤：</p>
+
+$$
+\begin{aligned}&1.\text{给定初始点}x^{(0)}\text{,初始罚因子 }\sigma_1&gt;0(\sigma_1=1)\text{,放大}\\&\text{系数}c&gt;1\text{,允许误差}\varepsilon&gt;0\text{,置}k=1。\\&2.\text{以}x^{(k-1)}\text{为初始点,求解无约束问题}\\&\min f(x)+\sigma_kp(x)+\sigma_kp(x)\\&\text{设其最小值点为}x^{(k)}。\\&3.\text{若}\sigma_kp(x^{(k)})&lt;\varepsilon\text{,则停止计算,得到点}x^{(k)};\text{否则,}\\&\text{令}\sigma_{k+1}=c\sigma_k\text{,置}k:=k+1,\text{ 返回2。}\end{aligned}
+$$
+
+
+<p>算法注解：</p>
+<p>1、在每一步得到的罚函数的最小值点不属于原问题的可行域, 所以称其为外点罚函数方法.</p>
+<p>2、该方法产生的点列一般是由可行域外部逐步靠近可行域的边界. 因此, 它更适合求解最优值点位于可行域边界上的约束优化问题</p>
+<p>引理 1：对于由外点法所产生的序列  $\{x^{(k)}\}$ ，总有</p>
+<p>（1） $F(x^{(k+1)},\sigma_{k+1})\geq F(x^{(k)},\sigma_k)$ </p>
+<p>（2） $p(x^{(k+1)})\leq p(x^{(k)})$ </p>
+<p>（3） $f(x^{(k+1)})\geq f(x^{(k)})$ </p>
+<p>引理 2：  $x^*$  是问题  $(A)$  的一个最优解，则对  $\forall k$ ，</p>
+
+$$
+f(x^*)\geq F(x^{(k)},\sigma_k)\geq f(x^{(k)}).
+$$
+
+
+<p>结论说明<br>1、该结论刻画了函数值、惩罚项与罚因子之间的关系。</p>
+<p>2、结论中关于罚函数最优解的存在性假设是由于约束优化问题<br>有最优解并不能保证罚函数有最小值点.这里有两种情况.</p>
+<p>一是罚因子取值太小，目标函数值的下降度不能抵消惩罚项对不<br>可行点的惩罚度</p>
+<p>二是目标函数的阶数高于惩罚项的阶数，以至于目标函<br>数的下降速度远高于惩罚项的下降速度</p>
+<p>定理：设  $\{x^{(k)}\}$  是由外点法产生的一个序列，则  $\{x^{(k)}\}$  的任何收敛子序列的极限都是问题  $(A)$  的最优解设  $x^*$  是问题  $(A)$  的最优解，若 $f(x),g(x),h(x)$  具有连续的一阶偏导数，且在  $x^*$ 处</p>
+
+$$
+\left\{\nabla g_i\left(x^*\right),i\in I(x^*),\nabla h_j\left(x^*\right),j=1,2,\cdots,l\right\}
+$$
+
+
+<p>线性无关，则</p>
+
+$$
+\begin{aligned}&\lim_{k\to\infty}2\sigma_k\max\left\{0,-g_i\left(x^{(k)}\right)\right\}=w_i,\quad i\in I(x^*)\\&\lim_{k\to\infty}2\sigma_kh_j\left(x^{(k)}\right)=\nu_i,\quad j=1,2,\cdots,l.\end{aligned}
+$$
+
+
+<p>假设问题  $\left(A\right)$  有全局最优解且对任意的  $\sigma$ ， $F(x,\sigma)$  有全局最优解。</p>
+<p>外点法的一个重要特点: 函数  $F(x, \sigma)$  是在整个空间  $E^n$  内进行优化，初始点 可任意选择 且外点法也可用于非凸规划的最优化。</p>
+<p>缺点：</p>
+<ol>
+<li>惩罚项  $\sigma p(x)$  的二阶偏导数一般不存在；</li>
+<li>外点法的中间结果不是可行解，不能作为近似解</li>
+<li>当点  $x^{(k)}$  接近最优解时，罚因子  $\sigma$  很大.可能使罚函数性质变坏，使搜索产生极大困难.</li>
+</ol>
+<h3 id="内点法-1"><a href="#内点法-1" class="headerlink" title="内点法"></a>内点法</h3><p>基本思想: 迭代总是从内点出发,并保持在可行域内部进行搜索.</p>
+
+$$
+\begin{cases}\min f(x)\\s.t.&g_i(x)\geq0&i=1,2,\cdots,m&\end{cases}\tag{B}
+$$
+
+
+<p>障碍函数</p>
+
+$$
+G(x,r)=f(x)+rB(x)
+$$
+
+
+<p>其中  $r$  是很小的正数， $B(x)$  定义在可行域内部，它满足两个条件：</p>
+<p>(1)  $B(x)$  是连续函数；</p>
+<p>(2)当点  $x$  趋向可行域边界时， $B(x)→+\infty$ 。</p>
+<p>倒数障碍函数和对数障碍函数：</p>
+
+$$
+B(x)=\sum_{i=1}^m\frac1{g_i(x)}\quad B(x)=-\sum_{i=1}^m\ln g_i(x)
+$$
+
+
+<p>随罚因子  $r$  逐渐减小, 罚函数的最优值点和原问题的最优值点越来越靠近. 从而可通过求解罚函数的最优值点得到原问题的近似最优解. </p>
+<p>算法思路：内点罚函数的任一最小值点固然在可行域的内部, 但考虑到原问题的最优值有可能在可行域的边界上达到, 所以在极小化内点罚函数的过程中, 为减少惩罚项的影响以使内点罚函数在可行域的更大范围内寻求目标函数的最小值点, 需减小惩罚因子的值以达到减少惩罚项的值.</p>
+
+$$
+\begin{cases}\min &G(x,r)=f(x)+rB(x)\\s.t.&x\in\mathrm{int~}S\end{cases}
+$$
+
+
+<p>步骤：</p>
+
+$$
+\begin{aligned}&1.\text{给定初始点}x^{(0)}\in\operatorname{int}S\text{,允许误差}\varepsilon&gt;0\text{,初始参数}\\&r_1,\text{缩小系数}\beta\in(0,1)\text{,置}k=1。\\&2.\text{以}x^{(k-1)}\text{为初始点,求解下列问题}\\&\min f(x)+r_kB(x)\\&s.t.\quad x\in\operatorname{int~}S\\&\text{设其极小点为}x^{(k)}。\\&3.\text{若}r_kB(x^{(k)})&lt;\varepsilon\text{,则停止计算,得到点}x^{(k)};\text{否则,}\\&\text{令}r_{k+1}=\beta r_k\text{,置}k:=k+1\text{,返回2。}\end{aligned}
+$$
+
+
+<p>引理 1：对于由内点法所产生的序列  $\left\{x^{(k)}\right\}$  ,总有</p>
+<p>（1） $G(x^{(k+1)},r_{k+1})\leq G(x^{(k)},r_k)$ </p>
+<p>（2） $B(x^{(k+1)})\geq B(x^{(k)})$ </p>
+<p>（3） $f(x^{(k+1)})\leq f(x^{(k)})$ </p>
+<p>引理 2：设  $x^*$  是问题  $(B)$  的一个最优解,则对  $\forall k$ ,有</p>
+
+$$
+f(x^*)\leq f(x^{(k)})\leq G(x^{(k)},r_k).
+$$
+
+
+
+<p>定理 设  $x^{(k)}$  是由内点法产生的一个序列，则  $x^{(k)}$  的任何收敛子序列的极限都是原问题的最优解。</p>
+<p>求初始内点的迭代步骤</p>
+
+$$
+\begin{aligned}&1.\text{ 任取}x^{(0)}\in E^n,r_0&gt;0\text{(如取}r_0=1),\text{置}k:=0。\\&2.\text{令 }\quad S_k=\left\{i\mid g_i(x^{(k)})\leq0,1\leq i\leq m\right\},\\&T_k=\left\{i\mid g_i(x^{(k)})&gt;0,1\leq i\leq m\right\}\\&3.\text{ 若}S_k=\varnothing\text{,停止计算;否则,转}4。\\&\text{4. 构造函数}\\&\widetilde{P}(x,r_k)=-\sum_{i\in S_k}g_i(x)+r_k\sum_{i\in T_k}\frac1{g_i(x)}\quad(r_k&gt;0)\\&\text{记}\quad\widetilde{R}_k=\{x\mid g_i(x)&gt;0\quad i\in T_k\}\\
+&\text{5.以}x^{(k)}\text{为初始点,在}\widetilde{R}_{{_{k}}}\text{域内,求障碍函数}\widetilde{P}(x,r_{{_{k}}})\\&\text{的极小点}:\\&\min\widetilde{P}(x,r_{k})\\&s.t.\quad x\in\widetilde{R}_{k}\\&\text{得}x^{(k+1)}\text{,转6。}\\&6.\text{令}0&lt;r_{{_{k+1}}}&lt;r_{k}\left(\text{如取}r_{{_{k+1}}}=\frac{1}{10}r_{{_{k}}}\right),\text{置}k:=k+1,\\&\text{转2。}\end{aligned}
+$$
+
+
+<p>内点法优点：迭代总在可行域内进行，每一个中间结果都是<br>可行解，可以作为近似解。</p>
+<p>内点法缺点：选取初始可行点较困难，且只适用于含不等式<br>约束的非线性规划问题。</p>
+<h3 id="乘子法"><a href="#乘子法" class="headerlink" title="乘子法"></a>乘子法</h3><p>内点罚函数和外点罚函数均要求罚因子趋于无穷小或无穷大才能得到原问题的最优解, 而这又会引起罚函数的病态, 从而带来计算上的困难. </p>
+<p>为克服这一缺陷, Hestenes (1969)和Powell(1969)分别独立地将Lagrange函数与外点罚函数结合起来建立起等式约束优化问题的增广Lagrange罚函数（乘子罚函数）.</p>
+<p>Rockafeller (1973)又将其推广到不等式约束优化问题,建立了约束优化问题的乘子罚函数方法.</p>
+<p>引理1：设  $W$  是  $n×n$  阶矩阵， $a$  为  $n$  阶向量，若对一切  $d$  满足  $d≠0，a^Td=0$ ,均有  $d^TWd&gt;0$ ,则存在  $\sigma^*&gt;0$ ,使当  $\sigma≥\sigma^*$  时，矩阵  $W+\sigma aa^T$  正定.</p>
+<p><strong>定理：</strong> 设  $x^*, v^*$  满足问题 (1) 的二阶充分条件，则存在  $\sigma^* &gt; 0$ ，使当  $\sigma \geq \sigma^*$  时， $x^*$  是无约束问题</p>
+
+$$\min \phi(x, \sigma) = f(x) - v^*c(x) + \frac{\sigma}{2}c^2(x)$$
+
+
+<p>的严格局部最优解。反之，若  $x^{(k)}$  是  $\phi(x, \sigma_k)$  的极小点，并且  $c(x^{(k)}) = 0$ ，则  $x^{(k)}$  是问题 (1) 的局部最优解。其中问题 (1) 为：</p>
+
+$$\begin{cases} \min f(x) \\ s.t. \quad c(x) = 0 \end{cases}$$
+
+
+<p>定义 增广 Lagrange 函数（乘子罚函数）：</p>
+
+$$
+\begin{aligned}\phi(x,\nu,\sigma)&=f(x)-\sum_{j=1}^l\nu_jh_j(x)+\frac\sigma2\sum_{j=1}^lh_j^2(x)\\&=f(x)-\nu^Th(x)+\frac\sigma2h(x)^Th(x)\end{aligned}
+$$
+
+
+<p>第 k 次迭代，得到了上述函数的极小值  $x^{(k)}$ ：</p>
+
+$$
+\begin{aligned}\nabla_x\phi(x^{(k)},\nu^{(k)},\sigma)&=\nabla f(x^{(k)})-\sum_{j=1}(\nu_j^{(k)}-\sigma h_j(x^{(k)}))\nabla h_j(x^{(k)})\\&=0.\end{aligned}
+$$
+
+
+<p>更新乘子  $\nu$ ：</p>
+
+$$
+\begin{aligned}&\nu_j^{(k+1)}=\nu_j^{(k)}-\sigma h_j(x^{(k)}),\\&j=1,2,\cdots,l.\end{aligned}
+$$
+
+
+<p>等式约束问题乘子法计算步骤</p>
+<p><strong>步1、初始步</strong><br>取  $\sigma_1 &gt; 0, v^{(1)} = 0, x^{(0)} \in R^n, \gamma &gt; 1, k = 1$ 。令  $\varepsilon &gt; 0$ 。</p>
+<p><strong>步2、迭代步</strong><br>以  $x^{(k-1)}$  为初始点，求  $\phi(x, v^{(k)}, \sigma_k)$  的最小值点得  $x^{(k)}$ 。</p>
+<p><strong>步3、终止判定</strong><br>若  $\|h(x^{(k)})\| &lt; \varepsilon$ ，算法终止。否则，转下一步。</p>
+<p><strong>步4、罚因子校正</strong><br>若  $\|h(x^{(k)})\| \ge \|h(x^{(k-1)})\|$ ，令  $\sigma_{k+1} = \gamma\sigma_k, v^{(k+1)} = v^{(k)}$ 。置  $k = k + 1$ ，转步2。否则，转步5。</p>
+<p><strong>步5、乘子校正</strong><br>若  $\sigma_k &gt; \sigma_{k-1}$  或  $\|h(x^{(k)})\| \le \frac{1}{4}\|h(x^{(k-1)})\|$ ，令  $\sigma_{k+1} = \sigma_k$ ，调整Lagrange乘子： $v_j^{(k+1)} = v_j^{(k)} - \sigma_k h_j(x^{(k)})$ 。置  $k = k + 1$ ，转步2；<br>否则，令  $\sigma_{k+1} = \gamma\sigma_k, v^{(k+1)} = v^{(k)}$ 。置  $k = k + 1$ ，转步2。</p>
+<p>算法注解</p>
+<ol>
+<li>若  $\|h(x^{(k)})\| \ge \|h(x^{(k-1)})\|$ ，迭代点列有远离可行域的趋势，需加大惩罚： $\sigma_{k+1} = \gamma\sigma_k$ </li>
+<li>若  $\|h(x^{(k)})\| \le \frac{1}{4}\|h(x^{(k-1)})\|$ ，迭代点靠近可行域显著，无论  $\sigma_k = \sigma_{k-1}$  还是  $\sigma_k &gt; \sigma_{k-1}$ ，调整Lagrange乘子： $v_j^{(k+1)} = v_j^{(k)} - \sigma_k h_j(x^{(k)})$ </li>
+<li>若  $\|h(x^{(k)})\| &gt; \frac{1}{4}\|h(x^{(k-1)})\|$  而  $\sigma_k = \sigma_{k-1}$ ，迭代点向可行域逼近效果不显著，调整罚因子： $\sigma_{k+1} = \gamma\sigma_k$ </li>
+<li>若  $\|h(x^{(k)})\| &gt; \frac{1}{4}\|h(x^{(k-1)})\|$  而  $\sigma_k &gt; \sigma_{k-1}$ ，说明当前迭代点向可行域逼近效果不显著，调整Lagrange乘子： $v_j^{(k+1)} = v_j^{(k)} - \sigma_k h_j(x^{(k)})$ </li>
+</ol>
+<p>算法优势：算法无需罚因子趋于无穷大就可通过极小化罚函数得到原问题的最优解. 因此, 在计算过程中不会出现外点罚函数方法和内点罚函数方法中的病态现象.</p>
+<p>不等式约束问题的乘子法</p>
+
+$$\min f(x)$$
+
+
+$$s.t. \quad g_j(x) \ge 0, j = 1, 2, \cdots, m$$
+
+
+<p>引入变量  $y_j$ ，把不等式约束问题化为等式约束问题：</p>
+
+$$\begin{cases} \min f(x) \\ s.t. \quad g_j(x) - y_j^2 = 0, j = 1, 2, \cdots, m \end{cases}$$
+
+
+<p>增广Lagrange函数为：</p>
+
+$$\Phi(x, y, w, \sigma) = f(x) - \sum_{j=1}^m w_j(g_j(x) - y_j^2) + \frac{\sigma}{2} \sum_{j=1}^m (g_j(x) - y_j^2)^2$$
+
+
+
+$$
+\begin{aligned}
+&\min f(x) \\
+&s.t. \quad g_j(x) \ge 0, j=1, 2, \cdots, m
+\end{aligned}
+$$
+
+
+
+$$
+\Updownarrow
+$$
+
+
+
+$$
+\min \Phi(x, y, w, \sigma)
+$$
+
+
+<p><strong>分两步进行：</strong></p>
+<p>(1) 求解问题</p>
+
+$$
+\min_y \Phi(x, y, w, \sigma)
+$$
+
+<p>得到最优解  $\bar{y} = \bar{y}(x, w, \sigma)$ 。</p>
+<p>(2) 将  $\bar{y} = \bar{y}(x, w, \sigma)$  代入  $\Phi(x, y, w, \sigma)$  中，求解问题</p>
+
+$$
+\min_x \phi(x, w, \sigma) = \Phi(x, y(x, w, \sigma), w, \sigma)
+$$
+
+<p>得到最优解  $\bar{x} = \bar{x}(w, \sigma)$ 。</p>
+<p>可以解得</p>
+
+$$
+y_j^2=\frac{1}{\sigma}\max\left\{0,\sigma g_j(x)-w_j\right\}.
+$$
+
+
+<p>因而增广 Lagrange 函数为</p>
+
+$$
+\begin{aligned}&\phi(x,w,\sigma)=f(x)\\&+\frac1{2\sigma}\sum_{j=1}^m\left\{\left[\max\left(0,w_j-\sigma g_j(x)\right)\right]^2-w_j^2\right\}.\end{aligned}
+$$
+
+
+<p>对于混合等式与不等式的问题：</p>
+
+$$
+\begin{aligned}&\min f(x)\\&s.t.\quad g_j(x)\geq0,j=1,2,\cdots,m\\&h_j(x)=0,j=1,2,\cdots,l\\&\text{增广Lagrange函数为}\\&\phi(x,w,\nu,\sigma)=f^{\prime}(x)\\&+\frac1{2\sigma}\sum_{j=1}^m\left\{\left[\max\left(0,w_j-\sigma g_j\left(x\right)\right)\right]^2-w_j^2\right\}\\&-\sum_{j=1}^l\nu_jh_j(x)+\frac\sigma2\sum_{j=1}^lh_j^2(x).\end{aligned}
+$$
+
+
+<p>对应的乘子迭代公式：</p>
+
+$$
+\begin{cases}w_j^{(k+1)}=\max(0,w_j^{(k)}-\sigma g_j(x^{(k)})),j=1,2,\cdots,m\\v_j^{(k+1)}=\nu_j^{(k)}-\sigma h_j(x^{(k)}),\quad j=1,2,\cdots,l\end{cases}
+$$
+
+
+<h2 id="二次规划"><a href="#二次规划" class="headerlink" title="二次规划"></a>二次规划</h2>
+$$
+(QP)\quad\begin{cases}\min f(x)=\frac12x^THx+c^Tx\\s.t.&Ax\geq b\\Ex=e\end{cases}
+$$
+
+
+<p>若矩阵H是半正定(正定)的，则称为(严格)凸二次规划。</p>
+<p>常用的求解方法：积极集方法、内点算法.</p>
+<p>定义  $\bar{G} = \left\{ d \ \middle| \ \begin{aligned} & d \in R^n \\ & \nabla g_i(\bar{x})^T d = 0, i \in I \text{且} \bar{w}_i &gt; 0 \\ & \nabla g_i(\bar{x})^T d \ge 0, i \in I \text{且} \bar{w}_i = 0 \\ & \nabla h_j(\bar{x})^T d = 0, j = 1, 2, \cdots, l \end{aligned} \right\}$ 。</p>
+<p>定理（<strong>二阶必要条件</strong>）：设  $\bar{x}$  是二次规划的局部最优解，则存在  $\bar{w} \ge 0, \bar{v}$ ，使得</p>
+
+$$
+\begin{aligned}
+& H\bar{x} + c = A^T \bar{w} + E^T \bar{v} \\
+& (A\bar{x} - b)^T \bar{w} = 0
+\end{aligned}
+$$
+
+<p>且对任意的  $d \in \bar{G}$ ，都有  $d^T H d \ge 0$ 。</p>
+<p>定理（二阶充分条件）<br>设  $\bar{x}$  为二次规划的一个  $KKT$  点， $\bar{w}, \bar{v}$  为相应的  $Lagrange$  乘子向量，若对任意的  $d \in \bar{G} \setminus \{0\}$ ，有  $d^T H d &gt; 0$ ，则  $\bar{x}$  是二次规划的一个严格局部极小点。</p>
+<p>定理（充要条件）<br>对二次规划来说，可行点  $\bar{x}$  是局部极小点，当且仅当  $\bar{x}$  是一个  $KKT$  点，且对任意的  $d \in \bar{G}$ ，有  $d^T H d \ge 0$ 。</p>
+<p>定理（充要条件）<br>对<strong>凸</strong>二次规划来说，可行点  $\bar{x}$  是全局极小点，当且仅当  $\bar{x}$  是一个  $KKT$  点。</p>
+<p>对偶问题的第一种形式：</p>
+ $\max \theta(w,v) = -\frac{1}{2}(c - \bar{A}^T\bar{w})^T H^{-1}(c - \bar{A}^T\bar{w}) + \bar{b}^T\bar{w}$ 
+ $s.t. \quad w \ge 0$ 
+
+ $\max \theta(w,v) = -\frac{1}{2}\bar{w}^T (\bar{A}H^{-1}\bar{A}^T)\bar{w} + \bar{w}^T(\bar{b} + \bar{A}H^{-1}c) - \frac{1}{2}c^T H^{-1}c$ 
+ $s.t. \quad w \ge 0$ 
+
+<p>其中  $\bar{w} = (w^T, v^T)^T$ ， $H$  正定。</p>
+<p>对偶问题的第二种形式：</p>
+ $\max \theta(w, v) = -\frac{1}{2} y^T H^{-1} y + \bar{b}^T \bar{w}$ 
+
+ $s.t. \quad \bar{A}^T \bar{w} + y = c$ 
+ $\quad \quad w \ge 0$ 
+
+<p>其中  $\bar{w} = (w^T, v^T)^T$ ， $H$  正定。</p>
+ $\bar{A} = \begin{pmatrix} A \\ E \end{pmatrix}, \quad \bar{b} = \begin{pmatrix} b \\ e \end{pmatrix}$ 
+
+ $\begin{cases} \min f(x) = \frac{1}{2} x^T H x + c^T x \\ s.t. \quad Ax \ge b \\ \quad \quad Ex = e \end{cases}$ 
+
+<p>对偶间隙</p>
+ $f(x) - \theta(w,v) = c^T x - \bar{b}^T \bar{w} + \frac{1}{2} x^T H x + \frac{1}{2} y^T H^{-1} y$ 
+
+ $= w^T (Ax - b) + \frac{1}{2} (x^T H x + y^T H^{-1} y + 2x^T y)$ 
+
+ $= w^T (Ax - b) + \frac{1}{2} (Hx + y)^T H^{-1} (Hx + y) \ge 0$ 
+
+ $f(x) - \theta(w,v) = 0$ , 当且仅当
+
+ $w^T (Ax - b) = 0$ 
+
+ $x = -H^{-1} y$ 
+
+<p>( $\bar{A}^T \bar{w} + y = c$ )</p>
+<p>定理1：对于严格凸二次规划，下面结论成立：</p>
+<p>(1) 若原始问题的可行域  $S \neq \varnothing$ ，则  $x^* \in S$  为最优解，当且仅当对偶问题存在最优解  $(y^*, w^*)$ ，并且  $x^* = -H^{-1}y^*$ 。</p>
+<p>(2) 原始问题没有可行点，当且仅当对偶问题无上界。</p>
+<p>定理2： 对于严格凸二次规划，设可行域为  $S$ ，则  $x^* \in S$  为最优解，当且仅当存在  $w^* \ge 0$  和  $v^*$ ，使得  $(x^*, w^*, v^*)$  为 Lagrange 函数  $L(x, w, v)$  的鞍点，即对任意  $x \in S$ ，任意  $w \ge 0$ ，有</p>
+
+$$L(x^*, w, v) \le L(x^*, w^*, v^*) \le L(x, w^*, v^*)$$
+
+
+<h3 id="Lagrange-方法"><a href="#Lagrange-方法" class="headerlink" title="Lagrange 方法"></a>Lagrange 方法</h3><p>原理：凸规划问题的KKT点是最优解。通过求解KKT系统获取最优解.</p>
+<p>定义 Lagrange 函数</p>
+
+$$
+L(x,\lambda)=\frac12x^THx+c^Tx-\lambda^T(Ax-b)
+$$
+
+
+<p>令  $\nabla_xL(x,\lambda)=0,\quad\nabla_\lambda L(x,\lambda)=0$ ，则</p>
+
+$$
+\begin{aligned}&Hx+c-A^T\lambda=0\\&-Ax+b=0\end{aligned}\\
+\underset{\text{Lagrange矩阵}}{\underline{\begin{bmatrix}H&-A^T\\-A&0\end{bmatrix}}}\begin{bmatrix}x\\\lambda\end{bmatrix}=\begin{bmatrix}-c\\-b\end{bmatrix}
+$$
+
+
+<p>假设 Lagrange 矩阵可逆，逆为</p>
+
+$$
+\begin{bmatrix}H&-A^T\\-A&0\end{bmatrix}^{-1}=\begin{bmatrix}Q&-R^T\\-R&S\end{bmatrix}
+$$
+
+
+<p>可得</p>
+
+$$
+\begin{cases}HQ+A^TR=I_n\\-HR^T-A^TS=0_{n\times m}\\-AQ=0_{m\times n}\\AR^T=I_m\end{cases}
+$$
+
+
+<p>假设  $H^{-1}$  存在，则</p>
+
+$$
+\begin{aligned}&Q=H^{-1}-H^{-1}A^T(AH^{-1}A^T)^{-1}AH^{-1}\\&R=(AH^{-1}A^T)^{-1}AH^{-1}\\&S=-(AH^{-1}A^T)^{-1}\\
+&\begin{bmatrix}\overline{x}\\\overline{\lambda}\end{bmatrix}=\begin{bmatrix}-Qc+R^Tb\\Rc-Sb\end{bmatrix}
+\end{aligned}
+$$
+
+
+<p>若  $x$  是任一可行解，则有  $Ax = b$ ，在该点目标函数的梯度为</p>
+
+$$
+\nabla f(x) = Hx + c
+$$
+
+
+<p>因此</p>
+
+$$
+\begin{bmatrix}\overline{x}\\\overline{\lambda}\end{bmatrix}=\begin{bmatrix}x-Q\nabla f(x)\\R\nabla f(x)\end{bmatrix}
+$$
+
+
+<p>定理：设约束系数矩阵  $A$  行满秩，并对任意满足  $Ax = 0$  的非零向量  $x$ ，均有  $x^THx \gt 0$ ，则矩阵</p>
+
+$$
+\begin{pmatrix}H&-A^T\\A&0\end{pmatrix}
+$$
+
+
+<p>可逆。</p>
+<p>只需要证明该矩阵的零空间只有零元素即可。</p>
+<p>定理：在前定理假设下, KKT点是二次规划问题的严格全局最优解.</p>
+<p>设  $d = x^* - x \ne 0$ ，则  $Ad = 0, d^THd \gt 0$ ，从而</p>
+
+$$
+\begin{aligned}
+f(x) &= f(x^* -d) \\
+&= f(x^*) - d^T(Hx^* + c) + \frac12 d^THd\\
+&\gt f(x^*)\end{aligned}
+$$
+
+
+<p>其中利用了 KKT 条件， $Hx^* + c - A^Tv = 0$ ，因此  $d^T(Hx^* + c) = 0$ 。</p>
+<h3 id="直接消去法"><a href="#直接消去法" class="headerlink" title="直接消去法"></a>直接消去法</h3>
+$$
+A=\begin{pmatrix}B,N\end{pmatrix},x=\begin{pmatrix}x_B\\x_N\end{pmatrix},H=\begin{pmatrix}H_{BB}&H_{BN}\\H_{NB}&H_{NN}\end{pmatrix},c=\begin{pmatrix}c_B\\c_N\end{pmatrix}
+$$
+
+
+<p>其中， $B$  为  $m \times m$  的可逆矩阵</p>
+
+$$
+x_B=B^{-1}(b-Nx_N)
+$$
+
+
+<p>这样就把有约束问题转换为无约束的问题。</p>
+
+$$
+\begin{aligned}&\psi(x_N)=\frac12x_N^T\bar{H}_Nx_N+\left(c_N^T-c_B^TB^{-1}N\right)x_N\\&+\left(B^{-1}b\right)^T\left(H_{BN}-H_{BB}\left(B^{-1}N\right)\right)x_N+\frac12\left(B^{-1}b\right)^TH_{BB}\left(B^{-1}N\right)+c_B^TB^{-1}b\end{aligned}
+$$
+
+
+<p>其中， $\bar{H}_{N}=H_{NN}-\left(B^{-1}N\right)^{T}H_{BN}-H_{NB}\left(B^{-1}N\right)+\left(B^{-1}N\right)^{T}H_{BB}\left(B^{-1}N\right)$ </p>
+<p>消元法的特点:<br>（1） 简单、直观<br>（2） B接近不可逆时可能导致数值不稳定</p>
+<h3 id="广义消去法"><a href="#广义消去法" class="headerlink" title="广义消去法"></a>广义消去法</h3><p>取  $Ax = b$  的一个特解  $x_0$ ，则原问题等价于</p>
+
+$$
+\begin{cases}\min&\frac12y^THy+y^T(Hx_0+c)+f(x_0)\\s.t.&Ay=0\end{cases}
+$$
+
+
+<p>记  $Z$  为由  $A$  的零空间的一组基组成的矩阵， $Ay=0$  等价于存在  $z\in \R^{n-m}$  使  $y=Zz$ .</p>
+<p>因此目标变为</p>
+
+$$
+\min_{z\in R^{n-m}}\frac12z^TZ^TH\mathbb{Z}z+z^TZ^Tg(x_0)\\
+g(x_0) = c+ Hx_0
+$$
+
+
+<p>令  $S, Z$  分别为  $n \times m, n \times (n - m)$  矩阵，满足</p>
+
+$$
+AS = I, AZ = 0
+$$
+
+
+<p>且  $(S\: Z)$  为可逆矩阵，则  $x = Sb$  是方程  $Ax = b$  的一个可行解，设  $d$  为  $Ax = 0$  的解，则  $d = Zy$ ，通解可表示为</p>
+
+$$
+x = Sb + Zy
+$$
+
+
+<p>通过 QR 分解</p>
+
+$$
+A^T = (Q_1\: Q_2)\binom{R}{0} = Q_1R
+$$
+
+
+<p>满足  $Q = (Q_1\: Q_2) \in R^{n\times n}$  为正交阵， $R$  为  $m\times m$  上三角矩阵， $Q_1^TQ_1 = I$ ， $Q_1^TQ_2 = 0$ 。</p>
+<p>取</p>
+
+$$
+S = Q_1(R^{-1})^T, Z = Q_2
+$$
+
+
+<h3 id="起作用集方法"><a href="#起作用集方法" class="headerlink" title="起作用集方法"></a>起作用集方法</h3>
+$$
+\begin{cases}\min &f(x)=\frac12x^THx+c^Tx
+\\s.t.&Ax\geq b\end{cases}
+$$
+
+
+<p>其中  $H$  为  $n$  阶对称正定矩阵。</p>
+<p>基本思想：在每次迭代中，以已知的可行点为起点，把在该点起作用约束作为等式约束，在此约束下极小化目标函数f(x). </p>
+<p>定理，设  $x^*$  是不等式约束二次规划问题的可行解， $x^*, \lambda^*$  是下述问题</p>
+
+$$
+\begin{aligned}&\min f(x)\\&s.t.\quad a^ix=b_i\quad i\in I(x^*)\end{aligned}
+$$
+
+
+<p>其中  $a^i$  是  $A$  的第  $i$  行。</p>
+<p>的 KKT 对，若对任意  $i \in I(x^*)$  都有  $\lambda_i^* \ge 0$ ，则  $x^*$  是原二次规划问题的 KKT 点。</p>
+<p>步骤：</p>
+
+$$
+\begin{aligned}&1.\text{给定初始可行点}x^{(1)},\text{起作用下标集}I^{(1)}\text{,置}k=1。\\&2.\text{ 求解二次规划问题:}\\&\begin{cases}\min\frac12\delta^TH\delta+\nabla f(x^{(k)})^T\delta\\s.t\quad a^i\delta=0,\quad i\in I^{(1)}\end{cases}\\&\text{得最优解}\delta^{(k)}\text{。若}\delta^{(k)}=0\text{,则转5;否则转3。}\\
+&\text{3.计算}\\&\hat{\alpha}_k=\min\left\{\frac{b_i-a^ix^{(k)}}{a^id^{(k)}}|\:i\notin I^{(k)},a^id^{(k)}&lt;0\right\}=\frac{b_p-a^px^{(k)}}{a^pd^{(k)}},\\&\text{取}\\&\alpha_k=\min\left\{1,\hat{\alpha}_k\right\}.\\&\text{令}x^{(k+1)}=x^{(k)}+\alpha_kd^{(k)}\text{,计算}\nabla f(x^{(k)}).\\&4.\text{若}\alpha_k&lt;1,\text{则置}I^{(k+1)}=I^{(k)}\bigcup\{p\},\:k:=k+1\text{, 返回}2;\\&\text{若}\alpha_k=1\text{,记}x^{(k+1)}\text{处起作用约束下标集为}I^{(k+1)}=I^{(k)},\\&\text{置}k:=k+1\text{,转5。}\\
+&\text{5.计算}\\&\lambda^{(k)}=(A^{(k)}H^{-1}A^{(k)^T})^{-1}A^{(k)}H^{-1}\nabla f(x^{(k)})\\&\text{其中}A^{(k)}\text{是起作用约束系数矩阵,设}\\&\lambda_q^{(k)}=\min\{\lambda_i^{(k)}\mid i\in I^{(k)}\}\\&\text{若 }\lambda_q^{(k)}\geq0,\text{则停止计算,得到最优解;否则从}I^{(k)}\text{中}\\&\text{删除}q,\text{返回2。}\end{aligned}
+$$
+
+
+<p>1.在实际计算中，初始点选取并非易事，需要用类似于线性<br>规划问题求初始基本可行解的方法构造辅助问题。</p>
+<p>2.若二次规划是严格凸的，则起作用集方法经有限步迭代可<br>求出二次规划的最优解；若H是非正定的，按上述方法，有<br>可能得不到最优解。</p>
+<h3 id="Lemke算法"><a href="#Lemke算法" class="headerlink" title="Lemke算法"></a>Lemke算法</h3><p>基本思想: 把线性规划的单纯形方法加以适当的修改,用于求二次规划KKT的点. </p>
+
+$$
+\begin{cases}\min\:&f(x)=\frac12\:x^THx+c^Tx\\s.t.&Ax\geq b\\&x\geq0\end{cases}
+$$
+
+
+<p>其中  $H$  为对称矩阵， $A$  为行满秩矩阵</p>
+<p>定义 Langrange 函数</p>
+
+$$
+L(x,y,u)=\frac12x^THx+c^Tx-y^T(Ax-b)-u^Tx
+$$
+
+
+<p>引入松弛变量  $v \ge 0$  使得  $Ax - v = b$ 。</p>
+<p>则 KKT 条件为</p>
+
+$$
+\begin{cases}Hx+c-A^Ty-u=0\\Ax-\nu=b\\u^Tx=0\\\nu^Ty=0\\u,\nu,x,y\geq0\end{cases}\Leftrightarrow
+\begin{cases}u-Hx+A^Ty=c\\\nu-Ax=-b\\u^Tx=0\\\nu^Ty=0\\u,\nu,x,y\geq0\end{cases}
+$$
+
+
+<p>记  $w=\begin{bmatrix}u\\v\end{bmatrix},z=\begin{bmatrix}x\\y\end{bmatrix},M=\begin{bmatrix}H&-A^T\\A&0\end{bmatrix},q=\begin{bmatrix}c\\-b\end{bmatrix}$ ，则等价于</p>
+
+$$
+\begin{cases}w-Mz=q\\w,z\geq0\\w^Tz=0\end{cases}\tag{*}
+$$
+
+
+<p>称为线性互补问题：对于给定的矩阵  $M$  和向量  $q$  ，寻找向量 $z$ 和</p>
+ $w$ ，使之满足  $(*)$ ，或者找到一种判断，说明  $z$  和  $w$  不存在。
+
+<p>线性互补问题的解  $(w, z)$  的特征:</p>
+<p>解的  $2(m + n)$  个分量中至少有  $m + n$  个取  $0$  值，而且每对变量  $w_i, z_i$  中至少有 1 个为 0，其余分量均为非负数。</p>
+<p>定义：设  $(w, z)$  是 </p>
+
+$$
+\begin{cases}w-Mz=q\\w,z\geq0\end{cases}
+$$
+
+
+<p>的一个基本可行解，且每个互补变量对  $(w_i, z_i)$  中有一个变量是基变量，则称  $(w, z)$  是互补基本可行解。</p>
+<p>求互补基本可行解的Lemke方法</p>
+<ol>
+<li>如果  $q \ge 0$ ，则  $(w,z) = (q, 0) $ 是一个互补基本可行解。</li>
+<li>若  $q \not\ge 0$ ，则引入人工变量  $z_0$ ，令</li>
+</ol>
+
+$$
+\begin{cases}w-Mz-ez_0=q&\text{(1)}\\w,z,z_0\geq0&\text{(2)}\\w^Tz=0&\end{cases}
+$$
+
+
+<p>其中  $e = (1, \dots, 1)^T$  是  $m + n$  维的列向量。</p>
+<p>定义：设  $(w, z, z_0)$  是  $(*)$  满足下列条件的可行解，则称  $(w, z, z_0)$  为准互补基本可行解。</p>
+<ol>
+<li> $(w, z, z_0)$  为  $(1)$  和  $(2)$  的一个基本可行解；</li>
+<li>对某个  $s \in \{1, \dots, m + n\}$ ， $w_s, z_s$  都不是基变量；</li>
+<li> $z_0$  是基变量，且每个互补变量对  $(w_i, z_i) (i \ne s)$  中，恰好有一个变量是基变量。</li>
+</ol>
+<p>用主元消去法求准互补基本可行解</p>
+<p>令  $z_0 = \max\{-q_i|i = 1, \dots, m+n\} = -q_s, z = 0, w = q + ez_0 = q - eq_s$ ，则  $(w, z, z_0)$  是一个准互补基本可行解，其中  $w_i()i\ne s$  和  $z_0$  是基变量，其余变量为非基变量，以此解为初始解，用主元消去法求新的准互补基本可行解。</p>
+<p>选择主元时应遵循的两条规则：</p>
+<ol>
+<li>若  $w_i$  (或者  $z_i$ ) 离基，则  $z_i$  （或者  $w_i$ ）进基；</li>
+<li>按照单纯形方法中的最小比值原则确定离基变量。</li>
+</ol>
+<h3 id="路径跟踪法"><a href="#路径跟踪法" class="headerlink" title="路径跟踪法"></a>路径跟踪法</h3>
+$$
+\begin{cases}\min\:f(x)=\frac12\:x^THx+c^Tx\\\\s.t.\quad Ax\geq b\end{cases}
+$$
+
+
+<p>其中  $H$  是  $n$  阶对称正定矩阵， $x$  是最优解的充要条件为存在  $y$  使得</p>
+
+$$
+\begin{cases}Hx+c-A^Ty=0\\Ax-b\geq0\\\left(Ax-b\right)_iy_i=0,i=1,\cdots,m\end{cases}
+$$
+
+
+<p>记  $Ax-b-w=0,w=(w_1,\cdots,w_m)^T\geq0$ ，则</p>
+
+$$
+\begin{cases}Hx+c-A^Ty=0\\Ax-b-w=0\\y_iw_i=0,i=1,\cdots,m\\y,w\geq0\end{cases}
+$$
+
+
+<p>对应的松弛 KKT 条件</p>
+
+$$
+\begin{cases}Hx+c-A^Ty=0\\Ax-b-w=0\\YWe=\mu e,\\y,w\geq0\end{cases}
+$$
+
+
+<p>其中  $Y=diag(y_1,\cdots,y_m),W=diag(w_1,\cdots,w_m)$ ，称  $\left\{\left(x(\mu),y(\mu),w(\mu)\right)|\mu&gt;0\right\}$  为中心路径。</p>
+<p>求解方法：</p>
+
+$$
+\text{任取一点}(x,y,w)\text{,其中}y&gt;0,w&gt;0,\text{确定方向}\\(\Delta x,\Delta y,\Delta w),\text{使}(x+\Delta x,y+\Delta y,w+\Delta w)\text{满足松弛}KKT\text{条件}.\\
+\begin{cases}H(x+\Delta x)-A^T(y+\Delta y)+c=0\\A(x+\Delta x)-(w+\Delta w)-b=0\\(Y+\Delta Y)(W+\Delta W)e=\mu e,\\y+\Delta y,w+\Delta w\geq0\end{cases}
+$$
+
+
+<p>从而</p>
+
+$$
+\begin{aligned}&\Delta w=Y^{-1}(\mu e-YWe-W\Delta y)\\&\begin{pmatrix}-H&A^T\\A&Y^{-1}W\end{pmatrix}\begin{pmatrix}\Delta x\\\Delta y\end{pmatrix}=\begin{pmatrix}c+Hx-A^Ty\\b-Ax+\mu Y^{-1}e\end{pmatrix}\end{aligned}
+$$
+
+
+<h3 id="序列二次规划方法"><a href="#序列二次规划方法" class="headerlink" title="序列二次规划方法"></a>序列二次规划方法</h3><p>通过解一系列二次规划问题产生收敛于问题最优解和Lagrange乘子的迭代序列。</p>
+
+$$
+\begin{aligned}&\min f(x)\\&s.t.\quad h(x)=0\end{aligned}
+$$
+
+
+<p>KKT 条件：</p>
+
+$$
+\begin{cases}\nabla_xL(x,\lambda)=\nabla f(x)-A(x)^T\lambda=0\\\nabla_\lambda L(x,\lambda)=-h(x)=0\end{cases}
+$$
+
+
+<p>用牛顿法求解满足 KKT 条件的方程组：</p>
+
+$$
+\begin{pmatrix}x^{(k+1)}\\\lambda^{(k+1)}\end{pmatrix}=\begin{pmatrix}x^{(k)}\\\lambda^{(k)}\end{pmatrix}+\begin{pmatrix}d_x^{(k)}\\d_\lambda^{(k)}\end{pmatrix}\\
+\nabla^2L\Big(x^{(k)},\lambda^{(k)}\Big)\biggl(\begin{matrix}d_x^{(k)}\\d_\lambda^{(k)}\\\end{matrix}\biggr)=-\nabla L\Big(x^{(k)},\lambda^{(k)}\Big)
+$$
+
+
+<p>恰好是下列二次规划问题的一阶必要条件：</p>
+
+$$
+\begin{aligned}&\min\frac12d^T\nabla_{xx}^2L\Big(x^{(k)},\lambda^{(k)}\Big)d+\nabla f\Big(x^{(k)}\Big)^Td\\&s.t.\quad A\Big(x^{(k)}\Big)d+h\Big(x^{(k)}\Big)=0\end{aligned}
+$$
+
+
+<p>势函数——衡量迭代点好坏的函数</p>
+
+$$
+\phi(x,\sigma)=f(x)+\sigma\sum_{j=1}^mh_j(x)^2\\
+\begin{aligned}&\text{结论:若}\nabla_{xx}^2L\left(x^{(k)},\lambda^{(k)}\right)\text{正定,}\sigma\text{充分大,则}\\&\min\frac12d^T\nabla_{xx}^2L\left(x^{(k)},\lambda^{(k)}\right)d+\nabla f\left(x^{(k)}\right)^Td\\&s.t.\quad A\left(x^{(k)}\right)d+h\left(x^{(k)}\right)=0\\&\text{的解}d^{(k)}\text{是函数}\phi(x,\sigma)\text{在点}x^{(k)}\text{点非增方向。}\end{aligned}
+$$
+
+
+<p>一般约束问题</p>
+
+$$
+\begin{aligned}&\min f(x)\\s.t.\quad&g_i(x)\geq0,\quad i=1,2,\cdots,m\\&h_j(x)=0,\quad j=1,2,\cdots,l\end{aligned}
+$$
+
+
+<p>Lagrange 函数：</p>
+
+$$
+L(x,w,\nu)=f(x)-\sum_{i=1}^mw_ig_i(x)-\sum_{j=1}^l\nu_jh_j(x)
+$$
+
+
+<p>每次迭代所要求解的二次规划子问题为：</p>
+
+$$
+\min\frac12d^T\nabla_{xx}^2L\left(x^{(k)},w^{(k)},\nu^{(k)}\right)d+\nabla f\left(x^{(k)}\right)^Td\\s.t.\quad\nabla g_i\left(x^{(k)}\right)^Td+g_i\left(x^{(k)}\right)\geq0,i=1,2,\cdots,m\\\nabla h_j\left(x^{(k)}\right)^Td+h_j\left(x^{(k)}\right)=0,j=1,2,\cdots,l
+$$
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2025/09/18/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" title="最优化方法">https://blitherboom812.github.io/2025/09/18/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2025/09/16/%E6%B3%9B%E5%87%BD%E5%88%86%E6%9E%90/" rel="next" title="泛函分析"><span class="post-nav-text">泛函分析</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

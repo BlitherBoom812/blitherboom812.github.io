@@ -1,0 +1,842 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Speech-SP | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="语音信号的线性预测编码技术线性预测编码技术（维纳滤波）。可以参考隔壁统计信号处理的笔记hh。 维纳滤波的正交原理：  $$ E \langle x(n-k), e(n) \rangle &#x3D; 0 $$   正交原理可以用来估计任何时候的任何值，不管是现在（滤波），过去（平滑）还是未来（预测），也不管估计的对象是  $x,y$ ，上述公式的含义是：估计误差始终与已知信号垂直，与估计的是哪个时间的信号无">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Speech-SP">
+<meta property="og:url" content="https://blitherboom812.github.io/2024/02/28/Speech-SP/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="语音信号的线性预测编码技术线性预测编码技术（维纳滤波）。可以参考隔壁统计信号处理的笔记hh。 维纳滤波的正交原理：  $$ E \langle x(n-k), e(n) \rangle &#x3D; 0 $$   正交原理可以用来估计任何时候的任何值，不管是现在（滤波），过去（平滑）还是未来（预测），也不管估计的对象是  $x,y$ ，上述公式的含义是：估计误差始终与已知信号垂直，与估计的是哪个时间的信号无">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1713960093567.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1713958735363.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1713958768829.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1713960064882.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1713963786950.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1713963998639.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1713965424496.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1715172645812.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Speech-SP/1715172680511.png">
+<meta property="article:published_time" content="2024-02-28T11:24:02.000Z">
+<meta property="article:modified_time" content="2024-05-29T14:37:05.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/Speech-SP/1713960093567.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7%E7%9A%84%E7%BA%BF%E6%80%A7%E9%A2%84%E6%B5%8B%E7%BC%96%E7%A0%81%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">语音信号的线性预测编码技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%9B%B8%E5%85%B3%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">自相关法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E6%96%B9%E5%B7%AE%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">协方差法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Durbin-%E9%80%92%E6%8E%A8%E7%AE%97%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">Durbin 递推算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E5%86%85%E7%A7%AF"><span class="toc-number">1.3.1.</span> <span class="toc-text">滤波器的内积</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%86%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">逆滤波器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E5%92%8C%E5%90%8E%E5%90%91%E9%A2%84%E6%B5%8B"><span class="toc-number">1.3.3.</span> <span class="toc-text">前向和后向预测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E4%BA%A4%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.4.</span> <span class="toc-text">正交性原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%92%E6%8E%A8%E5%85%AC%E5%BC%8F"><span class="toc-number">1.3.5.</span> <span class="toc-text">递推公式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Durbin-%E7%AE%97%E6%B3%95%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">Durbin 算法系统的稳定性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.4.1.</span> <span class="toc-text">稳定性的应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LPC-%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E8%AE%A8%E8%AE%BA"><span class="toc-number">1.5.</span> <span class="toc-text">LPC 模型参数讨论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B6%E6%95%B0"><span class="toc-number">1.5.1.</span> <span class="toc-text">阶数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BF%80%E5%8A%B1%E5%A2%9E%E7%9B%8A-G"><span class="toc-number">1.5.2.</span> <span class="toc-text">激励增益 G</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%AD%E6%97%B6%E5%88%86%E6%9E%90%E5%AF%B9%E4%BA%8ELPC%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">1.5.3.</span> <span class="toc-text">短时分析对于LPC参数估计的影响</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LPC%E5%88%86%E6%9E%90%E7%9A%84%E9%A2%91%E5%9F%9F%E8%A7%A3%E9%87%8A"><span class="toc-number">1.5.4.</span> <span class="toc-text">LPC分析的频域解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E7%A7%8DLPC%E5%8F%82%E6%95%B0%E8%AE%A1%E7%AE%97%E5%85%B6%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.5.5.</span> <span class="toc-text">各种LPC参数计算其它们之间的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7%E7%BC%96%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">语音信号编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%A0%87%E9%87%8F%E9%87%8F%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">语音信号的标量量化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E9%87%8F%E5%8C%96%E5%99%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">标量量化器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%87%E5%8C%80%E9%87%8F%E5%8C%96%E5%99%A8"><span class="toc-number">2.1.2.</span> <span class="toc-text">均匀量化器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%9D%87%E5%8C%80%E9%87%8F%E5%8C%96%E5%99%A8"><span class="toc-number">2.1.3.</span> <span class="toc-text">非均匀量化器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%8E%8B%E6%89%A9%E9%87%8F%E5%8C%96%E5%99%A8"><span class="toc-number">2.1.4.</span> <span class="toc-text">非线性压扩量化器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E9%80%82%E5%BA%94%E9%87%8F%E5%8C%96%EF%BC%88Adaptive-Delta-Modulation%EF%BC%8CADM%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">自适应量化（Adaptive Delta Modulation，ADM）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E8%87%AA%E9%80%82%E5%BA%94%E9%87%8F%E5%8C%96%EF%BC%88AQF%EF%BC%89"><span class="toc-number">2.2.1.</span> <span class="toc-text">前向自适应量化（AQF）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E5%90%91%E8%87%AA%E9%80%82%E5%BA%94%E9%87%8F%E5%8C%96%EF%BC%88AQB%EF%BC%89"><span class="toc-number">2.2.2.</span> <span class="toc-text">后向自适应量化（AQB）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E7%BC%96%E7%A0%81-DPCM"><span class="toc-number">2.3.</span> <span class="toc-text">差分编码 DPCM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CVSD-%E7%BC%96%E7%A0%81%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text">CVSD 编码器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delta-Sigma-%E9%87%8F%E5%8C%96%E5%99%A8"><span class="toc-number">2.5.</span> <span class="toc-text">Delta-Sigma 量化器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E5%B8%A6%E7%BC%96%E7%A0%81"><span class="toc-number">2.6.</span> <span class="toc-text">子带编码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E6%95%B0%E5%88%86%E9%85%8D"><span class="toc-number">2.6.1.</span> <span class="toc-text">比特数分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%9B%B8%E6%AD%A3%E4%BA%A4%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%BB%84"><span class="toc-number">2.6.2.</span> <span class="toc-text">多相正交滤波器组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E6%8D%A2%E5%9F%9F%E7%BC%96%E7%A0%81"><span class="toc-number">2.7.</span> <span class="toc-text">变换域编码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%88%86%E9%85%8D"><span class="toc-number">2.7.1.</span> <span class="toc-text">比特分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E6%AD%A3%E4%BA%A4%E5%8F%98%E6%8D%A2-KL-%E5%8F%98%E6%8D%A2"><span class="toc-number">2.7.2.</span> <span class="toc-text">最佳正交变换 - KL 变换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%8F%82%E6%95%B0%E7%BC%96%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">语音信号的参数编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%84%9F%E8%A7%89%E5%8A%A0%E6%9D%83%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">感觉加权滤波器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%84%89%E5%86%B2%E6%BF%80%E5%8A%B1%E7%BA%BF%E6%80%A7%E9%A2%84%E6%B5%8B%E5%A3%B0%E7%A0%81%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">多脉冲激励线性预测声码器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7%E4%BF%AE%E6%95%B4%E4%B8%8E%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF"><span class="toc-number">4.</span> <span class="toc-text">语音信号修整与综合技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E4%BF%AE%E6%AD%A3%E7%9F%AD%E6%97%B6%E8%B0%B1%E8%BF%9B%E8%A1%8C%E6%9C%80%E5%B0%8F%E6%96%B9%E5%B7%AE%E4%BF%A1%E5%8F%B7%E4%BC%B0%E8%AE%A1"><span class="toc-number">4.1.</span> <span class="toc-text">利用修正短时谱进行最小方差信号估计</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2024/02/28/Speech-SP/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Speech-SP</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2024-02-28 19:24:02" itemprop="dateCreated datePublished" datetime="2024-02-28T19:24:02+08:00">2024-02-28</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-05-29 22:37:05" itemprop="dateModified" datetime="2024-05-29T22:37:05+08:00">2024-05-29</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="语音信号的线性预测编码技术"><a href="#语音信号的线性预测编码技术" class="headerlink" title="语音信号的线性预测编码技术"></a>语音信号的线性预测编码技术</h2><p>线性预测编码技术（维纳滤波）。可以参考隔壁统计信号处理的笔记hh。</p>
+<p>维纳滤波的正交原理：</p>
+
+$$
+E \langle x(n-k), e(n) \rangle = 0
+$$
+
+
+<p>正交原理可以用来估计任何时候的任何值，不管是现在（滤波），过去（平滑）还是未来（预测），也不管估计的对象是  $x,y$ ，上述公式的含义是：估计误差始终与已知信号垂直，与估计的是哪个时间的信号无关。</p>
+<p>利用前面的  $P$  个信号预测下一个信号：</p>
+
+$$
+\hat{s}(n)=-\sum_{i=1}^{P^{\prime}}\hat{\alpha}_i\cdot s(n-i)
+$$
+
+
+<p>误差定义为</p>
+
+$$
+\begin{aligned}
+\varepsilon(n)& =s(n)-\overset{\wedge}{\operatorname*{s}}(n)=s(n)+\sum_{i=1}\widehat{\alpha}_i\cdot s(n-i)  \\
+&=\sum_{i=0}^{P^{\prime}}\widehat{\alpha}_i\cdot s(n-i)
+\end{aligned}
+$$
+
+
+<p>从 z 域看，这是一个全极点模型产生了目标信号：</p>
+
+$$
+S(z) = -S(z)\sum\limits_{i=1}^{P}\alpha_iz^{-i} + E(z)
+$$
+
+
+<p>接下来的所有步骤，目的都是推导  $\alpha$  的取值。</p>
+<h3 id="自相关法"><a href="#自相关法" class="headerlink" title="自相关法"></a>自相关法</h3><p>本文中假设信号具有遍历性，即时间平均等于统计平均，时间上的自相关等于统计意义上的自相关。</p>
+<p>利用 LMMSE 准则可以推出</p>
+
+$$
+\begin{bmatrix}R(0)&R(1)&R(2)&\cdots&R(P-1)\\R(1)&R(0)&R(1)&\cdots&R(P-2)\\R(2)&R(1)&R(0)&\cdots&R(P-3)\\\vdots&\vdots&&&\vdots\\R(P-1)&R(P-2)&\cdots&\cdots&R(0)\end{bmatrix}\cdot\begin{bmatrix}\hat\alpha_1\\\hat\alpha_2\\\vdots\\\vdots\\\hat\alpha_P\end{bmatrix}=-\begin{bmatrix}R(1)\\R(2)\\\vdots\\\vdots\\R(P)\end{bmatrix}
+$$
+
+
+<p>一个例子：Durbin 递推算法</p>
+<h3 id="协方差法"><a href="#协方差法" class="headerlink" title="协方差法"></a>协方差法</h3><p>不能保证声码器稳定</p>
+<h3 id="Durbin-递推算法"><a href="#Durbin-递推算法" class="headerlink" title="Durbin 递推算法"></a>Durbin 递推算法</h3><h4 id="滤波器的内积"><a href="#滤波器的内积" class="headerlink" title="滤波器的内积"></a>滤波器的内积</h4><p>定义 $s_w(n)$ 关于 $F(z)$ 和 $G(z)$ 的内积如下：</p>
+
+$$
+\langle F(z),G(z)\rangle=\sum_{-\infty}^{+\infty}u(n)\cdot v(n)
+$$
+
+
+<p>特别地若这里的 $F(z),\quad G(z)$ 都用我们的逆滤波器 $A(z)=\sum_{i=0}^P\alpha_iZ^{-i}$ 替换，那么语音信号 $s_w(n)$ 经过 $A(z)$ 后的输出 $e(n)$ 就是预测误差。</p>
+ $\alpha_i\cdot s_W(n-i)$  因此 $A(z)$ 范数 $\|A(z)\|$ 的平方就是预测误差。即
+
+
+$$
+\|A(z)\|^2=\langle A(z),A(z)\rangle=\sum_{-\infty}^{+\infty}e(n)\cdot e(n)=\sum_{-\infty}^{+\infty}e^2(n)
+$$
+
+
+<p>内积有正定性，线性，三角不等式</p>
+<p>特殊性质：</p>
+
+$$
+\langle z^{-i}, z^{-j} \rangle = R(|i - j|)\\
+\langle F(z), G(z) \rangle = \sum\limits_{i=0}^{M}\sum\limits_{j=0}^{M}f_ig_jR(|i - j|)\\
+\langle F(z),G(z)\rangle=\left\langle z^kF(z),z^kG(z)\right\rangle\\
+\langle F(z),G(z)\rangle=\langle F(1/z),G(1/z)\rangle
+$$
+
+
+<h4 id="逆滤波器"><a href="#逆滤波器" class="headerlink" title="逆滤波器"></a>逆滤波器</h4><p>定义FIR滤波器 $\hat{A}(z)$ :</p>
+
+$$
+\hat{A}(z)=\sum_{i=0}^P\hat{\alpha}_iz^{-i}\quad,\quad\alpha_0=1
+$$
+
+
+<p>若 $\hat{\alpha}_{i}$ 是满足LPC正则方程的解，则称 $\hat{A}(z)$ 称为逆滤波器。 $\hat{E}(z)=\hat{A}(z)\cdot S(z)$ 是预测误差 $\varepsilon(n)$ 的z 变换。显然有：</p>
+<p> (1) 若s(n)是由全极点模型 $1/A(z)$ 产生的，这时 $A(z)=\sum_{i=0}^P\alpha_iz^{-i}$ , 即：</p>
+ $s(n)=-\sum_{i=1}^P\alpha_is(n-i)+Ge(n)$ 
+
+
+$$
+S(z) \cdot A(z) = G \cdot E(z)
+$$
+
+
+<h4 id="前向和后向预测"><a href="#前向和后向预测" class="headerlink" title="前向和后向预测"></a>前向和后向预测</h4><p>前向线性预测器(P阶)</p>
+
+$$
+\hat{s}(n)=-\sum_{i=1}^P\alpha_i^{(P)}\cdot s(n-i)
+$$
+
+
+<p>前向预测误差(P阶)</p>
+
+$$
+\varepsilon_\alpha^{(P)}(n)=s(n)-\hat{s}(n)=\sum_{i=0}^P\alpha_i^{(P)}\cdot s(n-i)\:,\alpha_0^{(P)}=1
+$$
+
+
+<p>前向逆滤波器(P阶)</p>
+
+$$
+A^{(P)}(z)=\sum_{i=0}^P\alpha_i^{(P)}z^{-i}
+$$
+
+
+<p>显然有</p>
+
+$$
+E^{(P)}_\alpha(z) = S(z) \cdot A^{(P)}(z)
+$$
+
+
+<p>后向线性预测器(P阶)</p>
+
+$$
+\hat{s}(n-P-1)=-\sum_{i=1}^P\beta_i^{(P)}\cdot s(n-i)
+$$
+
+
+<p>n时刻对 $s(n-P-1)$ 的后向预测误差(P阶)</p>
+
+$$
+\begin{aligned}&\varepsilon_{\beta}^{(P)}(n)=s(n-P-1)-\hat{s}(n-P-1)\\&=\sum_{i=1}^{P+1}\beta_i^{(P)}\cdot s(n-i)\quad,\quad\beta_{P+1}^{(P)}=1\end{aligned}
+$$
+
+
+<p>后向逆滤波器 (P阶)</p>
+
+$$
+B^{(P)}(z)=\sum_{i=1}^{P+1}\beta_i^{(P)}z^{-i}
+$$
+
+
+<p>显然有</p>
+
+$$
+E_\beta^{(P)}(z) = S(z) \cdot B^{(P)}(z)
+$$
+
+
+<h4 id="正交性原理"><a href="#正交性原理" class="headerlink" title="正交性原理"></a>正交性原理</h4><p>判定最佳预测器的充要条件是</p>
+
+$$
+\langle A^{(m)}(z), z^{-l} \rangle = 0\\
+\langle B^{(m)}(z), z^{-l} \rangle = 0\\
+l = 1, 2, \dots, m
+$$
+
+
+<p>一个不严谨的理解：</p>
+
+$$
+u(n) = s(n) * Z^{-1}[A(z)] = \varepsilon(n)\\
+v(n) = s(n) * Z^{-1}[z^{-l}] = s(n - l)\\
+\begin{align*}
+    &\langle A^{(m)}(z), z^{-l} \rangle\\
+    =&\sum\limits_{n=-\infty}^{\infty}u(n)v(n)\\
+    =&\sum\limits_{n=-\infty}^{\infty}\varepsilon(n)s(n - l)\\
+\end{align*}
+$$
+
+
+<p>由于时间平均等于统计平均，</p>
+
+$$
+\frac1{2N} \sum\limits_{n=-N}^{N - 1}\varepsilon(n)s(n-l) = E \langle \varepsilon(n), s(n-l) \rangle
+$$
+
+
+<p>根据开头提到的维纳滤波正交原理可知上式等于0。</p>
+<h4 id="递推公式"><a href="#递推公式" class="headerlink" title="递推公式"></a>递推公式</h4><p>根据定义，当 $m=0$ 时，显然有</p>
+
+$$
+A^{(0)}(z)=1\\B^{(0)}(z)=z^{-1}
+$$
+
+
+ $m&gt;0$ 时有如下递推公式（施密特正交化）
+
+
+$$
+A^{(m)}(z)=A^{(m-1)}(z)+K^{(m)}B^{(m-1)}(z)
+$$
+
+
+
+$$
+B^{(m)}(z)=z^{-1}\Big[B^{(m-1)}(z)+K^{(m)}A^{(m-1)}(z)\Big]
+$$
+
+
+
+$$
+K^{(m)} = -\frac{\langle A^{(m-1)}(z), B^{(m-1)}(z)\rangle}{||B^{(m-1)}(z)||^2}
+$$
+
+
+<p>根据正交性原理，需要证明由递推公式得到的 $A^{(m)}(z)$ 和 $B^{(m)}(z)$ 满足正交性条件公式。</p>
+<p> 在公式(76) 中，根据多项式对应项系数相等的原则，可以得到</p>
+
+$$
+\begin{aligned}&\alpha_{i}^{(m)}=\alpha_{i}^{(m-1)}+K^{(m)}\cdot\beta_{i}^{(m-1)}\quad,\quad i=1,\cdots,m-1\\&\alpha_{i}^{(m)}=K^{(m)}\quad,\quad i=m\end{aligned}
+$$
+
+
+<p>由公式(73)可知</p>
+
+$$
+\beta_j^{(m)}=\alpha_{m+1-j}^{(m)},\:j=1,\cdots,m+1
+$$
+
+
+<blockquote>
+<p>从这里可以推出</p>
+
+$$
+&gt; B^{(m)}(z) = z^{-(m+1)}A^{(m)}(1/z)
+&gt; $$
+
+</blockquote>
+<p>因此可以得到预测器系数的递推公式</p>
+
+$$
+\begin{cases}\alpha_\mathrm{m}^{(\mathrm{m})}=\mathrm{K}^{(\mathrm{m})}\\\alpha_\mathrm{i}^{(\mathrm{m})}=\alpha_\mathrm{i}^{(\mathrm{m}-1)}+\mathrm{K}^{(\mathrm{m})}\cdot\alpha_\mathrm{m-i}^{(\mathrm{m}-1)}\quad,\:\mathrm{i}=1,\cdots,\mathrm{m}-1\end{cases}
+$$
+
+
+<p>这是线性预测系数的Durbin递推算法公式。 $m$ 阶部分相关系数 $K^{(m)}$ 可以用以下方法计算：</p>
+
+$$
+K^{(m)} = -\frac{\sum\limits_{j=1}^{m}\alpha_{m-j}^{(m-1)}R(j)}{||B^{(m-1)}(z)||^2}
+$$
+
+
+ $||B^{(m)}(z)||^2$  可以用这个递推式计算：
+
+
+$$
+\begin{Vmatrix}B^{(m)}(z)\end{Vmatrix}^2=(1-[K^{(m)}]^2)\begin{Vmatrix}B^{(m-1)}(z)\end{Vmatrix}^2
+$$
+
+
+<p>初值</p>
+
+$$
+||B^{(0)}(z)|| = R(0)\\
+\alpha^{(0)}_0 = 1
+$$
+
+
+<h3 id="Durbin-算法系统的稳定性"><a href="#Durbin-算法系统的稳定性" class="headerlink" title="Durbin 算法系统的稳定性"></a>Durbin 算法系统的稳定性</h3><p>充分性：</p>
+
+$$
+\frac{1}{A^{(m)}(z)} 稳定 \Rarr |k^{(m)}| &lt; 1
+$$
+
+
+<p>必要性：</p>
+
+$$
+|k^{(m)}| &lt; 1 \Rarr \frac{1}{A^{(m)}(z)} 稳定
+$$
+
+
+<p>Highlight:</p>
+<p>Durbin 逆序递推公式</p>
+
+$$
+A^{(m-1)}(z)=\frac{A^{(m)}(z)-k^{(m)}zB^{(m)}(z)}{1-(k^{(m)})^2}
+$$
+
+
+<p>证明过程中引入的一个辅助函数</p>
+
+$$
+F^{(m)}(z)=\frac{A^{(m)}(z)}{zB^{(m)}(z)}=\frac{z^mA^{(m)}(z)}{A^{(m)}(1/z)}
+$$
+
+
+<p>满足  $F^{(m)}(z) &lt; 1 \lrArr |z| &lt; 1$ </p>
+<h4 id="稳定性的应用"><a href="#稳定性的应用" class="headerlink" title="稳定性的应用"></a>稳定性的应用</h4><p>充分性：说明使用 Durbin 算法可以保证  $1/A(z)$  稳定</p>
+<p>必要性：</p>
+<p>判定高阶多项式  $A(z)$  构成的系统  $1/A(z)$  是否稳定。</p>
+<p>只要计算出  $k_m$ ，判断  $|k_m|$  是否小于1即可。</p>
+<h3 id="LPC-模型参数讨论"><a href="#LPC-模型参数讨论" class="headerlink" title="LPC 模型参数讨论"></a>LPC 模型参数讨论</h3><h4 id="阶数"><a href="#阶数" class="headerlink" title="阶数"></a>阶数</h4><p>误差能量是单调减的，一般  $P = 8 \sim 14$ </p>
+<h4 id="激励增益-G"><a href="#激励增益-G" class="headerlink" title="激励增益 G"></a>激励增益 G</h4><p>采用缓变窗（哈明窗）， $N &gt;&gt; P$ </p>
+
+$$
+\varepsilon_\alpha^{(p)}(n)\approx Ge_w(n)=Ge(n)w(n)
+$$
+
+
+
+$$
+G^2\approx\frac{\sum_{n=-\infty}^\infty\left(\varepsilon_\alpha^{(p)}(n)\right)^2}{\sum_{n=-\infty}^\infty e^2(n)w^2(n)}
+$$
+
+
+<h4 id="短时分析对于LPC参数估计的影响"><a href="#短时分析对于LPC参数估计的影响" class="headerlink" title="短时分析对于LPC参数估计的影响"></a>短时分析对于LPC参数估计的影响</h4><ol>
+<li>𝑒(𝑛)为白噪声时， $E[\hat \alpha_i] = \alpha_i$ ，无偏估计</li>
+<li>𝑒(𝑛)为浊音时，采用基音同步算法可以达到无偏估计。否则如果是任意截取一段语音作分析估计是有偏的。</li>
+</ol>
+<h4 id="LPC分析的频域解释"><a href="#LPC分析的频域解释" class="headerlink" title="LPC分析的频域解释"></a>LPC分析的频域解释</h4><p>用LPC分析可以用来跟踪声道模型谱（或称语音的平滑谱）。若用LPC算法解出的全极点模型来逼近实际声道，则它的单位冲激响应ℎ(𝑛)为：</p>
+
+$$
+\begin{cases}
+    h(n) = 0, n \lt 0\\
+    h(n) = - \sum\limits_{i=1}^{p}\alpha_i^{(p)}h(n - 1) + \delta(n), n \ge 0
+\end{cases}
+$$
+
+
+<p>若  $R_h(l) = R_h(-l) = \sum\limits_{n=0}^{\infty}h(n - l)h(n), l \ge 0$ </p>
+
+$$
+\sum\limits_{i=1}^{p}\alpha_i^{(P)}R_h(|k - i|) = -R_h(k), l \ge 0\\
+R_h(l)/R_h(0) = R(l) / R(0)
+$$
+
+
+<p>当激励为均方值为1，均值为0的白噪声序列时，输出的自关函数𝑅𝑤(𝑙)也有此关系。<br>P阶LPC预测模型也称为P阶自关匹配模型。</p>
+<h4 id="各种LPC参数计算其它们之间的关系"><a href="#各种LPC参数计算其它们之间的关系" class="headerlink" title="各种LPC参数计算其它们之间的关系"></a>各种LPC参数计算其它们之间的关系</h4><ol>
+<li> $R(l) \Rightarrow \alpha$ </li>
+<li> $K \Rightarrow \alpha$ </li>
+</ol>
+
+$$
+\begin{cases}\alpha_m^m=K^{(m)}\\\alpha_i^{(m)}=\alpha_i^{(m-1)}+K^{(m)}\alpha_{m-i}^{(m-1)}\end{cases}
+$$
+
+
+<ol start="3">
+<li>LPC 系数 &#x3D;&gt; 倒谱（因为是最小相位序列）</li>
+<li>PARCOR 系数( $K^{(m)}$ )<ol>
+<li>由 Durbin 解得</li>
+<li>由格形算法解得</li>
+<li>由 Schur 算法解得</li>
+</ol>
+</li>
+<li>由  $A(z)$  根确定振峰<ol>
+<li>每一对根与一个共振峰对应</li>
+</ol>
+</li>
+<li>声道面积比系数和对数面积比系数</li>
+</ol>
+
+$$
+\frac{A_m}{A_{m-1}}=\frac{1-K^{(m)}}{1+K^{(m)}}\:,\:m=1,2,\cdots P\\
+g_m = \ln\Bigg[\frac{A_m}{A_{m-1}}\Bigg]
+$$
+
+
+<ol start="7">
+<li>线谱对（LSP）或者线谱频率参数(LSF)</li>
+</ol>
+
+$$
+P(z) = A^{(p)}(z) + z^{-(p+1)}A^{(p)}(z^{-1})\\
+Q(z) = A^{(p)}(z) - z^{-(p+1)}A^{(p)}(z^{-1})
+$$
+
+
+<p>性质：</p>
+<ol>
+<li> $P(z)$  和  $Q(z)$  的根均在单位圆上</li>
+<li> $P(z)$  和  $Q(z)$  的根在单位元上交错</li>
+<li> $\alpha$  参数和  $LSP$  参数互推</li>
+</ol>
+<p>某个特定的𝐿𝑆𝑃 [𝑓1, 𝑓2, ⋯ 𝑓𝑝]中只移动其中任意一个频率𝑓𝑖的位置，那么对应的平滑谱只<br>有𝑓𝑖附近与原平滑谱有异，而在其它频域则变化很小</p>
+<h2 id="语音信号编码"><a href="#语音信号编码" class="headerlink" title="语音信号编码"></a>语音信号编码</h2><h3 id="语音信号的标量量化"><a href="#语音信号的标量量化" class="headerlink" title="语音信号的标量量化"></a>语音信号的标量量化</h3><h4 id="标量量化器"><a href="#标量量化器" class="headerlink" title="标量量化器"></a>标量量化器</h4><h4 id="均匀量化器"><a href="#均匀量化器" class="headerlink" title="均匀量化器"></a>均匀量化器</h4><h4 id="非均匀量化器"><a href="#非均匀量化器" class="headerlink" title="非均匀量化器"></a>非均匀量化器</h4><h4 id="非线性压扩量化器"><a href="#非线性压扩量化器" class="headerlink" title="非线性压扩量化器"></a>非线性压扩量化器</h4><h3 id="自适应量化（Adaptive-Delta-Modulation，ADM）"><a href="#自适应量化（Adaptive-Delta-Modulation，ADM）" class="headerlink" title="自适应量化（Adaptive Delta Modulation，ADM）"></a>自适应量化（Adaptive Delta Modulation，ADM）</h3><h4 id="前向自适应量化（AQF）"><a href="#前向自适应量化（AQF）" class="headerlink" title="前向自适应量化（AQF）"></a>前向自适应量化（AQF）</h4><h4 id="后向自适应量化（AQB）"><a href="#后向自适应量化（AQB）" class="headerlink" title="后向自适应量化（AQB）"></a>后向自适应量化（AQB）</h4><h3 id="差分编码-DPCM"><a href="#差分编码-DPCM" class="headerlink" title="差分编码 DPCM"></a>差分编码 DPCM</h3><p><img src="/../images/Speech-SP/1713960093567.png" alt="1713960093567" loading="lazy"></p>
+<p>DPCM是指采用固定预测器与固定量化器的差值脉冲调制。</p>
+<h3 id="CVSD-编码器"><a href="#CVSD-编码器" class="headerlink" title="CVSD 编码器"></a>CVSD 编码器</h3><p><img src="/../images/Speech-SP/1713958735363.png" alt="1713958735363" loading="lazy"></p>
+<h3 id="Delta-Sigma-量化器"><a href="#Delta-Sigma-量化器" class="headerlink" title="Delta-Sigma 量化器"></a>Delta-Sigma 量化器</h3><p><img src="/../images/Speech-SP/1713958768829.png" alt="1713958768829" loading="lazy"></p>
+<p>考虑  $D/A$  变换器的增益为 1 的情况，此时  $V_a(z)\approx V(z)$ ，</p>
+
+$$
+\begin{gathered}
+V(z)=[U(z)-V(z)]\cdot H(z)+Q(z) \\
+[1+H(z)]\cdot V(z)=U(z)\cdot H(z)+Q(z) \\
+V(z)=\frac{H(z)}{1+H(z)}U(z)\cdot+\frac{1}{1+H(z)}Q(z) 
+\end{gathered}
+$$
+
+
+<p>定义信号传输函数</p>
+
+$$
+STF(z)=\frac{V(z)}{U(z)}\Bigg|_{Q(z)=0}=\frac{H(z)}{1+H(z)}
+$$
+
+
+<p>定义超取样量化噪声传输函数</p>
+
+$$
+NTF(z)=\frac{V(z)}{Q(z)}\Bigg|_{U(z)=0}=\frac{1}{1+H(z)}
+$$
+
+
+<p>让  $H(z)$  为低通，则  $STF(z)$  是低通， $NTF(z)$  是高通</p>
+
+$$
+V(z)=STF(z)\cdot U(z)+NTF(z)\cdot Q(z)
+$$
+
+
+<p>噪声整形（Noise-Shaping）技术： $NTF(z)$  去掉了噪声能量的低频部分。接下来，只要经过低通滤波器  $H_d(z)$ ，就可以滤除高频部分的噪声能量，剩下的只有所需要的信号  $U(z)$ ， $H_d(z)$  的输出  $V_d(z)$  的量化噪声可以小于直接用 A&#x2F;D 量化器量化的噪声。</p>
+<p>采用速度（超采样）换精度（高量化比特数），量化器的精度可以非常低，甚至可以用 1 bit 量化器。1 bit 量化器，就不存在 A&#x2F;D 非线性问题。</p>
+<p>超采样的好处：扩展了频带宽度，我们认为噪声的功率一定，当频带变宽，噪声功率谱的高度就降低了。</p>
+<p><img src="/../images/Speech-SP/1713960064882.png" alt="1713960064882" loading="lazy"></p>
+<h3 id="子带编码"><a href="#子带编码" class="headerlink" title="子带编码"></a>子带编码</h3><p>含有多个频点信号分量的复合宽带信号</p>
+<p>首先用一组滤波器将信号分解成若干子带信号</p>
+
+$$
+\langle f_1(t),f_2(t)\rangle=\frac1{2\pi}\cdot\langle F_1(\omega),F_2(\omega)\rangle
+$$
+
+
+<p>若  $\langle F_1(\omega),F_2(\omega)\rangle\approx0$ ，则采用子带滤波后，两个信号的相关性  $\langle f_1(t),f_2(t)\rangle$  降低，对于这些不相关的子带信号独立编码可能提高编码效率。</p>
+<h4 id="比特数分配"><a href="#比特数分配" class="headerlink" title="比特数分配"></a>比特数分配</h4>
+$$
+\sum_{k=1}^MR_k=R\\
+\sigma_{r_k}^2=\varepsilon_{*k}^2\cdot2^{-2R_k}\cdot\sigma_{x_k}^2\\
+
+\min_{R_k} \sigma_{r,SBC}^2=\sum_{k=1}^M\varepsilon_{*k}^2\cdot2^{-2R_k}\cdot\sigma_{xk}^2\\
+$$
+
+
+<p>解得</p>
+
+$$
+R_{k,opt}=R/M+\frac12\log_2\frac{\sigma_{x_k}^2}{\left[\prod_{i=1}^M\sigma_{x_i}^2\right]^{1/M}}\\
+\sigma_{r_k}^2=\varepsilon_{*k}^2\cdot2^{-2R/M}\cdot\left[\prod_{i=1}^M\sigma_{x_i}^2\right]^{1/M}\\
+min\{\sigma_{r,SBC}^2\}=M\cdot\varepsilon_*^2\cdot2^{-\frac{2R}{M}}\cdot\left[\prod_{i=1}^M\sigma_{x_i}^2\right]^{\frac{1}{M}}
+$$
+
+
+<p>每个子带的采样率变为总带宽的 1&#x2F;M，总的信息比特速率为  $R \cdot f/M$ ，为了与 PCM 进行比较，假设 SBC 和 PCM 的编码速率相等：</p>
+
+$$
+R_{PCM} \cdot f = R_{SBC} \cdot f / M\\
+\Rarr R_{PCM} = R_{SBC}/M
+$$
+
+
+<p>此时可推出 SBC 较于 PCM 的信噪比增益为</p>
+
+$$
+max\{G_{SBC}\}=\frac{\sigma_{r,PCM}^{2}}{\sigma_{r,SBC}^{2}}=\frac{2^{-2R_{PCM}}\sigma_{x}^{2}}{M\cdot2^{-\frac{2R_{SBC}}{M}}\cdot[\prod_{k=1}^{M}\sigma_{xk}^{2}]^{\frac{1}{M}}}\\=\frac{2^{-\frac{2R_{SBC}}{M}}\sigma_{x}^{2}}{M\cdot2^{-\frac{2R_{SBC}}{M}}\cdot[\prod_{k=1}^{M}\sigma_{xk}^{2}]^{\frac{1}{M}}}=\frac{\sigma_{x}^{2}}{M\cdot[\prod_{k=1}^{M}\sigma_{xk}^{2}]^{\frac{1}{M}}}\\=\frac{\frac{1}{M}\sigma_{x}^{2}}{[\prod_{k=1}^{M}\sigma_{xk}^{2}]^{1/M}}=\frac{\frac{1}{M}\sum_{k=1}^{M}\sigma_{xk}^{2}}{[\prod_{k=1}^{M}\sigma_{xk}^{2}]^{1/M}}
+$$
+
+
+<p>因此 SBC 的信噪比增益等于子带信号的算术平均和几何平均之比。</p>
+<ul>
+<li>子带信号能量越大，则分配比特数越多；</li>
+<li>最佳分配条件下，各个子带的量化噪声相同；</li>
+<li>若各个子带能量相同，则子带编码的增益为1</li>
+</ul>
+<h4 id="多相正交滤波器组"><a href="#多相正交滤波器组" class="headerlink" title="多相正交滤波器组"></a>多相正交滤波器组</h4><p>用一组不同频率的余弦信号对低通滤波器进行调制，变成了带通滤波器组：</p>
+
+$$
+H_i(z)=\sum_{n=-\infty}^{+\infty}h(n)\cdot cos\left(\pi(2i+1)\cdot\frac{n}{2M}\right)\cdot z^{-n}=\frac12F_i(z)+\frac12G_i(z)
+$$
+
+
+
+$$
+F_{i}\big(e^{j\omega}\big)=H(e^{j(\omega-\frac{\pi(2i+1)}{2M})}),\quad i=0,1,\cdots M-1\\G_{i}\big(e^{j\omega}\big)=H(e^{j(\omega+\frac{\pi(2i+1)}{2M})}),\quad i=0,1,\cdots M-1
+$$
+
+
+<p><img src="/../images/Speech-SP/1713963786950.png" alt="1713963786950" loading="lazy"></p>
+<p>分析滤波器：子带滤波，降采样；</p>
+<p>降采样率过程等价于：采样(b, 将非M倍数的采样点置为0) + 分频(c，抽取 M 倍数上的采样点形成新的信号)</p>
+<p><img src="/../images/Speech-SP/1713963998639.png" alt="1713963998639" loading="lazy"></p>
+
+$$
+\hat{X}_i(z)=\frac1M\sum_{l=0}^{M-1}X_i(z^{\frac1M}W_M^{-l})
+$$
+
+
+<p><img src="/../images/Speech-SP/1713965424496.png" alt="1713965424496" loading="lazy"></p>
+<p>每个子带的输出会产生四种混叠干扰：</p>
+
+$$
+\begin{aligned}
+U_i(e^{j\omega})& =K_i(e^{j\omega})\cdot Y_i(e^{j\omega})  \\
+&\approx\frac1MK_i(e^{j\omega})\{a_iF_i(e^{j\omega})X(e^{j\omega})+b_iG_i(e^{j\omega})X(e^{j\omega})+ \\
+&a_iF_i(e^{j(\omega+\frac{2\pi}M\cdot i)})X(e^{j(\omega+\frac{2\pi}M\cdot i)})+b_iG_i(e^{j(\omega-\frac{2\pi}M\cdot i)})X(e^{j(\omega-\frac{2\pi}M\cdot i)})+ \\
+&a_iF_i(e^{j(\omega+\frac{2\pi}M\cdot(i+1))})X(e^{j(\omega+\frac{2\pi}M\cdot(i+1))})+b_iG_i(e^{j(\omega-\frac{2\pi}M\cdot(i+1))})X(e^{j(\omega-\frac{2\pi}M\cdot(i+1))})\} \\
+&i=1\sim M-2
+\end{aligned}
+$$
+
+
+<p>为了解决升采样后的频谱混叠，在综合滤波器部分精确对消混叠信号：</p>
+
+$$
+a_id_i=-a_{i-1}d_{i-1},\quad i&gt;0
+$$
+
+
+<h3 id="变换域编码"><a href="#变换域编码" class="headerlink" title="变换域编码"></a>变换域编码</h3><p>正交变换后编码：</p>
+
+$$
+Y = AX
+$$
+
+
+<p>正交变换满足能量守恒</p>
+
+$$
+||Y||^2 = ||X||^2
+$$
+
+
+<p>重建信号的误差等于变换域上量化器的误差</p>
+
+$$
+E = Y - [Y]\\
+||X - [x]||^2 = ||E||^2
+$$
+
+
+<h4 id="比特分配"><a href="#比特分配" class="headerlink" title="比特分配"></a>比特分配</h4><p>假设 N 个输入样本组成一个矢量 X，变换域 Y 的每个分量用  $R_k$   个比特量化</p>
+
+$$
+R=\frac1N\sum_{k=0}^{N-1}R_k\\
+\sigma_q^2=\sum_{k=0}^{N-1}\sigma_{q,k}^2=\varepsilon_*^2\cdot\sum_{k=0}^{N-1}2^{-2R_k}\sigma_k^2\\
+\min \sigma_{q}^{2}=\frac{1}{N}\sum_{k=0}^{N-1}\sigma_{q,k}^{2}
+$$
+
+
+
+$$
+R_{k,opt}=R+\frac12\log_2\frac{\sigma_{x_k}^2}{\left[\prod_{i=1}^M\sigma_{x_i}^2\right]^{1/N}}\\
+\sigma_{q}^2 = min\{\sigma_{q,k}^2\}=\varepsilon_*^2\cdot2^{-2R}\cdot\left[\prod_{i=1}^M\sigma_{x_i}^2\right]^{\frac{1}{N}}
+$$
+
+
+<p>相比 PCM 的增益为</p>
+
+$$
+\begin{gathered}
+G_{TC} =\frac{min\{\sigma_{r,PCM}^{2}\}}{min\{\sigma_{r,TC}^{2}\}}=\frac{\varepsilon_{*}\cdot2^{-2R}\cdot\sigma_{\chi}^{2}}{\varepsilon_{*}\cdot2^{-2R}\cdot\prod_{k=0}^{N-1}[\sigma_{k}^{2}]^{\frac{1}{N}}} \\
+=\frac{\sigma_x^2}{\prod_{k=0}^{N-1}[\sigma_k^2]^{1/N}}=\frac{\frac1N\sum_{k=0}^{N-1}\sigma_k^2}{\prod_{k=0}^{N-1}[\sigma_k^2]^{1/N}} 
+\end{gathered}
+$$
+
+
+<h4 id="最佳正交变换-KL-变换"><a href="#最佳正交变换-KL-变换" class="headerlink" title="最佳正交变换 - KL 变换"></a>最佳正交变换 - KL 变换</h4><h2 id="语音信号的参数编码"><a href="#语音信号的参数编码" class="headerlink" title="语音信号的参数编码"></a>语音信号的参数编码</h2><h3 id="感觉加权滤波器"><a href="#感觉加权滤波器" class="headerlink" title="感觉加权滤波器"></a>感觉加权滤波器</h3><p>误差函数加权：</p>
+
+$$
+J=\int_0^{f_s}\lvert s(f)-\hat{s}(f)\rvert^2\cdot\lvert w(f)\rvert^2df
+$$
+
+
+<p>其中，加权滤波器满足</p>
+
+$$
+\int_0^{f_S}|w(f)|df= Const.
+$$
+
+
+<p>当误差函数最小的时候，应当保证</p>
+
+$$
+|s(f)-\hat{s}(f)|^2\cdot|w(f)|=\frac{\gamma}{2}=\text{常数}
+$$
+
+
+<p>可以选择如下的滤波器：</p>
+
+$$
+w(z)=\frac{A(z)}{A\left(\frac{z}{\gamma}\right)}=\frac{1-\sum_{i=1}^P\alpha_iz^{-i}}{1-\sum_{i=1}^P\alpha_i\gamma^iz^{-i}},\quad0\leq\gamma\leq1
+$$
+
+
+ $\gamma$  为加权因子，在 0-1 之间。
+
+ $\gamma=0$  时变成逆滤波器，其频谱包络的峰值点就是语音谱的谷值点。
+
+<blockquote>
+<p>分析：语音信号是全极点模型产生的，即  $S(z) = GE(z)/A(z)$ ，与逆滤波器点频谱成反比。</p>
+</blockquote>
+<p><img src="/../images/Speech-SP/1715172645812.png" alt="1715172645812" loading="lazy"></p>
+<h3 id="多脉冲激励线性预测声码器"><a href="#多脉冲激励线性预测声码器" class="headerlink" title="多脉冲激励线性预测声码器"></a>多脉冲激励线性预测声码器</h3><p><img src="/../images/Speech-SP/1715172680511.png" alt="1715172680511" loading="lazy"></p>
+<p>语音综合器的激励源有若干个不同位置和幅度的脉冲信号组成。</p>
+
+$$
+\hat{s}(n)=\hat{s}_0(n)+\sum_{k=1}^Mg_kh(n-n_k)
+$$
+
+
+<p>其中  $\hat s_0(n)$  是 LPC 综合器的零输入响应。</p>
+
+$$
+\begin{aligned}&e_{s}(n)=s(n)-\hat{s}(n)=s(n)-\hat{s}_{0}(n)-\sum_{k=1}^{M}g_{k}h(n-n_{k})\\&=\bar{e}(n)-\sum_{k=1}^Mg_kh(n-n_k)\end{aligned}
+$$
+
+
+<p>用  $\bar{e}(n)=s(n)-\hat{s}_0(n)$  表示输入语音减去零输入响应（受历史激励影响的部分）。</p>
+<p>输入感觉加权滤波器，得到输出</p>
+
+$$
+\begin{aligned}e(n)&=e_{s}(n)*w(n)=\left[\bar{e}(n)-\sum_{k=1}^{M}g_{k}h(n-n_{k})\right]*w(n)\\&=\bar{e}_{w}(n)-\sum_{k=1}^{M}g_{k}h_{w}(n-n_{k})\end{aligned}
+$$
+
+
+<p>从而，得到感觉加权滤波器的误差函数</p>
+
+$$
+E=\sum_{n=1}^Ne^2(n)=\sum_{n=1}^N\left[\bar{e}_w(n)-\sum_{k=1}^Mg_kh_w(n-n_k)\right]^2
+$$
+
+
+<p>选择合适的  $n_k$ ,  $g_k$  使得上面的误差函数最小</p>
+
+$$
+\frac{\partial E}{\partial n_j}=0,\quad j=1,\cdots M\\\frac{\partial E}{\partial g_j}=0,\quad j=1,\cdots M
+$$
+
+
+<p>上面那个方程很复杂，会导出非线性的方程；</p>
+<p>从下面的那个方程可以推出</p>
+
+$$
+\sum_{k=1}^Mg_kR_{hh}(n_k,n_j)=R_{eh}(n_j),\quad j=1,\cdots M
+$$
+
+
+<p>其中</p>
+
+$$
+R_{eh}(n_j)=\sum_{n=1}^N\bar{e}_w(n)\cdot h_w(n-n_j)\\R_{hh}(n_k,n_j)=\sum_{n=1}^Nh_w(n-n_k)h_w(n-n_j)
+$$
+
+
+<p>此时可改写最小均方误差</p>
+
+$$
+E_{min}=\sum_{n=1}^N[\bar{e}_w(n)]^2-\sum_{k=1}^Mg_kR_{eh}(n_k)
+$$
+
+
+<p>最优解的计算涉及到非线性方程的求解，不太现实。考虑采用次优搜索，一个一个求解。</p>
+<p>当只有一个脉冲时</p>
+
+$$
+g_1R_{hh}(n_1,n_1)=R_{eh}(n_1)\\
+E_{min}=\sum_{n=1}^N[\bar{e}_w(n)]^2-g_1R_{eh}(n_1)
+$$
+
+
+<p>消元得到</p>
+
+$$
+E_{min}=\sum_{n=1}^N[\bar{e}_w(n)]^2-R_{eh}^2(n_1)/R_{hh}(n_1,n_1)
+$$
+
+
+<p>接下来搜索  $n_1$  使得上式最优化。解出  $n_1$  后即可解出  $g_1$ 。</p>
+<p>接下来一个个求解，每次都要把前面求解过的脉冲折算到零输入响应中，然后求解当前的结果：</p>
+<h2 id="语音信号修整与综合技术"><a href="#语音信号修整与综合技术" class="headerlink" title="语音信号修整与综合技术"></a>语音信号修整与综合技术</h2><p>短时谱分析</p>
+
+$$
+\begin{gathered}w[n]=\begin{cases}\neq0&,&0\leq n&lt;L\\0&,&\text{其它}\end{cases}\\X(p,k)=\sum_{n=-\infty}^{+\infty}x[n]w[p-n]e^{-j\frac{2\pi}{N}nk}\\x[n]w[p-n]=\left[\frac{1}{N}\sum_{i=0}^{N-1}X(p,k)e^{j\frac{2\pi}{N}nk}\right]\cdot R[p-n]\end{gathered}
+$$
+
+
+<h3 id="利用修正短时谱进行最小方差信号估计"><a href="#利用修正短时谱进行最小方差信号估计" class="headerlink" title="利用修正短时谱进行最小方差信号估计"></a>利用修正短时谱进行最小方差信号估计</h3><p>首先计算短时谱</p>
+
+$$
+X(p,\omega)=\sum_{m=-\infty}^{+\infty}x[m]w(p-m)e^{-j\omega m}
+$$
+
+
+<p>对短时谱进行修正</p>
+
+$$
+Y(p,\omega)=X(p,\omega)H(p,\omega)
+$$
+
+
+<p>需要得到一个“有效”的短时谱，满足：</p>
+<ol>
+<li>时域短时段有限长，非零段不超过窗函数  $w(p-n)$ 的范围</li>
+<li>一致性约束，即不同的𝑝时刻 𝑌(𝑝,𝜔)所对应的时域短时段，若有部分重叠，那么在去除分析窗的加权影响后，在重叠的部分，它们应该是相等的。</li>
+</ol>
+<p>实际上很难得到上述信号，可以通过最小方差准则逼近</p>
+
+$$
+D[\hat{Y}(n,\omega),Y(n,\omega)]=\sum_{m=-\infty}^{+\infty}\frac{1}{2\pi}\int_{-\pi}^{\pi}\left|\hat{Y}(m,\omega)-Y(m,\omega)\right|^{2}d\omega
+$$
+
+
+<p>其中</p>
+
+$$
+\hat{Y}(p,\omega)=\sum_{m=-\infty}^{+\infty}\hat{y}[m]w(p-m)e^{-j\omega m}
+$$
+
+
+<p>利用 Parseval 定理</p>
+
+$$
+\begin{aligned}&D\big[\hat{Y}(n,\omega),Y(n,\omega)\big]=\sum_{m=-\infty}^{+\infty}\sum_{n=-\infty}^{+\infty}|\hat{y}_{m}(n)-y_{m}(n)|^{2}\\&=\sum_{m=-\infty}^{+\infty}\sum_{n=-\infty}^{+\infty}|\hat{y}(n)w(m-n)-y_{m}(n)|^{2}\end{aligned}
+$$
+
+
+<p>变分法求得最小值</p>
+
+$$
+\hat{y}[n]=\frac{\sum_{m=-\infty}^\infty w(m-n)y_m(n)}{\sum_{m=-\infty}^\infty w^2(m-n)}
+$$
+
+
+<p>其中</p>
+
+$$
+y_m(n)=\frac{1}{2\pi}\int_{-\pi}^\pi Y(m,\omega)e^{j\omega n}d\omega
+$$
+
+
+<p>应用中，以周期  $T$  分析</p>
+
+$$
+\hat{y}[n]=\frac{\sum_{m=-\infty}^\infty w(mT-n)y_{mT}(n)}{\sum_{m=-\infty}^\infty w^2(mT-n)}
+$$
+
+
+<p>如果  $w(n)$  取三角窗的平方根</p>
+
+$$
+w^2(n)=\begin{cases}1-\frac{|n-T|}{T}&,\quad0\leq n\leq2T\\\\0&,\quad\text{其它}\end{cases}
+$$
+
+
+<p>若 n 此时为奇数， $T = (N-1)/2$ ，这时 $\sum_{m=-\infty}^{\infty}w^{2}(mT-n)=1$ ，可简化计算，如果频谱无修正，最优解为</p>
+
+$$
+\hat{y}(n)=\frac{\sum_{m=-\infty}^\infty w(mT-n)[w(mT-n)x(n)]}{\sum_{m=-\infty}^\infty w^2(mT-n)}=\frac{x(n)\sum_{m=-\infty}^\infty w^2(mT-n)}{\sum_{m=-\infty}^\infty w^2(mT-n)}=x(n)
+$$
+
+
+<p>若改变语音的速度， $p=k\cdot p^{\prime}$ ，满足 $|Y(p,\omega)|=|X(p^{\prime},\omega)|$  。</p>
+
+$$
+y_{p'}(n)=\frac{1}{2\pi}\int_{-\pi}^{\pi}Y(p',\omega)e^{j\omega n}d\omega=w(p'-n)x(n)
+$$
+
+
+<p>让  $\tau_p=p-p^{\prime}=(1-1/k)\cdot p$ ，</p>
+
+$$
+\begin{aligned}&y_p(n)=y_{p^{\prime}}(n-\tau_p)=w(p^{\prime}-n+\tau_p)x(n-\tau_p)\\&=w(p-n)x(n-\tau_p)\end{aligned}
+
+$$
+
+
+<p>代入重建公式</p>
+
+$$
+\hat{y}[n]=\frac{\sum_{m=-\infty}^\infty w^2(mT-n)x(n-\tau_{mT})}{\sum_{m=-\infty}^\infty w^2(mT-n)}
+$$
+
+
+<p>让 $\sum_{m=-\infty}^{\infty}W(mT-n)= \sum_{m=-\infty}^{\infty}w^2(mT-n) =1$ ，</p>
+
+$$
+\hat{y}[n]=\sum_{m=-\infty}^{\infty}W(mT-n)x(n-\tau_{mT})
+$$
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2024/02/28/Speech-SP/" title="Speech-SP">https://blitherboom812.github.io/2024/02/28/Speech-SP/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2024/03/01/Antenna/" rel="prev" title="Principle of Antenna"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Principle of Antenna</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2024/02/26/AI/" rel="next" title="Introduction to Artificial Intelligence"><span class="post-nav-text">Introduction to Artificial Intelligence</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

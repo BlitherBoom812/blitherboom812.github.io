@@ -1,0 +1,703 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Introduction to Artificial Intelligence | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="LearningLinear ClassificationLogistic RegressionUseful for classification problems. Cross-Entropy Loss  $$ \ell(h(\boldsymbol{x}_{i}),y_{i})&#x3D;\begin{cases}-\log[\sigma(\boldsymbol{w}^{T}\boldsymbol{x}_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Artificial Intelligence">
+<meta property="og:url" content="https://blitherboom812.github.io/2024/02/26/AI/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="LearningLinear ClassificationLogistic RegressionUseful for classification problems. Cross-Entropy Loss  $$ \ell(h(\boldsymbol{x}_{i}),y_{i})&#x3D;\begin{cases}-\log[\sigma(\boldsymbol{w}^{T}\boldsymbol{x}_">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713166706648.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713169419702.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713171808270.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713771652191.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713772489046.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713775669844.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713776156049.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1713776168789.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714379943169.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714380111476.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714380132725.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714380159356.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714380233071.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714380343254.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714379335929.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714380578105.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714380763838.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714982108981.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714982133935.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714982188331.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714982215920.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714982075164.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714982405665.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714983390325.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714983452419.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714983641507.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714983788461.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714983988587.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714984460020.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714984778231.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714985419724.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714985971187.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1714986050538.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716191759894.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716192135361.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716192175996.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716192534058.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716192519850.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716193180893.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716193473766.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716194228666.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716194320872.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716194583833.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716194633162.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716194757145.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716195002371.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716195398036.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716195442145.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716795753326.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716796053911.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716797001550.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716797936119.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716798247574.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716798687551.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716798850106.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716798927981.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716799063581.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1716799707301.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717400667281.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717400854837.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717401031002.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717401124879.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717401517265.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717401591545.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717403664862.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717403702542.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717403725888.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717404024479.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717404907709.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717404790783.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717405465141.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/AI/1717405435705.png">
+<meta property="article:published_time" content="2024-02-26T07:20:37.000Z">
+<meta property="article:modified_time" content="2024-06-03T09:04:30.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/AI/1713166706648.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning"><span class="toc-number">1.</span> <span class="toc-text">Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-Classification"><span class="toc-number">1.1.</span> <span class="toc-text">Linear Classification</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Logistic-Regression"><span class="toc-number">1.1.1.</span> <span class="toc-text">Logistic Regression</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Softmax-Regression"><span class="toc-number">1.1.2.</span> <span class="toc-text">Softmax Regression</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Support-Vector-Machine-SVM"><span class="toc-number">1.2.</span> <span class="toc-text">Support Vector Machine (SVM)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Soft-SVM-Hinge-Loss"><span class="toc-number">1.2.1.</span> <span class="toc-text">Soft-SVM (Hinge Loss)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel-Soft-SVM"><span class="toc-number">1.3.</span> <span class="toc-text">Kernel Soft-SVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decision-Tree"><span class="toc-number">1.4.</span> <span class="toc-text">Decision Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ID3-Algorithm"><span class="toc-number">1.4.1.</span> <span class="toc-text">ID3 Algorithm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiplayer-Perceptrons-MLP"><span class="toc-number">1.5.</span> <span class="toc-text">Multiplayer Perceptrons (MLP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MLP-for-XOR"><span class="toc-number">1.5.1.</span> <span class="toc-text">MLP for XOR</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Activation"><span class="toc-number">1.5.2.</span> <span class="toc-text">Activation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Loss-Functions"><span class="toc-number">1.5.3.</span> <span class="toc-text">Loss Functions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gradient-Based-Training"><span class="toc-number">1.5.4.</span> <span class="toc-text">Gradient-Based Training</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Learning-Rate-decay"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">Learning Rate decay</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Weight-Decay"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">Weight Decay</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Weight-Initialization"><span class="toc-number">1.5.4.3.</span> <span class="toc-text">Weight Initialization</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolutional-Neural-Network-CNN"><span class="toc-number">1.6.</span> <span class="toc-text">Convolutional Neural Network (CNN)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Convoluion-Kernel"><span class="toc-number">1.6.1.</span> <span class="toc-text">Convoluion Kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Pooling"><span class="toc-number">1.6.2.</span> <span class="toc-text">Pooling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ResNet"><span class="toc-number">1.6.3.</span> <span class="toc-text">ResNet</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recurrent-Neural-Network-RNN"><span class="toc-number">1.7.</span> <span class="toc-text">Recurrent Neural Network (RNN)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Idea-for-Sequence-Modeling"><span class="toc-number">1.7.1.</span> <span class="toc-text">Idea for Sequence Modeling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN"><span class="toc-number">1.8.</span> <span class="toc-text">RNN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Standard-Architectures"><span class="toc-number">1.8.1.</span> <span class="toc-text">Standard Architectures</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSTM"><span class="toc-number">1.8.2.</span> <span class="toc-text">LSTM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Training-Strategies"><span class="toc-number">1.8.3.</span> <span class="toc-text">Training Strategies</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer"><span class="toc-number">1.9.</span> <span class="toc-text">Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention"><span class="toc-number">1.9.1.</span> <span class="toc-text">Attention</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FFN"><span class="toc-number">1.9.2.</span> <span class="toc-text">FFN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Positional-Encoding"><span class="toc-number">1.9.3.</span> <span class="toc-text">Positional Encoding</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reasoning"><span class="toc-number">2.</span> <span class="toc-text">Reasoning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bayesian-Network"><span class="toc-number">2.1.</span> <span class="toc-text">Bayesian Network</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Variable-Elimination"><span class="toc-number">2.1.1.</span> <span class="toc-text">Variable Elimination</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Message-Passing"><span class="toc-number">2.1.2.</span> <span class="toc-text">Message Passing</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bayes-Approach"><span class="toc-number">2.2.</span> <span class="toc-text">Bayes Approach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLE-method"><span class="toc-number">2.3.</span> <span class="toc-text">MLE method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bayes-Decision-Rule"><span class="toc-number">2.4.</span> <span class="toc-text">Bayes Decision Rule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bayesian-Model-Averaging"><span class="toc-number">2.5.</span> <span class="toc-text">Bayesian Model Averaging</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Discriminative-Models"><span class="toc-number">2.6.</span> <span class="toc-text">Discriminative Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generative-Models"><span class="toc-number">2.7.</span> <span class="toc-text">Generative Models</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Naive-Bayes-Classifier"><span class="toc-number">2.7.1.</span> <span class="toc-text">Naive Bayes Classifier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Guassian-Discriminant-Analysis"><span class="toc-number">2.7.2.</span> <span class="toc-text">Guassian Discriminant Analysis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Discriminative-vs-Generative"><span class="toc-number">2.7.3.</span> <span class="toc-text">Discriminative vs. Generative</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixture-Models-and-EM"><span class="toc-number">2.8.</span> <span class="toc-text">Mixture Models and EM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gaussian-Mixture-Model"><span class="toc-number">2.8.1.</span> <span class="toc-text">Gaussian Mixture Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Expectation-Maximization"><span class="toc-number">2.8.2.</span> <span class="toc-text">Expectation Maximization</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Probabilistic-Topic-Models"><span class="toc-number">2.9.</span> <span class="toc-text">Probabilistic Topic Models</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Dirichlet-Multinomial-Model"><span class="toc-number">2.9.1.</span> <span class="toc-text">Dirichlet-Multinomial Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Variational-Methods"><span class="toc-number">2.9.2.</span> <span class="toc-text">Variational Methods</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variational-Autoencoders-VAE"><span class="toc-number">2.10.</span> <span class="toc-text">Variational Autoencoders (VAE)</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2024/02/26/AI/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Introduction to Artificial Intelligence</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2024-02-26 15:20:37" itemprop="dateCreated datePublished" datetime="2024-02-26T15:20:37+08:00">2024-02-26</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-06-03 17:04:30" itemprop="dateModified" datetime="2024-06-03T17:04:30+08:00">2024-06-03</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="Learning"><a href="#Learning" class="headerlink" title="Learning"></a>Learning</h2><h3 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h3><h4 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h4><p>Useful for classification problems.</p>
+<p>Cross-Entropy Loss</p>
+
+$$
+\ell(h(\boldsymbol{x}_{i}),y_{i})=\begin{cases}-\log[\sigma(\boldsymbol{w}^{T}\boldsymbol{x}_{i})]&\quad y_{i}=1\\-\log[1-\sigma(\boldsymbol{w}^{T}\boldsymbol{x}_{i})]&\quad y_{i}=0\end{cases}
+$$
+
+
+<p>With regularization:</p>
+
+$$
+\hat{\epsilon}(w)=-\sum_{i=1}^n\{y_i\log\sigma(h_w(x))+(1-y_i)\log[1-\sigma(h_w(x))]+\lambda\sum_{j=1}^dw_j^2
+$$
+
+
+<p>How to deal with multiclass problems?</p>
+<h4 id="Softmax-Regression"><a href="#Softmax-Regression" class="headerlink" title="Softmax Regression"></a>Softmax Regression</h4><p>Normalizes multiple outputs in a probability vector.</p>
+
+$$
+p(y=i|x)=\frac{\exp(w_i^Tx)}{\sum_{r=1}^C\exp(w_r^Tx)}
+$$
+
+
+<p>Cross-Entropy Loss</p>
+
+$$
+\ell(h(x_i),y_i)=\begin{cases}-\log\left[\frac{\exp(\boldsymbol{w}_1^T\boldsymbol{x})}{\sum_{r=1}^C\exp(\boldsymbol{w}_r^T\boldsymbol{x})}\right]&y_i=1\\-\log\left[\frac{\exp(\boldsymbol{w}_2^T\boldsymbol{x})}{\sum_{r=1}^C\exp(\boldsymbol{w}_r^T\boldsymbol{x})}\right]&y_i=2\\\vdots\\-\log\left[\frac{\exp(\boldsymbol{w}_c^T\boldsymbol{x})}{\sum_{r=1}^C\exp(\boldsymbol{w}_r^T\boldsymbol{x})}\right]&y_i=C\end{cases}
+$$
+
+
+<p>This loss is convex. But there are many solutions that result in same outputs, so the regularizaton is indispensible to prevent divergence.</p>
+<p><img src="/../images/AI/1713166706648.png" alt="1713166706648" loading="lazy"></p>
+<h3 id="Support-Vector-Machine-SVM"><a href="#Support-Vector-Machine-SVM" class="headerlink" title="Support Vector Machine (SVM)"></a>Support Vector Machine (SVM)</h3><h4 id="Soft-SVM-Hinge-Loss"><a href="#Soft-SVM-Hinge-Loss" class="headerlink" title="Soft-SVM (Hinge Loss)"></a>Soft-SVM (Hinge Loss)</h4>
+$$
+\min_{w,b,\xi}\frac{1}{2}\|w\|_{2}^{2}+\frac{C}{n}\sum_{i=1}^{n}\xi_{i}\\\mathrm{s.t.~}y_i(\boldsymbol{w}\cdot\boldsymbol{x}_i+b)\geq1-\xi_i\\\xi_i\geq0,1\leq i\leq n
+$$
+
+
+<p>Define Hinge Loss</p>
+
+$$
+\ell(f(x),y)=\max\{0,1-yf(x)\}
+$$
+
+
+<p>For the linear hypothesis:</p>
+
+$$
+\ell(f(x),y)=\max\{0,1-y(w\cdot x+b)\}
+$$
+
+
+<p>Theorem: Soft-SVM is equivalent to a Regularized Rise Minimization:</p>
+
+$$
+\min_{w,b}\frac12\|w\|_2^2+\frac Cn\sum_{i=1}^n\max\{0,1-y_i(w\cdot x_i+b)\}
+$$
+
+
+<p>这意味着SVM的“最大化”边界距离项本质上是一个正则化项。</p>
+<h3 id="Kernel-Soft-SVM"><a href="#Kernel-Soft-SVM" class="headerlink" title="Kernel Soft-SVM"></a>Kernel Soft-SVM</h3><p>Basis function  $\Phi(x)$  can often replaced by kernal function  $k(x_1, x_2)$ .</p>
+<p>Polynomial Kernel: efficient computation:  $O(d)$ </p>
+<p><img src="/../images/AI/1713169419702.png" alt="1713169419702" loading="lazy"></p>
+<p>Construct new kernel function from exist kernel functions:</p>
+
+$$
+k^{\prime}(x_{1},x_{2})=k_{1}\otimes k_{2}(x_{1},x_{2})=k_{1}
+(x_{1},x_{2})k_{2}(x_{1},x_{2})
+$$
+
+
+<p>For any function  $g: \mathcal X \rightarrow \R$ </p>
+
+$$
+k^\prime(x_1,x_2)=g(x_1)k_1(x_1,x_2)g(x_2)
+$$
+
+
+<p>Apply Representer theorem:</p>
+
+$$
+\min_\alpha\frac12\alpha^TK\alpha+\frac Cn\sum_{i=1}^n\max\left\{0,1-y_i\sum_{j=1}^n\alpha_jk(x_i,x_j)\right\}
+$$
+
+
+<ul>
+<li> $\alpha_j$  is the weight of each reference point  $\color{red}{x_j}$  to the prediction of  $\color{red}{x_i}$ .</li>
+<li>lt is actually a Primal Form with kernel functions.</li>
+</ul>
+<h3 id="Decision-Tree"><a href="#Decision-Tree" class="headerlink" title="Decision Tree"></a>Decision Tree</h3><p>Criterion:</p>
+<ul>
+<li>More balance</li>
+<li>More pure</li>
+</ul>
+<p>Misclassification error (not used very frequently):</p>
+
+$$
+\mathrm{Err}(\mathcal{D})=1-\max_{1\leq k\leq K}\left(\frac{|\mathcal{C}_k|}{|\mathcal{D}|}\right)
+$$
+
+
+<p>Use Entropy to measure purity:</p>
+
+$$
+H(\mathcal{D})=-\sum_{k=1}^K\frac{|\mathcal{C}_k|}{|\mathcal{D}|}\mathrm{log}\frac{|\mathcal{C}_k|}{|\mathcal{D}|}
+$$
+
+
+<p>Gini Index:</p>
+
+$$
+\mathrm{Gini}(\mathcal{D})=1-\sum_{k=1}^K\left(\frac{|\mathcal{C}_k|}{|\mathcal{D}|}\right)^2
+$$
+
+
+<h4 id="ID3-Algorithm"><a href="#ID3-Algorithm" class="headerlink" title="ID3 Algorithm"></a>ID3 Algorithm</h4><p><img src="/../images/AI/1713171808270.png" alt="1713171808270" loading="lazy"></p>
+<h3 id="Multiplayer-Perceptrons-MLP"><a href="#Multiplayer-Perceptrons-MLP" class="headerlink" title="Multiplayer Perceptrons (MLP)"></a>Multiplayer Perceptrons (MLP)</h3><h4 id="MLP-for-XOR"><a href="#MLP-for-XOR" class="headerlink" title="MLP for XOR"></a>MLP for XOR</h4><p><img src="/../images/AI/1713771652191.png" alt="1713771652191" loading="lazy"></p>
+<h4 id="Activation"><a href="#Activation" class="headerlink" title="Activation"></a>Activation</h4><p><img src="/../images/AI/1713772489046.png" alt="1713772489046" loading="lazy"></p>
+<h4 id="Loss-Functions"><a href="#Loss-Functions" class="headerlink" title="Loss Functions"></a>Loss Functions</h4><p>Entropy</p>
+
+$$
+H(q)=-\sum_{j=1}^kq_j\log q_j
+$$
+
+
+<p>Relative-entropy</p>
+
+$$
+\mathrm{KL}(q||p)=-\sum_{j=1}^kq_j\log p_j-H(q)
+$$
+
+
+<p>Cross-entropy</p>
+
+$$
+H(q,p)=-\sum_{j=1}^kq_j\log p_j
+$$
+
+
+<p>Relationship:</p>
+
+$$
+\boxed{H(q,p)=\mathrm{KL}(q||p)+H(q)}
+$$
+
+
+<p>Softmax in the output layer</p>
+
+$$
+\widehat{\boldsymbol{y}}=\boldsymbol{a}^{(n_l)}=f_\theta\big(\boldsymbol{x}^{(i)}\big)=\begin{bmatrix}p\big(\boldsymbol{y}^{(i)}=1\big|\boldsymbol{x}^{(i)};\boldsymbol{\theta}\big)\\p\big(\boldsymbol{y}^{(i)}=2\big|\boldsymbol{x}^{(i)};\boldsymbol{\theta}\big)\\\vdots\\p\big(\boldsymbol{y}^{(i)}=k\big|\boldsymbol{x}^{(i)};\boldsymbol{\theta}\big)\end{bmatrix}=\frac{1}{\sum_{j=1}^{k}\exp(z_{j}^{(n_{l})})}\begin{bmatrix}\exp(z_{1}^{(n_{l})})\\\exp(z_{2}^{(n_{l})})\\\vdots\\\exp(z_{k}^{(n_{l})})\end{bmatrix}
+$$
+
+
+<p>Cross-entropy loss:</p>
+
+$$
+J(y,\widehat{y})=-\sum_{j=1}^ky_j\log\widehat{y}_j
+$$
+
+
+<p>Cost function:</p>
+
+$$
+\min J(\theta)=-\frac1m\sum_{i=1}^m\left[\sum_{j=1}^k\mathbf{1}\{y^{(i)}=j\}\mathrm{log}\frac{\exp(\mathbf{z}_j^{(n_\iota)})}{\sum_{j^{\prime}=1}^k\exp(\mathbf{z}_{j^{\prime}}^{(n_\iota)})}\right]
+$$
+
+
+<h4 id="Gradient-Based-Training"><a href="#Gradient-Based-Training" class="headerlink" title="Gradient-Based Training"></a>Gradient-Based Training</h4>
+$$
+\arg\min_\theta O(\mathcal{D};\theta)=\sum_{i=1}^mL\left(y_i,f(x_i);\theta\right)+\Omega(\theta)
+$$
+
+
+<p>Forward Propagation: to compute activations &amp; objective  $J(\theta)$ </p>
+<p>Backward Propagation: Update paramters in all layers</p>
+<h5 id="Learning-Rate-decay"><a href="#Learning-Rate-decay" class="headerlink" title="Learning Rate decay"></a>Learning Rate decay</h5><p>Exponential decay strategy:</p>
+
+$$
+\eta = \eta_0e^{kt}
+$$
+
+
+<p>1&#x2F;t decay strategy:</p>
+
+$$
+\eta = \eta_0/(1+kt)
+$$
+
+
+<h5 id="Weight-Decay"><a href="#Weight-Decay" class="headerlink" title="Weight Decay"></a>Weight Decay</h5><p>L2 regularization:</p>
+
+$$
+\Omega(\theta)=\frac\lambda2\sum_{l=1}^{n_l-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\theta_{ji}^{(l)})^2\\\frac\partial{\partial\theta^{(l)}}\Omega(\theta)=\lambda\theta^{(l)}
+$$
+
+
+<p>L1:</p>
+
+$$
+\Omega(\theta)=\lambda\sum_{l=1}^{n_{l}-1}\sum_{i=1}^{s_{l}}\sum_{j=1}^{s_{l+1}}|\theta_{ji}^{(l)}|\\\frac{\partial}{\partial\theta^{(l)}}\Omega(\theta)_{ji}=\lambda(1_{\theta_{ji}^{(l)}&gt;0}-1_{\theta_{ji}^{(l)}&lt;0})
+$$
+
+
+<p>一般不调。</p>
+<h5 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h5><p>Xavier initialization</p>
+<p>(Linear activations)</p>
+
+$$
+\mathrm{Var}(w)=1/n_{\mathrm{in}}
+$$
+
+
+<p>避免梯度爆炸或者消失；</p>
+<p>He initialization</p>
+<p>(ReLU activations)</p>
+
+$$
+\mathrm{Var}(w)=2/n_{\mathrm{in}}
+$$
+
+
+<p>因为 ReLU 删除了一半的信息。</p>
+<p><img src="/../images/AI/1713775669844.png" alt="1713775669844" loading="lazy"></p>
+<h3 id="Convolutional-Neural-Network-CNN"><a href="#Convolutional-Neural-Network-CNN" class="headerlink" title="Convolutional Neural Network (CNN)"></a>Convolutional Neural Network (CNN)</h3><p><img src="/../images/AI/1713776156049.png" alt="1713776156049" loading="lazy"></p>
+<p><img src="/../images/AI/1713776168789.png" alt="1713776168789" loading="lazy"></p>
+<p><img src="/../images/AI/1714379943169.png" alt="1714379943169" loading="lazy"></p>
+<h4 id="Convoluion-Kernel"><a href="#Convoluion-Kernel" class="headerlink" title="Convoluion Kernel"></a>Convoluion Kernel</h4><p><img src="/../images/AI/1714380111476.png" alt="1714380111476" loading="lazy"></p>
+<p>Stride</p>
+<p><img src="/../images/AI/1714380132725.png" alt="1714380132725" loading="lazy"></p>
+<p>Padding</p>
+<p><img src="/../images/AI/1714380159356.png" alt="1714380159356" loading="lazy"></p>
+<p><img src="/../images/AI/1714380233071.png" alt="1714380233071" loading="lazy"></p>
+<h4 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h4><p><img src="/../images/AI/1714380343254.png" alt="1714380343254" loading="lazy"></p>
+<p>Batch Normalization</p>
+<p><img src="/../images/AI/1714379335929.png" alt="1714379335929" loading="lazy"></p>
+<p>在 N 张图像的对应通道做归一化。</p>
+<p>可以增强训练的稳定性，使得学习率可以设大一点而仍然保证收敛。</p>
+<ul>
+<li>数据集成</li>
+<li>参数集成</li>
+<li>模型集成</li>
+</ul>
+<h4 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h4><p><img src="/../images/AI/1714380578105.png" alt="1714380578105" loading="lazy"></p>
+<p><img src="/../images/AI/1714380763838.png" alt="1714380763838" loading="lazy"></p>
+<p>最后一层 Global Average Pooling：7*7*2048 -&gt; 1* 1 * 2048</p>
+<h3 id="Recurrent-Neural-Network-RNN"><a href="#Recurrent-Neural-Network-RNN" class="headerlink" title="Recurrent Neural Network (RNN)"></a>Recurrent Neural Network (RNN)</h3><h4 id="Idea-for-Sequence-Modeling"><a href="#Idea-for-Sequence-Modeling" class="headerlink" title="Idea for Sequence Modeling"></a>Idea for Sequence Modeling</h4><p>Local Dependency</p>
+<p><img src="/../images/AI/1714982108981.png" alt="1714982108981" loading="lazy"></p>
+<p>Parameter Sharing</p>
+<p><img src="/../images/AI/1714982133935.png" alt="1714982133935" loading="lazy"></p>
+<h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><p><img src="/../images/AI/1714982188331.png" alt="1714982188331" loading="lazy"></p>
+<p>Go deeper</p>
+<p><img src="/../images/AI/1714982215920.png" alt="1714982215920" loading="lazy"></p>
+<h4 id="Standard-Architectures"><a href="#Standard-Architectures" class="headerlink" title="Standard Architectures"></a>Standard Architectures</h4><p><img src="/../images/AI/1714982075164.png" alt="1714982075164" loading="lazy"></p>
+<ul>
+<li>RNNs can represent unbounded temporal dependencies</li>
+<li>RNNs encode histories of words into a fixed size hidden vector </li>
+<li>Parameter size does not grow with the length of dependencies</li>
+<li>RNNs are hard to learn long range dependencies present in data</li>
+</ul>
+<h4 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h4><p>Multihead, shared bottom.</p>
+<p><img src="/../images/AI/1714982405665.png" alt="1714982405665" loading="lazy"></p>
+<p>Gradient flow highway: remember history very well.</p>
+<p>NIPS 2015 Highway Network.</p>
+<h4 id="Training-Strategies"><a href="#Training-Strategies" class="headerlink" title="Training Strategies"></a>Training Strategies</h4><p>Shift in Training &amp; Inference</p>
+<p><img src="/../images/AI/1714983390325.png" alt="1714983390325" loading="lazy"></p>
+<p>Use Scheduled Sampling to solve this</p>
+<p><img src="/../images/AI/1714983452419.png" alt="1714983452419" loading="lazy"></p>
+<p>Problem: Gradient Explosion during continuously multiplication.</p>
+<p>Solution: Gradient Clipping</p>
+<p><img src="/../images/AI/1714983641507.png" alt="1714983641507" loading="lazy"></p>
+<p>Variational Dropout</p>
+<p><img src="/../images/AI/1714983788461.png" alt="1714983788461" loading="lazy"></p>
+<p>Layer Normalization</p>
+<p><img src="/../images/AI/1714983988587.png" alt="1714983988587" loading="lazy"></p>
+<p>BN: Easy to compare between channels</p>
+<p>LN: Easy to compare between samples</p>
+<p>在图像任务上，我们一般认为 channel 之间的地位应该是相同的，因此常常采用 BN。</p>
+<h3 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h3><p>use attention to replace state space.</p>
+<p><img src="/../images/AI/1714984460020.png" alt="1714984460020" loading="lazy"></p>
+<h4 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h4><p><img src="/../images/AI/1714984778231.png" alt="1714984778231" loading="lazy"></p>
+
+$$
+\text{Attention}(Q,K,V)=\text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+
+<p>Multi-Head Attention</p>
+<p><img src="/../images/AI/1714985419724.png" alt="1714985419724" loading="lazy"></p>
+<p>Sparse?</p>
+ $W^o$  to maintain shape and jointly attend to information from different representation subspaces.
+
+<h4 id="FFN"><a href="#FFN" class="headerlink" title="FFN"></a>FFN</h4><p>Position-wise FFN (Similar to multi convolution kernels in CNN, shared parameters in every word.)</p>
+<p><img src="/../images/AI/1714985971187.png" alt="1714985971187" loading="lazy"></p>
+<h4 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h4><p><img src="/../images/AI/1714986050538.png" alt="1714986050538" loading="lazy"></p>
+<h2 id="Reasoning"><a href="#Reasoning" class="headerlink" title="Reasoning"></a>Reasoning</h2><p>Reasoning (Probabilistic) &#x3D; Modeling + Inference</p>
+<p>Modeling:</p>
+<ul>
+<li>Bayesian Networks</li>
+<li>Markov random fields</li>
+</ul>
+<p>Inference:</p>
+<ul>
+<li>Elimination methods (变量消除法)</li>
+<li>Latent variable models (因变量模型)</li>
+<li>Variational methods (变分方法)</li>
+<li>Sampling methods (采样方法) - 难学！</li>
+</ul>
+<h3 id="Bayesian-Network"><a href="#Bayesian-Network" class="headerlink" title="Bayesian Network"></a>Bayesian Network</h3>
+$$
+p(x_1,...,x_K)=p(x_K|x_1,...,x_{K-1})\cdots p(x_2|x_1)p(x_1)
+$$
+
+
+<h4 id="Variable-Elimination"><a href="#Variable-Elimination" class="headerlink" title="Variable Elimination"></a>Variable Elimination</h4><p>用于计算概率的边缘分布</p>
+<p><img src="/../images/AI/1716191759894.png" alt="1716191759894" loading="lazy"></p>
+<p>一般而言是 NP-hard 问题。</p>
+<p>对于 Markov chain，复杂度为  $O(nk^2)$ ；对于一般的图， $O(k^{n-1})$ ；如果确定每个节点的父节点数不超过 m，则复杂度为  $O(nk^{m-1})$ </p>
+<h4 id="Message-Passing"><a href="#Message-Passing" class="headerlink" title="Message Passing"></a>Message Passing</h4><p>Reuse the computation from  $P(Y|E=e)$  when calcuating another probability  $P(Y_1|E_1=e_1)$ </p>
+<p><img src="/../images/AI/1716192135361.png" alt="1716192135361" loading="lazy"></p>
+<p><img src="/../images/AI/1716192175996.png" alt="1716192175996" loading="lazy"></p>
+<p>“ $\propto$ ” 意味着只需要知道概率的相对值就够了，因为可以通过归一化算出最终的概率值。</p>
+<p>MAP 需要求概率分布的最大值。</p>
+<p>sum 与 max 同为聚合操作，因此同样满足分配律，只需要对应替换就可以得到第二种 Message Passing：</p>
+<p><img src="/../images/AI/1716192534058.png" alt="1716192534058" loading="lazy"></p>
+<p><img src="/../images/AI/1716192519850.png" alt="1716192519850" loading="lazy"></p>
+<p><img src="/../images/AI/1716193180893.png" alt="1716193180893" loading="lazy"></p>
+<h3 id="Bayes-Approach"><a href="#Bayes-Approach" class="headerlink" title="Bayes Approach"></a>Bayes Approach</h3><p><img src="/../images/AI/1716193473766.png" alt="1716193473766" loading="lazy"></p>
+<h3 id="MLE-method"><a href="#MLE-method" class="headerlink" title="MLE method"></a>MLE method</h3><p>如果概率模型的参数知道，称为概率；不知道，称为统计推断。</p>
+<p>估计高斯分布的参数：</p>
+<p>方差是有偏估计，所以一般×  $1/(n-1)$ 。</p>
+<p><img src="/../images/AI/1716194228666.png" alt="1716194228666" loading="lazy"></p>
+<h3 id="Bayes-Decision-Rule"><a href="#Bayes-Decision-Rule" class="headerlink" title="Bayes Decision Rule"></a>Bayes Decision Rule</h3><p><img src="/../images/AI/1716194320872.png" alt="1716194320872" loading="lazy"></p>
+<p>对于回归问题，可以采用高斯噪声假设：</p>
+<p><img src="/../images/AI/1716194583833.png" alt="1716194583833" loading="lazy"></p>
+<p>这样就得到了最小二乘估计。</p>
+<p>MLE 是先验概率相等的 MAP。</p>
+<p>放在机器学习中，MAP 可以定义为：模型 &#x3D; 数据 + 先验。</p>
+<p><img src="/../images/AI/1716194633162.png" alt="1716194633162" loading="lazy"></p>
+<p>先验信息在机器学习中体现为正则化：</p>
+<p>2 范数正则化就是在认为模型参数服从高斯分布的先验假设情况下，利用 MAP 准则来估计参数。</p>
+<p>这也就是为什么正则化倾向于避免过拟合：高斯分布先验希望模型参数足够简单。</p>
+<p><img src="/../images/AI/1716194757145.png" alt="1716194757145" loading="lazy"></p>
+<h3 id="Bayesian-Model-Averaging"><a href="#Bayesian-Model-Averaging" class="headerlink" title="Bayesian Model Averaging"></a>Bayesian Model Averaging</h3><p><img src="/../images/AI/1716195002371.png" alt="1716195002371" loading="lazy"></p>
+<p>意义：模型集成。</p>
+<h3 id="Discriminative-Models"><a href="#Discriminative-Models" class="headerlink" title="Discriminative Models"></a>Discriminative Models</h3><p>上面的理论足够解释判别式模型的原理了。</p>
+<h3 id="Generative-Models"><a href="#Generative-Models" class="headerlink" title="Generative Models"></a>Generative Models</h3><p><img src="/../images/AI/1716195398036.png" alt="1716195398036" loading="lazy"></p>
+<p><img src="/../images/AI/1716195442145.png" alt="1716195442145" loading="lazy"></p>
+<h4 id="Naive-Bayes-Classifier"><a href="#Naive-Bayes-Classifier" class="headerlink" title="Naive Bayes Classifier"></a>Naive Bayes Classifier</h4><p>model  $Y$  as a bernoulli distribution with parameters  $p(y=1)$  and  $p(y=-1)$ </p>
+<p>conditional independence: each dimension is independent given label y</p>
+
+$$
+p(X=x|Y=y)=\prod_{j=1}^dp(x_{\cdot j}|y)
+$$
+
+
+<p>Laplacian smoothing for 0 samples:</p>
+
+$$
+p(x_{\cdot j}=r_j|Y=+1)=\frac{\sum_{i=1}^n1\{x_{\cdot j}=r_j\wedge y_i=+1\}+1}{\sum_{i=1}^n1\{y_i=+1\}+k_j}
+$$
+
+
+<p>For dataset with all continuous features: descretize it, or use another model based on a different assumption.</p>
+<h4 id="Guassian-Discriminant-Analysis"><a href="#Guassian-Discriminant-Analysis" class="headerlink" title="Guassian Discriminant Analysis"></a>Guassian Discriminant Analysis</h4><p>是一个生成模型！虽然它被用来分类，但是它的建模设计上采用的是生成式。</p>
+<p>For dataset with all continuous features:</p>
+<p>Using parametrice distribution to represent  $P(X=x|Y=y)$ </p>
+<p>A common assumption in classification:</p>
+<ul>
+<li>We always assume that data points in a class is a cluster.</li>
+</ul>
+<p>Still model  $p(Y=y)$  as Bernoulli distribution.</p>
+
+$$
+\text{So we can model }p(X=x|Y=y)\text{ by Gaussian distribution:}\\p(X=x|Y=+1)\propto\exp\left(-\frac{1}{2}(x-\mu_{+})^{T}\Sigma^{-1}(x-\mu_{+})\right)\\p(X=x|Y=-1)\propto\exp\left(-\frac{1}{2}(x-\mu_{-})^{T}\Sigma^{-1}(x-\mu_{-})\right)
+$$
+
+
+<p>Note the shared parameters  $\Sigma$  for positive and nagative classes.</p>
+<p>Use MLE to find the best solution:</p>
+
+$$
+\ell(\phi,\mu_+,\mu_-,\Sigma)=\log\prod_{i=1}^np(x_i,y_i;\phi,\mu_+,\mu_-,\Sigma)\\=\log\prod_{i=1}^np(x_i|y_i;\mu_+,\mu_-,\Sigma)+\boxed{\log\prod_{i=1}^np(y_i|\phi)}
+$$
+
+
+<p>Then:</p>
+
+$$
+\phi=\frac{\sum_{i=1}^{n}1\{y_{i}=+1\}}{n},\mu_{+}=\frac{\sum_{i=1}^{n}1\{y_{i}=+1\}x_{i}}{\sum_{i=1}^{n}1\{y_{i}=+1\}},\mu_{-}=\frac{\sum_{i=1}^{n}1\{y_{i}=-1\}x_{i}}{\sum_{i=1}^{n}1\{y_{i}=-1\}}\\\boldsymbol{\Sigma}=\frac{1}{n}\boldsymbol{\Sigma}_{i=1}^{n}(\boldsymbol{x}_{i}-\boldsymbol{\mu}_{\boldsymbol{y}_{i}})(\boldsymbol{x}_{i}-\boldsymbol{\mu}_{\boldsymbol{y}_{i}})^{T}
+$$
+
+
+<h4 id="Discriminative-vs-Generative"><a href="#Discriminative-vs-Generative" class="headerlink" title="Discriminative vs. Generative"></a>Discriminative vs. Generative</h4><p><img src="/../images/AI/1716795753326.png" alt="1716795753326" loading="lazy"></p>
+<h3 id="Mixture-Models-and-EM"><a href="#Mixture-Models-and-EM" class="headerlink" title="Mixture Models and EM"></a>Mixture Models and EM</h3><h4 id="Gaussian-Mixture-Model"><a href="#Gaussian-Mixture-Model" class="headerlink" title="Gaussian Mixture Model"></a>Gaussian Mixture Model</h4><p>A Generative model. More assumption than Logistic Regression.</p>
+<p><img src="/../images/AI/1716796053911.png" alt="1716796053911" loading="lazy"></p>
+<p>Sample dataset from GMM:</p>
+
+$$
+p(x)=\sum_{z=1}^k\pi_z\mathcal{N}(x|\mu_z,\Sigma_z)
+$$
+
+
+<p>Compute log-likelihood:</p>
+
+$$
+\ell(\boldsymbol{\pi},\boldsymbol{\mu},\boldsymbol{\Sigma})=\log\prod_{i=1}^n\sum_{z=1}^k\pi_z\mathcal{N}(\boldsymbol{x}_i|\boldsymbol{\mu}_z,\boldsymbol{\Sigma}_z)=\sum_{i=1}^n\log\left[\sum_{z=1}^k\pi_z\mathcal{N}(\boldsymbol{x}_i|\boldsymbol{\mu}_z,\boldsymbol{\Sigma}_z)\right]
+$$
+
+
+
+$$
+\ell(\pi,\mu,\Sigma)=\sum_{i=1}^n\log\left[\sum_{z=1}^k\frac{\pi_z}{\sqrt{|2\pi\Sigma_z|}}\exp(-\frac12(x_i-\mu_z)^T\Sigma^{-1}(x_i-\mu_z))\right]
+$$
+
+
+<p>Intracable! Use EM method to estimate parameters.</p>
+ $z$  is latent variable.
+
+<h4 id="Expectation-Maximization"><a href="#Expectation-Maximization" class="headerlink" title="Expectation Maximization"></a>Expectation Maximization</h4><p><img src="/../images/AI/1716797001550.png" alt="1716797001550" loading="lazy"></p>
+<p>Learing Problem:</p>
+<p>find MLE</p>
+
+$$
+\widehat{\theta}=\underset{\theta}{\operatorname*{argmax\ }}p(\mathcal{D}|\theta)
+$$
+
+
+<p>Inference Promblem:</p>
+<p>Given  $x$ , find conditional variable of  $z$ :</p>
+
+$$
+p(z|x,\theta)
+$$
+
+
+<p>EM method is for both problems!</p>
+<p>it is hard to maximize the marginal likelihood directly:</p>
+
+$$
+\max_\theta\log p(x|\theta)
+$$
+
+
+<p>but the complete data log-likelihood is easy typically:</p>
+
+$$
+\max_\theta\log p(x, z|\theta)
+$$
+
+
+<p>if we had a distribution  $q(z)$  for z:</p>
+
+$$
+\max_\theta\sum_zq(z)\log p(x,z|\theta)
+$$
+
+
+<p>We have Evidence Lower Bound (ELBO):</p>
+
+$$
+\log p(x|\theta)=\log\left[\sum_zp(x,z|\theta)\right] \ge \underbrace{\sum_zq(z)\log(\frac{p(x,z|\theta)}{q(z)})}_{\mathcal{L}(q,\theta)}
+$$
+
+
+<p>Now we optimize the ELBO iteratively:</p>
+<p><img src="/../images/AI/1716797936119.png" alt="1716797936119" loading="lazy"></p>
+<p>The math background for ELBO:</p>
+<p><img src="/../images/AI/1716798247574.png" alt="1716798247574" loading="lazy"></p>
+<p>We get back an equality for the marginal likelihood:</p>
+
+$$
+\log p(x|\theta)=\mathcal{L}(q,\theta)+\mathrm{KL}[q(z)||p(z|x,\theta)]
+$$
+
+
+<p>Evidence &#x3D; ELBO + KL-Divergence</p>
+<p>In E-step, if we want to maximize the ELBO without changing  $\theta$ , we have to let KL be zero. Thus  $q^*(z)=p(z|x,\theta)$ </p>
+<p>For M-step, we find the  $\theta$  to maximize the ELBO.</p>
+<p><img src="/../images/AI/1716798687551.png" alt="1716798687551" loading="lazy"></p>
+<p>In MAP case:</p>
+<p><img src="/../images/AI/1716798850106.png" alt="1716798850106" loading="lazy"></p>
+<p>For GMM, E-step:</p>
+<p><img src="/../images/AI/1716798927981.png" alt="1716798927981" loading="lazy"></p>
+<p>M-step:</p>
+<p><img src="/../images/AI/1716799063581.png" alt="1716799063581" loading="lazy"></p>
+<p>Recommended Initialize:</p>
+
+$$
+\pi = 1/k\\
+\mu = 0\\
+\Sigma = \sigma^2 I
+$$
+
+
+<p>Variational Methods:</p>
+<p><img src="/../images/AI/1716799707301.png" alt="1716799707301" loading="lazy"></p>
+<p>注意：E 步计算的是隐变量的后验（如果能计算出来），因为它是使得似然函数及ELBO最大的  $q(z)$ 。算不出来就用变分方法近似。</p>
+ $q(z)$  既不是先验分布，也不是后验分布，它只是我们对隐变量分布的一种估计。
+
+<h3 id="Probabilistic-Topic-Models"><a href="#Probabilistic-Topic-Models" class="headerlink" title="Probabilistic Topic Models"></a>Probabilistic Topic Models</h3><h4 id="Dirichlet-Multinomial-Model"><a href="#Dirichlet-Multinomial-Model" class="headerlink" title="Dirichlet-Multinomial Model"></a>Dirichlet-Multinomial Model</h4><p><img src="/../images/AI/1717400667281.png" alt="1717400667281" loading="lazy"></p>
+<p>Beta Distribution:</p>
+
+$$
+f(\phi|\alpha,\beta)=\frac1{B(\alpha,\beta)}\phi^{\alpha-1}(1-\phi)^{\beta-1}
+$$
+
+
+<p>Dirichlet Multinomial Model: Multi-dimensional version of Beta Distribution</p>
+
+$$
+\boxed{p(\vec{\theta}|\boldsymbol{\alpha})}=\frac1{B(\boldsymbol{\alpha})}\prod_{k=1}^K\theta_k^{\alpha_k-1}\quad\text{Where }B(\alpha)=\frac{\Pi_{k=1}^K\Gamma(\alpha_k)}{\Gamma(\sum_{k=1}^K\alpha_k)}
+$$
+
+
+<p>Conjugate prior:</p>
+
+$$
+\sum_{i=1}^K\theta_i=1
+$$
+
+
+<p><img src="/../images/AI/1717400854837.png" alt="1717400854837" loading="lazy"></p>
+<p>Admixture:</p>
+<p><img src="/../images/AI/1717401031002.png" alt="1717401031002" loading="lazy"></p>
+<p>Latent Dirichlet Allocation (LDA):</p>
+<p><img src="/../images/AI/1717401124879.png" alt="1717401124879" loading="lazy"></p>
+<p>Probabilistic Graphical Models:</p>
+<p><img src="/../images/AI/1717401517265.png" alt="1717401517265" loading="lazy"></p>
+<p><img src="/../images/AI/1717401591545.png" alt="1717401591545" loading="lazy"></p>
+<p>Maximum Likelihood Estimation</p>
+
+$$
+\log p(\beta,\theta,z,w|\alpha,\eta)\\
+=\sum_{k=1}^K\log p(\vec{\beta}_k|\eta)+\sum_{d=1}^D\log p(\vec{\theta}_d|\alpha)+\sum_{d=1}^D\sum_{n=1}^{N_d}\log p(z_{d,n}|\vec{\theta}_d)\\
+ +\sum_{d=1}^D\sum_{n=1}^{N_d}\log p(w_{d,n}|z_{d,n},\vec{\boldsymbol{\beta}}_{1:K})\\
+ \begin{aligned}
+&=\sum_{k=1}^{K}\left(\sum_{v=1}^{V}(\eta_{v}-1)\log\beta_{kv}-\log B(\eta)\right)+\sum_{d=1}^{D}\sum_{k=1}^{K}(\alpha_{k}-1)\log\theta_{dk}-\log B(\alpha) \\
+&+\sum_{d=1}^D\sum_{n=1}^{N_d}\log\theta_{d,z_{d,n}}+\sum_{d=1}^D\sum_{n=1}^{N_d}\log\beta_{z_{d,n}w_{d,n}}
+\end{aligned}
+$$
+
+
+<p>To learn the param  $\alpha, \eta$ , use EM method:</p>
+<p>In E-step, calculate </p>
+
+$$
+q^*(z)=p(z|x,\theta^{\mathrm{old}})
+$$
+
+
+
+$$
+p(\theta,z,\beta\mid w,\alpha,\eta)=\frac{p(\theta,z,\beta,w\mid\alpha,\eta)}{p(w\mid\alpha,\eta)}
+$$
+
+
+<p>However, the denominator is intractable:</p>
+
+$$
+p(\mathbf{w}|\alpha,\eta)=\int\int\sum_\mathbf{z}p(\boldsymbol{\theta},\mathbf{z},\boldsymbol{\beta},\mathbf{w}|\boldsymbol{\alpha},\boldsymbol{\eta})d\boldsymbol{\theta}d\boldsymbol{\beta}
+$$
+
+
+<p>This problem is for general Bayesian models. We can use Variational Methods or Markov Chain Monte Carlo to solve it.</p>
+<h4 id="Variational-Methods"><a href="#Variational-Methods" class="headerlink" title="Variational Methods"></a>Variational Methods</h4><p><img src="/../images/AI/1717403664862.png" alt="1717403664862" loading="lazy"></p>
+<p><img src="/../images/AI/1717403702542.png" alt="1717403702542" loading="lazy"></p>
+<p><img src="/../images/AI/1717403725888.png" alt="1717403725888" loading="lazy"></p>
+<p><img src="/../images/AI/1717404024479.png" alt="1717404024479" loading="lazy"></p>
+<p>Use Mean field assumption in LDA:</p>
+<p><img src="/../images/AI/1717404907709.png" alt="1717404907709" loading="lazy"></p>
+<p><img src="/../images/AI/1717404790783.png" alt="1717404790783" loading="lazy"></p>
+<h3 id="Variational-Autoencoders-VAE"><a href="#Variational-Autoencoders-VAE" class="headerlink" title="Variational Autoencoders (VAE)"></a>Variational Autoencoders (VAE)</h3><p><img src="/../images/AI/1717405465141.png" alt="1717405465141" loading="lazy"></p>
+<p>Reparameterization Trick: </p>
+<p><img src="/../images/AI/1717405435705.png" alt="1717405435705" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2024/02/26/AI/" title="Introduction to Artificial Intelligence">https://blitherboom812.github.io/2024/02/26/AI/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2024/02/28/Speech-SP/" rel="prev" title="Speech-SP"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Speech-SP</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2024/02/26/StaSP/" rel="next" title="Statistical Signal Processing"><span class="post-nav-text">Statistical Signal Processing</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

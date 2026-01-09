@@ -1,0 +1,1553 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>大雾笔记 | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="参考教材嫌教材太简单可以看看 《热学》lhf例题很多，很详细，很多数学比教材难 《》 《新概念物理教程-力学》新颖，比较硬核。 《费恩曼物理学讲义》 《新概念物理教程-光学》公认最好教材 《光学》chb, lyp 量子物理没有太好的参考书。 《原子物理学》杨福家编。现在没有原子物理了，只有量子物理。有时用经典方法，有时候用量子物理的方法。前几章和教材一致，实验讲得不错。 量子力学教程。周世勋。内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大雾笔记">
+<meta property="og:url" content="https://blitherboom812.github.io/2022/09/14/Physics/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="参考教材嫌教材太简单可以看看 《热学》lhf例题很多，很详细，很多数学比教材难 《》 《新概念物理教程-力学》新颖，比较硬核。 《费恩曼物理学讲义》 《新概念物理教程-光学》公认最好教材 《光学》chb, lyp 量子物理没有太好的参考书。 《原子物理学》杨福家编。现在没有原子物理了，只有量子物理。有时用经典方法，有时候用量子物理的方法。前几章和教材一致，实验讲得不错。 量子力学教程。周世勋。内容">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/VanGas.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/RealGasTemp.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/VanGasTemp.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/guocheng.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/xunhuantu.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/rexunhuan.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/zhilengxunhuan.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSA/Duopule.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/DSA/waveDuopl.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/shuangfeng.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/%E5%87%86%E5%8D%95%E8%89%B2%E5%85%89.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/%E9%9D%9E%E5%8D%95%E8%89%B2%E5%85%89.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/niudunhuan.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/shuangzheshe.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/physics/STM.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/source/images/physics/abaaba.jpg">
+<meta property="article:published_time" content="2022-09-14T09:20:10.000Z">
+<meta property="article:modified_time" content="2023-01-22T08:53:13.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/physics/VanGas.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%95%99%E6%9D%90"><span class="toc-number">1.</span> <span class="toc-text">参考教材</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%82%E9%A1%B9"><span class="toc-number">1.0.1.</span> <span class="toc-text">杂项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%83%AD%E5%AD%A6"><span class="toc-number">2.</span> <span class="toc-text">热学</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6"><span class="toc-number">2.1.</span> <span class="toc-text">温度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%AD%A6%E7%A0%94%E7%A9%B6%E5%86%85%E5%AE%B9%E4%B8%8E%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.1.1.</span> <span class="toc-text">热学研究内容与对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%9A%84%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">热力学的研究方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">热力学</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86%E5%AD%A6"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">统计物理学</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.3.</span> <span class="toc-text">几个重要概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%80%81"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">平衡态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8F%E8%A7%82%E9%87%8F"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">宏观量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E8%A7%82%E9%87%8F"><span class="toc-number">2.1.3.3.</span> <span class="toc-text">微观量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%8F%82%E9%87%8F"><span class="toc-number">2.1.3.4.</span> <span class="toc-text">状态参量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E6%80%81%E6%96%B9%E7%A8%8B"><span class="toc-number">2.1.3.5.</span> <span class="toc-text">物态方程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6-1"><span class="toc-number">2.1.4.</span> <span class="toc-text">温度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E5%B9%B3%E8%A1%A1%E6%80%81"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">热平衡态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%AC%AC%E9%9B%B6%E5%AE%9A%E5%BE%8B"><span class="toc-number">2.1.4.2.</span> <span class="toc-text">热力学第零定律</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%A9%E6%A0%87"><span class="toc-number">2.1.4.3.</span> <span class="toc-text">温标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86%E5%AD%A6%E7%9A%84%E8%A7%82%E7%82%B9%E3%80%81%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.5.</span> <span class="toc-text">统计物理学的观点、概念简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%91%E7%8B%AC%E7%AB%8B%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">近独立子系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E8%A7%82%E7%8A%B6%E6%80%81%EF%BC%88%E5%8A%9B%E5%AD%A6%E8%BF%90%E5%8A%A8%E7%8A%B6%E6%80%81%EF%BC%89"><span class="toc-number">2.1.5.2.</span> <span class="toc-text">微观状态（力学运动状态）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E5%8A%9B%E5%AD%A6%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.1.5.2.1.</span> <span class="toc-text">经典力学描述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.1.5.2.2.</span> <span class="toc-text">量子力学描述</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8F%E8%A7%82%E7%8A%B6%E6%80%81%E5%92%8C%E5%BE%AE%E8%A7%82%E7%8A%B6%E6%80%81%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.1.5.3.</span> <span class="toc-text">宏观状态和微观状态的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E8%A7%84%E5%BE%8B%E6%80%A7"><span class="toc-number">2.1.5.4.</span> <span class="toc-text">统计规律性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%80%81%E7%BB%9F%E8%AE%A1%E7%90%86%E8%AE%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE%EF%BC%9A%E7%AD%89%E6%A6%82%E7%8E%87%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.5.4.1.</span> <span class="toc-text">平衡态统计理论的基本假设：等概率原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%80%81%E4%B8%8B%E8%BF%91%E7%8B%AC%E7%AB%8B%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%9F%E8%AE%A1%E8%A7%84%E5%BE%8B"><span class="toc-number">2.1.5.4.2.</span> <span class="toc-text">平衡态下近独立子系统的统计规律</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%94%E4%BD%93%E5%8A%A8%E7%90%86%E8%AE%BA"><span class="toc-number">2.2.</span> <span class="toc-text">气体动理论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B0%94%E4%BD%93%E5%8A%A8%E7%90%86%E8%AE%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A7%82%E7%82%B9"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">气体动理论的基本观点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%9A%84%E5%8E%8B%E5%BC%BA"><span class="toc-number">2.2.1.</span> <span class="toc-text">理想气体的压强</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%9A%84%E5%81%87%E8%AE%BE"><span class="toc-number">2.2.1.0.1.</span> <span class="toc-text">关于理想气体的假设</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E5%88%86%E5%AD%90%E6%9C%8D%E4%BB%8E%E7%9A%84%E5%8A%9B%E5%AD%A6%E8%A7%84%E5%BE%8B"><span class="toc-number">2.2.1.0.1.1.</span> <span class="toc-text">单个分子服从的力学规律</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%A4%A7%E9%87%8F%E5%88%86%E5%AD%90%E5%A4%84%E4%BA%8E%E5%B9%B3%E8%A1%A1%E6%80%81%E6%97%B6%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%81%87%E8%AE%BE"><span class="toc-number">2.2.1.0.1.2.</span> <span class="toc-text">大量分子处于平衡态时的统计假设</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E5%8E%8B%E5%BC%BA%E5%85%AC%E5%BC%8F"><span class="toc-number">2.2.1.0.2.</span> <span class="toc-text">理想气体压强公式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%84%8F%E4%B9%89"><span class="toc-number">2.2.2.</span> <span class="toc-text">温度的统计意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E9%87%8F%E5%9D%87%E5%88%86%E5%AE%9A%E7%90%86"><span class="toc-number">2.2.3.</span> <span class="toc-text">能量均分定理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%95%E5%8E%9F%E5%AD%90%E5%88%86%E5%AD%90"><span class="toc-number">2.2.3.0.1.</span> <span class="toc-text">单原子分子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8C%E5%8E%9F%E5%AD%90%E5%88%86%E5%AD%90"><span class="toc-number">2.2.3.0.2.</span> <span class="toc-text">双原子分子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%9A%E5%8E%9F%E5%AD%90%E5%88%86%E5%AD%90"><span class="toc-number">2.2.3.0.3.</span> <span class="toc-text">多原子分子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%83%BD%E9%87%8F%E5%9D%87%E5%88%86%E5%AE%9A%E7%90%86-1"><span class="toc-number">2.2.3.0.4.</span> <span class="toc-text">能量均分定理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E5%86%85%E8%83%BD"><span class="toc-number">2.2.3.0.5.</span> <span class="toc-text">理想气体内能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E9%80%9F%E5%BA%A6%E5%88%86%E5%B8%83%E5%BE%8B"><span class="toc-number">2.2.4.</span> <span class="toc-text">麦克斯韦速度分布律</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.4.0.1.</span> <span class="toc-text">速率分布函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%EF%BC%88%E4%B8%8D%E7%94%A8%E8%AE%B0%EF%BC%89"><span class="toc-number">2.2.4.0.2.</span> <span class="toc-text">麦克斯韦速率分布函数（不用记）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E7%BB%9F%E8%AE%A1%E9%80%9F%E7%8E%87"><span class="toc-number">2.2.4.0.3.</span> <span class="toc-text">三种统计速率</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9C%80%E6%A6%82%E7%84%B6%E9%80%9F%E7%8E%87"><span class="toc-number">2.2.4.0.3.1.</span> <span class="toc-text">最概然速率</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E9%80%9F%E7%8E%87"><span class="toc-number">2.2.4.0.3.2.</span> <span class="toc-text">平均速率</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%96%B9%E5%9D%87%E6%A0%B9%E9%80%9F%E7%8E%87"><span class="toc-number">2.2.4.0.3.3.</span> <span class="toc-text">方均根速率</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E9%80%9F%E5%BA%A6%E5%88%86%E5%B8%83%E5%BE%8B-1"><span class="toc-number">2.2.4.0.4.</span> <span class="toc-text">麦克斯韦速度分布律</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E5%AD%90%E7%A2%B0%E5%A3%81%E6%95%B0"><span class="toc-number">2.2.4.0.5.</span> <span class="toc-text">分子碰壁数 $Γ$ </span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E5%88%86%E5%B8%83"><span class="toc-number">2.2.4.0.6.</span> <span class="toc-text">玻尔兹曼分布</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%81%92%E6%B8%A9%E6%B0%94%E5%8E%8B%E5%85%AC%E5%BC%8F"><span class="toc-number">2.2.4.0.6.1.</span> <span class="toc-text">恒温气压公式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E5%88%86%E5%B8%83-1"><span class="toc-number">2.2.4.0.6.2.</span> <span class="toc-text">玻尔兹曼分布</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC-%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E5%88%86%E5%B8%83"><span class="toc-number">2.2.4.0.6.3.</span> <span class="toc-text">玻尔兹曼-麦克斯韦分布</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8C%83%E5%BE%B7%E7%93%A6%E5%B0%94%E6%96%AF%E6%96%B9%E7%A8%8B"><span class="toc-number">2.2.5.</span> <span class="toc-text">范德瓦尔斯方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8C%83%E6%B0%8F%E6%B0%94%E4%BD%93%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.5.1.</span> <span class="toc-text">范氏气体模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8C%83%E5%BE%B7%E7%93%A6%E5%B0%94%E6%96%AF%E6%96%B9%E7%A8%8B-1"><span class="toc-number">2.2.5.2.</span> <span class="toc-text">范德瓦尔斯方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B0%94%E4%BD%93%E7%9A%84%E7%AD%89%E6%B8%A9%E7%BA%BF"><span class="toc-number">2.2.5.3.</span> <span class="toc-text">气体的等温线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8C%83%E6%B0%8F%E6%B0%94%E4%BD%93%E5%86%85%E8%83%BD"><span class="toc-number">2.2.5.4.</span> <span class="toc-text">范氏气体内能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82"><span class="toc-number">2.2.5.5.</span> <span class="toc-text">一个细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%94%E4%BD%93%E5%88%86%E5%AD%90%E7%9A%84%E7%A2%B0%E6%92%9E%E3%80%81%E5%B9%B3%E5%9D%87%E8%87%AA%E7%94%B1%E7%A8%8B"><span class="toc-number">2.2.6.</span> <span class="toc-text">气体分子的碰撞、平均自由程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%94%E4%BD%93%E8%BE%93%E8%BF%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.7.</span> <span class="toc-text">气体输运过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%AC%AC%E4%B8%80%E5%AE%9A%E5%BE%8B"><span class="toc-number">2.3.</span> <span class="toc-text">热力学第一定律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E9%9D%99%E6%80%81%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.1.</span> <span class="toc-text">准静态过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F"><span class="toc-number">2.3.2.</span> <span class="toc-text">功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%83%BD%EF%BC%8C%E7%83%AD%E9%87%8F%E5%92%8C%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%AC%AC%E4%B8%80%E5%AE%9A%E5%BE%8B"><span class="toc-number">2.3.3.</span> <span class="toc-text">内能，热量和热力学第一定律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%AE%B9%E9%87%8F%EF%BC%9A"><span class="toc-number">2.3.4.</span> <span class="toc-text">热容量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9D%E7%83%AD%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.5.</span> <span class="toc-text">绝热过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A1%E8%AF%BA%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.3.6.</span> <span class="toc-text">卡诺循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%AC%AC%E4%BA%8C%E5%AE%9A%E5%BE%8B"><span class="toc-number">2.4.</span> <span class="toc-text">热力学第二定律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A1%E8%AF%BA%E5%AE%9A%E7%90%86"><span class="toc-number">2.4.1.</span> <span class="toc-text">卡诺定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E6%B8%A9%E6%A0%87"><span class="toc-number">2.4.2.</span> <span class="toc-text">热力学温标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E5%8F%AF%E9%80%86%E5%BE%AA%E7%8E%AF%E7%9A%84%E6%95%88%E7%8E%87"><span class="toc-number">2.4.3.</span> <span class="toc-text">任意可逆循环的效率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8B%E5%8A%B3%E4%BF%AE%E6%96%AF%E7%86%B5%E5%85%AC%E5%BC%8F"><span class="toc-number">2.4.4.</span> <span class="toc-text">克劳修斯熵公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8B%E5%8A%B3%E4%BF%AE%E6%96%AF%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="toc-number">2.4.5.</span> <span class="toc-text">克劳修斯不等式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%AF%E5%8A%A8%E5%92%8C%E6%B3%A2%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">振动和波动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A2%E5%8A%A8"><span class="toc-number">3.1.</span> <span class="toc-text">波动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%99%AE%E5%8B%92%E6%95%88%E5%BA%94"><span class="toc-number">3.1.1.</span> <span class="toc-text">多普勒效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B3%A2"><span class="toc-number">3.1.2.</span> <span class="toc-text">激波</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%89%E5%AD%A6"><span class="toc-number">4.</span> <span class="toc-text">光学</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%9A%84%E7%9B%B8%E5%B9%B2%E5%8F%A0%E5%8A%A0"><span class="toc-number">4.1.</span> <span class="toc-text">光的相干叠加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%BC%9D%E5%B9%B2%E6%B6%89"><span class="toc-number">4.1.1.</span> <span class="toc-text">双缝干涉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E7%A8%8B"><span class="toc-number">4.1.2.</span> <span class="toc-text">光程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%96%84%E8%86%9C%E5%B9%B2%E6%B6%89"><span class="toc-number">4.1.3.</span> <span class="toc-text">薄膜干涉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%88%E5%85%8B%E5%B0%94%E9%80%8A%E5%B9%B2%E6%B6%89%E4%BB%AA"><span class="toc-number">4.1.4.</span> <span class="toc-text">迈克尔逊干涉仪</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8D%E5%B0%84"><span class="toc-number">4.2.</span> <span class="toc-text">衍射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%BC%9D%E8%A1%8D%E5%B0%84%EF%BC%88%E5%A4%AB%E7%90%85%E7%A6%BE%E8%B4%B9%EF%BC%89"><span class="toc-number">4.2.1.</span> <span class="toc-text">单缝衍射（夫琅禾费）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E6%A0%85%E8%A1%8D%E5%B0%84"><span class="toc-number">4.2.2.</span> <span class="toc-text">光栅衍射</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%8F%E6%8C%AF"><span class="toc-number">4.3.</span> <span class="toc-text">偏振</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">4.3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%81%8F%E4%B8%8E%E6%A3%80%E5%81%8F"><span class="toc-number">4.3.2.</span> <span class="toc-text">起偏与检偏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E4%B8%8E%E6%8A%98%E5%B0%84%E4%B8%AD%E7%9A%84%E5%81%8F%E6%8C%AF"><span class="toc-number">4.3.3.</span> <span class="toc-text">反射与折射中的偏振</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8F%E5%AD%90%E7%89%A9%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">量子物理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%91%E4%BD%93%E8%BE%90%E5%B0%84"><span class="toc-number">5.1.</span> <span class="toc-text">黑体辐射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94"><span class="toc-number">5.2.</span> <span class="toc-text">光电效应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E7%9A%84%E4%BA%8C%E8%B1%A1%E6%80%A7"><span class="toc-number">5.3.</span> <span class="toc-text">光的二象性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%B7%E6%99%AE%E9%A1%BF%E6%95%A3%E5%B0%84"><span class="toc-number">5.4.</span> <span class="toc-text">康普顿散射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E6%B3%A2%E5%92%8C%E6%A6%82%E7%8E%87%E5%B9%85"><span class="toc-number">5.5.</span> <span class="toc-text">概率波和概率幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E7%A1%AE%E5%AE%9A%E5%85%B3%E7%B3%BB"><span class="toc-number">5.6.</span> <span class="toc-text">不确定关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%96%9B%E5%AE%9A%E8%B0%94%E6%96%B9%E7%A8%8B"><span class="toc-number">5.7.</span> <span class="toc-text">薛定谔方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%80%81%E8%96%9B%E5%AE%9A%E8%B0%94%E6%96%B9%E7%A8%8B-%E8%83%BD%E9%87%8F%E6%9C%AC%E5%BE%81%E6%96%B9%E7%A8%8B"><span class="toc-number">5.7.1.</span> <span class="toc-text">定态薛定谔方程-能量本征方程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E9%99%90%E6%B7%B1%E6%96%B9%E5%8A%BF%E9%98%B1%E4%B8%AD%E7%9A%84%E7%B2%92%E5%AD%90"><span class="toc-number">5.8.</span> <span class="toc-text">无限深方势阱中的粒子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%BF%E5%9E%92%E7%A9%BF%E9%80%8F"><span class="toc-number">5.9.</span> <span class="toc-text">势垒穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B2%92%E5%AD%90%E8%BF%9B%E5%85%A5%E5%8A%BF%E5%9E%92"><span class="toc-number">5.9.1.</span> <span class="toc-text">粒子进入势垒</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E8%B0%90%E6%8C%AF%E5%AD%90"><span class="toc-number">5.10.</span> <span class="toc-text">一维谐振子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9B%E5%AD%A6%E9%87%8F%E7%AE%97%E7%AC%A6"><span class="toc-number">5.11.</span> <span class="toc-text">力学量算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9B%E5%AD%A6%E9%87%8F%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BC%95%E5%85%A5"><span class="toc-number">5.11.1.</span> <span class="toc-text">力学量算符的引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%BE%81%E5%80%BC%E5%92%8C%E6%9C%AC%E5%BE%81%E5%87%BD%E6%95%B0"><span class="toc-number">5.11.2.</span> <span class="toc-text">本征值和本征函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%81%E5%8F%A0%E5%8A%A0%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">5.11.3.</span> <span class="toc-text">态叠加原理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9B%E5%AD%A6%E9%87%8F%E7%9A%84%E6%B5%8B%E9%87%8F%E5%8E%9F%E7%90%86"><span class="toc-number">5.11.4.</span> <span class="toc-text">力学量的测量原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dirac%E7%AC%A6%E5%8F%B7"><span class="toc-number">5.12.</span> <span class="toc-text">Dirac符号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E5%AD%90%E6%80%81"><span class="toc-number">5.12.1.</span> <span class="toc-text">量子态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%A7%AF%E7%A9%BA%E9%97%B4"><span class="toc-number">5.12.2.</span> <span class="toc-text">内积空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%AE%97%E7%AC%A6"><span class="toc-number">5.12.3.</span> <span class="toc-text">线性算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E7%AC%A6%E6%9C%AC%E5%BE%81%E6%96%B9%E7%A8%8B"><span class="toc-number">5.12.4.</span> <span class="toc-text">算符本征方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%81%E5%8F%A0%E5%8A%A0%E5%8E%9F%E7%90%86"><span class="toc-number">5.12.5.</span> <span class="toc-text">态叠加原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E9%87%8F%E5%AD%90%E5%8C%96%E5%81%87%E8%AE%BE"><span class="toc-number">5.12.6.</span> <span class="toc-text">正则量子化假设</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90"><span class="toc-number">5.13.</span> <span class="toc-text">原子中的电子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%A2%E5%8E%9F%E5%AD%90%E7%90%86%E8%AE%BA"><span class="toc-number">5.13.1.</span> <span class="toc-text">氢原子理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%A2%E5%8E%9F%E5%AD%90%E7%9A%84%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6%E5%A4%84%E7%90%86"><span class="toc-number">5.13.2.</span> <span class="toc-text">氢原子的量子力学处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E8%87%AA%E6%97%8B"><span class="toc-number">5.13.3.</span> <span class="toc-text">电子自旋</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E8%A7%82%E7%B2%92%E5%AD%90%E5%85%A8%E5%90%8C%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-number">5.13.4.</span> <span class="toc-text">微观粒子全同性原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E6%A0%B8%E5%A4%96%E7%94%B5%E5%AD%90%E7%9A%84%E6%8E%92%E5%B8%83"><span class="toc-number">5.13.5.</span> <span class="toc-text">原子核外电子的排布</span></a></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2022/09/14/Physics/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">大雾笔记</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2022-09-14 17:20:10" itemprop="dateCreated datePublished" datetime="2022-09-14T17:20:10+08:00">2022-09-14</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2023-01-22 16:53:13" itemprop="dateModified" datetime="2023-01-22T16:53:13+08:00">2023-01-22</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h1 id="参考教材"><a href="#参考教材" class="headerlink" title="参考教材"></a>参考教材</h1><p>嫌教材太简单可以看看</p>
+<p>《热学》lhf例题很多，很详细，很多数学比教材难</p>
+<p>《》</p>
+<p>《新概念物理教程-力学》新颖，比较硬核。</p>
+<p>《费恩曼物理学讲义》</p>
+<p>《新概念物理教程-光学》公认最好教材</p>
+<p>《光学》chb, lyp</p>
+<p>量子物理没有太好的参考书。</p>
+<p>《原子物理学》杨福家编。现在没有原子物理了，只有量子物理。有时用经典方法，有时候用量子物理的方法。前几章和教材一致，实验讲得不错。</p>
+<p>量子力学教程。周世勋。内容有点少。</p>
+<p>《费恩曼物理学讲义》第3卷。相当有深度（量子物理）。</p>
+<p><em>Phyisics</em> Vol.1 &amp; 2。难度介于大学物理学和物理系教材之间。</p>
+<h3 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h3><p>牛顿运动方程一般个数少，微分阶数高；哈密顿正则方程一般个数多，微分阶数低。</p>
+<h1 id="热学"><a href="#热学" class="headerlink" title="热学"></a>热学</h1><h2 id="温度"><a href="#温度" class="headerlink" title="温度"></a>温度</h2><p>分子动理论：热学中比较古老的理论。</p>
+<p>教材中关于统计物理的内容不够透彻。</p>
+<p>建议学习分析力学（重点：哈密顿力学），对后续量子力学有帮助。固体物理也会使用相关技巧。哈密顿量，相空间，拉格朗日方程。不用看证明，能用就行。</p>
+<h3 id="热学研究内容与对象"><a href="#热学研究内容与对象" class="headerlink" title="热学研究内容与对象"></a>热学研究内容与对象</h3><p>内容：与热现象有关的性质和规律。</p>
+<p>热现象：宏观上与温度有关，微观上与分子热运动有关。</p>
+<p>对象：大量微观粒子构成的体积有限的物体-热力学系统。（量大：统计学规律。）</p>
+<p>经常讨论系统和外界（环境）。一种说法：宇宙是不是热力学系统？不是，因为宇宙之外没有外界。所以热二定律可能不适用于整个宇宙。</p>
+<p>孤立系统：与外界没有任何相互作用。</p>
+<p>绝热系统：有功的交换，没有热量交换</p>
+<p>封闭系统：有能量交换，无粒子交换</p>
+<p>开放系统：既有能量交换，也有粒子交换</p>
+<h3 id="热力学的研究方法"><a href="#热力学的研究方法" class="headerlink" title="热力学的研究方法"></a>热力学的研究方法</h3><h4 id="热力学"><a href="#热力学" class="headerlink" title="热力学"></a>热力学</h4><p>宏观理论方法。依赖于实验。不涉及物质的微观结构和微观运动规律。具有极大的普遍性，可靠性。</p>
+<h4 id="统计物理学"><a href="#统计物理学" class="headerlink" title="统计物理学"></a>统计物理学</h4><p>微观理论方法。从微观模型假设出发，力学 + 统计理论建立微观量和宏观量的关系。可解释本质，但是受模型局限。</p>
+<h3 id="几个重要概念"><a href="#几个重要概念" class="headerlink" title="几个重要概念"></a>几个重要概念</h3><h4 id="平衡态"><a href="#平衡态" class="headerlink" title="平衡态"></a>平衡态</h4><p>热力学系统内部，宏观上不存在能量和粒子的流动，系统宏观性质不随时间变化。（体积、压强、温度）</p>
+<p>热力学平衡条件：</p>
+<p>力学平衡条件：若系统与外界有力学作用，平衡时内外压强相等。</p>
+<p>热平衡条件：若系统与外界可交换热量，平衡时内外温度应相等。</p>
+<p>相平衡条件：若系统与外界处于不同相的共存状态，平衡时要达到力学平衡、热平衡以及相平衡。</p>
+<p>化学平衡条件：浓度不同的系统混到一起，平衡时要满足上面三个条件，并且浓度均匀。</p>
+<p>注意区分平衡态和稳定态：</p>
+<p>![..&#x2F;images&#x2F;pht.png]</p>
+<h4 id="宏观量"><a href="#宏观量" class="headerlink" title="宏观量"></a>宏观量</h4><p>描述系统宏观性质的量。可直接测量。</p>
+<p>广延量：有累加性。如M, V, E…</p>
+<p>强度量：无累加性。如p, T…</p>
+<h4 id="微观量"><a href="#微观量" class="headerlink" title="微观量"></a>微观量</h4><p>描述微观粒子性质的量。需要间接测量。</p>
+<p>如分子的m, v, d…</p>
+<h4 id="状态参量"><a href="#状态参量" class="headerlink" title="状态参量"></a>状态参量</h4><p>描述系统平衡态及其宏观性质的物理量。</p>
+<p>p, V, T, v, 内能E, 熵S, 焓H</p>
+<p>一组态参量对应一个平衡态。</p>
+<p>实验表明：状态参量之间不是相互独立的。</p>
+<p>常选p, V, T作为自变量，其他的当作函数（E, S, H）-热力学函数。</p>
+<p>对物质量确定的单元（单一组元，不能由多种物质混合）单相（同一种状态，不能有固液同时存在等等）系统，p, V, T只有两个是独立的：T(p, V), E(p, V)。</p>
+<p>统计物理：状态参量之间的偏导数关系。</p>
+<h4 id="物态方程"><a href="#物态方程" class="headerlink" title="物态方程"></a>物态方程</h4><p>两个最基本的热力学函数之一（物态方程和内能）。态参量之间的函数关系: f(T, p, V) &#x3D; 0</p>
+<p>通过测量确定。</p>
+<p>理想气体物态方程：</p>
+ $pV = νRT$ 
+
+ $p = nkT$ 
+
+ $k = \frac{R}{N_A}$ 
+
+ $\nu$  气体摩尔数
+
+ $k$  玻尔兹曼常量
+
+<h3 id="温度-1"><a href="#温度-1" class="headerlink" title="温度"></a>温度</h3><h4 id="热平衡态"><a href="#热平衡态" class="headerlink" title="热平衡态"></a>热平衡态</h4><p>两个系统长时间热接触达到的共同平衡态。</p>
+<h4 id="热力学第零定律"><a href="#热力学第零定律" class="headerlink" title="热力学第零定律"></a>热力学第零定律</h4><p>实验表明： A与C热平衡，B与C热平衡，A和B也必然保持热平衡。</p>
+<p>非热接触的两个系统也可以处在同一个热平衡态。</p>
+<p>温度：处于同一热平衡态下的热力学系统所具有的共同的宏观性质。</p>
+<p>处在同一热平衡态的系统具有相同的温度。</p>
+<h4 id="温标"><a href="#温标" class="headerlink" title="温标"></a>温标</h4><p>理想气体温标；用理想气体做测温物质。单位:  $K$ (Kelvin)， 范围适用  $&gt; 0.5K$ </p>
+<p>实验表明：一定质量的理想气体在同一个热平衡态下， $pV$ 不变。</p>
+<p>规定 $T \propto pV$ ，水的三相点温度为 $T_3 = 273.16K$ </p>
+
+$$T = T_3\frac{pV}{p_3V_3} = 273.16\frac{pV}{p_3V_3}$$
+
+
+<p>热力学温标 $T$ ：理论温标，与物质无关。</p>
+<p>单位:  $K$ ，适用于所有温度范围，在理想气体温标范围内与理气温标一致。</p>
+<h3 id="统计物理学的观点、概念简介"><a href="#统计物理学的观点、概念简介" class="headerlink" title="统计物理学的观点、概念简介"></a>统计物理学的观点、概念简介</h3><p>统计物理学包括平衡态统计理论，非平衡态统计理论和涨落理论。它从物质的微观结构和微观运动来阐明物质的宏观性质。其基本观点：</p>
+<ul>
+<li>宏观物体由大量的微观粒子（原子、分子、电子、光子等）构成。</li>
+<li>微观粒子的运动服从力学规律。原则上说服从量子力学规律，一定条件下可以用经典力学处理。</li>
+<li>从微观角度看，物体以一定的概率出现在各个微观状态上，物质的宏观性质就是物质微观性质的统计平均。宏观量是有关微观量的统计平均值。</li>
+</ul>
+<h4 id="近独立子系统"><a href="#近独立子系统" class="headerlink" title="近独立子系统"></a>近独立子系统</h4><p>构成系统的粒子间相互作用很弱，系统能量近似等于各粒子能量总和，如理想气体。</p>
+<h4 id="微观状态（力学运动状态）"><a href="#微观状态（力学运动状态）" class="headerlink" title="微观状态（力学运动状态）"></a>微观状态（力学运动状态）</h4><h5 id="经典力学描述"><a href="#经典力学描述" class="headerlink" title="经典力学描述"></a>经典力学描述</h5><p>常采用正则形式，即广义坐标和广义动量描述。</p>
+<ul>
+<li><p>子相空间（μ空间）：由粒子的广义坐标 $q_i$ 和广义动量 $p_i$ （ $i = 1, \dots, r$ ,  $r$ 是粒子自由度）构成的2r维空间。</p>
+<p>1组 $(q_1, \dots, q_r, p_1, \dots, p_r)$ 的取值表示粒子的1个微观状态，对应于子相空间的一个点。</p>
+<p>更确切的说，在子相空间  $( q_1,... , q_r , p_1,..., p_r )$ 位置处的体积元  $d q_1...d q_r dp_1...dp_r$ 中的点，都是由 $( q_1,... , q_r , p_1,..., p_r )$ 描述的相同的粒子微观状态。</p>
+<p>位形空间（坐标构成的空间），速度空间（速度构成的空间）。</p>
+<p>傅里叶变换和傅里叶级数的区别：一个离散，一个连续。</p>
+</li>
+<li><p>系统的微观状态是由所有粒子的广义坐标和广义动量描述的。</p>
+</li>
+</ul>
+<h5 id="量子力学描述"><a href="#量子力学描述" class="headerlink" title="量子力学描述"></a>量子力学描述</h5><p>量子力学中假设运动状态用量子态描述。</p>
+<ul>
+<li><p>粒子的微观状态用单粒子（量子）态描述。</p>
+<p>单粒子态由一组量子数描述：如  $|n, l, m_l, m_s &gt;$  。 1 组取值确定的 $ |n, l, m_l, m_s &gt; $ 表示 1 个单粒子态。 当粒子状态是由某个单粒子态描述时，称为粒子处于某个单粒子态，或粒子占据某个单粒子态</p>
+</li>
+<li><p>系统微观状态用多粒子（量子）态描述。</p>
+<p>对近独立子系统，多粒子态可由单粒子态表示： 系统所有粒子的 1 组单粒子占据态就表示系统的 1 个 多粒子态，即表示系统的 1 个 微观状态。</p>
+</li>
+</ul>
+<p>微观粒子全同性原理</p>
+<p>全同粒子：内禀属性如质量、电荷、自旋等相同 </p>
+<p>微观粒子全同性原理是量子力学假设。 </p>
+<p>全同性原理：对全同粒子组成的系统，交换任意 2个全同粒子，系统微观状态不变。</p>
+<p>泡利不相容原理：对全同费米子系统，不能有两个及以上的费米子占据同一单粒子态。</p>
+<p>费米子：自旋为半整数；玻色子：自旋为整数。</p>
+<h4 id="宏观状态和微观状态的关系"><a href="#宏观状态和微观状态的关系" class="headerlink" title="宏观状态和微观状态的关系"></a>宏观状态和微观状态的关系</h4><p>系统的宏观状态由宏观量表征，如 E、N、V。 </p>
+<p>系统的微观状态，如果用经典描述，则由所有粒子 的坐标和动量表征。 </p>
+<p>玻耳兹曼认为：从微观上看，对于一个系统的状态 的宏观描述是非常不完善的，系统的同一个宏观状 态实际上可能对应于非常非常多的微观状态，而这 些微观状态是粗略的宏观描述所不能加以区别的。</p>
+<p> 这意味着宏观状态和微观状态、宏观量和微观量具 有内在联系，这种联系是种统计关系。</p>
+<h4 id="统计规律性"><a href="#统计规律性" class="headerlink" title="统计规律性"></a>统计规律性</h4><p>统计物理发展早期，人们普遍认为：研究物体宏观 性质，应从求解粒子的力学运动方程出发来解决。 但由于粒子数太多，求解力学方程困难，迫不得已 得引入统计方法。而且这个统计是：宏观量是相应 微观量的长时间平均。 即原则上力学规律可完全决定物体宏观性质  </p>
+<p>这种观点无法解释根本问题：热现象的不可逆性。 因为把力学运动方程（牛顿方程或薛定谔方程）用 到微观粒子，是时间反演对称的 — 可逆的。</p>
+<p>这表明仅通过力学规律来解释物体的宏观性质是 不可能的，而有赖于新的规律 — 统计规律。</p>
+<p>力学规律是决定论性的，可表述为：在一定初始 条件下，某时刻系统必然处于一确定的运动状态。 </p>
+<p>统计规律可以表述为：在一定的宏观条件下，某 时刻系统以一定的概率处于某一微观状态。 </p>
+<p>即宏观状态与微观状态之间的联系是概率性的， 具有统计规律的特性，而不是决定论性的。</p>
+<p>统计规律的稳定性：只要 N 足够大，每次得到的分布几乎相同</p>
+<p>统计规律的涨落：每次实验中得到的比例 Ni &#x2F;N 稍有差别。N 越大，涨落越小。</p>
+<p>即对变量是离散取值的情况，直接采用概率， 对变量是连续取值的情况，需要引入概率密度。</p>
+<p>热现象本质是统计规律的反映。</p>
+<h5 id="平衡态统计理论的基本假设：等概率原理"><a href="#平衡态统计理论的基本假设：等概率原理" class="headerlink" title="平衡态统计理论的基本假设：等概率原理"></a>平衡态统计理论的基本假设：等概率原理</h5><p>处于平衡态下的孤立系统，系统各个可能的微观 状态出现的概率相等。 “可能的微观状态”是指孤立系统的宏观条件所 允许的那些微观状态，即这些微观状态对应于给 定的 E、V、N</p>
+<h5 id="平衡态下近独立子系统的统计规律"><a href="#平衡态下近独立子系统的统计规律" class="headerlink" title="平衡态下近独立子系统的统计规律"></a>平衡态下近独立子系统的统计规律</h5><p>处于平衡态下的热力学系统，宏观状态不变，但 相应的微观状态不断变化，是一种动态平衡。 根据等概率原理，平衡态包含的微观状态数目是 最多的 — 最概然态</p>
+<p>求统计分布函数：对于每个统计分布函数，可以计算它们对应的微观态数目（微观态数目是统计分布函数的函数）。在E, N不变的条件下，只要找到对应微观态数目最多的统计分布函数，就是平衡态的统计分布函数。</p>
+<p>对近独立子系统，采用经典力学及等概率原理只能得到一种经典统计：麦克斯韦-玻尔兹曼统计；采用量子力学及等概率原理得到3种统计：麦克斯韦-玻尔兹曼统计，费米-狄拉克统计，玻色-爱因斯坦统计。</p>
+<p>造成 3 种量子统计规律的原因是微观粒子的全同性原理和泡利不相容原理。</p>
+<p>麦克斯韦-玻尔兹曼统计适用于定域子系统，费米 - 狄拉克统计、玻色 - 爱因斯坦统计适用于非定域 子系统。</p>
+<p> 定域：全同粒子系统中的粒子的波包局限在空间 一定范围内，之间没有重叠，全同性原理 不起作用，可以通过位置分辨粒子。</p>
+<p> 经典的和量子的麦克斯韦-玻尔兹曼统计在数学形 式上一致。而在一定条件下，量子的 3 种统计都可 退化为经典的麦克斯韦-玻尔兹曼统计</p>
+<h2 id="气体动理论"><a href="#气体动理论" class="headerlink" title="气体动理论"></a>气体动理论</h2><h4 id="气体动理论的基本观点"><a href="#气体动理论的基本观点" class="headerlink" title="气体动理论的基本观点"></a>气体动理论的基本观点</h4><p>气体动理论（分子动理论），发展于 19 世纪下半 期，基于经典理论，是统计物理学的原型，被不断 补充发展完善成为统计物理学，其所得的结论可通 过统计物理得到。至今仍在诸多领域有重要应用。</p>
+<ol>
+<li>宏观物体是由大量分子、原子构成的，分子间 存在一定的间隙。</li>
+<li>分子永不停息地作无规则运动 — 热运动</li>
+<li>分子间存在一定的相互作用。</li>
+</ol>
+<h3 id="理想气体的压强"><a href="#理想气体的压强" class="headerlink" title="理想气体的压强"></a>理想气体的压强</h3><h5 id="关于理想气体的假设"><a href="#关于理想气体的假设" class="headerlink" title="关于理想气体的假设"></a>关于理想气体的假设</h5><h6 id="单个分子服从的力学规律"><a href="#单个分子服从的力学规律" class="headerlink" title="单个分子服从的力学规律"></a>单个分子服从的力学规律</h6><p>理想气体模型：</p>
+<p>大小：分子线度&lt;&lt;分子间平均距离</p>
+<p>分子力：除碰撞的瞬间，在分子间、分子与器壁间无作用力</p>
+<p>碰撞性质：弹性碰撞</p>
+<p>服从规律：牛顿力学</p>
+<h6 id="大量分子处于平衡态时的统计假设"><a href="#大量分子处于平衡态时的统计假设" class="headerlink" title="大量分子处于平衡态时的统计假设"></a>大量分子处于平衡态时的统计假设</h6><p>（1）无外场时，分子在各处出现的概率相同</p>
+
+$$n = \frac{\mathrm d N}{\mathrm d V} = \frac NV = \text{const}.$$
+
+<p>（2）由于碰撞，分子可以有各种不同速度</p>
+<p>速度取向各方向等概率：</p>
+
+$$\bar{v_x} = \bar{v_y} = \bar{v_z} = 0\\\\\bar{v_x^2} = \bar{v_y^2} = \bar{v_z^2} = \frac 13 \bar{v^2}$$
+
+
+<h5 id="理想气体压强公式"><a href="#理想气体压强公式" class="headerlink" title="理想气体压强公式"></a>理想气体压强公式</h5><p>前提：平衡态，忽略重力，分子当成质点</p>
+
+$$p = \frac13nm\bar{v^2} = \frac23n\bar\varepsilon_t, \\\\\bar\varepsilon_t = \frac12 mv^2$$
+
+
+<h3 id="温度的统计意义"><a href="#温度的统计意义" class="headerlink" title="温度的统计意义"></a>温度的统计意义</h3>
+$$\bar\varepsilon_t = \frac{3p}{2n} = \frac{3nkT}{2n} = \frac32kT\\\\\sqrt{\bar{v^2}} = \sqrt{\frac{3kT}{m}} = \sqrt{\frac{3RT}{M}}$$
+
+
+ $T = 273K$ , 
+
+ $\bar{\varepsilon}_t$ 数量级： $10^{-2}$ eV
+
+ $\sqrt{\bar{v^2}}$ 
+
+ $H_2$ :  $1.84\times 10^3m/s$ 
+
+ $O2$ :  $4.61\times 10^2m/s$ 
+
+<h3 id="能量均分定理"><a href="#能量均分定理" class="headerlink" title="能量均分定理"></a>能量均分定理</h3><p>自由度：决定物体空间位置的独立坐标数，用 $i$ 表示</p>
+<h5 id="单原子分子"><a href="#单原子分子" class="headerlink" title="单原子分子"></a>单原子分子</h5><p>平动自由度: $t = 3$  </p>
+ $i = 3$ 
+
+<h5 id="双原子分子"><a href="#双原子分子" class="headerlink" title="双原子分子"></a>双原子分子</h5><p>质心平动： $t = 3$ </p>
+<p>轴取向： $r = 2$ </p>
+<p>距离变化： $v = 1$ </p>
+<p>总自由度:  $i = 6$ </p>
+<h5 id="多原子分子"><a href="#多原子分子" class="headerlink" title="多原子分子"></a>多原子分子</h5><p>设分子包含 $N$ 个原子</p>
+ $i = 3N$ 
+
+ $t = 3$ 
+
+ $r = 3$ 
+
+ $v = 3N-6$ 
+
+<h5 id="能量均分定理-1"><a href="#能量均分定理-1" class="headerlink" title="能量均分定理"></a>能量均分定理</h5><p>一个平动自由度对应的平均动能为 $\frac12kT$ </p>
+<p>考虑平动、振动和转动，由于分子的碰撞，分子平均动能均匀分配到每个自由度上。</p>
+<p>在温度 $T$ 的平衡态下，分子热运动的每个自由度对应的平均动能都等于 $\frac12kT$ 。</p>
+<p>普遍的能量均分定理：</p>
+<p>分子能量中每具有一个平方项，就对应一个 $\frac12kT$ 的平均能量。</p>
+<p>分子振动的动能和势能都是平方项，所以：</p>
+ $\bar\varepsilon_{vP} = \bar\varepsilon_{vk} = v\frac12kT$ ,   $\bar\varepsilon_v = \bar\varepsilon_{vP}  + \bar\varepsilon_{vk} = vkT$ 
+
+$$\bar\varepsilon = \bar\varepsilon _t + \bar\varepsilon_r + \bar\varepsilon_v = (t + r + 2v)\frac12kT$$
+
+<p>通常情况下( $T &lt; 10^3K$ )，振动自由度被“冻结”，分子可视为刚性</p>
+<p>刚性分子： $v = 0, i = t + r$ </p>
+
+$$\bar\varepsilon = \frac{t+ r}2kT$$
+
+
+<h5 id="理想气体内能"><a href="#理想气体内能" class="headerlink" title="理想气体内能"></a>理想气体内能</h5><p>内能：系统内部各种形式能量的总和，不包括系统整体质心运动的能量</p>
+<p>分子内部：  $\bar\varepsilon = (t + r + 2v)\frac12kT$ </p>
+<p>分子之间：相互作用势能 $\varepsilon_{\mathrm pij}$ </p>
+<p>内能： $E = N\bar\varepsilon + \sum_i\sum_{j&lt;i}\varepsilon_{\mathrm pij} = E(T, V)$ </p>
+<p>理想气体：  $\varepsilon_{\mathrm pij} = 0,E = E(T)$ </p>
+<h3 id="麦克斯韦速度分布律"><a href="#麦克斯韦速度分布律" class="headerlink" title="麦克斯韦速度分布律"></a>麦克斯韦速度分布律</h3><p>分布函数是体现热力学系统的统计规律性的重要函数.</p>
+<p>常见的统计分布函数包括：速率分布函数、速度分布函数、能量分布函数等。</p>
+<p>通过分布函数可计算微观量的统计平均值，如 $\bar\varepsilon_t, \bar{v^2}$ 等，进而得到系统的宏观量。</p>
+<h5 id="速率分布函数"><a href="#速率分布函数" class="headerlink" title="速率分布函数"></a>速率分布函数</h5>
+$$f(v) = \frac{\text dN}{N\text dv}\\\\\int_0^\infty f(v)\text dv = \int_0^\infty\frac{\text dN}{N} = 1$$
+
+
+<h5 id="麦克斯韦速率分布函数（不用记）"><a href="#麦克斯韦速率分布函数（不用记）" class="headerlink" title="麦克斯韦速率分布函数（不用记）"></a>麦克斯韦速率分布函数（不用记）</h5>
+$$f(v) = 4\pi (\frac m{2\pi kT})^{3/2}e$$
+
+
+<h5 id="三种统计速率"><a href="#三种统计速率" class="headerlink" title="三种统计速率"></a>三种统计速率</h5><h6 id="最概然速率"><a href="#最概然速率" class="headerlink" title="最概然速率"></a>最概然速率</h6>
+$$v_p = \sqrt{\frac{2kT}{m}}$$
+
+
+<p>m一定时，温度T越高，速率大的分子数比例越大，最概然速率越大，  $f(v_p)$ 越小。</p>
+<h6 id="平均速率"><a href="#平均速率" class="headerlink" title="平均速率"></a>平均速率</h6>
+$$\bar v = \int_0^\infty vf(v)\text dv$$
+
+
+<p>任意函数对全体分子按速率分布的平均值为</p>
+<p><font color ="red"> $f(v)$ 一定要归一化!</font><p>例如求0到vp&#x2F;2的平均速率，首先要将f(v)归一化成这个区间内的速率分布，而不是直接用全部速率分布</p></p>
+
+$$\bar{\phi(v)} =\int_0^\infty \phi(v)f(v)\text dv$$
+
+
+<p>由麦克斯韦速率分布函数</p>
+
+$$\bar v = \sqrt{\frac{8kT}{\pi m}} = \sqrt{\frac{8RT}{\pi M}}$$
+
+
+<h6 id="方均根速率"><a href="#方均根速率" class="headerlink" title="方均根速率"></a>方均根速率</h6>
+$$\bar{v^2} = \int_0^\infty v^2f(v)\text dv = \frac{3kT}{m}\\\sqrt{\bar{v^2}} = \sqrt{\frac{3kT}{m}} = \sqrt{\frac{3RT}M}$$
+
+
+<h5 id="麦克斯韦速度分布律-1"><a href="#麦克斯韦速度分布律-1" class="headerlink" title="麦克斯韦速度分布律"></a>麦克斯韦速度分布律</h5>
+$$\frac{\text dN}{N} = \left(\frac{m}{2\pi kT}\right)^{3/2}e^{-m(v_x^2 + v_y^2 + v_z^2)/2kT}\text{d}v_x\text{d}v_y\text{d}v_x$$
+
+
+<p>速度分量的分布函数</p>
+
+$$g(v) = (\frac m{2\pi kT})^{1/2}e^{-mv^2/2kT}$$
+
+
+<h5 id="分子碰壁数"><a href="#分子碰壁数" class="headerlink" title="分子碰壁数"></a>分子碰壁数 $Γ$ </h5>
+$$\Gamma = \frac14 n\bar v$$
+
+
+<h5 id="玻尔兹曼分布"><a href="#玻尔兹曼分布" class="headerlink" title="玻尔兹曼分布"></a>玻尔兹曼分布</h5><h6 id="恒温气压公式"><a href="#恒温气压公式" class="headerlink" title="恒温气压公式"></a>恒温气压公式</h6>
+$$p = p_0e^{-mgz/kT}\\\\n = n_0e^{-mgz/kT}$$
+
+
+<h6 id="玻尔兹曼分布-1"><a href="#玻尔兹曼分布-1" class="headerlink" title="玻尔兹曼分布"></a>玻尔兹曼分布</h6>
+$$\text dN_{\vec r} = n_0 \cdot e^{-\varepsilon_p(\vec r)/kT} \cdot \text d^3 \vec r\\\\\text d^3\vec r = \text dx \ \text dy \  \text dz$$
+
+
+<h6 id="玻尔兹曼-麦克斯韦分布"><a href="#玻尔兹曼-麦克斯韦分布" class="headerlink" title="玻尔兹曼-麦克斯韦分布"></a>玻尔兹曼-麦克斯韦分布</h6>
+$$\text dN = n_0 \cdot (\frac m{2\pi kT})^{3/2} \cdot e^{-[\frac12 mv^2 + \varepsilon_p(\vec r)]/kT} \cdot \text d^3\vec r \cdot \text d^3 \vec v$$
+
+
+<p>能量简并：不同子相空间分子能量相等。</p>
+<p>分子按能量分布：</p>
+
+$$N(\varepsilon) = C \cdot w(\varepsilon) \cdot e^{-\frac{\varepsilon}{kT}}$$
+
+
+ $\varepsilon$ 为粒子的能量， $w(\varepsilon)$ 为具有此能量的体积元个数.
+
+<h3 id="范德瓦尔斯方程"><a href="#范德瓦尔斯方程" class="headerlink" title="范德瓦尔斯方程"></a>范德瓦尔斯方程</h3><h4 id="范氏气体模型"><a href="#范氏气体模型" class="headerlink" title="范氏气体模型"></a>范氏气体模型</h4><p>气体分子间的作用力：分子间的作用力很复杂，主要是电磁力，可以分为引力和斥力</p>
+<p>范氏气体模型：对理想气体做两方面的修正。考虑分子体积、分子间作用力引起的修正。</p>
+<p><img src="/../images/physics/VanGas.png" alt="范氏气体" loading="lazy"></p>
+<ul>
+<li>分子是直径为d的刚球</li>
+<li>在 $d\rightarrow s$ 的范围内，分子间有恒定引力</li>
+</ul>
+<h4 id="范德瓦尔斯方程-1"><a href="#范德瓦尔斯方程-1" class="headerlink" title="范德瓦尔斯方程"></a>范德瓦尔斯方程</h4><p>范德瓦尔斯方程：</p>
+<p>设:</p>
+ $\nu = 1 mol$ 
+
+ $p$  -- 实测气体压强
+
+ $V_m$  --  $1\ mol$ 气体容积
+
+<p>对理想气体： $pV_m = RT$ </p>
+<p>对真实气体：</p>
+<ol>
+<li>分子体积引起的修正</li>
+</ol>
+<p>分子自由活动空间的体积为 $V_m - b$ </p>
+
+$$p(V_m - b) = RT$$
+
+
+
+$$
+p = \frac{RT}{V_m - b}
+$$
+
+
+<ol start="2">
+<li>分子间引力引起的修正</li>
+</ol>
+<p>气体分子间作用力一般表现为引力。</p>
+<p>在容器内部，单个气体分子受到各个方向的平均引力相等，合力可以看作零。</p>
+<p>但是在容器边缘，单个气体分子受到的引力是不对称的。气体分子所受的合力指向容器内部，因此撞击容器壁的气体分子动量比理想气体下的情况要小，宏观上形成的压强比理想气体情况要小。</p>
+
+$$
+p &lt; \frac{RT}{V_m - b}\\
+$$
+
+
+<p>设</p>
+
+$$
+p = \frac{RT}{V_m - b} - p_{in}
+$$
+
+
+ $p_{in} \propto nf_{合}, f_{合}\propto n \Rightarrow p_{in} \propto n^2 \propto \frac 1{V_m^2}$ 
+
+<p>最后得到：</p>
+
+$$
+(p + \frac a{V_m^2})(V_m - b) = RT
+$$
+
+
+<p>对 ν mol 气体：</p>
+
+$$
+(p + \nu^2 \cdot \frac a{V^2})(V - \nu b) = \nu RT
+$$
+
+
+<p>常温常压下： $b/V_m \sim 10^{-3}, p_{in}/p \sim 10^{-2}$ ，这时分子体积和分子间的作用力修正可以忽略。</p>
+<h4 id="气体的等温线"><a href="#气体的等温线" class="headerlink" title="气体的等温线"></a>气体的等温线</h4><p>真实气体的等温线：</p>
+<p><img src="/../images/physics/RealGasTemp.png" alt="RealGasTemp" loading="lazy"></p>
+<p>范氏气体的等温线：</p>
+<p><img src="/../images/physics/VanGasTemp.png" alt="VanGasTemp" loading="lazy"></p>
+<p>如何计算临界参数：</p>
+<p>临界参数：临界点K对应的 $p_K, V_K, T_K$ </p>
+<p>临界点K是等温线的拐点：</p>
+
+$$
+\left(\frac{\partial p}{\partial V}\right)_{T = T_K} = 0\\
+\left(\frac{\partial^2 p}{\partial V^2}\right)_{T = T_K} = 0
+$$
+
+
+<p>K同时也是三次方程的三重根，因此可以通过假设 $(V_m - V_{mK})^3 = 0$ 展开后和范德瓦尔斯方程对比系数求解。</p>
+<h4 id="范氏气体内能"><a href="#范氏气体内能" class="headerlink" title="范氏气体内能"></a>范氏气体内能</h4><p>理想气体：  $E(T) = i\nu RT / 2$ </p>
+<p>范氏气体： $V\uparrow \rightarrow p_{in}做负功\rightarrow 分子间势能E_p\uparrow$ </p>
+<p>要计算势能，首先要定义势能为0的状态：定义某种位形为0势能。其他状态的势能定义为从这种状态变形到0势能状态的过程中保守力的变化。</p>
+
+$$\mathrm dA = -p_{in}S\mathrm dl = -p_{in}\mathrm dV$$
+
+
+<p>设 $E_p(V = \infty) = 0$ 。</p>
+
+$$
+E_p(V) = \int_V^\infty -p_{in}\mathrm dV = \int_V^\infty-\nu^2 \cdot \frac a{V^2}\mathrm dV = -v^2 \cdot \frac aV
+$$
+
+
+
+$$
+E = E_k + E_p = \frac i2\nu RT - \nu ^2\frac aV
+$$
+
+
+<p><strong>结论：</strong></p>
+
+$$E(T, V) = \frac i2 \nu RT - \nu^2 \frac aV$$
+
+
+<h4 id="一个细节"><a href="#一个细节" class="headerlink" title="一个细节"></a>一个细节</h4><p>为什么不考虑气体分子和容器壁分子间的引力？</p>
+<p>事实上，这引力确实存在。但是可以通过动量定理证明，碰撞过程这引力的作用总和为0。</p>
+<h3 id="气体分子的碰撞、平均自由程"><a href="#气体分子的碰撞、平均自由程" class="headerlink" title="气体分子的碰撞、平均自由程"></a>气体分子的碰撞、平均自由程</h3><p>平均碰撞频率和平均自由程</p>
+<p>平均碰撞频率 $\bar z$ ：单位时间内一个气体分子与其他分子碰撞的平均次数</p>
+<p>平均自由程 $\bar \lambda$ ：气体分子在相邻两次碰撞之间飞行的平均路程。</p>
+<p>平均碰撞频率和平均频率之间关系</p>
+<p>对象:平衡态下的理想气体</p>
+<p>假定：</p>
+<p>(1)只有一种分子；</p>
+<p>(2)分子可视作直径为d的刚球；</p>
+<p>(3)被考察的分子以平均相对速率 $\bar u$ 运动，其余的分子静止。</p>
+<p>碰撞界面为 $\sigma$ 。分子间平均相对速率为 $\bar u = \sqrt 2 \bar v$ 。</p>
+
+$$
+\bar z = \sigma \bar u n = \pi d^2 n \bar u = \sqrt 2 \pi d^2 n\bar v
+$$
+
+
+<p>平均自由程和压强、温度的关系：</p>
+
+$$
+\bar\lambda = \frac {\bar v} {\bar z} = \frac 1{\sqrt2 \pi d^2 n} = \frac {kT}{\sqrt2\pi d^2p} \propto \frac{T}{p}
+$$
+
+
+<h3 id="气体输运过程"><a href="#气体输运过程" class="headerlink" title="气体输运过程"></a>气体输运过程</h3><p>非平衡态下，气体内部各部分性质不均匀，就会产生热量、动量、质量的迁移，称为输运过程或内迁移过程。</p>
+<p>气体输运过程包括：热传导、扩散和内摩擦（粘滞）。</p>
+<p>输运现象的宏观实验定律和原因。</p>
+<p>热传导</p>
+<p>温度不均匀。实验定律：傅里叶定律，热传导方程。</p>
+<p>考虑1维的情形。</p>
+
+$$
+\mathrm dQ = -\kappa \frac{\partial T}{\partial x}\mathrm dS \mathrm dt
+$$
+
+
+
+$$
+j(x, t) = \frac{\mathrm dQ}{\mathrm dS\mathrm dt}  = -\kappa \frac {\partial T(x, t)}{\partial x}
+$$
+
+
+ $j(x, t)$ ：热流密度， $\partial T/\partial x$ ：温度梯度。
+
+<p>温度梯度“力”导致热流。</p>
+<blockquote>
+ $T$ 在这里相当于电势， $-\partial T / \partial x$ 相当于电势的负梯度即电场强度， $j$ 相当于电流密度， $\kappa$ 相当于电导率。因此类比 $\vec{J} = \sigma \vec{E}$ 有 $j = -\kappa \partial T /\partial x$ 。类似的，也许可以推导出热阻的概念？热学的“麦克斯韦”方程组又是什么？
+</blockquote>
+<p>统计物理给出的结论：</p>
+
+$$
+\kappa = \frac 13 nm\bar v \bar \lambda c_V
+$$
+
+
+<blockquote>
+<p>如何理解此公式：热传导的本质是分子能量（热量）的交换，交换的热量等于粒子数乘以单个粒子交换的热量。</p>
+ $m$ 为单个分子质量。 $c_V$ 为定体热容。 $n\bar v$ 用于描述 $\mathrm dt$ 内穿过 $\mathrm dS$ 的粒子数， $\bar\lambda$ 乘以 $\partial T/\partial x$ 得到温度的变化量 $\mathrm dT$  , $m,c_V$ 与温度的变化量相乘，得到单个粒子交换的热量。
+</blockquote>
+<p>稳恒热流： $\frac{\mathrm dQ}{\mathrm dt} = C$ ， $j$ ,  $T$ 与 $t$ 无关。</p>
+ $\kappa$ 称为导热系数，由气体特性和 $T, p$ 决定。
+
+<p>扩散</p>
+<p>原因：气体内部离子数浓度不均匀。</p>
+<p>斐克定律</p>
+
+$$
+\mathrm dN = -D\frac {\partial n}{\partial x}\mathrm dS \mathrm dt
+$$
+
+
+<blockquote>
+<p>教材的表述为</p>
+
+$$
+\mathrm dM = -D\frac {\partial \rho}{\partial x}\mathrm dS \mathrm dt
+&gt;$$
+
+<p>这里的两个 $D$ 是一样的。</p>
+</blockquote>
+<p>统计物理给出的结论：</p>
+
+$$
+D = \frac13\bar v\bar \lambda
+$$
+
+
+<p>扩散流密度：</p>
+
+$$
+j(x, t) = \frac {\mathrm dN}{\mathrm dS \mathrm dt} = -D\frac {\partial n}{\partial x}
+$$
+
+
+<p>稳恒扩散流： $\frac {\mathrm dN}{\mathrm dt} = C$ ， $j$ ,  $n$ , 与 $t$ 无关。</p>
+<p>粒子数守恒方程</p>
+
+$$
+\oiint_S j\cdot \vec {s} = -\frac {\mathrm dN}{\mathrm dt}, \nabla \cdot \vec j + \frac{\partial n}{\partial x} = 0.
+$$
+
+
+<p>结合粒子数守恒方程（微分形式）和斐克定律得到扩散方程</p>
+
+$$
+\frac{\partial n}{\partial t} = D\frac{\partial^2 n}{\partial x^2}
+$$
+
+
+<p>考试考定场稳恒流，不考内摩擦。</p>
+<p>内摩擦（粘滞）</p>
+<p>根据流体力学，对定常流动的粘滞流体，流速不太大时（雷诺数小），出现层流。</p>
+<p>粘滞定律（牛顿摩擦定律）</p>
+
+$$
+\Delta F = - \eta \frac{\mathrm du}{\mathrm dz}\Delta S
+$$
+
+
+
+$$
+p = -\eta \frac{\mathrm du}{\mathrm dz}
+$$
+
+
+<p>粘度和温度有关，气体粘度随温度增加，液体温度随温度减小。遵从粘滞定律的流体称为牛顿流体。</p>
+<p>内摩擦原因：流速不均匀。</p>
+<p>统计物理给出的结论：</p>
+
+$$
+\eta = \frac 13 nm\bar v\bar \lambda
+$$
+
+
+<h2 id="热力学第一定律"><a href="#热力学第一定律" class="headerlink" title="热力学第一定律"></a>热力学第一定律</h2><h3 id="准静态过程"><a href="#准静态过程" class="headerlink" title="准静态过程"></a>准静态过程</h3><p>准静态过程：过程的任一时刻，系统都处于平衡态— 一系列平衡态组成的理想化过程。</p>
+<p>若外界条件改变时，能保证和系统相应的强度量之间差无穷小，则过程是准静态的。</p>
+<p>弛豫时间τ：平衡破坏到恢复平衡的时间.</p>
+<p>当 $\Delta t_{过程} &gt; \tau$ 时，过程就可视为准静态过程。<br>。</p>
+<h3 id="功"><a href="#功" class="headerlink" title="功"></a>功</h3><p>体积功： $\mathrm{\bar dA} = p\mathrm dV$ </p>
+<p>系统对外界做功: $A = \int_{V_1}^{V_2}p\mathrm dV$ 是一个过程量。</p>
+<p>通过做功改变系统热力学状态，微观上是分子规则运动的能量通过碰撞转变为无规则运动的能量。</p>
+<h3 id="内能，热量和热力学第一定律"><a href="#内能，热量和热力学第一定律" class="headerlink" title="内能，热量和热力学第一定律"></a>内能，热量和热力学第一定律</h3><p>内能：定义为 $E_2 - E_1 = A_{1\rightarrow 2}$ （绝热过程）</p>
+<p>内能通过绝热功度量。</p>
+<p>热量：定义为 $Q = (E_2 - E_1)$ （无功过程）</p>
+<p>微观本质是分子无规则运动的能量通过碰撞从高温物体向低温物体传递。</p>
+<p>热力学第一定律：</p>
+ $Q = \Delta E + A$ 
+
+ $\mathrm {\bar{d}}Q = \mathrm d E + \mathrm{\bar{d}}A$ 
+
+<p>热力学第一定律是一条实验定律，适用于任何热力学系统的任何过程。</p>
+<h3 id="热容量："><a href="#热容量：" class="headerlink" title="热容量："></a>热容量：</h3>
+$$
+C = \frac{\mathrm dQ}{\mathrm dT}
+$$
+
+
+<p>定体热容量： $C_v = \left(\frac{\mathrm dQ}{\mathrm dT}\right)_V$ </p>
+<p>定压热容量： $C_p = \left(\frac{\mathrm dQ}{\mathrm dT}\right)_p$ </p>
+<p>摩尔热容量：</p>
+
+$$
+C_m = \frac1\nu\frac{\mathrm dQ}{\mathrm dT}
+$$
+
+
+<p>对应地有定体摩尔热容量和定压摩尔热容量。</p>
+<p>理想气体内能： $\Delta E = \nu C_{V, m}\Delta T$ 。（推导：内能变化与过程无关，假设先等体后等温，等体过程无功只有热交换，等温过程内能不变。）</p>
+<p>迈耶公式：</p>
+
+$$
+C_{p, m} - C_{V, m} = R
+$$
+
+
+<p>（推导：用等压过程计算内能的变化，与定体过程的结论比较一下可得。）</p>
+<p>理想气体热容量理论公式：</p>
+
+$$
+C_{V, m} = \frac i2R, C_{p, m} = \frac{i+2}{2}R
+$$
+
+
+<p>推导：结合理想气体内能公式。</p>
+<p>定义比热容比: $\gamma = C_{p, m}/C_{V, m}$ </p>
+<h3 id="绝热过程"><a href="#绝热过程" class="headerlink" title="绝热过程"></a>绝热过程</h3><p>系统和外界没有热交换的过程。</p>
+<p>理想气体的准静态绝热过程：</p>
+<blockquote>
+
+$$
+&gt; 0 = p\mathrm dV + \nu C_{V, m}\mathrm dT\\
+&gt; p\mathrm dV + V\mathrm dp = \nu R\mathrm dT\\
+&gt; R  = C_{p, m} - C_{V ,m}
+&gt; $$
+
+
+<p>得到：</p>
+
+$$
+&gt; \frac{\mathrm dp}{p} = -\gamma\frac{\mathrm dV}V
+&gt; $$
+
+</blockquote>
+<p>两边积分得到:</p>
+
+$$
+pV^{\gamma} = C, TV^{\gamma - 1} = C, p^{\gamma - 1}T^{-\gamma} = C
+$$
+
+
+<p>绝热功</p>
+
+$$
+A = \int_{V_1}^{V_2} p\mathrm dV = C \int_{V_1}^{V_2}\frac 1{V^{\gamma}}\mathrm dV = \frac{C}{1 - \gamma}(V_2^{1 - \gamma} - V_1^{1 - \gamma}) =\frac{p_2V_2 - p_1V_1}{1 - \gamma} 
+$$
+
+
+<p>绝热功等于内能的减少量：</p>
+
+$$
+A = -\Delta E = \nu C_{V, m}\Delta T
+$$
+
+
+<p>理想气体的多方过程</p>
+<p>多方过程：热容量 $C$ 为常数的过程</p>
+<p>多方过程方程： $pV^n = \text{const}$ </p>
+<p>其中， $n = (C - C_p)/(C - C_V) = (C_m - C_{p, m})/(C_m - C_{V, m}) = \text{const}$ </p>
+<p>如果为绝热过程则 $C = 0$ ， $n = \gamma$ ，从而 $pV^{\gamma} = \text{const}$ 。</p>
+<p>如果为等温过程则 $C = \infty$ ， $n = 1$ ，因此 $pV = \text{const}$ 。</p>
+<p>绝热自由膨胀过程<font color="red">（非准静态过程！！）</font>：</p>
+<p>理想气体： $Q = 0, A = 0 \Rightarrow E_1 = E_2$ </p>
+<p>真实气体：若分子间以引力为主,  $T_2 &lt; T_1$ ，以斥力为主， $T_2 &gt; T_1$ 。</p>
+<p>焓：气体的绝热节流过程是等焓过程，即 $H = E + pV$ 为常数，对于非理想气体而言，内能不仅与温度有关，也与体积有关（焦耳-汤姆孙效应）。</p>
+<p>绝热自由膨胀：初末状态在等温线上，但是过程中不是平衡态。</p>
+<p>准静态等温膨胀：吸热用来做功。</p>
+<p>准静态绝热膨胀：内能的减少量用来做功。</p>
+<p><img src="/../images/physics/guocheng.png" loading="lazy"></p>
+<p>循环过程：</p>
+<p>系统，如热机中的工质，经一系列变化的回到初态的整个过程。</p>
+<p>状态图：</p>
+<p><img src="/../images/physics/xunhuantu.png" loading="lazy"></p>
+<p>热循环：</p>
+<p><img src="/../images/physics/rexunhuan.png" loading="lazy"></p>
+<p>蒸汽机的效率约为十几%，内燃机20-30%。</p>
+<p>制冷循环：</p>
+<p><img src="/../images/physics/zhilengxunhuan.png" loading="lazy"></p>
+<p>制冷系数：</p>
+
+$$
+w = \frac{Q_2}{A} = \frac{Q_2}{Q_1 - Q_2}
+$$
+
+
+<h3 id="卡诺循环"><a href="#卡诺循环" class="headerlink" title="卡诺循环"></a>卡诺循环</h3><p>卡诺循环是一种可逆循环，包括两个等温过程和两个绝热过程。它的效率为</p>
+
+$$
+\eta = 1 - \frac{|Q_2|}{Q_1} = 1 - \frac{T_2}{T_1}
+$$
+
+
+<p>卡诺循环的效率仅与热源的温度比有关。</p>
+<p>由卡诺定理可以证明，卡诺循环的效率与工质无关。因此，不妨设工质为理想气体，利用理想气体等温和绝热过程方程得到效率公式。</p>
+<h2 id="热力学第二定律"><a href="#热力学第二定律" class="headerlink" title="热力学第二定律"></a>热力学第二定律</h2><p>开尔文表述：不可能将热量从低温热源搬运到高温热源，而不产生其他影响。（制冷系数不可能为无穷大）</p>
+<p>克劳修斯表述：不可能将功全部转化为热。（热机效率不可能为1）</p>
+<p>开尔文表述和克劳修斯表述是等价的。事实上，任何关于热现象不可逆的描述都是等价的，它们要么同时成立，要么同时不成立。因此，描述热现象的方向性，只需要举一个例子即可。</p>
+<h3 id="卡诺定理"><a href="#卡诺定理" class="headerlink" title="卡诺定理"></a>卡诺定理</h3><p>在温度相同的高温热源和温度相同的低温热源之间工作的一切热机，可逆热机的效率最大。</p>
+<p>推论：一切可逆热机，只要它们的高温热源的温度相等，低温热源的温度相等，效率就相等。</p>
+<p>对于制冷机：</p>
+<p>可逆制冷机的制冷系数最大。</p>
+<p>所有2热源可逆制冷机制冷系数都相等，等于卡诺制冷机的制冷系数。</p>
+<h3 id="热力学温标"><a href="#热力学温标" class="headerlink" title="热力学温标"></a>热力学温标</h3><p>根据卡诺定理，可逆热机的效率只与温度有关。因此可以用效率，或者说热量比来定义温标。</p>
+<p>在热力学温标下，低温热源的温度不能为0，否则可逆热机的效率为1.</p>
+<h3 id="任意可逆循环的效率"><a href="#任意可逆循环的效率" class="headerlink" title="任意可逆循环的效率"></a>任意可逆循环的效率</h3>
+$$
+\eta \le 1 - \frac {T_2}{T_1}
+$$
+
+
+<p>其中， $T_1$ ， $T_2$ 分别为循环中工质的最高和最低温度。</p>
+<h3 id="克劳修斯熵公式"><a href="#克劳修斯熵公式" class="headerlink" title="克劳修斯熵公式"></a>克劳修斯熵公式</h3><p>热力学第零定理导出了温度，热力学第一定律导出了内能，热力学第二定律则导出了熵。</p>
+<p>可逆循环可以拆成若干小卡诺循环，每个卡诺循环满足</p>
+<p>可逆循环有克劳修斯等式</p>
+
+$$
+\oint_R \frac{\mathrm {\bar d} Q}{T} = 0
+$$
+
+
+<p>因此得到一个与路径无关的状态函数。</p>
+<p>熵与状态有关，和过程无关。即便过程是不可逆过程。</p>
+<p>但是，仅当过程为可逆过程时才有 $\mathrm dS=  \mathrm{\bar d}Q/T$ 。</p>
+<p>对于可逆过程：</p>
+
+$$
+T\mathrm dS = \mathrm{\bar d}Q = \mathrm dE + p\mathrm dV
+$$
+
+
+<p>因而可以用 $E, V$ 表示熵：</p>
+
+$$
+\mathrm dS = \frac 1T \mathrm dE + \frac pT \mathrm dV = \frac 1T()
+$$
+
+
+<h3 id="克劳修斯不等式"><a href="#克劳修斯不等式" class="headerlink" title="克劳修斯不等式"></a>克劳修斯不等式</h3><p>不可逆循环有</p>
+
+$$
+\oint_{Ir} \frac{\mathrm {\bar d} Q}{T} &lt; 0
+$$
+
+
+<p>因而有熵增加原理:</p>
+
+$$
+\int_{1_{Ir}}^{2} + \int_{2_R}^1 &lt; 0\Rightarrow S_1 - S_2= \int_{1_{Ir}}^2
+$$
+
+
+<h1 id="振动和波动"><a href="#振动和波动" class="headerlink" title="振动和波动"></a>振动和波动</h1><h2 id="波动"><a href="#波动" class="headerlink" title="波动"></a>波动</h2><h3 id="多普勒效应"><a href="#多普勒效应" class="headerlink" title="多普勒效应"></a>多普勒效应</h3><p>一般形式：</p>
+<p><img src="/../images/DSA/Duopule.jpg" loading="lazy"></p>
+<p>机械波不存在多普勒效应。</p>
+<p>电磁波的多普勒效应：</p>
+<p><img src="/../images/DSA/waveDuopl.jpg" loading="lazy"></p>
+<p>横向多普勒效应： $\theta = \pi /2$ </p>
+<p>纵向多普勒效应： $\theta = 0,\pi$ </p>
+<h3 id="激波"><a href="#激波" class="headerlink" title="激波"></a>激波</h3><p>马赫数： $\frac{v_s}{u} = \frac 1{\sin\alpha}$ </p>
+<h1 id="光学"><a href="#光学" class="headerlink" title="光学"></a>光学</h1><p>光学分为几何光学，波动光学和量子光学。</p>
+<h2 id="光的相干叠加"><a href="#光的相干叠加" class="headerlink" title="光的相干叠加"></a>光的相干叠加</h2><p>光源：</p>
+<ol>
+<li>普通光源：自发辐射。不同原子发光独立、不相干；同原子不同次发光独立、不相干。</li>
+<li>激光光源：受激辐射。光放大，全通光子，相干光，波列长，相干性好。</li>
+</ol>
+<p>光的相干性：<br>光学中强调电磁波的电场矢量 $\vec E$ ：光矢量</p>
+<p>相干条件：光矢量有平行分量，频率相同，相差恒定。</p>
+<p>电磁波叠加的强度公式推导：</p>
+
+$$
+I = \sqrt{\varepsilon / \mu}\left&lt;\vec E \cdot \vec E \right&gt;_t \\
+
+I \propto \left&lt;\vec E \cdot \vec E \right&gt;_t \\
+
+叠加的电磁波：\vec E_1 + \vec E_2\\
+
+
+矢量的点乘运算可得叠加后的强度:\\
+
+I = I_1 + I_2 + 2\sqrt{\varepsilon / \mu}\left&lt;\vec E_1 \cdot \vec E_2 \right&gt;_t 
+
+$$
+
+
+<p>对光的相干叠加，用光矢量的平行分量描述光场–标量波函数。</p>
+
+$$
+I = I_1 + I_2 + 2\sqrt{I_1I_2}\cos \Delta \varphi
+$$
+
+
+<p>其中 $\Delta\varphi = -k(r_2 - r_1) + (\varphi_{20} - \varphi_{10})$ 为相位差。</p>
+<p>在上面两式中，若 $\vec E_1 \cdot \vec E_2 \ne 0$ 或者 $\Delta\varphi \ne \pm\frac{\pi}{2}...$ ，则满足相干的条件。</p>
+<p>条纹的明显程度用衬比度衡量： $V = (I_{max} - I_{min})/(I_{max} + I_{min})$ </p>
+<p>不同的位置 $\Delta\varphi$ 不同，因而对应的 $I$ 不同，造成了干涉条纹的出现。 $I_1 = I_2$ 时 $V=1$ ， $I_1 \ne I_2$ 时， $V \ne 1$ 。</p>
+<p>普通光源获得相干光的途径一般有分波阵面法（双缝干涉）和分振幅法（薄膜干涉）。</p>
+<h3 id="双缝干涉"><a href="#双缝干涉" class="headerlink" title="双缝干涉"></a>双缝干涉</h3><p><img src="/../images/physics/shuangfeng.jpg" loading="lazy"></p>
+<p>明纹： $\delta = \pm k\lambda$ </p>
+<p>暗纹： $\delta = \pm (2k + 1)\frac \lambda 2$ </p>
+ $(k\in N)$ 
+
+<p>条纹间距： $\Delta x = \frac{D}{d}\lambda$ </p>
+ $\Delta \varphi \approx \frac{d\sin \theta}{\lambda}2\pi$ 
+
+<p>时间相干性（光的颜色）：</p>
+<p>光的非单色性：</p>
+<p>准单色光：由某个中心频率或波长附近的频率或波长连续分布的光构成。采用谱密度函数描述。</p>
+<p><img src="/../images/physics/%E5%87%86%E5%8D%95%E8%89%B2%E5%85%89.jpg" loading="lazy"></p>
+<p>造成谱线宽度的原因：自然宽度、多普勒增宽、碰撞增宽</p>
+<p>非单色性对干涉条纹的影响：</p>
+<p><img src="/../images/physics/%E9%9D%9E%E5%8D%95%E8%89%B2%E5%85%89.jpg" loading="lazy"></p>
+<p>从图中可以看出，如果某个位置谱线中波长最长的成分的k级明纹和波长最短的成分的(k+1)级明纹重合，则在这个位置以后的条纹看不清楚了。</p>
+<p>可以解得最大相干级次： $k_M = \lambda/\Delta\lambda$ ，进而有最大波程差： $\delta_M = \lambda^2/\Delta\lambda$ 。</p>
+<p>相干长度等于波列长度。</p>
+<p>通常用相干时间（光通过相干长度所需的时间） $\tau = \delta_M / c$  衡量光的单色性。相干时间或相干长度越长，则单色性越好。</p>
+<p>空间相干性（光的宽度）：</p>
+<p>较宽的光源会导致明纹的非相干叠加，使衬比度下降。</p>
+<p>设光的宽度为 $b_0$ ,则看到干涉条纹的条件是 $b_0 &lt; \frac{R}{d}\lambda$ ，这一上界称为光源极限宽度。</p>
+<p>固定b和R，则得到 $d &lt; \frac{R}{b}\lambda$ ，上界称为相干间隔。</p>
+<p>光源中心对两孔的张角为 $\theta = \frac{d}{R} &lt; \frac{\lambda}{b}$ ，上界称为相干孔径角。</p>
+<h3 id="光程"><a href="#光程" class="headerlink" title="光程"></a>光程</h3><p>用于计算光经过不同介质的相差。</p>
+ $\Delta\varphi = \frac{2\pi r}{\lambda}$ 。
+
+<p>透镜不产生附加光程差。</p>
+<h3 id="薄膜干涉"><a href="#薄膜干涉" class="headerlink" title="薄膜干涉"></a>薄膜干涉</h3><p>为什么要薄？相干长度（时间相干性）限制。</p>
+<p>薄膜干涉有实际意义的是等倾条纹和等厚条纹。</p>
+<p>光程差</p>
+
+$$
+\delta = 2ne \cos r + \frac{\lambda}{2}
+$$
+
+
+<p>e为膜厚度。</p>
+<p>等厚条纹：</p>
+<p>厚度不同，角度相同</p>
+<p>单色平行光入射，近似垂直于膜表面，因而 $i, r \approx 0$ </p>
+
+$$
+\delta = 2ne + \frac{\lambda}{2}
+$$
+
+
+<p>劈尖：</p>
+<p>由于明纹需满足 $\delta = k\lambda$ ，暗纹需满足 $\delta = (2k+1)\lambda/2$ ，故相邻亮纹所在的厚度差为 $\Delta e = \lambda / (2n)$ ，而条纹间距为 $L = \Delta e / \theta = \lambda / (2n\theta)$ </p>
+<p>牛顿环：</p>
+<p><img src="/../images/physics/niudunhuan.jpg" loading="lazy"></p>
+<p>可以得到暗环半径公式： $r_k=\sqrt{kR\lambda}$ </p>
+<p>总结：条纹跟着厚度走。</p>
+<p>等倾条纹：</p>
+<p>厚度相同，角度不同。</p>
+<p>光程差(记!)</p>
+
+$$
+\delta = 2ne \cos r + \frac{\lambda}{2} = 2e\sqrt{n^2 - n^{\prime2}\sin ^2 i} + \frac \lambda2
+$$
+
+
+<p>等倾条纹实验通常采用面光源,因为透镜会把方向相同的光汇聚到一点，因而条纹的非常鲜明，衬比度很高，不会出现光源宽度和条纹衬比度的矛盾。</p>
+<p>应用：增透膜和增反膜</p>
+<h3 id="迈克尔逊干涉仪"><a href="#迈克尔逊干涉仪" class="headerlink" title="迈克尔逊干涉仪"></a>迈克尔逊干涉仪</h3><p>平行：等倾条纹</p>
+<p>倾斜：等厚条纹</p>
+<p>条纹缩进N个，代表厚度变化：</p>
+
+$$
+\Delta d = \frac{\lambda}{2n} = \frac {\lambda}{2}
+$$
+
+
+<p>在光路上放一个介质，条纹移动N个：</p>
+
+$$
+\delta = 2(n - 1)l = N\lambda
+$$
+
+
+<p>简而言之，一个条纹对应光程变化一个波长，厚度的变化（介质变化折算成厚度变化）乘以2等于光程的变化，因为一来一回经过了两次。</p>
+<h2 id="衍射"><a href="#衍射" class="headerlink" title="衍射"></a>衍射</h2><p>菲涅尔衍射和夫琅禾费衍射。</p>
+<p>惠更斯-菲涅尔原理</p>
+<p>夫琅禾费衍射研究光源和投影面在无限远处的情形。采用透镜将无限远转化为有限远。</p>
+<h3 id="单缝衍射（夫琅禾费）"><a href="#单缝衍射（夫琅禾费）" class="headerlink" title="单缝衍射（夫琅禾费）"></a>单缝衍射（夫琅禾费）</h3><p>利用半波带法计算明暗纹位置：</p>
+<p>中央明纹： $a\sin \theta = 0$ </p>
+<p>暗纹： $a\sin \theta = \pm k\lambda$ </p>
+<p>明纹（近似）: $a\sin \theta = \pm (2k + 1)\frac \lambda 2$ </p>
+<p>上述的 $k$ 不能为0。因为如果k&#x3D;0，即中央明纹，它没有半波带，因此要单独考虑。</p>
+<p>光强公式： $I_p = I_0(\frac{\sin \alpha}{\alpha})^2$ </p>
+<p>其中 $I_0$ 为中心亮纹强度， $\alpha = \frac{\pi a \sin \theta}{\lambda}$ </p>
+<p>条纹宽度：</p>
+<p>条纹宽度的定义：两个相邻暗纹之间的距离，就是它们之间那个条纹的宽度。</p>
+<p>中央明纹角宽度： $\Delta \theta_0\approx 2\frac{\lambda}{a}$ ，线宽度： $\Delta x_0 \approx 2 f \frac{\lambda}{a}$ </p>
+<p>其他明纹线宽度： $\Delta x \approx f\frac{\lambda}{a}$ </p>
+<h3 id="光栅衍射"><a href="#光栅衍射" class="headerlink" title="光栅衍射"></a>光栅衍射</h3><p>光栅是由衍射单元（狭缝、反射面等）排列成的具有空间周期性结构的光学元件。</p>
+<p>光栅常数d-空间周期性结构常数</p>
+<p>正入射光栅方程： $d\sin \theta = \pm k\lambda$ 。（明纹位置）</p>
+<p>暗纹方程： $d\sin \theta = \pm k\lambda + \frac{m}{N}\lambda$ </p>
+<p>主极大缺级公式： $k = k^\prime d / a$ </p>
+<p>主极大半角宽： $\frac {\lambda}{N d \cos \theta_k}$ </p>
+<p>斜入射光栅方程： $d(sin\theta - \sin i) = \pm k\lambda$ </p>
+<p>斜入射可以获得更高级次的条纹，但是观察到的条纹总数不变。</p>
+<p>调节入射角i或者波长 $\lambda$ ，衍射角 $\theta_k$ 也会改变。对于0级衍射光， $\sin \theta_0 = \frac{\lambda}{2\pi d}\Delta \varphi_{in}$ </p>
+<p>光学仪器的分辨本领：</p>
+<p>艾里斑半角宽 $D\sin \theta_1 \approx 1.22\lambda$ </p>
+<p>瑞利判据：一个象斑中心在另一个象斑边缘。</p>
+<p>根据瑞利判据得到透镜分辨本领（最小分辨角）： $R = \frac{D}{1.22\lambda}$ </p>
+<p>光栅光谱：</p>
+<p>取决于光栅的色散能力和谱线（条纹）的线宽度</p>
+<p>角色散本领： $D_{\theta} = \frac{\delta \theta}{\delta \lambda}$ </p>
+<p>色分辨本领： $R = \frac{\lambda}{\delta \lambda} = Nk$ ， $\delta \lambda$ ， $\lambda $ 取较小者的波长， $k$ 是主极大级数。</p>
+<h2 id="偏振"><a href="#偏振" class="headerlink" title="偏振"></a>偏振</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>线偏振光：光矢量做同向振动，方向不变。</p>
+<p>圆偏振光：光矢量的端点是圆。</p>
+<p>椭圆偏振光：光矢量的端点是椭圆。</p>
+<p>非偏振光：例如自然光。它的振动方向随机，各个方向振幅相等。自然光可以分解为两束垂直振动，振幅相等，相差随机的线偏振光。</p>
+<p>部分偏振光：自然光+完全偏振光。</p>
+<p>偏振度： $P = \frac{I_p}{I_t} = \frac{I_p}{I_n + I_p}$ </p>
+<h3 id="起偏与检偏"><a href="#起偏与检偏" class="headerlink" title="起偏与检偏"></a>起偏与检偏</h3><p>偏振片：利用二向色性。有微晶型和分子型。</p>
+<p>线偏振光的起偏：通过偏振片。</p>
+<p>马吕斯定律： $A = A_0 \cos \alpha, I = I_0 \cos^2 \alpha$ </p>
+<h3 id="反射与折射中的偏振"><a href="#反射与折射中的偏振" class="headerlink" title="反射与折射中的偏振"></a>反射与折射中的偏振</h3><p>S分量：垂直于入射面。P分量：平行于入射面。</p>
+<p>反射光S分量多，折射光P分量多。</p>
+<p>当 $i = i_0$ 使得反射光只有S分量，折射光大部分是P分量。称为布儒斯特角。 $i_0 + r_0 = 90\degree$ ，因而有布儒斯特定律： $\tg i_0 = \frac{n_2}{n_1}$ </p>
+<p>玻璃片堆可以增强反射光的强度，增加折射光的偏振程度。</p>
+<p>散射引起光的偏振：</p>
+<p>微粒散射：丁达尔效应</p>
+<p>分子散射：纯净气体、液体的散射。</p>
+<p>双折射现象：</p>
+<p>1束光入射到各向异性介质内，产生2束折射光。o光为寻常光，符合折射定律；e光为非常光，不符合折射定律一般，也不一定在入射面内。o，e光都是线偏振光，振动方向互相垂直。</p>
+<p>晶体光轴：是晶体中的特殊方向，光在晶体中沿该方向传播不发生双折射。方解石是单轴晶体。云母是双轴晶体。</p>
+<p>主平面：晶体中光的传播方向与晶体光轴构成的平面。o光振动方向垂直于主平面，e的振动方向在主平面内。只有当光轴在入射面内，o光主平面、e光主平面、入射面才重合。</p>
+<p>折射角度不同的本质是不同角度下光的传播速度不同。据此区分正晶体和负晶体：</p>
+ $v_o$ 是o光速度， $v_e$ 是e光垂直光轴方向速度。o光是各向同性的，e光沿平行光轴方向的速度和o光相同，e光沿所有方向的速度构成一个旋转椭球面。
+
+<p><img src="/../images/physics/shuangzheshe.jpg" loading="lazy"></p>
+<p>正晶体： $v_o &gt; v_e$ </p>
+<p>负晶体： $v_o &lt; v_e$ </p>
+<p>定义主折射率： $n_o = c/v_o, n_e = c/v_e$ </p>
+<p>利用惠更斯作图法可以讨论单轴晶体的光传播情况：</p>
+<p>以负晶体为例。</p>
+<ul>
+<li>若光轴平行于晶体表面，自然光垂直入射：o和e方向相同，速度不同，仍然是双折射；</li>
+<li>光轴平行晶体表面，且垂直入射面，自然光斜入射：e光也满足折射定律，折射率为 $n_e$ ；</li>
+<li>光轴与晶体表面斜交，自然光垂直入射：e光偏离入射方向，惠更斯波面是斜椭圆。</li>
+</ul>
+<p>研究晶片时，o光和e光（垂直振动和平行振动）是独立的正交的分量。垂直振动不会变成平行振动，平行振动也不会变成垂直振动。</p>
+<p>双折射：两个垂直方向的线偏振光的不同速度造成的。</p>
+<p>旋光：两个不同旋转方向的圆偏振光的不同速度造成的。</p>
+<h1 id="量子物理"><a href="#量子物理" class="headerlink" title="量子物理"></a>量子物理</h1><h2 id="黑体辐射"><a href="#黑体辐射" class="headerlink" title="黑体辐射"></a>黑体辐射</h2><p>热辐射</p>
+<p>物体受热发出电磁辐射。热辐射是连续谱，温度升高，短波成分增加。</p>
+<p>平衡热辐射：物体温度不变时产生的热辐射。单位时间内物体吸收能量等于辐射能量。</p>
+<p>光谱幅出度（单色幅出度）</p>
+<p>单位面积内单位频率发射的电磁波能量。</p>
+
+$$
+M_\nu = \frac{\mathrm d E_\nu(T)}{\mathrm d\nu}
+$$
+
+
+<p>总幅出度</p>
+
+$$
+M(T) = \int_0^\infty M_\nu(T)\mathrm d\nu
+$$
+
+
+<p>单色吸收比</p>
+
+$$
+\alpha_\nu(T) = \frac{\mathrm d E_{\nu(吸收)}}{\mathrm d E_{\nu(入射)}}
+$$
+
+
+<p>黑体</p>
+<p>能吸收所有频率的电磁波，没有反射。 $\alpha_{\nu}=1$ 。</p>
+<p>基尔霍夫辐射定律：</p>
+
+$$
+\frac{M_{\nu i}}{\alpha_{\nu i}} = M_{\nu 黑体}
+$$
+
+
+<p>实验定律：</p>
+<p>维恩位移定律： $\nu_m = C_\nu T$ ,  $\lambda_m = b/T$ </p>
+<p>注： $\lambda_m \nu_m \ne c$ 。</p>
+<p>斯特藩-玻尔兹曼定律： $M(T) = \sigma T^4$ ， $\sigma$ 为斯特藩-玻尔兹曼常量。</p>
+<p>韦恩公式：低频段不符合；</p>
+<p>瑞利-金斯公式：高频段不符合。</p>
+<p>普朗克能量子假设： $\varepsilon = h\nu$ </p>
+<p>普朗克公式：</p>
+
+$$
+M_\nu(T) = \frac{2\pi h}{c^2}\cdot \frac{\nu^3}{e^{h\nu/kT} - 1}
+$$
+
+
+<p>由它可以导出所有其他热辐射公式。</p>
+<h2 id="光电效应"><a href="#光电效应" class="headerlink" title="光电效应"></a>光电效应</h2><p>自学。</p>
+<h2 id="光的二象性"><a href="#光的二象性" class="headerlink" title="光的二象性"></a>光的二象性</h2><p>光子理论：能量 $\varepsilon = h\nu$ 。光强： $I = N \cdot h\nu$ ，N是光子数流通量。</p>
+<p>解释光电效应：</p>
+
+$$
+\frac 12 mv_m^2 = h\nu - A
+$$
+
+
+<p>光的粒子性：</p>
+
+$$
+p = \frac h \lambda \\
+E = h\nu \\
+m = \frac{h\nu}{c^2}
+$$
+
+
+<p>解释干涉和衍射：</p>
+<p>光子在某处出现的概率是由该处的光强决定的： $I \propto \frac 1 {r^2}$ ，光子分布概率的不同导致了光强的不同。也就是说，光子的波动性表现为概率波。</p>
+<p>光子在某处出现的概率和该处光强（光振幅的平方）成正比。</p>
+<h2 id="康普顿散射"><a href="#康普顿散射" class="headerlink" title="康普顿散射"></a>康普顿散射</h2><p>散射波出现新的波长： $\Delta \lambda = \lambda_C(1 - \cos\varphi)$ </p>
+<p>利用光子理论解释：光子和“静止”的“自由”电子碰撞过程动量守恒，能量守恒。</p>
+<p>解得 $\Delta \lambda = \frac{h}{m_0c}(1 - \cos \varphi)$ </p>
+<p>如果光子撞到内层电子，则能量不变，因而存在原波长。</p>
+<p>自由电子只能散射光子，不能吸收光子。如果吸收了，根据能量守恒和动量守恒，解得v&#x3D;c，违反了相对论。</p>
+<p>光电效应不考虑动量守恒，因为可见光、紫外线的能量低，电子不能视为自由，光子-电子不能视为动量守恒的系统。也因此，可见光观察不到康普顿效应。</p>
+<h2 id="概率波和概率幅"><a href="#概率波和概率幅" class="headerlink" title="概率波和概率幅"></a>概率波和概率幅</h2><p>物质波的本质：</p>
+<p>德布罗意认为是引导物质运动的“导波”；（本质不明确）</p>
+<p>薛定谔认为波是基本的，电子是“波包”；（波包是不稳定的，而电子是稳定的）</p>
+<p>另一个观点：粒子是基本的，物质波是电子相互作用形成的（被电子双缝实验否定）</p>
+<p>波恩的解释：物质波是描述粒子在空间概率分布的“概率波”。</p>
+<p>量子力学的基本假设之一：微观粒子的状态用波函数描述</p>
+<p>概率波波函数(概率幅)：复函数 $\Psi (\vec r, t)$ </p>
+<p>波函数没有直接的物理意义。复函数模的平方 $|\Psi (\vec r, t)|^2$ 表示概率密度。</p>
+<p>波函数需要满足标准条件：</p>
+<p>有限性: $\iiint_{\Delta V}|\Psi|^2 \mathrm dV$ 有限</p>
+<p>归一性： $\int_\Omega |\Psi(\vec r, t)|^2 \mathrm dV = 1$ </p>
+<p>单值性：波函数是单值函数。</p>
+<p>连续性：波函数和它的一阶导数是连续的。</p>
+<p>双缝的波函数：等于通过上缝和下缝的波函数的线性叠加。 $\Psi_{12}=\Psi_1+\Psi_2$ 。(一个基本假设)</p>
+<p>微观粒子波动性实质是波函数的叠加性。</p>
+<p>结合测量理解。</p>
+<p>态叠加原理： $\Psi = \sum_n C_n\Psi_n$ 。其中 $|C_n|^2$ 是该粒子处于 $\Psi_n$ 状态的概率。</p>
+<p>一维自由粒子的波函数：</p>
+
+$$
+\Psi(x, t) = A e^{i(px-Et)/\hbar}
+$$
+
+
+<p>概率密度 $|\Psi|^2 = |A|^2 = \text {const.}$ </p>
+<p>波粒二象性：</p>
+<p>粒子性：具有能量 $E$ 和动量 $\vec p$ 。非经典粒子！没有轨道概念。</p>
+<p>波动性：具有波长 $\lambda$ 和频率 $\nu$ 。非经典波！非真实物理量的波动。</p>
+<h2 id="不确定关系"><a href="#不确定关系" class="headerlink" title="不确定关系"></a>不确定关系</h2>
+$$
+\left&lt;\vec r|\Psi\right&gt;
+$$
+
+
+<p>不确定度： $\Delta A = \sqrt{\overline{(A - \bar A)^2}}$ </p>
+<p>坐标和动量的不确定性关系：</p>
+
+$$
+\Delta x \cdot \Delta p \ge \frac \hbar 2
+$$
+
+
+<p>因而微观粒子没有“轨道”。</p>
+<p>能量和时间的不确定性关系：</p>
+
+$$
+\Delta E \cdot \Delta t \ge \frac{\hbar}{2}
+$$
+
+
+<p>时间不是力学量，它只是一个参数。位置，动量，能量等都是力学量。</p>
+<h2 id="薛定谔方程"><a href="#薛定谔方程" class="headerlink" title="薛定谔方程"></a>薛定谔方程</h2><p>定义</p>
+
+$$
+i\hbar \frac{\partial \Psi}{\partial t} = \hat {H} \Psi
+$$
+
+
+<p>哈密顿算符： $\bar {H} = -\frac{\hbar ^2}{2m}\nabla^2 + U(\vec r, t)$ </p>
+<p>若势函数不显含时间，则哈密顿算符 $\hat H$ 称为能量算符。此时薛定谔方程可以通过分离变量法求解。</p>
+<h3 id="定态薛定谔方程-能量本征方程"><a href="#定态薛定谔方程-能量本征方程" class="headerlink" title="定态薛定谔方程-能量本征方程"></a>定态薛定谔方程-能量本征方程</h3><p>分离变量法求解：</p>
+<p>若势函数不显含t，则可设：</p>
+
+$$
+\Psi(\vec r, t) = \Phi(\vec r) \cdot T(t)
+$$
+
+
+<p>得到：</p>
+
+$$
+i\hbar \frac{\mathrm dT(t)}{\mathrm d t}\frac 1{T(t)} = [\hat H\Phi (\vec r)]\frac{1}{\Phi(\vec r)} = E
+$$
+
+
+
+$$
+T(t) = Ce^{-\frac{i}{\hbar}Et}\\
+()
+$$
+
+
+<p>E称为能量本征值（后面会讲什么叫本征值），对应的 $\Phi_E$ 称为本征波函数。</p>
+<p>定态：能量取确定值的状态，对应薛定谔方程的特解： $\Psi_E(\vec r, t) = \Phi e^{-\frac{i}{\hbar}Et}$ .</p>
+<p>对不同的势函数和能量区间，能量的本征值可能取连续的值，也可能取分立的值。设E取分立值， $\{E_n, n = 1, 2, 3, \dots\}$ ，对应的本征波函数 $\Psi_E (\vec r, t) = \Phi_E(\vec r)e^{-\frac{i}{\hbar}Et}$ </p>
+<p>下面通过求解一维定态薛定谔方程来讨论两类问题：</p>
+<p>本征值问题：给定 $U(x)$ ，求 $E_n$ 和 $\Phi_n(x)$ 。</p>
+<p>散射问题： $E$ 已知，射向势垒 $U(x)$ ，计算粒子穿透势垒的概率。 </p>
+<h2 id="无限深方势阱中的粒子"><a href="#无限深方势阱中的粒子" class="headerlink" title="无限深方势阱中的粒子"></a>无限深方势阱中的粒子</h2><p>背景：长度为 $a$ 的导体中自由移动的电子，只能在导体中自由运动，而不能离开导体。</p>
+ $|x| &gt; a/2$ 时， $U(x) \rightarrow \infty$ ；
+
+ $|x| \le a/2$ 时， $U(x) = 0$ 。
+
+<p>在 $|x| &gt; a/2$ 区间， $\Phi_1 = 0$ 。</p>
+<p>在 $|x| \le  a/2$ 区间， $\frac{\mathrm d^2 \Phi_2}{\mathrm dx^2} + \frac{2mE}{\hbar^2}\Phi_2 = 0$ </p>
+<p>记 $k = \frac{2mE}{\hbar^2}$ 。解得 $\Phi_2 = A\sin(kx + \varphi)$ 。</p>
+<p>求解定态的常规手法：利用波函数的三个条件，即单值、有限、连续，确定 $A, k, \varphi$ 。</p>
+<p>利用连续条件，波函数在势阱边界处连续：</p>
+
+$$
+A\sin(\frac{ka}{2} + \varphi) = 0, A\sin(-\frac{ka}{2} + \varphi) = 0.\\
+
+\Rightarrow k = \frac{n\pi}{a}, \varphi = \frac{l\pi}{2}
+$$
+
+
+<p>从而</p>
+
+$$
+E = \frac{\pi^2\hbar^2}{2ma^2}n^2 \ (n = 1, 2, 3, \dots)
+$$
+
+
+<p>最低能量 $E_1$ 被称为零点能。</p>
+<p>大量子数情况下，能量趋向于连续。</p>
+
+$$
+l = 0, \varphi = 0, \Phi_2 = A\sin \frac{n\pi}{a}x = \Phi_{on},满足边界连续需要n为偶数\\
+l = 1, \varphi =\pi /2 , \Phi_2 = A\cos \frac{n\pi}{a}x = \Phi_{en},满足边界连续需要n为奇数\\
+l \ge 2，只差个符号，不影响|\Phi|^2，不再考虑。
+$$
+
+
+<p>求 $A$ ：</p>
+<p>归一化： $\int_{-a/2}^{a/2}|\Phi_{on}|^2 \mathrm dx = 1$ ， 得到 $A = \sqrt \frac2a$ </p>
+
+$$
+\Phi_{on} = \sqrt{\frac 2a}\sin \frac{n\pi}{a}x, n = 2, 4, 6, \dots\\
+\Phi_{en} = \sqrt{\frac 2a}\cos\frac{n\pi}{a}x, n = 1, 3, 5, \dots
+$$
+ 
+
+<p>定态：</p>
+
+$$
+
+\Psi_n (x, t) = \Phi_n(x) \cdot e^{-\frac i\hbar Et}
+
+$$
+
+
+<p>被称为驻波解(时间项指数为纯虚数，展开可以写成三角函数)。概率密度 $|\Psi_n(x, t)|^2 = |\Phi_n(x)|^2$ </p>
+<h2 id="势垒穿透"><a href="#势垒穿透" class="headerlink" title="势垒穿透"></a>势垒穿透</h2><h3 id="粒子进入势垒"><a href="#粒子进入势垒" class="headerlink" title="粒子进入势垒"></a>粒子进入势垒</h3><p>背景：金属与半导体接触处，势能隆起形成势垒。粒子以能量为 $E(E &lt; U_0)$ 的状态自由入射。</p>
+
+$$
+U(x) = 0, x \le 0;\\
+U(x) = U_0, x \gt 0.
+$$
+
+
+<p>量子力学认为有一部分粒子会穿透势垒。不仅有反射，还有投射。</p>
+<p>定态薛定谔方程：</p>
+
+$$
+\Phi^{\prime\prime}(x) + \frac{2m}{\hbar^2}(E - U(x))\Phi(x) = 0
+$$
+
+
+ $x \le 0$ : 
+
+$$
+k_1 = \sqrt{2mE/\hbar^2} &gt; 0\\
+\Psi_1^{\prime\prime} + k_1^2 \Psi_1 = 0
+$$
+
+
+ $x \gt 0$ :
+
+$$
+ik_2 = \sqrt{2m(E - U_0)/\hbar^2} (k_2 &gt; 0)\\
+\Psi_2^{\prime\prime} + (ik_2)^2\Psi_2 = 0
+$$
+
+
+<p>通解（利用了 $x\rightarrow\infty$ 时 $\Psi_2$ 的有界性）：</p>
+
+$$
+\Psi_1(x) = Ae^{ik_1x} + Be^{-k_1x}(表现为入射和反射波)\\
+\Psi_2(x) = Ce^{k_2x}(表现为透射波)
+$$
+
+
+<p>粒子可以出现在势垒区！表现为电子溢出金属表面，形成金属表面的一层电子气。</p>
+<p>势垒区的概率密度： $|\Psi_2(x)|\propto e^{-\frac{2x}{\hbar}\sqrt{U_0 - E}}$ </p>
+<p>波可以穿过有限宽势垒，以平面波的形式继续前进。称为量子隧穿效应。</p>
+ $\Psi_3(x) = Se^{i\frac {\sqrt{2mE}}{\hbar} x}$ 
+
+<p>扫描隧道显微镜：原理是量子隧穿效应，可以用来观测物质表面结构。</p>
+<p><img src="/../images/physics/STM.jpg" loading="lazy"></p>
+
+$$
+i \propto Ue^{-C\sqrt{\varPhi}d}
+$$
+
+
+ $\varPhi$ 为样品表面平均势垒高度。
+
+<h2 id="一维谐振子"><a href="#一维谐振子" class="headerlink" title="一维谐振子"></a>一维谐振子</h2>
+$$
+U(x) = \frac 12 kx^2 = \frac 12m\omega^2x^2, \omega = \sqrt{\frac km}
+$$
+
+
+<p>求解定态薛定谔方程得到</p>
+
+$$
+E_n = (n + \frac 12)\hbar \omega = (n + \frac 12)h\nu
+$$
+
+<p>零点能： $\frac{h\nu}{2}$ 。间距： $h\nu$ 。能量本征函数不用记。</p>
+<p>定态概率密度：</p>
+<p>经典情况下：平衡位置处 $\vec v$ 最大，停留时间最短，出现概率最小，振幅最大的时候 $\vec v$ 为0，出现概率最大。量子数n趋于无穷时，量子概率分布趋于经典概率分布。</p>
+<p>如果 $E&lt; U$ ，隧穿效应仍然存在。</p>
+<h2 id="力学量算符"><a href="#力学量算符" class="headerlink" title="力学量算符"></a>力学量算符</h2><p>以位矢 $\vec r$ 为自变量的空间，称为“坐标表象”。在坐标表象中，动量和位矢不存在对应关系 $\vec p = \vec p(\vec r)$ （不确定关系）。</p>
+<p>量子力学将动量、角动量、能量等力学量“算符化”。力学量算符是量子力学的一个基本假设。</p>
+<h3 id="力学量算符的引入"><a href="#力学量算符的引入" class="headerlink" title="力学量算符的引入"></a>力学量算符的引入</h3><p>定义能量算符 $\hat {E} \equiv i\hbar \frac{\partial}{\partial t}$ ，与表象无关。</p>
+<p>坐标表象中定义动量算符 $\hat{\vec p} = -i\hbar\nabla$ ，坐标算符 $\hat{\vec r} = r$ 。</p>
+<p>由于坐标表象下坐标算符就是坐标，因此势能算符 $\hat{U} = U(\vec r)$ 。动能算符 $\hat{E_k} = \frac{(-i\hbar\nabla)\cdot (-i\hbar\nabla)}{2m} = -\frac{\hbar^2}{2m}\nabla^2$ </p>
+<p>角动量算符 $\hat{\vec L} = \hat{\vec r}\times \hat{\vec p} = -i\hbar\vec r \times \nabla$ 。如果用球极坐标，可得 $\hat{L_z} = -i\hbar \frac{\partial}{\partial \varphi}$ 。角动量算符的模方由极角和方位角的导数组成： $\hat{L}^2 = -\frac {\hbar^2}{\sin \theta}\frac{\partial}{\partial \theta}(\sin \theta\frac{\partial}{\partial \theta})  +\frac{\hat{L_z^2}}{\sin^2\theta}$ </p>
+<h3 id="本征值和本征函数"><a href="#本征值和本征函数" class="headerlink" title="本征值和本征函数"></a>本征值和本征函数</h3><p>本征方程： $\hat{A}\Psi_n = A_n\Psi_n$ 。其中 $A_n$ 为本征值， $\Psi_n$ 是 $A$ 取 $A_n$ 时的本征态，称为本征函数。</p>
+<p>本征值就是相应力学量的可能取值。</p>
+ $\hat A$ 的本征函数系 ${\Psi_n}$ 构成正交、归一的完备函数系。一维情况的归一化： $\int_{-\infty}^{+\infty}\Psi_n^*(x)\Psi_n(x)\mathrm dx = 1$ 。正交性： $\int_{-\infty}^{+\infty}\Psi_m(x)\Psi_n(x)\mathrm d x = \delta_{mn}$ .
+
+<p>本征函数的完备性：在相同的函数空间内，任一物理上合理的归一化波函数，都可以由力学量A的本征函数系线性展开，即 $\Psi = \sum_{n}C_n(t)\Psi_n(x)$ 。</p>
+<h3 id="态叠加原理："><a href="#态叠加原理：" class="headerlink" title="态叠加原理："></a>态叠加原理：</h3><p>线性展开公式：</p>
+
+$$
+\Psi(x, t) = \sum_{n }C_n(t)\Psi_n(x) \ (假设是归一化的)
+$$
+
+
+<p>基本假设之一。</p>
+<h3 id="力学量的测量原理"><a href="#力学量的测量原理" class="headerlink" title="力学量的测量原理"></a>力学量的测量原理</h3><p>量子力学假设：在 $\Psi(x,t)$ 态上测量 $A$ ，则 $\Psi(x, t)$ 一定向着 $A$ 的某个本征态 $\Psi_n$ 塌缩，测量结果为 $A_n$ 。</p>
+<p>特别地，如果 $\Psi = \Psi_n$ ，则测量结果是确定的，为 $A_n$ 。</p>
+<p>测量结果中 $A_n$ 出现的概率为 $|C_n(t)|^2$ 。</p>
+
+$$
+\bar A = \sum_n |C_n(t)|^2A_n = \int_{-\infty}^{+\infty}\Psi^*(x, t)\hat A\Psi(x, t)\mathrm dx
+$$
+
+
+
+<h2 id="Dirac符号"><a href="#Dirac符号" class="headerlink" title="Dirac符号"></a>Dirac符号</h2><h3 id="量子态"><a href="#量子态" class="headerlink" title="量子态"></a>量子态</h3><p>本征值离散的： $\ket{n}$ </p>
+<p>本征值是连续的： $\ket{P_x}, \ket{x}$ </p>
+<p>它们各自张开一个线性空间。</p>
+<h3 id="内积空间"><a href="#内积空间" class="headerlink" title="内积空间"></a>内积空间</h3><p>左矢与右矢一一对应，左矢张开一个共轭线性空间。</p>
+ $\ket{A}$ 和 $\ket{B}$ 的内积(复内积)： $\langle B|A\rangle$ 
+
+<p>左矢空间与右矢空间通过复内积练习，称为内积空间。</p>
+<h3 id="线性算符"><a href="#线性算符" class="headerlink" title="线性算符"></a>线性算符</h3>
+$$
+\hat{L}\ket{A} = \ket{B}
+$$
+
+
+<p>满足：</p>
+<ul>
+<li> $\hat L (\ket{A} + \ket {B}) = \hat L\ket{A} + \hat L\ket{B}$ </li>
+<li> $(\hat F + \hat G)\ket{A} = \hat F \ket{A} + \hat G\ket{A}$ 
+</li>
+<li> $\hat F(\hat G \ket{A}) = (\hat F \cdot \hat G)\ket {A}$ </li>
+</ul>
+<p>共轭算符： $\bra{A}\bar{\hat L}$ 与 $\hat L \ket{A}$ 一一对应，将 $\bar{\hat L}$ 或者 $\hat L ^+$ 称为共轭算符。</p>
+<p>厄米算符： $\bar {\hat L} = \hat L$ 。</p>
+<p>算符是向右结合的。</p>
+<h3 id="算符本征方程"><a href="#算符本征方程" class="headerlink" title="算符本征方程"></a>算符本征方程</h3>
+$$
+\hat L \ket{L_n} = l_n\ket{L_n}\\
+
+\hat L\ket{n} = l_n\ket{n}
+$$
+
+
+ $l_n$ 是本征值， $L_n$ 是本征态。
+
+<p>由测量原理，本征值必须是实数。所以可以观测的力学量对应的算符都是厄米算符。</p>
+<h3 id="态叠加原理"><a href="#态叠加原理" class="headerlink" title="态叠加原理"></a>态叠加原理</h3><p>离散谱：</p>
+
+$$
+\bra{m}n\rangle = \delta_{mn}\\
+\ket{\psi} = \sum_n C_n\ket{n}\\
+概率幅：\bra{m}\psi \rangle = C_m\\
+\ket{A} = \sum_{n}(\bra{n}A\rangle)\ket{n} = \left(\sum_n \ket{n}\bra{n}\right)\ket{A}\\
+\Rightarrow \sum_n \ket{n}\bra{n}=1(本征矢的完备性表示)
+$$
+
+
+<p>连续谱：</p>
+
+$$
+\bra{x_0^\prime}x_0\rangle = \delta(x_0^\prime - x_0)\\
+\ket{\psi} = \int_{-\infty}^{\infty}C(x_0)\ket{x_0}\mathrm dx_0 \\
+概率幅：\bra{x_0^\prime}\psi\rangle = C(x_0^\prime)\\
+\ket{\psi} = \int_{-\infty}^{\infty}\bra{x_0}\psi\rangle\ket{x_0}\mathrm dx_0 = \left(\int_{-\infty}^{\infty}\ket{x_0}\bra{x_0}\mathrm dx_0\right)\ket{\psi}\\
+\Rightarrow \int_{-\infty}^{\infty}\ket{x_0}\bra{x_0}\mathrm dx_0 = 1(连续谱的完备性方程)
+$$
+
+
+<p>注： $C(x_0) = \bra{x_0}\psi\rangle$ 就是波函数 $\psi(x_0)$ 。 $|\bra{x_0}\psi\rangle|^2 = |\psi(x_0)|^2 = \psi^*(x_0)\psi(x_0)$ 是概率密度。</p>
+<h3 id="正则量子化假设"><a href="#正则量子化假设" class="headerlink" title="正则量子化假设"></a>正则量子化假设</h3><p>对易关系： $[\hat A, \hat B]= \hat A\hat B - \hat B\hat A$ ，若 $[\hat A , \hat B]=0$ ，则称 $A$ 与 $B$ 对易，否则称不对易。</p>
+<p>正则量子化假设：</p>
+
+$$
+[\hat{x}, \hat{p_x}] = i\hbar,
+[\hat{y}, \hat{p_y}] = i\hbar, 
+[\hat{z}, \hat{p_z}] = i\hbar
+$$
+
+
+<p>其余 $x, y, z, p_x, p_y, p_z$ 的组合均对易。</p>
+<p>满足 $\hat{\vec A}\times \hat{\vec A} = i\hbar \hat{\vec A}$ 的算符被称为角动量。所有的角动量算符都满足这个关系。例如 $\hat L = \hat r\times \hat p$ ，可以利用正则量子化假设对三个坐标进行计算验证。</p>
+ $\hat A$ 和 $\hat B$ 可以同时测准的充分必要条件：
+
+
+$$
+[\hat A, \hat{B}] = 0\Leftrightarrow 有共同本征态
+$$
+
+
+<p>简并：1个本征值对应m个量子态,称为m重简并。</p>
+<p>产生简并的原因：对称性&#x3D;&gt;守恒量。</p>
+<p>如果 $\hat A$ 是m重简并的，只测量得到本征值A，无法确定对应的量子态。但是如果同时测量对易的 $\hat B$ ，就可以确定对应的 $|A, B_i\rangle$ ，则对应的A的量子态是 $|A_i\rangle$ 。</p>
+<p>力学量完全集：能完备描述、确定量子态的力学量算符必须包含 $\hat H$ 。</p>
+ $\hat H$ 是核心力学量。
+
+
+$$
+[\hat A, \hat H]=0\Leftrightarrow \hat A是守恒量
+$$
+
+<p>选择力学量的完全集，就是选择守恒量的完全集。</p>
+<h2 id="原子中的电子"><a href="#原子中的电子" class="headerlink" title="原子中的电子"></a>原子中的电子</h2><h3 id="氢原子理论"><a href="#氢原子理论" class="headerlink" title="氢原子理论"></a>氢原子理论</h3><p>巴耳末公式-&gt;里德伯方程-&gt;波尔氢原子理论</p>
+<p>氢原子理论：</p>
+<p>定态条件</p>
+<p>电子绕核作圆周运动，有确定能量，不辐射能量-经典轨道+定态</p>
+<p>频率条件</p>
+<p>电子在定态之间跃迁满足： $\nu = (E_i - E_f)/h$ </p>
+<p>轨道角动量： $L_n = mv_nr_n = n\hbar$ ，轨道半径 $r_n = n^2r_1$ </p>
+<p>能级公式： $E_n = -13.6eV/n^2$ </p>
+<p>类氢离子能级：核外只有一个电子，核电荷数大于1.例如 $He^+, Li^{2+}$ </p>
+<p>评价：</p>
+<p>波尔理论解释了氢原子和类氢离子光谱的波长和频率。</p>
+<p>但是不能解释氢原子的光谱线强度，也不能解释其他原子的光谱结构。</p>
+<ul>
+<li>与经典电磁理论矛盾</li>
+<li>角动量量子化条件是硬加的</li>
+<li>卢瑟福的质疑：电子知道要往 $E_2$ 跳才能往 $E_2$ 跳，但是又必须先跳过去才能知道要往 $E_2$ 跳</li>
+<li>薛定谔的非难：当电子离开 $E_1$ 态之后，进入 $E_2$ 态之前，它在哪里，是什么状态？</li>
+</ul>
+<p>轨道概念不再适用。定态、能级、跃迁频率条件、角动量量子化仍然被认为是正确的。</p>
+<h3 id="氢原子的量子力学处理"><a href="#氢原子的量子力学处理" class="headerlink" title="氢原子的量子力学处理"></a>氢原子的量子力学处理</h3><p>求解量子问题的要点之一：确定体系的力学量完全集，即力学量可以同时测准，具有共同本征态，相应量子数集可完备地描述体系状态。</p>
+<p>通常选择守恒量完全集，和体系对称性有关。</p>
+<p>氢原子问题的守恒量完全集： $\hat H, \hat L^2, \hat L_z$ </p>
+<p><strong>角动量量子化：</strong></p>
+<p>处于中心力场的氢原子电子，角动量守恒。</p>
+<p>求 $\hat  L_z$ 的本征值：</p>
+
+$$
+\hat L_z = -i\hbar \frac{\partial }{\partial \varphi}\\
+
+\hat L_z \varPhi = L_z \varPhi\Rightarrow \varPhi = Ae^{\frac{i}{\hbar}L_z\varphi}
+$$
+
+
+<p>根据标准条件（周期性）， $\varPhi(\varphi) = \varPhi(\varphi + 2\pi)$ ，带入解得 $L_z = m_l\hbar$ ， $m_l = 0, \pm1, \pm2,\dots$ 称为磁量子数。</p>
+<p>对应的本征函数： $\varPhi_{m_l}(\varphi) = Ae^{im_l\varPhi} = \frac{1}{\sqrt{2\pi}}e^{im_l\varphi}$ </p>
+<p>求 $\hat L^2$ 的本征值：</p>
+<p>结论： $L^2 = l(l+1)\hbar^2$ ， $l = 0, 1, 2, \dots$ 称为角量子数。</p>
+<p>（ $\hat L^2$ 和 $\hat L_z$ 具有的共同本征值为球谐函数 $Y_{ml}(\theta, \varphi)$ ）</p>
+<p>角动量的空间量子化</p>
+ $L = \sqrt{l(l+1)}\hbar &gt; L_z = m_l\hbar \Rightarrow m_l = 0, \pm1, \pm2,\dots, \pm l$ 。作矢量图可知，角动量有 $2l+1$ 种取向。
+
+<p><strong>能量量子化</strong></p>
+<p>(省略公式)</p>
+ $l = 0, 1, \dots, n - 1$ 
+
+ $\hat H, \hat L^2, \hat L_z$ 的共同本征态就是定态。
+
+<p>能量的本征值只与主量子数n有关，因而出现了能量简并，不同的角量子数和磁量子数可以对应相同的能量本征值。同能量的本征值态称为能级简并态，包含的态数目称为能级简并度。</p>
+<p>角量子数 $l = 0, 1, 2...$ 对应的状态分别称为 $s, p, d...$ ，从概率波图像可以看出，角量子数低的电子更容易靠近原子中心。</p>
+<h3 id="电子自旋"><a href="#电子自旋" class="headerlink" title="电子自旋"></a>电子自旋</h3><p>轨道角动量产生磁矩：</p>
+
+$$
+\hat{\vec \mu} = -\frac{e}{2m_e}\hat{\vec L}
+$$
+
+
+<p>玻尔磁子：</p>
+
+$$
+\mu_B = \frac{e\hbar}{2m_e}
+$$
+
+
+<p>利用本征值的定义不难推出z方向的磁矩：</p>
+
+$$
+\mu_z = -m_l \cdot \mu_B
+$$
+
+
+<p>斯特恩-盖拉赫实验</p>
+<p>理论分析：</p>
+<p>磁矩在外磁场中有势能： $E = -\vec \mu \cdot \vec B$ </p>
+<p>轨道磁矩在z方向受力：</p>
+
+$$
+F_z = \frac{\partial E}{\partial z} = \mu_z\frac{\partial B_z}{\partial z} = -m_l\mu_B\frac{\partial B_z}{\partial z}
+$$
+
+
+<p>由于 $m_l$ 的 $2l+1$ 种取值，对应的原子束应该在z方向上分裂成奇数条线。</p>
+<p><img src="/source/images/physics/abaaba.jpg" loading="lazy"></p>
+<p>问题： $Ag, H$ 等原子束( $l = 0$ )出现了2条线而不是一条线，矛盾。</p>
+<p>电子自旋的假设：</p>
+<ul>
+<li>电子不是质点，而是自旋的小球，具有固有的自旋角动量 $\vec S$ 和自旋磁矩 $\vec \mu_S$ </li>
+<li> $S = \sqrt{s(s+1)}\hbar$ ，其中 $s = \frac 12$ 称为自旋量子数</li>
+<li> $S_z = m_s\hbar$ ， $m_s = \pm\frac 12$ ，称为自旋磁量子数</li>
+<li>自旋磁矩和自旋角动量满足 $\hat {\vec \mu_S} = -\frac{e}{m_e}\hat {\vec S}$ ，进而推出 $\mu_{S,z}=\pm \mu_B$ </li>
+</ul>
+<p>“自转小球”模型仍存在缺陷：电子表面的速度会超过光速。</p>
+<p>但是这些假设成功解释了原子光谱的精细结构和反常塞曼效应。</p>
+<p>量子力学的解释：</p>
+<ul>
+<li>自旋是与时空无关的内禀运动，一种新的自由度，一种新的角动量，无经典对应</li>
+<li>自旋、磁矩和静止质量、电荷一样，是反映微观粒子固有属性的基本量</li>
+<li>电子的自旋是一种相对论效应，被自动地包含在相对论波动方程(Dirac方程)中。</li>
+</ul>
+<p>电子的总角动量：</p>
+
+$$
+\hat {\vec J} = \hat {\vec L} + \hat {\vec S}
+$$
+
+
+ $\hat {\vec J}$ 也是量子化的，大小为：
+
+$$
+J = \sqrt{j(j + 1)}\hbar
+$$
+
+
+<p>前文已说过如下定义：</p>
+<blockquote>
+<p>满足 $\hat{\vec A}\times \hat{\vec A} = i\hbar \hat{\vec A}$ 的算符被称为角动量。所有的角动量算符都满足这个关系。例如 $\hat L = \hat r\times \hat p$ ，可以利用正则量子化假设对三个坐标进行计算验证。</p>
+</blockquote>
+<p>可以验证 $\hat {\vec J }\times \hat {\vec J } = i\hbar \hat {\vec J }$ 。因此总角动量还是角动量。</p>
+<p>这一角动量的合成被称为自旋——轨道耦合。 $j$ 称为总角动量量子数。</p>
+
+$$
+l = 0: 
+\\
+j = s = \frac 12, m_j = -\frac 12, +\frac 12\\
+l \ne 0:\\
+j = l + s = l + \frac 12, m_j = -(l + \frac 12), \dots, l + \frac 12;\\
+j = l - s = l - \frac 12, m_j = -(l - \frac12), \dots, l - \frac12
+$$
+
+
+<p>碱金属原子光谱：</p>
+<p>碱金属的原子能级既和 $n$ 有关，又和 $l$ 有关。</p>
+<p>轨道角动量对原子的影响包括轨道贯穿和原子实极化，导致相应能级能量降低。</p>
+<p>因此原来相同能级的 $3s,3p,...$ 会分裂成不同能级的轨道。</p>
+<p>碱金属原子光谱的精细结构：</p>
+<p>电子的轨道运动会使得它感受到原子绕它转动的磁场 $\vec B_{Nuc}$ 的作用。</p>
+<p>电子自旋磁矩 $\vec \mu_s$ 和 $\vec B_{Nuc}$ 的相互作用就是自旋轨道耦合，是相对论效应。</p>
+<p>于是能级在自旋轨道耦合的影响下进一步分裂，形成了能级精细结构。</p>
+<h3 id="微观粒子全同性原理"><a href="#微观粒子全同性原理" class="headerlink" title="微观粒子全同性原理"></a>微观粒子全同性原理</h3><p>两个微观粒子的全部内禀属性相同称为全同粒子。对调全同粒子不会影响系统的状态。</p>
+<p>数学上对应地表现为波函数模方相同，进而有波函数对称或者反对称。</p>
+<p>对称的波函数表达式：</p>
+
+$$
+\psi(q_1, q_2) = \frac {1}{\sqrt 2}[\phi_A(q_1)\phi_B(q_2) + \phi_A(q_2)\phi_B(q_1)]
+$$
+
+
+<p>反对称的波函数表达式：</p>
+
+$$
+\psi(q_1, q_2) = \frac{1}{\sqrt{2}}[\phi_A(q_1)\phi_B(q_2) - \phi_A(q_2)\phi_B(q_1)]
+$$
+
+
+<p>如果 $\phi_A=\phi_B$ ，则反对称波函数为0。</p>
+<p>费米子是自旋为半整数的粒子。它是波函数反对称的粒子。由此得到泡利不相容原理：全同费米子系统不能有两个及以上的费米子占据同一单粒子态。</p>
+<p>玻色子是自旋为0或者整数的粒子。它是波函数对称的粒子。玻色子不受泡利不相容原理的限制。</p>
+<p>费米统计：</p>
+
+$$
+N(E) = \frac{1}{e^{(E - \mu)/kT} + 1}
+$$
+
+
+ $\mu = \mu(T)$ 是粒子化学势。
+
+<p>玻色统计：</p>
+
+$$
+N(E) = \frac{1}{e^{(E - \mu)/kT} - 1}
+$$
+
+
+<p>对所有温度T, $0\le N(E)\lt \infty$ 。</p>
+<p>玻色-爱因斯坦凝聚。</p>
+<p>当 $E$ 很高时， $(E - \mu) &gt;&gt; kT$ 。退化为麦克斯韦-玻尔兹曼统计。</p>
+<h3 id="原子核外电子的排布"><a href="#原子核外电子的排布" class="headerlink" title="原子核外电子的排布"></a>原子核外电子的排布</h3><p>4个量子数 $n,l,m_l,m_s$ 可以完备描述原子的电子运动状态。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2022/09/14/Physics/" title="大雾笔记">https://blitherboom812.github.io/2022/09/14/Physics/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2022/09/28/github-command/" rel="prev" title="github的一些命令"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">github的一些命令</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/09/13/DataAndAlgorithms/" rel="next" title="笔记-数据与算法"><span class="post-nav-text">笔记-数据与算法</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

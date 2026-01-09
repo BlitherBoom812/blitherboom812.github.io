@@ -1,0 +1,1021 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Principle of Antenna | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="Introduction of AntennaDefinition of Antenna  Transmitter and receiver of EM wave Signal from current to wave from lumped to distributed  Antenna classifications  Resonant and non-resonant&#x2F;leaky&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Principle of Antenna">
+<meta property="og:url" content="https://blitherboom812.github.io/2024/03/01/Antenna/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="Introduction of AntennaDefinition of Antenna  Transmitter and receiver of EM wave Signal from current to wave from lumped to distributed  Antenna classifications  Resonant and non-resonant&#x2F;leaky&amp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711090268476.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711090565574.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711091202619.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711091212947.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711693683771.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711693701192.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711693749686.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711693845822.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711693861642.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711693936592.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711694027177.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711694083583.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711694243897.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711694350257.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711694462059.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711694619870.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711694639638.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1711695738159.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712471419276.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712471436962.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712471499226.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712473473687.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712900712333.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712901375924.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712902160882.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712903308547.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712905110844.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712905233876.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1712905317317.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713506228135.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713506258888.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713506275022.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713506837120.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713506363705.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713507175699.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713507190746.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713507205996.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713508252106.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713508669926.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713508784675.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713509120707.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713509734724.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1713509771675.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715324583382.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715324548326.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715324559069.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715325834911.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715324769403.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715328812089.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715924283522.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715924294266.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715924314079.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715924338243.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715924364965.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715924463502.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715927654495.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715927982080.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715928380068.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929046320.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929138391.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929169213.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929396692.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929501432.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929523072.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929531751.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1715929546494.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717133761533.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717133876692.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134268805.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134287481.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134353772.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134725130.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134745100.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134897852.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134942873.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717134955235.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717135044895.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717135171215.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717135198414.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717135386351.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717135675789.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717135951201.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717136046473.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717136115015.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717137633424.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717137646795.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717138714524.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717138873279.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740667735.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740670364.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740680573.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740726098.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740758890.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740768183.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740786849.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717740801741.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717742374397.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717742413544.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717742626807.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717743460723.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717743468657.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717743681072.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717743691321.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1717743927411.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718344358151.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718345601277.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718345727630.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718345718761.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718346212882.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718346379534.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718346371235.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718346571584.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718346830900.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718347859765.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/Antenna/1718347869028.png">
+<meta property="article:published_time" content="2024-03-01T06:14:50.000Z">
+<meta property="article:modified_time" content="2024-06-14T06:51:44.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/Antenna/1711090268476.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-of-Antenna"><span class="toc-number">1.</span> <span class="toc-text">Introduction of Antenna</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maxwell-equations"><span class="toc-number">2.</span> <span class="toc-text">Maxwell equations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Auxiliary-Potential-Functions"><span class="toc-number">3.</span> <span class="toc-text">Auxiliary Potential Functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Radiation-Parameters"><span class="toc-number">4.</span> <span class="toc-text">Radiation Parameters</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Field-Zone"><span class="toc-number">4.1.</span> <span class="toc-text">Field Zone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Antenna-Parameters"><span class="toc-number">4.2.</span> <span class="toc-text">Antenna Parameters</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Pattern-Parameters"><span class="toc-number">4.2.1.</span> <span class="toc-text">Pattern Parameters</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Power-Density"><span class="toc-number">4.2.2.</span> <span class="toc-text">Power Density</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Radiation-Intensity"><span class="toc-number">4.2.3.</span> <span class="toc-text">Radiation Intensity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Directivity"><span class="toc-number">4.2.4.</span> <span class="toc-text">Directivity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gain"><span class="toc-number">4.2.5.</span> <span class="toc-text">Gain</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Polarization"><span class="toc-number">4.2.6.</span> <span class="toc-text">Polarization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Effective-Aperture-and-Aperture-efficiency"><span class="toc-number">4.2.7.</span> <span class="toc-text">Effective Aperture and Aperture efficiency</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Circuit-Parameters"><span class="toc-number">4.3.</span> <span class="toc-text">Circuit Parameters</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Input-impedance"><span class="toc-number">4.3.1.</span> <span class="toc-text">Input impedance</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Conjugate-Matching"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">Conjugate Matching</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Mismatching"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">Mismatching</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Radiation-Resistance"><span class="toc-number">4.3.1.3.</span> <span class="toc-text">Radiation Resistance</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scattering-Parameters"><span class="toc-number">4.3.2.</span> <span class="toc-text">Scattering Parameters</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Link-Calculation"><span class="toc-number">5.</span> <span class="toc-text">Link Calculation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Friis%E2%80%99s-Equation"><span class="toc-number">5.1.</span> <span class="toc-text">Friis’s Equation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EIRP"><span class="toc-number">5.2.</span> <span class="toc-text">EIRP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Radar-Equation"><span class="toc-number">5.3.</span> <span class="toc-text">Radar Equation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Antenna-Theorems"><span class="toc-number">6.</span> <span class="toc-text">Antenna Theorems</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Duality-Theorem"><span class="toc-number">6.1.</span> <span class="toc-text">Duality Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Image-Theorem"><span class="toc-number">6.2.</span> <span class="toc-text">Image Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reciprocity-Theorem"><span class="toc-number">6.3.</span> <span class="toc-text">Reciprocity Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Huygen%E2%80%99s-Principle"><span class="toc-number">6.4.</span> <span class="toc-text">Huygen’s Principle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dipole-Antenna"><span class="toc-number">7.</span> <span class="toc-text">Dipole Antenna</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hertz-Dipole"><span class="toc-number">7.1.</span> <span class="toc-text">Hertz Dipole</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finite-Length-Dipole"><span class="toc-number">7.2.</span> <span class="toc-text">Finite Length Dipole</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Small-Dipole"><span class="toc-number">7.2.1.</span> <span class="toc-text">Small Dipole</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#General-Case"><span class="toc-number">7.2.2.</span> <span class="toc-text">General Case</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Input-Impedance"><span class="toc-number">7.2.3.</span> <span class="toc-text">Input Impedance</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Half-wavelength-dipole"><span class="toc-number">7.3.</span> <span class="toc-text">Half-wavelength dipole</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Applications"><span class="toc-number">7.4.</span> <span class="toc-text">Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Wideband-Antennas"><span class="toc-number">7.4.1.</span> <span class="toc-text">Wideband Antennas</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Folded-Dipole"><span class="toc-number">7.4.2.</span> <span class="toc-text">Folded Dipole</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Log-periodic-amp-Yagi-Uda-antenna"><span class="toc-number">7.4.3.</span> <span class="toc-text">Log-periodic &amp; Yagi-Uda antenna</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dipole-Antennas-in-base-station"><span class="toc-number">7.4.4.</span> <span class="toc-text">Dipole Antennas in base station</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Monopole"><span class="toc-number">7.4.5.</span> <span class="toc-text">Monopole</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Loop-Antennas"><span class="toc-number">8.</span> <span class="toc-text">Loop Antennas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Small-Loop"><span class="toc-number">8.1.</span> <span class="toc-text">Small Loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finite-length-loop-antennas"><span class="toc-number">8.2.</span> <span class="toc-text">Finite-length loop antennas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modes-of-Loop-antennas"><span class="toc-number">8.3.</span> <span class="toc-text">Modes of Loop antennas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Helix-x2F-helical-antennas"><span class="toc-number">8.4.</span> <span class="toc-text">Helix&#x2F;helical antennas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Aperture-Antenna"><span class="toc-number">9.</span> <span class="toc-text">Aperture Antenna</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Huygens%E2%80%99-Principle"><span class="toc-number">9.1.</span> <span class="toc-text">Huygens’ Principle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rectangular-aperture-antennas"><span class="toc-number">9.2.</span> <span class="toc-text">Rectangular aperture antennas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Horn-Antennas"><span class="toc-number">9.3.</span> <span class="toc-text">Horn Antennas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Antenna-Array"><span class="toc-number">10.</span> <span class="toc-text">Antenna Array</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Two-Element-array"><span class="toc-number">10.1.</span> <span class="toc-text">Two-Element array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#N-Element-array"><span class="toc-number">10.2.</span> <span class="toc-text">N-Element array</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Broadside-Array"><span class="toc-number">10.2.1.</span> <span class="toc-text">Broadside Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#End-fire-Array"><span class="toc-number">10.2.2.</span> <span class="toc-text">End-fire Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Phased-Array"><span class="toc-number">10.2.3.</span> <span class="toc-text">Phased Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Non-uniform-Array"><span class="toc-number">10.2.4.</span> <span class="toc-text">Non-uniform Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Planar-Array"><span class="toc-number">10.2.5.</span> <span class="toc-text">Planar Array</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Applications-1"><span class="toc-number">10.3.</span> <span class="toc-text">Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Yagi-Uda-Antenna"><span class="toc-number">10.3.1.</span> <span class="toc-text">Yagi-Uda Antenna</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Helix-Antenna"><span class="toc-number">10.3.2.</span> <span class="toc-text">Helix Antenna</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Travelling-Wave-Antennas"><span class="toc-number">11.</span> <span class="toc-text">Travelling-Wave Antennas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Travelling-wave-amp-standing-wave"><span class="toc-number">11.1.</span> <span class="toc-text">Travelling wave &amp; standing wave</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Long-wire-antennas"><span class="toc-number">11.1.1.</span> <span class="toc-text">Long wire antennas</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-periodic-Antennas"><span class="toc-number">11.2.</span> <span class="toc-text">Log-periodic Antennas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Microstrip-Antennas"><span class="toc-number">12.</span> <span class="toc-text">Microstrip Antennas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Mode"><span class="toc-number">12.1.</span> <span class="toc-text">Basic Mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Antenna-feeding-methods"><span class="toc-number">12.2.</span> <span class="toc-text">Antenna feeding methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-Model"><span class="toc-number">12.3.</span> <span class="toc-text">Analysis Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Transmission-line-model"><span class="toc-number">12.3.1.</span> <span class="toc-text">Transmission line model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cavity-Model"><span class="toc-number">12.3.2.</span> <span class="toc-text">Cavity Model</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Circular-polarization"><span class="toc-number">12.4.</span> <span class="toc-text">Circular polarization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reflector-and-lens-antennas"><span class="toc-number">13.</span> <span class="toc-text">Reflector and lens antennas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Corner-Reflectors"><span class="toc-number">13.1.</span> <span class="toc-text">Corner Reflectors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parabolic-Reflectors"><span class="toc-number">13.2.</span> <span class="toc-text">Parabolic Reflectors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lens-Antennas"><span class="toc-number">13.3.</span> <span class="toc-text">Lens Antennas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reflected-and-transmitted-array"><span class="toc-number">13.4.</span> <span class="toc-text">Reflected and transmitted array</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2024/03/01/Antenna/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Principle of Antenna</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2024-03-01 14:14:50" itemprop="dateCreated datePublished" datetime="2024-03-01T14:14:50+08:00">2024-03-01</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-06-14 14:51:44" itemprop="dateModified" datetime="2024-06-14T14:51:44+08:00">2024-06-14</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="Introduction-of-Antenna"><a href="#Introduction-of-Antenna" class="headerlink" title="Introduction of Antenna"></a>Introduction of Antenna</h2><p>Definition of Antenna</p>
+<ul>
+<li>Transmitter and receiver of EM wave</li>
+<li>Signal from current to wave</li>
+<li>from lumped to distributed</li>
+</ul>
+<p>Antenna classifications</p>
+<ul>
+<li>Resonant and non-resonant&#x2F;leaky&#x2F;travelling wave</li>
+<li>Antenna number: element, multiple antennas, array</li>
+<li>Shape: wire, loop, slot, patch&#x2F;microstrip, cavity</li>
+<li>Materials: metallic, dielectric</li>
+<li>Property: wideband, narrow band</li>
+<li>Yagi-Uda, Vivaldi, Cassegrain</li>
+<li>Function: moblie&#x2F;handset, base station, AiP</li>
+</ul>
+<h2 id="Maxwell-equations"><a href="#Maxwell-equations" class="headerlink" title="Maxwell equations"></a>Maxwell equations</h2>
+$$
+\nabla \cdot \vec D = \rho \rightarrow \nabla \cdot \tilde{\vec D} = \rho \\
+\nabla \cdot {\vec B} = 0 \rarr \nabla \cdot \tilde{\vec B} = 0\\
+\nabla \times {\vec E} = -\frac{\partial \vec B}{\partial t} \rarr \nabla \times \tilde{\vec E} = -j\omega \tilde{\vec B}\\
+\nabla \times {\vec H} = \vec J + \frac{\partial \vec D}{\partial t} \rarr \nabla \times \tilde{\vec H} = \vec J + j\omega \tilde{\vec D}\\
+\vec D = \varepsilon \vec E\\
+\vec B = \mu \vec H
+$$
+
+
+
+$$
+\nabla^2 \vec F = \nabla(\nabla \cdot \vec F) - \nabla \times (\nabla \times \vec F)\\
+\nabla \times (\nabla f) = 0\\
+\nabla \cdot (\nabla \times \vec F) = 0
+$$
+
+
+<h2 id="Auxiliary-Potential-Functions"><a href="#Auxiliary-Potential-Functions" class="headerlink" title="Auxiliary Potential Functions"></a>Auxiliary Potential Functions</h2><p>Let</p>
+
+$$
+\vec B = \nabla \times \vec A\\
+\vec E + j\omega \vec A = -\nabla \phi
+$$
+
+
+
+$$
+\nabla \cdot \vec D = \varepsilon \nabla \cdot(-\nabla \phi  - j\omega \vec A) = \rho\\
+\Rightarrow \nabla^2\phi + \omega^2\mu\varepsilon\phi = - \frac{\rho}{\varepsilon} - j\omega(\nabla \cdot \vec A + j\omega \mu \varepsilon \phi)
+$$
+
+
+
+$$
+\nabla \times \vec H = \frac{1}{\mu}(\nabla(\nabla \cdot \vec A) - \nabla^2\vec A) = \vec J + j\omega \vec D = \vec J + j\omega\varepsilon(-\nabla\phi - j\omega \vec A)\\
+\Rightarrow \nabla^2\vec A + \omega^2\mu\varepsilon\vec A = -\mu \vec J - \nabla(\nabla \cdot \vec A + j\omega\mu\varepsilon\phi)
+$$
+
+
+<p>Use Lorentz Gauge</p>
+
+$$
+\nabla \cdot \vec A + j\omega\mu\varepsilon\phi = 0
+$$
+
+
+<p>Then</p>
+
+$$
+\nabla^2\vec A + \omega^2\mu\varepsilon\vec A = -\mu \vec J\\
+\nabla^2\phi + \omega^2\mu\varepsilon\phi = - \frac{\rho}{\varepsilon}
+$$
+
+
+<p>Solve ODE:</p>
+
+$$
+\begin{equation}  
+\nabla^2\phi + k^2\phi = 0(r\ne 0)
+\end{equation}\\
+\begin{equation}
+\nabla^2\phi + k^2\phi = -\frac{\rho}{\varepsilon}(r=0)
+\end{equation}
+$$
+
+
+<p>For (1)</p>
+
+$$
+u(r) = \frac{\phi(r)}{r}\\
+\frac{\rm{d}^2}{\rm{d}r^2}u + k^2u = 0\\
+u = C_1e^{-jkr} + C_2e^{jkr}\\
+\phi = C_1\frac{e^{-jkr}}{r}
+$$
+
+
+<p>For (2), in arbitrary volume</p>
+
+$$
+\iiint_V(\nabla^2\phi + k^2\phi)\mathrm dv = \iiint_V(-\frac{\rho}{\varepsilon}\mathrm dv) = -\frac{q}{\varepsilon}\\
+r \rightarrow 0\\
+\iiint_V(k^2\phi)\mathrm dv = 0\\
+\iiint_V\nabla^2\phi \mathrm dv = \oiint_S \nabla\phi \cdot \mathrm d\vec s = C_1 \oiint_S (\frac{-jkre^{-jkr} - e^{-jkr}}{r^2})\mathrm d\vec s = C_1 (\frac{-jkre^{-jkr} - e^{-jkr}}{r^2})4\pi r^2 = -C_1 4\pi
+$$
+
+
+<p>Finally,</p>
+
+$$
+\phi(r) = \frac{q}{4\pi\varepsilon}\frac{e^{-jkr}}{r}
+$$
+
+
+<h2 id="Radiation-Parameters"><a href="#Radiation-Parameters" class="headerlink" title="Radiation Parameters"></a>Radiation Parameters</h2><h3 id="Field-Zone"><a href="#Field-Zone" class="headerlink" title="Field Zone"></a>Field Zone</h3><p>Near field: resonant, field;</p>
+<p>Far field: propagation, wave;</p>
+<p>Fresnel region: transition;</p>
+<p><img src="/../images/Antenna/1711090268476.png" alt="1711090268476" loading="lazy"></p>
+<h3 id="Antenna-Parameters"><a href="#Antenna-Parameters" class="headerlink" title="Antenna Parameters"></a>Antenna Parameters</h3><ul>
+<li>Radiation patterns</li>
+<li>Radiation Intensity</li>
+<li>Power Density</li>
+<li>Directivity (方向性) and Gain (重要！)</li>
+<li>Polarization</li>
+<li>Effective Aperture(等效口面) and Aperture efficienty(口面效率)</li>
+</ul>
+<p>E 面：与电场方向平行的面</p>
+<p>H 面：与磁场方向平行的面</p>
+<h4 id="Pattern-Parameters"><a href="#Pattern-Parameters" class="headerlink" title="Pattern Parameters"></a>Pattern Parameters</h4><p><img src="/../images/Antenna/1711090565574.png" alt="1711090565574" loading="lazy"></p>
+<p>Often use log scale.</p>
+<h4 id="Power-Density"><a href="#Power-Density" class="headerlink" title="Power Density"></a>Power Density</h4><p>Instantaneous Poynting vector  $\vec S(x, y, z, t)$ </p>
+<p>Radiation Power Density &#x3D; Time average Poynting vector  $\vec S_{av}(x, y, z)=\frac1T\int_0^T\vec S(x, y, z, t)\mathrm dt = \frac12\text{Re}[\tilde{\vec E} \times \tilde{\vec H^*}]$ </p>
+<p>Total Radiation Power  $P_{rad} = \oiint_S[\tilde{\vec E} \times \tilde{\vec H^*}] \cdot \mathrm d\vec s$ </p>
+<h4 id="Radiation-Intensity"><a href="#Radiation-Intensity" class="headerlink" title="Radiation Intensity"></a>Radiation Intensity</h4>
+$$
+U(\theta, \varphi) = r^2 S(r, \theta, \varphi)
+$$
+
+
+<p>Isotropic 各向同性</p>
+
+$$
+P_{rad} = \int_{0}^{2\pi}\int_{0}^{\pi}U\sin\theta\mathrm d\theta\mathrm d\varphi
+$$
+
+
+<h4 id="Directivity"><a href="#Directivity" class="headerlink" title="Directivity"></a>Directivity</h4>
+$$
+D = \frac{U_{\max}}{U_{av}} = \frac{P_{\max}}{P_{rad}/4\pi}
+$$
+
+
+<p><img src="/../images/Antenna/1711091202619.png" alt="1711091202619" loading="lazy"></p>
+<p><img src="/../images/Antenna/1711091212947.png" alt="1711091212947" loading="lazy"></p>
+<p><img src="/../images/Antenna/1711693683771.png" alt="1711693683771" loading="lazy"></p>
+<p><img src="/../images/Antenna/1711693701192.png" alt="1711693701192" loading="lazy"></p>
+<h4 id="Gain"><a href="#Gain" class="headerlink" title="Gain"></a>Gain</h4><p><img src="/../images/Antenna/1711693749686.png" alt="1711693749686" loading="lazy"></p>
+
+$$
+G = \frac{U_{\max}}{P_{in}/4\pi}
+$$
+
+
+<h4 id="Polarization"><a href="#Polarization" class="headerlink" title="Polarization"></a>Polarization</h4><p><img src="/../images/Antenna/1711693845822.png" alt="1711693845822" loading="lazy"></p>
+<p>Polarization Mismatch:</p>
+<p><img src="/../images/Antenna/1711693861642.png" alt="1711693861642" loading="lazy"></p>
+<p>CP</p>
+<p><img src="/../images/Antenna/1711693936592.png" alt="1711693936592" loading="lazy"></p>
+<h4 id="Effective-Aperture-and-Aperture-efficiency"><a href="#Effective-Aperture-and-Aperture-efficiency" class="headerlink" title="Effective Aperture and Aperture efficiency"></a>Effective Aperture and Aperture efficiency</h4><p><img src="/../images/Antenna/1711694027177.png" alt="1711694027177" loading="lazy"></p>
+<p><img src="/../images/Antenna/1711694083583.png" alt="1711694083583" loading="lazy"></p>
+<h3 id="Circuit-Parameters"><a href="#Circuit-Parameters" class="headerlink" title="Circuit Parameters"></a>Circuit Parameters</h3><h4 id="Input-impedance"><a href="#Input-impedance" class="headerlink" title="Input impedance"></a>Input impedance</h4><p>Input impedance definition:</p>
+<ul>
+<li>the impedance presented by an antenna at its terminals</li>
+<li>the ratio of the voltage to current at its terminals</li>
+<li>the ratio of the electric to magnetic fields at its terminals</li>
+</ul>
+<p><img src="/../images/Antenna/1711694243897.png" alt="1711694243897" loading="lazy"></p>
+<h5 id="Conjugate-Matching"><a href="#Conjugate-Matching" class="headerlink" title="Conjugate Matching"></a>Conjugate Matching</h5>
+$$
+Z_A = Z_g^*
+$$
+
+
+<h5 id="Mismatching"><a href="#Mismatching" class="headerlink" title="Mismatching"></a>Mismatching</h5><p><img src="/../images/Antenna/1711694350257.png" alt="1711694350257" loading="lazy"></p>
+<h5 id="Radiation-Resistance"><a href="#Radiation-Resistance" class="headerlink" title="Radiation Resistance"></a>Radiation Resistance</h5>
+$$
+P_{rad} = \frac12|I_g|^2R_r = \oiint_S\vec S_{av} \cdot \rm d\vec s
+$$
+
+
+<p><img src="/../images/Antenna/1711694462059.png" alt="1711694462059" loading="lazy"></p>
+<h4 id="Scattering-Parameters"><a href="#Scattering-Parameters" class="headerlink" title="Scattering Parameters"></a>Scattering Parameters</h4><p><img src="/../images/Antenna/1711694619870.png" alt="1711694619870" loading="lazy"></p>
+
+$$
+\frac{\Gamma^2}{Z_1} + \frac{T^2}{Z_2} = 1
+$$
+
+
+<p><img src="/../images/Antenna/1711694639638.png" alt="1711694639638" loading="lazy"></p>
+<p><img src="/../images/Antenna/1711695738159.png" alt="1711695738159" loading="lazy"></p>
+<p>二端口网络通常用于描述二天线问题。 $S_{11}$ 表示天线1的反射， $S_{21}$ 表示天线1到天线2的耦合，均不利于信号的传播。我们希望让 $1 - S_{11}^2 - S_{21}^2$ 尽可能大。</p>
+<h2 id="Link-Calculation"><a href="#Link-Calculation" class="headerlink" title="Link Calculation"></a>Link Calculation</h2><h3 id="Friis’s-Equation"><a href="#Friis’s-Equation" class="headerlink" title="Friis’s Equation"></a>Friis’s Equation</h3><p><img src="/../images/Antenna/1712471419276.png" alt="1712471419276" loading="lazy"></p>
+<p><img src="/../images/Antenna/1712471436962.png" alt="1712471436962" loading="lazy"></p>
+<h3 id="EIRP"><a href="#EIRP" class="headerlink" title="EIRP"></a>EIRP</h3><p><img src="/../images/Antenna/1712471499226.png" alt="1712471499226" loading="lazy"></p>
+<p>赫兹偶极子的辐射电阻：  $80\pi^2(\frac{\Delta z}{\lambda})^2$ ，方向性  $\frac{2}{3}$ 。</p>
+<h3 id="Radar-Equation"><a href="#Radar-Equation" class="headerlink" title="Radar Equation"></a>Radar Equation</h3><p><img src="/../images/Antenna/1712473473687.png" alt="1712473473687" loading="lazy"></p>
+<p>RCS(Radar cross section)</p>
+<p>RCS (σ) of a radar target is an effective area that intercepts the transmitted radar power and then<br>scatters that power isotropically back to the radar receiver.</p>
+
+$$
+\sigma=\lim_{R\to\infty}\frac{W_{o}4\pi R^2}{W_i}
+$$
+
+
+<ul>
+<li> $W_i$ ,  $W_o$  and  $R$  are known;</li>
+<li> $\sigma$  converges.</li>
+</ul>
+<h2 id="Antenna-Theorems"><a href="#Antenna-Theorems" class="headerlink" title="Antenna Theorems"></a>Antenna Theorems</h2>
+$$
+\boxed{P_r=\mathrm{P}_t\mathrm{G}_t\mathrm{G}_r(\frac{\lambda}{4\pi R})^2}
+$$
+
+
+
+$$
+P_{r}=P_{t}\mathrm{e}_{r}\mathrm{e}_{t}D_{r}\mathrm{D}_{t}(1-\left|\Gamma_{r}\right|^{2})(1-\left|\Gamma_{t}\right|^{2})(\frac{\lambda}{4\pi R})^{2}
+$$
+
+
+<p>In radar:</p>
+
+$$
+P_{r}=P_{t}\mathrm{G}_{t}\mathrm{G}_{r}\sigma\frac{1}{4\pi}(\frac{\lambda}{4\pi R_{1}R_{2}})^{2}
+$$
+
+
+<p>Equivalent circuit model</p>
+<p><img src="/../images/Antenna/1712900712333.png" alt="1712900712333" loading="lazy"></p>
+ $R_r$  ：接收天线反射会释放能量。
+
+<h3 id="Duality-Theorem"><a href="#Duality-Theorem" class="headerlink" title="Duality Theorem"></a>Duality Theorem</h3><p><img src="/../images/Antenna/1712901375924.png" alt="1712901375924" loading="lazy"></p>
+<p>电 -&gt; 磁，不变号；<br>磁 -&gt; 电，变号。</p>
+<h3 id="Image-Theorem"><a href="#Image-Theorem" class="headerlink" title="Image Theorem"></a>Image Theorem</h3><p>PEC：完美电导体</p>
+<p>PMC：完美磁导体</p>
+<p>定理条件：</p>
+<ul>
+<li>PEC or PMC</li>
+<li>Infinite boundary</li>
+</ul>
+<p>PEC</p>
+
+$$
+\begin{aligned}&\hat{n}\times\vec{E}=0\\&\hat{n}\cdot\vec{B}=0\end{aligned}
+$$
+
+
+<p>PMC</p>
+
+$$
+\begin{aligned}&\hat{n}\times\vec{H}=0\\&\hat{n}\cdot\vec{D}=0\end{aligned}
+$$
+
+
+<p><img src="/../images/Antenna/1712902160882.png" alt="1712902160882" loading="lazy"></p>
+<p>Note:</p>
+<ul>
+<li>Satisfied with boundary condition;</li>
+<li>Mirror source instead of PEC or PMC infinite boundary;</li>
+<li>Array: source and mirror source;</li>
+<li>Current loop: upper inside, lower outside.</li>
+</ul>
+<h3 id="Reciprocity-Theorem"><a href="#Reciprocity-Theorem" class="headerlink" title="Reciprocity Theorem"></a>Reciprocity Theorem</h3><p>In radiation pattern,</p>
+<p><img src="/../images/Antenna/1712903308547.png" alt="1712903308547" loading="lazy"></p>
+<p>Transmitting pattern of antenna “a”</p>
+
+$$
+Z_{_{ba}}(\theta,\varphi)=\frac{V_{_b}(\theta,\varphi)}{I_{_a}}
+$$
+
+
+<p>Receiving pattern of ante</p>
+
+$$
+Z_{ab}(\theta,\varphi)=\frac{V_{a}(\theta,\varphi)}{I_{b}}
+$$
+
+
+<p>Then,</p>
+
+$$
+Z_{ab}(\theta,\phi)=Z_{ba}(\theta,\phi)
+$$
+
+
+<p>Lorentz Reciprocity Theorem</p>
+
+$$
+-\nabla\cdot(\vec{E}_{1}\times\vec{H}_{2}-\vec{E}_{2}\times\vec{H}_{1})=\vec{E}_{1}\cdot\vec{J}_{2}+\vec{H}_{2}\cdot\vec{M}_{1}-\vec{E}_{2}\cdot\vec{J}_{1}-\vec H_1 \cdot \vec M_2\\
+-\oiint_{S}(\vec{E}_{1}\times\vec{H}_{2}-\vec{E}_{2}\times\vec{H}_{1})\cdot ds^{'}=\iiint_{V}\left(\vec{E}_{1}\cdot\vec{J}_{2}+\vec{H}_{2}\cdot\vec{M}_{1}-\vec{E}_{2}\cdot\vec{J}_{1}-\vec H_1 \cdot \vec M_2\right)dv^{'}
+$$
+
+
+<p>Far field:</p>
+
+$$
+\vec{H}_i=\hat{r}\times\vec{E}_i/\eta;\quad d\vec{s}=\hat{n}ds=\hat{r}ds
+$$
+
+
+
+$$
+(\vec{E}_1\times\vec{H}_2-\vec{E}_2\times\vec{H}_1)\cdot\hat{r}=(\hat{r}\times\vec{E}_1)\cdot\vec{H}_2-(\hat{r}\times\vec{E}_2)\cdot\vec{H}_1=0
+$$
+
+
+
+$$
+\iiint_{V}\Big(\vec{E}_{1}\cdot\vec{J}_{2}+\vec{H}_{2}\cdot\vec{M}_{1}-\vec{E}_{2}\cdot\vec{J}_{1}-\vec{H}_{1}\cdot\vec{M}_{2}\Big)d\nu^{'}=0\\\iiint_{V}\Big(\vec{E}_{1}\cdot\vec{J}_{2}-\vec{H}_{1}\cdot\vec{M}_{2}\Big)d\nu^{'}=\iiint_{V}\Big(\vec{E}_{2}\cdot\vec{J}_{1}-\vec{H}_{2}\cdot\vec{M}_{1}\Big)d\nu^{'}
+$$
+
+
+<p>Reaction: Reciprocity theorem:  $\langle 1 2\rangle=\langle 2,1\rangle$ </p>
+
+$$
+\left\langle1,2\right\rangle=\int_{V}(\vec{E}_{1}\cdot\vec{J}_{2}-\vec{H}_{1}\cdot\vec{M}_{2})d\nu\quad\left\langle2,1\right\rangle=\int_{V}(\vec{E}_{2}\cdot\vec{J}_{1}-\vec{H}_{2}\cdot\vec{M}_{1})d\nu 
+$$
+
+
+<p>If only current-source</p>
+
+$$
+\iiint_V\vec{E}_1\cdot\vec{J}_2d\nu=\iiint_V\vec{E}_2\cdot\vec{J}_1d\nu\\
+\vec{E}_1\cdot\vec{J}_2=\vec{E_2} \cdot \vec{J_1}
+$$
+
+
+<p>Non-reciprocity</p>
+<p>Electron plasma (non-reciprocal media)</p>
+
+$$
+\varepsilon = \begin{bmatrix}\varepsilon_{xx}&+ig&0\\-ig&\varepsilon_{yy}&0\\0&0&\varepsilon_{zz}\end{bmatrix}
+$$
+
+
+<h3 id="Huygen’s-Principle"><a href="#Huygen’s-Principle" class="headerlink" title="Huygen’s Principle"></a>Huygen’s Principle</h3><p><img src="/../images/Antenna/1712905110844.png" alt="1712905110844" loading="lazy"></p>
+<p><img src="/../images/Antenna/1712905233876.png" alt="1712905233876" loading="lazy"></p>
+<p><img src="/../images/Antenna/1712905317317.png" alt="1712905317317" loading="lazy"></p>
+<h2 id="Dipole-Antenna"><a href="#Dipole-Antenna" class="headerlink" title="Dipole Antenna"></a>Dipole Antenna</h2><h3 id="Hertz-Dipole"><a href="#Hertz-Dipole" class="headerlink" title="Hertz Dipole"></a>Hertz Dipole</h3><ul>
+<li>Infinite short length;</li>
+<li>Uniform distribution;</li>
+<li>Infinite small radius;</li>
+</ul>
+
+$$
+E_\theta=\frac{I\Delta z}{4\pi}j\omega\mu\frac{e^{-jkr}}r\sin\theta \\
+H_\varphi=\frac{I\Delta z}{4\pi}jk\frac{e^{-jkr}}r{\sin\theta}\\
+\frac{E_\theta}{H_\varphi}=\sqrt{\frac{\mu_0}{\varepsilon_0}}=\eta 
+$$
+
+
+<p><img src="/../images/Antenna/1713506228135.png" alt="1713506228135" loading="lazy"></p>
+<p><img src="/../images/Antenna/1713506258888.png" alt="1713506258888" loading="lazy"></p>
+<p><img src="/../images/Antenna/1713506275022.png" alt="1713506275022" loading="lazy"></p>
+<h3 id="Finite-Length-Dipole"><a href="#Finite-Length-Dipole" class="headerlink" title="Finite Length Dipole"></a>Finite Length Dipole</h3><p><img src="/../images/Antenna/1713506837120.png" alt="1713506837120" loading="lazy"></p>
+
+$$
+I=\begin{cases}I_0\sin[k(\dfrac{l}{2}-z')]&0\leq z'\leq\dfrac{l}{2}\\
+I_0\sin[k(\dfrac{l}{2}+z')]&-\dfrac{l}{2}\leq z'\leq0\end{cases}
+$$
+
+
+
+$$
+\vec{A}(x,y,z)=A_z\hat{z}=\hat{z}\int_{-l/2}^{l/2}\mu I(z’)\frac{e^{-j\kappa\Lambda}}{4\pi R}dz’\\R=\sqrt{\left(x-x’\right)^2+\left(y-y’\right)^2+\left(z-z’\right)^2}
+$$
+
+
+
+$$
+\begin{aligned}&\text{For phase:}&&R\cong r-z'\cos\theta\\&\text{For amplitude:}&&R\cong r\end{aligned}
+$$
+
+
+<p>R is the distance between observer and source,<br>r is the distance between observer and origin.</p>
+<h4 id="Small-Dipole"><a href="#Small-Dipole" class="headerlink" title="Small Dipole"></a>Small Dipole</h4><p><img src="/../images/Antenna/1713506363705.png" alt="1713506363705" loading="lazy"></p>
+
+$$
+\begin{aligned}&I(z’)\cong I_{in}(1-2|z’|/l)\\&\vec{A}(x,y,z)=A_z\hat{z}=\hat{z}\int_{-l/2}^{l/2}\mu I(z’)\frac{e^{-jkr}}{4\pi r}dz’\end{aligned}
+$$
+
+
+<p>Then</p>
+
+$$
+\vec{A}(x,y,z)=\hat{z}\mu\frac{e^{-jkr}}{4\pi r}\cdot\frac12I_{in}l\\
+\vec{A}(\theta,r)=\frac12I_{in}l\mu\frac{e^{-jkr}}{4\pi r}(-\sin\theta\hat{\theta}+\cos\theta\hat{r})
+$$
+
+
+
+$$
+\vec{E}=j\omega\mu I_{in}l\frac{e^{-jkr}}{8\pi r}\sin\theta\hat{\theta}\\\vec{H}=j\beta I_{in}l\frac{e^{-jkr}}{8\pi r}\sin\theta\hat{\varphi}
+$$
+
+
+<p>Note: half of the ideal infinitesima(Hertz) dipole</p>
+
+$$
+\mathrm{Directivity}:\quad D=\frac{4\pi}{\Omega_A}\Rightarrow D_{\underset{dipole}{\operatorname*{small}}}=1.5
+$$
+
+
+
+$$
+R_{rad}=20\left(\frac{\pi\Delta z}\lambda\right)^2=\frac14R_{rad}^\textit{Hertz dipole}
+$$
+
+
+
+$$
+P_{rad}=\frac14\frac{4\pi}3{\left(\frac{I\Delta z}{4\pi}\right)}^2k^2\eta{=}\frac12I^2R_{rad}
+$$
+
+
+<h4 id="General-Case"><a href="#General-Case" class="headerlink" title="General Case"></a>General Case</h4>
+$$
+E_{\theta}=j\eta\frac{I_0e^{-jkr}}{2\pi r}\Bigg[\frac{\cos(\frac{kl}2\cos\theta)-\cos(\frac{kl}2)}{\sin\theta}\Bigg]\\H_{\varphi}=j\frac{I_0e^{-jkr}}{2\pi r}\Bigg[\frac{\cos(\frac{kl}2\cos\theta)-\cos(\frac{kl}2)}{\sin\theta}\Bigg]
+$$
+
+
+<p>Beam width: change with length.</p>
+<p><img src="/../images/Antenna/1713507175699.png" alt="1713507175699" loading="lazy"></p>
+
+$$
+\begin{aligned}
+&\textbf{The time average Poynting vector:}\\
+&\vec{S}_{a\nu}=\hat{r}S_{a\nu}=\frac{1}{2}\mathrm{Re}\bigg[\tilde{\vec{E}}\times\tilde{\vec{H}}^{*}\bigg]=\eta\frac{\big|I_{0}\big|^{2}}{8\pi^{2}r^{2}}\bigg[\frac{\cos(\frac{kl}{2}\cos\theta)-\cos(\frac{kl}{2})}{\sin\theta}\bigg]^{2}\hat{r}  \\
+&P_{rad}=\oint_{s}\vec{S}_{a\nu}\cdot d\vec{s}=\int_{0}^{2\pi}\int_{0}^{\pi}\vec{S}_{a\nu}\cdot\vec{r}r^{2}\sin\theta d\theta d\varphi=\eta\frac{\left|I_{0}\right|^{2}}{4\pi}\int_{0}^{\pi}\frac{\left[\cos(\frac{kl}{2}\cos\theta)-\cos(\frac{kl}{2})\right]^{2}}{\sin\theta}d\theta  \\
+&\begin{aligned}&\text{The radiation intensity:}\\&&U=r^2S_{av}=\eta\frac{\left|I_0\right|^2}{8\pi^2}\left[\frac{\cos(\frac{kl}2\cos\theta)-\cos(\frac{kl}2)}{\sin\theta}\right]^2\\&&=\frac{\pi}{2}=\frac{\left|I_{0}\right|^{2}}{2}=\frac{k_{0}}{2}=\frac{k_{0}}{2}\end{aligned}& \begin{matrix}{l}\\\end{matrix})  \\
+&\Omega_A=\frac{P_{rad}}{U_{\max}}\quad D=4\pi/\Omega_A\quad A_e=\frac{\lambda^2}{4\pi}D\quad P_{rad}=\frac12I^2R_{rad}
+\end{aligned}
+$$
+
+
+<p><img src="/../images/Antenna/1713507190746.png" alt="1713507190746" loading="lazy"></p>
+<p><img src="/../images/Antenna/1713507205996.png" alt="1713507205996" loading="lazy"></p>
+<h4 id="Input-Impedance"><a href="#Input-Impedance" class="headerlink" title="Input Impedance"></a>Input Impedance</h4><p>Input resistance  $R_r$ :</p>
+<ul>
+<li>calculated by E and H at port; </li>
+<li>take the real part (lossless).</li>
+</ul>
+<p>Radiation resistance  $R_{rad}$ :</p>
+<ul>
+<li>calculated by E and H at far-field;</li>
+</ul>
+
+$$
+P_{rad}=\frac12{\left|I\right|}^2R_{rad}\quad P_{rad}=\frac12{\left|I_{in}\right|}^2R_r
+$$
+
+
+<p>I is the maximum&#x2F;peak current.</p>
+<p>General Relation:</p>
+
+$$
+R_r=R_{rad}/\sin^2\left(\frac{kl}2\right)
+$$
+
+
+<h3 id="Half-wavelength-dipole"><a href="#Half-wavelength-dipole" class="headerlink" title="Half-wavelength dipole"></a>Half-wavelength dipole</h3><p><img src="/../images/Antenna/1713508252106.png" alt="1713508252106" loading="lazy"></p>
+
+$$
+I(z)=I_0\sin(\frac\pi2-k\left|z\right|)
+$$
+
+
+
+$$
+E_\theta(r,\theta,\varphi)=j\eta I_0\frac{e^{-jkr}}{2\pi r}\frac{\cos(\frac\pi2\cos\theta)}{\sin\theta}\\H_\varphi(r,\theta,\varphi)=jI_0\frac{e^{-jkr}}{2\pi r}\frac{\cos(\frac\pi2\cos\theta)}{\sin\theta}
+$$
+
+
+
+$$
+\vec{S}_{a\nu}=\hat{r}S_{a\nu}=\frac{1}{2}\operatorname{Re}\bigg[\tilde{\vec{E}}\times\tilde{\vec{H}}^{*}\bigg]=\eta\frac{\big|I_{0}\big|^{2}}{8\pi^{2}r^{2}}\bigg[\frac{\cos(\frac{\pi}{2}\cos\theta)}{\sin\theta}\bigg]^{2}\hat{r}\\
+P_{rad}=\oint_sS_{a\nu}\cdot d\vec{s}=\int_0^{2\pi}\int_0^\pi\vec{S}_{a\nu}\cdot\hat{r}r^2\sin\theta d\theta d\varphi=\eta\frac{\left|I_0\right|^2}{4\pi}\int_0^\pi\frac{\cos^2(\frac\pi2\cos\theta)}{\sin\theta}d\theta 
+$$
+
+
+
+$$
+D=4\pi/\Omega_{A}=1.643=2.15\mathrm{dBi}\\
+A_e=\frac{\lambda^2}{4\pi}D_0\cong0.13\lambda^2
+$$
+
+
+<p>Edge capacitive effect: </p>
+<ul>
+<li>Terminal (open-end)<br>current is not ideal zero;</li>
+<li>Effective length is longer</li>
+</ul>
+
+$$
+R_r=R_{rad}=\frac{2P_{rad}}{\left|I_0\right|^2}\cong73\left(\Omega\right)\\
+Z_A=73+j43\left(\Omega\right)
+$$
+
+
+<h3 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h3><h4 id="Wideband-Antennas"><a href="#Wideband-Antennas" class="headerlink" title="Wideband Antennas"></a>Wideband Antennas</h4><p><img src="/../images/Antenna/1713508669926.png" alt="1713508669926" loading="lazy"></p>
+<h4 id="Folded-Dipole"><a href="#Folded-Dipole" class="headerlink" title="Folded Dipole"></a>Folded Dipole</h4><p><img src="/../images/Antenna/1713508784675.png" alt="1713508784675" loading="lazy"></p>
+
+$$
+Z_{{folded}}=4Z_A
+$$
+
+
+<p>Increase Input Impedance</p>
+<h4 id="Log-periodic-amp-Yagi-Uda-antenna"><a href="#Log-periodic-amp-Yagi-Uda-antenna" class="headerlink" title="Log-periodic &amp; Yagi-Uda antenna"></a>Log-periodic &amp; Yagi-Uda antenna</h4><p><img src="/../images/Antenna/1713509120707.png" alt="1713509120707" loading="lazy"></p>
+<h4 id="Dipole-Antennas-in-base-station"><a href="#Dipole-Antennas-in-base-station" class="headerlink" title="Dipole Antennas in base station"></a>Dipole Antennas in base station</h4><p><img src="/../images/Antenna/1713509734724.png" alt="1713509734724" loading="lazy"></p>
+<h4 id="Monopole"><a href="#Monopole" class="headerlink" title="Monopole"></a>Monopole</h4><p><img src="/../images/Antenna/1713509771675.png" alt="1713509771675" loading="lazy"></p>
+<h2 id="Loop-Antennas"><a href="#Loop-Antennas" class="headerlink" title="Loop Antennas"></a>Loop Antennas</h2><h3 id="Small-Loop"><a href="#Small-Loop" class="headerlink" title="Small Loop"></a>Small Loop</h3><p><img src="/../images/Antenna/1715324583382.png" alt="1715324583382" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715324548326.png" alt="1715324548326" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715324559069.png" alt="1715324559069" loading="lazy"></p>
+<p>Infinite small loop radius;</p>
+<p>Infinite small wire radius;</p>
+<p>Uniform distribution.</p>
+<p>Resistance  $R_r$  too small!</p>
+<h3 id="Finite-length-loop-antennas"><a href="#Finite-length-loop-antennas" class="headerlink" title="Finite-length loop antennas"></a>Finite-length loop antennas</h3><p><img src="/../images/Antenna/1715325834911.png" alt="1715325834911" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715324769403.png" alt="1715324769403" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715328812089.png" alt="1715328812089" loading="lazy"></p>
+<h3 id="Modes-of-Loop-antennas"><a href="#Modes-of-Loop-antennas" class="headerlink" title="Modes of Loop antennas"></a>Modes of Loop antennas</h3><p><img src="/../images/Antenna/1715924283522.png" alt="1715924283522" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715924294266.png" alt="1715924294266" loading="lazy"></p>
+<h3 id="Helix-x2F-helical-antennas"><a href="#Helix-x2F-helical-antennas" class="headerlink" title="Helix&#x2F;helical antennas"></a>Helix&#x2F;helical antennas</h3><p><img src="/../images/Antenna/1715924314079.png" alt="1715924314079" loading="lazy"></p>
+<p>Axial Mode</p>
+<p><img src="/../images/Antenna/1715924338243.png" alt="1715924338243" loading="lazy"></p>
+<p>Normal Mode:</p>
+<p><img src="/../images/Antenna/1715924364965.png" alt="1715924364965" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715924463502.png" alt="1715924463502" loading="lazy"></p>
+<h2 id="Aperture-Antenna"><a href="#Aperture-Antenna" class="headerlink" title="Aperture Antenna"></a>Aperture Antenna</h2><h3 id="Huygens’-Principle"><a href="#Huygens’-Principle" class="headerlink" title="Huygens’ Principle"></a>Huygens’ Principle</h3><p><img src="/../images/Antenna/1715927654495.png" alt="1715927654495" loading="lazy"></p>
+<h3 id="Rectangular-aperture-antennas"><a href="#Rectangular-aperture-antennas" class="headerlink" title="Rectangular aperture antennas"></a>Rectangular aperture antennas</h3><p><img src="/../images/Antenna/1715927982080.png" alt="1715927982080" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715928380068.png" alt="1715928380068" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715929046320.png" alt="1715929046320" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715929138391.png" alt="1715929138391" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715929169213.png" alt="1715929169213" loading="lazy"></p>
+<h3 id="Horn-Antennas"><a href="#Horn-Antennas" class="headerlink" title="Horn Antennas"></a>Horn Antennas</h3><p><img src="/../images/Antenna/1715929396692.png" alt="1715929396692" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715929501432.png" alt="1715929501432" loading="lazy"></p>
+<p>The E-pattern is in shadow.</p>
+<p><img src="/../images/Antenna/1715929523072.png" alt="1715929523072" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715929531751.png" alt="1715929531751" loading="lazy"></p>
+<p><img src="/../images/Antenna/1715929546494.png" alt="1715929546494" loading="lazy"></p>
+<h2 id="Antenna-Array"><a href="#Antenna-Array" class="headerlink" title="Antenna Array"></a>Antenna Array</h2><p>1-D Linear Array</p>
+<p>2-D Planar Array</p>
+<p>3-D Conformal Array</p>
+<p>Array Element</p>
+<ul>
+<li>Dipoles</li>
+<li>Loops</li>
+<li>Slots</li>
+<li>Microstrip antennas</li>
+</ul>
+<h3 id="Two-Element-array"><a href="#Two-Element-array" class="headerlink" title="Two-Element array"></a>Two-Element array</h3><p><img src="/../images/Antenna/1717133761533.png" alt="1717133761533" loading="lazy"></p>
+
+$$
+\begin{gathered}
+\vec{E}_1= \hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\frac{e^{-jkr_1}}{r_1}\cos\theta_1 \\
+\vec{E}_{2}= \hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\frac{e^{-jkr_2}}{r_2}\cos\theta_2 
+\end{gathered}
+$$
+
+
+<p>Remarks:</p>
+<ul>
+<li>Two element;</li>
+<li>Towards Y axis;</li>
+<li>Along Z axis;</li>
+<li>Space: d;</li>
+<li>Uniform phase<br>and amplitude;</li>
+<li>Observe in 2D<br>(YZ-plane).</li>
+</ul>
+<p>Far field Approximation</p>
+<p><img src="/../images/Antenna/1717133876692.png" alt="1717133876692" loading="lazy"></p>
+
+$$
+\begin{aligned}&\vec{E}_{total}=\vec{E}_1+\vec{E}_2\\&=\hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac1r\Bigg(e^{-jk(r-\frac d2\cos\theta)}+e^{-jk(r+\frac d2\cos\theta)}\Bigg)\end{aligned}
+$$
+
+
+
+$$
+\begin{aligned}
+\vec{E}_{total}& =\vec{E}_1+\vec{E}_2=\hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac{1}{r}\Bigg(e^{-jk(r-\frac{d}{2}\cos\theta)}+e^{-jk(r+\frac{d}{2}\cos\theta)}\Bigg)  \\
+&=\hat{\theta}\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac{e^{-jkr}}{r}\Bigg(e^{jk\frac{d}{2}\cos\theta}+e^{-jk\frac{d}{2}\cos\theta}\Bigg) \\
+&=\hat{\theta}\underbrace{\frac{I\Delta z}{4\pi}j\omega\mu\cos\theta\frac{e^{-jkr}}r}_{\text{Element pattern}}\underbrace{2\cos\biggl[\frac12kd\cos\theta\biggr]}_{\text{Array Factor (AF)}}
+\end{aligned}
+$$
+
+
+<p>Remarks:</p>
+<ul>
+<li>Uniform phase and amplitude;</li>
+<li>AF is related to space (d);</li>
+<li>AF is with no relation with antenna type.</li>
+</ul>
+
+$$
+AF{=}2\cos\left[\frac12kd\cos\theta\right]\quad kd{=}\frac{2\pi}\lambda d{=}2\pi\frac d\lambda 
+$$
+
+
+<p><img src="/../images/Antenna/1717134268805.png" alt="1717134268805" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717134287481.png" alt="1717134287481" loading="lazy"></p>
+<h3 id="N-Element-array"><a href="#N-Element-array" class="headerlink" title="N-Element array"></a>N-Element array</h3><p><img src="/../images/Antenna/1717134353772.png" alt="1717134353772" loading="lazy"></p>
+
+$$
+\begin{aligned}&AF=1+e^{jkd\cos\theta}+e^{j2kd\cos\theta}+\cdots+e^{j(N-1)kd\cos\theta}\\&=\sum_{n=1}^Ne^{j(n-1)kd\cos\theta}=\sum_{n=1}^Ne^{j(n-1)\Psi}\end{aligned}
+$$
+
+
+
+$$
+AF=1+e^{j\Psi}+e^{j2\Psi}+\cdots+e^{j(N-1)\Psi}=\frac{e^{jN\Psi}-1}{e^{j\Psi}-1}\\=\frac{e^{j\frac N2\Psi}\left(e^{j\frac N2\Psi}-e^{-j\frac N2\Psi}\right)}{e^{j\frac12\Psi}\left(e^{j\frac12\Psi}-e^{-j\frac12\Psi}\right)}=\frac{e^{j\frac N2\Psi}\sin\left(\frac N2\Psi\right)}{e^{j\frac12\Psi}\sin\left(\frac12\Psi\right)}
+$$
+
+
+<p>Refenece Point at the end:</p>
+
+$$
+AF=\frac{e^{j\frac N2\Psi}\sin\left(\frac N2\Psi\right)}{e^{j\frac12\Psi}\sin\left(\frac12\Psi\right)},\Psi=kd\cos\theta,
+$$
+
+
+<p>Refenece Point at the center:</p>
+
+$$
+AF=\frac{\sin\left(\frac N2\Psi\right)}{\sin\left(\frac12\Psi\right)},\Psi=kd\cos\theta,
+$$
+
+
+<p>In Progreessive Phase Shift:</p>
+
+$$
+\Psi=kd\cos\theta+\alpha 
+$$
+
+
+
+$$
+AF=1+e^{j(kd\cos\theta+\alpha)}+e^{j2(kd\cos\theta+\alpha)}+\cdots+e^{j(N-1)(kd\cos\theta+\alpha)}\\=\sum_{n=1}^Ne^{j(n-1)(kd\cos\theta+\alpha)}=\sum_{n=1}^Ne^{j(n-1)\Psi}=\frac{e^{j\frac N2\Psi}\sin\left(\frac N2\Psi\right)}{e^{j\frac12\Psi}\sin\left(\frac12\Psi\right)}
+$$
+
+
+<p>Normalized Array Factor:</p>
+
+$$
+\left|f(\Psi)\right|=\left|\frac{\sin\left(\frac N2\Psi\right)}{N\sin\left(\frac12\Psi\right)}\right|
+$$
+
+
+<p>Grating Lobe:</p>
+
+$$
+\begin{aligned}
+\theta\in\begin{bmatrix}0,\pi\end{bmatrix}\text{ or }\theta\in\begin{bmatrix}\theta_1,\theta_2\end{bmatrix}\text{, visible region} \\
+\text{In the visible region,} \\
+ifwehaveY= 0\mathrm{~and~}\Psi=2\pi. 
+\end{aligned}
+$$
+
+
+<p>Avoid grating lobe:</p>
+<ol>
+<li>Smaller d;</li>
+<li>Smaller phase shift.</li>
+</ol>
+
+$$
+1.\mathrm{~For~}\alpha=\pi\Rightarrow2kd&lt;2\pi\Rightarrow d\mathrm{~/~}\lambda&lt;\frac12\\2.\mathrm{~For~}\alpha=0\mathrm{~}\Rightarrow\mathrm{~k}d&lt;2\pi\Rightarrow d\mathrm{~/~}\lambda&lt;1
+$$
+
+
+<h4 id="Broadside-Array"><a href="#Broadside-Array" class="headerlink" title="Broadside Array"></a>Broadside Array</h4><p>Maximum @  $\theta = 90\degree$ </p>
+
+$$
+AF\boldsymbol{=}N@\boldsymbol{\theta}\boldsymbol{=}\boldsymbol{\pi}/2\quad\boldsymbol{\Psi}\boldsymbol{=}kd\cos\boldsymbol{\theta}\boldsymbol{+}\boldsymbol{\alpha}|_{\theta=\pi/2}\boldsymbol{=}0
+$$
+
+
+<p><img src="/../images/Antenna/1717134725130.png" alt="1717134725130" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717134745100.png" alt="1717134745100" loading="lazy"></p>
+<h4 id="End-fire-Array"><a href="#End-fire-Array" class="headerlink" title="End-fire Array"></a>End-fire Array</h4><p><img src="/../images/Antenna/1717134897852.png" alt="1717134897852" loading="lazy"></p>
+
+$$
+\begin{aligned}
+&AF= N@\theta{=}0  &\Psi=kd+\alpha=2n\pi(n=0,\pm1,\pm2\ldots)  \\
+&\text{or} \\
+&AF= N@\theta{=}\pi   &\Psi=-kd+\alpha=2n\pi(n=0,\pm1,\pm2...)  \\
+&\Psi=kd\cos\theta+\alpha=2\pi\cos\theta 
+\end{aligned}
+$$
+
+
+<p>Bidirectional:</p>
+<p><img src="/../images/Antenna/1717134942873.png" alt="1717134942873" loading="lazy"></p>
+<p>Unidirectional:</p>
+<p><img src="/../images/Antenna/1717134955235.png" alt="1717134955235" loading="lazy"></p>
+<h4 id="Phased-Array"><a href="#Phased-Array" class="headerlink" title="Phased Array"></a>Phased Array</h4><p><img src="/../images/Antenna/1717135044895.png" alt="1717135044895" loading="lazy"></p>
+<h4 id="Non-uniform-Array"><a href="#Non-uniform-Array" class="headerlink" title="Non-uniform Array"></a>Non-uniform Array</h4><p>Side Lobe</p>
+<p>Uniform array:</p>
+<ul>
+<li>Universal pattern: N↑, SLL↓ </li>
+<li>With a limit of -13.3 dB</li>
+<li>No control of SL</li>
+</ul>
+<p>How to reduce SLL?</p>
+<p>Non-uniform excitation</p>
+<p><img src="/../images/Antenna/1717135171215.png" alt="1717135171215" loading="lazy"></p>
+<h4 id="Planar-Array"><a href="#Planar-Array" class="headerlink" title="Planar Array"></a>Planar Array</h4><p><img src="/../images/Antenna/1717135198414.png" alt="1717135198414" loading="lazy"></p>
+<p>Can be viewed as product of two linear array factors:</p>
+
+$$
+AF=\sum_{i=1}^{M\times N}I_ie^{jk\hat{r}\cdot\vec{r}_i}\\
+AF_n(\theta,\phi)=\left\{\frac{\sin(\frac M2\psi_x)}{M\sin\frac{\psi_x}2}\right\}\left\{\frac{\sin(\frac N2\psi_y)}{N\sin\frac{\psi_y}2}\right\};\\\psi_x=kd_x\sin\theta\cos\varphi+\alpha_x\\\psi_y=kd_y\sin\theta\sin\varphi+\alpha_y
+$$
+
+
+<h3 id="Applications-1"><a href="#Applications-1" class="headerlink" title="Applications"></a>Applications</h3><h4 id="Yagi-Uda-Antenna"><a href="#Yagi-Uda-Antenna" class="headerlink" title="Yagi-Uda Antenna"></a>Yagi-Uda Antenna</h4><p>Basic configuration:</p>
+<ul>
+<li>One driven element;</li>
+<li>Two parasitic elements or more</li>
+</ul>
+<p><img src="/../images/Antenna/1717135386351.png" alt="1717135386351" loading="lazy"></p>
+<p>Remarks:</p>
+<ul>
+<li>Parasitic elements are excited by near-field coupling from the driven element;</li>
+<li>Proper design of parasitic elements for end fire radiation;</li>
+<li>In far field, the radiated waves from all the elements are in-phase.</li>
+</ul>
+<p><img src="/../images/Antenna/1717135675789.png" alt="1717135675789" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717135951201.png" alt="1717135951201" loading="lazy"></p>
+<h4 id="Helix-Antenna"><a href="#Helix-Antenna" class="headerlink" title="Helix Antenna"></a>Helix Antenna</h4><p><img src="/../images/Antenna/1717136046473.png" alt="1717136046473" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717136115015.png" alt="1717136115015" loading="lazy"></p>
+<h2 id="Travelling-Wave-Antennas"><a href="#Travelling-Wave-Antennas" class="headerlink" title="Travelling-Wave Antennas"></a>Travelling-Wave Antennas</h2><h3 id="Travelling-wave-amp-standing-wave"><a href="#Travelling-wave-amp-standing-wave" class="headerlink" title="Travelling wave &amp; standing wave"></a>Travelling wave &amp; standing wave</h3><h4 id="Long-wire-antennas"><a href="#Long-wire-antennas" class="headerlink" title="Long wire antennas"></a>Long wire antennas</h4><p><img src="/../images/Antenna/1717137633424.png" alt="1717137633424" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717137646795.png" alt="1717137646795" loading="lazy"></p>
+<p>Note:<br>Long wire antennas: “l” &#x3D; Several wavelength</p>
+<ul>
+<li>One end for excitation;</li>
+<li>The other end for load (open, short, or matching);</li>
+<li>Transmission line with radiation.</li>
+</ul>
+<h3 id="Log-periodic-Antennas"><a href="#Log-periodic-Antennas" class="headerlink" title="Log-periodic Antennas"></a>Log-periodic Antennas</h3><p>Yagi-Uda: High Gain</p>
+<p>Log-periodic: Wide Bandwidth</p>
+<p><img src="/../images/Antenna/1717138714524.png" alt="1717138714524" loading="lazy"></p>
+<p>Why:</p>
+<ol>
+<li>Feed from smaller dipole element;</li>
+<li>Feed out-of-phase with adjacent elements;</li>
+<li>Add a resistor at the end.</li>
+</ol>
+
+$$
+\tau=\frac{R_{n+1}}{R_{n}}=\frac{L_{n+1}}{L_{n}}=\frac{d_{n+1}}{d_{n}}\\\alpha=2\tan^{-1}\left(\frac{1-\tau}{4\sigma}\right)\\\sigma=\frac{d_{n}}{2L_{n}}\\L_{1}\approx\frac{\lambda_{L}}{2}\quad\mathrm{and}\quad L_{N}\approx\frac{\lambda_{U}}{2}
+$$
+
+
+<p><img src="/../images/Antenna/1717138873279.png" alt="1717138873279" loading="lazy"></p>
+<h2 id="Microstrip-Antennas"><a href="#Microstrip-Antennas" class="headerlink" title="Microstrip Antennas"></a>Microstrip Antennas</h2><p><img src="/../images/Antenna/1717740667735.png" alt="1717740667735" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717740670364.png" alt="1717740670364" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717740680573.png" alt="1717740680573" loading="lazy"></p>
+<h3 id="Basic-Mode"><a href="#Basic-Mode" class="headerlink" title="Basic Mode"></a>Basic Mode</h3><ul>
+<li>Equivalent magnetic current;</li>
+<li>Radiating and non-radiating apertures;</li>
+<li>Operating frequency with different L.</li>
+</ul>
+<p><img src="/../images/Antenna/1717740726098.png" alt="1717740726098" loading="lazy"></p>
+<ul>
+<li>Magnetic current array;</li>
+<li>Image theorem from infinite ground;</li>
+<li>Cavity model with magnetic walls;</li>
+<li>Different from</li>
+</ul>
+<p><img src="/../images/Antenna/1717740758890.png" alt="1717740758890" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717740768183.png" alt="1717740768183" loading="lazy"></p>
+<h3 id="Antenna-feeding-methods"><a href="#Antenna-feeding-methods" class="headerlink" title="Antenna feeding methods"></a>Antenna feeding methods</h3><p><img src="/../images/Antenna/1717740786849.png" alt="1717740786849" loading="lazy"></p>
+<p>Impedance Matching:</p>
+<p><img src="/../images/Antenna/1717740801741.png" alt="1717740801741" loading="lazy"></p>
+<p>Using 50-Ohm port: finding the position with Z_in&#x3D;50 Ohm</p>
+<h3 id="Analysis-Model"><a href="#Analysis-Model" class="headerlink" title="Analysis Model"></a>Analysis Model</h3><p><img src="/../images/Antenna/1717742374397.png" alt="1717742374397" loading="lazy"></p>
+<p>Known:</p>
+<ul>
+<li>Operating Frequency</li>
+<li>Dielectric:  $\varepsilon_r$  and  $h$ </li>
+<li>Metal:  $t$ </li>
+</ul>
+<p>Design: </p>
+<ul>
+<li>Patch:  $L$  and  $W$ </li>
+<li>Evaluate gain</li>
+</ul>
+<p>2 Models:</p>
+<p><img src="/../images/Antenna/1717742413544.png" alt="1717742413544" loading="lazy"></p>
+<h4 id="Transmission-line-model"><a href="#Transmission-line-model" class="headerlink" title="Transmission line model"></a>Transmission line model</h4><p>determine W</p>
+<p>Uniform distribution and  field intensity in dielectric</p>
+
+$$
+W=\frac{1}{2f_r\sqrt{\mu_0\epsilon_0}}\sqrt{\frac{2}{\epsilon_r+1}}
+$$
+
+
+<p>Effective permittivity</p>
+
+$$
+\varepsilon_{eff}=\frac{\varepsilon_r+1}2+\frac{\varepsilon_r-1}2{\left[1+12\frac hW\right]}^{-1/2}
+$$
+
+
+<p>Fring effect and determine L</p>
+
+$$
+\frac{\Delta L}{h}=0.412\frac{(\varepsilon_{eff}+0.3)(\frac Wh+0.264)}{(\varepsilon_{eff}-0.258)(\frac Wh+0.8)}\\L=\frac{\lambda_d}2-2\Delta L=\frac{\lambda_0}{2\sqrt{\varepsilon_{eff}}}-2\Delta L
+$$
+
+
+<p>impedance matching</p>
+<h4 id="Cavity-Model"><a href="#Cavity-Model" class="headerlink" title="Cavity Model"></a>Cavity Model</h4><p><img src="/../images/Antenna/1717742626807.png" alt="1717742626807" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717743460723.png" alt="1717743460723" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717743468657.png" alt="1717743468657" loading="lazy"></p>
+<h3 id="Circular-polarization"><a href="#Circular-polarization" class="headerlink" title="Circular polarization"></a>Circular polarization</h3><p>Dual feed patch</p>
+<p><img src="/../images/Antenna/1717743681072.png" alt="1717743681072" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717743691321.png" alt="1717743691321" loading="lazy"></p>
+<p><img src="/../images/Antenna/1717743927411.png" alt="1717743927411" loading="lazy"></p>
+<p><img src="/../images/Antenna/1718344358151.png" alt="1718344358151" loading="lazy"></p>
+<p>SP-feed 旋转馈电</p>
+<h2 id="Reflector-and-lens-antennas"><a href="#Reflector-and-lens-antennas" class="headerlink" title="Reflector and lens antennas"></a>Reflector and lens antennas</h2><p><img src="/../images/Antenna/1718345601277.png" alt="1718345601277" loading="lazy"></p>
+<h3 id="Corner-Reflectors"><a href="#Corner-Reflectors" class="headerlink" title="Corner Reflectors"></a>Corner Reflectors</h3><p><img src="/../images/Antenna/1718345727630.png" alt="1718345727630" loading="lazy"></p>
+<p><img src="/../images/Antenna/1718345718761.png" alt="1718345718761" loading="lazy"></p>
+<h3 id="Parabolic-Reflectors"><a href="#Parabolic-Reflectors" class="headerlink" title="Parabolic Reflectors"></a>Parabolic Reflectors</h3><p><img src="/../images/Antenna/1718346212882.png" alt="1718346212882" loading="lazy"></p>
+<p><img src="/../images/Antenna/1718346379534.png" alt="1718346379534" loading="lazy"></p>
+<p><img src="/../images/Antenna/1718346371235.png" alt="1718346371235" loading="lazy"></p>
+<p><img src="/../images/Antenna/1718346571584.png" alt="1718346571584" loading="lazy"></p>
+<h3 id="Lens-Antennas"><a href="#Lens-Antennas" class="headerlink" title="Lens Antennas"></a>Lens Antennas</h3><p><img src="/../images/Antenna/1718346830900.png" alt="1718346830900" loading="lazy"></p>
+<p>Lens antennas:</p>
+<ul>
+<li>High gain: plane wave;</li>
+<li>Geometrical optics: equal optical distance;</li>
+<li>Source: spherical wave, illuminate the whole lens;</li>
+<li>Source is positioned on the focal point for normal<br>radiated plane wave;</li>
+<li>Other incident&#x2F;radiated angle of plane wave: focus on<br>the focal plane with gain decrease;</li>
+<li>Spatial Fournier Transformation: (x, y)&amp;k</li>
+</ul>
+<h3 id="Reflected-and-transmitted-array"><a href="#Reflected-and-transmitted-array" class="headerlink" title="Reflected and transmitted array"></a>Reflected and transmitted array</h3><p><img src="/../images/Antenna/1718347859765.png" alt="1718347859765" loading="lazy"></p>
+<p><img src="/../images/Antenna/1718347869028.png" alt="1718347869028" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2024/03/01/Antenna/" title="Principle of Antenna">https://blitherboom812.github.io/2024/03/01/Antenna/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2024/03/19/hello-world/" rel="prev" title="Hello World"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Hello World</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2024/02/28/Speech-SP/" rel="next" title="Speech-SP"><span class="post-nav-text">Speech-SP</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

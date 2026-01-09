@@ -1,0 +1,828 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Computer Network | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="参考书籍A.S Tanebaum (著)，严伟，潘爱民(译) 计算机网络(第五版), 2004，清华大学出版社  A.S Tanebaum，Nick Feamster, David Wetherall (著)，潘爱民(译)， 计算机网络(第六版), 2022, 清华大学出版社（彩色版，非常精美） 杂项token ring  计算机网络最核心的技术：分组(packet)。 grid computin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network">
+<meta property="og:url" content="https://blitherboom812.github.io/2023/09/18/Computer-Network/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="参考书籍A.S Tanebaum (著)，严伟，潘爱民(译) 计算机网络(第五版), 2004，清华大学出版社  A.S Tanebaum，Nick Feamster, David Wetherall (著)，潘爱民(译)， 计算机网络(第六版), 2022, 清华大学出版社（彩色版，非常精美） 杂项token ring  计算机网络最核心的技术：分组(packet)。 grid computin">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/3_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/3_3.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/3_2.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/3_5.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/3_6.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/3_7.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/5_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/5_2.jpg">
+<meta property="article:published_time" content="2023-09-18T11:18:41.000Z">
+<meta property="article:modified_time" content="2023-10-30T13:48:44.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/%E8%AE%A1%E7%BD%91/3_1.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D"><span class="toc-number">1.</span> <span class="toc-text">参考书籍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%82%E9%A1%B9"><span class="toc-number">2.</span> <span class="toc-text">杂项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%8E%86%E5%8F%B2%E4%B8%8E%E8%BF%9B%E5%B1%95"><span class="toc-number">3.</span> <span class="toc-text">计算机网络的历史与进展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">数据通信基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">5.</span> <span class="toc-text">网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">5.1.</span> <span class="toc-text">计算机网络的构成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">5.1.1.</span> <span class="toc-text">基本结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">5.2.</span> <span class="toc-text">计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.2.1.</span> <span class="toc-text">网络协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%82%E3%80%81%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.2.2.</span> <span class="toc-text">层、协议和接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%88%86%E7%B1%BB"><span class="toc-number">5.2.3.</span> <span class="toc-text">服务分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%8E%9F%E8%AF%AD-primitives"><span class="toc-number">5.2.4.</span> <span class="toc-text">服务原语(primitives)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B1%82"><span class="toc-number">5.2.5.</span> <span class="toc-text">分层</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.3.</span> <span class="toc-text">计算机网络参考模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E6%A0%87%E5%87%86%E5%8C%96"><span class="toc-number">5.3.1.</span> <span class="toc-text">计算机网络的标准化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI-%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.3.2.</span> <span class="toc-text">OSI 参考模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-x2F-IP-%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.3.3.</span> <span class="toc-text">TCP&#x2F;IP 参考模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.3.4.</span> <span class="toc-text">其他参考模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-number">6.</span> <span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">7.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%8A%9F%E8%83%BD"><span class="toc-number">7.1.</span> <span class="toc-text">定义和功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%B8%A7"><span class="toc-number">7.1.1.</span> <span class="toc-text">成帧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6"><span class="toc-number">7.1.2.</span> <span class="toc-text">差错控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">7.1.3.</span> <span class="toc-text">流量控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B%E5%92%8C%E7%BA%A0%E6%AD%A3"><span class="toc-number">7.2.</span> <span class="toc-text">错误检测和纠正</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%A0%E9%94%99%E7%A0%81"><span class="toc-number">7.2.1.</span> <span class="toc-text">纠错码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E9%94%99%E7%A0%81"><span class="toc-number">7.2.2.</span> <span class="toc-text">检错码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.3.</span> <span class="toc-text">数据链路层协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E5%8D%95%E5%B7%A5%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.3.1.</span> <span class="toc-text">无约束单工协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%B7%A5%E5%81%9C%E7%AD%89%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.3.2.</span> <span class="toc-text">单工停等协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%99%AA%E5%A3%B0%E4%BF%A1%E9%81%93%E7%9A%84%E5%8D%95%E5%B7%A5%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.3.3.</span> <span class="toc-text">有噪声信道的单工协议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6-1"><span class="toc-number">7.4.</span> <span class="toc-text">流量控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.4.1.</span> <span class="toc-text">滑动窗口协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%80%E5%90%8En%E5%B8%A7%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.4.2.</span> <span class="toc-text">退后n帧协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.4.3.</span> <span class="toc-text">选择重传协议</span></a></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2023/09/18/Computer-Network/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Computer Network</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2023-09-18 19:18:41" itemprop="dateCreated datePublished" datetime="2023-09-18T19:18:41+08:00">2023-09-18</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2023-10-30 21:48:44" itemprop="dateModified" datetime="2023-10-30T21:48:44+08:00">2023-10-30</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/note/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">note</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h2><p>A.S Tanebaum (著)，严伟，潘爱民(译) 计算机网络(第五版), 2004，清华大学出版社 </p>
+<p>A.S Tanebaum，Nick Feamster, David Wetherall (著)，潘爱民(译)， 计算机网络(第六版), 2022, 清华大学出版社（彩色版，非常精美）</p>
+<h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><p>token ring </p>
+<p>计算机网络最核心的技术：分组(packet)。</p>
+<p>grid computing</p>
+<h2 id="计算机网络的历史与进展"><a href="#计算机网络的历史与进展" class="headerlink" title="计算机网络的历史与进展"></a>计算机网络的历史与进展</h2><p>网络计算的基本模式</p>
+<ul>
+<li>C&#x2F;S or B&#x2F;W</li>
+<li>P2P</li>
+</ul>
+<p>服务</p>
+<ul>
+<li>延迟、带宽、丢失率、可靠性</li>
+<li>单播&#x2F;多播， 实时&#x2F;非实时</li>
+</ul>
+<p>链路：光纤、电缆和卫星</p>
+<ul>
+<li>电子、光子等作为传输介质</li>
+<li>节点：机械&#x2F;电&#x2F;光</li>
+</ul>
+<p>协议</p>
+<ul>
+<li>TCP&#x2F;IP, ATM, MPLS, SONET, Ethernet, PPP, X.25, FrameRelay, AppleTalk, IPX, SNA</li>
+</ul>
+<p>功能</p>
+<ul>
+<li>路由，差错控制、拥塞控制、服务质量(QoS)</li>
+</ul>
+<p>应用：FTP、HTTP </p>
+<p>空间距离</p>
+<ul>
+<li>局域网 (LAN): 以太网、令牌环、FDDI</li>
+<li>城域网 (MAN): DQDB, SMDS ,以太网</li>
+<li>广域网 (WAN): X.25, ATM, frame relay, DWDM</li>
+</ul>
+<p>信息类型</p>
+<ul>
+<li>数据网络 vs. 通信网络</li>
+</ul>
+<p>应用类型</p>
+<ul>
+<li>专用网络：飞机订票网，银行网，信用卡网</li>
+<li>通用网络：Internet</li>
+</ul>
+<p>使用权</p>
+<ul>
+<li>私有：企业网</li>
+<li>公用：电话网、Internet<br>协议的所有权</li>
+<li>私有: SNA (Systems Network Architecture)</li>
+<li>开放: IP<br>技术</li>
+<li>地面 vs. 卫星</li>
+<li>有线 vs. 无线<br>协议</li>
+<li>IP, AppleTalk, SNA</li>
+</ul>
+<p>计算机网络的形成</p>
+<ul>
+<li>多终端系统</li>
+<li>把计算机互联起来<br>1970年代的计算机网络</li>
+<li>X.25 分组交换网：各国的电信部门建设运行</li>
+<li>各种专用的网络体系结构：SNA，DECnet</li>
+<li>Internet 的前身ARPANET进行实验运行<br>1980年代的计算机网络</li>
+<li>标准化计算机网络体系结构：OSI</li>
+<li>局域网络 LAN 技术空前发展</li>
+<li>建成NSFNET，Internet 初具规模</li>
+</ul>
+<p>迈特卡尔夫定律(联网定律)</p>
+<p>网络价值随用户数平方成正比。未联网设备增加  $N$  倍，效率增加  $N$  倍。联网设备增加  $N$  倍，效率增加  $N^2$  倍</p>
+<p>Internet 标准化组织</p>
+<ul>
+<li>Internet Engineering Task Force（IETF）：IETF负责Internet协议的研发和改进。IETF被分为很多个工作组（working groups），他们提交的文档称为RFC（Request For Comments）。</li>
+<li>IRTF（Internet Research Task Force）：IRTF由一些专注于某个领域长期发展的研究小组组成。</li>
+<li>Internet Architecture Board（IAB）：IAB负责定义Internet的整体框架，为IETF提供大方向上的指导。</li>
+<li>The Internet Engineering Steering Group（IESG）：IESG在技术方面管理IETF的活动，负责Internet标准的制定过程。</li>
+</ul>
+<p>所有的标准以RFC的形式发布出来，可以从<a href="http://www.ietf.org免费获得，但不是所有的RFC都是Internet标准。标准形成的一般步骤是：">www.ietf.org免费获得，但不是所有的RFC都是Internet标准。标准形成的一般步骤是：</a></p>
+<ul>
+<li>Internet Drafts</li>
+<li>RFCs</li>
+<li>Proposed Standard</li>
+<li>Draft Standard（需要两个可以工作的实现）</li>
+<li>Internet Standard（由IAB发布）</li>
+</ul>
+<p>David Clark, MIT, 1992: </p>
+<ul>
+<li><pre><code> &quot;We reject: kings, presidents, and voting. 
+</code></pre>
+</li>
+<li><pre><code>  We believe in: rough consensus and running code.”
+</code></pre>
+</li>
+</ul>
+<p><strong>Paul Baran 分组交换网络</strong></p>
+<p>与 Donald Watts Davies 在这个思想的发明上有争议。</p>
+<p>Baran 的设计细节：</p>
+<p>报文发送</p>
+<ul>
+<li>每个交换节点根据自己的路由表判断如何转发报文</li>
+<li>每个报文的转发都是独立于其他报文的</li>
+<li>交换节点不保存端节点的状态<ul>
+<li>可扩展性好</li>
+<li>不是最有效的网络</li>
+<li>发送不是完美的<ul>
+<li>端节点必须能容忍发送错误并从中恢复<br>分布式系统</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>所有交换节点是平等的</li>
+<li>避免了单一节点失效问题</li>
+<li>部件可以失效，但系统不可以</li>
+<li>系统的健壮性来自于<ul>
+<li>足够的物理（硬件）冗余</li>
+<li>适应性路由</li>
+</ul>
+</li>
+</ul>
+<p>模拟实验表明：“extremely survivable networks can be built using a moderately low redundancy of connectivity level”—Paul Baran, 1964</p>
+<p>比较两种可靠系统的实现思路：</p>
+<p>电话系统 </p>
+<ul>
+<li>笨终端，聪明的网络 </li>
+<li>确保每个网络部件都是可靠的 <ul>
+<li>系统可靠性＝部件可靠性 </li>
+<li>通过局部冗余实现部件的高可靠性 </li>
+<li>期望每个部件都能正常工作，部件失败的可能性很低</li>
+</ul>
+</li>
+<li>需要人工配置的，高度控制的网络</li>
+</ul>
+<p>Baran的系统 </p>
+<ul>
+<li>建立在简单的、不可靠部件上的可靠系统 </li>
+<li>自适应的系统 </li>
+<li>聪明的终端，可以修正传输错误</li>
+</ul>
+<p>Baran 设计思想的一种实现：Internet</p>
+<ul>
+<li>连接异构的子网</li>
+<li>提供两种基本功能<ul>
+<li>全球唯一的地址</li>
+<li>报文通过动态路由从源节点发送到目的节点</li>
+</ul>
+</li>
+</ul>
+<p>simple, flexible, scalable, and robust</p>
+<p>分组交换的特点：</p>
+<p><strong>简单性</strong></p>
+<ul>
+<li>每个报文携带各自的地址信息</li>
+<li>一个路由表可以为所有的流量服务</li>
+<li>可以适应爆炸性的增长<ul>
+<li>越简单越不容易出错 </li>
+<li>越简单越容易增长 </li>
+<li>对基本网络功能的要求少，可以在其上建立多种类型的网络</li>
+</ul>
+</li>
+</ul>
+<p><strong>灵活性</strong></p>
+<p>Everything over IP</p>
+<p>IP over Everything</p>
+<p><strong>可扩展性</strong></p>
+<p>可扩展的系统必须能对付</p>
+<ul>
+<li>端系统的增加</li>
+<li>流量的增加</li>
+<li>网络规模的增长<ul>
+<li>大的路由表</li>
+<li>路由频繁的变化</li>
+</ul>
+</li>
+</ul>
+<p>边缘论：End-to-End Argument</p>
+<p>路由器只负责传输，复杂的功能（纠错，重传）都由终端自行解决</p>
+<p><strong>健壮性</strong></p>
+<ul>
+<li>动态路由具有自适应的特性<ul>
+<li>动态路由和报文转发相辅相成</li>
+<li>周期性路由更新</li>
+<li>默认: 现有的部件会失效，会有新的部件加入，认为变化是正常的</li>
+</ul>
+</li>
+<li>牺牲一定的带宽的利用率，提高健壮性(报文头开销，更新开销)</li>
+</ul>
+<h2 id="数据通信基本原理"><a href="#数据通信基本原理" class="headerlink" title="数据通信基本原理"></a>数据通信基本原理</h2><p>香农定理：<br>带宽为  $H$  赫兹，信噪比为  $S/N$  的任意信道的最大数据传输率为  $H\log_2(1 + S/N) (bps)$ </p>
+<ul>
+<li>此式是利用信息论得出的，具有普遍意义</li>
+<li>与信号电平级数、采样速度无关</li>
+<li>此式仅是上限，实践中难以达到</li>
+</ul>
+<p>曼彻斯特码（Manchester），也称相位编码</p>
+<ul>
+<li>原理：每一位中间都有一个跳变，从低跳到高表示“0”，从高跳到低表示“1”。</li>
+<li>优点：克服了NRZ码的不足。每位中间的跳变即可作为数据，又可作为时钟，能够自同步。</li>
+</ul>
+<p>	</p>
+<p>差分曼彻斯特码（Differential Manchester）</p>
+<ul>
+<li>原理：每一位中间都有一个跳变，每位开始时有跳变表示“0”，无跳变表示“1”。位中间跳变表示时钟，位前跳变表示数据。</li>
+<li>优点：时钟、数据分离，便于提取。</li>
+</ul>
+<h2 id="网络体系结构"><a href="#网络体系结构" class="headerlink" title="网络体系结构"></a>网络体系结构</h2><h3 id="计算机网络的构成"><a href="#计算机网络的构成" class="headerlink" title="计算机网络的构成"></a>计算机网络的构成</h3><p><strong>资源子网</strong></p>
+<ul>
+<li>服务器（Server）</li>
+<li>客户机（Client）</li>
+</ul>
+<p>C&#x2F;S -&gt; B&#x2F;W -&gt; P2P</p>
+<p><strong>通信子网</strong></p>
+<ul>
+<li>通信线路（通道）</li>
+<li>网络互连设备（路由器、交换机、集线器等）</li>
+</ul>
+<h4 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h4><p><strong>点到点通道</strong></p>
+<ul>
+<li>一条线路连接两台网络互联设备</li>
+<li>一般两台计算机的连接要经过多台互联设备</li>
+<li>星形、环形、树形、全连结、交叉环、不规则图</li>
+<li>关键技术：路由选择（Routing）</li>
+</ul>
+<p><strong>广播网络</strong></p>
+<ul>
+<li><p>总线，环</p>
+</li>
+<li><p>组播网络（Multicast Networks）：把成员分组</p>
+</li>
+<li><p>单播网络（Unicast Networks）</p>
+<ul>
+<li>点到点连接</li>
+</ul>
+</li>
+<li><p>关键技术：通道分配</p>
+<ul>
+<li>静态分配：分时间片<ul>
+<li>控制简单，通道利用率低</li>
+</ul>
+</li>
+<li>动态分配各站点动态使用通道<ul>
+<li>控制复杂，通道利用度高</li>
+<li>通道分配方法：<ul>
+<li>集中式：只有一个仲裁机构</li>
+<li>分布式：各站点均有仲裁机构</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>PAN</p>
+</li>
+<li><p>LAN</p>
+</li>
+<li><p>MAN</p>
+</li>
+<li><p>WAN</p>
+</li>
+<li><p>internet，指一种技术(Internet，指实体的网络)</p>
+</li>
+<li><p>Interplanetary Internet</p>
+</li>
+</ul>
+<h3 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h3><p>对计算机网络及其部件所完成的功能的比较精确的定义，即从功能的角度描述计算机网络的结构，是层次模型和协议的集合。</p>
+<p>注意：计算机网络体系结构仅仅定义了网络及其部件通过协议应完成的功能，不定义协议的实现细节和各层协议之间的接口关系。</p>
+<p>协议分层的优点：易于协议的设计、分析、实现和调试</p>
+<p>计算机网络的功能：</p>
+<ul>
+<li>基本功能：为地理位置不同的计算机用户提供访问通路</li>
+<li>具体化为：<ul>
+<li>连接源节点和目的节点的物理传输线路，可以经过中间节点</li>
+<li>每条线路两端的结点利用波形进行二进制通信</li>
+<li>无差错的信息传送</li>
+<li>多个用户共享一条物理线路</li>
+<li>按照地址信息，进行路由选择</li>
+<li>信息缓存与流量控制</li>
+<li>会话控制</li>
+<li>满足各种用户、各种应用的访问要求</li>
+</ul>
+</li>
+</ul>
+<h4 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h4><p>层次结构的计算计网络功能中最重要的功能是通信功能，这种通信功能主要涉及同层中通信双方的相互作用，位于不同计算机上进行对话的第N层通信各方可分别看成是一种进程，称为<strong>对等进程（同等进程）</strong></p>
+<p><strong>协议</strong></p>
+<p>计算机网络同等层次中，通信双方进行信息交换时必须遵守的规则。</p>
+<p><strong>协议栈</strong></p>
+<p>一个特定系统所使用的一组协议统称为协议栈。</p>
+<p><strong>接口</strong></p>
+<p>相邻层之间有一个接口（Interface），它定义了下层向上层提供的原语操作与服务</p>
+<h4 id="层、协议和接口"><a href="#层、协议和接口" class="headerlink" title="层、协议和接口"></a>层、协议和接口</h4><p><strong>协议特性</strong></p>
+<ul>
+<li>不知道上下层的内部结构</li>
+<li>独立完成某种功能</li>
+<li>为上层提供服务</li>
+<li>使用下层提供的服务</li>
+</ul>
+<h4 id="服务分类"><a href="#服务分类" class="headerlink" title="服务分类"></a>服务分类</h4><ul>
+<li>面向连接的服务<ul>
+<li>当使用服务传输数据时，首先建立连接，然后使用该链接传送数据，使用完后，关闭连接。</li>
+<li>特点：顺序性好，类似于电话</li>
+</ul>
+</li>
+<li>面向无连接的服务<ul>
+<li>直接使用服务传送数据，每个分组独立进行路由选择。</li>
+<li>特点：顺序性差，类似于邮政</li>
+</ul>
+</li>
+<li>连接与可靠的关系<ul>
+<li>连接并不意味着可靠，可靠要通过确认、重传等机制来保证</li>
+<li>面向无连接的可以是可靠的，例如挂号信</li>
+</ul>
+</li>
+</ul>
+<p>TCP(可靠的连接)，UDP(不可靠的)</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>面向连接的例子</td>
+<td></td>
+</tr>
+<tr>
+<td>可靠的报文流</td>
+<td>页面序列</td>
+</tr>
+<tr>
+<td>可靠的字节流</td>
+<td>文件下载</td>
+</tr>
+<tr>
+<td>不可靠的连接</td>
+<td>IP语音</td>
+</tr>
+<tr>
+<td>无连接的例子</td>
+<td></td>
+</tr>
+<tr>
+<td>不可靠的数据报</td>
+<td>垃圾邮件</td>
+</tr>
+<tr>
+<td>有确认的数据报</td>
+<td>文本消息</td>
+</tr>
+<tr>
+<td>请求-响应</td>
+<td>数据库查询</td>
+</tr>
+</tbody></table>
+<h4 id="服务原语-primitives"><a href="#服务原语-primitives" class="headerlink" title="服务原语(primitives)"></a>服务原语(primitives)</h4><p>服务在形式上是由一组接口原语（或操作）来描述的</p>
+<p>四种类型：</p>
+<ul>
+<li>请求（request）：实体请求服务做一些工作</li>
+<li>指示（Indication）：实体被通知事件的发生</li>
+<li>响应（Response）：实体对某个事件的响应</li>
+<li>确认（Confirm）：对较早请求产生响应的确认</li>
+</ul>
+<h4 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h4><p>引入中间层，为底层不同的网络技术提供统一的抽象，服务上层业务</p>
+<h3 id="计算机网络参考模型"><a href="#计算机网络参考模型" class="headerlink" title="计算机网络参考模型"></a>计算机网络参考模型</h3><h4 id="计算机网络的标准化"><a href="#计算机网络的标准化" class="headerlink" title="计算机网络的标准化"></a>计算机网络的标准化</h4><p><strong>电信标准</strong></p>
+<p>ITU(International Telecommunication Union)</p>
+<ul>
+<li>ITU-R：无线通信</li>
+<li>ITU-T：电信标准</li>
+<li>ITU-D：开发</li>
+</ul>
+<p><strong>国际标准化组织：ISO</strong></p>
+<p>一个国际标准的形成：</p>
+<ul>
+<li>CD（Committee Draft）</li>
+<li>DIS(Draft International Standard)</li>
+<li>IS(International Standard)</li>
+</ul>
+<p><strong>其他标准化组织</strong></p>
+<ul>
+<li>ANSI</li>
+<li>NIST</li>
+<li>IEEE</li>
+<li>OIF</li>
+</ul>
+<p><strong>互联网标准化组织</strong></p>
+<p>互联网标准是自发，而非政府干预的，标准文本称为 RFC(Request For Comments)</p>
+<h4 id="OSI-参考模型"><a href="#OSI-参考模型" class="headerlink" title="OSI 参考模型"></a>OSI 参考模型</h4><p><img src="/../images/%E8%AE%A1%E7%BD%91/3_1.jpg" alt="alt" loading="lazy"></p>
+<p><img src="/../images/%E8%AE%A1%E7%BD%91/3_3.jpg" alt="alt" loading="lazy"></p>
+<h4 id="TCP-x2F-IP-参考模型"><a href="#TCP-x2F-IP-参考模型" class="headerlink" title="TCP&#x2F;IP 参考模型"></a>TCP&#x2F;IP 参考模型</h4><ul>
+<li>物理层<ul>
+<li>在物理线路上传输原始的二进制位</li>
+</ul>
+</li>
+<li>数据链路层<ul>
+<li>在有差错的物理线路上提供无差错的数据传输</li>
+<li>第一层和第二层合称为：Host-to-Network</li>
+</ul>
+</li>
+<li>Internet 层（网络层）<ul>
+<li>控制通信子网提供源点到目的点的IP分组传送</li>
+</ul>
+</li>
+<li>运输层<ul>
+<li>提供端到端的数据传送服务，包括 TCP 和 UDP</li>
+</ul>
+</li>
+<li>应用层<ul>
+<li>提供各种管理和应用服务功能</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../images/%E8%AE%A1%E7%BD%91/3_2.jpg" alt="alt" loading="lazy"></p>
+<h4 id="其他参考模型"><a href="#其他参考模型" class="headerlink" title="其他参考模型"></a>其他参考模型</h4><p>Novell NetWare 参考模型</p>
+<p><img src="/../images/%E8%AE%A1%E7%BD%91/3_5.jpg" alt="alt" loading="lazy"></p>
+<p>ATM 参考模型（B-ISDN）</p>
+<p><img src="/../images/%E8%AE%A1%E7%BD%91/3_6.jpg" alt="alt" loading="lazy"></p>
+<p><strong>排队与统计复用</strong></p>
+<p>若分组的到达速率超过链路的传输速率：</p>
+<ul>
+<li>分组在端口中排队，等待链路发送</li>
+<li>当排队等待的分组超过分配给端口队列的缓存大小，缓存溢出，导致新到达的分组被丢弃</li>
+<li>端口队列将随即到达的分组进行一定程度的整形，实现了关联端口链路的统计复用</li>
+</ul>
+<p><strong>分组延时的组成</strong></p>
+
+$$
+D = d_{proc} + d_{queue} + d_{trans} + d_{drop}
+$$
+
+
+ $d_{trans}$ ：传输延时：
+<ul>
+<li>L: 分组长度</li>
+<li>R：链路速率</li>
+<li> $d_{trans} = L / R$ </li>
+</ul>
+ $d_{prop}$  传播延时：
+<ul>
+<li> $d$ ：链路长度</li>
+<li> $s$ ：传播速度</li>
+<li> $d_{prop}$ ： $d/s$ </li>
+</ul>
+<p><strong>吞吐量</strong></p>
+<p>单位时间内发送者可以给接收者传送的比特数</p>
+<ul>
+<li>瞬时吞吐量：给定时刻的速率</li>
+<li>平均吞吐量：一段时间内的平均速率</li>
+</ul>
+<p>瓶颈链路：端到端路径(Path)上约束端到端平均吞吐量的链路(Link)</p>
+<p><img src="/../images/%E8%AE%A1%E7%BD%91/3_7.jpg" alt="alt" loading="lazy"></p>
+<p><strong>几个概念</strong></p>
+<ul>
+<li>报文：传输层协议的传输单位。报文由传输协议的头和应用层协议数据组成。就互联网而言，报文就是 TCP 报文段，报文段一定要封装在 IP 数据报(Datagram)中。</li>
+<li>报文段： TCP 协议端到端传输的单位。</li>
+<li>IP 数据报分组：IP 协议的端到端传输单位，由 IP 头和传输层协议数据组成。</li>
+<li>分组：穿越网络层和链路层之间接口的数据单位。可以是完整的 IP 数据报或者 IP 数据报的分片(fragment)</li>
+<li>帧：链路层协议传输单元</li>
+</ul>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p>物理层提供机械的、电气的、功能的和规程的特性，目的是启动、维护和关闭数据链路实体之间进行比特传输的物理连接。这种连接可能通过中继系统，中继系统内的传输也是在物理层。</p>
+<p>物理层的网络互联设备：中继器</p>
+<p>物理层的基本功能：在两个网络设备之间提供透明的比特流传输。</p>
+<p>物理层操作：物理连接的启动与关闭，正常数据的传输，以及维护管理。</p>
+<ul>
+<li>连接方式  （点到点，点到多点）</li>
+<li>通信方式  （单工，半双工，全双工）</li>
+<li>位传输方式（串行，并行）</li>
+</ul>
+<p>物理层的四个重要特性：</p>
+<ul>
+<li>机械特性</li>
+<li>电气特性</li>
+<li>功能特性</li>
+<li>规程特性</li>
+</ul>
+<p><strong>机械特性</strong></p>
+<p>主要定义物理连接的边界点，即接插装置；规定物理连接时所采用的规格、引脚的数量和排列情况</p>
+<p><strong>电气特性</strong></p>
+<p>规定传输二进制位时，线路上信号的电压高低、阻抗匹配、传输速率和距离限制。</p>
+<p><strong>功能特性</strong></p>
+<p>主要定义各条物理线路的功能。</p>
+<p>线路的功能分为四大类：</p>
+<ul>
+<li>数据</li>
+<li>控制</li>
+<li>定时</li>
+<li>接地</li>
+</ul>
+<p><strong>规程特性</strong></p>
+<p>主要定义各条物理线路的工作规程和时序关系。</p>
+<p><strong>传输介质</strong></p>
+<p>有导向介质</p>
+<ul>
+<li>铜线、光纤</li>
+</ul>
+<p>磁介质</p>
+<p>双绞线</p>
+<p>同轴电缆</p>
+<p>光纤</p>
+<p>无导向介质</p>
+<ul>
+<li>无线电波、激光、红外等</li>
+</ul>
+<p><strong>扩频技术</strong></p>
+<ul>
+<li>窄带通信<ul>
+<li>窄带的接受效果更加</li>
+<li>利于提高单位 Hz 的能量</li>
+</ul>
+</li>
+<li>扩频通信<ul>
+<li>调频扩频</li>
+<li>直接序列扩频</li>
+<li>超宽带(UWB)</li>
+</ul>
+</li>
+</ul>
+<p>无线电传输</p>
+<p>低频率、大波长的无线电容易穿过障碍物。全方向发射。</p>
+<p>微波传输</p>
+<ul>
+<li>f &gt;100Mhz，波长在厘米级</li>
+<li>微波沿直线传播</li>
+<li>无法穿越障碍物,容易被雨水吸收</li>
+<li>多径衰落(Multipath fading)</li>
+<li>造价低</li>
+</ul>
+<p>红外线和毫米波</p>
+<ul>
+<li>波长在毫米级</li>
+<li>很难穿越障碍物</li>
+<li>短程通信（无需授权）</li>
+<li>遥控器等</li>
+<li>室内无线LAN</li>
+</ul>
+<p>光波传输</p>
+<ul>
+<li>自由空间光通信</li>
+<li>无法穿透雨或浓雾</li>
+<li>受环境影响较大</li>
+</ul>
+<p><strong>典型传输网络</strong></p>
+<ul>
+<li>电话网络<ul>
+<li>SONET&#x2F;SDH</li>
+<li>采用TDM技术，是同步系统，由主时钟控制，时钟精度10e-9。</li>
+<li>路径（path），链路（line），段（section）</li>
+</ul>
+</li>
+</ul>
+<p>基本结构</p>
+<ul>
+<li>一帧包含 810 字节，每 125 us 产生一帧</li>
+<li>基本 SONET 信道称为 STS-1</li>
+</ul>
+<p>蜂窝无线电（Cellular Radio）</p>
+<ul>
+<li>单方向的寻呼系统</li>
+<li>打电话给寻呼公司，输入寻呼机号码；</li>
+<li>寻呼公司的计算机收到请求，通过线路传到高处（山顶）的天线；</li>
+<li>天线直接广播信号（本地寻呼），或传递给卫星（异地寻呼），卫星再广播。</li>
+<li>需要很小的带宽</li>
+</ul>
+<p>模拟蜂窝电话</p>
+<ul>
+<li>使用小的蜂窝</li>
+<li>在附近（不相邻）的蜂窝中重用传输频率</li>
+<li>发射功率小，设备小而便宜</li>
+</ul>
+<p>数字蜂窝网络</p>
+<ul>
+<li>第一代：模拟蜂窝电话</li>
+<li>第二代：数字蜂窝电话</li>
+<li>第三代：3G</li>
+</ul>
+<p>有线接入网络</p>
+<p>通信卫星</p>
+<p>电力线通信</p>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h3 id="定义和功能"><a href="#定义和功能" class="headerlink" title="定义和功能"></a>定义和功能</h3><p>数据链路层协议定义了一条链路的两个结点间交换数据的单元格式，以结点发送和接收数据单元的动作。</p>
+<p>概念：</p>
+<p>结点(node)：网络中的主机(host)和路由器(router)称为结点</p>
+<p>链路(link)：   通信路径上连接相邻结点的信道称为链路</p>
+<p>点到点(point to point)：一条链路的两个相邻结点间的通信称为点到点通信, 也称为通信路径(path)的一跳(hop)</p>
+<p>端到端(end to end)</p>
+<p>从源结点(source node)到目的结点(destination node)的通信称为端到端通信，通信路径可能由多个链路组成。</p>
+<p>与端到端(end to end，E2E)相对应的概念是逐调(hop by hop，HBH) </p>
+<p>虚拟数据通路</p>
+<p>实际数据通路</p>
+<p>功能：</p>
+<p>数据链路层协议应提供的最基本功能</p>
+<ul>
+<li>向网络层提供服务</li>
+<li>定界与同步</li>
+<li>差错控制</li>
+<li>顺序控制</li>
+<li>流量控制</li>
+</ul>
+<p>提供三种服务</p>
+<ul>
+<li>不可靠无连接服务</li>
+<li>可靠无连接服务</li>
+<li>可靠面向连接服务</li>
+</ul>
+<h4 id="成帧"><a href="#成帧" class="headerlink" title="成帧"></a>成帧</h4><p>Framing: 将比特流分成离散的帧，并计算每个帧的校验和。</p>
+<p>字符计数法</p>
+<ul>
+<li>在帧头中用一个域来表示整个帧的字符个数</li>
+<li>缺点：若计数出错，对本帧和后面的帧有影响</li>
+</ul>
+<p>带字符填充的首尾字符定界法</p>
+<ul>
+<li>起始字符 DLE STX，结束字符DLE ETX<ul>
+<li>DLE:Data Link Escape</li>
+<li>STX:Start of Text</li>
+<li>ETX:End of Text</li>
+</ul>
+</li>
+<li>字符填充</li>
+<li>局限于 8 位字符和 ASCII 字符传送</li>
+</ul>
+<p>带位填充的首尾标记定界法</p>
+<ul>
+<li>帧的起始和结束都用一个特殊的位串“01111110”，称为标记(flag)</li>
+<li>“0”比特插入删除技术</li>
+</ul>
+<p>物理层编码违例法</p>
+<p>只适用于物理层编码有冗余的网络</p>
+<ul>
+<li>802 LAN：曼彻斯特编码中<ul>
+<li>高-低 &#x2F; 低-高 分别表示1&#x2F;0，</li>
+<li>高-高 &#x2F; 低-低  不表示数据，可以用来做定界符。</li>
+</ul>
+</li>
+</ul>
+<h4 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h4><p>一般方法：接收方给发送方一个反馈（响应）</p>
+<p>出错情况</p>
+<ul>
+<li>帧出错，包括发送帧和相应帧</li>
+<li>帧丢失，包括发送帧和相应帧</li>
+</ul>
+<p>一般方案</p>
+<ul>
+<li>通过计时器和序号保证每帧最终交给目的网络层仅一次</li>
+</ul>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>防止发送过快，淹没接收端</p>
+<ul>
+<li>例如，接收端缓存溢出</li>
+</ul>
+<h3 id="错误检测和纠正"><a href="#错误检测和纠正" class="headerlink" title="错误检测和纠正"></a>错误检测和纠正</h3><p> 差错出现特点</p>
+<ul>
+<li>随机、偶发、孤立</li>
+<li>连续突发(burst）<br> 处理差错的两种基本策略</li>
+<li>使用纠错码</li>
+<li>发送方在每个数据块中加入足够的冗余信息，使得接收方能够判断接收到的数据是否有错，并能纠正错误。<ul>
+<li>例：前向纠错FEC (Forward Error Correcting):</li>
+</ul>
+</li>
+<li>使用检错码</li>
+<li>发送方在每个数据块中加入足够的冗余信息，使得接收方能够判断接收到的数据是否有错，但不能判断哪里有错。</li>
+</ul>
+<p><strong>奇偶校验</strong><br>最简单的例子是奇偶校验，在数据后填加一个奇偶位</p>
+<p>奇偶校验可以用来检查奇数个错误</p>
+<h4 id="纠错码"><a href="#纠错码" class="headerlink" title="纠错码"></a>纠错码</h4><p>码字(codeword）</p>
+<ul>
+<li>一个帧包括m个数据位，r个校验位，n &#x3D; m + r，</li>
+<li>则此n比特单元称为n位码字<br>海明距离（Hamming distance）</li>
+<li>两个码字之间不同的比特位数目。</li>
+<li>例如：0000000000 与0000011111的海明距离为5</li>
+</ul>
+<p>结论</p>
+<ul>
+<li>如果两个码字的海明距离为d，则需要d个单比特错就可以把一个码字转换成另一个码字；</li>
+<li>为了检查出d个错，需要使用海明距离为 d + 1 的编码；</li>
+<li>为了纠正d个错，需要使用海明距离为 2d + 1 的编码。</li>
+</ul>
+<p>m个信息位，r个校验位，纠正单比特错 (n&#x3D;r+m)</p>
+<p>对  $2^m$  个任何有效信息中的任何一个，有  $n$  个与其距离为 1 的无效码字，因此有</p>
+
+$$
+(n + 1)2^m \le 2^n
+$$
+
+
+<p>利用  $n = m + r$ ，得到  $m + r + 1 \le 2^r$ ，给定 m，利用上式得到校正单比特误码的校验位数目下界</p>
+<ul>
+<li>码位从左边开始编号，从“1”开始；</li>
+<li>位号为2的幂的位是校验位，其余是信息位；</li>
+<li>每个校验位使得包括自己在内的一些位的奇偶值为偶数（或奇数）</li>
+<li>为看清数据位k对哪些校验位有影响，将k写成2的幂的和。</li>
+</ul>
+<p>汉明码的工作过程：</p>
+<ul>
+<li>每个码字到来前，接收方计数器清零；</li>
+<li>接收方检查每个校验位k (k &#x3D; 1, 2, 4 …)的奇偶值是否正确；</li>
+<li>若第 k 位奇偶值不对，计数器加 k；</li>
+<li>所有校验位检查完后，若计数器值为0，则码字有效；若计数器值为m，则第m位出错。例：若校验位1、2、8出错，则第11位变反。</li>
+</ul>
+<h4 id="检错码"><a href="#检错码" class="headerlink" title="检错码"></a>检错码</h4><p>使用纠错码传数据，效率低。适用于不可重传的场合。</p>
+<p>大多情况采用的检测码加重传。</p>
+<p>二进制多项式</p>
+<p>二进制码串表示成二进制多项式</p>
+<p>循环冗余码（CRC）</p>
+<ul>
+<li>发送方与接收方事前商定。</li>
+<li>生成多项式的高位和低位必须为1</li>
+<li>生成多项式必须比传输信息对应的多项式短</li>
+</ul>
+<p>CRC 的基本思想<br>校验和(checksum)加载帧尾，使带校验和的帧的多项式能被  $G(x)$  除尽，接收方接受时，用  $G(x)$  去除它，若有余数，则传输出错。</p>
+<p>校验和计算算法</p>
+<p>设  $G(x)$  为  $r$  阶，在帧的末尾加  $r$  个0，使得帧为  $m + r$  位，相应多项式为  $x^rM(x)$ 。</p>
+<p>按照模 2 除法用对应 $G(x)$  的位串去除对应于  $x^rM(x)$ 减去余数，结果就是要传送的带检验和的多项式  $T(x)$ 。</p>
+<p>CRC 的检错能力：</p>
+<p>发送方发送  $T(x)$ ，接收方接受的 $T(x) + E(x)$ ， $E(x) \ne 0$ 。</p>
+ $(T(x) + E(x)) / G(x) = 0 + (E(x) / G(x))$ 
+
+<p>如果 $(E(x) / G(x))$ 的余数为0，则差错不能发现；否则可以发现。</p>
+<p><img src="/../images/%E8%AE%A1%E7%BD%91/5_1.jpg" alt="alt" loading="lazy"></p>
+<p><img src="/../images/%E8%AE%A1%E7%BD%91/5_2.jpg" alt="alt" loading="lazy"></p>
+<h3 id="数据链路层协议"><a href="#数据链路层协议" class="headerlink" title="数据链路层协议"></a>数据链路层协议</h3><h4 id="无约束单工协议"><a href="#无约束单工协议" class="headerlink" title="无约束单工协议"></a>无约束单工协议</h4><ul>
+<li>工作在理想情况</li>
+<li>单工传输</li>
+<li>发送方无休止工作（要发送的信息无限多）</li>
+<li>接收方无休止工作（缓冲区无限大）</li>
+<li>通信线路（信道）不损坏或丢失信息帧</li>
+</ul>
+<p>工作过程</p>
+<ul>
+<li>发送程序: 取数据，构成帧，发送帧；</li>
+<li>接收程序: 等待，接收帧，送数据给高层</li>
+</ul>
+<h4 id="单工停等协议"><a href="#单工停等协议" class="headerlink" title="单工停等协议"></a>单工停等协议</h4><p>协议描述</p>
+<ul>
+<li>增加约束条件：接收方不能无休止接收。<br>解决方案</li>
+<li>接收方每收到一个帧后，给发送方回送一个响应。<br>工作过程</li>
+<li>发送程序：取数据，成帧，发送帧，等待响应帧</li>
+<li>接收程序：等待，接收帧，送数据给高层，回送响应帧。</li>
+</ul>
+<h4 id="有噪声信道的单工协议"><a href="#有噪声信道的单工协议" class="headerlink" title="有噪声信道的单工协议"></a>有噪声信道的单工协议</h4><p>协议描述</p>
+<ul>
+<li>增加约束条件：信道（线路）有差错，信息帧可能损坏或丢失。</li>
+</ul>
+<p>解决方案</p>
+<ul>
+<li>出错重传<ul>
+<li>带来的问题<ul>
+<li>响应帧重复?发送帧头中放入序号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重传触发:<ul>
+<li>超时重传 </li>
+<li>什么时候重传?定时器<br>ARQ&#x2F;PAR</li>
+<li>PAR (Positive Acknowledgement with Retransmission）</li>
+<li>ARQ (Automatic Repeat reQuest）</li>
+</ul>
+</li>
+</ul>
+<h3 id="流量控制-1"><a href="#流量控制-1" class="headerlink" title="流量控制"></a>流量控制</h3><h4 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h4><p>捎带确认（piggybacking）</p>
+<p><strong>一位滑窗协议</strong></p>
+<ul>
+<li>窗口大小：N &#x3D; 1，发送序号和接收序号的取值范围：0，1；</li>
+<li>可进行数据双向传输，信息帧中可含有确认信息（piggybacking）；</li>
+<li>信息帧中包括两个序号域：发送序号和接收序号<br>（已经正确收到的帧的序号）<br>存在问题</li>
+<li>能保证无差错传输，但是基于停等方式；</li>
+<li>若双方同时开始发送，则会有一半重复帧；</li>
+<li>效率低，传输时间长。</li>
+</ul>
+<h4 id="退后n帧协议"><a href="#退后n帧协议" class="headerlink" title="退后n帧协议"></a>退后n帧协议</h4><h4 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h4></div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2023/09/18/Computer-Network/" title="Computer Network">https://blitherboom812.github.io/2023/09/18/Computer-Network/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/09/20/%E9%87%8F%E7%AD%92/" rel="prev" title="量筒"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">量筒</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/09/18/%E9%80%9A%E7%BD%91/" rel="next" title="通网"><span class="post-nav-text">通网</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

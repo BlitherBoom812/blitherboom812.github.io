@@ -1,0 +1,70 @@
+@font-face {
+    font-family: "宋体";
+    font-weight: normal;
+    font-style: normal;
+    src: url("/fonts/SIMSUN.TTC");
+}
+
+@font-face {
+    font-family: "华文宋体";
+    font-weight: normal;
+    font-style: normal;
+    src: url("/fonts/STSONG.TTF");
+}
+
+@font-face {
+    font-family: "华文宋体";
+    font-weight: normal;
+    font-style: italic;
+    src: url("/fonts/STKAITI.TTF");
+}
+
+@font-face {
+    font-family: "华文楷体";
+    font-weight: normal;
+    font-style: normal;
+    src: url("/fonts/STKAITI.TTF");
+}
+
+@font-face {
+    font-family: "华文仿宋";
+    font-weight: normal;
+    font-style: normal;
+    src: url("/fonts/STFANGSO.TTF");
+}
+
+@font-face {
+    font-family: "SmileySans";
+    font-weight: normal;
+    font-style: normal;
+    src: url("/fonts/SmileySans-Oblique.otf");
+}
+
+
+@font-face {
+    font-family: "Latin Modern Roman 10";
+    font-weight: normal;
+    font-style: normal;
+    src: url("/fonts/LMROMAN10-REGULAR.OTF");
+}
+
+@font-face {
+    font-family: "Latin Modern Roman 10";
+    font-weight: bold;
+    font-style: normal;
+    src: url("/fonts/LMROMAN10-BOLD.OTF");
+}
+
+@font-face {
+    font-family: "Latin Modern Roman 10";
+    font-weight: normal;
+    font-style: italic;
+    src: url("/fonts/LMROMAN10-ITALIC.OTF");
+}
+
+@font-face {
+    font-family: "Latin Modern Roman 10";
+    font-weight: bold;
+    font-style: italic;
+    src: url("/fonts/LMROMAN10-BOLDITALIC.OTF");
+}

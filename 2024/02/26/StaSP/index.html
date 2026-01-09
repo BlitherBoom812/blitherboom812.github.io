@@ -1,0 +1,1286 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Statistical Signal Processing | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="参数估计分类：  经典估计 贝叶斯估计  准则：  MSE，均方误差   $$ \hat \theta &#x3D; f(\bm{x}) $$   MSE $$ \text{mse}(\hat \theta) &#x3D; E \lbrace(\theta - \hat \theta)^2\rbrace &#x3D; \text{var}(\hat \theta) + b^2(\hat \theta)\\ b^2(\hat \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Statistical Signal Processing">
+<meta property="og:url" content="https://blitherboom812.github.io/2024/02/26/StaSP/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="参数估计分类：  经典估计 贝叶斯估计  准则：  MSE，均方误差   $$ \hat \theta &#x3D; f(\bm{x}) $$   MSE $$ \text{mse}(\hat \theta) &#x3D; E \lbrace(\theta - \hat \theta)^2\rbrace &#x3D; \text{var}(\hat \theta) + b^2(\hat \theta)\\ b^2(\hat \">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/2_1.jpg">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/2_2.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711254850893.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339154789.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339192281.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339216759.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339249863.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339773571.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339786814.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339831807.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711339865703.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711340151724.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711340163113.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711340177961.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711340277148.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1711340293644.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1713150769252.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1713152016025.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1713152987612.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1713152970273.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1713150674892.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1713151589324.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714360809348.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714360717248.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714360742651.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714360782259.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714361011137.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714361027958.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714966200160.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/StaSP/1714966230536.png">
+<meta property="article:published_time" content="2024-02-26T03:12:57.000Z">
+<meta property="article:modified_time" content="2024-06-03T09:04:30.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/StaSP/1_1.jpg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">参数估计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MSE"><span class="toc-number">1.1.</span> <span class="toc-text">MSE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVU"><span class="toc-number">1.2.</span> <span class="toc-text">MVU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8B%E6%8B%89%E7%BE%8E%E7%BD%97%E7%95%8C%E5%AE%9A%E7%90%86-CRLB"><span class="toc-number">1.3.</span> <span class="toc-text">克拉美罗界定理(CRLB)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3MVU"><span class="toc-number">1.4.</span> <span class="toc-text">求解MVU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E5%8F%98%E6%8D%A2%E7%9A%84%E5%85%8B%E6%8B%89%E7%BE%8E%E7%BD%97%E7%95%8C"><span class="toc-number">1.5.</span> <span class="toc-text">参数变换的克拉美罗界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A2%E9%87%8F%E5%8F%82%E6%95%B0%E7%9A%84%E5%85%8B%E6%8B%89%E7%BE%8E%E7%BD%97%E7%95%8C"><span class="toc-number">1.6.</span> <span class="toc-text">矢量参数的克拉美罗界</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">线性模型方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%85%E5%88%86%E7%BB%9F%E8%AE%A1%E9%87%8F%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">充分统计量方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Neyman-Fisher%E5%9B%A0%E5%AD%90%E5%88%86%E8%A7%A3%E5%AE%9A%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">Neyman-Fisher因子分解定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rao-Black-Lehmann-Scheffe-RBLS-%E5%AE%9A%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">Rao-Black-Lehmann-Scheffe(RBLS)定理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A2%E9%87%8F%E5%8F%82%E6%95%B0%E7%9A%84-RBLS"><span class="toc-number">3.2.1.</span> <span class="toc-text">矢量参数的 RBLS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BLUE"><span class="toc-number">4.</span> <span class="toc-text">BLUE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%AE%9A%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text">高斯-马尔可夫定理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MLE"><span class="toc-number">5.</span> <span class="toc-text">MLE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLE-%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">5.2.</span> <span class="toc-text">MLE 的性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%BC%B0%E8%AE%A1-LS"><span class="toc-number">6.</span> <span class="toc-text">最小二乘估计(LS)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%BC%B0%E8%AE%A1"><span class="toc-number">6.1.</span> <span class="toc-text">线性最小二乘估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%BC%B0%E8%AE%A1"><span class="toc-number">6.2.</span> <span class="toc-text">加权最小二乘估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%BC%B0%E8%AE%A1"><span class="toc-number">6.3.</span> <span class="toc-text">约束最小二乘估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-number">6.4.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E4%BC%B0%E8%AE%A1%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83"><span class="toc-number">7.</span> <span class="toc-text">经典估计方法比较</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E7%94%B5%E5%B9%B3%E4%BC%B0%E8%AE%A1%E9%97%AE%E9%A2%98"><span class="toc-number">7.1.</span> <span class="toc-text">噪声电平估计问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVU%E4%BC%B0%E8%AE%A1"><span class="toc-number">7.1.1.</span> <span class="toc-text">MVU估计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="toc-number">7.1.2.</span> <span class="toc-text">线性模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUE-1"><span class="toc-number">7.1.3.</span> <span class="toc-text">BLUE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%85%E5%88%86%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="toc-number">7.1.4.</span> <span class="toc-text">充分统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MLE-1"><span class="toc-number">7.1.5.</span> <span class="toc-text">MLE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSE"><span class="toc-number">7.1.6.</span> <span class="toc-text">LSE</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1"><span class="toc-number">8.</span> <span class="toc-text">贝叶斯估计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E9%A3%8E%E9%99%A9"><span class="toc-number">8.1.</span> <span class="toc-text">贝叶斯风险</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%9E%8B%E8%AF%AF%E5%B7%AE"><span class="toc-number">8.1.1.</span> <span class="toc-text">二次型误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E8%AF%AF%E5%B7%AE"><span class="toc-number">8.1.2.</span> <span class="toc-text">绝对误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F%E5%A4%B1%E8%B4%A5%E5%9E%8B%E8%AF%AF%E5%B7%AE"><span class="toc-number">8.1.3.</span> <span class="toc-text">成功失败型误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E5%80%BC%E6%AF%94%E8%BE%83"><span class="toc-number">8.1.4.</span> <span class="toc-text">三值比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1"><span class="toc-number">8.2.</span> <span class="toc-text">线性贝叶斯估计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A2%E9%87%8F%E5%8F%82%E6%95%B0%E6%83%85%E5%86%B5"><span class="toc-number">8.2.1.</span> <span class="toc-text">矢量参数情况</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E8%B4%AFLMMSE"><span class="toc-number">8.3.</span> <span class="toc-text">序贯LMMSE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%B4%E7%BA%B3%E6%BB%A4%E6%B3%A2"><span class="toc-number">9.</span> <span class="toc-text">维纳滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2"><span class="toc-number">9.1.</span> <span class="toc-text">滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E6%BB%91"><span class="toc-number">9.2.</span> <span class="toc-text">平滑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B"><span class="toc-number">9.3.</span> <span class="toc-text">预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">9.4.</span> <span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">10.</span> <span class="toc-text">卡尔曼滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B-1%EF%BC%9A%E5%BD%93%E6%88%90%E7%A1%AE%E5%AE%9A%E5%8F%82%E6%95%B0"><span class="toc-number">10.1.</span> <span class="toc-text">模型 1：当成确定参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B2%EF%BC%9A%E5%BD%93%E6%88%90%E6%9F%90%E4%B8%AA%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">10.2.</span> <span class="toc-text">模型2：当成某个随机变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B3%EF%BC%9A%E5%BD%93%E6%88%90%E6%9C%AA%E7%9F%A5%E4%B8%94%E9%9A%8F%E6%97%B6%E9%97%B4%E5%8F%98%E5%8C%96%E7%9A%84%E9%87%8F"><span class="toc-number">10.3.</span> <span class="toc-text">模型3：当成未知且随时间变化的量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BF%A1%E5%8F%B7%E6%A8%A1%E5%9E%8B"><span class="toc-number">10.4.</span> <span class="toc-text">动态信号模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E7%A8%B3%E6%80%A7"><span class="toc-number">10.4.1.</span> <span class="toc-text">平稳性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%92%E6%8E%A8%E7%89%B9%E6%80%A7"><span class="toc-number">10.4.2.</span> <span class="toc-text">递推特性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2-1"><span class="toc-number">10.5.</span> <span class="toc-text">卡尔曼滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B-1"><span class="toc-number">10.5.1.</span> <span class="toc-text">预测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E9%A2%84%E6%B5%8B-MSE"><span class="toc-number">10.5.2.</span> <span class="toc-text">最小预测 MSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E5%A2%9E%E7%9B%8A"><span class="toc-number">10.5.3.</span> <span class="toc-text">卡尔曼增益</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%AD%A3"><span class="toc-number">10.5.4.</span> <span class="toc-text">修正</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F-MSE"><span class="toc-number">10.5.5.</span> <span class="toc-text">最小 MSE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%9B%B6%E5%9D%87%E5%80%BC%E4%BF%A1%E5%8F%B7%E6%A8%A1%E5%9E%8B"><span class="toc-number">10.6.</span> <span class="toc-text">非零均值信号模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A2%E9%87%8F%E7%8A%B6%E6%80%81-%E6%A0%87%E9%87%8F%E8%A7%82%E6%B5%8B%E4%BF%A1%E5%8F%B7%E6%A8%A1%E5%9E%8B"><span class="toc-number">10.7.</span> <span class="toc-text">矢量状态-标量观测信号模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A2%E9%87%8F%E7%8A%B6%E6%80%81-%E7%9F%A2%E9%87%8F%E8%A7%82%E6%B5%8B%E4%BF%A1%E5%8F%B7%E6%A8%A1%E5%9E%8B"><span class="toc-number">10.8.</span> <span class="toc-text">矢量状态-矢量观测信号模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BF%A1%E5%8F%B7%E6%A8%A1%E5%9E%8B"><span class="toc-number">10.9.</span> <span class="toc-text">非线性信号模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">10.10.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B%E5%9F%BA%E6%9C%AC%E5%87%86%E5%88%99%E4%B8%8E%E6%96%B9%E6%B3%95"><span class="toc-number">11.</span> <span class="toc-text">信号检测基本准则与方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Neyman-Pearson-%E5%87%86%E5%88%99"><span class="toc-number">11.1.</span> <span class="toc-text">Neyman-Pearson 准则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">11.2.</span> <span class="toc-text">检测性能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E9%94%99%E8%AF%AF%E6%A6%82%E7%8E%87%E5%87%86%E5%88%99"><span class="toc-number">11.3.</span> <span class="toc-text">最小错误概率准则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E8%B4%9D%E5%8F%B6%E6%96%AF%E9%A3%8E%E9%99%A9%E5%87%86%E5%88%99"><span class="toc-number">11.4.</span> <span class="toc-text">二元贝叶斯风险准则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E8%B4%9D%E5%8F%B6%E6%96%AF%E9%A3%8E%E9%99%A9%E5%87%86%E5%88%99"><span class="toc-number">11.5.</span> <span class="toc-text">多元贝叶斯风险准则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">12.</span> <span class="toc-text">总结知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%B0%E8%AE%A1%E7%90%86%E8%AE%BA"><span class="toc-number">12.1.</span> <span class="toc-text">估计理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E7%90%86%E8%AE%BA"><span class="toc-number">12.2.</span> <span class="toc-text">检测理论</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2024/02/26/StaSP/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Statistical Signal Processing</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2024-02-26 11:12:57" itemprop="dateCreated datePublished" datetime="2024-02-26T11:12:57+08:00">2024-02-26</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-06-03 17:04:30" itemprop="dateModified" datetime="2024-06-03T17:04:30+08:00">2024-06-03</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h2><p>分类：</p>
+<ul>
+<li>经典估计</li>
+<li>贝叶斯估计</li>
+</ul>
+<p>准则：</p>
+<ul>
+<li>MSE，均方误差</li>
+</ul>
+
+$$
+\hat \theta = f(\bm{x})
+$$
+
+
+<h3 id="MSE"><a href="#MSE" class="headerlink" title="MSE"></a>MSE</h3>
+$$
+\text{mse}(\hat \theta) = E \lbrace(\theta - \hat \theta)^2\rbrace = \text{var}(\hat \theta) + b^2(\hat \theta)\\
+b^2(\hat \theta) = E(\hat \theta) - \theta
+$$
+
+
+<p>现实中无法直接计算 MSE，因为涉及到真值  $\theta$ ，但是  $\theta$  是我们要求的参数。</p>
+<h3 id="MVU"><a href="#MVU" class="headerlink" title="MVU"></a>MVU</h3><p>最小方差无偏估计</p>
+<p>MVU, Minimum Variance Unbiased</p>
+<p>无偏：</p>
+
+$$
+E(\hat \theta) = \theta, a \lt \theta \lt b
+$$
+
+
+<p>无偏的含义： $\hat \theta$  的求法需要对取值范围内任意的  $\theta$  进行估计。</p>
+<p>无偏估计是否一定存在？不一定。</p>
+<p>最小方差：</p>
+
+$$
+\min \text{var}\lbrace\hat\theta\rbrace
+$$
+
+
+<p>MVU的内涵：估计值的发散程度最小（最小方差），平均意义上靠近真值（MVU）。是对 MSE 的迂回实现。</p>
+<h3 id="克拉美罗界定理-CRLB"><a href="#克拉美罗界定理-CRLB" class="headerlink" title="克拉美罗界定理(CRLB)"></a>克拉美罗界定理(CRLB)</h3><p>假设  $p(\bm{x};\theta)$  满足正则条件：</p>
+
+$$
+E \left [ \frac{\partial\ln p(\bm{x};\theta)}{\partial\theta} \right] = 0
+$$
+
+
+<p>则</p>
+
+$$
+\text{var}(\hat\theta) \ge \frac{1}{E \left [\left( \frac{\partial\ln p(\bm{x};\theta)}{\partial\theta}\right)^2 \right]} = - \frac{1}{E \left [ \frac{\partial^2\ln p(\bm{x};\theta)}{\partial\theta^2} \right]}
+$$
+
+
+<p>等号成立的充要条件：找到函数  $I, g$ </p>
+
+$$
+\frac{\partial \ln p(\bm{x};\theta)}{\partial \theta}= I(\theta)(g(\bm{x}) - \theta)\\
+\hat \theta = g(\bm{x})
+$$
+
+
+<p>此时有  $\text{var}(\hat\theta) =1 / I(\theta)$ 。</p>
+<h3 id="求解MVU"><a href="#求解MVU" class="headerlink" title="求解MVU"></a>求解MVU</h3>
+$$
+\frac{\partial \ln p(\bm{x};A)}{\partial A} = \frac{1}{\sigma^2}\sum\limits_{n=0}^{N - 1}(x[n] - A) = \frac{N}{\sigma^2}\left (\frac{1}{N}\sum\limits_{n=0}^{N - 1}(x[n] - A)  \right)
+$$
+
+
+
+$$
+g(\bm{x}) = \frac{1}{N}\sum\limits_{n=0}^{N - 1}x[n]\\
+I(\theta) = \frac{N}{\sigma^2}
+$$
+
+
+<p>有效估计量：能达到克拉美罗下界的估计量，是MVU的子集。</p>
+<h3 id="参数变换的克拉美罗界"><a href="#参数变换的克拉美罗界" class="headerlink" title="参数变换的克拉美罗界"></a>参数变换的克拉美罗界</h3><p>若</p>
+
+$$
+\alpha = g(\theta)
+$$
+
+
+<p>则</p>
+
+$$
+CRLB(\hat \alpha) = \left(\frac{\partial g(\theta)}{\partial \theta}\right)^2CRLB(\hat \theta)
+$$
+
+
+<p>对于高斯分布有</p>
+
+$$
+E(x^2) = \mu^2 + \sigma^2\\
+E(x^4) = \mu^4 + 6\mu^2\sigma^2 + 3\sigma^4
+$$
+
+
+<p>当数据量很大时</p>
+<p>有效估计量靠近真值： $N \rightarrow \infty, \hat\theta \rightarrow \theta$ </p>
+<p>非线性变换渐进有效,可以看成线性函数： $g(\hat \theta) \approx g(\theta) + \frac{\partial g(\theta)}{\partial\theta}(\hat \theta - \theta)$ </p>
+<h3 id="矢量参数的克拉美罗界"><a href="#矢量参数的克拉美罗界" class="headerlink" title="矢量参数的克拉美罗界"></a>矢量参数的克拉美罗界</h3>
+$$
+E \left [ \frac{\partial \ln p(\bm{x};\bm{\theta})}{\partial \bm{\theta}} \right] = 0
+$$
+
+
+
+$$
+\alpha = g(\theta)
+$$
+
+
+<p><img src="/../images/StaSP/1_1.jpg" loading="lazy"></p>
+<p>注意： $\bm T(\bm x)$  的维度要和  $\bm \theta$  的维度相同</p>
+<h2 id="线性模型方法"><a href="#线性模型方法" class="headerlink" title="线性模型方法"></a>线性模型方法</h2>
+$$
+x = H\theta + w, w \sim N(0, \sigma^2I)
+$$
+
+
+
+$$
+p(x;\theta) = \frac{1}{(2\pi\sigma)^{N/2}}\exp \lbrace -\frac{1}{2\sigma^2}(x - H\theta)^T(x - H\theta) \rbrace
+$$
+
+
+
+$$
+\frac{\partial \ln p(x;\theta)}{\partial \theta} = \frac{H^TH}{\sigma^2}\lbrace (H^TH)^{-1}H^Tx - \theta \rbrace
+$$
+
+
+<p>从而</p>
+
+$$
+\hat \theta = (H^TH)^{-1}H^Tx\\
+C_{\hat\theta} = \sigma^2(H^TH)^{-1}
+$$
+
+
+<p>这个 MVU 估计量满足</p>
+
+$$
+\hat \theta \sim N(\theta, \sigma^2(H^TH)^{-1})
+$$
+
+
+<ul>
+<li>要求观测数据与待估计参数间呈线性关系</li>
+<li>要求噪声是高斯白噪声</li>
+<li>要求观测矩阵是满秩的</li>
+<li>所得估计量是有效估计量</li>
+</ul>
+<p>一般信号模型</p>
+
+$$
+x = H\theta + s + w, s已知，w \sim N(0, C)
+$$
+
+
+<p>结论</p>
+
+$$
+\hat \theta = (H^TC^{-1}H)^{-1}H^TC^{-1}(x - s)\\
+C_{\hat\theta} = (H^TC^{-1}H)^{-1}
+$$
+
+
+<h2 id="充分统计量方法"><a href="#充分统计量方法" class="headerlink" title="充分统计量方法"></a>充分统计量方法</h2>
+$$
+p(x|T(x);\theta) = p(x|T(x))
+$$
+
+
+<p>则称  $T(x)$  为充分统计量</p>
+<p>充分统计量的性质:</p>
+<ul>
+<li>一旦充分统计量确定，似然函数就与待估计参数无关</li>
+<li>充分统计量依赖于待估计参数。待估计参数变化，其相应的充分计量一般也会变化</li>
+<li>所谓“充分”，是相对于原始观测数据而言的原始观测量总是充分统计量，但通常不是最小集</li>
+<li>充分统计量并不唯一</li>
+</ul>
+<p>若</p>
+
+$$
+\int_{-\infty}^{\infty}v(T)p(T;\theta)\mathrm dT = 0
+$$
+
+
+<p>对所有的  $\theta$  并非都满足，只对零函数  $v(T) = 0$  成立，则称充分统计量是完备的。</p>
+<ul>
+<li>一般地，当待估计参数发生变化时，充分统计量也会发生变化</li>
+<li>一旦充分统计量确定以后，似然函数就与待估计参数无关</li>
+</ul>
+<h3 id="Neyman-Fisher因子分解定理"><a href="#Neyman-Fisher因子分解定理" class="headerlink" title="Neyman-Fisher因子分解定理"></a>Neyman-Fisher因子分解定理</h3><p>如果概率密度函数（或概率质量函数，对于离散随机变量） $p(x; \theta)$  可以被分解为</p>
+
+$$
+p(x; \theta) = g(T(x); \theta) \cdot h(x)
+$$
+
+
+<p>其中：</p>
+<ul>
+<li> $g(T(x); \theta)$  是一个只通过统计量  $T(x)$  并依赖于参数  $\theta$  的函数。</li>
+<li> $h(x)$  是只与观测数据  $x$  相关的函数，与参数  $\theta$  无关。</li>
+</ul>
+<p>那么，统计量  $T(x)$  是参数  $\theta$  的充分统计量。反之，如果  $T(x)$  是参数  $\theta$  的充分统计量，那么概率密度函数  $p(x; \theta)$  必然可以分解为上述形式。</p>
+<h3 id="Rao-Black-Lehmann-Scheffe-RBLS-定理"><a href="#Rao-Black-Lehmann-Scheffe-RBLS-定理" class="headerlink" title="Rao-Black-Lehmann-Scheffe(RBLS)定理"></a>Rao-Black-Lehmann-Scheffe(RBLS)定理</h3><p>若  $\breve\theta$  是 $\theta$ 的无偏估计， $T(x)$ 是 $\theta$ 的充分统计量，那么 $\hat \theta=E(\breve{\theta}|T(x))$ </p>
+<ol>
+<li>是 $\theta$  的一个适用的估计量(与 $\theta$ 无关)</li>
+<li>无偏的</li>
+<li>对所有的  $\theta$ ，它的方差小于等于 $\breve\theta$  的方差</li>
+<li>若 $T(x)$ 是完备的，那么 $\theta$ 是MVU估计量</li>
+</ol>
+<h4 id="矢量参数的-RBLS"><a href="#矢量参数的-RBLS" class="headerlink" title="矢量参数的 RBLS"></a>矢量参数的 RBLS</h4><p><img src="/../images/StaSP/2_1.jpg" loading="lazy"></p>
+<p><img src="/../images/StaSP/2_2.png" loading="lazy"></p>
+<h2 id="BLUE"><a href="#BLUE" class="headerlink" title="BLUE"></a>BLUE</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>直接求出数据-&gt;参数的映射  $\bm A_{p \times N}$ ：</p>
+
+$$
+\bm x = \bm H \theta\\
+\hat {\theta}_{p \times 1} = \bm A\bm x
+$$
+
+
+<p>无偏性：</p>
+
+$$
+\theta = E(\hat\theta) = \bm AE(\bm x) = \bm AH\theta\\
+\Rightarrow AH = I_{p \times p}
+$$
+
+
+<p>最佳（最小方差）</p>
+
+$$
+\min \lbrace a_i^TCa_i \rbrace, A = [a_1, a_2, \dots, a_n]^T
+$$
+
+
+<p>其中</p>
+
+$$
+C = E \lbrace (x - E(x))(x - E(x))^T \rbrace
+$$
+
+
+<h3 id="高斯-马尔可夫定理"><a href="#高斯-马尔可夫定理" class="headerlink" title="高斯-马尔可夫定理"></a>高斯-马尔可夫定理</h3><p>如果数据具有一般线性模型的形式</p>
+
+$$
+\bm x = \bm H \theta + w
+$$
+
+
+<p>其中  $\bm H$  为已知  $N \times p$  矩阵， $\theta$  为待估计参数， $w$  是均值为零、协方差为  $\bm C$  的噪声矢量（<strong>不一定为高斯</strong>），则 BLUE 估计量为</p>
+
+$$
+\hat \theta = (H^TC^{-1}H)^{-1}H^TC^{-1}x\\
+C_{\hat\theta} = (H^TC^{-1}H)^{-1}
+$$
+
+
+<ul>
+<li>若为高斯噪声，则BLUE为MVU，且为有效估计量</li>
+</ul>
+<h2 id="MLE"><a href="#MLE" class="headerlink" title="MLE"></a>MLE</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3>
+$$
+\hat \theta = \arg\max\limits_\theta p(\bm{x};\theta)
+$$
+
+
+<p>如果 PDF 可导</p>
+
+$$
+\frac{\partial p(\bm x; \theta)}{\partial \theta}\bigg|_{\hat\theta} = 0\\
+\Rightarrow\frac{\partial \ln p(\bm x; \theta)}{\partial \theta}\bigg|_{\hat\theta} = 0
+$$
+
+
+<p>若有效估计量存在， $\frac{\partial \ln p(\bm x; \theta)}{\partial \theta}\bigg|_{\hat\theta} = I(\theta)(g(x) - \theta)$ ，则可以使用最大似然估计方法求得结果。</p>
+<h3 id="MLE-的性质"><a href="#MLE-的性质" class="headerlink" title="MLE 的性质"></a>MLE 的性质</h3><p>如果数据  $\bm x$  的 PDF  $p(\bm x;\theta)$  满足“正则”条件，那么<br>对于足够多的数据记录，未知参数  $\theta$  的 MLE 渐近服从</p>
+
+$$
+\hat\theta \stackrel{a}{\sim} N(\theta, I^{-1}\theta)
+$$
+
+
+<p>其中  $\theta$  是在未知参数真值处计算的 Fisher 信息。</p>
+<p>MLE是渐近无偏的</p>
+<p>MLE渐近达到CRLB</p>
+<p>MLE是渐近有效的</p>
+<p>MLE是渐近最佳的</p>
+<ul>
+<li>MLE的方差（协方差）可大于、等于、小于CRLB！（不同于MVU估计）</li>
+<li>但数据量足够多时，将与CRLB接近</li>
+<li>因此，可利用CRLB评估MLE的性能</li>
+</ul>
+<p>“足够多”数据：大量能带来新信息的数据</p>
+<p><strong>MLE的不变性</strong></p>
+<p>若参数  $\alpha = g(\theta)$ ，则</p>
+
+$$
+\hat\alpha = g(\hat\theta)
+$$
+
+
+<p>若  $g$  非一对一函数，那么  $\hat\alpha$  是使修正后的似然函数  $p_T(\bm x;\alpha)$  最大者</p>
+
+$$
+\hat\alpha = \arg\max_\alpha p_T(\bm x; \alpha)\\
+p_T(\bm x; \alpha) = \max_{\theta: \alpha=g(\theta)}p(\bm x; \theta)
+$$
+
+
+<p>该性质对函数  $g$  无线性变换要求，对任意函数均成立。</p>
+<p>对比MVU</p>
+<ul>
+<li>无偏性、有效性仅对线性变换成立</li>
+<li>对非线性变换不能保持（但渐近无偏、渐近有效）</li>
+</ul>
+<p>对一般线性模型，MLE是MVU，达到了CRLB，是有效的、最佳的！</p>
+<p><img src="/../images/StaSP/1711254850893.png" alt="1711254850893" loading="lazy"></p>
+<h2 id="最小二乘估计-LS"><a href="#最小二乘估计-LS" class="headerlink" title="最小二乘估计(LS)"></a>最小二乘估计(LS)</h2><h3 id="线性最小二乘估计"><a href="#线性最小二乘估计" class="headerlink" title="线性最小二乘估计"></a>线性最小二乘估计</h3><p><img src="/../images/StaSP/1711339154789.png" alt="1711339154789" loading="lazy"></p>
+<h3 id="加权最小二乘估计"><a href="#加权最小二乘估计" class="headerlink" title="加权最小二乘估计"></a>加权最小二乘估计</h3><p><img src="/../images/StaSP/1711339192281.png" alt="1711339192281" loading="lazy"></p>
+<h3 id="约束最小二乘估计"><a href="#约束最小二乘估计" class="headerlink" title="约束最小二乘估计"></a>约束最小二乘估计</h3><p><img src="/../images/StaSP/1711339216759.png" alt="1711339216759" loading="lazy"></p>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p><img src="/../images/StaSP/1711339249863.png" alt="1711339249863" loading="lazy"></p>
+<h2 id="经典估计方法比较"><a href="#经典估计方法比较" class="headerlink" title="经典估计方法比较"></a>经典估计方法比较</h2><h3 id="噪声电平估计问题"><a href="#噪声电平估计问题" class="headerlink" title="噪声电平估计问题"></a>噪声电平估计问题</h3>
+$$
+x[n] = A + w[n]
+$$
+
+
+<p>其中  $w[n] \sim N(0, \sigma^2)$ ，待估计参数  $\theta = [A, \sigma^2]^T$ </p>
+<h4 id="MVU估计"><a href="#MVU估计" class="headerlink" title="MVU估计"></a>MVU估计</h4>
+$$
+p(x;\theta) = \frac{1}{(2\pi\sigma^2)^{N/2}}\exp \lbrace -\frac{1}{2\sigma^2} \sum\limits_{n=0}^{N - 1}(x[n] - A)^2\rbrace
+$$
+
+
+
+$$
+\frac{\partial \ln p (x;\theta)}{\partial A} = \frac{1}{\sigma^2}\sum\limits_{n=0}^{N - 1}(x[n] - A)
+$$
+
+
+
+$$
+\frac{\partial \ln p(x;\theta)}{\partial \sigma^2} = \frac{N}{2\sigma^2} + \frac{1}{2\sigma^4}\sum\limits_{n=0}^{N - 1}(x[n] - A)
+$$
+
+
+<p><img src="/../images/StaSP/1711339773571.png" alt="1711339773571" loading="lazy"></p>
+<p><img src="/../images/StaSP/1711339786814.png" alt="1711339786814" loading="lazy"></p>
+<h4 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h4>
+$$
+\hat\theta = (\bm H^T\bm H)^{-1}\bm  H^T x
+$$
+
+
+<p><img src="/../images/StaSP/1711339831807.png" alt="1711339831807" loading="lazy"></p>
+<h4 id="BLUE-1"><a href="#BLUE-1" class="headerlink" title="BLUE"></a>BLUE</h4>
+$$
+\hat\theta = (\bm H^T\bm C^{-1}\bm H)^{-1}\bm  H^T\bm C^{-1} x
+$$
+
+
+<p><img src="/../images/StaSP/1711339865703.png" alt="1711339865703" loading="lazy"></p>
+<h4 id="充分统计量"><a href="#充分统计量" class="headerlink" title="充分统计量"></a>充分统计量</h4><p><img src="/../images/StaSP/1711340151724.png" alt="1711340151724" loading="lazy"></p>
+<p><img src="/../images/StaSP/1711340163113.png" alt="1711340163113" loading="lazy"></p>
+<p><img src="/../images/StaSP/1711340177961.png" alt="1711340177961" loading="lazy"></p>
+<h4 id="MLE-1"><a href="#MLE-1" class="headerlink" title="MLE"></a>MLE</h4><p><img src="/../images/StaSP/1711340277148.png" alt="1711340277148" loading="lazy"></p>
+<h4 id="LSE"><a href="#LSE" class="headerlink" title="LSE"></a>LSE</h4><p><img src="/../images/StaSP/1711340293644.png" alt="1711340293644" loading="lazy"></p>
+<h2 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h2><p>贝叶斯MSE：<br>Bmse $\left(\hat{\theta}\right)=E\left(\left(\theta-\hat{\theta}\right)^2\right)$ </p>
+ $=\int\int\left(\theta-\hat{\theta}\right)^{2}p\big(\mathbf{x},\theta\big)d\mathbf{x}d\theta$   $=\iint\left(\theta-\hat{\theta}\right)^2p\big(\boldsymbol{x}|\theta\big)p\big(\theta\big)d\boldsymbol{x}d\theta$ 
+  $=\iint\left(\theta-\hat{\theta}\right)^2p(x|\theta)dxp(\theta)d\theta$ 
+
+ $\hat{\theta}=E\big(\theta|x\big)$ 
+
+<p>多余参数：未知，但不感兴趣的参数<br> 解决思路：通过积分消除多余参数的影响<br> (1) 后验概率中存多余参数时：</p>
+
+$$
+p(\boldsymbol{\theta},\boldsymbol{\alpha}\mid\boldsymbol{x}) \Rightarrow p (\boldsymbol{\theta}\mid\boldsymbol{x})=\int p(\boldsymbol{\theta},\boldsymbol{\alpha}\mid\boldsymbol{x})\:d\boldsymbol{\alpha}
+$$
+
+
+<p>(2) 条件概率中存在多余参数时：</p>
+
+$$
+p(\boldsymbol{\theta}\mid\boldsymbol{x})=\frac{p(\boldsymbol{x}\mid\boldsymbol{\theta})p(\boldsymbol{\theta})}{\int p(\boldsymbol{x}\mid\boldsymbol{\theta})p(\boldsymbol{\theta})d\boldsymbol{\theta}}
+$$
+
+
+
+$$
+\text{若现只有 }p(x|\theta,\alpha)\text{,而无 }p(x|\theta)
+$$
+
+<p> 此时可通过积分方式解决</p>
+
+$$
+p(x\mid\theta)=\int p(x\mid\theta,\alpha)p(\alpha\mid\theta)d\alpha 
+$$
+
+
+<p>进一步地，若待估计参数与多余参数相互独立，</p>
+
+$$
+p(x\mid\theta)=\int p(x\mid\theta,\alpha)p(\alpha)d\alpha 
+$$
+
+
+<p>矢量参数下贝叶斯估计<br>若 θ 是  $p{\times}1$  的矢量参数，那么为了估计其中某个参数  $\theta_i$ , 可以将剩余参数当作多余参数，因此对 $\theta_i$  的MMSE为</p>
+
+$$
+\hat{\theta}_i=E\left(\theta_i\mid x\right)=\int\theta_ip(\theta_i\mid x)d\theta_i
+$$
+
+<p> 其中</p>
+
+$$
+p(\theta_i\mid x)=\int\cdots\int p(\theta\mid x)d\theta_1\cdots d\theta_{i-1}d\theta_{i+1}\cdots d\theta_p
+$$
+
+
+
+$$
+\hat{\theta}_i=\int\theta_i\left(\int\cdots\int p(\boldsymbol{\theta}\mid\boldsymbol{x})\underline{d\theta_1\cdots d\theta_{i-1}d\theta_{i+1}\cdots d\theta_p}\right)d\theta_i=\int\theta_ip(\boldsymbol{\theta}\mid\boldsymbol{x})d\boldsymbol{\theta}
+$$
+
+
+
+$$
+\Longrightarrow\hat{\theta}=\begin{bmatrix}\theta_1p(\theta|x)d\theta\\\int\theta_2p(\theta|x)d\theta\\\vdots\\\int\theta_pp(\theta|x)d\theta\end{bmatrix}=\int\theta_P(\theta|x)d\theta=E(\theta|x)
+$$
+
+
+<p>Woodbury 恒等式：</p>
+
+$$
+\left(\mathbf{B}+\boldsymbol{u}\boldsymbol{u}^T\right)^{-1}=\mathbf{B}^{-1}-\frac{\mathbf{B}^{-1}\boldsymbol{u}\boldsymbol{u}^T\mathbf{B}^{-1}}{1+\boldsymbol{u}^T\mathbf{B}^{-1}\boldsymbol{u}}
+$$
+
+
+<h3 id="贝叶斯风险"><a href="#贝叶斯风险" class="headerlink" title="贝叶斯风险"></a>贝叶斯风险</h3>
+$$
+\Re=\iint C(\varepsilon)p(x,\theta)dxd\theta 
+$$
+
+
+<h4 id="二次型误差"><a href="#二次型误差" class="headerlink" title="二次型误差"></a>二次型误差</h4>
+$$
+C(\varepsilon) = \begin{pmatrix}\theta-\hat{\theta}\end{pmatrix}^2
+$$
+
+
+<p>这就是 MMSE</p>
+<p>此时为平均值。</p>
+<h4 id="绝对误差"><a href="#绝对误差" class="headerlink" title="绝对误差"></a>绝对误差</h4>
+$$
+C(\varepsilon)=\begin{vmatrix}\theta-\hat{\theta}\end{vmatrix}
+$$
+
+
+<blockquote>
+<p>Leibnitz 准则</p>
+ $\frac{\partial}{\partial u}\int\limits_{\phi_1(u)}^{\phi_2(u)}h\big(u,v\big)dv=\int\limits_{\phi_1(u)}^{\phi_2(u)}\frac{\partial h\big(u,v\big)}{\partial u}dv+\frac{\partial\phi_2\big(u\big)}{\partial u}h\big(u,\phi_2\big(u\big)\big)-\frac{\partial\phi_1\big(u\big)}{\partial u}h\big(u,\phi_1\big(u\big))$ 
+</blockquote>
+<p>此时</p>
+
+$$
+\int_{-\infty}^{\hat{\theta}}p\big(\theta|x\big)d\theta=\int_{\hat{\theta}}^{+\infty}p\big(\theta|x\big)d\theta 
+$$
+
+
+<p>为中位数</p>
+<h4 id="成功失败型误差"><a href="#成功失败型误差" class="headerlink" title="成功失败型误差"></a>成功失败型误差</h4>
+$$
+C(\varepsilon)=\begin{cases}0,\left|\theta-\hat{\theta}\right|&lt;\delta\\1,\left|\theta-\hat{\theta}\right|\geq\delta\end{cases}
+$$
+
+
+<p>此时 </p>
+
+$$
+\hat{\theta}=\arg\max_{\theta}p(\theta|x)
+$$
+
+
+<p>即  $\hat{\theta}$  是后验PDF的最大值 (众数) </p>
+<p>MAP maximum a posteriori</p>
+<p>根据贝叶斯公式</p>
+
+$$
+\hat{\theta}=\arg\max_{\theta}\left\{p(x|\theta)p(\theta)\right\}\\
+\hat{\theta}=\arg\max_{\theta}\left\{\ln p\big(x|\theta\big)+\ln p\big(\theta\big)\right\}
+$$
+
+
+<h4 id="三值比较"><a href="#三值比较" class="headerlink" title="三值比较"></a>三值比较</h4><p>一般而言，“三值”并不相等，因此三种估计量往往不同</p>
+<p>特例：高斯时“三值”相等，三种估计方法等价</p>
+<p>大数据量时先验信息不起作用，最大后验概率估计（MAP）将转变为（贝叶斯）最大似然估计（MLE）</p>
+<h3 id="线性贝叶斯估计"><a href="#线性贝叶斯估计" class="headerlink" title="线性贝叶斯估计"></a>线性贝叶斯估计</h3><p>线性贝叶斯估计(LMMSE), 也称线性最小意味着：</p>
+
+$$
+\hat{\theta}=\sum_{n=0}^{N-1}a_nx[n]+a_N
+$$
+
+
+<p>即限定估计量与观察数据间呈线性关系，然最小化 </p>
+
+$$
+\mathrm{Bmse}\Big(\hat{\theta}\Big)=E\Big[\Big(\theta-\hat{\theta}\Big)^{2}\Big]
+$$
+
+
+<p>即，LMMSE:</p>
+
+$$
+\min\left\{E\left[\left(\theta-\hat{\theta}\right)^2\right]\right\}\\s.t.\quad\hat{\theta}=\sum_{n=0}^{N-1}a_nx[n]+a_N
+$$
+
+
+<p>解得估计量：</p>
+
+$$
+\hat{\theta}=E\left(\theta\right)+\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\left(x-E\left(x\right)\right)\\\mathrm{Bmse}\left(\hat{\theta}\right)=\mathbf{C}_{\theta\theta}-\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\mathbf{C}_{x\theta}
+$$
+
+
+<p>对比 MMSE：</p>
+<p>附加了线性约束</p>
+<ul>
+<li>可得显示解——好求</li>
+<li>仅需一阶矩和二阶矩</li>
+</ul>
+<p>无附加约束</p>
+<ul>
+<li>可能难以求得显示解</li>
+<li>需PDF</li>
+<li>全局最优</li>
+<li>仅在“线性”中最优</li>
+</ul>
+<h4 id="矢量参数情况"><a href="#矢量参数情况" class="headerlink" title="矢量参数情况"></a>矢量参数情况</h4><p>待估计参数 $\boldsymbol{\theta}=\begin{bmatrix}\theta_1,\theta_2,...,\theta_p\end{bmatrix}^T$ ,其每个参数的 LMMSE 定义为</p>
+
+$$
+\begin{aligned}&\min E\bigg[\bigg(\theta_{i}-\hat{\theta}_{i}\bigg)^{2}\bigg]\\&s.t.\hat{\theta}_{i}=\sum_{n=0}^{N-1}a_{in}x[n]+a_{iN}\end{aligned}
+$$
+
+
+
+$$
+\hat{\boldsymbol{\theta}}=\begin{bmatrix}E(\theta_1)\\E(\theta_2)\\\vdots\\E(\theta_p)\end{bmatrix}+\begin{bmatrix}\mathbf{C}_{\theta_1x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E(\boldsymbol{x})\right)\\\mathbf{C}_{\theta_2x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E(\boldsymbol{x})\right)\\\vdots\\\mathbf{C}_{\theta_px}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E(\boldsymbol{x})\right)\end{bmatrix}\\
+=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x} - E(\boldsymbol{x})\right)
+$$
+
+
+<h3 id="序贯LMMSE"><a href="#序贯LMMSE" class="headerlink" title="序贯LMMSE"></a>序贯LMMSE</h3><p>白噪声电平估计</p>
+
+$$
+x[n]=A+w[n],n=0,1,...,N
+$$
+
+
+
+$$
+A\sim N\big(0,\sigma_{A}^{2}\big)\\
+w[n]\sim N\left(0,\sigma^{2}\right)
+$$
+
+
+<p>解得</p>
+
+$$
+\begin{aligned}
+&E(\theta)=0 \\
+&\mathbf{C}_{\theta x}=E\left(\left(\theta-E\left(\theta\right)\right)\left(x-E\left(x\right)\right)^{T}\right) \\
+&=E\left(\left(A-0\right)\left(x-0\right)^{T}\right) \\
+&=E\Big(A\big(A\mathbf{1}+\mathbf{w}\big)^{T}\Big) \\
+&=\sigma_{A}^{2}\mathbf{1}^{T}
+\end{aligned}\\
+\begin{aligned}
+\mathbf{C}_{xx}& =E\left(\left(x-E\left(x\right)\right)\left(x-E\left(x\right)\right)^T\right)  \\
+&=E\left(\left(A\mathbf{1}+\boldsymbol{w}\right)\left(A\mathbf{1}+\boldsymbol{w}\right)^T\right) \\
+&=E\left\{A\mathbf{1}\mathbf{1}^TA+A\mathbf{1}\boldsymbol{w}^T+\boldsymbol{w}\mathbf{1}^TA+\boldsymbol{w}\boldsymbol{w}^T\right\} \\
+&=\sigma_A^2\mathbf{1}\mathbf{1}^T+\sigma^2\mathbf{I}
+\end{aligned}\\
+\begin{aligned}\mathbf{C}_{\theta\theta}&=\sigma_A^2\\\mathbf{C}_{x\theta}&=\mathbf{C}_{\theta x}^T\\&=\sigma_A^2\mathbf{1}\end{aligned}
+$$
+
+
+
+$$
+\begin{aligned}\hat{A}&=\frac{\sigma_{A}^{2}}{\sigma_{A}^{2}+\frac{\sigma^{2}}{N}}\\\mathrm{Bmse}&\left(\hat{A}\right)=\frac{1}{N}\end{aligned}
+$$
+
+
+<p>记</p>
+
+$$
+\hat{A}[N-1]=\frac{\sigma_A^2}{\sigma_A^2+\frac{\sigma^2}{N}}\frac{1}{N}\sum_{n=0}^{N-1}x[n]
+$$
+
+
+<p>则</p>
+
+$$
+\hat{A}[N]=\hat{A}[N-1]+\underbrace{\frac{\sigma_A^2}{\left(N+1\right)\sigma_A^2+\sigma^2}}_{K[N]，增益因子}\Big(x[N]-\hat{A}[N-1]\Big)
+$$
+
+
+
+$$
+\frac{\frac1{\sigma^2}}{\frac1{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)}+\frac1{\sigma^2}}=\frac{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)}{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)+\sigma^2}\\=\frac{\frac{\sigma_A^2\sigma^2}{N\sigma_A^2+\sigma^2}}{\frac{\sigma_A^2\sigma^2}{N\sigma_A^2+\sigma^2}+\sigma^2}=\frac{\sigma_A^2}{\left(N\sigma_A^2+\sigma^2\right)+\sigma_A^2}=K\begin{bmatrix}N\end{bmatrix}
+$$
+
+
+<p>一般方法</p>
+<p>序贯计算方法估计量更新：</p>
+
+$$
+\hat{A}[N]=\hat{A}[N-1]+K[N]\Big(x[N]-\hat{A}[N-1]\Big)
+$$
+
+
+<p>增益因子：</p>
+
+$$
+K\left[N\right]=\frac{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)}{\mathrm{Bmse}\left(\hat{A}\left[N-1\right]\right)+\sigma^2}
+$$
+
+
+<p>最小贝叶斯MSE更新：</p>
+
+$$
+\mathrm{Bmse}\Big(\hat{A}[N]\Big)\boldsymbol{=}\Big(1\boldsymbol{-}K[N]\Big)\mathrm{Bmse}\Big(\hat{A}[N\boldsymbol{-}1]\Big)
+$$
+
+
+<p>初始化：</p>
+
+$$
+\hat{A}[-1]=E(A)\\
+\text{Bmse}\left ( \hat{A} [ - 1] \right ) = \text{var}\left ( A\right ) 
+$$
+
+
+<h2 id="维纳滤波"><a href="#维纳滤波" class="headerlink" title="维纳滤波"></a>维纳滤波</h2><h3 id="滤波"><a href="#滤波" class="headerlink" title="滤波"></a>滤波</h3><p>假定观测数据是零均值、宽平稳的，信号也是零均值、宽平稳的，信号与噪声不相关</p>
+
+$$
+x[n] = s[n] + w[n], n = 0, 1, \dots, N - 1
+$$
+
+
+
+$$
+\theta=s[n]\text{ 用 }x[0],x[1],x[2],...,x[n]\text{来估计}$$
+
+
+<p><img src="/../images/StaSP/1713150769252.png" alt="1713150769252" loading="lazy"></p>
+<p>利用 LMMSE 可得</p>
+
+$$
+\hat{s}[n]=r_{ss}^{'T}\left(\mathbf{R}_{ss}+\mathbf{R}_{ww}\right)^{-1}\boldsymbol{x}
+$$
+
+<p>从而得到维纳-霍夫滤波方程</p>
+
+$$
+\begin{bmatrix}r_{xx}\begin{bmatrix}0\end{bmatrix}&r_{xx}\begin{bmatrix}1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}n\end{bmatrix}\\r_{xx}\begin{bmatrix}1\end{bmatrix}&r_{xx}\begin{bmatrix}0\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}n-1\end{bmatrix}\\\vdots&\vdots&\ddots&\vdots\\r_{xx}\begin{bmatrix}n\end{bmatrix}&r_{xx}\begin{bmatrix}n-1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}0\end{bmatrix}\end{bmatrix}\begin{bmatrix}h^{(n)}\begin{bmatrix}0\end{bmatrix}\\h^{(n)}\begin{bmatrix}1\end{bmatrix}\\\vdots\\h^{(n)}\begin{bmatrix}n\end{bmatrix}\end{bmatrix}=\begin{bmatrix}r_{ss}\begin{bmatrix}0\end{bmatrix}\\r_{ss}\begin{bmatrix}1\end{bmatrix}\\\vdots\\r_{ss}\begin{bmatrix}n\end{bmatrix}\end{bmatrix}
+$$
+
+<h3 id="平滑"><a href="#平滑" class="headerlink" title="平滑"></a>平滑</h3>
+$$
+\theta=s[n]\text{用 }...,x[-1],x[0],x[1],x[2],...,\text{来估计}
+$$
+
+<p><img src="/../images/StaSP/1713152016025.png" alt="1713152016025" loading="lazy"></p>
+<p>LMMSE:</p>
+
+$$
+\hat{s}[n]=\sum_{k=-\infty}^\infty a_kx[k]
+$$
+
+<p>令  $h[k] = a_{N-k}$ </p>
+<blockquote>
+<p>正交原理：误差与每一个观测数据正交</p>
+
+$$
+&gt; E\left(\left(\theta-\hat{\theta}\right)x[m]\right)=0
+&gt; $$
+
+<p>正交原理不依赖于任务是平滑、滤波还是预测，是普遍适用的，证明如下：<br><img src="/../images/StaSP/1713152987612.png" alt="1713152987612" loading="lazy"><br><img src="/../images/StaSP/1713152970273.png" alt="1713152970273" loading="lazy"><br>在 LMMSE</p>
+</blockquote>
+
+$$
+\hat{s}[n]=\sum_{k=-\infty}^\infty a_kx[k]
+$$
+
+<p>中令  $h[k]=a_{n-k}$ </p>
+<p>则有</p>
+
+$$
+\hat s[n] = \sum\limits_{k=-\infty}^{\infty}h[k]x[n-k]
+$$
+
+<p>可得</p>
+
+$$
+r_{ss}\begin{bmatrix}n\end{bmatrix}=h\begin{bmatrix}n\end{bmatrix}*r_{xx}\begin{bmatrix}n\end{bmatrix}
+$$
+
+<p>无限维纳平滑器的频率响应</p>
+
+$$
+H\left(f\right)=\frac{P_{ss}\left(f\right)}{P_{xx}\left(f\right)}\quad=\frac{P_{ss}\left(f\right)}{P_{ss}\left(f\right)+P_{ww}\left(f\right)}\quad=\frac{\eta\left(f\right)}{\eta\left(f\right)+1}\quad\text{,其中 }\eta\left(f\right)=\frac{P_{ss}\left(f\right)}{P_{ww}\left(f\right)}
+$$
+
+<h3 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h3><p>可以用来进行预测</p>
+
+$$
+\theta=x[N-1+l]\text{ 用 }x[0],x[1],x[2],...,x[N-1]\text{ 来估计}
+$$
+
+<p><img src="/../images/StaSP/1713150674892.png" alt="1713150674892" loading="lazy"></p>
+<p>依然用 LMMSE 可以得到线性预测维纳-霍夫滤波方程</p>
+
+$$
+\begin{bmatrix}r_{xx}\begin{bmatrix}0\end{bmatrix}&r_{xx}\begin{bmatrix}1\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}N-1\end{bmatrix}\\r_{xx}\begin{bmatrix}1\end{bmatrix}&r_{xx}\begin{bmatrix}0\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}N-2\end{bmatrix}\\\vdots&\vdots&\ddots&\vdots\\r_{xx}\begin{bmatrix}N-1\end{bmatrix}&r_{xx}\begin{bmatrix}N-2\end{bmatrix}&\cdots&r_{xx}\begin{bmatrix}0\end{bmatrix}\end{bmatrix}\begin{bmatrix}h\begin{bmatrix}1\end{bmatrix}\\h\begin{bmatrix}2\end{bmatrix}\\\vdots\\h\begin{bmatrix}N\end{bmatrix}\end{bmatrix}=\begin{bmatrix}r_{xx}\begin{bmatrix}l\end{bmatrix}\\r_{xx}\begin{bmatrix}l+1\end{bmatrix}\\\vdots\\r_{xx}\begin{bmatrix}N-1+l\end{bmatrix}\end{bmatrix}
+$$
+
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>信道均衡问题</p>
+<p><img src="/../images/StaSP/1713151589324.png" alt="1713151589324" loading="lazy"></p>
+<h2 id="卡尔曼滤波"><a href="#卡尔曼滤波" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h2><p>如何估计电压？</p>
+<h3 id="模型-1：当成确定参数"><a href="#模型-1：当成确定参数" class="headerlink" title="模型 1：当成确定参数"></a>模型 1：当成确定参数</h3>
+$$
+x[n] = A + w[n], w[n] \sim N(0, \sigma^{2})
+$$
+
+
+
+$$
+\hat A = \sum\limits_{n=0}^{N - 1}x[n] = \bar x
+$$
+
+<h3 id="模型2：当成某个随机变量"><a href="#模型2：当成某个随机变量" class="headerlink" title="模型2：当成某个随机变量"></a>模型2：当成某个随机变量</h3>
+$$
+x[n] = A + w[n], w[n] \sim N(0, \sigma^{2}), A \sim N(\mu_A, \sigma_A^{2})
+$$
+
+<p>贝叶斯一般线性模型：</p>
+
+$$
+\boldsymbol{x}=\mathbf{H}\boldsymbol{\theta}+\boldsymbol{w}\quad\text{其中 }\boldsymbol{\theta}{\sim}N\begin{pmatrix}\boldsymbol{\mu}_\theta,\mathbf{C}_\theta\end{pmatrix}\text{,}\boldsymbol{w}{\sim}N\begin{pmatrix}\boldsymbol{0},\mathbf{C}_w\end{pmatrix}\\
+E\left(\boldsymbol{\theta}\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x}\mathbf{C}_{xx}^{-1}\left(\boldsymbol{x}-E\left(\boldsymbol{x}\right)\right)=\boldsymbol{\mu}_\theta+\mathbf{C}_{\theta|x}\mathbf{H}^T\mathbf{C}_w^{-1}\left(\boldsymbol{x}-\mathbf{H}\boldsymbol{\mu}_\theta\right)\\
+\text{其中,}\mathbf{C}_{\theta|x}=\left(\mathbf{C}_\theta^{-1}+\mathbf{H}^T\mathbf{C}_w^{-1}\mathbf{H}\right)^{-1}
+$$
+
+
+
+$$
+\hat{A}=\mu_A+\frac{\frac1{\sigma^2/N}}{\frac1{\sigma_A^2}+\frac1{\sigma^2/N}}(\overline{x}-\mu_A)
+$$
+
+<h3 id="模型3：当成未知且随时间变化的量"><a href="#模型3：当成未知且随时间变化的量" class="headerlink" title="模型3：当成未知且随时间变化的量"></a>模型3：当成未知且随时间变化的量</h3>
+$$
+x[n]=A[n]+w[n],n=0,1,...,N-1
+$$
+
+
+
+$$
+\mathrm{MVU}\text{估计量:}\hat{\boldsymbol{\theta}}=\left(\mathbf{H}^T\mathbf{H}\right)^{-1}\mathbf{H}^T\boldsymbol{x}\\
+\begin{aligned}&\boldsymbol{\theta}=&\begin{bmatrix}A[0],A[1],...,A[N-1]\end{bmatrix}^T\\&\mathbf{H}=\mathbf{I}\end{aligned}\\
+\hat{A}[n]=x[n]
+$$
+
+<h3 id="动态信号模型"><a href="#动态信号模型" class="headerlink" title="动态信号模型"></a>动态信号模型</h3><p>一阶高斯-马尔可夫信号模型：</p>
+
+$$
+s[n]=as[n-1]+u[n],n\geq0
+$$
+
+<p>其中， $u[n]$ 是均值为零方差为  $\sigma_u^2$  的高斯白噪声，称为驱动噪声或激励噪声。信号初值s $[-1]\sim N(\mu_s,\sigma_s^2)$ 与激励噪声 $u[n]$ 相互独立。</p>
+<p>均值：</p>
+
+$$
+s[n]=a^{n+1}s[-1]+\sum_{k=0}^na^ku[n-k]\\
+E\left(s[n]\right)=a^{n+1}E\left(s[-1]\right)+\sum_{k=0}^na^kE\left(u[n-k]\right)=a^{n+1}\mu_s\\
+c_s[m,n] = a^{m+n+2}\sigma_s^2+\sum_{k=0}^m\sum_{l=0}^na^{k+l}E\left(u[m-k]u[n-l]\right)\\
+E\left(u[m-k]u[n-l]\right)=\begin{cases}\sigma_u^2,&l=n-m+k\\0,&\mathrm{others}\end{cases}
+$$
+
+<p>协方差：</p>
+
+$$
+m \ge n, c_s\left[m,n\right]=a^{m+n+2}\sigma_s^2+\sum_{k=m-n}^ma^{2k+n-m}\sigma_u^2=a^{m+n+2}\sigma_s^2+\sigma_u^2a^{m-n}\sum_{k=0}^na^{2k}\\
+m \lt n, c_s\begin{bmatrix}m,n\end{bmatrix}=a^{m+n+2}\sigma_s^2+\sum_{k=0}^ma^{2k+n-m}\sigma_u^2=a^{m+n+2}\sigma_s^2+\sigma_u^2a^{n-m}\sum_{k=0}^ma^{2k}=c_s\begin{bmatrix}n,m\end{bmatrix}
+$$
+
+<p>方差和二阶矩：</p>
+
+$$
+\begin{aligned}
+\operatorname{var}(s[n])& =E\left(\left(s[n]-E\left(s[n]\right)\right)\left(s[n]-E\left(s[n]\right)\right)\right)  \\
+&=c_s[n,n] \\
+&=a^{2n+2}\sigma_s^2+\sigma_u^2\sum_{k=0}^na^{2k}
+\end{aligned}\\
+\text{当 }m\geq n\text{ 时}\\r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_{s}^{2}+\sigma_{s}^{2}\right)+\sigma_{u}^{2}a^{m-n}\sum_{k=0}^{n}a^{2k}\\\text{当 }m&lt;n\text{ 时}\\r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_{s}^{2}+\sigma_{s}^{2}\right)+\sigma_{u}^{2}a^{n-m}\sum^{m}a^{2k}=r_{ss}\left[n,m\right]
+$$
+
+<h4 id="平稳性"><a href="#平稳性" class="headerlink" title="平稳性"></a>平稳性</h4>
+$$
+\begin{aligned}&E\left(s\left[n\right]\right)=a^{n+1}\mu_s\\&r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_s^2+\sigma_s^2\right)+\sigma_u^2a^{m-n}\sum_{k=0}^na^{2k}\end{aligned}
+$$
+
+<p>不是宽平稳的。</p>
+<p>通常要求  $|a| \lt 1$ ，当取  $n \rarr \infty$  时</p>
+
+$$
+\begin{aligned}&E\left(s\left[n\right]\right)=0\\&r_{ss}\left[m,n\right]=a^{m+n+2}\left(\mu_s^2+\sigma_s^2\right)+\sigma_u^2a^{m-n}\frac{1-a^{2n+2}}{1-a^2}=\frac{\sigma_u^2a^{m-n}}{1-a^2}=r_{ss}\left[k\right]\end{aligned}
+$$
+
+<p>此时是宽平稳（WSS）的。</p>
+<h4 id="递推特性"><a href="#递推特性" class="headerlink" title="递推特性"></a>递推特性</h4>
+$$
+E\left(s[n]\right)=aE\left(s[n-1]\right)+E\left(u[n]\right)=aE\left(s[n-1]\right)
+$$
+
+
+
+$$
+\operatorname{var}\left(s[n]\right)=E\left(\left(s[n]-E(s[n])\right)\left(s[n]-E(s[n])\right)\right) = a^2\operatorname{var}\left(s[n-1]\right)+\sigma_u^2
+$$
+
+
+
+$$
+m \ge n, c_s\left[m,n\right]=a^{m-n}\operatorname{var}\left(s[n]\right) = a^{m-n}\left(a^{2n+2}\sigma_s^2+\sigma_u^2\sum_{k=0}^na^{2k}\right)\\
+m \le n, c_s\left[m,n\right]=c_s\left[n,m\right]=a^{n-m}\operatorname{var}\left(s\left[m\right]\right)
+$$
+
+<h3 id="卡尔曼滤波-1"><a href="#卡尔曼滤波-1" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h3><p>状态方程： $s[n]=as\left[n-1\right]+u\left[n\right]$ </p>
+<p>观测方程： $x[n]=s\left[n\right]+w[n]$ </p>
+<p>驱动噪声  $u[n]$  相互独立且  $u[n] \sim N(0, \sigma^2)$ ，观测噪声  $w[n]$  相互独立且  $w[n] \sim N(0, \sigma^2)$ ，起始条件  $s[-1] \sim N(0, \sigma_s^2)$ 。假定  $s[-1], u[n], w[n]$  之间相互独立。</p>
+<ul>
+<li>提高估计性能：利用待估计参数的内在联系提高性能</li>
+<li>减小运算量：通过“老”估计量更新得到“新”估计量</li>
+</ul>
+<p>性质：</p>
+<p>对联合高斯独立数据矢量可加性：</p>
+<p>若 $\theta,x_1,x_2$ 是联合高斯的，数据矢量 $x_1,x_2$  相互独立，则MMSE估计量为：</p>
+
+$$
+\hat{\theta}=E\left(\boldsymbol{\theta}\right)+\mathbf{C}_{\theta x_1}\mathbf{C}_{x_1x_1}^{-1}\left(\boldsymbol{x}_1-E\left(\boldsymbol{x}_1\right)\right)+\mathbf{C}_{\theta x_2}\mathbf{C}_{x_2x_2}^{-1}\left(\boldsymbol{x}_2-E\left(\boldsymbol{x}_2\right)\right)
+$$
+
+<p>对待估计参数的可加性：</p>
+<p>若  $\boldsymbol{\theta}=\boldsymbol{\theta}_1+\boldsymbol{\theta}_2$ , 则相应的MMSE估计量是可加的，即</p>
+
+$$
+\hat{\theta}=E\left(\boldsymbol{\theta}\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}_1+\boldsymbol{\theta}_2\mid\boldsymbol{x}\right)=E\left(\boldsymbol{\theta}_1\mid\boldsymbol{x}\right)+E\left(\boldsymbol{\theta}_2\mid\boldsymbol{x}\right)
+$$
+
+<p>线性变换的不变性：</p>
+<p>若 $\alpha=\mathbf{A\theta}+\boldsymbol{b},\quad\theta$  的MMSE估计量是  $\theta$ , 则  $\alpha$  的MMSE估计量为：</p>
+
+$$
+\hat{\alpha}=\mathbf{A}\hat{\theta}+b
+$$
+
+<p>定义：</p>
+
+$$
+\hat{s}[n-1]=E\left(s[n-1]|x[0],x[1],...,x[n-1]\right)\triangleq\hat{s}[n-1\mid n-1]\\
+M\begin{bmatrix}n-1\end{bmatrix}=E\left(\left(s\begin{bmatrix}n-1\end{bmatrix}-\hat{s}\begin{bmatrix}n-1\end{bmatrix}\right)^2\right)\\
+\hat s[n] \triangleq\hat{s}[n\mid n]
+$$
+
+<p>其中，前面的 n 表示被估计的信号下表，后面的 n 表示估计量用到的数据中最新的那个数据的下标。</p>
+<p>如果能够提取出第 n 个数据点带来的新的信息，并加入之前已有的估计量，就可更新估计量：</p>
+
+$$
+\begin{aligned}
+\hat{s}\Big[n|n\Big]& =E\left(s[n]|x[0],x[1],...,x[n-1],x[n]\right)  \\
+&=E\left(s[n]|x[0],x[1],...,x[n-1],\tilde{x}[n]\right) \\
+&=\underbrace{E\left(s[n]|x[0],x[1],...,x[n-1]\right)}_{先前数据估计}+\underbrace{E\left(s[n]|\tilde{x}[n]\right)}_{新息估计}
+\end{aligned}
+$$
+
+<p>新息与已有的数据正交。</p>
+
+$$
+\tilde{x}[n]=x[n]-\hat{x}[n|n-1]
+$$
+
+<p>“先前数据估计”怎么求解？</p>
+
+$$
+\begin{aligned}
+\hat{s}[n\mid n-1]& =E\left(as[n-1]+u[n]|x[0],x[1],...,x[n-1]\right)  \\
+&=E\left(as[n-1]|x[0],x[1],...,x[n-1]\right)+E\left(u[n]|x[0],x[1],...,x[n-1]\right) \\
+&=aE\left(s\begin{bmatrix}n-1\end{bmatrix}|x\begin{bmatrix}0\end{bmatrix},x\begin{bmatrix}1\end{bmatrix},...,x\begin{bmatrix}n-1\end{bmatrix}\right)\\
+&=a\hat{s}\begin{bmatrix}n-1|n-1\end{bmatrix} \\
+\end{aligned}
+$$
+
+<h4 id="预测-1"><a href="#预测-1" class="headerlink" title="预测"></a>预测</h4><p>求解新息</p>
+
+$$
+E\left(s[n]|\tilde{x}[n]\right)=E\left(s[n]\right)+\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}\left(\tilde{x}[n]-E\left(\tilde{x}[n]\right)\right)
+$$
+
+
+
+$$
+s[n]=a^{n+1}s[-1]+\sum_{k=0}^na^ku[n-k]\rArr E(s[n]) = 0\\
+$$
+
+
+
+$$
+\begin{gathered}
+E\left(\tilde{x}[n]\right)=E\left(x[n]-\hat{x}[n\mid n-1]\right) \\
+E\left(x[n]\right)=E\left(s[n]+w[n]\right)=0 \\
+E\left(\hat{x}[n\mid n-1]\right)=E\left(\sum_{k=0}^{n-1}a[k]x[k]\right) 
+\end{gathered}\\
+\rArr E\left(\hat{x}[n\mid n-1]\right)=0\\
+\rArr E(\tilde x[n]) = 0
+$$
+
+<p>因此，</p>
+
+$$
+E\left(s[n]|\tilde{x}[n]\right)=\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}\tilde{x}[n]=\underbrace{\mathbf{C}_{s\tilde{x}}\mathbf{C}_{\tilde{x}\tilde{x}}^{-1}}_{卡尔曼增益}\left(x[n]-\hat{x}[n\mid n-1]\right)
+$$
+
+<h4 id="最小预测-MSE"><a href="#最小预测-MSE" class="headerlink" title="最小预测 MSE"></a>最小预测 MSE</h4> $\mathbf{C}_{s\tilde{x}}\text{的求解}$ 
+
+$$
+\begin{aligned}
+C_{s\tilde{x}}& =E\left(s[n]\tilde{x}[n]\right)  \\
+&=E\Big(s[n]\Big(x[n]-\hat{x}\Big[n|n-1\Big]\Big)\Big)
+\end{aligned}
+$$
+
+<p>其中</p>
+
+$$
+\begin{aligned}\hat{x}\left[n|n-1\right]&=E\left(x[n]|x[0],x[1],...x[n-1]\right)=E\left(s[n]+w[n]|x[0],x[1],...x[n-1]\right)\\&=E\left(s[n]|x[0],x[1],...x[n-1]\right)=\hat{s}\left[n|n-1\right]\end{aligned}
+$$
+
+<p>因此</p>
+
+$$
+\begin{aligned}
+C_{s\tilde{x}}& =E\left(s[n]\left(s[n]+w[n]-\hat{s}[n|n-1]\right)\right)  \\
+&=E\left(s[n]w[n]+s[n]\left(s[n]-\hat{s}[n|n-1]\right)\right) \\
+&=E\Big(s[n]\Big(s[n]-\hat{s}\Big[n|n-1\Big]\Big)\Big)\\
+&=E\left(s[n]\left(s[n]-\hat{s}[n|n-1]\right)\right)-E\left(\hat{s}[n|n-1]\left(s[n]-\hat{s}[n|n-1]\right)\right)\\
+&=E\left(\left(s[n]-\hat{s}[n|n-1]\right)\left(s[n]-\hat{s}[n|n-1]\right)\right)\\
+&\triangleq M\begin{bmatrix}n\mid n-1\end{bmatrix}
+\end{aligned}
+$$
+
+<p>求解  $M\begin{bmatrix}n\mid n-1\end{bmatrix}$ </p>
+
+$$
+\begin{aligned}
+&M\begin{bmatrix}n\mid n-1\end{bmatrix}\\
+&=E\left(\left(as\begin{bmatrix}n-1\end{bmatrix}+u\begin{bmatrix}n\end{bmatrix}-\hat{s}\begin{bmatrix}n|n-1\end{bmatrix}\right)^2\right)\\
+&=E\left(\left(a\left(s[n-1]-\hat{s}[n-1\mid n-1]\right)+u[n]\right)^2\right) \\
+&=E\left(a^2\left(s\left[n-1\right]-\hat{s}\left[n-1\mid n-1\right]\right)^2+u^2\left[n\right]+2a\left(s\left[n-1\right]-\hat{s}\left[n-1\mid n-1\right]\right)u\left[n\right]\right) \\
+&=a^2M\left[n-1\mid n-1\right]+\sigma_u^2
+\end{aligned}
+$$
+
+<h4 id="卡尔曼增益"><a href="#卡尔曼增益" class="headerlink" title="卡尔曼增益"></a>卡尔曼增益</h4> $\mathbf{C}_{\tilde{x}\tilde{x}}\text{的求解}$ 
+
+$$
+\\
+\begin{aligned}
+\mathbf{C}_{\tilde{x}\tilde{x}}&=E\left(\left(\tilde{x}[n]-E(\tilde{x}[n])\right)^2\right) = E\left(\tilde{x}^2[n]\right) = E\left(\left(x[n]-\hat{s}[n\mid n-1]\right)^2\right)\\
+&=E\left(\left(s[n]+w[n]-\hat{s}[n\mid n-1]\right)^2\right) \\
+&=E\left(\left(s[n]-\hat{s}[n\mid n-1]\right)^2+w^2\left[n\right]+2\left(s[n]-\hat{s}[n\mid n-1]\right)w[n]\right) \\
+&=M\begin{bmatrix}n\mid n-1\end{bmatrix}+\sigma_n^2
+\end{aligned}
+$$
+
+<p>结合</p>
+
+$$
+\begin{aligned}\mathbf{C}_{\tilde{x}\tilde{x}}&=M\begin{bmatrix}n\mid n-1\end{bmatrix}+\sigma_n^2\\\mathbf{C}_{s\tilde{x}}&=M\begin{bmatrix}n\mid n-1\end{bmatrix}\end{aligned}
+$$
+
+<p>我们得到了卡尔曼增益</p>
+
+$$
+E\left(s[n]|\tilde{x}[n]\right)=\underbrace{\frac{M\left[n\mid n-1\right]}{M\left[n\mid n-1\right]+\sigma_n^2}}_{卡尔曼增益 K[n]}\tilde{x}[n]
+$$
+
+<h4 id="修正"><a href="#修正" class="headerlink" title="修正"></a>修正</h4>
+$$
+\hat{s}\left[n\mid n\right]=\underbrace{\hat{s}\left[n\mid n-1\right]}_{预测}+\underbrace{K\left[n\right]\left(x\left[n\right]-\hat{s}\left[n\mid n-1\right]\right)}_{新息修正}
+$$
+
+<h4 id="最小-MSE"><a href="#最小-MSE" class="headerlink" title="最小 MSE"></a>最小 MSE</h4><p>MSE 修正：</p>
+
+$$
+M[n|n] = (1 - K[n])M[n|n - 1]
+$$
+
+<h3 id="非零均值信号模型"><a href="#非零均值信号模型" class="headerlink" title="非零均值信号模型"></a>非零均值信号模型</h3><p><img src="/../images/StaSP/1714360809348.png" alt="1714360809348" loading="lazy"></p>
+<p>初始化： $\hat{s} [ - 1|- 1] = E\begin{pmatrix} s[ - 1] \end{pmatrix} = \mu _s$   $M[ - 1|- 1] = E\left ( \begin{pmatrix} s[ - 1] - \hat{s} [ - 1|- 1] \end{pmatrix} ^2\right ) = \sigma _s^2$ </p>
+<p>估计量预测： $\hat{s}[n|n-1]=a\hat{s}[n-1|n-1]$ </p>
+<p>MSE预测： $M\left[n\mid n-1\right]=a^2M\left[n-1\mid n-1\right]+\sigma_u^2$ </p>
+<p>卡尔曼增益： $K[n]=\frac{M\left[n|n-1\right]}{M\left[n|n-1\right]+\sigma_n^2}$ </p>
+<p>估计量修正： $\hat{s}[n|n]=\hat{s}[n|n-1]+K[n]\left(x[n]-\hat{s}[n|n-1]\right)$ </p>
+<p>MSE修正:  $M\left [ n\mid n\right ] = \left ( 1- K\left [ n\right ] \right ) M\left [ n\mid n- 1\right ]$ </p>
+<h3 id="矢量状态-标量观测信号模型"><a href="#矢量状态-标量观测信号模型" class="headerlink" title="矢量状态-标量观测信号模型"></a>矢量状态-标量观测信号模型</h3><p><img src="/../images/StaSP/1714360717248.png" alt="1714360717248" loading="lazy"></p>
+<h3 id="矢量状态-矢量观测信号模型"><a href="#矢量状态-矢量观测信号模型" class="headerlink" title="矢量状态-矢量观测信号模型"></a>矢量状态-矢量观测信号模型</h3><p><img src="/../images/StaSP/1714360742651.png" alt="1714360742651" loading="lazy"></p>
+<h3 id="非线性信号模型"><a href="#非线性信号模型" class="headerlink" title="非线性信号模型"></a>非线性信号模型</h3><p><img src="/../images/StaSP/1714360782259.png" alt="1714360782259" loading="lazy"></p>
+<p><img src="/../images/StaSP/1714361011137.png" alt="1714361011137" loading="lazy"></p>
+<p><img src="/../images/StaSP/1714361027958.png" alt="1714361027958" loading="lazy"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>不同时刻的待估计参数并不完全一样，但是存在某些内在联系</li>
+<li>卡尔曼滤波利用这种联系进行 LMMSE 估计，并减少了运算量</li>
+<li>如果信号与噪声是高斯的，则卡尔曼滤波在 MMSE 准则下最佳，否则，在 LMMSE 准则下是最佳的。</li>
+</ul>
+<h2 id="信号检测基本准则与方法"><a href="#信号检测基本准则与方法" class="headerlink" title="信号检测基本准则与方法"></a>信号检测基本准则与方法</h2><p>之前一直在研究连续型的问题（回归&#x2F;估计），这里研究离散型的问题（分类&#x2F;检测）。</p>
+<h3 id="Neyman-Pearson-准则"><a href="#Neyman-Pearson-准则" class="headerlink" title="Neyman-Pearson 准则"></a>Neyman-Pearson 准则</h3><p>适用于没有先验信息、代价不好量化的场景。</p>
+<p>两种假设：</p>
+
+$$
+\begin{aligned}&H_0:x[n]=w[n],n=0,1,...,N-1\\&H_1:x[n]=s[n]+w[n],n=0,1,...,N-1\end{aligned}
+$$
+
+
+
+$$
+\begin{aligned}
+&P\left(H_1;H_0\right):\text{ 虚警概率}\left(P_{FA},\text{有时简记为}P_F\right)\\
+&P\left(H_0;H_1\right):\text{ 漏检概率 }\left(P_M\right)\\
+&P\left(H_1;H_1\right):\text{ 检测概率 }\left(P_D\right)\end{aligned}
+$$
+
+<p>要求：在虚警概率一定情况下，使检测概率最大化</p>
+<p>检测概率和虚警概率之间追求折中，不可能两者都改善。</p>
+<p>对给定的虚警概率  $P_{FA}=\alpha$  ,使检测概率  $P_D$  最大的判决为</p>
+
+$$
+L(x)=\frac{p(x;H_1)}{p(x;H_0)}&gt;\gamma
+$$
+
+<p>其中门限由  $P_{FA}=\int_{\lbrace\mathbf{x}:L(\mathbf{x})&gt;\gamma\rbrace}p(\boldsymbol{x};H_0)d\boldsymbol{x}=\alpha$  决定</p>
+<p>对于信号检测问题：</p>
+
+$$
+H_0:\boldsymbol{x}\sim N\left(\boldsymbol{0},\sigma^2\mathbf{I}\right)\\H_1:\boldsymbol{x}\sim N\left(A\mathbf{1},\sigma^2\mathbf{I}\right)
+$$
+
+
+<p>NP 检测器：</p>
+
+$$
+\frac{p\left(\boldsymbol{x};H_1\right)}{p\left(\boldsymbol{x};H_0\right)}=\frac{\frac1{\left(2\pi\sigma^2\right)^{N/2}}\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}\left(x[n]-A\right)^2\right\}}{\frac1{\left(2\pi\sigma^2\right)^{N/2}}\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}x^2[n]\right\}}&gt;\gamma\\\quad\exp\left\{-\frac1{2\sigma^2}\sum_{n=0}^{N-1}\left(x[n]-A\right)^2+\frac1{2\sigma^2}\sum_{n=0}^{N-1}x^2[n]\right\}&gt;\gamma 
+$$
+
+
+
+$$
+-\frac1{2\sigma^2}\Bigg(-2A\sum_{n=0}^{N-1}x[n]+NA^2\Bigg)&gt;\ln\gamma\\\frac1N\sum_{n=0}^{N-1}x[n]&gt;\frac{\sigma^2}{NA}\ln\gamma+\frac A2
+$$
+
+<p>称为检测统计量。若均值大于门限，则判为有信号，否则为无信号。</p>
+<p>使用方法：</p>
+
+$$
+\begin{aligned}
+&\text{检测统计量:}T(x)=\frac1N\sum_{n=0}^{N-1}x[n]\sim\begin{cases}N\Big(0,\sigma^2\Big/_N\Big),&H_0\\[2ex]N\Big(A,\sigma^2\Big/_N\Big),&H_1\end{cases} \\
+&\text{虚警概率:}P_{FA}=Pr\left(T\left(\boldsymbol{x}\right)&gt;\gamma^{'};H_0\right)=Q\left(\frac{\gamma^{'}}{\sqrt{\sigma^2/N}}\right) \\
+&\text{门限设置:}\gamma^{\prime}=\sqrt{\frac{\sigma^2}N}Q^{-1}\left(P_{FA}\right) \\
+& \begin{aligned}&\text{相应的检测概率:}\\&P_{D}=Pr\Big(T\big(\boldsymbol{x}\big)&gt;\gamma^{'};H_{1}\Big)=Q\Bigg(\frac{\gamma^{'}-A}{\sqrt{\sigma^{2}/N}}\Bigg)=Q\Bigg(\frac{\sqrt{\frac{\sigma^{2}}{N}}Q^{-1}\big(P_{FA}\big)-A}{\sqrt{\sigma^{2}/N}}\Bigg)\end{aligned}  \\
+&=Q\Bigg(Q^{-1}\big(P_{F_A}\big)-\sqrt{\frac{NA^2}{\sigma^2}}\Bigg)
+\end{aligned}
+$$
+
+<h3 id="检测性能分析"><a href="#检测性能分析" class="headerlink" title="检测性能分析"></a>检测性能分析</h3><p>接收机工作特性曲线（ROC, receiver operating characteristics）</p>
+<p><img src="/../images/StaSP/1714966200160.png" alt="1714966200160" loading="lazy"></p>
+<p>直观理解：</p>
+<p><img src="/../images/StaSP/1714966230536.png" alt="1714966230536" loading="lazy"></p>
+<p>多次观测的好处</p>
+<ul>
+<li>从数学角度：不同假设下的pdf分隔更开，更易区分不同假设</li>
+<li>从信号处理角度：增加信号预检测积分时间，获得更多的能量用于检测</li>
+<li>从信息论角度：多的观测数据带来了新的信息</li>
+</ul>
+<h3 id="最小错误概率准则"><a href="#最小错误概率准则" class="headerlink" title="最小错误概率准则"></a>最小错误概率准则</h3>
+$$
+\begin{aligned}
+P_{e}& =\Pr\left\{\text{判}H_0,H_1\text{为真}\right\}+\Pr\left\{\text{判}H_1,H_0\text{为真}\right\}  \\
+&=P\big(H_0,H_1\big)+P\big(H_1,H_0\big) \\
+&=P\big(H_1\big)P\big(H_0|H_1\big)+P\big(H_0\big)P\big(H_1|H_0\big) \\
+&=P\big(H_1\big)\int_{R_0}p\big(\boldsymbol{x}|H_1\big)d\boldsymbol{x}+P\big(H_0\big)\int_{R_1}p\big(\boldsymbol{x}|H_0\big)d\boldsymbol{x} \\
+&=P\big(H_1\big)\Bigg(1-\int_{R_1}p\big(\boldsymbol{x}\mid H_1\big)d\boldsymbol{x}\Bigg)+P\big(H_0\big)\int_{R_1}p\big(\boldsymbol{x}\mid H_0\big)d\boldsymbol{x} \\
+&=P\left(H_1\right)+\int_{R_1}\left\{P\left(H_0\right)p\left(\boldsymbol{x}\mid H_0\right)-P\left(H_1\right)p\left(\boldsymbol{x}\mid H_1\right)\right\}d\boldsymbol{x}
+\end{aligned}
+$$
+
+<p>为了使错误最小，需要在积分式小于零的区域积分，即</p>
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}&gt;\frac{P\left(H_0\right)}{P\left(H_1\right)}\text{ 时,判 }H_1
+$$
+
+<p>最小错误概率准则可推导出最大后验概率检测器：</p>
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}&gt;\frac{P\left(H_0\right)}{P\left(H_1\right)}\text{ 时,判 }H_1
+$$
+
+<p>等价于</p>
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)P\left(H_1\right)}{p\left(\boldsymbol{x}\right)}&gt;\frac{p\left(\boldsymbol{x}\mid H_0\right)P\left(H_0\right)}{p\left(\boldsymbol{x}\right)}\\p\left(H_1\mid\boldsymbol{x}\right)&gt;p\left(H_0\mid\boldsymbol{x}\right)
+$$
+
+<p>若先验概率相同，则为最大似然检测器：</p>
+
+$$
+p\left(x\mid H_1\right)&gt;p\left(x\mid H_0\right)
+$$
+
+<h3 id="二元贝叶斯风险准则"><a href="#二元贝叶斯风险准则" class="headerlink" title="二元贝叶斯风险准则"></a>二元贝叶斯风险准则</h3><p>引入判错代价</p>
+
+$$
+R=C_{01}P\left(H_1\right)P\left(H_0\mid H_1\right)+C_{10}P\left(H_0\right)P\left(H_1\mid H_0\right)
+$$
+
+<p>进一步泛化：</p>
+
+$$
+R=C_{00}P\big(H_0\big)P\big(H_0|H_0\big)+C_{10}P\big(H_0\big)P\big(H_1|H_0\big)\\+C_{01}P\big(H_1\big)P\big(H_0|H_1\big)+C_{11}P\big(H_1\big)P\big(H_1|H_1\big)
+$$
+
+
+
+$$
+\begin{aligned}\text{R}&=C_{00}P\left(H_0\right)+C_{01}P\left(H_1\right)\\&+\int_{R_1}\left\{\left(C_{10}-C_{00}\right)P\left(H_0\right)p\left(\boldsymbol{x}\mid H_0\right)-\left(C_{01}-C_{11}\right)P\left(H_1\right)p\left(\boldsymbol{x}\mid H_1\right)\right\}d\boldsymbol{x}\end{aligned}
+$$
+
+<p>因此，有了最小贝叶斯风险判决准则：</p>
+
+$$
+\frac{p\left(\boldsymbol{x}\mid H_1\right)}{p\left(\boldsymbol{x}\mid H_0\right)}&gt;\frac{\left(C_{10}-C_{00}\right)P\left(H_0\right)}{\left(C_{01}-C_{11}\right)P\left(H_1\right)}\text{ 时,判 }H_1
+$$
+
+<p>风险一致条件下（ $C_{00}=C_{11}=0,C_{10}=C_{01}=1$ ），回到最小错误概率准则。</p>
+<h3 id="多元贝叶斯风险准则"><a href="#多元贝叶斯风险准则" class="headerlink" title="多元贝叶斯风险准则"></a>多元贝叶斯风险准则</h3><p>贝叶斯风险：</p>
+
+$$
+\begin{aligned}
+\text{R}& =\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}C_{ij}P\Big(H_i,H_j\Big)  \\
+&=\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}C_{ij}\int_{R_i}P\Big(x,H_j\Big)dx \\
+&=\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0}^{M-1}C_{ij}P\Big(x,H_j\Big)dx \\
+&=\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0}^{M-1}C_{ij}P\Big(H_j\mid x\Big)p(x)dx
+\end{aligned}
+$$
+
+
+<p>应选择使平均风险 $C_i\left(\boldsymbol{x}\right)=\sum_{j=0}^{M-1}C_{ij}P\left(H_j\mid\boldsymbol{x}\right)$ 最小的假设</p>
+<p>在风险一致条件下</p>
+
+$$
+C_{ij}=\begin{cases}0,&i=j\\1,&i\neq j\end{cases}
+$$
+
+
+
+$$
+\begin{aligned}C_{i}\left(\boldsymbol{x}\right)&=\sum_{j=0\atop j\neq i}^{M-1}P\Big(H_j\mid\boldsymbol{x}\Big)\\&=\sum_{j=0}^{M-1}P\Big(H_j\mid\boldsymbol{x}\Big)-\underline{P\Big(H_i\mid\boldsymbol{x}\Big)}_{最大化这个}\end{aligned}
+$$
+
+<p>因此等价于最大后验准则：</p>
+
+$$
+\max_iP(H_i\mid\boldsymbol{x})
+$$
+
+
+<p>若此时先验概率相同，则为最大似然准则。</p>
+<h2 id="总结知识点"><a href="#总结知识点" class="headerlink" title="总结知识点"></a>总结知识点</h2><h3 id="估计理论"><a href="#估计理论" class="headerlink" title="估计理论"></a>估计理论</h3><p>MAP 估计通常不能使用参数变换，变换后的参数不一定是 MAP。但是 MLE 可以。</p>
+<p>LS 方法与 BLUE 等 MVU 的衍生方法有一点不同，就是基础的 LS 没有使用协方差矩阵，但是加权的 LS 可以用协方差矩阵修正结果。</p>
+<p>贝叶斯方法和经典方法的区别在于是否把估计量的真值看作一个随机变量。它们都以“平均误差最小”为目标。</p>
+<h3 id="检测理论"><a href="#检测理论" class="headerlink" title="检测理论"></a>检测理论</h3><p>贝叶斯风险：让平均的风险最小化。</p>
+<p>未知多余参数如果影响最终的判决结果，可以用贝叶斯方法或者GLRT方法处理。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2024/02/26/StaSP/" title="Statistical Signal Processing">https://blitherboom812.github.io/2024/02/26/StaSP/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2024/02/26/AI/" rel="prev" title="Introduction to Artificial Intelligence"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Introduction to Artificial Intelligence</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/10/09/Python-OJ/" rel="next" title="Python-OJ"><span class="post-nav-text">Python-OJ</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>

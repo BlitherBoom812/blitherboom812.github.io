@@ -1,0 +1,978 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Blither Boom"><meta name="copyright" content="Blither Boom"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>固体物理 | Guo_Yun</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://fastly.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script type="module">import { renderKatex } from '/js/utils.js'
+document.addEventListener("DOMContentLoaded", () => {
+  renderKatex({
+    ...{},
+    ...true?.options,
+  });
+});</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"blitherboom812.github.io","root":"/","title":["摸","🐟","人","的","日","常"],"version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="外场中电子运动状态的变化布洛赫电子布洛赫定理 $$ \psi(x+R_n)&#x3D;e^{ik\cdot R_n}\psi(x) $$   布洛赫波函数：  $$ \boxed{\vec{\psi(r)}&#x3D;e^{i\vec{k}\cdot\vec{r}}\vec{u(r)}} $$   薛定谔方程在周期势场  $V(r)$ 的本征解。与  $V(r)$ 有相同的周期。 简约布里渊区和周期布里渊区图景  一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="固体物理">
+<meta property="og:url" content="https://blitherboom812.github.io/2024/04/16/SolidPhysics/index.html">
+<meta property="og:site_name" content="Guo_Yun">
+<meta property="og:description" content="外场中电子运动状态的变化布洛赫电子布洛赫定理 $$ \psi(x+R_n)&#x3D;e^{ik\cdot R_n}\psi(x) $$   布洛赫波函数：  $$ \boxed{\vec{\psi(r)}&#x3D;e^{i\vec{k}\cdot\vec{r}}\vec{u(r)}} $$   薛定谔方程在周期势场  $V(r)$ 的本征解。与  $V(r)$ 有相同的周期。 简约布里渊区和周期布里渊区图景  一">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713239832006.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713240457384.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713234834861.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713234874686.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713235941206.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713235941206.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713236189430.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713236233045.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713236269885.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713236929581.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713236984022.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713237069207.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713237158982.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713237357342.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715048162767.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715048234147.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715051145151.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715051313166.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715053184570.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715053408715.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715657785337.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715658350241.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715658620805.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715659347111.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1715659894626.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716257709851.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716257832298.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716257919907.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716258157706.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716258191070.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716258575169.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716259850103.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716260746330.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716259893782.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716260901275.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716261236429.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716261409659.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716261766058.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716261781489.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716262583215.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716262570823.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716263334906.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716263526504.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716263538645.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716263918247.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716263941957.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716863556246.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716864038557.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716864050264.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716868157804.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716868762789.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717467825452.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716869179928.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1716869156196.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717467681404.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717467815166.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717467885133.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717467940325.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717468003069.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717468014637.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717468150691.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717468250438.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717468279238.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717468352260.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717468364464.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717469037238.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717469080107.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717469005887.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717469702087.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717470027229.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717470756612.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717473776761.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1717473805195.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718071135404.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718071202034.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718071363760.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718071563960.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718071692546.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718071922789.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718072084533.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718072235738.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718072255786.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718072474995.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718072707268.png">
+<meta property="og:image" content="https://blitherboom812.github.io/images/SolidPhysics/1718072997880.png">
+<meta property="article:published_time" content="2024-04-16T02:06:07.000Z">
+<meta property="article:modified_time" content="2024-06-11T03:52:57.000Z">
+<meta property="article:author" content="Blither Boom">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blitherboom812.github.io/images/SolidPhysics/1713239832006.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script><!-- hexo injector head_end start --><link rel="stylesheet" type="text/css" href="/css/latex.css"><link rel="stylesheet" type="text/css" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Blither Boom"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="Blither Boom"></a><div class="site-author-name"><a href="/about/">Blither Boom</a></div><span class="site-name">Guo_Yun</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">33</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E5%9C%BA%E4%B8%AD%E7%94%B5%E5%AD%90%E8%BF%90%E5%8A%A8%E7%8A%B6%E6%80%81%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">外场中电子运动状态的变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E6%B4%9B%E8%B5%AB%E7%94%B5%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">布洛赫电子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E6%B4%9B%E8%B5%AB%E5%AE%9A%E7%90%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">布洛赫定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E8%BF%91%E8%87%AA%E7%94%B1%E7%94%B5%E5%AD%90%E8%BF%91%E4%BC%BC"><span class="toc-number">1.1.2.</span> <span class="toc-text">一维近自由电子近似</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E7%BB%8F%E5%85%B8%E8%BF%90%E5%8A%A8"><span class="toc-number">1.2.</span> <span class="toc-text">准经典运动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%81%92%E5%AE%9A%E7%94%B5%E5%9C%BA%E4%B8%8B%E8%BF%90%E5%8A%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">恒定电场下运动</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E4%BD%93%E3%80%81%E7%BB%9D%E7%BC%98%E4%BD%93%E5%92%8C%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%9A%84%E8%83%BD%E5%B8%A6%E8%A7%A3%E9%87%8A"><span class="toc-number">1.3.</span> <span class="toc-text">导体、绝缘体和半导体的能带解释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%A1%E5%B8%A6%E4%B8%8D%E5%AF%BC%E7%94%B5"><span class="toc-number">1.3.1.</span> <span class="toc-text">满带不导电</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E5%88%86%E5%A1%AB%E5%85%85%E8%83%BD%E5%B8%A6%E4%BA%A7%E7%94%9F%E7%94%B5%E6%B5%81"><span class="toc-number">1.3.2.</span> <span class="toc-text">部分填充能带产生电流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E4%BD%93%E7%9A%84%E8%83%BD%E5%B8%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.3.</span> <span class="toc-text">导体的能带模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%AF%BC%E4%BD%93%E7%9A%84%E8%83%BD%E5%B8%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.4.</span> <span class="toc-text">非导体的能带模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8A%E5%AF%BC%E4%BD%93%E8%83%BD%E5%B8%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.5.</span> <span class="toc-text">半导体能带模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%91%E5%B1%9E%E5%92%8C%E5%8D%8A%E5%AF%BC%E4%BD%93%E4%B8%AD%E7%9A%84%E8%BE%93%E8%BF%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">金属和半导体中的输运过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%91%E5%B1%9E%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E8%BE%93%E8%BF%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">金属中的电子输运过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%94%B5%E5%AD%90%E8%BE%93%E8%BF%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">半导体电子输运过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%BE%81%E6%BF%80%E5%8F%91"><span class="toc-number">2.2.1.</span> <span class="toc-text">本征激发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E5%8D%8A%E5%AF%BC%E4%BD%93"><span class="toc-number">2.2.2.</span> <span class="toc-text">一般半导体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%82%E8%B4%A8%E4%B8%8E%E6%9D%82%E8%B4%A8%E6%BF%80%E5%8F%91"><span class="toc-number">2.2.3.</span> <span class="toc-text">杂质与杂质激发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%81%BF%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%9A%84%E8%BD%BD%E6%B5%81%E5%AD%90%E6%B5%93%E5%BA%A6"><span class="toc-number">2.2.4.</span> <span class="toc-text">补偿半导体的载流子浓度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%BD%E6%B5%81%E5%AD%90%E7%9A%84%E8%BF%81%E7%A7%BB%EF%BC%88%E6%BC%82%E7%A7%BB%EF%BC%89%E8%BF%90%E5%8A%A8"><span class="toc-number">2.3.</span> <span class="toc-text">载流子的迁移（漂移）运动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PN-%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">PN 结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">功函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PN-%E7%BB%93-1"><span class="toc-number">3.2.</span> <span class="toc-text">PN 结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%B9%B3%E8%A1%A1%E8%BD%BD%E6%B5%81%E5%AD%90%E7%9A%84%E6%89%A9%E6%95%A3%E5%92%8C%E5%A4%8D%E5%90%88"><span class="toc-number">3.2.1.</span> <span class="toc-text">非平衡载流子的扩散和复合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PN-%E7%BB%93%E7%9A%84%E6%8E%A5%E8%A7%A6%E7%94%B5%E5%8A%BF%E5%B7%AE"><span class="toc-number">3.2.2.</span> <span class="toc-text">PN 结的接触电势差</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%90%91%E5%81%8F%E5%8E%8B-%E8%BD%BD%E6%B5%81%E5%AD%90%E6%89%A9%E6%95%A3%E8%BF%90%E5%8A%A8%E4%BA%A7%E7%94%9F%E7%94%B5%E6%B5%81"><span class="toc-number">3.3.</span> <span class="toc-text">正向偏压-载流子扩散运动产生电流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E5%81%8F%E5%8E%8B-%E6%BC%82%E7%A7%BB%E4%BD%9C%E7%94%A8%E5%A2%9E%E5%BC%BA"><span class="toc-number">3.4.</span> <span class="toc-text">反向偏压-漂移作用增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PN-%E7%BB%93%E7%9A%84%E5%87%BB%E7%A9%BF"><span class="toc-number">3.5.</span> <span class="toc-text">PN 结的击穿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E6%9E%81%E6%80%A7%E6%99%B6%E4%BD%93%E7%AE%A1"><span class="toc-number">3.6.</span> <span class="toc-text">双极性晶体管</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E8%B4%A8%E7%BB%93%E4%B8%8E%E8%82%96%E7%89%B9%E5%9F%BA%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">异质结与肖特基结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E5%AF%BC%E4%BD%93%E5%BC%82%E8%B4%A8%E7%BB%93"><span class="toc-number">4.1.</span> <span class="toc-text">半导体异质结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E8%B4%A8%E7%BB%93%E7%9A%84%E6%B3%A8%E5%85%A5%E6%AF%94"><span class="toc-number">4.2.</span> <span class="toc-text">同质结的注入比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E5%85%89%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text">激光器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%82%96%E7%89%B9%E5%9F%BA%E7%BB%93"><span class="toc-number">4.4.</span> <span class="toc-text">肖特基结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E6%B3%A2"><span class="toc-number">5.</span> <span class="toc-text">格波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E5%8D%95%E5%8E%9F%E5%AD%90%E9%93%BE"><span class="toc-number">5.1.</span> <span class="toc-text">一维单原子链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E5%8F%8C%E5%8E%9F%E5%AD%90%E9%93%BE%E7%BB%93%E6%9E%84"><span class="toc-number">5.2.</span> <span class="toc-text">一维双原子链结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%B6%E6%A0%BC%E6%8C%AF%E5%8A%A8%E7%9A%84%E9%87%8F%E5%AD%90%E5%8C%96%E2%80%94%E2%80%94%E5%A3%B0%E5%AD%90"><span class="toc-number">5.3.</span> <span class="toc-text">晶格振动的量子化——声子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9"><span class="toc-number">5.4.</span> <span class="toc-text">固体热容</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://blitherboom812.github.io/2024/04/16/SolidPhysics/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Blither Boom"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Guo_Yun"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">固体物理</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2024-04-16 10:06:07" itemprop="dateCreated datePublished" datetime="2024-04-16T10:06:07+08:00">2024-04-16</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-06-11 11:52:57" itemprop="dateModified" datetime="2024-06-11T11:52:57+08:00">2024-06-11</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="外场中电子运动状态的变化"><a href="#外场中电子运动状态的变化" class="headerlink" title="外场中电子运动状态的变化"></a>外场中电子运动状态的变化</h2><h3 id="布洛赫电子"><a href="#布洛赫电子" class="headerlink" title="布洛赫电子"></a>布洛赫电子</h3><h4 id="布洛赫定理"><a href="#布洛赫定理" class="headerlink" title="布洛赫定理"></a>布洛赫定理</h4>
+$$
+\psi(x+R_n)=e^{ik\cdot R_n}\psi(x)
+$$
+
+
+<p>布洛赫波函数：</p>
+
+$$
+\boxed{\vec{\psi(r)}=e^{i\vec{k}\cdot\vec{r}}\vec{u(r)}}
+$$
+
+
+<p>薛定谔方程在周期势场  $V(r)$ 的本征解。与  $V(r)$ 有相同的周期。</p>
+<p>简约布里渊区和周期布里渊区图景</p>
+<p><img src="/../images/SolidPhysics/1713239832006.png" alt="1713239832006" loading="lazy"></p>
+<h4 id="一维近自由电子近似"><a href="#一维近自由电子近似" class="headerlink" title="一维近自由电子近似"></a>一维近自由电子近似</h4><p>利用微扰求解薛定谔方程</p>
+<p>零级哈密顿量是自由电子的哈密顿量(索末菲模型),周期性势场的作用看成是微扰<br>适用于解释参与共有化运动的外层价电子的运动状态</p>
+
+$$
+H=-\frac{\hbar^2}{2m_0}\frac{d^2}{dx^2}+V(x)=H_0+H^{\prime}\\
+V(x)=\overline{V}+\sum_{n\neq0}V_nexp\biggl[i\frac{2\pi}anx\biggr]
+$$
+
+
+
+$$
+\begin{aligned}&H_0=-\frac{\hbar^2}{2m_0}\frac{d^2}{dx^2}+\overline{V}\\&H'=\sum_{n\neq0}V_n\exp\left(i\frac{2\pi nx}a\right)\end{aligned}
+$$
+
+
+<p>基态（零级解）</p>
+
+$$
+E_k^0=\frac{\hbar^2k^2}{2m_0}+\overline{V}\\
+\psi_k^{(0)}=\frac1{\sqrt{L}}e^{ikx}
+$$
+
+
+
+$$
+k=\frac{2\pi l_x}{Na}
+$$
+
+
+<p>利用波恩卡曼条件看作准连续。</p>
+<p>周期性势场的一级微扰</p>
+
+$$
+\Delta V=\sum_{n\neq0}V_nexp\biggl[i\frac{2\pi}{a}nx\biggr]
+$$
+
+
+<p>一级修正：</p>
+
+$$
+E_k^{(1)}=\int\left(\psi_k^0\right)^*[\Delta V]\psi_k^0dx=\left\langle k|\Delta V|k\right\rangle=0
+$$
+
+
+<p>二级修正：</p>
+
+$$
+E_k^{(2)}=\sum_{k^{\prime}}\frac{\left|\left\langle k^{\prime}|\Delta V|k\right\rangle\right|^2}{E_k^0-E_{k^{\prime}}^0}
+$$
+
+
+<p>非简并情况下：</p>
+
+$$
+E_k^{(2)}=\sum_{n\neq0}\frac{\left|V_n\right|^2}{\frac{\hbar^2}{2m_0}\left[k^2-\left(k+\frac{2\pi}an\right)^2\right]}
+$$
+
+
+<p>k’对应的波可以看作k状态波在周期性势场各频率分量对应的散射波-&gt;自由电子波函数经过周期势场的散射后改变了原有的能量。</p>
+<p>波函数的一级修正</p>
+
+$$
+\psi_k=\frac1{\sqrt{L}}e^{ikx}\left\{1+\sum_{n=0}\frac{V_n}{\frac{\hbar^2}{2m_0}\left[k^2-\left(k+\frac{2\pi n}a\right)^2\right]}\cdot exp\left[i\frac{2\pi}anx\right]\right\}
+$$
+
+
+
+$$
+\vec{\psi(r)}=e^{i\vec{k}\cdot\vec{r}}\vec{u(r)}
+$$
+
+
+<p>被周期函数调幅的平面波。</p>
+<p><img src="/../images/SolidPhysics/1713240457384.png" alt="1713240457384" loading="lazy"></p>
+<p>如果 k 的取值在布里渊区边界  $k=-\frac{n\pi}a$ ，散射波矢 $k’=k+\frac{2\pi n}a=\frac{\pi n}a$ ，即布拉格定律  $2dsin\theta=n\lambda$ 。此时电子的波函数是  $k$  和  $k'$  两个平面波叠加的驻波。</p>
+<p>简并状态的处理方法</p>
+<p>在布里渊区边界，存在简并状态，能量相等。</p>
+<h3 id="准经典运动"><a href="#准经典运动" class="headerlink" title="准经典运动"></a>准经典运动</h3><p>引入准经典粒子——波包</p>
+<p>自由电子和晶体电子速度的定义：</p>
+
+$$
+v(k_0) = \frac1\hbar \bigg[\frac{d E(k)}{dk}\bigg]_{k_0}\\
+E(k) = \hbar\omega
+$$
+
+
+<p>速度方向垂直于等能面，如果等能面为球面， 速度的方向与  $k$  相同。</p>
+<p>晶体电子的加速度</p>
+
+$$
+\hbar\frac{dk}{dt} = F
+$$
+
+
+<p>由此定义电子的准动量（晶体动量）为  $\hbar k$ 。可定义有效质量：</p>
+
+$$
+\frac{d\upsilon_a}{dt}=\frac1{\hbar^2}\sum_\beta F_\beta\cdot\frac{\partial^2}{\partial k_\beta\partial k_\alpha}E(k)\\
+\frac{d\vec{\upsilon}}{dt}=\frac1{m_0}\vec{F}
+$$
+
+
+<p>有效质量的“倒数”（矩阵的逆）：</p>
+
+$$
+\frac1{m_{\alpha\beta}^*}=\frac1{\hbar^2}\frac{\partial^2E}{\partial k_\alpha\partial k_\beta}
+$$
+
+
+
+$$
+\begin{pmatrix}\dot{\nu}_x\\\dot{\nu}_y\\\dot{\nu}_z\end{pmatrix}=\dfrac{1}{\hbar^2}\begin{pmatrix}\dfrac{\partial^2E}{\partial k_x^2}&\dfrac{\partial^2E}{\partial k_x\partial k_y}&\dfrac{\partial^2E}{\partial k_x\partial k_z}\\\dfrac{\partial^2E}{\partial k_y\partial k_x}&\dfrac{\partial^2E}{\partial k_y^2}&\dfrac{\partial^2E}{\partial k_y\partial k_z}\\\dfrac{\partial^2E}{\partial k_z\partial k_x}&\dfrac{\partial^2E}{\partial k_z\partial k_y}&\dfrac{\partial^2E}{\partial k_z^2}\end{pmatrix}\begin{pmatrix}F_x\\F_y\\F_z\end{pmatrix}
+$$
+
+
+<p>选取  $(k_x, k_y, k_z)$  的主轴方向时</p>
+
+$$
+\begin{pmatrix}\dot{\nu}_x\\\dot{\nu}_y\\\dot{\nu}_z\end{pmatrix}=\dfrac{1}{\hbar^2}\begin{pmatrix}\dfrac{\partial^2E}{\partial k_x^2}&0&0\\0&\dfrac{\partial^2E}{\partial k_y^2}&0\\\\0&0&\dfrac{\partial^2E}{\partial k_z^2}\end{pmatrix}\begin{pmatrix}F_x\\F_y\\F_z\end{pmatrix}
+$$
+
+
+<p>注意：各方向上的有效质量一般不同</p>
+<p>(1) 质量是标量，而有效质量是张量<br>晶体中的电子，加速度和外力的方向可以不一致<br> (2)质量常值，有效质量是变值，有正有负<br>能带顶附近&lt;0 能带底附近&gt;0<br>有效质量 $m^{*}$ 与电子质量 $m$ 之间可以有很大的差别， 因为有效质量中实际包含了周期势场的作用</p>
+<p>晶体所表现出来的有效质量，原因在于电子波在晶体中传播时与晶格交换动量。</p>
+<p>正有效质量状态出现在能带底附近，体现电子从外场获得的动量，加速度为正。</p>
+<p> 负有效质量状态出现在能带顶附近，由电子从外场获得动量不足以弥补与晶格的碰撞，加速度为负。</p>
+<h4 id="恒定电场下运动"><a href="#恒定电场下运动" class="headerlink" title="恒定电场下运动"></a>恒定电场下运动</h4><p>在周期布里渊图景；</p>
+<p>在  $k$  空间里匀速运动</p>
+<p><img src="/../images/SolidPhysics/1713234834861.png" alt="1713234834861" loading="lazy"></p>
+<p>在实际空间中，电子的运动相当复杂：</p>
+<p><img src="/../images/SolidPhysics/1713234874686.png" alt="1713234874686" loading="lazy"></p>
+<p>质量无穷大：驻波解。</p>
+<p>拐点不一定是  $\pi/2a$ ，结合实际情况。</p>
+<p><img src="/../images/SolidPhysics/1713235941206.png" alt="1713235941206" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1713235941206.png" alt="1713235941206" loading="lazy"></p>
+<p>理想情况（无散射），电子的运动产生震荡的电流。</p>
+<p>实际情况下，很难观察到来回震荡。</p>
+<p><img src="/../images/SolidPhysics/1713236189430.png" alt="1713236189430" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1713236233045.png" alt="1713236233045" loading="lazy"></p>
+<p>实际情况：带隙部分反射</p>
+<p>存在势垒穿透</p>
+<p>隧穿几率：</p>
+
+$$
+f\propto E\exp\left[-\frac{\pi^2}\hbar\left(2m_0E_g\right)^{1/2}\left(\frac{E_g}{qE}\right)\right]
+$$
+
+
+<p><img src="/../images/SolidPhysics/1713236269885.png" alt="1713236269885" loading="lazy"></p>
+<p>准经典运动只适合描述弱电场下电子在同一能带中的运动。</p>
+<h3 id="导体、绝缘体和半导体的能带解释"><a href="#导体、绝缘体和半导体的能带解释" class="headerlink" title="导体、绝缘体和半导体的能带解释"></a>导体、绝缘体和半导体的能带解释</h3><h4 id="满带不导电"><a href="#满带不导电" class="headerlink" title="满带不导电"></a>满带不导电</h4><p>不加电场： $E(k)=E(-k)$ ，占据正反方向波矢的概率相等， 相反速度的电子数量也相等，相互抵消；</p>
+<p>加电场：k空间里匀速移动，边界上移出的粒子和移入的粒子是一样的，仍然均匀填充。</p>
+<h4 id="部分填充能带产生电流"><a href="#部分填充能带产生电流" class="headerlink" title="部分填充能带产生电流"></a>部分填充能带产生电流</h4><p>无外场：净电流为0</p>
+<p>有外场：k空间分布向一方移动，有净电流</p>
+<h4 id="导体的能带模型"><a href="#导体的能带模型" class="headerlink" title="导体的能带模型"></a>导体的能带模型</h4><p>部分填充的能带称为导带</p>
+<p><img src="/../images/SolidPhysics/1713236929581.png" alt="1713236929581" loading="lazy"></p>
+<h4 id="非导体的能带模型"><a href="#非导体的能带模型" class="headerlink" title="非导体的能带模型"></a>非导体的能带模型</h4><p>电子恰好填满最低的一系列能带，再高的能带全空</p>
+<p>满带不导电，空带也不导电</p>
+<p><img src="/../images/SolidPhysics/1713236984022.png" alt="1713236984022" loading="lazy"></p>
+<p>最高的满带的电子容易被激发到上面的空带，从而使两个带皆变成未满带，产生一定的导电性</p>
+<p><img src="/../images/SolidPhysics/1713237069207.png" alt="1713237069207" loading="lazy"></p>
+<p>总结：</p>
+<p><img src="/../images/SolidPhysics/1713237158982.png" alt="1713237158982" loading="lazy"></p>
+<h4 id="半导体能带模型"><a href="#半导体能带模型" class="headerlink" title="半导体能带模型"></a>半导体能带模型</h4><p>常温下，T&#x3D;0K时的满带电子容易被激发到上面的空带，<br>从而使两个带皆变成未满带，产生一定的导电性</p>
+<p><img src="/../images/SolidPhysics/1713237357342.png" alt="1713237357342" loading="lazy"></p>
+<p>近满带和空穴</p>
+<ul>
+<li>速度是电子的速度</li>
+<li>但电荷为正</li>
+</ul>
+<p>空穴的波矢：</p>
+<p>空穴的有效质量，在能带顶部为k_\mathrm{h}&#x3D;-k_\mathrm{e}</p>
+<p>正：</p>
+
+$$
+\frac1{m_h^*}=-\left(\frac1{\hbar^2}\cdot\frac{d^2E}{dk^2}\right)
+$$
+
+
+<h2 id="金属和半导体中的输运过程"><a href="#金属和半导体中的输运过程" class="headerlink" title="金属和半导体中的输运过程"></a>金属和半导体中的输运过程</h2><h3 id="金属中的电子输运过程"><a href="#金属中的电子输运过程" class="headerlink" title="金属中的电子输运过程"></a>金属中的电子输运过程</h3><p>各向同性晶体中的电导率：</p>
+
+$$
+\sigma_0=\frac{ne^2\tau\left(E_F\right)}{m^*}
+$$
+
+
+<ol>
+<li>电子的质量 →有效质量 (能带理论的必然结果)</li>
+<li>弛豫时间只由费米面附近的电子状态决定(量子统计的结果)</li>
+</ol>
+<h3 id="半导体电子输运过程"><a href="#半导体电子输运过程" class="headerlink" title="半导体电子输运过程"></a>半导体电子输运过程</h3><p>E-k 关系：</p>
+<p>考虑三维能带的顶部和底部的 E-k 关系，并引入有效质量得到抛物线近似：</p>
+
+$$
+E\left(k\right)=E\left(k_0\right)+\frac{\hbar^2\left(k_x-k_{0x}\right)^2}{2m_x^*}+\frac{\hbar^2\left(k_y-k_{0y}\right)^2}{2m_y^*}+\frac{\hbar^2\left(k_z-k_{0z}\right)^2}{2m_z^*}
+$$
+
+
+<p>间接带隙：价带的顶部和导带的底部并不是同一个简约波矢k</p>
+<p>直接带隙：价带的顶部和导带的底部是同一个简约波矢k</p>
+<p><img src="/../images/SolidPhysics/1715048162767.png" alt="1715048162767" loading="lazy"></p>
+<p>近似成自由电子：</p>
+<p><img src="/../images/SolidPhysics/1715048234147.png" alt="1715048234147" loading="lazy"></p>
+<p>将自由电子的质量替换为：电子或空穴的有效质量</p>
+<p>将自由电子的能量替换为：与导带底或价带顶的能量差</p>
+ $E_-$ : 电子的； $E_+$ ：空穴的。
+
+
+$$
+N_-(E)=\frac{4\pi(2m_-^*)^{3/2}}{h^3}\sqrt{(E-E_-)}\\N_+(E)=\frac{4\pi(2m_+^*)^{3/2}}{h^3}\sqrt{(E_+-E)}
+$$
+
+
+<p>费米能量应在  $E_-$  和  $E_+$  之间。</p>
+
+$$
+f(E)=\frac1{e^{(E-E_F)/k_BT}+1}\approx e^{-(E-E_F)/k_BT}&lt;&lt;1
+$$
+
+
+<p>据此计算电子的浓度：</p>
+
+$$
+\begin{aligned}
+&n=\int_{E_-}^\infty f(E)N_-(E)dE \\
+&=\frac{4\pi(2m_-^*)^{3/2}}{h^3}\int_{E_-}^\infty e^{-(E-E_F)/k_BT}\sqrt{(E-E_-)}dE \\
+&=\frac{4\pi(2m_-^*)^{3/2}}{h^3}e^{-(E_--E_F)/k_BT}\int_{E_-}^\infty e^{-(E-E_-)/k_BT}\sqrt{(E-E_-)}dE \\
+&=\frac{4\pi(2m_-^*k_BT)^{3/2}}{h^3}e^{-(E_--E_F)/k_BT}\int_0^\infty\xi^{1/2}e^{-\xi}d\xi  \\
+&=\frac{2(2\pi m_-^*k_BT)^{3/2}}{h^3}e^{-(E_--E_F)/k_BT}=N_-e^{-(E_--E_F)/k_BT}
+\end{aligned}
+$$
+
+
+ $N_-$  为有效能级密度。
+
+<p>空穴的浓度：</p>
+
+$$
+\begin{aligned}
+&p=\int_{-\infty}^{E_+}(1-f(E))N_+(E)dE \\
+&=\frac{4\pi(2m_+^*)^{3/2}}{h^3}\int_{-\infty}^{E_+}e^{-(E_F-E)/k_BT}\sqrt{(E_+-E)}dE \\
+&=N_+e^{-(E_F-E_+)/k_BT}
+\end{aligned}
+$$
+
+
+
+$$
+N_+=\frac{2(2\pi m_+^*k_BT)^{3/2}}{h^3}
+$$
+
+
+<p>在计算价带空穴数时可以等效地用价带顶能级E+代替整个价带，价带的空穴数就如同在价带顶E+处集中了N+个能态所含有的空穴数</p>
+<p>反直觉的事实：电子浓度与空穴浓度的乘积仅与禁带宽度和温度有关，与费米能级无关。温度一样，电子浓度越高，空穴浓度就越低。</p>
+
+$$
+np=N_-N_+exp\biggl(-\frac{E_--E_+}{k_BT}\biggr)=N_-N_+exp\biggl(-\frac{E_g}{k_BT}\biggr)
+$$
+
+
+<h4 id="本征激发"><a href="#本征激发" class="headerlink" title="本征激发"></a>本征激发</h4><p>无杂质及缺陷的半导体称为本征半导体</p>
+
+$$
+n_i=n=p=\left(N_-N_+\right)^{1/2}e^{-E_g/2k_BT}
+$$
+
+
+<p>电子数目与空穴数目相同。</p>
+
+$$
+\begin{aligned}
+&E_{Fi}=E_--k_BT\ln(N_-/n_i) \\
+&=E_++k_BT\ln(N_+/n_i) \\
+&=\frac12(E_-+E_+)+\frac12k_BT\ln(N_+/N_-) \\
+&=\frac12(E_-+E_+)+\frac34k_BT\ln(m_+^*/m_-^*)
+\end{aligned}
+$$
+
+
+<p>多数半导体的密度分布和金属相反：导带能级密度更大， 价带的更小，也就是说  $N_+&gt;N_-$ ，即随着温度的升高费米能级在上升。而金属，随着温度的升高，费米能级是下降的。</p>
+<p>在一般情况下，由于 $k_BT$ 较小，且 $m_h*$ 和 $m_e*$ 相差不大， 所以，本征半导体的费米能 $E_{Fi}$ 近似地在带隙的中间。</p>
+<h4 id="一般半导体"><a href="#一般半导体" class="headerlink" title="一般半导体"></a>一般半导体</h4> $E_F$  升高，则电子浓度增大，空穴浓度减小。
+
+<p>通过掺杂来改变载流子的类型和浓度。</p>
+<h4 id="杂质与杂质激发"><a href="#杂质与杂质激发" class="headerlink" title="杂质与杂质激发"></a>杂质与杂质激发</h4><p>掺杂形成了杂质能级，只在掺杂原子局部地区存在。</p>
+<p>处在杂质能级的电子实际上处于束缚态，只在掺杂原子附近存在，对导电性没有贡献。所以，电子从杂质原子跑出来，并不会形成“空穴”，这些“空穴”处于束缚态，并不会导电。</p>
+<p><img src="/../images/SolidPhysics/1715051145151.png" alt="1715051145151" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1715051313166.png" alt="1715051313166" loading="lazy"></p>
+<p>浅能级杂质</p>
+<ul>
+<li>上述由替位杂质所形成的施主和受主</li>
+<li>能级靠近导带或价带，又称为浅能级杂质</li>
+<li>杂质能级对电子或空穴的束缚能很小</li>
+<li>电子很容易从施主能级跃迁或跃迁到受主能级</li>
+<li>载流子将以杂质跃迁产生为主</li>
+</ul>
+<p>深能级杂质</p>
+<p> 大多数是多重能级<br>o 如Au在硅中，有施主能级也有受主能级<br>o 金为1价，施主能级靠近价带(!)，受主能级靠近禁带中部(!)<br> 深能级杂质附加势作用距离短，1～2个原子<br> 深能级杂质和缺陷影响<br>o 有效的复合中心，降低载流子寿命<br>o 做补偿杂质，提高材料电阻率</p>
+<p>施主杂质激发</p>
+<p>假设N型半导体只含一种施主,浓度 $N_D$ ,能级 $E_D$ </p>
+<p>那么导带中电子数目显然与空的施主能级的数目相等</p>
+
+$$
+n=N_D[1-f(E_D)]=N_D\left[\frac{e^{(E_D-E_F)/k_BT}}{e^{(E_D-E_F)/k_BT}+1}\right]=N_D\frac1{1+e^{-(E_D-E_F)/k_BT}}
+$$
+
+
+ $E_F$  在掺杂半导体里求不出来，因此尝试消去它，得到：
+
+<p>温度很低时（ $E_i &gt;&gt; k_BT$ ），少量施主电离激发电子</p>
+
+$$
+n\approx\frac{\left[4\left(\frac{N_D}{N_-}\right)e^{E_i/k_BT}\right]^{1/2}}{\left(\frac2{N_-}\right)e^{E_i/k_BT}}=\left(N_-N_D\right)^{1/2}e^{-E_i/2k_BT}
+$$
+
+
+<p>温度很高时（ $E_i &gt;&gt; k_BT$ ），全部施主电离激发电子</p>
+
+$$
+\begin{aligned}n=&\frac{-1+\left[1+2{\left(\frac{N_D}{N_-}\right)}e^{E_i/k_BT}+...\right]}{\frac2{N_-}e^{E_i/k_BT}}\approx N_D\\\end{aligned}
+$$
+
+
+<p>一般室温下热激发到导带的电子数也符合上式，按指数关系随温度升高而增加 （慎用！）</p>
+<p>空穴的浓度是</p>
+
+$$
+p = (n_i)^2/n
+$$
+
+
+<p>费米能级</p>
+
+$$
+\begin{aligned}
+E_{F}& =E_--k_BT\ln(N_-/n)  \\
+&=E_{Fi}+k_BT\ln(n/n_i)
+\end{aligned}
+$$
+
+
+<p>施主杂质的浓度越高，费米能级越靠近导带</p>
+<p>受主类似：</p>
+<p>温度很低时（ $E_i &gt;&gt; k_BT$ ）</p>
+
+$$
+p\thickapprox\left(N_AN_+\right)^{1/2}e^{-E_i/2k_BT}
+$$
+
+
+<p>温度很高时（ $E_i &lt;&lt; k_BT$ ）</p>
+
+$$
+p\approx N_A
+$$
+
+
+
+$$
+\begin{aligned}&E_F=E_++k_BT\ln(N_+/p)\\&=E_{Fi}-k_BT\ln(p/n_i)\end{aligned}
+$$
+
+
+<p>受主杂质的浓度越高，费米能级越靠近价带</p>
+<p>考虑施主和受主能级简并和电子自旋取向时引入施主和受主能级基态简并因子gD和gA。</p>
+
+$$
+n=\frac{-1+\left[1+4\left(\frac{g_DN_D}{N_-}\right)e^{E_i/k_\mathrm{B}T}\right]^{1/2}}{2\left(\frac{g_D}{N_-}\right)e^{E_i/k_\mathrm{B}T}}\\p=\frac{-1+\left[1+4\left(\frac{g_AN_A}{N_+}\right)e^{E_i/k_\mathrm{B}T}\right]^{1/2}}{2\left(\frac{g_A}{N_+}\right)e^{E_i/k_\mathrm{B}T}}
+$$
+
+
+<p><img src="/../images/SolidPhysics/1715053184570.png" alt="1715053184570" loading="lazy"></p>
+<p>中间的平台区域意味着施主已经给出了所有电子。</p>
+<p>在足够高的温度下，由满带到导带的电子激发（本征激发）将成为主要的。</p>
+<p><img src="/../images/SolidPhysics/1715053408715.png" alt="1715053408715" loading="lazy"></p>
+<p>在足够高的温度下，费米能级同样也接近本征费米能级。</p>
+<p>以上讨论的是非简并半导体。</p>
+<p>对于简并半导体，不能再使用玻尔兹曼分布，只能使用费米-狄拉克分布。</p>
+<h4 id="补偿半导体的载流子浓度"><a href="#补偿半导体的载流子浓度" class="headerlink" title="补偿半导体的载流子浓度"></a>补偿半导体的载流子浓度</h4><p>完全电离条件下</p>
+
+$$
+n_0+N_a=p_0+N_d\\
+p_0 = n_i^2/n_0
+$$
+
+
+
+$$
+n_0=\frac{(N_d-N_a)}2+\sqrt{\left(\frac{(N_d-N_a)}2\right)^2+n_i^2}\\
+p_0=\frac{(N_a-N_d)}2+\sqrt{\left(\frac{(N_d-N_a)}2\right)^2+n_i^2}
+$$
+
+
+<p>n-type 和 p-type 的效果可以相互抵消。</p>
+<p>由于补偿半导体中掺有两种杂质，所以会产生杂质的补偿作用，从而其中能够参加导电的多数载流子，就只有由那些未被补偿的杂质来提供；因此补偿半导体中有效的载流子浓度很小，故电阻率很高。虽然补偿半导体的电阻率很高，但它<strong>不同于未掺杂的本征半导体。</strong></p>
+<p>总的杂质浓度</p>
+
+$$
+N_{doping}{=}N_A{+}N_D
+$$
+
+
+<h3 id="载流子的迁移（漂移）运动"><a href="#载流子的迁移（漂移）运动" class="headerlink" title="载流子的迁移（漂移）运动"></a>载流子的迁移（漂移）运动</h3><p>迁移率  $\mu$ ：单位电场下载流子的平均漂移速度</p>
+
+$$
+\sigma=nq\mu
+$$
+
+
+
+$$
+j=nq\left(\mu E\right)\\
+\sigma=\frac{nq^2\tau}{m^*}=nq\frac{q\tau}{m^*}=nq\mu\\
+\mu=\frac{q\tau}{m^*}
+$$
+
+
+
+$$
+\sigma=nq\mu_-+pq\mu_+
+$$
+
+
+<p>多子导电：</p>
+
+$$
+\sigma\approx\begin{cases}nq\mu_-&(n\text{型 })\\pq\mu_+&(p\text{型 })&\end{cases}
+$$
+
+
+<p>迁移率决定于有效质量以及平均弛豫时间</p>
+
+$$
+\mu_-=\frac{q\tau_{cn}}{m_-^*}\quad\mu_+=\frac{q\tau_{cp}}{m_+^*}
+$$
+
+
+<p>在低温下，杂质的散射是主要的。温度升高时载流子热运动的速度增大，电离杂质的散射作用相应减弱，从而使迁移率增大。</p>
+<p>在较高温度下，晶格的散射是主要的，温度升高，声子的散射增大，因而迁移率随温度的升高而下降。</p>
+<p>半导体的电导率σ除了与迁移率有关外，还与载流子的浓度有关。而载流子的浓度随温度的升高以指数形式增加（饱和区除外）。因此除饱和区外，电导率主要以指数形式随温度的升高而迅速增大，表现出很强的热敏性。但是，不是温度越高就越好的，温度升高后，掺杂的特性就没了，导电能力主要由本征激发决定，相当于半导体退化成了一块普通的电阻，也没有什么 PN 结了。</p>
+<p>这与金属的电导率有明显不同。因为金属的载流子（电子或空穴）浓度与温度无关，温度升高时，传导电子的迁移率因与声子的碰撞更加频繁而减小，所以金属的导电率温度系数为负，温度升高，电导率下降。</p>
+<h2 id="PN-结"><a href="#PN-结" class="headerlink" title="PN 结"></a>PN 结</h2><h3 id="功函数"><a href="#功函数" class="headerlink" title="功函数"></a>功函数</h3><p>金属发射电流与温度有关，符合指数规律：</p>
+
+$$
+j\propto e^{\large-\frac{W}{k_BT}}
+$$
+
+
+<p>其中  $W$  称功函数。</p>
+<p>经典理论：</p>
+
+$$
+j=-n_0q\left(\frac{k_BT}{2\pi m}\right)^{1/2}e^{-\frac\chi{k_BT}}
+$$
+
+
+<p>功函数：</p>
+
+$$
+W = \chi
+$$
+
+
+<p>统计分布：</p>
+
+$$
+dn=n_0\left(\frac m{2\pi k_BT}\right)^{3/2}e^{-\frac{m\upsilon^2}{2k_BT}}d\upsilon
+$$
+
+
+<p>量子理论：</p>
+
+$$
+j=-q\frac{4\pi m{\left(k_BT\right)}^2}{\left(2\pi\hbar\right)^3}e^{-\left(\chi-E_F\right)/k_BT}
+$$
+
+
+<p>功函数</p>
+
+$$
+W = \chi - E_F
+$$
+
+
+<p>统计分布：</p>
+
+$$
+dn=2{\left(\frac m{2\pi\hbar}\right)}^3\frac1{e^{\left(\frac12m\upsilon^2-E_F\right)/k_BT}+1}d\upsilon
+$$
+
+
+<p>金属有接触电势，从费米能级高的地方流向费米能级低的。</p>
+<p><img src="/../images/SolidPhysics/1715657785337.png" alt="1715657785337" loading="lazy"></p>
+
+$$
+V_A - V_B = (W_B - W_A)/q
+$$
+
+
+<p>平衡态下，费米能级变为相等，电子不再流动。</p>
+<h3 id="PN-结-1"><a href="#PN-结-1" class="headerlink" title="PN 结"></a>PN 结</h3><p>载流子扩散运动：</p>
+<p><img src="/../images/SolidPhysics/1715658350241.png" alt="1715658350241" loading="lazy"></p>
+<p>非平衡载流子：复合运动</p>
+<p>在外界的作用下，半导体中的电子浓度n和空穴浓度p有可<br>能偏离平衡值。例如半导体的本征光吸收产生电子—空穴<br>对，用Δn＝n－n0，Δp＝p－p0表示超出热平衡的多余载流<br>子，称为非平衡载流子。通常情况下，由于电中性要求，<br>Δn＝Δp</p>
+<p>我们最关心的是非平衡的少数载流子，因为少子的浓度变化大，通常采用准费米能级  $E_{Fn}, E_{Fp}$ 。多子的费米能级不变。</p>
+
+$$
+\begin{aligned}n_0+\Delta n&=n_i\exp(\frac{E_{Fn}-E_{Fi}}{kT})\\\left(n_0+\Delta n\right)\cdot\left(p_0+\Delta p\right)&gt;n_i^2\\p_0+\Delta p&=n_i\exp(\frac{E_{Fi}-E_{Fp}}{kT})\end{aligned}
+$$
+
+
+<p><img src="/../images/SolidPhysics/1715658620805.png" alt="1715658620805" loading="lazy"></p>
+<p>外界作用下， 非平衡态要恢复到平衡态。非平衡的载流子会消失，消失的过程叫复合，导带的多余电子落回价带，多余的电子和空穴成对消失。</p>
+<p>复合速率：</p>
+
+$$
+\frac{d\Delta n}{dt}=-\frac{\Delta n}{\tau}\\\text{其解为:}\quad\Delta n=(\Delta n)_0\exp(-t/\tau)
+$$
+
+
+ $\tau$  称为非平衡载流子寿命
+
+<h4 id="非平衡载流子的扩散和复合"><a href="#非平衡载流子的扩散和复合" class="headerlink" title="非平衡载流子的扩散和复合"></a>非平衡载流子的扩散和复合</h4><p>直接复合：复合率  $R=\alpha_r\cdot n\cdot p$ </p>
+<p>间接复合：通过杂质能级的间接复合（与杂质浓度呈正比，与非平衡载流子浓度呈正比，深能级更强）</p>
+<p>非平衡状态下，过剩电子的复合率一定等于过剩空穴的复合率</p>
+
+$$
+R_n^{\prime}=R_p^{\prime}
+$$
+
+
+<p>扩散复合过程的稳定分布：</p>
+
+$$
+-\frac d{dx}\Bigg(-D\frac{dN}{dx}\Bigg)-\frac N\tau=0\\N=N_0e^{-x/L},L=\sqrt{D\tau}
+$$
+
+
+<p>扩散长度L：表面非平衡载流子深入材料内部的距离，随扩散系数和复合寿命增加而增加</p>
+
+$$
+\text{扩散流密度 }=-D\frac{dN}{dx}=N_0\frac DLe^{-x/L}
+$$
+
+
+<p>扩散速度D&#x2F;L：界面处载流子以速度D&#x2F;L运动</p>
+<p>漂移 + 扩散 的总电流密度：</p>
+
+$$
+J=qn\mu_nE_x+qp\mu_pE_x+qD_n\frac{dn}{dx}-qD_p\frac{dp}{dx}
+$$
+
+
+<p>爱因斯坦关系：</p>
+
+$$
+\frac{D_n}{\mu_n}=\frac{k_\text{B}T}q\quad\frac{D_p}{\mu_p}=\frac{k_\text{B}T}q
+$$
+
+
+<h4 id="PN-结的接触电势差"><a href="#PN-结的接触电势差" class="headerlink" title="PN 结的接触电势差"></a>PN 结的接触电势差</h4><p><img src="/../images/SolidPhysics/1715659347111.png" alt="1715659347111" loading="lazy"></p>
+
+$$
+eV_D=\left(E_F\right)_N-\left(E_F\right)_P\\qV_D=\left(E_F\right)_N-\left(E_F\right)_P
+$$
+
+
+
+$$
+
+
+$$
+
+
+ $V_D$  等于接触前的费米能级差。
+
+<p><img src="/../images/SolidPhysics/1715659894626.png" alt="1715659894626" loading="lazy"></p>
+<h3 id="正向偏压-载流子扩散运动产生电流"><a href="#正向偏压-载流子扩散运动产生电流" class="headerlink" title="正向偏压-载流子扩散运动产生电流"></a>正向偏压-载流子扩散运动产生电流</h3><p>p 区看电子，n 区看空穴：</p>
+<p><img src="/../images/SolidPhysics/1716257709851.png" alt="1716257709851" loading="lazy"></p>
+<p>0 表示热平衡时候的浓度。</p>
+<h3 id="反向偏压-漂移作用增强"><a href="#反向偏压-漂移作用增强" class="headerlink" title="反向偏压-漂移作用增强"></a>反向偏压-漂移作用增强</h3><p><img src="/../images/SolidPhysics/1716257832298.png" alt="1716257832298" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716257919907.png" alt="1716257919907" loading="lazy"></p>
+<p>正向注入：</p>
+<p>当PN结加正向偏压时： $\mathsf{PN}$ 结势垒降低为 $q(V_D-V)$ 扩散作用增强</p>
+<p>反向抽取：</p>
+<p>当PN结加反向偏压时： $\mathsf{PN}$ 结势垒升高为 $q(V_D+V)$ 漂移作用增强</p>
+<p>反向抽取时载流子的复合率为负数，就是说在不断地产生新的载流子（电子-空穴对）。PN结的反向电流实质上就是产生电流。</p>
+<p><img src="/../images/SolidPhysics/1716258157706.png" alt="1716258157706" loading="lazy"></p>
+<h3 id="PN-结的击穿"><a href="#PN-结的击穿" class="headerlink" title="PN 结的击穿"></a>PN 结的击穿</h3><p><img src="/../images/SolidPhysics/1716258191070.png" alt="1716258191070" loading="lazy"></p>
+<h3 id="双极性晶体管"><a href="#双极性晶体管" class="headerlink" title="双极性晶体管"></a>双极性晶体管</h3><p><img src="/../images/SolidPhysics/1716258575169.png" alt="1716258575169" loading="lazy"></p>
+<h2 id="异质结与肖特基结"><a href="#异质结与肖特基结" class="headerlink" title="异质结与肖特基结"></a>异质结与肖特基结</h2><h3 id="半导体异质结"><a href="#半导体异质结" class="headerlink" title="半导体异质结"></a>半导体异质结</h3><p>真空能级：电子自由运动所占据的最低能量。</p>
+<p><img src="/../images/SolidPhysics/1716259850103.png" alt="1716259850103" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716260746330.png" alt="1716260746330" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716259893782.png" alt="1716259893782" loading="lazy"></p>
+<p>导带能级差： $\Delta E_C=\chi_1-\chi_2$ <br>价带能级差： $\Delta E_v=(\chi_2+E_{g^2})-(\chi_1+E_{g^1})=E_{g^2}-E_{g^1}-\Delta E_{g^2}$ <br>导带能级差+价带能级差 &#x3D;带隙宽度差<br>注：此为一般半导体物理书中的结果</p>
+<p><img src="/../images/SolidPhysics/1716260901275.png" alt="1716260901275" loading="lazy"></p>
+<h3 id="同质结的注入比"><a href="#同质结的注入比" class="headerlink" title="同质结的注入比"></a>同质结的注入比</h3><p>总电流： $j= j_n+ j_p= j_s\left ( e^{qV/ K_BT}- 1\right )$ </p>
+<p>注入比定义：总电流中，电子电流与空穴电流的比例<br>普通PN结(同质结)</p>
+<p>注入到 $p$ 区的电子电流密度为： $j_n= q\frac {D_n}{L_n}n_P^0\left ( e^{qV/ k_BT}- 1\right )$ </p>
+<p>注入到 $n$ 区的空穴电流密度为： $j_p= q\frac {D_p}{L_p}p_N^0\left ( e^{qV/ k_BT}- 1\right )$ </p>
+<p>总电流： $j= j_n+ j_p= j_s\left ( e^{qV/ k_BT}- 1\right )$ <br>注入比定义：总电流中，电子电流与空穴电流的比例<br>正偏压下的电子注入比：</p>
+
+$$
+\begin{aligned}&\frac{j_n}{j_p}=\frac{D_nn_P^0}{L_n}\frac{D_pp_N^0}{L_p}=\frac{D_nL_pn_P^0}{D_pL_np_N^0}\\&n_P^0=\frac{n_i^2}{p_P}\approx\frac{n_i^2}{N_A}\\&p_{N}^{0}=\frac{n_{i}^{2}}{n_{N}}\approx\frac{n_{i}^{2}}{N_{D}}\\&\frac{j_n}{j_p}=\frac{D_nL_pN_D}{D_pL_nN_A}\end{aligned}
+$$
+
+
+<p>提高注入比的办法,提高N型区的施主杂质浓度</p>
+<p><img src="/../images/SolidPhysics/1716261236429.png" alt="1716261236429" loading="lazy"></p>
+<p>结中电子注入比：</p>
+
+$$
+\begin{aligned}&\frac{J_n}{J_p}=\frac{D_nn_P^0}{L_n}\left/\frac{D_pp_N^0}{L_p}\right.=\frac{D_nL_pN_D}{D_pL_nN_A}e^{\frac{E_{gN}-E_{gP}}{k_BT}}\end{aligned}
+$$
+
+
+<p>异质结构的优点：</p>
+<p>也就是说，N型区的带隙宽度比p型区带隙宽度大，<br>可以进一步以指数级增加注入比</p>
+<p>提高注入比的意义<br>提高晶体管放大系数-异质结双极晶体管HBT</p>
+<p><img src="/../images/SolidPhysics/1716261409659.png" alt="1716261409659" loading="lazy"></p>
+<h3 id="激光器"><a href="#激光器" class="headerlink" title="激光器"></a>激光器</h3><p>本征光吸收</p>
+<p>光照激发价带电子到导带， 形成电子-空穴对的过程</p>
+
+$$
+\hbar\omega\geq E_{_g}
+$$
+
+
+<p>准动量守恒——竖直跃迁</p>
+<p>应当照射结区（空间电荷区）</p>
+<p><img src="/../images/SolidPhysics/1716261766058.png" alt="1716261766058" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716261781489.png" alt="1716261781489" loading="lazy"></p>
+<p>二维电子气体系提高电子迁移率</p>
+<p><img src="/../images/SolidPhysics/1716262583215.png" alt="1716262583215" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716262570823.png" alt="1716262570823" loading="lazy"></p>
+<h3 id="肖特基结"><a href="#肖特基结" class="headerlink" title="肖特基结"></a>肖特基结</h3><p>功函数的物理本质是真空能级与费米能级的差</p>
+<p>亲合能：从导带底部到真空能级的能量（真空-导带底）</p>
+<p><img src="/../images/SolidPhysics/1716263334906.png" alt="1716263334906" loading="lazy"></p>
+<p>金属与 N 型半导体的接触：</p>
+<p><img src="/../images/SolidPhysics/1716263526504.png" alt="1716263526504" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716263538645.png" alt="1716263538645" loading="lazy"></p>
+
+$$
+\boxed{\begin{array}{c}\text{肖特基势垒}\\\phi_{B0}=\left(\phi_m-\chi\right)\end{array}}
+$$
+
+
+
+$$
+\boxed{\begin{array}{c}\text{内建电势差}\\\\V_{bi}=\left(\phi_{B0}-\phi_n\right)\end{array}}
+$$
+
+
+<p>考虑偏压：</p>
+<p><img src="/../images/SolidPhysics/1716263918247.png" alt="1716263918247" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716263941957.png" alt="1716263941957" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716863556246.png" alt="1716863556246" loading="lazy"></p>
+<p>欧姆接触</p>
+<p><img src="/../images/SolidPhysics/1716864038557.png" alt="1716864038557" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716864050264.png" alt="1716864050264" loading="lazy"></p>
+<p>欧姆接触是指金属与半导体的接触，而其接触面的电阻值远小于半导体本身的电阻，不产生明显的附加阻抗，而且不会使半导体内部的平衡载流子浓度发生显著的改变</p>
+<p>区分电子和空穴的本质是迁移率的不同。</p>
+<h2 id="格波"><a href="#格波" class="headerlink" title="格波"></a>格波</h2><h3 id="一维单原子链"><a href="#一维单原子链" class="headerlink" title="一维单原子链"></a>一维单原子链</h3><p>相邻原子间距为</p>
+
+$$
+a+(\mu_{n+1}-\mu_n)=a+\delta
+$$
+
+
+<p>相邻原子的作用力</p>
+
+$$
+F=-\frac{\partial\nu}{\partial\delta}\approx-\beta\delta
+$$
+
+
+<p>左右两边一个原子对中间原子的作用力</p>
+
+$$
+F_{n,n-1}=-\beta\left(\mu_n-\mu_{n-1}\right)\\
+F_{n,n+1}=-\beta\left(\mu_n-\mu_{n+1}\right)\\
+F_n=\beta(\mu_{n+1}+\mu_{n-1}-2\mu_n)
+$$
+
+
+<p>相邻原子之间的耦合运动方程组</p>
+
+$$
+m\ddot{\mu}_n=\beta\left(\mu_{n+1}+\mu_{n-1}-2\mu_n\right)
+$$
+
+
+<p>通过坐标变换简化方程组，得到简谐振动解</p>
+
+$$
+\mu_n=Ae^{i(\omega t-qX_n)}
+$$
+
+
+<p>其中  $X_n=na$  是第 n 个原子的平衡位置</p>
+<p>将解代入运动方程：</p>
+
+$$
+m{\left(i\omega\right)}^2Ae^{i(\omega t-qX_n)}=\beta Ae^{i(\omega t-qna)}{\left(e^{-iqa}+e^{iqa}-2\right)}
+$$
+
+
+<p>得到色散关系</p>
+
+$$
+\omega^2=\frac{2\beta}m\Big(1-\cos\alpha q\Big)=\frac{4\beta}m\sin^2\Bigg(\frac{aq}2\Bigg)
+$$
+
+
+<p><img src="/../images/SolidPhysics/1716868157804.png" alt="1716868157804" loading="lazy"></p>
+<p>格波有意义的取值只在第一布里渊区，我们只关心格点位置处的取值。</p>
+<p><img src="/../images/SolidPhysics/1716868762789.png" alt="1716868762789" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717467825452.png" alt="1717467825452" loading="lazy"></p>
+<p>波恩卡门条件下的环状链模型</p>
+<p><img src="/../images/SolidPhysics/1716869179928.png" alt="1716869179928" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1716869156196.png" alt="1716869156196" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717467681404.png" alt="1717467681404" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717467815166.png" alt="1717467815166" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717467885133.png" alt="1717467885133" loading="lazy"></p>
+<h3 id="一维双原子链结构"><a href="#一维双原子链结构" class="headerlink" title="一维双原子链结构"></a>一维双原子链结构</h3><p><img src="/../images/SolidPhysics/1717467940325.png" alt="1717467940325" loading="lazy"></p>
+<p>P原子质量：m<br> Q原子质量：M</p>
+
+$$
+m\ddot{\mu}_{2n}=\beta(\mu_{2n+1}+\mu_{2n-1}-2\mu_{2n})\\M\ddot{\mu}_{2n+1}=\beta(\mu_{2n+2}+\mu_{2n}-2\mu_{2n+1})
+$$
+
+
+<p><img src="/../images/SolidPhysics/1717468003069.png" alt="1717468003069" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717468014637.png" alt="1717468014637" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717468150691.png" alt="1717468150691" loading="lazy"></p>
+<p>波数 q 的取值范围：</p>
+
+$$
+-\frac\pi{2a}&lt;q\leq\frac\pi{2a}
+$$
+
+
+<p>原胞变大，倒格矢变小，布里渊区变小</p>
+
+$$
+N\cdot\left(2aq\right)=2\pi h,h=[-N/2,+N/2]\quad q=\frac{h\pi}{Na}
+$$
+
+
+<p>对于双原子链，有2N个原子，也有2N个格波</p>
+<p><img src="/../images/SolidPhysics/1717468250438.png" alt="1717468250438" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717468279238.png" alt="1717468279238" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717468352260.png" alt="1717468352260" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717468364464.png" alt="1717468364464" loading="lazy"></p>
+<p>相邻原子振动相反，振幅反比于原子质量</p>
+<p>对于声学波，相邻原子同步运动,原胞中两种原子的运动是完全一致的振幅和位相</p>
+<p><img src="/../images/SolidPhysics/1717469037238.png" alt="1717469037238" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717469080107.png" alt="1717469080107" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717469005887.png" alt="1717469005887" loading="lazy"></p>
+<p>k 代表的是移动一个原胞后的位相差。</p>
+<p>简单晶格没有能带折叠，所以没有光学波。</p>
+<p><img src="/../images/SolidPhysics/1717469702087.png" alt="1717469702087" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1717470027229.png" alt="1717470027229" loading="lazy"></p>
+<p>如果问的是“多少个”光学波&#x2F;声学波，还得×一个 N</p>
+<p>横波才能简并，纵波不能。</p>
+<p>硅的晶格中虽然只有硅一种原子，但是由于是复式晶格结构，等同于有两种原子，因此也有声学波和光学波</p>
+<p>金属铅(Pb)属于面心立方的简单晶格结构，没有光学波只有三支声学波（注：不同方向上有简并）</p>
+<p>纵波的速度总是比横波快。</p>
+<h3 id="晶格振动的量子化——声子"><a href="#晶格振动的量子化——声子" class="headerlink" title="晶格振动的量子化——声子"></a>晶格振动的量子化——声子</h3><p>一维谐振子</p>
+<p><img src="/../images/SolidPhysics/1717470756612.png" alt="1717470756612" loading="lazy"></p>
+<h3 id="固体热容"><a href="#固体热容" class="headerlink" title="固体热容"></a>固体热容</h3>
+$$
+C_V=\left(\frac{\partial\overline{E}}{\partial T}\right)_V
+$$
+
+
+<p>固体热容主要来自于两个部分</p>
+<p>晶格热容：来源于固体的晶格热运动</p>
+<p>电子热容：来源于电子的热运动仅在,极低温下，对于金属比较显著，相比晶格热容，一般可忽略不计</p>
+<p><img src="/../images/SolidPhysics/1717473776761.png" alt="1717473776761" loading="lazy"></p>
+<p>经典模型</p>
+<p><img src="/../images/SolidPhysics/1717473805195.png" alt="1717473805195" loading="lazy"></p>
+<p>量子模型</p>
+<p><img src="/../images/SolidPhysics/1718071135404.png" alt="1718071135404" loading="lazy"></p>
+<p>高温情况下</p>
+<p><img src="/../images/SolidPhysics/1718071202034.png" alt="1718071202034" loading="lazy"></p>
+<p>在较高温度时，杜隆-珀替定律成立。即当振子的能量远远大于能量的量子( ħωq)时，量子化效应就可以忽略</p>
+<p><img src="/../images/SolidPhysics/1718071363760.png" alt="1718071363760" loading="lazy"></p>
+<p>爱因斯坦模型</p>
+<p>基本假设</p>
+<p>晶格中所有原子都具有统一振动频率 $\omega_0$ </p>
+<p>所有原子的振动是独立的</p>
+<p>假设有 $N$ 个原子</p>
+<p><img src="/../images/SolidPhysics/1718071563960.png" alt="1718071563960" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1718071692546.png" alt="1718071692546" loading="lazy"></p>
+<p>爱因斯坦模型较经典模型的改进明显，阐明低温热容趋于零的基本原因</p>
+<p>爱因斯坦模型低温段热容下降很陡，与实验值有不相符的问题</p>
+<p>原子与原子间的相互作用是很强的，晶格振动是以格波的形式存在，不同格波之间的频率不完全相同，而且有一定分布爱因斯坦模型等效于所有的格波频率相同过于简单</p>
+<p>德拜模型</p>
+<p><img src="/../images/SolidPhysics/1718071922789.png" alt="1718071922789" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1718072084533.png" alt="1718072084533" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1718072235738.png" alt="1718072235738" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1718072255786.png" alt="1718072255786" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1718072474995.png" alt="1718072474995" loading="lazy"></p>
+<p>德拜温度</p>
+
+$$
+\Theta_D=\frac{\hbar\omega_m}{k_B}
+$$
+
+
+
+$$
+\omega_m=\overline{C}\bigg[6\pi^2\frac NV\bigg]^{1/3}
+$$
+
+
+<p><img src="/../images/SolidPhysics/1718072707268.png" alt="1718072707268" loading="lazy"></p>
+<p><img src="/../images/SolidPhysics/1718072997880.png" alt="1718072997880" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Blither Boom</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://blitherboom812.github.io/2024/04/16/SolidPhysics/" title="固体物理">https://blitherboom812.github.io/2024/04/16/SolidPhysics/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2024/04/16/OS/" rel="prev" title="操作系统"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">操作系统</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2024/04/10/DRL/" rel="next" title="Deep Reinforcement Learning"><span class="post-nav-text">Deep Reinforcement Learning</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2026 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Blither Boom</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18","12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>
